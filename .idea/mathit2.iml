@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/datamanager/test/selenium" isTestSource="true" packagePrefix="PhpMyAdmin\Tests\Selenium\" />
+      <sourceFolder url="file://$MODULE_DIR$/datamanager/setup/lib" isTestSource="false" packagePrefix="PhpMyAdmin\Setup\" />
+      <sourceFolder url="file://$MODULE_DIR$/datamanager/libraries/classes" isTestSource="false" packagePrefix="PhpMyAdmin\" />
+      <sourceFolder url="file://$MODULE_DIR$/datamanager/test/classes" isTestSource="true" packagePrefix="PhpMyAdmin\Tests\" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/bacon/bacon-qr-code" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/google/recaptcha" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/paragonie/constant_time_encoding" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/phpmyadmin/motranslator" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/phpmyadmin/shapefile" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/phpmyadmin/sql-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/phpseclib/phpseclib" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/pragmarx/google2fa" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/samyoul/u2f-php-server" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/symfony/expression-language" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/symfony/polyfill-php56" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/symfony/polyfill-util" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/tecnickcom/tcpdf" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/twig/extensions" />
+      <excludeFolder url="file://$MODULE_DIR$/datamanager/vendor/twig/twig" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

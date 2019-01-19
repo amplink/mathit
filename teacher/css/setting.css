@@ -1,0 +1,256 @@
+.setting_menu {
+    display: inline-block;
+    width: 150px;
+    height: 53px;
+    line-height: 43px;
+    background-color: rgb(255, 255, 255);
+    border: solid 2px rgb(220, 220, 220);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    overflow: hidden;
+    transition: all .3s;
+}
+
+.setting_menu:nth-child(1) {
+    position: relative;
+    left: 6px;
+}
+
+.setting_menu:nth-child(2) {
+}
+
+.setting_menu a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(150, 150, 150);
+    text-align: center;
+    transition: all .2s;
+}
+
+.setting_menu.on {
+    height: 55px;
+    line-height: 45px;
+    border-bottom: none;
+}
+
+.setting_menu a.on {
+    font-weight: 800;
+    background-color: rgb(245, 248, 250);
+    color: rgb(32, 175, 68);
+}
+
+.setting_menu:hover {
+    transform: translateY(-10px);
+}
+
+.setting_menu:hover a {
+    color: rgb(32, 175, 68);
+}
+
+/**/
+
+.setting_box {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    max-width: 1400px;
+    height: 500px;
+    max-height: 500px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(220, 220, 220);
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: auto;
+}
+
+.setting_head {
+    width: calc(100% - 40px);
+    height: 50px;
+    background-color: rgb(32, 175, 68);
+    border-bottom: solid 1px rgb(220, 220, 220);
+    padding: 0 20px;
+}
+
+.setting_head p {
+    position: relative;
+    top: 15px;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+}
+
+.setting_box table {
+    width: 100%;
+}
+
+.setting_box table thead tr th {
+    height: 30px;
+    font-size: 18px;
+    background-color: rgb(32, 175, 68);
+    color: rgb(255, 255, 255);
+    border-bottom: solid 1px rgb(220, 220, 220);
+    border-right: solid 1px rgb(220, 220, 220);
+    padding: 10px;
+}
+
+.setting_box table thead tr th:last-child {
+    border-right: none;
+}
+
+.setting_box table thead tr:nth-child(1) th p {
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    text-align: left;
+    vertical-align: middle;
+}
+
+.setting_box table thead tr:nth-child(2) th {
+    width: 120px;
+}
+
+.setting_box table tbody tr td {
+    background-color: rgb(233, 240, 243);
+    border-right: solid 1px rgb(230, 230, 230);
+    text-align: center;
+    padding: 10px 0;
+}
+
+.setting_box table tbody tr td input {
+    width: 18px;
+    height: 18px;
+}
+
+.setting_box table tbody tr td:last-child {
+    border-right: none;
+}
+
+.setting_box table tbody tr:nth-child(2n) td {
+    background-color: rgb(248, 251, 252);
+}
+
+.setting_box table tbody tr td:nth-child(1) {
+    width: 200px;
+}
+
+.setting_box table tbody tr td:nth-child(1) span:nth-child(2) {
+    margin-left: 10px;
+}
+
+.setting_box table tbody tr td select {
+    width: 120px;
+    height: 25px;
+    padding: 2px 5px;
+}
+
+.app_box {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    max-width: 1400px;
+    height: 180px;
+    max-height: 180px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(220, 220, 220);
+    margin: auto;
+    margin-top: 10px;
+}
+
+.app_head {
+    width: calc(100% - 40px);
+    height: 50px;
+    background-color: rgb(32, 175, 68);
+    padding: 0 20px;
+}
+
+.app_head p {
+    position: relative;
+    top: 15px;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+}
+
+.save_setting_btn {
+    position: relative;
+    top: 10px;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    float: right;
+}
+
+.save_setting_btn a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(32, 175, 68);
+    text-align: center;
+}
+
+.app_contnet_section {
+    width: calc(100% - 40px);
+    height: auto;
+    padding: 0 20px;
+}
+
+.l_side {
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+    margin-top: 20px;
+}
+
+.r_side {
+    display: inline-block;
+    width: 49%;
+    margin-top: 20px;
+}
+
+.content_title {
+    display: inline-block;
+    width: 150px;
+    font-size: 18px;
+    font-weight: 600;
+    border-left: solid 4px rgb(32, 175, 68);
+    padding-left: 20px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.content_side {
+    display: inline-block;
+}
+
+.content_side p span {
+    display: block;
+}
+
+.line_ {
+    margin-bottom: 18px;
+}
+
+.radio_on {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.radio_on input {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+.radio_on p {
+    display: inline-block;
+    margin-left: 10px;
+}

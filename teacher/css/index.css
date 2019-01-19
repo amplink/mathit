@@ -1,0 +1,216 @@
+.day_select {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.day_select select {
+    width: 100px;
+    height: 30px;
+    padding: 5px;
+}
+
+.head_right>div {
+    display: inline-block;
+    width: 100px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(32, 175, 68);
+    transition: all .1s;
+}
+
+.head_right>div>a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(32, 175, 68);
+    text-align: center;
+    transition: all .1s;
+}
+
+.head_right>div:hover {
+    background-color: rgb(32, 175, 68);
+}
+
+.head_right>div:hover a {
+    color: rgb(255, 255, 255);
+}
+
+.scoring_shortcut_btn {
+    margin-left: 5px;
+}
+
+/**/
+
+.class_table_section {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    max-width: 1400px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(220, 220, 220);
+    margin: auto;
+}
+
+.class_table_section table {
+    width: 100%;
+}
+
+.class_table_section table thead tr th {
+    height: 30px;
+    font-size: 18px;
+    background-color: rgb(32, 175, 68);
+    color: rgb(255, 255, 255);
+    border-bottom: solid 1px rgb(220, 220, 220);
+    padding: 10px;
+}
+
+.class_table_section table thead tr th.on {
+    background-color: rgb(19, 145, 50);
+    font-size: 20px;
+}
+
+.class_table_section table thead tr th:nth-child(1) {
+    width: 100px;
+}
+
+.day {
+    width: 206px;
+}
+
+.blank {
+    width: 150px;
+}
+
+.class_table_section table tbody tr td {
+    background-color: rgb(233, 240, 243);
+    border-right: solid 1px rgb(230, 230, 230);
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 0;
+    transition: all .2s;
+}
+
+.class_table_section table tbody tr:nth-child(2n) td {
+    background-color: rgb(248, 251, 252);
+}
+
+/**/
+
+.class_table_section table tbody tr td.class_type_1 {
+    background-color: rgba(240, 81, 81, 0.5);
+} 
+
+.class_table_section table tbody tr td.class_type_2 {
+    background-color: rgba(255, 133, 208, 0.5);
+}
+.class_table_section table tbody tr td.class_type_3 {
+    background-color: rgba(116, 241, 85, 0.5);
+}
+.class_table_section table tbody tr td.class_type_4 {
+    background-color: rgba(91, 196, 238, 0.5);
+}
+.class_table_section table tbody tr td.class_type_5 {
+    background-color: rgba(125, 95, 233, 0.5);
+}
+
+/**/
+
+.class_name {
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.class_grade {
+    font-size: 14px;
+    display: inline-block;
+}
+
+.class_other {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.class_table_section table tbody tr td:first-child,
+.class_table_section table tbody tr td:nth-child(2) {
+    background-color: rgb(240, 240, 240);
+    border-right: solid 1px rgb(220, 220, 220);
+    font-size: 14px;
+    text-align: center;
+}
+
+.class_table_section table tbody tr:nth-child(2n) td:first-child,
+.class_table_section table tbody tr:nth-child(2n) td:nth-child(2) {
+    background-color: rgb(250, 250, 250);
+} 
+
+.class_table_section table tbody tr td:nth-child(3):hover,
+.class_table_section table tbody tr td:nth-child(4):hover,
+.class_table_section table tbody tr td:nth-child(5):hover,
+.class_table_section table tbody tr td:nth-child(6):hover,
+.class_table_section table tbody tr td:nth-child(7):hover,
+.class_table_section table tbody tr td:nth-child(8):hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, .5);
+}
+
+.notice_list_wrap {
+    width: 100%;
+    max-width: 1400px;
+    height: 325px;
+    max-height: 325px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(220, 220, 220);
+    margin: auto;
+    margin-top: 30px;
+}
+
+.notice_title {
+    display: inline-block;
+    width: 222px;
+    height: 100%;
+    background-color: rgb(240, 240, 240);
+    border-right: solid 1px rgb(220, 220, 220);
+}
+
+.notice_title p {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+.notice_contents_wrap {
+    display: inline-block;
+    width: calc(100% - 247px);
+    vertical-align: top;
+    padding: 0 10px;
+}
+
+.notice_content {
+    display: inline-block;
+    width: calc(100% - 20px);
+    height: 50px;
+    line-height: 50px;
+    padding: 0 10px;
+    border-bottom: dashed 1px rgb(220, 220, 220);
+}
+
+.notice_content a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-decoration: underline;
+}
+
+.notice_content span {
+    font-family: initial;
+}

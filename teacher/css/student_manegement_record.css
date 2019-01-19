@@ -1,0 +1,161 @@
+.report_manegement_btn {
+    display: inline-block;
+    width: 100px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(32, 175, 68);
+    margin-left: 10px;
+    transition: all .1s;
+}
+
+.report_manegement_btn a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(32, 175, 68);
+    text-align: center;
+    transition: all .1s;
+}
+
+.report_manegement_btn:hover {
+    background-color: rgb(32, 175, 68);
+}
+
+.report_manegement_btn:hover a {
+    color: rgb(255, 255, 255);
+}
+
+.head_right>div {
+    display: inline-block;
+    width: 100px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(32, 175, 68);
+    transition: all .1s;
+}
+
+.head_right>div>a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(32, 175, 68);
+    text-align: center;
+    transition: all .1s;
+}
+
+.head_right>div:hover {
+    background-color: rgb(32, 175, 68);
+}
+
+.head_right>div:hover a {
+    color: rgb(255, 255, 255);
+}
+
+/**/
+
+.class_table_section {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    max-width: 1400px;
+    max-height: 705px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(220, 220, 220);
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: auto;
+}
+
+.class_table_section table {
+    width: 100%;
+}
+
+.class_table_section table thead tr th {
+    height: 30px;
+    font-size: 18px;
+    background-color: rgb(32, 175, 68);
+    color: rgb(255, 255, 255);
+    border-bottom: solid 1px rgb(220, 220, 220);
+    padding: 10px;
+}
+
+.class_table_section table thead tr th:nth-child(1) {
+    width: 150px;
+}
+
+.class_table_section table tbody tr td {
+    background-color: rgb(233, 240, 243);
+    border-right: solid 1px rgb(230, 230, 230);
+    text-align: center;
+    padding: 10px 0;
+}
+
+.class_table_section table tbody tr:nth-child(2n) td {
+    background-color: rgb(248, 251, 252);
+}
+
+.class_table_section table tbody tr td:first-child {
+    background-color: rgb(240, 240, 240);
+    border-right: solid 1px rgb(220, 220, 220);
+    font-size: 14px;
+    text-align: center;
+}
+
+.class_table_section table tbody tr:nth-child(2n) td:first-child {
+    background-color: rgb(250, 250, 250);
+} 
+
+.class_table_section table tbody tr td:nth-child(2)>div {
+    display: inline-block;
+    width: 120px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(32, 175, 68);
+    margin-left: 50px;
+    transition: all .1s;
+}
+
+.class_table_section table tbody tr td:nth-child(2)>div:nth-child(1) {
+    margin-left: 0;
+}
+
+.class_table_section table tbody tr td:nth-child(2)>div a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(32, 175, 68);
+    transition: all .1s;
+}
+
+.class_table_section table tbody tr td:nth-child(2)>div:hover {
+    background-color: rgb(32, 175, 68);
+}
+
+.class_table_section table tbody tr td:nth-child(2)>div:hover a {
+    color: rgb(255, 255, 255);
+}
+
+/*disable_btn*/
+
+.class_table_section table tbody tr td:nth-child(2) div.disable {
+    background-color: rgb(230, 230, 230);
+    border: solid 1px rgb(200, 200, 200);
+}
+
+.class_table_section table tbody tr td:nth-child(2) div.disable a {
+    color: rgb(150, 150, 150);
+}
+
+/**/

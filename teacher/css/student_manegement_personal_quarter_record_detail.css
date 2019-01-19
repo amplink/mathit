@@ -1,0 +1,214 @@
+.quarter_date {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.record_date {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-size: 12px;
+    color: rgb(150, 150, 150);
+    margin-left: 3px;
+}
+
+.head_right>div {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.head_right>.sub_close_btn {
+    position: relative;
+    bottom: 3px;
+    width: 25px;
+    height: 25px;
+}
+
+.head_right>div>img {
+    width: 100%;
+}
+
+.up_box {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    max-width: 1400px;
+    height: 250px;
+    max-height: 250px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(220, 220, 220);
+    overflow: hidden;
+    margin: auto;
+}
+
+.l_box {
+    display: inline-block;
+    width: calc(100% - 43px);
+    height: 360px;
+    vertical-align: top;
+    padding: 20px;
+}
+
+.student_info_section {
+    width: 100%;
+    height: auto;
+}
+
+.s_info_left {
+    display: inline-block;
+    width: calc(50% - 12px);
+    height: 100%;
+    padding-right: 10px;
+}
+
+.s_info_left .s_info_div {
+    width: 100%;
+    height: 30px;
+}
+
+.l_div_text {
+    display: inline-block;
+    width: 100px;
+    height: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    border-left: solid 4px rgb(32, 175, 68);
+    vertical-align: top;
+    padding-left: 20px;
+}
+
+.r_div_content {
+    display: inline-block;
+}
+
+.r_div_content p {
+    display: inline-block;
+}
+
+.s_info_right {
+    display: inline-block;
+    width: calc(50% - 12px);
+    height: 100%;
+    padding-left: 10px;
+    vertical-align: top;
+}
+
+.s_info_right .s_info_div {
+    width: 100%;
+    height: 30px;
+}
+
+.record_detail_table_section {
+    margin-top: 10px;
+}
+
+.record_detail_table {
+    width: 100%;
+    height: auto;
+    border: solid 1px rgb(220, 220, 220);
+    background-color: rgb(235, 235, 235);
+    margin-top: 10px;
+}
+
+.record_detail_table table {
+    width: 100%;
+}
+
+.record_detail_table table thead tr th {
+    width: 15%;
+    font-size: 14px;
+    font-weight: 400;
+    background-color: rgb(41, 124, 62);
+    color: rgb(255, 255, 255);
+    border-bottom: solid 1px rgb(220, 220, 220);
+    padding: 5px;
+}
+
+.record_detail_table table tbody tr td {
+    font-size: 14px;
+    border-right: solid 1px rgb(220, 220, 220);
+    text-align: center;
+    padding: 5px 0;
+}
+
+.record_detail_table table tbody tr:nth-child(1) td {
+    border-bottom: solid 1px rgb(220, 220, 220);
+    background-color: rgb(245, 245, 245);
+}
+
+.r_box {
+    display: inline-block;
+    width: calc(45% - 42px);
+    height: 360px;
+    padding: 20px;
+}
+
+.graph_input_section {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(200, 200, 200);
+    overflow: auto;
+}
+
+.down_box {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    max-width: 1400px;
+    height: 470px;
+    max-height: 470px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(220, 220, 220);
+    overflow: hidden;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.down_head_section {
+    width: calc(100% - 40px);
+    height: 50px;
+    padding: 0 20px;
+}
+
+.down_head_section>.l_div_text {
+    width: 150px;
+    margin-top: 15px;
+}
+
+.save_btn {
+    position: relative;
+    top: 10px;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 20px;
+    background-color: rgb(32, 175, 68);
+    float: right;
+}
+
+.save_btn a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.comment_input_section {
+    width: calc(100% - 40px);
+    height: 170px;
+    padding: 0 20px;
+}
+
+.comment_input_section textarea {
+    width: calc(100% - 40px);
+    height: calc(100% - 20px);
+    border: solid 1px rgb(220, 220, 220);
+    padding: 10px 20px;
+}

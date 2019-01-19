@@ -1,0 +1,226 @@
+.head_p {
+    width: calc(100% - 20px);
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    border-top-right-radius: 15px;
+    border-top-left-radius:  15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    margin: auto;
+    margin-top: 60px;
+}
+
+.head_p_head {
+    padding: 15px 10px;
+}
+
+.head_title {
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 800;
+    color: rgb(17, 90, 55);
+}
+
+.back_btn {
+    position: relative;
+    bottom: 5px;
+    width: 30px;
+    height: 30px;
+    float: right;
+}
+
+.user_info_wrap {
+    width: calc(100% - 20px);
+    padding: 0 10px 20px 10px;
+}
+
+.my_user_img {
+    display: inline-block;
+    width: 60px;
+    margin-right: 10px;
+}
+
+.my_user_info {
+    position: relative;
+    bottom: 13px;
+    display: inline-block;
+}
+
+.my_user_name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.my_academy_name {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(17, 141, 81);
+}
+
+.content_p {
+    position: relative;
+    bottom: 10px;
+    width: calc(100% - 20px);
+    height: auto;
+    background-color: rgb(242, 248, 249);
+    border-top-right-radius: 15px;
+    border-top-left-radius:  15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+.my_content_head {
+    width: calc(100% - 20px);
+    padding: 10px;
+}
+
+.my_content_head p {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.my_content_head p span:nth-child(1) {
+    margin-right: 10px;
+}
+
+.class_list_wrap {
+    width: calc(100% - 20px);
+    padding: 10px;
+}
+
+.class_list {
+    width: calc(100% - 20px);
+    height: auto;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.class_title {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.class_title span:nth-child(2) {
+    margin-right: 10px;
+}
+
+.class_time {
+    position: relative;
+    top: 3px;
+    display: inline-block;
+    font-size: 12px;
+    float: right;
+}
+
+.content_detail_p {
+    position: relative;
+    bottom: 20px;
+    width: calc(100% - 20px);
+    height: auto;
+    background-color: rgb(209, 229, 236);
+    border-top-right-radius: 15px;
+    border-top-left-radius:  15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    margin: auto;
+}
+
+.bus_box_wrap {
+    width: calc(100% - 20px);
+    height: auto;
+    padding: 10px;
+}
+
+.my_bus_box {
+    width: calc(100% - 20px);
+    height: auto;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    margin-bottom: 40px;
+}
+
+.bus_use {
+    display: inline-block;
+}
+
+.bus_use p {
+    font-weight: 800;
+}
+
+.bus_btn_section {
+    display: inline-block;
+    float: right;
+}
+
+.not_use_btn {
+    display: inline-block;
+    width: 80px;
+    height: 16px;
+    line-height: 16px;
+    border-radius: 5px;
+    background-color: rgb(70, 70, 70);
+    text-align: center;
+    cursor: pointer;
+}
+
+.not_use_btn p {
+    font-size: 10px;
+    color: rgb(255, 255, 255);
+}
+
+.route_change_btn {
+    display: inline-block;
+    width: 50px;
+    height: 16px;
+    line-height: 16px;
+    border-radius: 5px;
+    background-color: rgb(70, 70, 70);
+    text-align: center;
+    cursor: pointer;
+}
+
+.route_change_btn p {
+    font-size: 10px;
+    color: rgb(255, 255, 255);
+}
+
+.down_section {
+    margin-top: 20px;
+}
+
+.route_name {
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.busstop_name {
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.bus_time {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.decoration {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 20px);
+    height: 30px;
+    padding: 20px 10px 10px 10px;
+}
+
+.deco_circle {
+    width: 5vw;
+    height: 5vw;
+    border-radius: 20px;
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, .2);
+    background-color: rgb(251, 253, 255);
+}

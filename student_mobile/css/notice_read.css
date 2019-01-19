@@ -1,0 +1,119 @@
+.head_p {
+    width: calc(100% - 20px);
+    height: 60px;
+    background-color: rgb(255, 255, 255);
+    border-top-right-radius: 15px;
+    border-top-left-radius:  15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    margin: auto;
+    margin-top: 60px;
+}
+
+.head_title {
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 800;
+    color: rgb(17, 90, 55);
+    margin-left: 10px;
+    padding-top: 15px;
+}
+
+.back_btn {
+    width: 30px;
+    height: 30px;
+    float: right;
+    margin-right: 10px;
+    padding-top: 10px;
+}
+
+.content_p {
+    position: relative;
+    bottom: 10px;
+    width: calc(100% - 20px);
+    height: auto;
+    background-color: rgb(242, 248, 249);
+    border-top-right-radius: 15px;
+    border-top-left-radius:  15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    margin: auto;
+    padding-bottom: 20px;
+}
+
+.notice_title {
+    width: calc(100% - 20px);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 15px 10px 5px 10px;
+}
+
+.other_info {
+    width: calc(100% - 20px);
+    padding: 0 10px;
+}
+
+.other_info p {
+    display: inline-block;
+    font-size: 12px;
+}
+
+.writer {
+    width: 30%;
+}
+
+.academy {
+    width: 30%;
+}
+
+.date {
+    position: relative;
+    top: 2px;
+    float: right;
+}
+
+.content_detail_p {
+    position: relative;
+    bottom: 20px;
+    width: calc(100% - 20px);
+    height: auto;
+    background-color: rgb(209, 229, 236);
+    border-top-right-radius: 15px;
+    border-top-left-radius:  15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    margin: auto;
+    padding-bottom: 50px;
+}
+
+.text_input_wrap {
+    width: calc(100% - 20px);
+    height: auto;
+    padding: 15px 10px 30px 10px;
+}
+
+.text_input {
+    width: calc(100% - 20px);
+    height: auto;
+    min-height: 300px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
+
+.decoration {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 20px);
+    height: 30px;
+    padding: 20px 10px 10px 10px;
+}
+
+.deco_circle {
+    width: 5vw;
+    height: 5vw;
+    border-radius: 20px;
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, .2);
+    background-color: rgb(251, 253, 255);
+}

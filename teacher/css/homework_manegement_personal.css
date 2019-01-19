@@ -1,0 +1,271 @@
+.head_left p {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.head_right p {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.head_right input {
+    width: 100px;
+    height: 15px;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.head_right .calender_img {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.calender_img img {
+    width: 100%;
+}
+.head_right img {
+    display: inline-block;
+}
+/**/
+
+.homework_table_section {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    max-width: 1400px;
+    height: 700px;
+    max-height: 700px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(220, 220, 220);
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: auto;
+}
+
+.homework_table_section table {
+    width: 100%;
+}
+
+.homework_table_section table thead tr th {
+    height: 30px;
+    font-size: 18px;
+    background-color: rgb(32, 175, 68);
+    color: rgb(255, 255, 255);
+    border-bottom: solid 1px rgb(220, 220, 220);
+    padding: 10px;
+}
+
+.homework_table_section table thead tr th:nth-child(1) {
+    width: 150px;
+}
+
+.homework_table_section table tbody tr td {
+    background-color: rgb(233, 240, 243);
+    border-right: solid 1px rgb(230, 230, 230);
+    text-align: center;
+    padding: 10px 0;
+}
+
+.homework_table_section table tbody tr:nth-child(2n) td {
+    background-color: rgb(248, 251, 252);
+}
+
+.homework_table_section table tbody tr td:nth-child(6) {
+    border-right: none;
+}
+
+.homework_table_section table tbody tr td:nth-child(4) span:nth-child(3),
+.homework_table_section table tbody tr td:nth-child(5) span:nth-child(3) {
+    font-weight: 600;
+}
+
+.detail_show_btn {
+    width: 100px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 20px;
+    border: solid 1px rgb(150, 150, 150);
+    background-color: rgb(255, 255, 255);
+    margin: auto;
+    transition: all .1s;
+}
+
+.detail_show_btn:hover {
+    background-color: rgb(32, 175, 68);
+    border: solid 1px rgb(32, 175, 68);
+}
+
+.detail_show_disable_btn {
+    width: 100px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 20px;
+    border: solid 1px rgb(150, 150, 150);
+    background-color: rgb(150, 150, 150);
+    opacity: .5;
+    margin: auto;
+}
+
+.detail_show_btn a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+}
+
+.detail_show_disable_btn a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: rgb(100, 100, 100);
+    font-size: 14px;
+}
+
+.detail_show_btn:hover a {
+    color: rgb(255, 255, 255);
+}
+
+.td_blank {
+    width: 100px;
+}
+
+.homework_table_section table tbody tr td:nth-child(6) p.show {
+    display: block;
+}
+
+.homework_table_section table tbody tr td:nth-child(6) p.hide {
+    display: none;
+}
+
+.homework_table_section table tbody tr td:nth-child(6) p.green {
+    color: green;
+}
+
+.homework_table_section table tbody tr td:nth-child(6) p.blue {
+    color: blue;
+}
+
+.homework_table_section table tbody tr td:nth-child(6) p.red {
+    color: red;
+}
+
+/**/
+
+.modal_wrap {
+    position: fixed;
+    top: 0;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    display: none;
+}
+
+.modal_wrap.on {
+    display: block;
+}
+
+.black_back {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.modal_box {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    width: 400px;
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(220, 220, 220);
+    overflow: hidden;
+}
+
+.modal_head {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: rgb(32, 175, 68);
+}
+
+.modal_head p {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.modal_head p:nth-child(1) {
+    margin-left: 20px;
+}
+
+.modal_head p:nth-child(1) span:nth-child(2) {
+    margin-left: 5px;
+}
+
+.modal_head p span {
+    color: rgb(255, 255, 255);
+}
+
+.r_exit_btn {
+    position: relative;
+    top: 2px;
+    right: 20px;
+    width: 15px;
+    height: 15px;
+    float: right;
+    cursor: pointer;
+}
+
+.r_exit_btn img {
+    width: 100%;
+}
+
+.modal_div {
+    width: calc(100% - 40px);
+    height: auto;
+    padding: 10px 20px;
+}
+
+.modal_div:nth-child(3) {
+    background-color: rgb(230, 230, 230);
+}
+
+.modal_subtitle {
+    font-size: 18px;
+    font-weight: 600;
+    padding-left: 10px;
+    border-left: solid 4px rgb(32, 175, 68);
+    margin-top: 10px;
+}
+
+.modal_content {
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+.first p {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.first p:nth-child(1) {
+    font-weight: 600;
+}
+
+.second p {
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.second p:nth-child(1) {
+    font-weight: 600;
+}

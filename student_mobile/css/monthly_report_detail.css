@@ -1,0 +1,175 @@
+.head_p {
+    width: calc(100% - 20px);
+    height: 60px;
+    background-color: rgb(255, 255, 255);
+    border-top-right-radius: 15px;
+    border-top-left-radius:  15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    margin: auto;
+    margin-top: 60px;
+}
+
+.head_title {
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 800;
+    color: rgb(17, 90, 55);
+    margin-left: 10px;
+    padding-top: 15px;
+}
+
+.title_detail {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 800;
+    margin-left: 10px;
+}
+
+.back_btn {
+    width: 30px;
+    height: 30px;
+    float: right;
+    margin-right: 10px;
+    padding-top: 10px;
+}
+
+.content_p {
+    position: relative;
+    bottom: 10px;
+    width: calc(100% - 20px);
+    height: auto;
+    background-color: rgb(242, 248, 249);
+    border-top-right-radius: 15px;
+    border-top-left-radius:  15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    margin: auto;
+    padding-bottom: 30px;
+}
+
+.student_name {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 800;
+    padding: 15px 0;
+    margin-left: 10px;
+}
+
+.record_class_name {
+    font-size: 18px;
+    font-weight: 600;
+    float: right;
+    padding: 15px 0;
+    margin-right: 10px;
+}
+
+.right_info {
+    position: relative;
+    bottom: 10px;
+    float: right;
+    margin-right: 10px;
+}
+
+.attendance {
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.attendance span:nth-child(1) {
+    margin-right: 5px;
+}
+
+.attendance_detail {
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.content_detail_p {
+    position: relative;
+    bottom: 20px;
+    width: calc(100% - 20px);
+    height: auto;
+    background-color: rgb(209, 229, 236);
+    border-top-right-radius: 15px;
+    border-top-left-radius:  15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    margin: auto;
+    padding-bottom: 50px;
+}
+
+.report_list_wrap {
+    width: calc(100% - 20px);
+    padding: 15px 10px;
+}
+
+.report_detail_section {
+    width: calc(100% - 20px);
+    padding: 15px 10px;
+}
+
+.detail_title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.detail_content_box {
+    width: calc(100% - 10px);
+    height: auto;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+}
+
+.detail_content_box table {
+    width: 100%;
+    font-size: 12px;
+}
+
+.detail_content_box table thead tr th {
+    background-color: rgb(17, 90, 55);
+    color: rgb(255, 255, 255);
+    padding: 5px;
+}
+
+.detail_content_box table tbody tr td {
+    text-align: center;
+    padding: 5px 3px;
+}
+
+.detail_content_box table tbody tr:nth-child(2n) td {
+    background-color: rgb(220, 220, 220);
+}
+
+.report_detail_section:nth-child(1) .detail_content_box:nth-child(3) {
+    min-height: 180px;
+    margin-top: 10px;
+}
+
+.report_detail_section:nth-child(2) .detail_content_box>p:nth-child(1) {
+    font-size: 18px;
+    font-weight: 800;
+    border-bottom: dashed 1px rgb(220, 220, 220);
+    padding-bottom: 5px;
+}
+
+.detail_score {
+    padding-top: 5px;
+}
+
+.detail_score p {
+    display: inline-block;
+    width: 49%;
+    font-size: 14px;
+}
+
+.detail_score p span:nth-child(1) {
+    margin-right: 5px;
+}
+
+.report_detail_section:nth-child(3) .detail_content_box {
+    min-height: 150px;
+}
+

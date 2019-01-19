@@ -1,0 +1,200 @@
+.homework_wrap {
+    width: 100%;
+    height: auto;
+    padding-top: 20px;
+}
+
+.section_title_line {
+    width: calc(100% - 20px);
+    margin: auto;
+}
+
+.section_title_wrap {
+    position: relative;
+    display: inline-block;
+    width: auto;
+}
+
+.section_title {
+    font-size: 18px;
+    font-weight: 800;
+    color: rgb(255, 255, 255);
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+}
+
+.deco_line {
+    position: absolute;
+    top: 22px;
+    left: 1px;
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: rgb(111, 169, 142);
+}
+
+.more_btn_wrap {
+    display: inline-block;
+    width: 40px;
+    vertical-align: bottom;
+    float: right;
+    cursor: pointer;
+}
+
+.homework_content_wrap {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 20px);
+    height: auto;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.homework_box {
+    width: calc(30vw - 20px);
+    height: auto;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    border: solid 2px rgb(47, 131, 92);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.time_view {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.homework_content_img {
+    display: inline-block;
+    width: 20px;
+    vertical-align: top;
+    margin-right: 5px;
+}
+
+.homework_content_text {
+    display: inline-block;
+    width: calc(100% - 30px);
+}
+
+.homework_content_text p {
+    font-size: 14px;
+}
+
+.report_wrap {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.report_content_wrap {
+    width: calc(100% - 20px);
+    height: auto;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.report_box {
+    position: relative;
+    display: block;
+    width: calc(100% - 24px);
+    height: auto;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    border: solid 2px rgb(47, 131, 92);
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.date p {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.date p span {
+    color: rgb(100, 100, 100);
+}
+
+.report_content {
+    left: 10px;
+    width: 100%;
+}
+
+.report_title {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.report_icon {
+    width: 20px;
+    float: right;
+    cursor: pointer;
+}
+
+.notice_wrap {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.notice_content_wrap {
+    width: calc(100% - 20px);
+    height: auto;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.notice_table {
+    width: calc(100% - 24px);
+    height: auto;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    border: solid 2px rgb(47, 131, 92);
+    padding: 10px;
+}
+
+.notice_list {
+    font-size: 14px;
+    border-bottom: dashed 1px rgb(220, 220, 220);
+    padding: 5px 3px;
+}
+
+.notice_list:last-child {
+    border-bottom: none;
+}
+
+.notice_title {
+    width: 100%;
+    margin-bottom: 3px;
+}
+
+.notice_title p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.notice_date {
+    width: 100%;
+}
+
+.notice_date p {
+    font-size: 14px;
+    color: rgb(100, 100, 100);
+}
+
+footer {
+    width: 100%;
+    height: 150px;
+    margin-top: 40px;
+}
+
+.copyright {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
