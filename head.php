@@ -20,7 +20,7 @@ include_once(G5_LIB_PATH.'/connect.lib.php');
 include_once(G5_LIB_PATH.'/popular.lib.php');
 ?>
 <?
-$iii = 4;
+$iii = 3;
 ?>
 <!-- 상단 시작 { -->
 <div id="hd">
