@@ -27,9 +27,7 @@ include_once('head.php');
 <!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
 <!--    <title>MathIT Admin</title>-->
 <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />-->
-<!--    <link rel="stylesheet" type="text/css" media="screen" href="css/home.css" />-->
-<!--    <script src="js/jquery-3.3.1.min.js"></script>-->
+
 <!--</head>-->
 <!--<body>-->
 <!--    <div class="header">-->
@@ -62,5 +60,5 @@ include_once('head.php');
     </div>
 
 <?php
-include_once(G5_THEME_PATH.'/tail.php');
+include_once('tail.php');
 ?>

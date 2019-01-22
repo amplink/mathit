@@ -3,10 +3,10 @@
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 // 테마 head.sub.php 파일
-if(!defined('G5_IS_ADMIN') && defined('G5_THEME_PATH') && is_file(G5_THEME_PATH.'/head.sub.php')) {
-    require_once(G5_THEME_PATH.'/head.sub.php');
-    return;
-}
+//if(!defined('G5_IS_ADMIN') && defined('G5_THEME_PATH') && is_file(G5_THEME_PATH.'/head.sub.php')) {
+//    require_once(G5_THEME_PATH.'/head.sub.php');
+//    return;
+//}
 
 $begin_time = get_microtime();
 
@@ -91,16 +91,21 @@ if(G5_IS_MOBILE) {
 if(!defined('G5_IS_ADMIN'))
     echo $config['cf_add_script'];
 ?>
+<!-- 민석 추가 css -->
+<link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/home.css" />
+<script src="js/jquery-3.3.1.min.js"></script>
 </head>
 <body<?php echo isset($g5['body_script']) ? $g5['body_script'] : ''; ?>>
-<?php
-if ($is_member) { // 회원이라면 로그인 중이라는 메세지를 출력해준다.
-    $sr_admin_msg = '';
-    if ($is_admin == 'super') $sr_admin_msg = "최고관리자 ";
-    else if ($is_admin == 'group') $sr_admin_msg = "그룹관리자 ";
-    else if ($is_admin == 'board') $sr_admin_msg = "게시판관리자 ";
-
-    echo '<div id="hd_login_msg">'.$sr_admin_msg.get_text($member['mb_nick']).'님 로그인 중 ';
-    echo '<a href="'.G5_BBS_URL.'/logout.php">로그아웃</a></div>';
-}
-?>
+<? echo "hi"; ?>
+<!--< ?php-->
+<!--if ($is_member) { // 회원이라면 로그인 중이라는 메세지를 출력해준다.-->
+<!--    $sr_admin_msg = '';-->
+<!--    if ($is_admin == 'super') $sr_admin_msg = "최고관리자 ";-->
+<!--    else if ($is_admin == 'group') $sr_admin_msg = "그룹관리자 ";-->
+<!--    else if ($is_admin == 'board') $sr_admin_msg = "게시판관리자 ";-->
+<!---->
+<!--    echo '<div id="hd_login_msg">'.$sr_admin_msg.get_text($member['mb_nick']).'님 로그인 중 ';-->
+<!--    echo '<a href="'.G5_BBS_URL.'/logout.php">로그아웃</a></div>';-->
+<!--}-->
+<!--?>-->
