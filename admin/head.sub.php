@@ -52,14 +52,14 @@ if($config['cf_add_meta'])
     echo $config['cf_add_meta'].PHP_EOL;
 ?>
 <title><?php echo $g5_head_title; ?></title>
-<?php
-if (defined('G5_IS_ADMIN')) {
-    if(!defined('_THEME_PREVIEW_'))
-        echo '<link rel="stylesheet" href="'.G5_ADMIN_URL.'/css/admin.css?ver='.G5_CSS_VER.'">'.PHP_EOL;
-} else {
-    echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'default').'.css?ver='.G5_CSS_VER.'">'.PHP_EOL;
-}
-?>
+<!--< ?php-->
+<!--if (defined('G5_IS_ADMIN')) {-->
+<!--    if(!defined('_THEME_PREVIEW_'))-->
+<!--        echo '<link rel="stylesheet" href="'.G5_ADMIN_URL.'/css/admin.css?ver='.G5_CSS_VER.'">'.PHP_EOL;-->
+<!--} else {-->
+<!--    echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'default').'.css?ver='.G5_CSS_VER.'">'.PHP_EOL;-->
+<!--}-->
+<!--?>-->
 <!--[if lte IE 8]>
 <script src="<?php echo G5_JS_URL ?>/html5.js"></script>
 <![endif]-->
@@ -78,7 +78,7 @@ var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
 var g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";
 <?php } ?>
 </script>
-<script src="<?php echo G5_JS_URL ?>/jquery-1.8.3.min.js"></script>
+<!--<script src="< ?php echo G5_JS_URL ?>/jquery-1.8.3.min.js"></script>-->
 <script src="<?php echo G5_JS_URL ?>/jquery.menu.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_JS_URL ?>/common.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_JS_URL ?>/wrest.js?ver=<?php echo G5_JS_VER; ?>"></script>
@@ -97,7 +97,6 @@ if(!defined('G5_IS_ADMIN'))
 <script src="js/jquery-3.3.1.min.js"></script>
 </head>
 <body<?php echo isset($g5['body_script']) ? $g5['body_script'] : ''; ?>>
-<? echo "hi"; ?>
 <!--< ?php-->
 <!--if ($is_member) { // 회원이라면 로그인 중이라는 메세지를 출력해준다.-->
 <!--    $sr_admin_msg = '';-->
