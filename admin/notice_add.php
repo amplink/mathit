@@ -18,7 +18,7 @@
             <p>ADMIN</p>
         </div>
         <nav>
-            <div class="nav_menu"><a href="home.php">홈</a></div>
+            <div class="nav_menu"><a href="index.php">홈</a></div>
             <div class="nav_menu"><a href="notice_home.php" class="on">공지사항관리</a></div>
             <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>
             <div class="nav_menu"><a href="answer_manegement.php">정답지관리</a></div>

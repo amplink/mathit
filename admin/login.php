@@ -46,7 +46,7 @@
                     <input type="checkbox">
                     <p>아이디 저장하기</p>
                 </div>
-                <div class="login_btn"><a href="home.php">로그인</a></div>
+                <div class="login_btn"><a href="index.php">로그인</a></div>
             </div>
         </div>
     </div>

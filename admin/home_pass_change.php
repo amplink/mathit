@@ -18,7 +18,7 @@
             <p>ADMIN</p>
         </div>
         <nav>
-            <div class="nav_menu"><a href="home.php" class="on">홈</a></div>
+            <div class="nav_menu"><a href="index.php" class="on">홈</a></div>
             <div class="nav_menu"><a href="notice_home.php">공지사항관리</a></div>
             <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>
             <div class="nav_menu"><a href="answer_manegement.php">정답지관리</a></div>
@@ -40,7 +40,7 @@
                 <form action=""><input type="text" placeholder="현재 비밀번호를 입력해주세요"><input type="text" placeholder="새 비밀번호를 입력해주세요"><input type="text" placeholder="비밀번호를 재입력해주세요"></form>
             </div>
             <div class="ok_btn">
-                <a href="home.php">확인</a>
+                <a href="index.php">확인</a>
             </div>
         </div>
     </div>
