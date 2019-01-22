@@ -79,6 +79,7 @@ var g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";
 <?php } ?>
 </script>
 <!--<script src="< ?php echo G5_JS_URL ?>/jquery-1.8.3.min.js"></script>-->
+    <script src="js/jquery-3.3.1.min.js"></script>
 <script src="<?php echo G5_JS_URL ?>/jquery.menu.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_JS_URL ?>/common.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_JS_URL ?>/wrest.js?ver=<?php echo G5_JS_VER; ?>"></script>
@@ -94,7 +95,7 @@ if(!defined('G5_IS_ADMIN'))
 <!-- 민석 추가 css -->
 <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/home.css" />
-<script src="js/jquery-3.3.1.min.js"></script>
+
 </head>
 <body<?php echo isset($g5['body_script']) ? $g5['body_script'] : ''; ?>>
 <!--< ?php-->
