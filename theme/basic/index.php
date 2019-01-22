@@ -8,7 +8,6 @@ if (G5_IS_MOBILE) {
 }
 
 include_once(G5_THEME_PATH.'/head.php');
-echo G5_VERSION;
 ?>
 
 <h2 class="sound_only">최신글</h2>
