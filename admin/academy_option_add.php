@@ -47,104 +47,110 @@ include_once('head.php');
 <head>
         <link rel="stylesheet" type="text/css" media="screen" href="css/academy_option_add.css" />
 </head>
-    <div class="section">
-        <div class="head_section">
-            <div class="l_nav">
-                <div class="l_nav_menu"><a href="academy_option_add.php" class="on">학원등록</a></div>
-                <div class="l_nav_menu"><a href="academy_option_staff.php" >관리자 지정</a></div>
-            </div>
-            <div class="search_box_wrap">
-                <div class="search_input_box"><input type="text"></div>
-                <div class="search_btn"><a href="#none">검색</a></div>
-            </div>
-        </div>
-        <div class="view_section">
-            <table>
-                <thead>
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <th>학원아이디</th>
-                        <th>학원명</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td><span>Kakao</span></td>
-                        <td><span>필승학원</span><span>(서울)</span></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td><span>Kakao</span></td>
-                        <td><span>필승학원</span><span>(서울)</span></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td><span>Kakao</span></td>
-                        <td><span>필승학원</span><span>(서울)</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="section_footer">
-            <div class="list_btn_wrap">
-                <div class="prev_btn"><a href="#none"><img src="img/prev.png" alt=""></a></div>
-                <ul>
-                    <li><a href="#none" class="on">1</a></li>
-                    <li><a href="#none">2</a></li>
-                    <li><a href="#none">3</a></li>
-                    <li><a href="#none">4</a></li>
-                    <li><a href="#none">5</a></li>
-                </ul>
-                <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>
-            </div>
-            <div class="button_wrap">
-                <div class="delete_btn"><a href="#none">선택삭제</a></div>
-            </div>
-        </div>
-        <div class="add_section">
-            <div class="line">
-                <div class="name">
-                    <div class="lside">
-                        <p>학원아이디</p>
-                    </div>
-                    <div class="rside">
-                        <input type="text" placeholder="학원아이디를 입력해주세요">
-                    </div>
-                </div>
-                <div class="pass">
-                    <div class="lside">
-                        <p>지정학원</p>
-                    </div>
-                    <div class="rside">
-                        <input type="text" disabled />
-                    </div>
-                </div>
-            </div>
-            <div class="line">
-                <div class="name">
-                    <div class="lside">
-                        <p>비밀번호</p>
-                    </div>
-                    <div class="rside">
-                        <input type="password" placeholder="비밀번호를 입력해주세요" />
-                        <div class="confirm_btn"><a href="#none">확인</a></div>
-                    </div>
-                </div>
-                <div class="pass">
-                    <div class="lside">
-                        <p></p>
-                    </div>
-                    <div class="rside"></div>
-                </div>
-            </div>
-        </div>
-        <div class="section_footer">
-            <div class="button_wrap">
-                <div class="add_btn"><a href="#none">추가</a></div>
-            </div>
-        </div>
-    </div>
+<!--    <div class="section">-->
+<!--        <div class="head_section">-->
+<!--            <div class="l_nav">-->
+<!--                <div class="l_nav_menu"><a href="academy_option_add.php" class="on">학원등록</a></div>-->
+<!--                <div class="l_nav_menu"><a href="academy_option_staff.php" >관리자 지정</a></div>-->
+<!--            </div>-->
+<!--            <div class="search_box_wrap">-->
+<!--                <div class="search_input_box"><input type="text"></div>-->
+<!--                <div class="search_btn"><a href="#none">검색</a></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="view_section">-->
+<!--            <table>-->
+<!--                <thead>-->
+<!--                    <tr>-->
+<!--                        <th><input type="checkbox"></th>-->
+<!--                        <th>학원아이디</th>-->
+<!--                        <th>학원명</th>-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                    <tr>-->
+<!--                        <td><input type="checkbox"></td>-->
+<!--                        <td><span>Kakao</span></td>-->
+<!--                        <td><span>필승학원</span><span>(서울)</span></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><input type="checkbox"></td>-->
+<!--                        <td><span>Kakao</span></td>-->
+<!--                        <td><span>필승학원</span><span>(서울)</span></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><input type="checkbox"></td>-->
+<!--                        <td><span>Kakao</span></td>-->
+<!--                        <td><span>필승학원</span><span>(서울)</span></td>-->
+<!--                    </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--        <div class="section_footer">-->
+<!--            <div class="list_btn_wrap">-->
+<!--                <div class="prev_btn"><a href="#none"><img src="img/prev.png" alt=""></a></div>-->
+<!--                <ul>-->
+<!--                    <li><a href="#none" class="on">1</a></li>-->
+<!--                    <li><a href="#none">2</a></li>-->
+<!--                    <li><a href="#none">3</a></li>-->
+<!--                    <li><a href="#none">4</a></li>-->
+<!--                    <li><a href="#none">5</a></li>-->
+<!--                </ul>-->
+<!--                <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>-->
+<!--            </div>-->
+<!--            <div class="button_wrap">-->
+<!--                <div class="delete_btn"><a href="#none">선택삭제</a></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="add_section">-->
+<!--            <div class="line">-->
+<!--                <div class="name">-->
+<!--                    <div class="lside">-->
+<!--                        <p>학원아이디</p>-->
+<!--                    </div>-->
+<!--                    <div class="rside">-->
+<!--                        <input type="text" placeholder="학원아이디를 입력해주세요">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="pass">-->
+<!--                    <div class="lside">-->
+<!--                        <p>지정학원</p>-->
+<!--                    </div>-->
+<!--                    <div class="rside">-->
+<!--                        <input type="text" disabled />-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="line">-->
+<!--                <div class="name">-->
+<!--                    <div class="lside">-->
+<!--                        <p>비밀번호</p>-->
+<!--                    </div>-->
+<!--                    <div class="rside">-->
+<!--                        <input type="password" placeholder="비밀번호를 입력해주세요" />-->
+<!--                        <div class="confirm_btn"><a href="#none">확인</a></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="pass">-->
+<!--                    <div class="lside">-->
+<!--                        <p></p>-->
+<!--                    </div>-->
+<!--                    <div class="rside"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="section_footer">-->
+<!--            <div class="button_wrap">-->
+<!--                <div class="add_btn"><a href="#none">추가</a></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 <!--</body>-->
+
+<?
+$_GET["bo_table"] = "test1";
+include_once ('board.php');
+
+?>
 <!---->
 <!--</html>-->

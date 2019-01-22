@@ -1,5 +1,5 @@
 <?php
-include_once('./_common.php');
+include_once('_common.php');
 
 if (!$board['bo_table']) {
    alert('존재하지 않는 게시판입니다.', G5_URL);
@@ -176,8 +176,7 @@ if (isset($wr_id) && $wr_id) {
     $g5['title'] = $g5['board_title'].' '.$page.' 페이지';
 }
 
-include_once(G5_PATH.'/head.sub.php');
-
+include_once('head.sub.php');
 $width = $board['bo_table_width'];
 if ($width <= 100)
     $width .= '%';
@@ -236,9 +235,9 @@ if (isset($wr_id) && $wr_id) {
 if ($member['mb_level'] >= $board['bo_list_level'] && $board['bo_use_list_view'] || empty($wr_id))
     include_once (G5_BBS_PATH.'/list.php');
 
-include_once(G5_BBS_PATH.'/board_tail.php');
+include_once('board_tail.php');
 
 echo "\n<!-- 사용스킨 : ".(G5_IS_MOBILE ? $board['bo_mobile_skin'] : $board['bo_skin'])." -->\n";
 
-include_once(G5_PATH.'/tail.sub.php');
+include_once('tail.sub.php');
 ?>
