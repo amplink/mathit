@@ -79,7 +79,8 @@ var g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";
 <?php } ?>
 </script>
 <!--<script src="< ?php echo G5_JS_URL ?>/jquery-1.8.3.min.js"></script>-->
-    <script src="js/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 <script src="<?php echo G5_JS_URL ?>/jquery.menu.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_JS_URL ?>/common.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_JS_URL ?>/wrest.js?ver=<?php echo G5_JS_VER; ?>"></script>
@@ -95,6 +96,15 @@ if(!defined('G5_IS_ADMIN'))
 <!-- 민석 추가 css -->
 <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/home.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/notice_home.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/notice_add.css" />
+
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap-multiselect.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="js/bootstrap-multiselect.js"></script>
+
 
 </head>
 <body<?php echo isset($g5['body_script']) ? $g5['body_script'] : ''; ?>>
