@@ -159,6 +159,7 @@
 }
 
 .notice_list_wrap {
+    display:flex;
     width: 100%;
     max-width: 1400px;
     height: 325px;
@@ -186,7 +187,7 @@
 }
 
 .notice_contents_wrap {
-    display: inline-block;
+    /*display: inline-block;*/
     width: calc(100% - 247px);
     vertical-align: top;
     padding: 0 10px;
