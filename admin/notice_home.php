@@ -61,7 +61,7 @@ include_once('head.php');
         <div class="view_section">
             <table>
                 <thead>
-                    <tr>
+                    <tr style="text-align:center">
                         <th><input type="checkbox"></th>
                         <th>번호</th>
                         <th>유형</th>

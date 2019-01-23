@@ -64,7 +64,7 @@
     position: relative;
     top: 13px;
     width: 170px;
-    height: 30px;
+    height: 35px;
     border: solid 1px rgb(150, 150, 150);
     border-right: none;
 }
@@ -74,6 +74,7 @@
     height: 30px;
     border: none;
     padding: 0 10px;
+    outline:none;
 }
 
 .search_btn {
@@ -246,7 +247,7 @@
 }
 
 .name {
-    display: inline-block;
+    display: flex;
     width: calc(50% - 2px);
     height: 100%;
     vertical-align: top;
@@ -281,12 +282,18 @@
 }
 
 .rside>input {
+    /*position: relative;*/
+    /*top: 8px;*/
+    /*left: 10px;*/
+    /*width: 250px;*/
+    /*height: 20px;*/
+    /*padding: 10px;*/
+
     position: relative;
-    top: 8px;
-    left: 10px;
-    width: 250px;
-    height: 20px;
-    padding: 10px;
+    top: 1px;
+    height: 57px;
+    width: 400px;
+    outline: none;
 }
 
 .confirm_btn {
@@ -316,6 +323,7 @@
     height: 40px;
     line-height: 40px;
     border-radius: 5px;
+    margin-top: 10px;
     background-color: rgb(2, 99, 34);
 }
 

@@ -61,7 +61,7 @@ include_once('head.php');
         <div class="view_section">
             <table>
                 <thead>
-                    <tr>
+                    <tr style="text-align:center">
                         <th><input type="checkbox"></th>
                         <th>학원아이디</th>
                         <th>학원명</th>
@@ -103,6 +103,7 @@ include_once('head.php');
             </div>
         </div>
         <div class="add_section">
+
             <div class="line">
                 <div class="name">
                     <div class="lside">
@@ -111,33 +112,36 @@ include_once('head.php');
                     <div class="rside">
                         <input type="text" placeholder="학원아이디를 입력해주세요">
                     </div>
+                    <div class="button_wrap">
+                        <div class="add_btn"><a href="#none">확인</a></div>
+                    </div>
                 </div>
-                <div class="pass">
-                    <div class="lside">
-                        <p>지정학원</p>
+                <div class="pass" style="display:flex">
+                    <div class="lside" style="width: 122px;">
+                        <p>학원명</p>
                     </div>
                     <div class="rside">
                         <input type="text" disabled />
                     </div>
                 </div>
             </div>
-            <div class="line">
-                <div class="name">
-                    <div class="lside">
-                        <p>비밀번호</p>
-                    </div>
-                    <div class="rside">
-                        <input type="password" placeholder="비밀번호를 입력해주세요" />
-                        <div class="confirm_btn"><a href="#none">확인</a></div>
-                    </div>
-                </div>
-                <div class="pass">
-                    <div class="lside">
-                        <p></p>
-                    </div>
-                    <div class="rside"></div>
-                </div>
-            </div>
+<!--            <div class="line">-->
+<!--                <div class="name">-->
+<!--                    <div class="lside">-->
+<!--                        <p>비밀번호</p>-->
+<!--                    </div>-->
+<!--                    <div class="rside">-->
+<!--                        <input type="password" placeholder="비밀번호를 입력해주세요" />-->
+<!--                        <div class="confirm_btn"><a href="#none">확인</a></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="pass">-->
+<!--                    <div class="lside">-->
+<!--                        <p></p>-->
+<!--                    </div>-->
+<!--                    <div class="rside"></div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
         <div class="section_footer">
             <div class="button_wrap">

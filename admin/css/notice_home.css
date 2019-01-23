@@ -41,7 +41,7 @@
     position: relative;
     top: 13px;
     width: 170px;
-    height: 30px;
+    height: 35px;
     border: solid 1px rgb(150, 150, 150);
     border-right: none;
 }
@@ -51,6 +51,7 @@
     height: 30px;
     border: none;
     padding: 0 10px;
+    outline: none;
 }
 
 .search_btn {

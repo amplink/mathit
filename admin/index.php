@@ -49,7 +49,7 @@ include_once('head.php');
 <!--        </div>-->
 <!--    </div>-->
     <div class="section">
-        <div class="title_box">
+        <div class="" style="text-align: center;">
             <div class="title_logo_wrap"><img src="img/logo.png" alt="title_logo"></div>
             <p>
                 <span>안녕하세요 </span>

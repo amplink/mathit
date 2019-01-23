@@ -1,3 +1,9 @@
+html *
+{
+
+    font-family: "Nanum Square" !important;
+}
+
 .section {
     width: calc(100% - 60px);
     height: auto;
@@ -9,7 +15,7 @@
     height: 820px;
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 0px 10px rgb(200, 200, 200);
-    margin-top: 20px;
+    /*margin-top: 20px;*/
 }
 
 .title_logo_wrap {

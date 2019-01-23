@@ -94,10 +94,13 @@ if(!defined('G5_IS_ADMIN'))
     echo $config['cf_add_script'];
 ?>
 <!-- 민석 추가 css -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/nanumsquare.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/home.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/notice_home.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/notice_add.css" />
+
+
 
 <!--    선택적으로 CSS를 사용하면 될것 같습니다. Multi Select CSS 가 된다면 구지 bootstrap css를 사용할 필요가 없습니다-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
