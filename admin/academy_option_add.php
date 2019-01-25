@@ -1,35 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!---->
-<!--<head>-->
-<!--    <meta charset="utf-8" />-->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--    <title>MathIT Admin</title>-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />-->
-<!--    <link rel="stylesheet" type="text/css" media="screen" href="css/academy_option_add.css" />-->
-<!--    <script src="js/jquery-3.3.1.min.js"></script>-->
-<!--</head>-->
-<!---->
-<!--<body>-->
-<!--    <div class="header">-->
-<!--        <div class="logo_wrap">-->
-<!--            <div class="logo"><img src="img/logo.png" alt="logo"></div>-->
-<!--            <p>ADMIN</p>-->
-<!--        </div>-->
-<!--        <nav>-->
-<!--            <div class="nav_menu"><a href="index.php">홈</a></div>-->
-<!--            <div class="nav_menu"><a href="notice_home.php">공지사항관리</a></div>-->
-<!--            <div class="nav_menu"><a href="academy_option_staff.php" class="on">학원별관리</a></div>-->
-<!--            <div class="nav_menu"><a href="answer_manegement.php">정답지관리</a></div>-->
-<!--        </nav>-->
-<!--        <div class="header_right">-->
-<!--            <div class="user_img"><img src="img/user.png" alt="user_img"></div>-->
-<!--            <p class="user_id">admin</p>-->
-<!--            <div class="logout_btn"><a href="login.php">로그아웃</a></div>-->
-<!--            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>-->
-<!--        </div>-->
-<!--    </div>-->
 <?php
 include_once('_common.php');
 define('_INDEX_', true);
@@ -44,6 +12,7 @@ if (G5_IS_MOBILE) {
 include_once('head.php');
 
 ?>
+
 <head>
         <link rel="stylesheet" type="text/css" media="screen" href="css/academy_option_add.css" />
 </head>
@@ -68,21 +37,26 @@ include_once('head.php');
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td><span>Kakao</span></td>
-                        <td><span>필승학원</span><span>(서울)</span></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td><span>Kakao</span></td>
-                        <td><span>필승학원</span><span>(서울)</span></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td><span>Kakao</span></td>
-                        <td><span>필승학원</span><span>(서울)</span></td>
-                    </tr>
+<!--                    <tr>-->
+<!--                        <td><input type="checkbox"></td>-->
+<!--                        <td><span>Kakao</span></td>-->
+<!--                        <td><span>필승학원</span><span>(서울)</span></td>-->
+<!--                    </tr>-->
+                        <?
+                        $sql = "select * from `academy`";
+                        $result = mysqli_query($connect_db, $sql);
+
+                        while($ac_data = mysqli_fetch_array($result)) {
+                            ?>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td><span><? echo $ac_data["client_id"]; ?></span></td>
+                                <td><span><? echo $ac_data["client_name"]; ?></span></td>
+                            </tr>
+                            <?
+                        }
+
+                        ?>
                 </tbody>
             </table>
         </div>
@@ -102,59 +76,50 @@ include_once('head.php');
                 <div class="delete_btn"><a href="#none">선택삭제</a></div>
             </div>
         </div>
-        <div class="add_section">
 
+        <!-- 학원등록 -->
+        <div class="add_section">
+            <form action="chk_ac.php" type="GET" id="ac_name_form">
             <div class="line">
                 <div class="name">
                     <div class="lside">
                         <p>학원아이디</p>
                     </div>
                     <div class="rside">
-                        <input type="text" placeholder="학원아이디를 입력해주세요">
-                    </div>
-                    <div class="button_wrap">
-                        <div class="add_btn"><a href="#none">확인</a></div>
-                    </div>
-                </div>
-                <div class="pass" style="display:flex">
-                    <div class="lside" style="width: 122px;">
-                        <p>학원명</p>
-                    </div>
-                    <div class="rside">
-                        <input type="text" disabled />
+                        <input type="text" placeholder="학원아이디를 입력해주세요" name="ac_id">
                     </div>
                 </div>
             </div>
-<!--            <div class="line">-->
-<!--                <div class="name">-->
-<!--                    <div class="lside">-->
-<!--                        <p>비밀번호</p>-->
-<!--                    </div>-->
-<!--                    <div class="rside">-->
-<!--                        <input type="password" placeholder="비밀번호를 입력해주세요" />-->
-<!--                        <div class="confirm_btn"><a href="#none">확인</a></div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="pass">-->
-<!--                    <div class="lside">-->
-<!--                        <p></p>-->
-<!--                    </div>-->
-<!--                    <div class="rside"></div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="line">
+                <div class="name">
+                    <div class="lside">
+                        <p>비밀번호</p>
+                    </div>
+                    <div class="rside">
+                        <input type="password" placeholder="비밀번호를 입력해주세요." name="ac_pw">
+                    </div>
+                </div>
+            </div>
+            </form>
         </div>
         <div class="section_footer">
             <div class="button_wrap">
-                <div class="add_btn"><a href="#none">추가</a></div>
+                <div class="add_btn" onclick="submit();">추가</div>
             </div>
         </div>
     </div>
-<!--</body>-->
+</body>
 
 <?
-$_GET["bo_table"] = "test1";
-include_once ('board.php');
+//$_GET["bo_table"] = "test1";
+//include_once ('board.php');
+//INSERT INTO `academy` (`client_id`, `event_time`, `admin_id`, `client_name`) VALUES ('11', CURRENT_TIMESTAMP, 'admin', 'admin');
 
 ?>
-<!---->
-<!--</html>-->
+
+</html>
+<script>
+    function submit() {
+        document.getElementById("ac_name_form").submit();
+    }
+</script>
