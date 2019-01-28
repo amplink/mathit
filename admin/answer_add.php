@@ -58,9 +58,9 @@ include_once('_common.php');
                     <tbody>
                         <tr>
                             <td><select name="book_type" id="textbook">
-                                    <option value="math" selected>수학의 정석</option>
-                                    <option value="kor">국어의 정석</option>
-                                    <option value="eng">영어의 정석</option>
+                                    <option value="수학의정석" selected>수학의 정석</option>
+                                    <option value="국어의정석">국어의 정석</option>
+                                    <option value="영어의정석">영어의 정석</option>
                                 </select></td>
                             <td><select name="grade" id="grade">
                                     <option value="grade_1">초등 1학년</option>
