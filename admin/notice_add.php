@@ -24,6 +24,7 @@ include_once('head.php');
 <!--    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />-->
 <!--    <link rel="stylesheet" type="text/css" media="screen" href="css/notice_add.css" />-->
     <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap-multiselect.js"></script>
 <!--</head>-->
 <!---->
 <body>
@@ -72,18 +73,35 @@ include_once('head.php');
                     </div>
                     <div class="contents_box">
 
+                        <select name="languages_known[]" id="academy" multiple="multiple">
                             <?php
                             $sql = "select * from `academy`";
                             $res = mysqli_query($connect_db, $sql);
                             while($ac = mysqli_fetch_array($res)) {
-                                echo "<div class='radio_group'>";
-                              echo "<input type='checkbox' name='ac_select[]' class='notice_range' value='".$ac['client_id']."'><p>".$ac['client_name']."</p></div>";
+                                ?>
+                                <option value="<?=$ac["client_id"];?>"><?=$ac["client_name"];?></option>
+                                <?php
+                                $i++;
                             }
+
                             ?>
-                    </div>
-                    <script type="text/javascript">
+
+                        </select>
+                        <script type="text/javascript">
                             $('#academy').multiselect();
-                    </script>
+                        </script>
+
+
+<!--                            -->
+<!--                            $sql = "select * from `academy`";-->
+<!--                            $res = mysqli_query($connect_db, $sql);-->
+<!--                            while($ac = mysqli_fetch_array($res)) {-->
+<!--                                echo "<div class='radio_group'>";-->
+<!--                              echo "<input type='checkbox' name='ac_select[]' class='notice_range' value='".$ac['client_id']."'><p>".$ac['client_name']."</p></div>";-->
+<!--                            }-->
+
+                    </div>
+
                 </div>
             </div>
             <div class="board_line">
@@ -134,7 +152,7 @@ include_once('head.php');
         </div>
         <div class="section_footer">
             <div class="button_wrap">
-                <div class="save_btn"><input type="submit" value="저장"></div>
+                <div class="save_btn" ><input class="l_save_btn" type="submit" value="저장"></div>
                 <div class="cancel_btn"><a href="notice_home.php">취소</a></div>
             </div>
         </div>

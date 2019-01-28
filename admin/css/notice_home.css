@@ -196,7 +196,7 @@
 
 .list_btn_wrap>ul {
     position: relative;
-    bottom: 5px;
+    bottom: 0px;
     display: inline-block;
 }
 
@@ -218,4 +218,12 @@
 .list_btn_wrap>ul>li>a.on {
     color: rgb(50, 50, 50);
     font-weight: 600;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+a.btn:hover{
+    color:white !important;
 }

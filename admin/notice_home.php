@@ -15,39 +15,6 @@ include_once('head.php');
 ?>
 
 
-<!---->
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!---->
-<!--<head>-->
-<!--    <meta charset="utf-8" />-->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--    <title>MathIT Admin</title>-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />-->
-<!--    <link rel="stylesheet" type="text/css" media="screen" href="css/notice_home.css" />-->
-<!--    <script src="js/jquery-3.3.1.min.js"></script>-->
-<!--</head>-->
-<!---->
-<!--<body>-->
-<!--    <div class="header">-->
-<!--        <div class="logo_wrap">-->
-<!--            <div class="logo"><img src="img/logo.png" alt="logo"></div>-->
-<!--            <p>ADMIN</p>-->
-<!--        </div>-->
-<!--        <nav>-->
-<!--            <div class="nav_menu"><a href="index.php">홈</a></div>-->
-<!--            <div class="nav_menu"><a href="notice_home.php" class="on">공지사항관리</a></div>-->
-<!--            <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>-->
-<!--            <div class="nav_menu"><a href="answer_manegement.php">정답지관리</a></div>-->
-<!--        </nav>-->
-<!--        <div class="header_right">-->
-<!--            <div class="user_img"><img src="img/user.png" alt="user_img"></div>-->
-<!--            <p class="user_id">admin</p>-->
-<!--            <div class="logout_btn"><a href="login.php">로그아웃</a></div>-->
-<!--            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>-->
-<!--        </div>-->
-<!--    </div>-->
     <div class="section">
         <div class="head_section">
             <div class="l_title">
@@ -70,14 +37,7 @@ include_once('head.php');
                     </tr>
                 </thead>
                 <tbody>
-<!--                    <tr>-->
-<!--                        <td><input type="checkbox"></td>-->
-<!--                        <td>1</td>-->
-<!--                        <td>일반공지</td>-->
-<!--                        <td><a href="notice_read.php">공지사항입니다</a></td>-->
-<!--                        <td>전체</td>-->
-<!--                    </tr>-->
-                    <?
+                    <?php
                     $sql = "select * from `notify`";
                     $result = mysqli_query($connect_db, $sql);
                     $i=1;
@@ -86,11 +46,13 @@ include_once('head.php');
                         else if($res['type']==1) $type = "일반공지";
                         else if($res['type']==2) $type = "중요공지";
                         $range = explode(",", $res['target']);
+
                         foreach($range as $t) {
                             if($t == 0) $target .= "전임강사,";
                             else if($t == 1) $target .= "채점강사,";
                             else if($t == 2) $target .= "학생,";
                         }
+
                         $target[count($target)-2] = "\0";
 
                         echo "<tr><td><input type='checkbox'</td><td>$i</td><td>".$type."</td><td>".$res['title']."</td><td>$target</td></tr>";
@@ -113,7 +75,7 @@ include_once('head.php');
                 <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
-                <div class="add_btn"><a href="notice_add.php">공지등록</a></div>
+                <div class="add_btn"><a class="btn" href="notice_add.php">공지등록</a></div>
                 <div class="delete_btn"><a href="#none">삭제</a></div>
             </div>
         </div>

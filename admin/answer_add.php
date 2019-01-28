@@ -124,13 +124,13 @@ include_once('_common.php');
                     <tbody>
                         <tr id="item_section_1">
                             <td>
-                                <div class="plus_icon" onclick="append_div(1)"><img src="img/plus.png" alt="plus"></div>
+                                <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
                             </td>
                             <td><input type="text" name="a_item_number[]" placeholder="문항번호"></td>
                             <td><input type="file" name="a_answer_image[]"></td>
                             <td><input type="file" name="a_explain_image[]"></td>
                             <td>
-                                <div class="minus_icon" onclick="delete_div(1)"><img src="img/minus.png" alt="minus"></div>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
                             </td>
                         </tr>
                     </tbody>
@@ -151,13 +151,13 @@ include_once('_common.php');
                     <tbody>
                     <tr id="item_section_2">
                         <td>
-                            <div class="plus_icon" onclick="append_div(2)"><img src="img/plus.png" alt="plus"></div>
+                            <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
                         </td>
                         <td><input type="text" name="b_item_number[]" placeholder="문항번호"></td>
                         <td><input type="file" name="b_answer_image[]"></td>
                         <td><input type="file" name="b_explain_image[]"></td>
                         <td>
-                            <div class="minus_icon" onclick="delete_div(2)"><img src="img/minus.png" alt="minus"></div>
+                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
                         </td>
                     </tr>
                     </tbody>
@@ -178,13 +178,13 @@ include_once('_common.php');
                     <tbody>
                     <tr id="item_section_3">
                         <td>
-                            <div class="plus_icon" onclick="append_div(3)"><img src="img/plus.png" alt="plus"></div>
+                            <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
                         </td>
                         <td><input type="text" name="c_item_number[]" placeholder="문항번호"></td>
                         <td><input type="file" name="c_answer_image[]"></td>
                         <td><input type="file" name="c_explain_image[]"></td>
                         <td>
-                            <div class="minus_icon"><img src="img/minus.png" alt="minus"></div>
+                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
                         </td>
                     </tr>
                     </tbody>
@@ -205,13 +205,13 @@ include_once('_common.php');
                     <tbody>
                     <tr id="item_section_4">
                         <td>
-                            <div class="plus_icon" onclick="append_div(4)"><img src="img/plus.png" alt="plus"></div>
+                            <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
                         </td>
                         <td><input type="text" name="d_item_number[]" placeholder="문항번호"></td>
                         <td><input type="file" name="d_answer_image[]"></td>
                         <td><input type="file" name="d_explain_image[]"></td>
                         <td>
-                            <div class="minus_icon"><img src="img/minus.png" alt="minus"></div>
+                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
                         </td>
                     </tr>
                     </tbody>
@@ -257,26 +257,27 @@ include_once('_common.php');
         }
     }
 
-    function append_div(n) {
-        var t = "a";
-        if(n==1) t = "a";
-        else if(n==2) t = "b";
-        else if(n==3) t = "c";
-        else if(n==4) t = "d";
+    function append_div(previous,idx) {
+        // var t = "a";
+        // if(n==1) t = "a";
+        // else if(n==2) t = "b";
+        // else if(n==3) t = "c";
+        // else if(n==4) t = "d";
 
-        var text = '<tr id="item_section_'+n+'">\n' + '<td>\n' +
-            '<div class="plus_icon" onclick="append_div('+n+')">' +
+        var text = '<tr class="item_section">\n' + '<td>\n' +
+            '<div class="plus_icon" onclick="append_div(this,idx)">' +
             '<img src="img/plus.png" alt="plus"></div></td>\n' +
-            '<td><input type="text" name="'+t+'_item_number[]" placeholder="문항번호"></td>\n' +
-            '<td><input type="file" name="'+t+'_answer_image[]"></td>\n' +
-            '<td><input type="file" name="'+t+'_explain_image[]"></td>\n' +
-            '<td><div class="minus_icon" onclick="delete_div('+n+')"><img src="img/minus.png" alt="minus"></div></td>\n' +
+            '<td><input type="text" name="'+idx+'_item_number[]" placeholder="문항번호"></td>\n' +
+            '<td><input type="file" name="'+idx+'_answer_image[]"></td>\n' +
+            '<td><input type="file" name="'+idx+'_explain_image[]"></td>\n' +
+            '<td><div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div></td>\n' +
             '</tr>';
-        $("#item_section_"+n).parent().append(text);
+        // $("#item_section_"+n).parent().append(text);
+        $(previous).parent().parent().after(text);
     }
 
-    function delete_div(n) {
-        $("#item_section_" + n + ":last").remove();
+    function delete_div(t) {
+        $(t).parent().parent().remove();
     }
 
     function myFunction() {

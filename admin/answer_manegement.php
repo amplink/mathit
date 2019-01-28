@@ -37,27 +37,25 @@ include_once('head.php');
                     </tr>
                 </thead>
                 <tbody>
-<!--                    <tr>-->
-<!--                        <td><span>초3</span></td>-->
-<!--                        <td><span>1학기</span></td>-->
-<!--                        <td><span>1단원</span></td>-->
-<!--                        <td><span>루트</span></td>-->
-<!--                        <td><span>알파</span></td>-->
-<!--                    </tr>-->
-                    <?
+                    <?php
                     $sql = "select * from `answer_master`";
                     $result = mysqli_query($connect_db, $sql);
 
                     while($ac_data = mysqli_fetch_array($result)) {
-                        ?>
-                        <tr>
-                            <td><span><?=$ac_data['grade']?></span></td>
-                            <td><span><?=$ac_data['semester']?></span></td>
-                            <td><span><?=$ac_data['unit']?></span></td>
-                            <td><span><?=$ac_data['level']?></span></td>
-                            <td><span><?=$ac_data['c_name']?></span></td>
-                        </tr>
-                        <?
+
+                       echo '<tr>';
+                       echo '     <td><span>'.$ac_data["grade"].'</span></td>';
+                       echo '     <td><span>'.$ac_data["unit"].'</span></td>';
+                       echo '     <td><span>'.$ac_data["level"].'</span></td>';
+                       echo '     <td><span>'.$ac_data["c_name"].'</span></td>';
+                        echo '     <td><span>'.$ac_data["book_type"].'</span></td>';
+                      echo '  </tr>';
+
+//                        echo '<tr> ';
+//                        echo '     <td style="width:20px"><input type="checkbox"></td> ';
+//                        echo '     <td><span>'.$ac_data["client_id"].'</span></td> ';
+//                        echo '     <td><span>'.$ac_data["client_name"].'</span></td> ';
+//                        echo ' </tr> ';
                     }
                     ?>
                 </tbody>

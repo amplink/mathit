@@ -37,23 +37,19 @@ include_once('head.php');
                     </tr>
                 </thead>
                 <tbody>
-<!--                    <tr>-->
-<!--                        <td><input type="checkbox"></td>-->
-<!--                        <td><span>Kakao</span></td>-->
-<!--                        <td><span>필승학원</span><span>(서울)</span></td>-->
-<!--                    </tr>-->
-                        <?
+
+                        <?php
                         $sql = "select * from `academy`";
                         $result = mysqli_query($connect_db, $sql);
 
                         while($ac_data = mysqli_fetch_array($result)) {
-                            ?>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td><span><? echo $ac_data["client_id"]; ?></span></td>
-                                <td><span><? echo $ac_data["client_name"]; ?></span></td>
-                            </tr>
-                            <?
+
+                            echo '<tr> ';
+                            echo '     <td style="width:20px"><input type="checkbox"></td> ';
+                            echo '     <td><span>'.$ac_data["client_id"].'</span></td> ';
+                            echo '     <td><span>'.$ac_data["client_name"].'</span></td> ';
+                            echo ' </tr> ';
+
                         }
 
                         ?>
@@ -104,7 +100,7 @@ include_once('head.php');
         </div>
         <div class="section_footer">
             <div class="button_wrap">
-                <div class="add_btn" onclick="submit();">추가</div>
+                <div class="add_btn" onclick="submit();"><a href="#none">추가</a></div>
             </div>
         </div>
     </div>
