@@ -115,7 +115,7 @@ include_once('_common.php');
                     <thead>
                         <tr>
                             <th></th>
-                            <th>1문항번호</th>
+                            <th>문항번호</th>
                             <th>정답이미지</th>
                             <th>풀이이미지</th>
                             <th></th>
@@ -126,9 +126,9 @@ include_once('_common.php');
                             <td>
                                 <div class="plus_icon" onclick="append_div(1)"><img src="img/plus.png" alt="plus"></div>
                             </td>
-                            <td><input type="text" name="a_item_number" placeholder="문항번호"></td>
-                            <td><input type="file" name="a_answer_image"></td>
-                            <td><input type="file" name="a_explain_image"></td>
+                            <td><input type="text" name="a_item_number[]" placeholder="문항번호"></td>
+                            <td><input type="file" name="a_answer_image[]"></td>
+                            <td><input type="file" name="a_explain_image[]"></td>
                             <td>
                                 <div class="minus_icon" onclick="delete_div(1)"><img src="img/minus.png" alt="minus"></div>
                             </td>
@@ -142,7 +142,7 @@ include_once('_common.php');
                     <thead>
                     <tr>
                         <th></th>
-                        <th>2문항번호</th>
+                        <th>문항번호</th>
                         <th>정답이미지</th>
                         <th>풀이이미지</th>
                         <th></th>
@@ -153,9 +153,9 @@ include_once('_common.php');
                         <td>
                             <div class="plus_icon" onclick="append_div(2)"><img src="img/plus.png" alt="plus"></div>
                         </td>
-                        <td><input type="text" name="b_item_number" placeholder="문항번호"></td>
-                        <td><input type="file" name="b_answer_image"></td>
-                        <td><input type="file" name="b_explain_image"></td>
+                        <td><input type="text" name="b_item_number[]" placeholder="문항번호"></td>
+                        <td><input type="file" name="b_answer_image[]"></td>
+                        <td><input type="file" name="b_explain_image[]"></td>
                         <td>
                             <div class="minus_icon" onclick="delete_div(2)"><img src="img/minus.png" alt="minus"></div>
                         </td>
@@ -169,7 +169,7 @@ include_once('_common.php');
                     <thead>
                     <tr>
                         <th></th>
-                        <th>3문항번호</th>
+                        <th>문항번호</th>
                         <th>정답이미지</th>
                         <th>풀이이미지</th>
                         <th></th>
@@ -180,9 +180,9 @@ include_once('_common.php');
                         <td>
                             <div class="plus_icon" onclick="append_div(3)"><img src="img/plus.png" alt="plus"></div>
                         </td>
-                        <td><input type="text" name="c_item_number" placeholder="문항번호"></td>
-                        <td><input type="file" name="c_answer_image"></td>
-                        <td><input type="file" name="c_explain_image"></td>
+                        <td><input type="text" name="c_item_number[]" placeholder="문항번호"></td>
+                        <td><input type="file" name="c_answer_image[]"></td>
+                        <td><input type="file" name="c_explain_image[]"></td>
                         <td>
                             <div class="minus_icon"><img src="img/minus.png" alt="minus"></div>
                         </td>
@@ -196,7 +196,7 @@ include_once('_common.php');
                     <thead>
                     <tr>
                         <th></th>
-                        <th>4문항번호</th>
+                        <th>문항번호</th>
                         <th>정답이미지</th>
                         <th>풀이이미지</th>
                         <th></th>
@@ -207,9 +207,9 @@ include_once('_common.php');
                         <td>
                             <div class="plus_icon" onclick="append_div(4)"><img src="img/plus.png" alt="plus"></div>
                         </td>
-                        <td><input type="text" name="d_item_number" placeholder="문항번호"></td>
-                        <td><input type="file" name="d_answer_image"></td>
-                        <td><input type="file" name="d_explain_image"></td>
+                        <td><input type="text" name="d_item_number[]" placeholder="문항번호"></td>
+                        <td><input type="file" name="d_answer_image[]"></td>
+                        <td><input type="file" name="d_explain_image[]"></td>
                         <td>
                             <div class="minus_icon"><img src="img/minus.png" alt="minus"></div>
                         </td>
@@ -219,6 +219,7 @@ include_once('_common.php');
             </div>
         </div>
     </div>
+    <input type="hidden" id="submit_section_1">
 </form>
 </body>
 
@@ -257,13 +258,18 @@ include_once('_common.php');
     }
 
     function append_div(n) {
+        var t = "a";
+        if(n==1) t = "a";
+        else if(n==2) t = "b";
+        else if(n==3) t = "c";
+        else if(n==4) t = "d";
 
         var text = '<tr id="item_section_'+n+'">\n' + '<td>\n' +
             '<div class="plus_icon" onclick="append_div('+n+')">' +
             '<img src="img/plus.png" alt="plus"></div></td>\n' +
-            '<td><input type="text" name="a_item_number" placeholder="문항번호"></td>\n' +
-            '<td><input type="file" name="a_answer_image"></td>\n' +
-            '<td><input type="file" name="a_explain_image"></td>\n' +
+            '<td><input type="text" name="'+t+'_item_number[]" placeholder="문항번호"></td>\n' +
+            '<td><input type="file" name="'+t+'_answer_image[]"></td>\n' +
+            '<td><input type="file" name="'+t+'_explain_image[]"></td>\n' +
             '<td><div class="minus_icon" onclick="delete_div('+n+')"><img src="img/minus.png" alt="minus"></div></td>\n' +
             '</tr>';
         $("#item_section_"+n).parent().append(text);
@@ -274,16 +280,75 @@ include_once('_common.php');
     }
 
     function myFunction() {
-        var a = $("input[name='a_item_number']").length;
-        var b = new Array(new Array(), new Array());
-
-        for(var i=0; i<a; i++) {
-            b[i] = $("input[name='a_item_number']")[i].value;
-        }
-
-        alert(b[1]);
+        // var a;
+        // var section_1 = new Array();
+        // var section_2 = new Array();
+        // var section_3 = new Array();
+        // var section_4 = new Array();
+        //
+        // for(var i=0; i<3; i++) {
+        //     if(i==0) {
+        //         a = $("input[name='a_item_number']");
+        //     }else if(i==1) {
+        //         a = $("input[name='a_answer_image']");
+        //     }else if(i==2) {
+        //         a = $("input[name='a_explain_image']");
+        //     }
+        //     for(var j=0; j<a.length; j++) {
+        //         section_1[i] = new Array(a.length);
+        //         section_1[i][j] = a[j].value;
+        //     }
+        // }
+        //
+        // for(var i=0; i<3; i++) {
+        //     if(i==0) {
+        //         a = $("input[name='b_item_number']");
+        //     }else if(i==1) {
+        //         a = $("input[name='b_answer_image']");
+        //     }else if(i==2) {
+        //         a = $("input[name='b_explain_image']");
+        //     }
+        //     for(var j=0; j<a.length; j++) {
+        //         section_2[i] = new Array(a.length);
+        //         section_2[i][j] = a[j].value;
+        //     }
+        // }
+        //
+        // for(var i=0; i<3; i++) {
+        //     if(i==0) {
+        //         a = $("input[name='c_item_number']");
+        //     }else if(i==1) {
+        //         a = $("input[name='c_answer_image']");
+        //     }else if(i==2) {
+        //         a = $("input[name='c_explain_image']");
+        //     }
+        //     for(var j=0; j<a.length; j++) {
+        //         section_3[i] = new Array(a.length);
+        //         section_3[i][j] = a[j].value;
+        //     }
+        // }
+        //
+        // for(var i=0; i<3; i++) {
+        //     if(i==0) {
+        //         a = $("input[name='d_item_number']");
+        //     }else if(i==1) {
+        //         a = $("input[name='d_answer_image']");
+        //     }else if(i==2) {
+        //         a = $("input[name='d_explain_image']");
+        //     }
+        //     for(var j=0; j<a.length; j++) {
+        //         section_4[i] = new Array(a.length);
+        //         section_4[i][j] = a[j].value;
+        //     }
+        // }
+        //
+        // // var arr = ['귤', '사과', '배', '파인애플'];
+        // // $('#btn-send').click(function() {
+        // //     $.form({
+        // //         action: 'submit_array_ok.php',
+        // //         data: { fruits: arr },
+        // //     }).submit();
+        // // });
+        $("#answer_add_form").submit();
     }
 </script>
-<?
-
-?>
