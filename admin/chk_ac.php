@@ -1,7 +1,7 @@
 <?php
     include_once('_common.php');
-    $data['Id'] = $_GET['ac_id'];
-    $data['Pw'] = $_GET['ac_pw'];
+    $data['id'] = $_GET['ac_id'];
+    $data['pw'] = $_GET['ac_pw'];
 
     $link = "/api/math_client_chk";
     $res = api_calls($link, $data);

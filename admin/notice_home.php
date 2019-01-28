@@ -70,27 +70,33 @@ include_once('head.php');
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>일반공지</td>
-                        <td><a href="notice_read.php">공지사항입니다</a></td>
-                        <td>전체</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>2</td>
-                        <td>일반공지</td>
-                        <td><a href="notice_read.php">공지사항입니다</a></td>
-                        <td>전임강사, 채점강사</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>3</td>
-                        <td>중요공지</td>
-                        <td><a href="notice_read.php">공지사항입니다</a></td>
-                        <td>채점강사, 학생</td>
-                    </tr>
+<!--                    <tr>-->
+<!--                        <td><input type="checkbox"></td>-->
+<!--                        <td>1</td>-->
+<!--                        <td>일반공지</td>-->
+<!--                        <td><a href="notice_read.php">공지사항입니다</a></td>-->
+<!--                        <td>전체</td>-->
+<!--                    </tr>-->
+                    <?
+                    $sql = "select * from `notify`";
+                    $result = mysqli_query($connect_db, $sql);
+                    $i=1;
+                    while($res = mysqli_fetch_array($result)) {
+                        if($res['type']==0) $type = "전체공지";
+                        else if($res['type']==1) $type = "일반공지";
+                        else if($res['type']==2) $type = "중요공지";
+                        $range = explode(",", $res['target']);
+                        foreach($range as $t) {
+                            if($t == 0) $target .= "전임강사,";
+                            else if($t == 1) $target .= "채점강사,";
+                            else if($t == 2) $target .= "학생,";
+                        }
+                        $target[count($target)-2] = "\0";
+
+                        echo "<tr><td><input type='checkbox'</td><td>$i</td><td>".$type."</td><td>".$res['title']."</td><td>$target</td></tr>";
+                        $i++;
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
