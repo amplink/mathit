@@ -109,7 +109,7 @@ include_once('head.php');
                 <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
-                <div class="add_btn"><a class="btn" href="notice_add.php">공지등록</a></div>
+                <div class="add_btn"><a style="color:white" href="notice_add.php">공지등록</a></div>
                 <div class="delete_btn" onclick="del_notice();"><a href="#none">삭제</a></div>
             </div>
         </div>
