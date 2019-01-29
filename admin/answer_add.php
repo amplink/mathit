@@ -13,6 +13,7 @@ include_once('_common.php');
     <link rel="stylesheet" type="text/css" media="screen" href="css/answer_add_2.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/answer_add.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/nanumsquare.css" />
 </head>
 
 <body>

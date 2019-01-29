@@ -1,3 +1,9 @@
+html *
+{
+
+    font-family: "Nanum Square" !important;
+}
+
 .section {
     width: calc(100% - 60px);
     height: auto;
