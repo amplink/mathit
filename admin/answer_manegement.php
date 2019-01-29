@@ -41,16 +41,23 @@ include_once('head.php');
                     $sql = "select * from `answer_master`";
                     $result = mysqli_query($connect_db, $sql);
 
-                    $grade = "";
-                    $unit = "";
-                    $level = "";
-                    $semester = "";
-                    $book_type = "";
+                    $grade = array();
+                    $unit = array();
+                    $level = array();
+                    $semester = array();
+                    $book_type = array();
+                    $j=0;
 
                     while($ac_data = mysqli_fetch_array($result)) {
-                        if($book_type == $ac_data['book_type'] && $unit == $ac_data['unit'] && $grade == $ac_data['grade']
-                            && $level == $ac_data['level'] && $semester == $ac_data['semester']) continue;
-                       else {
+                        $n = 0;
+                        for($i=0; $i<count($grade)+1; $i++) {
+                            if ($book_type[$i] == $ac_data['book_type'] && $unit[$i] == $ac_data['unit'] && $grade[$i] == $ac_data['grade'] && $level[$i] == $ac_data['level'] && $semester[$i] == $ac_data['semester']) {
+                                $n = 1;
+                            }
+                        }
+
+
+                       if($n != 1) {
                            echo '<tr>';
                            echo '     <td><span>'.$ac_data["grade"].'</span></td>';
                            echo '     <td><span>'.$ac_data["semester"].'</span></td>';
@@ -59,12 +66,14 @@ include_once('head.php');
                            echo '     <td><span>'.$ac_data["book_type"].'</span></td>';
                            echo '  </tr>';
 
-                           $grade = $ac_data['grade'];
-                           $unit = $ac_data['unit'];
-                           $level = $ac_data['level'];
-                           $semester = $ac_data['semester'];
-                           $book_type = $ac_data['book_type'];
+                           $grade[$j] = $ac_data['grade'];
+                           $unit[$j] = $ac_data['unit'];
+                           $level[$j] = $ac_data['level'];
+                           $semester[$j] = $ac_data['semester'];
+                           $book_type[$j] = $ac_data['book_type'];
+                           $j++;
                        }
+
 
                     }
                     ?>
