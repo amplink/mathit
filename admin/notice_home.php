@@ -14,7 +14,7 @@ include_once('head.php');
 
 ?>
 
-
+<script src="js/jquery-3.3.1.min.js"></script>
     <div class="section">
         <div class="head_section">
             <div class="l_title">
@@ -37,12 +37,14 @@ include_once('head.php');
                     </tr>
                 </thead>
                 <tbody>
+                <form action="notice_home_del.php" method="POST" id="notice_form">
                     <?php
                     $sql = "select * from `notify`";
                     $result = mysqli_query($connect_db, $sql);
                     $i=1;
 
                     while($res = mysqli_fetch_array($result)) {
+                        $target = "";
                         if($res['type']==0) $type = "전체공지";
                         else if($res['type']==1) $type = "일반공지";
                         else if($res['type']==2) $type = "중요공지";
@@ -55,10 +57,11 @@ include_once('head.php');
 
                         $target[count($target)-2] = "\0";
 
-                        echo "<tr><td><input type='checkbox'</td><td>$i</td><td>".$type."</td><td>".$res['title']."</td><td>$target</td></tr>";
+                        echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>$i</td><td>".$type."</td><td>".$res['title']."</td><td>$target</td></tr>";
                         $i++;
                     }
                     ?>
+                </form>
                 </tbody>
             </table>
         </div>
@@ -76,10 +79,15 @@ include_once('head.php');
             </div>
             <div class="button_wrap">
                 <div class="add_btn"><a class="btn" href="notice_add.php">공지등록</a></div>
-                <div class="delete_btn"><a href="#none">삭제</a></div>
+                <div class="delete_btn" onclick="del_notice();"><a href="#none">삭제</a></div>
             </div>
         </div>
     </div>
 <?php
 include_once('tail.php');
 ?>
+<script>
+    function del_notice() {
+        $('#notice_form').submit();
+    }
+</script>

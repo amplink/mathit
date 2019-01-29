@@ -23,5 +23,7 @@ $sql = "INSERT INTO `notify` (`id`, `client_id`, `target`, `title`, `author`, `t
 VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$attach_file', '$contents', CURRENT_TIMESTAMP);";
 sql_query($sql);
 
+echo "<script>alert('공지 등록이 완료되었습니다.');</script>";
+echo "<script>location.href='./notice_home.php';</script>";
 
 ?>

@@ -33,7 +33,7 @@
     <div class="section">
         <div class="head_section">
             <div class="l_nav">
-                <div class="l_nav_menu"><a href="board.php?bo_table=test1">학원등록</a></div>
+                <div class="l_nav_menu"><a href="academy_option_add.php">학원등록</a></div>
                 <div class="l_nav_menu"><a href="academy_option_staff.php" class="on">관리자 지정</a></div>
             </div>
             <div class="search_box_wrap">

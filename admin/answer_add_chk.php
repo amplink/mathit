@@ -72,4 +72,8 @@ if($section_4[0][0]) {
         mysqli_query($connect_db, $sql);
     }
 }
+
+echo "<script>alert('등록이 완료되었습니다.');</script>";
+echo "<script>location.href='./answer_manegement.php';</script>";
+
 ?>

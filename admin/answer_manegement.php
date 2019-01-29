@@ -41,21 +41,31 @@ include_once('head.php');
                     $sql = "select * from `answer_master`";
                     $result = mysqli_query($connect_db, $sql);
 
+                    $grade = "";
+                    $unit = "";
+                    $level = "";
+                    $semester = "";
+                    $book_type = "";
+
                     while($ac_data = mysqli_fetch_array($result)) {
+                        if($book_type == $ac_data['book_type'] && $unit == $ac_data['unit'] && $grade == $ac_data['grade']
+                            && $level == $ac_data['level'] && $semester == $ac_data['semester']) continue;
+                       else {
+                           echo '<tr>';
+                           echo '     <td><span>'.$ac_data["grade"].'</span></td>';
+                           echo '     <td><span>'.$ac_data["semester"].'</span></td>';
+                           echo '     <td><span>'.$ac_data["unit"].'</span></td>';
+                           echo '     <td><span>'.$ac_data["level"].'</span></td>';
+                           echo '     <td><span>'.$ac_data["book_type"].'</span></td>';
+                           echo '  </tr>';
 
-                       echo '<tr>';
-                       echo '     <td><span>'.$ac_data["grade"].'</span></td>';
-                       echo '     <td><span>'.$ac_data["unit"].'</span></td>';
-                       echo '     <td><span>'.$ac_data["level"].'</span></td>';
-                       echo '     <td><span>'.$ac_data["c_name"].'</span></td>';
-                        echo '     <td><span>'.$ac_data["book_type"].'</span></td>';
-                      echo '  </tr>';
+                           $grade = $ac_data['grade'];
+                           $unit = $ac_data['unit'];
+                           $level = $ac_data['level'];
+                           $semester = $ac_data['semester'];
+                           $book_type = $ac_data['book_type'];
+                       }
 
-//                        echo '<tr> ';
-//                        echo '     <td style="width:20px"><input type="checkbox"></td> ';
-//                        echo '     <td><span>'.$ac_data["client_id"].'</span></td> ';
-//                        echo '     <td><span>'.$ac_data["client_name"].'</span></td> ';
-//                        echo ' </tr> ';
                     }
                     ?>
                 </tbody>

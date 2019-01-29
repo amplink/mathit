@@ -37,7 +37,7 @@ include_once('head.php');
                     </tr>
                 </thead>
                 <tbody>
-
+                <form action="academy_option_del.php" method="POST" id="del_form">
                         <?php
                         $sql = "select * from `academy`";
                         $result = mysqli_query($connect_db, $sql);
@@ -45,7 +45,7 @@ include_once('head.php');
                         while($ac_data = mysqli_fetch_array($result)) {
 
                             echo '<tr> ';
-                            echo '     <td style="width:20px"><input type="checkbox"></td> ';
+                            echo '     <td style="width:20px"><input type="checkbox" name="chk_list[]" value="'.$ac_data['client_id'].'"></td> ';
                             echo '     <td><span>'.$ac_data["client_id"].'</span></td> ';
                             echo '     <td><span>'.$ac_data["client_name"].'</span></td> ';
                             echo ' </tr> ';
@@ -53,6 +53,7 @@ include_once('head.php');
                         }
 
                         ?>
+                </form>
                 </tbody>
             </table>
         </div>
@@ -69,7 +70,7 @@ include_once('head.php');
                 <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
-                <div class="delete_btn"><a href="#none">선택삭제</a></div>
+                <div class="delete_btn" onclick="del_academy();"><a href="#none">선택삭제</a></div>
             </div>
         </div>
 
@@ -117,5 +118,8 @@ include_once('head.php');
 <script>
     function submit() {
         document.getElementById("ac_name_form").submit();
+    }
+    function del_academy() {
+        $('#del_form').submit();
     }
 </script>
