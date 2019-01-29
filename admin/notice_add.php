@@ -73,7 +73,7 @@ include_once('head.php');
                     </div>
                     <div class="contents_box">
 
-                        <select name="languages_known[]" id="academy" multiple="multiple">
+                        <select name="ac_select[]" id="academy" multiple="multiple">
                             <?php
                             $sql = "select * from `academy`";
                             $res = mysqli_query($connect_db, $sql);

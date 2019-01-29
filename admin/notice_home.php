@@ -41,12 +41,12 @@ include_once('head.php');
                     $sql = "select * from `notify`";
                     $result = mysqli_query($connect_db, $sql);
                     $i=1;
+
                     while($res = mysqli_fetch_array($result)) {
                         if($res['type']==0) $type = "전체공지";
                         else if($res['type']==1) $type = "일반공지";
                         else if($res['type']==2) $type = "중요공지";
                         $range = explode(",", $res['target']);
-
                         foreach($range as $t) {
                             if($t == 0) $target .= "전임강사,";
                             else if($t == 1) $target .= "채점강사,";
