@@ -33,6 +33,8 @@ include_once('head.php');
                         <th>번호</th>
                         <th>유형</th>
                         <th>제목</th>
+                        <th>작성일</th>
+                        <th>대상학원 아이디</th>
                         <th>공지범위</th>
                     </tr>
                 </thead>
@@ -60,7 +62,7 @@ include_once('head.php');
 
                         $target[count($target)-2] = "\0";
 
-                        echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>$i</td><td>".$res['type']."</td><td>".$res['title']."</td><td>$target</td></tr>";
+                        echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>$i</td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$res['client_id']."</td><td>$target</td></tr>";
                         $i++;
                     }
                     ?>
