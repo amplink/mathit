@@ -140,14 +140,17 @@ include_once('head.php');
                     <p class="title_text">첨부파일</p>
                 </div>
 <!--                <div class="contents_box">-->
-                    <input type="file" name="file">
+                    <input style="margin-top: 15px;" type="file" name="file">
 <!--                </div>-->
             </div>
             <div class="board_line">
                 <div class="title_box">
                     <p class="title_text">내용</p>
                 </div>
-                <textarea rows="2" cols="100" name="content"></textarea>
+
+            </div>
+            <div class="board_line">
+                <textarea class="textarea_input" rows="10"  name="content"></textarea>
             </div>
         </div>
         <div class="section_footer">

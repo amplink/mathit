@@ -13,6 +13,17 @@
     margin-top: 20px;
 }
 
+
+.textarea_input{
+    height: 350px;
+    width: 100%;
+    padding: 40px;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 0px solid gray;
+}
+
+
 .l_title {
     position: relative;
     top: 18px;
@@ -185,10 +196,10 @@ div.btn-group > button.multiselect{
 .contents_box>input {
     position: relative;
     top: 9px;
-    left: 10px;
+    left: 1px;
     display: inline-block;
     width: 500px;
-    height: 18px;
+    height: 40px;
     padding: 10px;
     margin-right: 20px;
 }
