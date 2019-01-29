@@ -149,7 +149,7 @@ include_once('head.php');
                 </div>
 
             </div>
-            <div class="board_line">
+            <div class="board_line2" style="overflow: initial">
                 <textarea class="textarea_input" rows="10"  name="content"></textarea>
             </div>
         </div>
