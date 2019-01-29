@@ -18,7 +18,7 @@ include_once('_common.php');
 
 <body>
 <form action="answer_add_chk.php" method="POST" id="answer_add_form">
-<div class="header">
+<div class="header" style="width:calc(100% - 40px)">
     <div class="logo_wrap">
         <div class="logo"><img src="img/logo.png" alt="logo"></div>
         <p>ADMIN</p>
@@ -36,8 +36,8 @@ include_once('_common.php');
         <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>
     </div>
 </div>
-    <div class="section">
-        <div class="head_section">
+    <div class="section" style="width:100%">
+        <div class="head_section"  style="width:calc(100% - 100px)">
             <div class="upside">
                 <p>교재정보 등록</p>
                 <div class="btn_wrap">
@@ -92,7 +92,7 @@ include_once('_common.php');
                 </table>
             </div>
         </div>
-        <div class="view_section">
+        <div class="view_section"  style="width:calc(100% - 60px)">
             <div class="upside_2">
                 <p>정답지 작성</p>
                 <div class="r_nav">
