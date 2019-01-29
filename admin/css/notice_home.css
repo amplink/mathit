@@ -145,6 +145,12 @@
     /*margin-right: 10px;*/
 }
 
+.img-save
+{
+    width: 12px;
+    margin-left: 5px;
+}
+
 .add_btn a {
     display: block;
     width: 100%;

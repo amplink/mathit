@@ -79,7 +79,16 @@ include_once('head.php');
                             }
                         }
 
-                        echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>$i</td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td></tr>";
+                        if($res['attach_file'] != "")
+                        {
+                            echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>$i</td><td>".$res['type']."</td><td>".$res['title']."<img class='img-save' src='img/diskette.png'/></td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td></tr>";
+
+                        }
+                        else
+                        {
+                            echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>$i</td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td></tr>";
+
+                        }
                         $i++;
                     }
                     ?>
