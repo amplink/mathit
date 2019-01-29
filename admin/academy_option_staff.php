@@ -63,7 +63,7 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
         <div class="view_section">
             <table>
                 <thead>
-                    <tr>
+                    <tr style="text-align:center">
                         <th><input type="checkbox"></th>
                         <th>학원명</th>
                         <th>관리자아이디</th>
@@ -82,8 +82,8 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
                         $result = mysqli_query($connect_db, $sql);
                         $i=0;
                         while($res = mysqli_fetch_array($result)) {
-                            echo '<tr>';
-                            echo '<td><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'"></td>';
+                            echo '<tr style="text-align:center">';
+                            echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'"></td>';
                             echo '<td><span>'.$res['client_name'].'</span></td>';
                             echo '<td><span>'.$res['manager_id'].'</span></td>';
                             echo '<td>'.$res['manager_name'].'</td>';
@@ -124,30 +124,38 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
                 </div>
                 <div class="pass">
                     <div class="lside">
-                        <p>학원명</p>
-                    </div>
-                    <div class="rside">
-                        <input type="text" name="ac_name" id="ac_name"/>
-                    </div>
-                </div>
-            </div>
-            <div class="line">
-                <div class="name">
-                    <div class="lside">
-                        <p></p>
-                    </div>
-                    <div class="rside">
-                    </div>
-                </div>
-                <div class="pass">
-                    <div class="lside">
                         <p>관리자 이름</p>
                     </div>
                     <div class="rside">
                         <input type="text" disabled />
                     </div>
                 </div>
+<!--                <div class="pass">-->
+<!--                    <div class="lside">-->
+<!--                        <p>학원명</p>-->
+<!--                    </div>-->
+<!--                    <div class="rside">-->
+<!--                        <input type="text" name="ac_name" id="ac_name"/>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
+<!--            <div class="line">-->
+<!--                <div class="name">-->
+<!--                    <div class="lside">-->
+<!--                        <p></p>-->
+<!--                    </div>-->
+<!--                    <div class="rside">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="pass">-->
+<!--                    <div class="lside">-->
+<!--                        <p>관리자 이름</p>-->
+<!--                    </div>-->
+<!--                    <div class="rside">-->
+<!--                        <input type="text" disabled />-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
         <div class="section_footer">
             <div class="button_wrap">
