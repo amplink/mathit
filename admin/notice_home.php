@@ -41,6 +41,13 @@ include_once('head.php');
                 <tbody>
                 <form action="notice_home_del.php" method="POST" id="notice_form">
                     <?php
+                    $sql = "select * from `academy`";
+                    $result = mysqli_query($connect_db, $sql);
+                    $client_arr = array();
+                    while($res = mysqli_fetch_array($result)) {
+                        $client_arr[$res['client_id']] = $res['client_name'];
+                    }
+
                     $sql = "select * from `notify`";
                     $result = mysqli_query($connect_db, $sql);
                     $i=1;
@@ -62,7 +69,17 @@ include_once('head.php');
 
                         $target[count($target)-2] = "\0";
 
-                        echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>$i</td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$res['client_id']."</td><td>$target</td></tr>";
+                        $client = "";
+                        $k = 0;
+                        $range = explode(",", $res['client_id']);
+                        for($j=0; $j<count($range)-1; $j++) {
+                            if ($client_arr[$range[$j]]) {
+                                if($j == count($range)-2) $client .= $client_arr[$range[$j]];
+                                else $client .= $client_arr[$range[$j]].", ";
+                            }
+                        }
+
+                        echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>$i</td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td></tr>";
                         $i++;
                     }
                     ?>
