@@ -44,6 +44,7 @@ include_once('head.php');
                     $i=1;
 
                     while($res = mysqli_fetch_array($result)) {
+                        $size = 1;
                         $target = "";
                         if($res['type']==0) $type = "전체공지";
                         else if($res['type']==1) $type = "일반공지";
@@ -53,6 +54,8 @@ include_once('head.php');
                             if($t == 0) $target .= "전임강사,";
                             else if($t == 1) $target .= "채점강사,";
                             else if($t == 2) $target .= "학생,";
+                            if($size >= count($range)-1) break;
+                            else $size++;
                         }
 
                         $target[count($target)-2] = "\0";

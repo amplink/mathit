@@ -10,7 +10,7 @@
     if(!$res['client_no']) {
         echo("<script>alert('회원 정보가 등록되지 않았습니다.');</script>");
     }else {
-        $sql = "INSERT INTO `academy` (`client_id`, `event_time`, `admin_id`, `client_name`) VALUES ('".$res['client_no']."', CURRENT_TIMESTAMP, '".$res['client_name']."', '".$res['client_name']."');";
+        $sql = "INSERT INTO `academy` (`client_id`, `event_time`, `admin_id`, `client_name`, `manager_id`, `manager_name`) VALUES ('".$res['client_no']."', CURRENT_TIMESTAMP, '".$res['client_name']."', '".$res['client_name']."', '', '');";
         mysqli_query($connect_db, $sql);
     }
 
