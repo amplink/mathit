@@ -19,7 +19,15 @@ foreach($r_client_id as $r) {
     $client_id .= $r.",";
 }
 
-$sql = "INSERT INTO `notify` (`id`, `client_id`, `target`, `title`, `author`, `type`, `attach_file`, `contents`, `event_time`) 
+if($type == "all") {
+    $type = "전체공지";
+}else if($type == "normal") {
+    $type = "일반공지";
+}else {
+    $type = "중요공지";
+}
+
+$sql = "INSERT INTO `notify` (`id`, `client_id`, `target`, `title`, `author`, `type`, `attach_file`, `contents`, `event_time`)
 VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$attach_file', '$contents', CURRENT_TIMESTAMP);";
 sql_query($sql);
 

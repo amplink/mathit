@@ -46,9 +46,9 @@ include_once('head.php');
                     while($res = mysqli_fetch_array($result)) {
                         $size = 1;
                         $target = "";
-                        if($res['type']==0) $type = "전체공지";
-                        else if($res['type']==1) $type = "일반공지";
-                        else if($res['type']==2) $type = "중요공지";
+//                        if($res['type']==0) $type = "전체공지";
+//                        else if($res['type']==1) $type = "일반공지";
+//                        else if($res['type']==2) $type = "중요공지";
                         $range = explode(",", $res['target']);
                         foreach($range as $t) {
                             if($t == 0) $target .= "전임강사,";
@@ -60,7 +60,7 @@ include_once('head.php');
 
                         $target[count($target)-2] = "\0";
 
-                        echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>$i</td><td>".$type."</td><td>".$res['title']."</td><td>$target</td></tr>";
+                        echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>$i</td><td>".$res['type']."</td><td>".$res['title']."</td><td>$target</td></tr>";
                         $i++;
                     }
                     ?>

@@ -174,7 +174,7 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
 <script>
 
     function get_ac_name(n) {
-        $('#acname').val("awefawef");
+        $('#ac_name').val("awefawef");
         // $('#'+n).val();
     }
 
