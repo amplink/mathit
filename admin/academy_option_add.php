@@ -120,6 +120,6 @@ include_once('head.php');
         document.getElementById("ac_name_form").submit();
     }
     function del_academy() {
-        $('#del_form').submit();
+        if(confirm("삭제하시겠습니까?")) $('#del_form').submit();
     }
 </script>

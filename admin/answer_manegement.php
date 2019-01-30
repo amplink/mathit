@@ -38,7 +38,7 @@ include_once('head.php');
                 </thead>
                 <tbody>
                     <?php
-                    $sql = "select * from `answer_master`";
+                    $sql = "select * from `answer_master` order by `event_time` asc";
                     $result = mysqli_query($connect_db, $sql);
 
                     $grade = array();
@@ -59,12 +59,12 @@ include_once('head.php');
 
                        if($n != 1) {
                            echo '<tr>';
-                           echo '     <td><span>'.$ac_data["grade"].'</span></td>';
-                           echo '     <td><span>'.$ac_data["semester"].'</span></td>';
-                           echo '     <td><span>'.$ac_data["unit"].'</span></td>';
-                           echo '     <td><span>'.$ac_data["level"].'</span></td>';
-                           echo '     <td><span>'.$ac_data["book_type"].'</span></td>';
-                           echo '  </tr>';
+                           echo '     <td><span><a href="./update_answer_add.php?grade='.$ac_data['grade'].'&semester='.$ac_data['semester'].'&unit='.$ac_data['unit'].'&level='.$ac_data['level'].'&book_type='.$ac_data['book_type'].'">'.$ac_data["grade"].'</a></span></td>';
+                           echo '     <td><span><a href="./update_answer_add.php?grade='.$ac_data['grade'].'&semester='.$ac_data['semester'].'&unit='.$ac_data['unit'].'&level='.$ac_data['level'].'&book_type='.$ac_data['book_type'].'">'.$ac_data["semester"].'</span></td>';
+                           echo '     <td><span><a href="./update_answer_add.php?grade='.$ac_data['grade'].'&semester='.$ac_data['semester'].'&unit='.$ac_data['unit'].'&level='.$ac_data['level'].'&book_type='.$ac_data['book_type'].'">'.$ac_data["unit"].'</span></td>';
+                           echo '     <td><span><a href="./update_answer_add.php?grade='.$ac_data['grade'].'&semester='.$ac_data['semester'].'&unit='.$ac_data['unit'].'&level='.$ac_data['level'].'&book_type='.$ac_data['book_type'].'">'.$ac_data["level"].'</span></td>';
+                           echo '     <td><span><a href="./update_answer_add.php?grade='.$ac_data['grade'].'&semester='.$ac_data['semester'].'&unit='.$ac_data['unit'].'&level='.$ac_data['level'].'&book_type='.$ac_data['book_type'].'">'.$ac_data["book_type"].'</span></td>';
+                           echo '</tr>';
 
                            $grade[$j] = $ac_data['grade'];
                            $unit[$j] = $ac_data['unit'];

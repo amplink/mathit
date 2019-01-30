@@ -79,16 +79,7 @@ include_once('head.php');
                             }
                         }
 
-                        if($res['attach_file'] != "")
-                        {
-                            echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>$i</td><td>".$res['type']."</td><td>".$res['title']."<img class='img-save' src='img/diskette.png'/></td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td></tr>";
-
-                        }
-                        else
-                        {
-                            echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>$i</td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td></tr>";
-
-                        }
+                        echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td><a href='./update_notice_add.php?id=".$res['id']."'>$i</a></td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td></tr>";
                         $i++;
                     }
                     ?>
@@ -109,7 +100,7 @@ include_once('head.php');
                 <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
-                <div class="add_btn"><a style="color:white" href="notice_add.php">공지등록</a></div>
+                <div class="add_btn"><a class="btn" href="notice_add.php">공지등록</a></div>
                 <div class="delete_btn" onclick="del_notice();"><a href="#none">삭제</a></div>
             </div>
         </div>
@@ -119,6 +110,6 @@ include_once('tail.php');
 ?>
 <script>
     function del_notice() {
-        $('#notice_form').submit();
+        if(confirm("삭제하시겠습니까?")) $('#notice_form').submit();
     }
 </script>

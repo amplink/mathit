@@ -14,5 +14,6 @@
         mysqli_query($connect_db, $sql);
     }
 
+    echo "<script>alert('".$res['client_name']."학원 등록되었습니다.');</script>";
     echo("<script>location.href='./academy_option_add.php';</script>");
 ?>

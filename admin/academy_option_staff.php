@@ -83,7 +83,7 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
                         $i=0;
                         while($res = mysqli_fetch_array($result)) {
                             echo '<tr style="text-align:center">';
-                            echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'"></td>';
+                            echo '<td style="width:20px" ><input type="checkbox" name="chk_list" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'"></td>';
                             echo '<td><span>'.$res['client_name'].'</span></td>';
                             echo '<td><span>'.$res['manager_id'].'</span></td>';
                             echo '<td>'.$res['manager_name'].'</td>';
@@ -111,6 +111,7 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
                 <div class="delete_btn"><a href="#none">선택삭제</a></div>
             </div>
         </div>
+        <form action="ac_manager_chk.php" id="manager_form" method="POST">
         <div class="add_section">
             <div class="line">
                 <div class="name">
@@ -118,7 +119,7 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
                         <p>관리자아이디</p>
                     </div>
                     <div class="rside">
-                        <input type="text" placeholder="관리자 아이디를 입력해주세요">
+                        <input type="text" placeholder="관리자 아이디를 입력해주세요" name="manager_id" value="none">
                         <div class="confirm_btn" onclick="outh_manager();"><a href="#none">확인</a></div>
                     </div>
                 </div>
@@ -127,7 +128,7 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
                         <p>관리자 이름</p>
                     </div>
                     <div class="rside">
-                        <input type="text" disabled />
+                        <input type="text" disabled name="manager_name" id="manager_name" value="test"/>
                     </div>
                 </div>
 <!--                <div class="pass">-->
@@ -135,7 +136,7 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
 <!--                        <p>학원명</p>-->
 <!--                    </div>-->
 <!--                    <div class="rside">-->
-<!--                        <input type="text" name="ac_name" id="ac_name"/>-->
+                        <input type="hidden" name="ac_name" id="ac_name"/>
 <!--                    </div>-->
 <!--                </div>-->
             </div>
@@ -159,10 +160,11 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
         </div>
         <div class="section_footer">
             <div class="button_wrap">
-                <div class="add_btn"><a href="#none">지정</a></div>
+                <div class="add_btn" onclick="sul3mit();"><a href="#none">지정</a></div>
             </div>
         </div>
     </div>
+    </form>
 </body>
 </html>
 <?php
@@ -172,12 +174,13 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
 //
 ?>
 <script>
-
     function get_ac_name(n) {
-        $('#ac_name').val("awefawef");
-        // $('#'+n).val();
+        $('#ac_name').val($('#'+n).val());
     }
-
+    function sul3mit() {
+        $('#manager_name').attr('disabled',false);
+        $('#manager_form').submit();
+    }
     // function createCORSRequest(method, url) {
     //     var xhr = new XMLHttpRequest();
     //     if ("withCredentials" in xhr) {
@@ -202,17 +205,19 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
     //     return xhr;
     // }
 
+    function outh_manager() {
+        $.ajax({
+            type: 'GET',
+            url: 'https://www.edusys.co.kr:8080/api/math/teacher?client_no=126&id=mathit1',
+            success: function (data) {
+                alert("AJAX SUccess!!");
 
-    // function outh_manager() {
-    //     $.ajax({
-    //         type: 'GET',
-    //         url: 'https://www.edusys.co.kr:8080/api/math/teacher?client_no=126&id=mathit1',
-    //         success: function (data) {
-    //             alert("AJAX SUccess!!");
-    //         },
-    //         error: function () {
-    //             alert("ㅜㅜ");
-    //         }
-    //     })
-    // }
+                $('#manager_name').val(data[0]);
+
+            },
+            error: function () {
+                alert("아이디를 확인해주세요");
+            }
+        })
+    }
 </script>
