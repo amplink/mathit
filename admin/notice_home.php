@@ -11,7 +11,12 @@ if (G5_IS_MOBILE) {
 
 //include_once(G5_THEME_PATH.'/head.php');
 include_once('head.php');
-
+$num = 1;
+if(!$_GET['page']) {
+    $page = 0;
+}else {
+    $page = $_GET['page']-1;
+}
 ?>
 
 <script src="js/jquery-3.3.1.min.js"></script>
@@ -51,6 +56,7 @@ include_once('head.php');
                     $sql = "select * from `notify`";
                     $result = mysqli_query($connect_db, $sql);
                     $i=1;
+                    $count = 0;
 
                     while($res = mysqli_fetch_array($result)) {
                         $size = 1;
@@ -78,8 +84,7 @@ include_once('head.php');
                                 else $client .= $client_arr[$range[$j]].", ";
                             }
                         }
-
-                        echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td><a href='./update_notice_add.php?id=".$res['id']."'>$i</a></td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td></tr>";
+                        if($i >= $page*10 && $i <= ($page*10+10)) echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td><a href='./update_notice_add.php?id=".$res['id']."'>".$i."</a></td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td></tr>";
                         $i++;
                     }
                     ?>
@@ -89,15 +94,17 @@ include_once('head.php');
         </div>
         <div class="section_footer">
             <div class="list_btn_wrap">
-                <div class="prev_btn"><a href="#none"><img src="img/prev.png" alt=""></a></div>
+                <div class="prev_btn"><a href="./notice_home.php?page=<?=$page;?>"><img src="img/prev.png" alt=""></a></div>
                 <ul>
-                    <li><a href="#none" class="on">1</a></li>
-                    <li><a href="#none">2</a></li>
-                    <li><a href="#none">3</a></li>
-                    <li><a href="#none">4</a></li>
-                    <li><a href="#none">5</a></li>
+                    <?
+                    $count = $i;
+                    for($i=0; $i<$count/10; $i++) {
+                        $cnt = $i+1;
+                        echo '<li><a href="./notice_home.php?page='.$cnt.'">'.$cnt.'</a></li>';
+                    }
+                    ?>
                 </ul>
-                <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>
+                <div class="next_btn"><a href="./notice_home.php?page=<?=$page+1;?>"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
                 <div class="add_btn"><a class="btn" href="notice_add.php">공지등록</a></div>

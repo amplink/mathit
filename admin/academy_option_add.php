@@ -10,7 +10,11 @@ if (G5_IS_MOBILE) {
 
 //include_once(G5_THEME_PATH.'/head.php');
 include_once('head.php');
-
+if(!$_GET['page']) {
+    $page = 0;
+}else {
+    $page = $_GET['page']-1;
+}
 ?>
 
 <head>
@@ -41,15 +45,17 @@ include_once('head.php');
                         <?php
                         $sql = "select * from `academy`";
                         $result = mysqli_query($connect_db, $sql);
-
+                        $i = 1;
                         while($ac_data = mysqli_fetch_array($result)) {
 
-                            echo '<tr> ';
-                            echo '     <td style="width:20px"><input type="checkbox" name="chk_list[]" value="'.$ac_data['client_id'].'"></td> ';
-                            echo '     <td><span>'.$ac_data["client_id"].'</span></td> ';
-                            echo '     <td><span>'.$ac_data["client_name"].'</span></td> ';
-                            echo ' </tr> ';
-
+                            if($i >= $page*10 && $i <= ($page*10+10))  {
+                                echo '<tr> ';
+                                echo '     <td style="width:20px"><input type="checkbox" name="chk_list[]" value="'.$ac_data['client_id'].'"></td> ';
+                                echo '     <td><span>'.$ac_data["client_id"].'</span></td> ';
+                                echo '     <td><span>'.$ac_data["client_name"].'</span></td> ';
+                                echo ' </tr> ';
+                            }
+                            $i++;
                         }
 
                         ?>
@@ -59,15 +65,17 @@ include_once('head.php');
         </div>
         <div class="section_footer">
             <div class="list_btn_wrap">
-                <div class="prev_btn"><a href="#none"><img src="img/prev.png" alt=""></a></div>
+                <div class="prev_btn"><a href="./academy_option_add.php?page=<?=$page;?>"><img src="img/prev.png" alt=""></a></div>
                 <ul>
-                    <li><a href="#none" class="on">1</a></li>
-                    <li><a href="#none">2</a></li>
-                    <li><a href="#none">3</a></li>
-                    <li><a href="#none">4</a></li>
-                    <li><a href="#none">5</a></li>
+                    <?
+                    $count = $i;
+                    for($i=0; $i<$count/10; $i++) {
+                        $cnt = $i+1;
+                        echo '<li><a href="./academy_option_add.php?page='.$cnt.'">'.$cnt.'</a></li>';
+                    }
+                    ?>
                 </ul>
-                <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>
+                <div class="next_btn"><a href="./academy_option_add.php?page=<?=$page+1;?>"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
                 <div class="delete_btn" onclick="del_academy();"><a href="#none">선택삭제</a></div>
