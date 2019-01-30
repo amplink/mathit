@@ -54,7 +54,7 @@ include_once('head.php');
             <p>
                 <span>안녕하세요 </span>
                 <span>MATH IT Admin</span>
-                <span>페이지 입니다.</span>
+                <span>페이지 입니다..</span>
             </p>
         </div>
     </div>
