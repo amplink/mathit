@@ -26,7 +26,7 @@ include_once('head.php');
                 <div class="logo_login"><img src="img/logo.png" alt="login_logo"></div>
             </div>
             <div class="form_section">
-                <form action=""><input type="text" placeholder="현재 비밀번호를 입력해주세요" name="current_pw"><input type="text" placeholder="새 비밀번호를 입력해주세요" name="new_pw" id="new_pw1"><input type="text" placeholder="비밀번호를 재입력해주세요" name="new_pw2" id="new_pw2"></form>
+                <form action=""><input type="text" placeholder="현재 비밀번호를 입력해주세요" name="current_pw"><input type="text" placeholder="새 비밀번호를 입력해주세요" name="new_pw1" id="new_pw1"><input type="text" placeholder="비밀번호를 재입력해주세요" name="new_pw2" id="new_pw2"></form>
             </div>
             <div class="ok_btn" onclick="log_in();">
                 <a href="#">확인</a>

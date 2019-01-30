@@ -9,9 +9,10 @@ $sql = "select * from `g5_member` where `mb_password` = '$current_pw';";
 $r = mysqli_query($connect_db, $sql);
 
 $res = mysqli_fetch_array($r);
+$sql = "update `g5_member` set `mb_password` = '$new_pw1' where `mb_no` = '".$res['mb_no']."';";
+//echo $sql."<br>".$current_pw."<br>".$new_pw1;
 
 if($res["mb_no"]) {
-    $sql = "update `g5_member` set `mb_password` = '$new_pw1' where `mb_no` = '".$res['mb_no']."';";
     mysqli_query($connect_db, $sql);
     echo "<script>alert('변경되었습니다.');</script>";
     echo "<script>location.href='./index.php';</script>";
