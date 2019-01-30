@@ -10,7 +10,7 @@ if (G5_IS_MOBILE) {
 
 //include_once(G5_THEME_PATH.'/head.php');
 include_once('head.php');
-
+echo $mb_password;
 ?>
 
 
