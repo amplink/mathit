@@ -9,6 +9,8 @@ if (G5_IS_MOBILE) {
 }
 
 //include_once(G5_THEME_PATH.'/head.php');
+//190130김영모 페이지 번호 입력
+$now_menu_number = 30;
 include_once('head.php');
 if(!$_GET['page']) {
     $page = 0;
@@ -113,6 +115,18 @@ if(!$_GET['page']) {
             </div>
         </div>
     </div>
+
+<script>
+    function submit() {
+        document.getElementById("ac_name_form").submit();
+    }
+    function del_academy() {
+        if(confirm("삭제하시겠습니까?")) $('#del_form').submit();
+    }
+</script>
+<?php
+include_once('tail.php');
+?>
 </body>
 
 <?
@@ -123,11 +137,3 @@ if(!$_GET['page']) {
 ?>
 
 </html>
-<script>
-    function submit() {
-        document.getElementById("ac_name_form").submit();
-    }
-    function del_academy() {
-        if(confirm("삭제하시겠습니까?")) $('#del_form').submit();
-    }
-</script>

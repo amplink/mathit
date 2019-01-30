@@ -83,10 +83,10 @@ $(document).ready(function(){
     var tmp_menu_num = $(".nav_menu").val();
     $(".nav_menu").children('a').removeClass('on');
     switch (now_menu) {
-        case "10" : $(".nav_menu:eq(1)").children('a').addClass('on'); break;
-        case "20" : $(".nav_menu:eq(2)").children('a').addClass('on'); break;
-        case "30" : $(".nav_menu:eq(3)").children('a').addClass('on'); break;
-        case "40" : $(".nav_menu:eq(4)").children('a').addClass('on'); break;
+        case "10" : $(".nav_menu:eq(0)").children('a').addClass('on'); break;
+        case "20" : $(".nav_menu:eq(1)").children('a').addClass('on'); break;
+        case "30" : $(".nav_menu:eq(2)").children('a').addClass('on'); break;
+        case "40" : $(".nav_menu:eq(3)").children('a').addClass('on'); break;
         default : ;
     }
 });
