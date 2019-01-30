@@ -98,9 +98,10 @@
     bottom: 6px;
     display: inline-block;
     width: calc(100% - 69px);
-    height: 18px;
+    height: 20px;
     border: none;
-    padding: 10px; 
+    font-size: 17px;
+    font-family: none !important;
 }
 
 .auto_id {
