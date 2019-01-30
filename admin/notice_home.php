@@ -8,8 +8,8 @@ if (G5_IS_MOBILE) {
     include_once(G5_THEME_MOBILE_PATH.'/index.php');
     return;
 }
-
-//include_once(G5_THEME_PATH.'/head.php');
+$now_menu_number = 20;
+//include_once(G5_THEME_PATH.'/head.php');\
 include_once('head.php');
 $num = 1;
 if(!$_GET['page']) {
@@ -119,4 +119,6 @@ include_once('tail.php');
     function del_notice() {
         if(confirm("삭제하시겠습니까?")) $('#notice_form').submit();
     }
+
+
 </script>

@@ -75,6 +75,14 @@ $(function() {
     // 폰트 리사이즈 쿠키있으면 실행
     font_resize("container", get_cookie("ck_font_resize_rmv_class"), get_cookie("ck_font_resize_add_class"));
 });
+
+//191030 김영모 : 메뉴 색상 변경
+
+$(document).ready(function(){
+    var now_menu = "<? echo $now_menu_number; ?>";
+    var tmp_menu_num = $(".nav_menu").val();
+    $(".nav_menu").children('a').removeClass('on');
+});
 </script>
 
 <?php
