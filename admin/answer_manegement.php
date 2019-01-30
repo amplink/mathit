@@ -10,7 +10,11 @@ if (G5_IS_MOBILE) {
 
 //include_once(G5_THEME_PATH.'/head.php');
 include_once('head.php');
-
+if(!$_GET['page']) {
+    $page = 0;
+}else {
+    $page = $_GET['page']-1;
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +42,7 @@ include_once('head.php');
                 </thead>
                 <tbody>
                     <?php
-                    $sql = "select * from `answer_master`";
+                    $sql = "select * from `answer_master` order by `event_time` asc";
                     $result = mysqli_query($connect_db, $sql);
 
                     $grade = array();
@@ -47,7 +51,7 @@ include_once('head.php');
                     $semester = array();
                     $book_type = array();
                     $j=0;
-
+                    $t=1;
                     while($ac_data = mysqli_fetch_array($result)) {
                         $n = 0;
                         for($i=0; $i<count($grade)+1; $i++) {
@@ -58,20 +62,23 @@ include_once('head.php');
 
 
                        if($n != 1) {
-                           echo '<tr>';
-                           echo '     <td><span>'.$ac_data["grade"].'</span></td>';
-                           echo '     <td><span>'.$ac_data["semester"].'</span></td>';
-                           echo '     <td><span>'.$ac_data["unit"].'</span></td>';
-                           echo '     <td><span>'.$ac_data["level"].'</span></td>';
-                           echo '     <td><span>'.$ac_data["book_type"].'</span></td>';
-                           echo '  </tr>';
-
-                           $grade[$j] = $ac_data['grade'];
-                           $unit[$j] = $ac_data['unit'];
-                           $level[$j] = $ac_data['level'];
-                           $semester[$j] = $ac_data['semester'];
-                           $book_type[$j] = $ac_data['book_type'];
-                           $j++;
+                           if($t >= $page*10 && $t <= ($page*10+10)) {
+                               echo '<tr>';
+                               echo '     <td><span>' . $ac_data["grade"] . '</span></td>';
+                               echo '     <td><span>' . $ac_data["semester"] . '</span></td>';
+                               echo '     <td><span>' . $ac_data["unit"] . '</span></td>';
+                               echo '     <td><span>' . $ac_data["level"] . '</span></td>';
+                               echo '     <td><span>' . $ac_data["book_type"] . '</span></td>';
+                               echo '</tr>';
+                               //<a href="./update_answer_add.php?grade='.$ac_data['grade'].'&semester='.$ac_data['semester'].'&unit='.$ac_data['unit'].'&level='.$ac_data['level'].'&book_type='.$ac_data['book_type'].'">
+                               $grade[$j] = $ac_data['grade'];
+                               $unit[$j] = $ac_data['unit'];
+                               $level[$j] = $ac_data['level'];
+                               $semester[$j] = $ac_data['semester'];
+                               $book_type[$j] = $ac_data['book_type'];
+                               $j++;
+                           }
+                           $t++;
                        }
 
 
@@ -82,15 +89,17 @@ include_once('head.php');
         </div>
         <div class="section_footer">
             <div class="list_btn_wrap">
-                <div class="prev_btn"><a href="#none"><img src="img/prev.png" alt=""></a></div>
+                <div class="prev_btn"><a href="./answer_manegement.php?page=<?=$page;?>"><img src="img/prev.png" alt=""></a></div>
                 <ul>
-                    <li><a href="#none" class="on">1</a></li>
-                    <li><a href="#none">2</a></li>
-                    <li><a href="#none">3</a></li>
-                    <li><a href="#none">4</a></li>
-                    <li><a href="#none">5</a></li>
+                    <?
+                    $count = $t;
+                    for($i=0; $i<$count/10; $i++) {
+                        $cnt = $i+1;
+                        echo '<li><a href="./answer_manegement.php?page='.$cnt.'">'.$cnt.'</a></li>';
+                    }
+                    ?>
                 </ul>
-                <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>
+                <div class="next_btn"><a href="./answer_manegement.php?page=<?=$page+1;?>"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
                 <div class="add_btn"><a href="answer_add.php">정답지추가</a></div>

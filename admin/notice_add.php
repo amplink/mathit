@@ -25,6 +25,8 @@ include_once('head.php');
 <!--    <link rel="stylesheet" type="text/css" media="screen" href="css/notice_add.css" />-->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap-multiselect.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+
 <!--</head>-->
 <!---->
 <body>
@@ -61,9 +63,9 @@ include_once('head.php');
                     </div>
                     <div class="contents_box">
                         <select name="notice_div" id="notice_div">
-                            <option value="all">전체공지</option>
-                            <option value="normal">일반공지</option>
-                            <option value="important">중요공지</option>
+                            <option value="전체공지">전체공지</option>
+                            <option value="일반공지">일반공지</option>
+                            <option value="중요공지">중요공지</option>
                         </select>
                     </div>
                 </div>
@@ -73,7 +75,7 @@ include_once('head.php');
                     </div>
                     <div class="contents_box">
 
-                        <select name="ac_select[]" id="academy" multiple="multiple">
+                        <select name="ac_select[]" id="academy" multiple="multiple" required>
                             <?php
                             $sql = "select * from `academy`";
                             $res = mysqli_query($connect_db, $sql);
@@ -150,7 +152,7 @@ include_once('head.php');
 
             </div>
             <div class="board_line2" style="overflow: initial">
-                <textarea class="textarea_input" rows="10"  name="content"></textarea>
+                <textarea class="ckeditor" rows="10"  name="content" id="content"></textarea>
             </div>
         </div>
         <div class="section_footer">
@@ -163,7 +165,11 @@ include_once('head.php');
     </form>
 </body>
 <script>
-
+    ClassicEditor
+        .create( document.querySelector( '#content' ) )
+        .catch( error => {
+            console.error( error );
+        } );
 </script>
 <?php
 include_once('tail.php');

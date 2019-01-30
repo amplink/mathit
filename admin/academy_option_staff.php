@@ -14,6 +14,14 @@ include_once('head.php');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
 
+if(!$_GET['page']) {
+    $page = 0;
+}else {
+    $page = $_GET['page']-1;
+}
+
+$manager_get_id = $_GET['manager_get_id'];
+$manager_get_name = $_GET['manager_get_name'];
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +35,6 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/academy_option_staff.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -81,14 +88,18 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
                         $sql = "select * from `academy`";
                         $result = mysqli_query($connect_db, $sql);
                         $i=0;
+                        $t = 0;
                         while($res = mysqli_fetch_array($result)) {
-                            echo '<tr style="text-align:center">';
-                            echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'"></td>';
-                            echo '<td><span>'.$res['client_name'].'</span></td>';
-                            echo '<td><span>'.$res['manager_id'].'</span></td>';
-                            echo '<td>'.$res['manager_name'].'</td>';
-                            echo '</tr>';
-                            $i++;
+                            if($t >= $page*10 && $t <= ($page*10+10)) {
+                                echo '<tr style="text-align:center">';
+                                echo '<td style="width:20px" ><input type="checkbox" name="chk_list" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'"></td>';
+                                echo '<td><span>'.$res['client_name'].'</span></td>';
+                                echo '<td><span>'.$res['manager_id'].'</span></td>';
+                                echo '<td>'.$res['manager_name'].'</td>';
+                                echo '</tr>';
+                                $i++;
+                            }
+                            $t++;
                         }
 
                         ?>
@@ -97,37 +108,42 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
         </div>
         <div class="section_footer">
             <div class="list_btn_wrap">
-                <div class="prev_btn"><a href="#none"><img src="img/prev.png" alt=""></a></div>
+                <div class="prev_btn"><a href="./academy_option_staff.php?page=<?=$page;?>"><img src="img/prev.png" alt=""></a></div>
                 <ul>
-                    <li><a href="#none" class="on">1</a></li>
-                    <li><a href="#none">2</a></li>
-                    <li><a href="#none">3</a></li>
-                    <li><a href="#none">4</a></li>
-                    <li><a href="#none">5</a></li>
+                    <?
+                    $count = $t;
+                    for($i=0; $i<$count/10; $i++) {
+                        $cnt = $i+1;
+                        echo '<li><a href="./academy_option_staff.php?page='.$cnt.'">'.$cnt.'</a></li>';
+                    }
+                    ?>
                 </ul>
-                <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>
+                <div class="next_btn"><a href="./academy_option_staff.php?page=<?=$page+1;?>"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
                 <div class="delete_btn"><a href="#none">선택삭제</a></div>
             </div>
         </div>
+        <form action="ac_manager_chk.php" id="manager_form" method="POST">
         <div class="add_section">
             <div class="line">
                 <div class="name">
                     <div class="lside">
                         <p>관리자아이디</p>
                     </div>
+
                     <div class="rside">
-                        <input type="text" placeholder="관리자 아이디를 입력해주세요">
-                        <div class="confirm_btn" onclick="outh_manager();"><a href="#none">확인</a></div>
+                        <input type="text" placeholder="관리자 아이디를 입력해주세요" name="manager_id" value="none" id="manager_id">
+                        <div class="confirm_btn" onclick="outh_manager();"><a>확인</a></div>
                     </div>
+
                 </div>
                 <div class="pass">
                     <div class="lside">
                         <p>관리자 이름</p>
                     </div>
                     <div class="rside">
-                        <input type="text" disabled />
+                        <input type="text" disabled name="manager_name" id="manager_name"/>
                     </div>
                 </div>
 <!--                <div class="pass">-->
@@ -135,7 +151,7 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
 <!--                        <p>학원명</p>-->
 <!--                    </div>-->
 <!--                    <div class="rside">-->
-<!--                        <input type="text" name="ac_name" id="ac_name"/>-->
+                        <input type="hidden" name="ac_name" id="ac_name"/>
 <!--                    </div>-->
 <!--                </div>-->
             </div>
@@ -159,25 +175,38 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
         </div>
         <div class="section_footer">
             <div class="button_wrap">
-                <div class="add_btn"><a href="#none">지정</a></div>
+                <div class="add_btn" onclick="sul3mit();"><a href="#none">지정</a></div>
             </div>
         </div>
     </div>
+    </form>
+    <form action="./outh_manager.php" method="get" id="manager_post_form">
+        <input type="hidden" name="manager_get_id" id="manager_get_id">
+    </form>
 </body>
 </html>
 <?php
 //function outh_manager() {
 //    $res = api_calls_get("/api/math/teacher?client_no=126&id=mathit1");
 //}
-//
+
 ?>
 <script>
+    $('#manager_id').val('<? echo $manager_get_id;?>');
+    $('#manager_name').val('<? echo $manager_get_name;?>');
 
-    function get_ac_name(n) {
-        $('#ac_name').val("awefawef");
-        // $('#'+n).val();
+    function outh_manager() {
+        // alert($('#manager_id').val());
+        $('#manager_get_id').val($('#manager_id').val());
+        $('#manager_post_form').submit();
     }
-
+    function get_ac_name(n) {
+        $('#ac_name').val($('#'+n).val());
+    }
+    function sul3mit() {
+        $('#manager_name').attr('disabled',false);
+        $('#manager_form').submit();
+    }
     // function createCORSRequest(method, url) {
     //     var xhr = new XMLHttpRequest();
     //     if ("withCredentials" in xhr) {
@@ -202,16 +231,18 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
     //     return xhr;
     // }
 
-
     // function outh_manager() {
     //     $.ajax({
     //         type: 'GET',
     //         url: 'https://www.edusys.co.kr:8080/api/math/teacher?client_no=126&id=mathit1',
     //         success: function (data) {
     //             alert("AJAX SUccess!!");
+    //
+    //             $('#manager_name').val(data[0]);
+    //
     //         },
     //         error: function () {
-    //             alert("ㅜㅜ");
+    //             alert("아이디를 확인해주세요");
     //         }
     //     })
     // }

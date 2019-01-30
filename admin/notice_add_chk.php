@@ -19,17 +19,23 @@ foreach($r_client_id as $r) {
     $client_id .= $r.",";
 }
 
-if($type == "all") {
-    $type = "전체공지";
-}else if($type == "normal") {
-    $type = "일반공지";
-}else {
-    $type = "중요공지";
-}
+//if($type == "all") {
+//    $type = "전체공지";
+//}else if($type == "normal") {
+//    $type = "일반공지";
+//}else {
+//    $type = "중요공지";
+//}
 
-$sql = "INSERT INTO `notify` (`id`, `client_id`, `target`, `title`, `author`, `type`, `attach_file`, `contents`, `event_time`)
+if(!$_GET['id']) {
+    $sql = "INSERT INTO `notify` (`id`, `client_id`, `target`, `title`, `author`, `type`, `attach_file`, `contents`, `event_time`)
 VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$attach_file', '$contents', CURRENT_TIMESTAMP);";
-sql_query($sql);
+    sql_query($sql);
+}else {
+    $sql = "UPDATE `notify` SET `client_id` = '$client_id', `target` = '$target', `title` = '$title', `author` = '$author', `type` = '$type', `attach_file` = '$attach_file', `contents` = '$contents', `event_time` = CURRENT_TIMESTAMP WHERE  `id` = '".$_GET['id']."';";
+//    echo $sql;
+    mysqli_query($connect_db, $sql);
+}
 
 echo "<script>alert('공지 등록이 완료되었습니다.');</script>";
 echo "<script>location.href='./notice_home.php';</script>";
