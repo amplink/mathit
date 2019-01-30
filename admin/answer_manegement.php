@@ -109,6 +109,9 @@ if(!$_GET['page']) {
             </div>
         </div>
     </div>
+    <?php
+    include_once('tail.php');
+    ?>
 </body>
 
 </html>

@@ -185,6 +185,9 @@ $manager_get_name = $_GET['manager_get_name'];
     <form action="./outh_manager.php" method="get" id="manager_post_form">
         <input type="hidden" name="manager_get_id" id="manager_get_id">
     </form>
+<?php
+include_once('tail.php');
+?>
 </body>
 </html>
 <?php
