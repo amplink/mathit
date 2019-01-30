@@ -95,12 +95,13 @@
 
 .login_input {
     position: relative;
-    bottom: 6px;
+    bottom: 2px;
     display: inline-block;
     width: calc(100% - 69px);
-    height: 18px;
+    height: 31px;
     border: none;
-    padding: 10px; 
+    font-size: 20px;
+    font-family: none !important;
 }
 
 .auto_id {

@@ -1,35 +1,24 @@
-<!DOCTYPE html>
-<html>
+<?php
+include_once('_common.php');
+define('_INDEX_', true);
+if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
+
+if (G5_IS_MOBILE) {
+    include_once(G5_THEME_MOBILE_PATH.'/index.php');
+    return;
+}
+
+//include_once(G5_THEME_PATH.'/head.php');
+include_once('head.php');
+
+?>
+
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIT Admin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/home_pass_change.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
 </head>
-
-<body>
-    <div class="header">
-        <div class="logo_wrap">
-            <div class="logo"><img src="img/logo.png" alt="logo"></div>
-            <p>ADMIN</p>
-        </div>
-        <nav>
-            <div class="nav_menu"><a href="index.php" class="on">홈</a></div>
-            <div class="nav_menu"><a href="notice_home.php">공지사항관리</a></div>
-            <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>
-            <div class="nav_menu"><a href="answer_manegement.php">정답지관리</a></div>
-        </nav>
-        <div class="header_right">
-            <div class="user_img"><img src="img/user.png" alt="user_img"></div>
-            <p class="user_id">admin</p>
-            <div class="logout_btn"><a href="login.php">로그아웃</a></div>
-            <div class="pass_change_btn"><a href="login.php">비밀번호변경</a></div>
-        </div>
-    </div>
+    <form action="home_pass_chk.php" method="post" id="login_form">
     <div class="section">
         <div class="member_login_box">
             <p>비밀번호 재설정</p>
@@ -37,13 +26,23 @@
                 <div class="logo_login"><img src="img/logo.png" alt="login_logo"></div>
             </div>
             <div class="form_section">
-                <form action=""><input type="text" placeholder="현재 비밀번호를 입력해주세요"><input type="text" placeholder="새 비밀번호를 입력해주세요"><input type="text" placeholder="비밀번호를 재입력해주세요"></form>
+                <form action="">
+                    <input type="password" placeholder="현재 비밀번호를 입력해주세요" name="current_pw" style="font-family: none !important;">
+                    <input type="password" placeholder="새 비밀번호를 입력해주세요" name="new_pw1" id="new_pw1" style="font-family: none !important;">
+                    <input type="password" placeholder="비밀번호를 재입력해주세요" name="new_pw2" id="new_pw2" style="font-family: none !important;">
+                </form>
             </div>
-            <div class="ok_btn">
-                <a href="index.php">확인</a>
+            <div class="ok_btn" onclick="log_in();">
+                <a href="#">확인</a>
             </div>
         </div>
     </div>
+    </form>
 </body>
-
 </html>
+<script>
+    function log_in() {
+        if($('#new_pw1').val() == $('#new_pw2').val()) $('#login_form').submit();
+        else alert('비밀번호가 동일한지 확인해주세요.');
+    }
+</script>

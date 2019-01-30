@@ -142,7 +142,13 @@
 
 .add_btn {
     background-color: rgb(2, 99, 34);
-    margin-right: 10px;
+    /*margin-right: 10px;*/
+}
+
+.img-save
+{
+    width: 12px;
+    margin-left: 5px;
 }
 
 .add_btn a {
@@ -196,7 +202,7 @@
 
 .list_btn_wrap>ul {
     position: relative;
-    bottom: 5px;
+    bottom: 0px;
     display: inline-block;
 }
 
@@ -219,3 +225,11 @@
     color: rgb(50, 50, 50);
     font-weight: 600;
 }
+
+a {
+    text-decoration: none !important;
+}
+
+/*a.btn:hover{*/
+    /*color:white !important;*/
+/*}*/

@@ -34,7 +34,7 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
     <div class="header_right">
         <div class="user_img"><img src="img/user.png" style="margin-top:-30px" alt="user_img"></div>
         <p class="user_id" style="margin-top:20px">admin</p>
-        <div class="logout_btn"><a href="login.php">로그아웃</a></div>
+        <div class="logout_btn"><a href="../bbs/logout.php">로그아웃</a></div>
         <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>
     </div>
 </div>

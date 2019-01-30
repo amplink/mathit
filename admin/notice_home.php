@@ -11,43 +11,15 @@ if (G5_IS_MOBILE) {
 
 //include_once(G5_THEME_PATH.'/head.php');
 include_once('head.php');
-
+$num = 1;
+if(!$_GET['page']) {
+    $page = 0;
+}else {
+    $page = $_GET['page']-1;
+}
 ?>
 
-
-<!---->
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!---->
-<!--<head>-->
-<!--    <meta charset="utf-8" />-->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--    <title>MathIT Admin</title>-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />-->
-<!--    <link rel="stylesheet" type="text/css" media="screen" href="css/notice_home.css" />-->
-<!--    <script src="js/jquery-3.3.1.min.js"></script>-->
-<!--</head>-->
-<!---->
-<!--<body>-->
-<!--    <div class="header">-->
-<!--        <div class="logo_wrap">-->
-<!--            <div class="logo"><img src="img/logo.png" alt="logo"></div>-->
-<!--            <p>ADMIN</p>-->
-<!--        </div>-->
-<!--        <nav>-->
-<!--            <div class="nav_menu"><a href="index.php">홈</a></div>-->
-<!--            <div class="nav_menu"><a href="notice_home.php" class="on">공지사항관리</a></div>-->
-<!--            <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>-->
-<!--            <div class="nav_menu"><a href="answer_manegement.php">정답지관리</a></div>-->
-<!--        </nav>-->
-<!--        <div class="header_right">-->
-<!--            <div class="user_img"><img src="img/user.png" alt="user_img"></div>-->
-<!--            <p class="user_id">admin</p>-->
-<!--            <div class="logout_btn"><a href="login.php">로그아웃</a></div>-->
-<!--            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>-->
-<!--        </div>-->
-<!--    </div>-->
+<script src="js/jquery-3.3.1.min.js"></script>
     <div class="section">
         <div class="head_section">
             <div class="l_title">
@@ -66,52 +38,85 @@ include_once('head.php');
                         <th>번호</th>
                         <th>유형</th>
                         <th>제목</th>
+                        <th>작성일</th>
+                        <th>대상학원 아이디</th>
                         <th>공지범위</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>일반공지</td>
-                        <td><a href="notice_read.php">공지사항입니다</a></td>
-                        <td>전체</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>2</td>
-                        <td>일반공지</td>
-                        <td><a href="notice_read.php">공지사항입니다</a></td>
-                        <td>전임강사, 채점강사</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>3</td>
-                        <td>중요공지</td>
-                        <td><a href="notice_read.php">공지사항입니다</a></td>
-                        <td>채점강사, 학생</td>
-                    </tr>
+                <form action="notice_home_del.php" method="POST" id="notice_form">
+                    <?php
+                    $sql = "select * from `academy`";
+                    $result = mysqli_query($connect_db, $sql);
+                    $client_arr = array();
+                    while($res = mysqli_fetch_array($result)) {
+                        $client_arr[$res['client_id']] = $res['client_name'];
+                    }
+
+                    $sql = "select * from `notify`";
+                    $result = mysqli_query($connect_db, $sql);
+                    $i=1;
+                    $count = 0;
+
+                    while($res = mysqli_fetch_array($result)) {
+                        $size = 1;
+                        $target = "";
+//                        if($res['type']==0) $type = "전체공지";
+//                        else if($res['type']==1) $type = "일반공지";
+//                        else if($res['type']==2) $type = "중요공지";
+                        $range = explode(",", $res['target']);
+                        foreach($range as $t) {
+                            if($t == 0) $target .= "전임강사,";
+                            else if($t == 1) $target .= "채점강사,";
+                            else if($t == 2) $target .= "학생,";
+                            if($size >= count($range)-1) break;
+                            else $size++;
+                        }
+
+                        $target[count($target)-2] = "\0";
+
+                        $client = "";
+                        $k = 0;
+                        $range = explode(",", $res['client_id']);
+                        for($j=0; $j<count($range)-1; $j++) {
+                            if ($client_arr[$range[$j]]) {
+                                if($j == count($range)-2) $client .= $client_arr[$range[$j]];
+                                else $client .= $client_arr[$range[$j]].", ";
+                            }
+                        }
+                        if($i >= $page*10 && $i <= ($page*10+10)) echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td><a href='./update_notice_add.php?id=".$res['id']."'>".$i."</a></td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td></tr>";
+                        $i++;
+                    }
+                    ?>
+                </form>
                 </tbody>
             </table>
         </div>
         <div class="section_footer">
             <div class="list_btn_wrap">
-                <div class="prev_btn"><a href="#none"><img src="img/prev.png" alt=""></a></div>
+                <div class="prev_btn"><a href="./notice_home.php?page=<?=$page;?>"><img src="img/prev.png" alt=""></a></div>
                 <ul>
-                    <li><a href="#none" class="on">1</a></li>
-                    <li><a href="#none">2</a></li>
-                    <li><a href="#none">3</a></li>
-                    <li><a href="#none">4</a></li>
-                    <li><a href="#none">5</a></li>
+                    <?
+                    $count = $i;
+                    for($i=0; $i<$count/10; $i++) {
+                        $cnt = $i+1;
+                        echo '<li><a href="./notice_home.php?page='.$cnt.'">'.$cnt.'</a></li>';
+                    }
+                    ?>
                 </ul>
-                <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>
+                <div class="next_btn"><a href="./notice_home.php?page=<?=$page+1;?>"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
-                <div class="add_btn"><a href="notice_add.php">공지등록</a></div>
-                <div class="delete_btn"><a href="#none">삭제</a></div>
+                <div class="add_btn"><a class="btn" href="notice_add.php">공지등록</a></div>
+                <div class="delete_btn" onclick="del_notice();"><a href="#none">삭제</a></div>
             </div>
         </div>
     </div>
 <?php
 include_once('tail.php');
 ?>
+<script>
+    function del_notice() {
+        if(confirm("삭제하시겠습니까?")) $('#notice_form').submit();
+    }
+</script>

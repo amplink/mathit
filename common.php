@@ -597,7 +597,6 @@ if (G5_IS_MOBILE) {
 }
 //==============================================================================
 
-
 // 방문자수의 접속을 남김
 include_once(G5_BBS_PATH.'/visit_insert.inc.php');
 
@@ -625,6 +624,43 @@ if(!empty($extend_file) && is_array($extend_file)) {
 }
 unset($extend_file);
 
+// mathit api call function(POST)
+function api_calls($link, $data) {
+    $url = 'https://www.edusys.co.kr:8080'.$link;
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt ($ch, CURLOPT_POSTFIELDS, $data);
+
+    curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+    $res = curl_exec ($ch);
+
+    curl_close($ch);
+
+    $res = json_decode($res, true);
+
+    return $res;
+};
+
+// mathit api call function(GET)
+function api_calls_get($link) {
+    $url = 'https://www.edusys.co.kr:8080'.$link;
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//    curl_setopt($ch, CURLOPT_PUT, 1);
+
+    $res = curl_exec ($ch);
+
+    curl_close($ch);
+    $res = json_decode($res, true);
+
+    return $res;
+};
 ob_start();
 
 // 자바스크립트에서 go(-1) 함수를 쓰면 폼값이 사라질때 해당 폼의 상단에 사용하면

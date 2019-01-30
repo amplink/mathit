@@ -1,41 +1,36 @@
+<?php
+include_once('_common.php');
+define('_INDEX_', true);
+if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
+
+if (G5_IS_MOBILE) {
+    include_once(G5_THEME_MOBILE_PATH.'/index.php');
+    return;
+}
+
+//include_once(G5_THEME_PATH.'/head.php');
+include_once('head.php');
+if(!$_GET['page']) {
+    $page = 0;
+}else {
+    $page = $_GET['page']-1;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIT Admin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/answer_manegement.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
-    <div class="header">
-        <div class="logo_wrap">
-            <div class="logo"><img src="img/logo.png" alt="logo"></div>
-            <p>ADMIN</p>
-        </div>
-        <nav>
-            <div class="nav_menu"><a href="#none">홈</a></div>
-            <div class="nav_menu"><a href="notice_home.php">공지사항관리</a></div>
-            <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>
-            <div class="nav_menu"><a href="#none" class="on">정답지관리</a></div>
-        </nav>
-        <div class="header_right">
-            <div class="user_img"><img src="img/user.png" alt="user_img"></div>
-            <p class="user_id">admin</p>
-            <div class="logout_btn"><a href="login.php">로그아웃</a></div>
-            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>
-        </div>
-    </div>
     <div class="section">
         <div class="head_section">
             <p>정답지 목록</p>
         </div>
         <div class="view_section">
-            <table>
+            <table style="text-align: center;">
                 <thead>
                     <tr>
                         <th>학년</th>
@@ -46,55 +41,65 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><span>초3</span></td>
-                        <td><span>1학기</span></td>
-                        <td><span>1단원</span></td>
-                        <td><span>루트</span></td>
-                        <td><span>알파</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>초3</span></td>
-                        <td><span>1학기</span></td>
-                        <td><span>1단원</span></td>
-                        <td><span>루트</span></td>
-                        <td><span>알파</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>초3</span></td>
-                        <td><span>1학기</span></td>
-                        <td><span>1단원</span></td>
-                        <td><span>루트</span></td>
-                        <td><span>알파</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>초3</span></td>
-                        <td><span>1학기</span></td>
-                        <td><span>1단원</span></td>
-                        <td><span>루트</span></td>
-                        <td><span>알파</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>초3</span></td>
-                        <td><span>1학기</span></td>
-                        <td><span>1단원</span></td>
-                        <td><span>루트</span></td>
-                        <td><span>알파</span></td>
-                    </tr>
+                    <?php
+                    $sql = "select * from `answer_master` order by `event_time` asc";
+                    $result = mysqli_query($connect_db, $sql);
+
+                    $grade = array();
+                    $unit = array();
+                    $level = array();
+                    $semester = array();
+                    $book_type = array();
+                    $j=0;
+                    $t=1;
+                    while($ac_data = mysqli_fetch_array($result)) {
+                        $n = 0;
+                        for($i=0; $i<count($grade)+1; $i++) {
+                            if ($book_type[$i] == $ac_data['book_type'] && $unit[$i] == $ac_data['unit'] && $grade[$i] == $ac_data['grade'] && $level[$i] == $ac_data['level'] && $semester[$i] == $ac_data['semester']) {
+                                $n = 1;
+                            }
+                        }
+
+
+                       if($n != 1) {
+                           if($t >= $page*10 && $t <= ($page*10+10)) {
+                               echo '<tr>';
+                               echo '     <td><span>' . $ac_data["grade"] . '</span></td>';
+                               echo '     <td><span>' . $ac_data["semester"] . '</span></td>';
+                               echo '     <td><span>' . $ac_data["unit"] . '</span></td>';
+                               echo '     <td><span>' . $ac_data["level"] . '</span></td>';
+                               echo '     <td><span>' . $ac_data["book_type"] . '</span></td>';
+                               echo '</tr>';
+                               //<a href="./update_answer_add.php?grade='.$ac_data['grade'].'&semester='.$ac_data['semester'].'&unit='.$ac_data['unit'].'&level='.$ac_data['level'].'&book_type='.$ac_data['book_type'].'">
+                               $grade[$j] = $ac_data['grade'];
+                               $unit[$j] = $ac_data['unit'];
+                               $level[$j] = $ac_data['level'];
+                               $semester[$j] = $ac_data['semester'];
+                               $book_type[$j] = $ac_data['book_type'];
+                               $j++;
+                           }
+                           $t++;
+                       }
+
+
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
         <div class="section_footer">
             <div class="list_btn_wrap">
-                <div class="prev_btn"><a href="#none"><img src="img/prev.png" alt=""></a></div>
+                <div class="prev_btn"><a href="./answer_manegement.php?page=<?=$page;?>"><img src="img/prev.png" alt=""></a></div>
                 <ul>
-                    <li><a href="#none" class="on">1</a></li>
-                    <li><a href="#none">2</a></li>
-                    <li><a href="#none">3</a></li>
-                    <li><a href="#none">4</a></li>
-                    <li><a href="#none">5</a></li>
+                    <?
+                    $count = $t;
+                    for($i=0; $i<$count/10; $i++) {
+                        $cnt = $i+1;
+                        echo '<li><a href="./answer_manegement.php?page='.$cnt.'">'.$cnt.'</a></li>';
+                    }
+                    ?>
                 </ul>
-                <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>
+                <div class="next_btn"><a href="./answer_manegement.php?page=<?=$page+1;?>"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
                 <div class="add_btn"><a href="answer_add.php">정답지추가</a></div>

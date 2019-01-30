@@ -23,10 +23,13 @@ include_once('head.php');
 <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
 <!--    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />-->
 <!--    <link rel="stylesheet" type="text/css" media="screen" href="css/notice_add.css" />-->
-<!--    <script src="js/jquery-3.3.1.min.js"></script>-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap-multiselect.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+
 <!--</head>-->
 <!---->
-<!--<body>-->
+<body>
 <!--    <div class="header">-->
 <!--        <div class="logo_wrap">-->
 <!--            <div class="logo"><img src="img/logo.png" alt="logo"></div>-->
@@ -45,6 +48,7 @@ include_once('head.php');
 <!--            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>-->
 <!--        </div>-->
 <!--    </div>-->
+    <form action="notice_add_chk.php" method="POST" id="notice_bbs">
     <div class="section">
         <div class="head_section">
             <div class="l_title">
@@ -59,9 +63,9 @@ include_once('head.php');
                     </div>
                     <div class="contents_box">
                         <select name="notice_div" id="notice_div">
-                            <option value="all">공지종류</option>
-                            <option value="normal">일반공지</option>
-                            <option value="important">중요공지</option>
+                            <option value="전체공지">전체공지</option>
+                            <option value="일반공지">일반공지</option>
+                            <option value="중요공지">중요공지</option>
                         </select>
                     </div>
                 </div>
@@ -70,17 +74,36 @@ include_once('head.php');
                         <p class="title_text">학원선택</p>
                     </div>
                     <div class="contents_box">
-                        <select name="academy" id="academy" multiple="multiple">
-                            <option value="academy_1">academy_1</option>
-                            <option value="academy_2">academy_2</option>
-                            <option value="academy_3">academy_3</option>
-                            <option value="academy_4">academy_4</option>
-                        </select>
-                    </div>
-                    <script type="text/javascript">
-                            $('#academy').multiselect();
 
-                    </script>
+                        <select name="ac_select[]" id="academy" multiple="multiple" required>
+                            <?php
+                            $sql = "select * from `academy`";
+                            $res = mysqli_query($connect_db, $sql);
+                            while($ac = mysqli_fetch_array($res)) {
+                                ?>
+                                <option value="<?=$ac["client_id"];?>"><?=$ac["client_name"];?></option>
+                                <?php
+                                $i++;
+                            }
+
+                            ?>
+
+                        </select>
+                        <script type="text/javascript">
+                            $('#academy').multiselect();
+                        </script>
+
+
+<!--                            -->
+<!--                            $sql = "select * from `academy`";-->
+<!--                            $res = mysqli_query($connect_db, $sql);-->
+<!--                            while($ac = mysqli_fetch_array($res)) {-->
+<!--                                echo "<div class='radio_group'>";-->
+<!--                              echo "<input type='checkbox' name='ac_select[]' class='notice_range' value='".$ac['client_id']."'><p>".$ac['client_name']."</p></div>";-->
+<!--                            }-->
+
+                    </div>
+
                 </div>
             </div>
             <div class="board_line">
@@ -88,20 +111,20 @@ include_once('head.php');
                     <p class="title_text">공지범위</p>
                 </div>
                 <div class="contents_box">
+<!--                    <div class="radio_group">-->
+<!--                        <input type="checkbox" class="notice_range" onchange="all_select();">-->
+<!--                        <p>전체</p>-->
+<!--                    </div>-->
                     <div class="radio_group">
-                        <input type="checkbox" class="notice_range" name="notice_range">
-                        <p>전체</p>
-                    </div>
-                    <div class="radio_group">
-                        <input type="checkbox" class="notice_range" name="notice_range">
+                        <input type="checkbox" name="notice_range[]" class="notice_range" value="0">
                         <p>전임강사</p>
                     </div>
                     <div class="radio_group">
-                        <input type="checkbox" class="notice_range" name="notice_range">
+                        <input type="checkbox" name="notice_range[]" class="notice_range" value="1">
                         <p>채점강사</p>
                     </div>
                     <div class="radio_group">
-                        <input type="checkbox" class="notice_range" name="notice_range">
+                        <input type="checkbox" name="notice_range[]" class="notice_range" value="2">
                         <p>학생</p>
                     </div>
                 </div>
@@ -111,30 +134,43 @@ include_once('head.php');
                     <p class="title_text">제목</p>
                 </div>
                 <div class="contents_box">
-                    <input type="text" placeholder="제목을 입력해주세요">
+                    <input type="text" placeholder="제목을 입력해주세요" name="title">
                 </div>
             </div>
             <div class="board_line">
                 <div class="title_box">
                     <p class="title_text">첨부파일</p>
                 </div>
-                <div class="contents_box">
-                    <input type="text" placeholder="">
-                    <div class="input_btn"><a href="#none">첨부파일</a></div>
-                </div>
+<!--                <div class="contents_box">-->
+                    <input style="margin-top: 15px;" type="file" name="file">
+<!--                </div>-->
             </div>
-            <div class="smart_edit_input_section">
-                
+            <div class="board_line">
+                <div class="title_box">
+                    <p class="title_text">내용</p>
+                </div>
+
+            </div>
+            <div class="board_line2" style="overflow: initial">
+                <textarea class="ckeditor" rows="10"  name="content" id="content"></textarea>
             </div>
         </div>
         <div class="section_footer">
             <div class="button_wrap">
-                <div class="save_btn"><a href="notice_home.php">저장</a></div>
+                <div class="save_btn" ><input class="l_save_btn" type="submit" value="저장"></div>
                 <div class="cancel_btn"><a href="notice_home.php">취소</a></div>
             </div>
         </div>
     </div>
-
+    </form>
+</body>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#content' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 <?php
 include_once('tail.php');
 ?>

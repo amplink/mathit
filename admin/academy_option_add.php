@@ -1,35 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!---->
-<!--<head>-->
-<!--    <meta charset="utf-8" />-->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--    <title>MathIT Admin</title>-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />-->
-<!--    <link rel="stylesheet" type="text/css" media="screen" href="css/academy_option_add.css" />-->
-<!--    <script src="js/jquery-3.3.1.min.js"></script>-->
-<!--</head>-->
-<!---->
-<!--<body>-->
-<!--    <div class="header">-->
-<!--        <div class="logo_wrap">-->
-<!--            <div class="logo"><img src="img/logo.png" alt="logo"></div>-->
-<!--            <p>ADMIN</p>-->
-<!--        </div>-->
-<!--        <nav>-->
-<!--            <div class="nav_menu"><a href="index.php">홈</a></div>-->
-<!--            <div class="nav_menu"><a href="notice_home.php">공지사항관리</a></div>-->
-<!--            <div class="nav_menu"><a href="academy_option_staff.php" class="on">학원별관리</a></div>-->
-<!--            <div class="nav_menu"><a href="answer_manegement.php">정답지관리</a></div>-->
-<!--        </nav>-->
-<!--        <div class="header_right">-->
-<!--            <div class="user_img"><img src="img/user.png" alt="user_img"></div>-->
-<!--            <p class="user_id">admin</p>-->
-<!--            <div class="logout_btn"><a href="login.php">로그아웃</a></div>-->
-<!--            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>-->
-<!--        </div>-->
-<!--    </div>-->
 <?php
 include_once('_common.php');
 define('_INDEX_', true);
@@ -42,8 +10,13 @@ if (G5_IS_MOBILE) {
 
 //include_once(G5_THEME_PATH.'/head.php');
 include_once('head.php');
-
+if(!$_GET['page']) {
+    $page = 0;
+}else {
+    $page = $_GET['page']-1;
+}
 ?>
+
 <head>
         <link rel="stylesheet" type="text/css" media="screen" href="css/academy_option_add.css" />
 </head>
@@ -68,93 +41,93 @@ include_once('head.php');
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td><span>Kakao</span></td>
-                        <td><span>필승학원</span><span>(서울)</span></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td><span>Kakao</span></td>
-                        <td><span>필승학원</span><span>(서울)</span></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td><span>Kakao</span></td>
-                        <td><span>필승학원</span><span>(서울)</span></td>
-                    </tr>
+                <form action="academy_option_del.php" method="POST" id="del_form">
+                        <?php
+                        $sql = "select * from `academy`";
+                        $result = mysqli_query($connect_db, $sql);
+                        $i = 1;
+                        while($ac_data = mysqli_fetch_array($result)) {
+
+                            if($i >= $page*10 && $i <= ($page*10+10))  {
+                                echo '<tr> ';
+                                echo '     <td style="width:20px"><input type="checkbox" name="chk_list[]" value="'.$ac_data['client_id'].'"></td> ';
+                                echo '     <td><span>'.$ac_data["client_id"].'</span></td> ';
+                                echo '     <td><span>'.$ac_data["client_name"].'</span></td> ';
+                                echo ' </tr> ';
+                            }
+                            $i++;
+                        }
+
+                        ?>
+                </form>
                 </tbody>
             </table>
         </div>
         <div class="section_footer">
             <div class="list_btn_wrap">
-                <div class="prev_btn"><a href="#none"><img src="img/prev.png" alt=""></a></div>
+                <div class="prev_btn"><a href="./academy_option_add.php?page=<?=$page;?>"><img src="img/prev.png" alt=""></a></div>
                 <ul>
-                    <li><a href="#none" class="on">1</a></li>
-                    <li><a href="#none">2</a></li>
-                    <li><a href="#none">3</a></li>
-                    <li><a href="#none">4</a></li>
-                    <li><a href="#none">5</a></li>
+                    <?
+                    $count = $i;
+                    for($i=0; $i<$count/10; $i++) {
+                        $cnt = $i+1;
+                        echo '<li><a href="./academy_option_add.php?page='.$cnt.'">'.$cnt.'</a></li>';
+                    }
+                    ?>
                 </ul>
-                <div class="next_btn"><a href="#none"><img src="img/next.png" alt=""></a></div>
+                <div class="next_btn"><a href="./academy_option_add.php?page=<?=$page+1;?>"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
-                <div class="delete_btn"><a href="#none">선택삭제</a></div>
+                <div class="delete_btn" onclick="del_academy();"><a href="#none">선택삭제</a></div>
             </div>
         </div>
-        <div class="add_section">
 
+        <!-- 학원등록 -->
+        <div class="add_section">
+            <form action="chk_ac.php" type="GET" id="ac_name_form">
             <div class="line">
                 <div class="name">
                     <div class="lside">
                         <p>학원아이디</p>
                     </div>
                     <div class="rside">
-                        <input type="text" placeholder="학원아이디를 입력해주세요">
-                    </div>
-                    <div class="button_wrap">
-                        <div class="add_btn"><a href="#none">확인</a></div>
-                    </div>
-                </div>
-                <div class="pass" style="display:flex">
-                    <div class="lside" style="width: 122px;">
-                        <p>학원명</p>
-                    </div>
-                    <div class="rside">
-                        <input type="text" disabled />
+                        <input type="text" placeholder="학원아이디를 입력해주세요" name="ac_id">
                     </div>
                 </div>
             </div>
-<!--            <div class="line">-->
-<!--                <div class="name">-->
-<!--                    <div class="lside">-->
-<!--                        <p>비밀번호</p>-->
-<!--                    </div>-->
-<!--                    <div class="rside">-->
-<!--                        <input type="password" placeholder="비밀번호를 입력해주세요" />-->
-<!--                        <div class="confirm_btn"><a href="#none">확인</a></div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="pass">-->
-<!--                    <div class="lside">-->
-<!--                        <p></p>-->
-<!--                    </div>-->
-<!--                    <div class="rside"></div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="line">
+                <div class="name">
+                    <div class="lside">
+                        <p>비밀번호</p>
+                    </div>
+                    <div class="rside">
+                        <input type="password" placeholder="비밀번호를 입력해주세요." name="ac_pw">
+                    </div>
+                </div>
+            </div>
+            </form>
         </div>
         <div class="section_footer">
             <div class="button_wrap">
-                <div class="add_btn"><a href="#none">추가</a></div>
+                <div class="add_btn" onclick="submit();"><a href="#none">추가</a></div>
             </div>
         </div>
     </div>
-<!--</body>-->
+</body>
 
 <?
-$_GET["bo_table"] = "test1";
-include_once ('board.php');
+//$_GET["bo_table"] = "test1";
+//include_once ('board.php');
+//INSERT INTO `academy` (`client_id`, `event_time`, `admin_id`, `client_name`) VALUES ('11', CURRENT_TIMESTAMP, 'admin', 'admin');
 
 ?>
-<!---->
-<!--</html>-->
+
+</html>
+<script>
+    function submit() {
+        document.getElementById("ac_name_form").submit();
+    }
+    function del_academy() {
+        if(confirm("삭제하시겠습니까?")) $('#del_form').submit();
+    }
+</script>

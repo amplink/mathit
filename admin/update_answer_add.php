@@ -1,5 +1,12 @@
 <?
 include_once('_common.php');
+//"./update_answer_add.php?grade='.$ac_data['grade'].'&semester='.$ac_data['semester'].'&unit='.$ac_data['unit'].'&level='.$ac_data['level'].'&book_type='.$ac_data['book_type'].'"
+$grade = $_GET['grade'];
+$semester = $_GET['semester'];
+$unit = $_GET['unit'];
+$level = $_GET['level'];
+$book_type = $_GET['book_type'];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,24 +25,24 @@ include_once('_common.php');
 
 <body>
 <form action="answer_add_chk.php" method="POST" id="answer_add_form">
-<div class="header" style="width:calc(100% - 40px)">
-    <div class="logo_wrap">
-        <div class="logo"><img src="img/logo.png" alt="logo"></div>
-        <p>ADMIN</p>
+    <div class="header" style="width:calc(100% - 40px)">
+        <div class="logo_wrap">
+            <div class="logo"><img src="img/logo.png" alt="logo"></div>
+            <p>ADMIN</p>
+        </div>
+        <nav>
+            <div class="nav_menu"><a href="index.php">홈</a></div>
+            <div class="nav_menu"><a href="notice_home.php">공지사항관리</a></div>
+            <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>
+            <div class="nav_menu"><a href="answer_manegement.php" class="on">정답지관리</a></div>
+        </nav>
+        <div class="header_right">
+            <div class="user_img"><img src="img/user.png" alt="user_img"></div>
+            <p class="user_id">admin</p>
+            <div class="logout_btn"><a href="login.php">로그아웃</a></div>
+            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>
+        </div>
     </div>
-    <nav>
-        <div class="nav_menu"><a href="index.php">홈</a></div>
-        <div class="nav_menu"><a href="notice_home.php">공지사항관리</a></div>
-        <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>
-        <div class="nav_menu"><a href="answer_manegement.php" class="on">정답지관리</a></div>
-    </nav>
-    <div class="header_right">
-        <div class="user_img"><img src="img/user.png" alt="user_img"></div>
-        <p class="user_id">admin</p>
-        <div class="logout_btn"><a href="login.php">로그아웃</a></div>
-        <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>
-    </div>
-</div>
     <div class="section" style="width:100%">
         <div class="head_section"  style="width:calc(100% - 100px)">
             <div class="upside">
@@ -48,46 +55,54 @@ include_once('_common.php');
             <div class="downside">
                 <table>
                     <thead>
-                        <tr>
-                            <th>교재구분</th>
-                            <th>학년</th>
-                            <th>학기</th>
-                            <th>단원</th>
-                            <th>레벨</th>
-                        </tr>
+                    <tr>
+                        <th>교재구분</th>
+                        <th>학년</th>
+                        <th>학기</th>
+                        <th>단원</th>
+                        <th>레벨</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><select name="book_type" id="textbook">
-                                    <option value="수학의정석" selected>수학의 정석</option>
-                                    <option value="국어의정석">국어의 정석</option>
-                                    <option value="영어의정석">영어의 정석</option>
-                                </select></td>
-                            <td><select name="grade" id="grade">
-                                    <option value="grade_1">초등 1학년</option>
-                                    <option value="grade_2">초등 2학년</option>
-                                    <option value="grade_3">초등 3학년</option>
-                                    <option value="grade_4">초등 4학년</option>
-                                    <option value="grade_5">초등 5학년</option>
-                                    <option value="grade_6">초등 6학년</option>
-                                </select></td>
-                            <td><select name="semester" id="semester">
-                                    <option value="semester_1">1학기</option>
-                                    <option value="semester_2">2학기</option>
-                                    <option value="semester_3">3학기</option>
-                                </select></td>
-                            <td><select name="unit" id="unit">
-                                    <option value="unit_1">1단원</option>
-                                    <option value="unit_2">2단원</option>
-                                    <option value="unit_3">3단원</option>
-                                    <option value="unit_4">4단원</option>
-                                </select></td>
-                            <td><select name="level" id="level">
-                                    <option value="level_1">레벨 1</option>
-                                    <option value="level_2">레벨 2</option>
-                                    <option value="level_3">레벨 3</option>
-                                </select></td>
-                        </tr>
+                    <tr>
+                        <?
+//                        $sql = "select * from `answer_master` where `grade` = '$grade' and `semester` = '$semester' and `unit` = '$unit' and `level` = '$level' and `book_type` = '$book_type';";
+//                        $g = mysqli_query($connect_db, $sql);
+//
+//                        $a = mysqli_fetch_array($g);
+//
+
+                        ?>
+                        <td><select name="book_type" id="textbook">
+                                <option value="수학의정석">수학의 정석</option>
+                                <option value="국어의정석">국어의 정석</option>
+                                <option value="영어의정석">영어의 정석</option>
+                            </select></td>
+                        <td><select name="grade" id="grade">
+                                <option value="grade_1">초등 1학년</option>
+                                <option value="grade_2">초등 2학년</option>
+                                <option value="grade_3">초등 3학년</option>
+                                <option value="grade_4">초등 4학년</option>
+                                <option value="grade_5">초등 5학년</option>
+                                <option value="grade_6">초등 6학년</option>
+                            </select></td>
+                        <td><select name="semester" id="semester">
+                                <option value="semester_1">1학기</option>
+                                <option value="semester_2">2학기</option>
+                                <option value="semester_3">3학기</option>
+                            </select></td>
+                        <td><select name="unit" id="unit">
+                                <option value="unit_1">1단원</option>
+                                <option value="unit_2">2단원</option>
+                                <option value="unit_3">3단원</option>
+                                <option value="unit_4">4단원</option>
+                            </select></td>
+                        <td><select name="level" id="level">
+                                <option value="level_1">레벨 1</option>
+                                <option value="level_2">레벨 2</option>
+                                <option value="level_3">레벨 3</option>
+                            </select></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -114,26 +129,35 @@ include_once('_common.php');
             <div class="downside_2" id="section_1">
                 <table>
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th>문항번호</th>
-                            <th>정답이미지</th>
-                            <th>풀이이미지</th>
-                            <th></th>
-                        </tr>
+                    <tr>
+                        <th></th>
+                        <th>문항번호</th>
+                        <th>정답이미지</th>
+                        <th>풀이이미지</th>
+                        <th></th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr id="item_section_1">
-                            <td>
-                                <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
-                            </td>
-                            <td><input type="text" name="a_item_number[]" placeholder="문항번호"></td>
-                            <td><input type="file" name="a_answer_image[]"></td>
-                            <td><input type="file" name="a_explain_image[]"></td>
-                            <td>
-                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                            </td>
-                        </tr>
+                    <?
+                    $sql = "select * from `answer_master` where `grade` = '$grade' and `semester` = '$semester' and `unit` = '$unit' and `level` = '$level' and `book_type` = '$book_type' and `c_name` = '개념마스터' order by `seq` asc;";
+                    $res = mysqli_query($connect_db, $sql);
+
+                    while($r = mysqli_fetch_array($res)) {
+                    ?>
+                    <tr id="item_section_1">
+                        <td>
+                            <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
+                        </td>
+                        <td><input type="text" name="a_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
+                        <td><input type="file" name="a_answer_image[]" value="<?=$r['answer_image'];?>"></td>
+                        <td><input type="file" name="a_explain_image[]" value="<?=$r['explain_image'];?>"></td>
+                        <td>
+                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                        </td>
+                    </tr>
+                    <?
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -230,6 +254,12 @@ include_once('_common.php');
     $("div#section_2").hide();
     $("div#section_3").hide();
     $("div#section_4").hide();
+
+    $("option[value='<? echo $grade; ?>']").attr('selected', true);
+    $("option[value='<? echo $semester; ?>']").attr('selected', true);
+    $("option[value='<? echo $unit; ?>']").attr('selected', true);
+    $("option[value='<? echo $level; ?>']").attr('selected', true);
+    $("option[value='<? echo $book_type; ?>']").attr('selected', true);
 
     function change(n) {
         if(n==1) {

@@ -117,6 +117,6 @@ if(function_exists('social_login_success_after')){
     $link = social_login_success_after($mb, $link);
     social_login_session_clear(1);
 }
-
+$link = G5_URL."/admin/";
 goto_url($link);
 ?>
