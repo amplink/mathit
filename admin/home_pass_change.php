@@ -27,9 +27,10 @@ include_once('head.php');
             </div>
             <div class="form_section">
                 <form action="">
-                    <input type="password" placeholder="현재 비밀번호를 입력해주세요" name="current_pw">
-                    <input type="password" placeholder="새 비밀번호를 입력해주세요" name="new_pw1" id="new_pw1">
-                    <input type="password" placeholder="비밀번호를 재입력해주세요" name="new_pw2" id="new_pw2"></form>
+                    <input type="password" placeholder="현재 비밀번호를 입력해주세요" name="current_pw" style="font-family: none !important;">
+                    <input type="password" placeholder="새 비밀번호를 입력해주세요" name="new_pw1" id="new_pw1" style="font-family: none !important;;">
+                    <input type="password" placeholder="비밀번호를 재입력해주세요" name="new_pw2" id="new_pw2" style="font-family: none !important;;">
+                </form>
             </div>
             <div class="ok_btn" onclick="log_in();">
                 <a href="#">확인</a>
