@@ -20,6 +20,8 @@ if(!$_GET['page']) {
     $page = $_GET['page']-1;
 }
 
+$manager_get_id = $_GET['manager_get_id'];
+$manager_get_name = $_GET['manager_get_name'];
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +35,6 @@ if(!$_GET['page']) {
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/academy_option_staff.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -130,17 +131,19 @@ if(!$_GET['page']) {
                     <div class="lside">
                         <p>관리자아이디</p>
                     </div>
+
                     <div class="rside">
-                        <input type="text" placeholder="관리자 아이디를 입력해주세요" name="manager_id" value="none">
-                        <div class="confirm_btn" onclick="outh_manager();"><a href="#none">확인</a></div>
+                        <input type="text" placeholder="관리자 아이디를 입력해주세요" name="manager_id" value="none" id="manager_id">
+                        <div class="confirm_btn" onclick="outh_manager();"><a>확인</a></div>
                     </div>
+
                 </div>
                 <div class="pass">
                     <div class="lside">
                         <p>관리자 이름</p>
                     </div>
                     <div class="rside">
-                        <input type="text" disabled name="manager_name" id="manager_name" value="test"/>
+                        <input type="text" disabled name="manager_name" id="manager_name"/>
                     </div>
                 </div>
 <!--                <div class="pass">-->
@@ -177,15 +180,26 @@ if(!$_GET['page']) {
         </div>
     </div>
     </form>
+    <form action="./outh_manager.php" method="get" id="manager_post_form">
+        <input type="hidden" name="manager_get_id" id="manager_get_id">
+    </form>
 </body>
 </html>
 <?php
 //function outh_manager() {
 //    $res = api_calls_get("/api/math/teacher?client_no=126&id=mathit1");
 //}
-//
+
 ?>
 <script>
+    $('#manager_id').val('<? echo $manager_get_id;?>');
+    $('#manager_name').val('<? echo $manager_get_name;?>');
+
+    function outh_manager() {
+        // alert($('#manager_id').val());
+        $('#manager_get_id').val($('#manager_id').val());
+        $('#manager_post_form').submit();
+    }
     function get_ac_name(n) {
         $('#ac_name').val($('#'+n).val());
     }
@@ -217,19 +231,19 @@ if(!$_GET['page']) {
     //     return xhr;
     // }
 
-    function outh_manager() {
-        $.ajax({
-            type: 'GET',
-            url: 'https://www.edusys.co.kr:8080/api/math/teacher?client_no=126&id=mathit1',
-            success: function (data) {
-                alert("AJAX SUccess!!");
-
-                $('#manager_name').val(data[0]);
-
-            },
-            error: function () {
-                alert("아이디를 확인해주세요");
-            }
-        })
-    }
+    // function outh_manager() {
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: 'https://www.edusys.co.kr:8080/api/math/teacher?client_no=126&id=mathit1',
+    //         success: function (data) {
+    //             alert("AJAX SUccess!!");
+    //
+    //             $('#manager_name').val(data[0]);
+    //
+    //         },
+    //         error: function () {
+    //             alert("아이디를 확인해주세요");
+    //         }
+    //     })
+    // }
 </script>
