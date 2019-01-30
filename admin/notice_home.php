@@ -8,7 +8,9 @@ if (G5_IS_MOBILE) {
     include_once(G5_THEME_MOBILE_PATH.'/index.php');
     return;
 }
+//190130김영모 페이지 번호 입력
 $now_menu_number = 20;
+
 //include_once(G5_THEME_PATH.'/head.php');\
 include_once('head.php');
 $num = 1;
