@@ -87,6 +87,7 @@ $(document).ready(function(){
         case "20" : $(".nav_menu:eq(2)").children('a').addClass('on'); break;
         case "30" : $(".nav_menu:eq(3)").children('a').addClass('on'); break;
         case "40" : $(".nav_menu:eq(4)").children('a').addClass('on'); break;
+        default : ;
     }
 });
 </script>
