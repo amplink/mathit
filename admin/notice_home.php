@@ -28,8 +28,8 @@ if(!$_GET['page']) {
                 <p>공지사항</p>
             </div>
             <div class="search_box_wrap">
-                <div class="search_input_box"><input type="text"></div>
-                <div class="search_btn"><a href="#none">검색</a></div>
+                <div class="search_input_box"><input type="text" id="search_val"></div>
+                <div class="search_btn" onclick="search();"><a href="#none">검색</a></div>
             </div>
         </div>
         <div class="view_section">
@@ -95,7 +95,7 @@ if(!$_GET['page']) {
                                 else $client .= $client_arr[$range[$j]].", ";
                             }
                         }
-                        if($i >= $page*10 && $i <= ($page*10+10)) echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>".$i."</a></td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td><td><a style='color: black;' href='./update_notice_add.php?id=".$res['id']."'>수정</a></td></tr>";
+                        if($i >= $page*10 && $i <= ($page*10+10)) echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>".$i."</a></td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td><td><a style='' href='./update_notice_add.php?id=".$res['id']."'>수정</a></td></tr>";
                         $i++;
                     }
                     ?>
@@ -136,5 +136,7 @@ include_once('tail.php');
         if(confirm("삭제하시겠습니까?")) $('#notice_form').submit();
     }
 
-
+    function search() {
+        location.href = './search_notice_home.php?search='+$('#search_val').val();
+    }
 </script>

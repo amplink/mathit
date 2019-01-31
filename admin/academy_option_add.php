@@ -29,8 +29,8 @@ if(!$_GET['page']) {
                 <div class="l_nav_menu"><a href="academy_option_staff.php" >관리자 지정</a></div>
             </div>
             <div class="search_box_wrap">
-                <div class="search_input_box"><input type="text"></div>
-                <div class="search_btn"><a href="#none">검색</a></div>
+                <div class="search_input_box"><input type="text" id="search_val"></div>
+                <div class="search_btn" onclick="search();"><a href="#none">검색</a></div>
             </div>
         </div>
         <div class="view_section">
@@ -127,6 +127,9 @@ if(!$_GET['page']) {
         if($('#all_select').prop('checked')) $('input[type=checkbox]').prop('checked', true);
         else $('input[type=checkbox]').prop('checked', false);
     });
+    function search() {
+        location.href = './search_academy_option_add.php?search='+$('#search_val').val();
+    }
 </script>
 <?php
 include_once('tail.php');

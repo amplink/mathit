@@ -77,7 +77,7 @@ if(!$_GET['page']) {
                                echo '     <td><span>' . $ac_data["unit"] . '</span></td>';
                                echo '     <td><span>' . $ac_data["level"] . '</span></td>';
                                echo '     <td><span>' . $ac_data["book_type"] . '</span></td>';
-                               echo "     <td><a href='./update_answer_add.php?grade=".$ac_data['grade']."&semester=".$ac_data['semester']."&unit=".$ac_data['unit']."&level=".$ac_data['level']."&book_type=".$ac_data['book_type']."' style='color: black;'>수정</a></td>";
+                               echo "     <td><a href='./update_answer_add.php?grade=".$ac_data['grade']."&semester=".$ac_data['semester']."&unit=".$ac_data['unit']."&level=".$ac_data['level']."&book_type=".$ac_data['book_type']."' style=''>수정</a></td>";
                                echo '</tr>';
                                $grade[$j] = $ac_data['grade'];
                                $unit[$j] = $ac_data['unit'];
