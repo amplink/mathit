@@ -1,6 +1,6 @@
 <?php
 if (!defined('_GNUBOARD_')) exit;
-define('G5_MYSQL_HOST', 'pse2018.cafe24.com:3306');
+define('G5_MYSQL_HOST', 'localhost');
 define('G5_MYSQL_USER', 'pse2018');
 define('G5_MYSQL_PASSWORD', 'PSE2018**');
 define('G5_MYSQL_DB', 'pse2018');

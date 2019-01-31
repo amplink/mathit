@@ -11,7 +11,6 @@ if ($is_nogood) $colspan++;
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
 ?>
-
 <!-- 게시판 목록 시작 { -->
 <div id="bo_list" style="width:<?php echo $width; ?>">
 
@@ -20,7 +19,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     <div id="bo_btn_top">
         <div id="bo_list_total">
             <span>Total <?php echo number_format($total_count) ?>건</span>
-            <?php echo $page ?> 페이지
+            <?php echo $page ?>
         </div>
 
         <?php if ($rss_href || $write_href) { ?>
@@ -180,7 +179,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     </fieldset>
     <!-- } 게시판 검색 끝 -->   
 </div>
-
 <?php if($is_checkbox) { ?>
 <noscript>
 <p>자바스크립트를 사용하지 않는 경우<br>별도의 확인 절차 없이 바로 선택삭제 처리하므로 주의하시기 바랍니다.</p>
