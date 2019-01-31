@@ -75,7 +75,7 @@ $manager_get_chk = $_GET['manager_get_chk'];
             <table>
                 <thead>
                     <tr style="text-align:center">
-                        <th><input type="checkbox"></th>
+                        <th><input type="checkbox" id="all_select"></th>
                         <th>학원명</th>
                         <th>관리자아이디</th>
                         <th>이름</th>
@@ -219,6 +219,10 @@ include_once('tail.php');
     function del_academy() {
         if(confirm("삭제하시겠습니까?")) $('#staff_form').submit();
     }
+    $("#all_select").on('click', function () {
+        if($('#all_select').prop('checked')) $('input[type=checkbox]').prop('checked', true);
+        else $('input[type=checkbox]').prop('checked', false);
+    });
     function outh_manager() {
         // alert($('#manager_id').val());
         $('#manager_get_id').val($('#manager_id').val());
