@@ -70,7 +70,7 @@ if(!$_GET['page']) {
 
                                echo '<tr>';
                                echo '     <td><span>' . $r_grade . '</span></td>';
-                               echo '     <td><span>' . $ac_data["semester"] . '</span></td>';
+                               echo '     <td><span>' . $ac_data["semester"] . '학기</span></td>';
                                echo '     <td><span>' . $ac_data["unit"] . '</span></td>';
                                echo '     <td><span>' . $ac_data["level"] . '</span></td>';
                                echo '     <td><span>' . $ac_data["book_type"] . '</span></td>';
