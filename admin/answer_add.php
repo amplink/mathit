@@ -75,16 +75,13 @@ include_once('_common.php');
                                     <option value="1">1학기</option>
                                     <option value="2">2학기</option>
                                 </select></td>
-                            <td><select name="unit" id="unit">
-                                    <option value="1단원">1단원</option>
-                                    <option value="2단원">2단원</option>
-                                    <option value="3단원">3단원</option>
-                                    <option value="4단원">4단원</option>
+                            <td><select name="unit" id="unit" onclick="book_info();">
+                                    <div id="unit_data"></div>
                                 </select></td>
                             <td><select name="level" id="level">
-                                    <option value="레벨 1">레벨 1</option>
-                                    <option value="레벨 2">레벨 2</option>
-                                    <option value="레벨 3">레벨 3</option>
+                                    <option value="루트">루트</option>
+                                    <option value="파이">파이</option>
+                                    <option value="시그마">시그마</option>
                                 </select></td>
                         </tr>
                     </tbody>
@@ -303,5 +300,16 @@ include_once('_common.php');
 
     function myFunction() {
         $("#answer_add_form").submit();
+    }
+
+    function book_info() {
+        $.ajax({
+            type: "GET",
+            url: "book_info.php?grade="+$('#grade option:selected').val()+"&semester="+$('#semester option:selected').val(),
+            dataType: "html",
+            success: function(response){
+                $("#unit").html(response);
+            }
+        });
     }
 </script>
