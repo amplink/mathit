@@ -36,13 +36,14 @@ if(!$_GET['page']) {
             <table>
                 <thead>
                     <tr style="text-align:center">
-                        <th><input type="checkbox"></th>
+                        <th><input type="checkbox" id="all_select"></th>
                         <th>번호</th>
                         <th>유형</th>
                         <th>제목</th>
                         <th>작성일</th>
                         <th>대상학원 아이디</th>
                         <th>공지범위</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,7 +95,7 @@ if(!$_GET['page']) {
                                 else $client .= $client_arr[$range[$j]].", ";
                             }
                         }
-                        if($i >= $page*10 && $i <= ($page*10+10)) echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td><a href='./update_notice_add.php?id=".$res['id']."'>".$i."</a></td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td></tr>";
+                        if($i >= $page*10 && $i <= ($page*10+10)) echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>".$i."</a></td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td><td><a style='color: black;' href='./update_notice_add.php?id=".$res['id']."'>수정</a></td></tr>";
                         $i++;
                     }
                     ?>
@@ -126,6 +127,11 @@ if(!$_GET['page']) {
 include_once('tail.php');
 ?>
 <script>
+    $("#all_select").on('click', function () {
+        if($('#all_select').prop('checked')) $('input[type=checkbox]').prop('checked', true);
+        else $('input[type=checkbox]').prop('checked', false);
+    });
+
     function del_notice() {
         if(confirm("삭제하시겠습니까?")) $('#notice_form').submit();
     }
