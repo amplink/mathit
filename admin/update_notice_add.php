@@ -17,10 +17,12 @@ $id = $_GET['id'];
 $sql = "select * from `notify` where `id`='$id';";
 $result = mysqli_query($connect_db, $sql);
 $no_res = mysqli_fetch_array($result);
+$type = array();
+$range = explode(",", $no_res['target']);
+$r_size = count($range)-1;
 
-//$type = array();
-//$range = explode(",", $no_res['target']);
-
+$ac_range = explode(',', $no_res['client_id']);
+$ac_r_size = count($ac_range)-1;
 ?>
     <!--<!DOCTYPE html>-->
     <!--<html>-->
@@ -87,11 +89,20 @@ $no_res = mysqli_fetch_array($result);
                                 <?php
                                 $sql = "select * from `academy`";
                                 $res = mysqli_query($connect_db, $sql);
+                                $i=0;
                                 while($ac = mysqli_fetch_array($res)) {
+                                    if($ac_range[$i] == $ac['client_id']){
+                                        ?>
+                                        <option value="<?=$ac["client_id"];?>" id="<?=$ac["client_id"];?>" selected><?=$ac["client_name"];?></option>
+                                        <?
+                                        $i++;
+                                    }else {
+                                        ?>
+                                        <option value="<?=$ac["client_id"];?>" id="<?=$ac["client_id"];?>"><?=$ac["client_name"];?></option>
+                                        <?
+                                    }
                                     ?>
-                                    <option value="<?=$ac["client_id"];?>" id="<?=$ac["client_id"];?>"><?=$ac["client_name"];?></option>
                                     <?php
-                                    $i++;
                                 }
 
                                 ?>
@@ -172,8 +183,16 @@ $no_res = mysqli_fetch_array($result);
         </div>
     </form>
     </body>
+    <?
+    for($k=0; $k<$r_size; $k++) {
+        echo "<script>$('input[type=checkbox][value=".$range[$k]."]').prop('checked', true);</script>";
+    }
+//    for($k=0; $k<$ac_r_size; $k++) {
+//        echo "<script>$('option[id=".$ac_range[$k]."]').prop('selected', true);</script>";
+//    }
+    ?>
     <script>
-        $('option[value="<? echo $no_res['type'];?>"]').attr("selected", true);
+        $('#notice_div').val("<? echo $no_res['type'];?>");
         // $("option[value='126']").attr("selected", true);
         <?php
 //        for($i=0; $i<count($range)-1; $i++) {
