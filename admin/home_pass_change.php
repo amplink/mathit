@@ -42,8 +42,13 @@ include_once('head.php');
 </html>
 <script>
     function log_in() {
-        if($('#new_pw1').val().length < 8 || $('#new_pw1').val().length > 16 || $('#new_pw2').val().length < 8 || $('#new_pw2').val().length > 16 ){
+        if($('#new_pw1').val().length < 8 || $('#new_pw1').val().length > 16 ){
             alert("글자 수는 8~16자리만 가능합니다.");
+            $('#new_pw1').focus();
+            return false;
+        }else if($('#new_pw2').val().length < 8 || $('#new_pw2').val().length > 16 ){
+            alert("글자 수는 8~16자리만 가능합니다.");
+            $('#new_pw2').focus();
             return false;
         }else if($('#new_pw1').val() == $('#new_pw2').val()) {
             $('#login_form').submit();
