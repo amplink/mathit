@@ -49,6 +49,14 @@ if(!$_GET['page']) {
                 <form action="notice_home_del.php" method="POST" id="notice_form">
                     <?php
                     $sql = "select * from `academy`";
+                    //190131 손민석 검색기능 추가 {
+                    if($_GET["sch_kwd"]){
+                        $sql = $sql."WHERE ";
+                        $sql = $sql." 'title' LIKE AND '%".$_GET["sch_kwd"]."%' ";
+                        $sql = $sql." 'contents' LIKE AND '%".$_GET["sch_kwd"]."%' ";
+                        $sql = $sql." 'title' LIKE AND '%".$_GET["sch_kwd"]."%' ";
+                    }
+                    // }
                     $result = mysqli_query($connect_db, $sql);
                     $client_arr = array();
                     while($res = mysqli_fetch_array($result)) {
