@@ -54,6 +54,9 @@ include_once('head.php');
             $('#login_form').submit();
         } else {
             alert('비밀번호가 동일한지 확인해주세요.');
+            $('#new_pw1').focus();
+            return false;
         }
+        $('#login_form').submit();
     }
 </script>
