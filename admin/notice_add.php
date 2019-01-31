@@ -29,6 +29,14 @@ include_once('head.php');
     <script src="js/bootstrap-multiselect.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
 
+<!-- 190131 2350 민석 추가 { -->
+    <style>
+        #content{
+            width: 100%;
+            height: 389px;
+        }
+    </style
+<!-- } 끝-->
 <!--</head>-->
 <!---->
 <body>
@@ -113,10 +121,10 @@ include_once('head.php');
                     <p class="title_text">공지범위</p>
                 </div>
                 <div class="contents_box">
-<!--                    <div class="radio_group">-->
-<!--                        <input type="checkbox" class="notice_range" onchange="all_select();">-->
-<!--                        <p>전체</p>-->
-<!--                    </div>-->
+                    <div class="radio_group">
+                        <input type="checkbox" class="notice_range" id="all_select">
+                        <p>전체</p>
+                    </div>
                     <div class="radio_group">
                         <input type="checkbox" name="notice_range[]" class="notice_range" value="0">
                         <p>전임강사</p>
@@ -167,6 +175,13 @@ include_once('head.php');
     </form>
 </body>
 <script>
+
+    //190131 민석 수정 {
+    $("#all_select").on('click', function () {
+        if($('#all_select').prop('checked')) $('.radio_group>input[type=checkbox]').prop('checked', true);
+        else $('input[type=checkbox]').prop('checked', false);
+    });
+    // }
     ClassicEditor
         .create( document.querySelector( '#content' ) )
         .catch( error => {
