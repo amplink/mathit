@@ -161,6 +161,7 @@ $ac_r_size = count($ac_range)-1;
                         <p class="title_text">첨부파일</p>
                     </div>
                     <!--                <div class="contents_box">-->
+                    <? echo $no_res['attach_file'];?>
                     <input style="margin-top: 15px;" type="file" name="file">
                     <!--                </div>-->
                 </div>

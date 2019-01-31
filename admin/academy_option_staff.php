@@ -123,7 +123,7 @@ $manager_get_name = $_GET['manager_get_name'];
                 <div class="next_btn"><a href="./academy_option_staff.php?page=<?=$page+1;?>"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
-                <div class="delete_btn"><a href="#none">선택삭제</a></div>
+                <div class="delete_btn"><a href="./academy_option_staff_del.php?">선택삭제</a></div>
             </div>
         </div>
         <form action="ac_manager_chk.php" id="manager_form" method="POST">

@@ -29,51 +29,59 @@ $section_size[1] = count($section_2[0]);
 $section_size[2] = count($section_3[0]);
 $section_size[3] = count($section_4[0]);
 
-if($section_1[0][0]) {
-    $c_name = "개념마스터";
-    for($i=0; $i<$section_size[0]; $i++) {
-        $answer_id = rand(1, 22222).":".date("mds");
-        $sql = "INSERT INTO `answer_master`
-                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `event_time`)
-                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_1[0][$i]."', '".$section_1[1][$i]."', '".$section_1[2][$i]."', CURRENT_TIMESTAMP);";
-        if($section_1[0][$i]) mysqli_query($connect_db, $sql);
+foreach ($_FILES["a_answer_image"]["error"] as $key => $error) {
+    if ($error = UPLOAD_ERR_OK) {
+        $tmp_name = $_FILES["a_answer_image"]["tmp_name"][$key];
+        $name = $_FILES["a_answer_image"]["name"][$key];
+        move_uploaded_file($tmp_name, "img/$name");
     }
 }
 
-if($section_2[0][0]) {
-    $c_name = "개념확인";
-    for($i=0; $i<$section_size[1]; $i++) {
-        $answer_id = rand(22222, 44444).":".date("mds");
-        $sql = "INSERT INTO `answer_master`
-                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `event_time`)
-                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_2[0][$i]."', '".$section_2[1][$i]."', '".$section_2[2][$i]."', CURRENT_TIMESTAMP);";
-        if($section_2[0][$i]) mysqli_query($connect_db, $sql);
-    }
-}
-
-if($section_3[0][0]) {
-    $c_name = "서술과코칭";
-    for($i=0; $i<$section_size[2]; $i++) {
-        $answer_id = rand(44444, 66666).":".date("mds");
-        $sql = "INSERT INTO `answer_master`
-                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `event_time`)
-                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_3[0][$i]."', '".$section_3[1][$i]."', '".$section_3[2][$i]."', CURRENT_TIMESTAMP);";
-        if($section_3[0][$i]) mysqli_query($connect_db, $sql);
-    }
-}
-
-if($section_4[0][0]) {
-    $c_name = "이야기수학";
-    for($i=0; $i<$section_size[3]; $i++) {
-        $answer_id = rand(66666, 99999).":".date("mds");
-        $sql = "INSERT INTO `answer_master`
-                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `event_time`)
-                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_4[0][$i]."', '".$section_4[1][$i]."', '".$section_4[2][$i]."', CURRENT_TIMESTAMP);";
-        if($section_4[0][$i]) mysqli_query($connect_db, $sql);
-    }
-}
-
-echo "<script>alert('등록이 완료되었습니다.');</script>";
-echo "<script>location.href='./answer_manegement.php';</script>";
+//if($section_1[0][0]) {
+//    $c_name = "개념마스터";
+//    for($i=0; $i<$section_size[0]; $i++) {
+//        $answer_id = rand(1, 22222).":".date("mds");
+//        $sql = "INSERT INTO `answer_master`
+//                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `event_time`)
+//                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_1[0][$i]."', '".$section_1[1][$i]."', '".$section_1[2][$i]."', CURRENT_TIMESTAMP);";
+//        if($section_1[0][$i]) mysqli_query($connect_db, $sql);
+//    }
+//}
+//
+//if($section_2[0][0]) {
+//    $c_name = "개념확인";
+//    for($i=0; $i<$section_size[1]; $i++) {
+//        $answer_id = rand(22222, 44444).":".date("mds");
+//        $sql = "INSERT INTO `answer_master`
+//                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `event_time`)
+//                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_2[0][$i]."', '".$section_2[1][$i]."', '".$section_2[2][$i]."', CURRENT_TIMESTAMP);";
+//        if($section_2[0][$i]) mysqli_query($connect_db, $sql);
+//    }
+//}
+//
+//if($section_3[0][0]) {
+//    $c_name = "서술과코칭";
+//    for($i=0; $i<$section_size[2]; $i++) {
+//        $answer_id = rand(44444, 66666).":".date("mds");
+//        $sql = "INSERT INTO `answer_master`
+//                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `event_time`)
+//                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_3[0][$i]."', '".$section_3[1][$i]."', '".$section_3[2][$i]."', CURRENT_TIMESTAMP);";
+//        if($section_3[0][$i]) mysqli_query($connect_db, $sql);
+//    }
+//}
+//
+//if($section_4[0][0]) {
+//    $c_name = "이야기수학";
+//    for($i=0; $i<$section_size[3]; $i++) {
+//        $answer_id = rand(66666, 99999).":".date("mds");
+//        $sql = "INSERT INTO `answer_master`
+//                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `event_time`)
+//                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_4[0][$i]."', '".$section_4[1][$i]."', '".$section_4[2][$i]."', CURRENT_TIMESTAMP);";
+//        if($section_4[0][$i]) mysqli_query($connect_db, $sql);
+//    }
+//}
+//
+//echo "<script>alert('등록이 완료되었습니다.');</script>";
+//echo "<script>location.href='./answer_manegement.php';</script>";
 
 ?>
