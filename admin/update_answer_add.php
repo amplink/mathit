@@ -74,33 +74,29 @@ $book_type = $_GET['book_type'];
 
                         ?>
                         <td><select name="book_type" id="textbook">
-                                <option value="수학의정석">수학의 정석</option>
+                                <option value="수학의정석" selected>수학의 정석</option>
                                 <option value="국어의정석">국어의 정석</option>
                                 <option value="영어의정석">영어의 정석</option>
                             </select></td>
                         <td><select name="grade" id="grade">
-                                <option value="grade_1">초등 1학년</option>
-                                <option value="grade_2">초등 2학년</option>
-                                <option value="grade_3">초등 3학년</option>
-                                <option value="grade_4">초등 4학년</option>
-                                <option value="grade_5">초등 5학년</option>
-                                <option value="grade_6">초등 6학년</option>
+                                <option value="3">초등 3학년</option>
+                                <option value="4">초등 4학년</option>
+                                <option value="5">초등 5학년</option>
+                                <option value="6">초등 6학년</option>
+                                <option value="7">중등 1학년</option>
+                                <option value="8">중등 2학년</option>
                             </select></td>
                         <td><select name="semester" id="semester">
-                                <option value="semester_1">1학기</option>
-                                <option value="semester_2">2학기</option>
-                                <option value="semester_3">3학기</option>
+                                <option value="1">1학기</option>
+                                <option value="2">2학기</option>
                             </select></td>
-                        <td><select name="unit" id="unit">
-                                <option value="unit_1">1단원</option>
-                                <option value="unit_2">2단원</option>
-                                <option value="unit_3">3단원</option>
-                                <option value="unit_4">4단원</option>
+                        <td><select name="unit" id="unit" onclick="book_info();">
+                                <div id="unit_data"></div>
                             </select></td>
                         <td><select name="level" id="level">
-                                <option value="level_1">레벨 1</option>
-                                <option value="level_2">레벨 2</option>
-                                <option value="level_3">레벨 3</option>
+                                <option value="루트">루트</option>
+                                <option value="파이">파이</option>
+                                <option value="시그마">시그마</option>
                             </select></td>
                     </tr>
                     </tbody>
@@ -255,11 +251,12 @@ $book_type = $_GET['book_type'];
     $("div#section_3").hide();
     $("div#section_4").hide();
 
-    $("option[value='<? echo $grade; ?>']").attr('selected', true);
-    $("option[value='<? echo $semester; ?>']").attr('selected', true);
-    $("option[value='<? echo $unit; ?>']").attr('selected', true);
-    $("option[value='<? echo $level; ?>']").attr('selected', true);
-    $("option[value='<? echo $book_type; ?>']").attr('selected', true);
+    $("#unit_data").html("<option value='<? echo $unit; ?>' selected><? echo $unit; ?></option>");
+    $("option[value='<? echo $grade; ?>']").prop('selected', true);
+    $("option[value='<? echo $semester; ?>']").prop('selected', true);
+    //$("option[value='<?// echo $unit; ?>//']").prop('selected', true);
+    $("option[value='<? echo $level; ?>']").prop('selected', true);
+    $("option[value='<? echo $book_type; ?>']").prop('selected', true);
 
     function change(n) {
         if(n==1) {
@@ -312,75 +309,16 @@ $book_type = $_GET['book_type'];
     }
 
     function myFunction() {
-        // var a;
-        // var section_1 = new Array();
-        // var section_2 = new Array();
-        // var section_3 = new Array();
-        // var section_4 = new Array();
-        //
-        // for(var i=0; i<3; i++) {
-        //     if(i==0) {
-        //         a = $("input[name='a_item_number']");
-        //     }else if(i==1) {
-        //         a = $("input[name='a_answer_image']");
-        //     }else if(i==2) {
-        //         a = $("input[name='a_explain_image']");
-        //     }
-        //     for(var j=0; j<a.length; j++) {
-        //         section_1[i] = new Array(a.length);
-        //         section_1[i][j] = a[j].value;
-        //     }
-        // }
-        //
-        // for(var i=0; i<3; i++) {
-        //     if(i==0) {
-        //         a = $("input[name='b_item_number']");
-        //     }else if(i==1) {
-        //         a = $("input[name='b_answer_image']");
-        //     }else if(i==2) {
-        //         a = $("input[name='b_explain_image']");
-        //     }
-        //     for(var j=0; j<a.length; j++) {
-        //         section_2[i] = new Array(a.length);
-        //         section_2[i][j] = a[j].value;
-        //     }
-        // }
-        //
-        // for(var i=0; i<3; i++) {
-        //     if(i==0) {
-        //         a = $("input[name='c_item_number']");
-        //     }else if(i==1) {
-        //         a = $("input[name='c_answer_image']");
-        //     }else if(i==2) {
-        //         a = $("input[name='c_explain_image']");
-        //     }
-        //     for(var j=0; j<a.length; j++) {
-        //         section_3[i] = new Array(a.length);
-        //         section_3[i][j] = a[j].value;
-        //     }
-        // }
-        //
-        // for(var i=0; i<3; i++) {
-        //     if(i==0) {
-        //         a = $("input[name='d_item_number']");
-        //     }else if(i==1) {
-        //         a = $("input[name='d_answer_image']");
-        //     }else if(i==2) {
-        //         a = $("input[name='d_explain_image']");
-        //     }
-        //     for(var j=0; j<a.length; j++) {
-        //         section_4[i] = new Array(a.length);
-        //         section_4[i][j] = a[j].value;
-        //     }
-        // }
-        //
-        // // var arr = ['귤', '사과', '배', '파인애플'];
-        // // $('#btn-send').click(function() {
-        // //     $.form({
-        // //         action: 'submit_array_ok.php',
-        // //         data: { fruits: arr },
-        // //     }).submit();
-        // // });
         $("#answer_add_form").submit();
+    }
+    function book_info() {
+        $.ajax({
+            type: "GET",
+            url: "book_info.php?grade="+$('#grade option:selected').val()+"&semester="+$('#semester option:selected').val(),
+            dataType: "html",
+            success: function(response){
+                $("#unit").html(response);
+            }
+        });
     }
 </script>

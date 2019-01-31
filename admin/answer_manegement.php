@@ -35,14 +35,16 @@ if(!$_GET['page']) {
             <table style="text-align: center;">
                 <thead>
                     <tr>
+                        <th><input type="checkbox" id="all_select"></th>
                         <th>학년</th>
                         <th>학기</th>
                         <th>단원</th>
                         <th>레벨</th>
-                        <th>교재구분</th>
+                        <th colspan="2">교재구분</th>
                     </tr>
                 </thead>
                 <tbody>
+                <form action="answer_del.php" method="post" id="answer_form">
                     <?php
                     $sql = "select * from `answer_master` order by `event_time` asc";
                     $result = mysqli_query($connect_db, $sql);
@@ -69,13 +71,14 @@ if(!$_GET['page']) {
                                else $r_grade = "중등 ".($ac_data['grade']-6)."학년";
 
                                echo '<tr>';
+                               echo '     <td><input type="checkbox" name="answer_chk[]" value="'.$ac_data['event_time'].'"></td>';
                                echo '     <td><span>' . $r_grade . '</span></td>';
                                echo '     <td><span>' . $ac_data["semester"] . '학기</span></td>';
                                echo '     <td><span>' . $ac_data["unit"] . '</span></td>';
                                echo '     <td><span>' . $ac_data["level"] . '</span></td>';
                                echo '     <td><span>' . $ac_data["book_type"] . '</span></td>';
+                               echo "     <td><a href='./update_answer_add.php?grade=".$ac_data['grade']."&semester=".$ac_data['semester']."&unit=".$ac_data['unit']."&level=".$ac_data['level']."&book_type=".$ac_data['book_type']."' style='color: black;'>수정</a></td>";
                                echo '</tr>';
-                               //<a href="./update_answer_add.php?grade='.$ac_data['grade'].'&semester='.$ac_data['semester'].'&unit='.$ac_data['unit'].'&level='.$ac_data['level'].'&book_type='.$ac_data['book_type'].'">
                                $grade[$j] = $ac_data['grade'];
                                $unit[$j] = $ac_data['unit'];
                                $level[$j] = $ac_data['level'];
@@ -89,6 +92,7 @@ if(!$_GET['page']) {
 
                     }
                     ?>
+                </form>
                 </tbody>
             </table>
         </div>
@@ -108,7 +112,7 @@ if(!$_GET['page']) {
             </div>
             <div class="button_wrap">
                 <div class="add_btn"><a href="answer_add.php">정답지추가</a></div>
-                <!-- <div class="modify_btn"><a href="#none">수정</a></div> -->
+                 <div class="modify_btn" onclick="del_answer();"><a href="#">삭제</a></div>
             </div>
         </div>
     </div>
@@ -116,5 +120,14 @@ if(!$_GET['page']) {
     include_once('tail.php');
     ?>
 </body>
-
 </html>
+<script>
+    $("#all_select").on('click', function () {
+        if($('#all_select').prop('checked')) $('input[type=checkbox]').prop('checked', true);
+        else $('input[type=checkbox]').prop('checked', false);
+    });
+
+    function del_answer() {
+        if(confirm("삭제하시겠습니까?")) $('#answer_form').submit();
+    }
+</script>
