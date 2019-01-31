@@ -28,8 +28,8 @@ include_once('head.php');
             <div class="form_section">
                 <form action="">
                     <input type="password" placeholder="현재 비밀번호를 입력해주세요" name="current_pw" style="font-family: none !important;">
-                    <input type="password" placeholder="새 비밀번호를 입력해주세요" name="new_pw1" id="new_pw1" style="font-family: none !important;">
-                    <input type="password" placeholder="비밀번호를 재입력해주세요" name="new_pw2" id="new_pw2" style="font-family: none !important;">
+                    <input type="password" placeholder="새 비밀번호를 입력해주세요" name="new_pw1" id="new_pw1" style="font-family: none !important;" pattern=".{8,16}" required title="8~16자리만 가능합니다.">
+                    <input type="password" placeholder="비밀번호를 재입력해주세요" name="new_pw2" id="new_pw2" style="font-family: none !important;" pattern=".{8,16}" required title="8~16자리만 가능합니다.">
                 </form>
             </div>
             <div class="ok_btn" onclick="log_in();">
