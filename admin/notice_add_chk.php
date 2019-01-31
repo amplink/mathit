@@ -28,7 +28,11 @@ else {
 VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$attach_file', '$contents', CURRENT_TIMESTAMP);";
         sql_query($sql);
     }else {
-        $sql = "UPDATE `notify` SET `client_id` = '$client_id', `target` = '$target', `title` = '$title', `author` = '$author', `type` = '$type', `attach_file` = '$attach_file', `contents` = '$contents', `event_time` = CURRENT_TIMESTAMP WHERE  `id` = '".$_GET['id']."';";
+        if($attach_file) {
+            $sql = "UPDATE `notify` SET `client_id` = '$client_id', `target` = '$target', `title` = '$title', `author` = '$author', `type` = '$type', `attach_file` = '$attach_file', `contents` = '$contents', `event_time` = CURRENT_TIMESTAMP WHERE  `id` = '".$_GET['id']."';";
+        }else {
+            $sql = "UPDATE `notify` SET `client_id` = '$client_id', `target` = '$target', `title` = '$title', `author` = '$author', `type` = '$type', `contents` = '$contents', `event_time` = CURRENT_TIMESTAMP WHERE  `id` = '".$_GET['id']."';";
+        }
         mysqli_query($connect_db, $sql);
     }
 
