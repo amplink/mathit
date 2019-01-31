@@ -37,7 +37,7 @@ if(!$_GET['page']) {
             <table>
                 <thead>
                     <tr style="text-align:center">
-                        <th><input type="checkbox"></th>
+                        <th><input type="checkbox" id="all_select"></th>
                         <th>학원아이디</th>
                         <th>학원명</th>
                     </tr>
@@ -123,6 +123,10 @@ if(!$_GET['page']) {
     function del_academy() {
         if(confirm("삭제하시겠습니까?")) $('#del_form').submit();
     }
+    $("#all_select").on('click', function () {
+        if($('#all_select').prop('checked')) $('input[type=checkbox]').prop('checked', true);
+        else $('input[type=checkbox]').prop('checked', false);
+    });
 </script>
 <?php
 include_once('tail.php');

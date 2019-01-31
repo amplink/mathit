@@ -24,7 +24,7 @@ $book_type = $_GET['book_type'];
 </head>
 
 <body>
-<form action="answer_add_chk.php" method="POST" id="answer_add_form">
+<form action="update_answer_add_chk.php" method="POST" id="answer_add_form">
     <div class="header" style="width:calc(100% - 40px)">
         <div class="logo_wrap">
             <div class="logo"><img src="img/logo.png" alt="logo"></div>
@@ -147,8 +147,8 @@ $book_type = $_GET['book_type'];
                             <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
                         </td>
                         <td><input type="text" name="a_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
-                        <td><input type="file" name="a_answer_image[]" value="<?=$r['answer_image'];?>"></td>
-                        <td><input type="file" name="a_explain_image[]" value="<?=$r['explain_image'];?>"></td>
+                        <td><input type="file" name="a_answer_image[]"></span></td>
+                        <td><input type="file" name="a_explain_image[]"></span></td>
                         <td>
                             <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
                         </td>
