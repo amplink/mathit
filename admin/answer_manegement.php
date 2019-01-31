@@ -65,8 +65,11 @@ if(!$_GET['page']) {
 
                        if($n != 1) {
                            if($t >= $page*10 && $t <= ($page*10+10)) {
+                               if($ac_data['grade'] <= 6) $r_grade = "초등 ".$ac_data['grade']."학년";
+                               else $r_grade = "중등 ".$ac_data['grade']."학년";
+
                                echo '<tr>';
-                               echo '     <td><span>' . $ac_data["grade"] . '</span></td>';
+                               echo '     <td><span>' . $r_grade . '</span></td>';
                                echo '     <td><span>' . $ac_data["semester"] . '</span></td>';
                                echo '     <td><span>' . $ac_data["unit"] . '</span></td>';
                                echo '     <td><span>' . $ac_data["level"] . '</span></td>';
