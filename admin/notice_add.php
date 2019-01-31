@@ -136,7 +136,7 @@ include_once('head.php');
                     <p class="title_text">제목</p>
                 </div>
                 <div class="contents_box">
-                    <input type="text" placeholder="제목을 입력해주세요" name="title">
+                    <input type="text" placeholder="제목을 입력해주세요" name="title" required>
                 </div>
             </div>
             <div class="board_line">
