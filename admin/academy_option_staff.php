@@ -66,8 +66,8 @@ $manager_get_chk = $_GET['manager_get_chk'];
                 <div class="l_nav_menu"><a href="academy_option_staff.php" class="on">관리자 지정</a></div>
             </div>
             <div class="search_box_wrap">
-                <div class="search_input_box"><input type="text"></div>
-                <div class="search_btn"><a href="#none">검색</a></div>
+                <div class="search_input_box"><input type="text" id="search_val"></div>
+                <div class="search_btn" onclick="search();"><a href="#none">검색</a></div>
             </div>
         </div>
         <form action="academy_option_staff_del.php" method="post" id="staff_form">
@@ -234,5 +234,8 @@ include_once('tail.php');
     function sul3mit() {
         $('#manager_name').attr('disabled',false);
         $('#manager_form').submit();
+    }
+    function search() {
+        location.href = './search_academy_option_staff.php?search='+$('#search_val').val();
     }
 </script>
