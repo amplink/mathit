@@ -64,28 +64,27 @@ include_once('_common.php');
                                     <option value="영어의정석">영어의 정석</option>
                                 </select></td>
                             <td><select name="grade" id="grade">
-                                    <option value="grade_1">초등 1학년</option>
-                                    <option value="grade_2">초등 2학년</option>
-                                    <option value="grade_3">초등 3학년</option>
-                                    <option value="grade_4">초등 4학년</option>
-                                    <option value="grade_5">초등 5학년</option>
-                                    <option value="grade_6">초등 6학년</option>
+                                    <option value="3">초등 3학년</option>
+                                    <option value="4">초등 4학년</option>
+                                    <option value="5">초등 5학년</option>
+                                    <option value="6">초등 6학년</option>
+                                    <option value="7">중등 1학년</option>
+                                    <option value="8">중등 2학년</option>
                                 </select></td>
                             <td><select name="semester" id="semester">
-                                    <option value="semester_1">1학기</option>
-                                    <option value="semester_2">2학기</option>
-                                    <option value="semester_3">3학기</option>
+                                    <option value="1">1학기</option>
+                                    <option value="2">2학기</option>
                                 </select></td>
                             <td><select name="unit" id="unit">
-                                    <option value="unit_1">1단원</option>
-                                    <option value="unit_2">2단원</option>
-                                    <option value="unit_3">3단원</option>
-                                    <option value="unit_4">4단원</option>
+                                    <option value="1단원">1단원</option>
+                                    <option value="2단원">2단원</option>
+                                    <option value="3단원">3단원</option>
+                                    <option value="4단원">4단원</option>
                                 </select></td>
                             <td><select name="level" id="level">
-                                    <option value="level_1">레벨 1</option>
-                                    <option value="level_2">레벨 2</option>
-                                    <option value="level_3">레벨 3</option>
+                                    <option value="레벨 1">레벨 1</option>
+                                    <option value="레벨 2">레벨 2</option>
+                                    <option value="레벨 3">레벨 3</option>
                                 </select></td>
                         </tr>
                     </tbody>
@@ -123,17 +122,24 @@ include_once('_common.php');
                         </tr>
                     </thead>
                     <tbody>
-                        <tr id="item_section_1">
-                            <td>
-                                <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
-                            </td>
-                            <td><input type="text" name="a_item_number[]" placeholder="문항번호"></td>
-                            <td><input type="file" name="a_answer_image[]"></td>
-                            <td><input type="file" name="a_explain_image[]"></td>
-                            <td>
-                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                            </td>
-                        </tr>
+                    <?
+                    for($i=0; $i<10; $i++) {
+
+                    ?>
+                    <tr id="item_section_1">
+                        <td>
+                            <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
+                        </td>
+                        <td><input type="text" name="a_item_number[]" placeholder="문항번호"></td>
+                        <td><input type="file" name="a_answer_image[]"></td>
+                        <td><input type="file" name="a_explain_image[]"></td>
+                        <td>
+                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                        </td>
+                    </tr>
+                    <?
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -150,6 +156,10 @@ include_once('_common.php');
                     </tr>
                     </thead>
                     <tbody>
+                    <?
+                    for($i=0; $i<10; $i++) {
+
+                    ?>
                     <tr id="item_section_2">
                         <td>
                             <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
@@ -161,6 +171,9 @@ include_once('_common.php');
                             <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
                         </td>
                     </tr>
+                    <?
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -177,6 +190,10 @@ include_once('_common.php');
                     </tr>
                     </thead>
                     <tbody>
+                    <?
+                    for($i=0; $i<10; $i++) {
+
+                    ?>
                     <tr id="item_section_3">
                         <td>
                             <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
@@ -188,6 +205,9 @@ include_once('_common.php');
                             <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
                         </td>
                     </tr>
+                    <?
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -204,6 +224,10 @@ include_once('_common.php');
                     </tr>
                     </thead>
                     <tbody>
+                    <?
+                    for($i=0; $i<10; $i++) {
+
+                    ?>
                     <tr id="item_section_4">
                         <td>
                             <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
@@ -215,6 +239,9 @@ include_once('_common.php');
                             <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
                         </td>
                     </tr>
+                    <?
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -259,12 +286,6 @@ include_once('_common.php');
     }
 
     function append_div(previous,idx) {
-        // var t = "a";
-        // if(n==1) t = "a";
-        // else if(n==2) t = "b";
-        // else if(n==3) t = "c";
-        // else if(n==4) t = "d";
-
         var text = '<tr class="item_section">\n' + '<td>\n' +
             '<div class="plus_icon" onclick="append_div(this,idx)">' +
             '<img src="img/plus.png" alt="plus"></div></td>\n' +
@@ -273,7 +294,6 @@ include_once('_common.php');
             '<td><input type="file" name="'+idx+'_explain_image[]"></td>\n' +
             '<td><div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div></td>\n' +
             '</tr>';
-        // $("#item_section_"+n).parent().append(text);
         $(previous).parent().parent().after(text);
     }
 
@@ -282,75 +302,6 @@ include_once('_common.php');
     }
 
     function myFunction() {
-        // var a;
-        // var section_1 = new Array();
-        // var section_2 = new Array();
-        // var section_3 = new Array();
-        // var section_4 = new Array();
-        //
-        // for(var i=0; i<3; i++) {
-        //     if(i==0) {
-        //         a = $("input[name='a_item_number']");
-        //     }else if(i==1) {
-        //         a = $("input[name='a_answer_image']");
-        //     }else if(i==2) {
-        //         a = $("input[name='a_explain_image']");
-        //     }
-        //     for(var j=0; j<a.length; j++) {
-        //         section_1[i] = new Array(a.length);
-        //         section_1[i][j] = a[j].value;
-        //     }
-        // }
-        //
-        // for(var i=0; i<3; i++) {
-        //     if(i==0) {
-        //         a = $("input[name='b_item_number']");
-        //     }else if(i==1) {
-        //         a = $("input[name='b_answer_image']");
-        //     }else if(i==2) {
-        //         a = $("input[name='b_explain_image']");
-        //     }
-        //     for(var j=0; j<a.length; j++) {
-        //         section_2[i] = new Array(a.length);
-        //         section_2[i][j] = a[j].value;
-        //     }
-        // }
-        //
-        // for(var i=0; i<3; i++) {
-        //     if(i==0) {
-        //         a = $("input[name='c_item_number']");
-        //     }else if(i==1) {
-        //         a = $("input[name='c_answer_image']");
-        //     }else if(i==2) {
-        //         a = $("input[name='c_explain_image']");
-        //     }
-        //     for(var j=0; j<a.length; j++) {
-        //         section_3[i] = new Array(a.length);
-        //         section_3[i][j] = a[j].value;
-        //     }
-        // }
-        //
-        // for(var i=0; i<3; i++) {
-        //     if(i==0) {
-        //         a = $("input[name='d_item_number']");
-        //     }else if(i==1) {
-        //         a = $("input[name='d_answer_image']");
-        //     }else if(i==2) {
-        //         a = $("input[name='d_explain_image']");
-        //     }
-        //     for(var j=0; j<a.length; j++) {
-        //         section_4[i] = new Array(a.length);
-        //         section_4[i][j] = a[j].value;
-        //     }
-        // }
-        //
-        // // var arr = ['귤', '사과', '배', '파인애플'];
-        // // $('#btn-send').click(function() {
-        // //     $.form({
-        // //         action: 'submit_array_ok.php',
-        // //         data: { fruits: arr },
-        // //     }).submit();
-        // // });
         $("#answer_add_form").submit();
     }
 </script>
