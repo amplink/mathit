@@ -29,13 +29,19 @@ $section_size[1] = count($section_2[0]);
 $section_size[2] = count($section_3[0]);
 $section_size[3] = count($section_4[0]);
 
-foreach ($_FILES["a_answer_image"]["error"] as $key => $error) {
-    if ($error = UPLOAD_ERR_OK) {
-        $tmp_name = $_FILES["a_answer_image"]["tmp_name"][$key];
-        $name = $_FILES["a_answer_image"]["name"][$key];
-        move_uploaded_file($tmp_name, "img/$name");
-    }
-}
+//foreach ($_FILES["a_answer_image"]["error"] as $key => $error) {
+//    if ($error = UPLOAD_ERR_OK) {
+//        $tmp_name = $_FILES["a_answer_image"]["tmp_name"][$key];
+//        $name = $_FILES["a_answer_image"]["name"][$key];
+//        move_uploaded_file($tmp_name, "admin_img/$name");
+//    }else {
+//        echo "awef";
+//    }
+//}
+//echo $section_1[1][0];
+//var_dump($_FILES);
+
+echo $_FILES["a_answer_image"]["tmp_name"][0];
 
 //if($section_1[0][0]) {
 //    $c_name = "개념마스터";

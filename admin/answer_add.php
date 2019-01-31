@@ -17,7 +17,7 @@ include_once('_common.php');
 </head>
 
 <body>
-<form action="answer_add_chk.php" method="POST" id="answer_add_form">
+<form enctype='multipart/form-data' action="answer_add_chk.php" method="POST" id="answer_add_form">
 <div class="header" style="width:calc(100% - 40px)">
     <div class="logo_wrap">
         <div class="logo"><img src="img/logo.png" alt="logo"></div>
