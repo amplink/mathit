@@ -161,8 +161,8 @@ $ac_r_size = count($ac_range)-1;
                         <p class="title_text">첨부파일</p>
                     </div>
                     <!--                <div class="contents_box">-->
-                    <? echo $no_res['attach_file'];?>
-                    <input style="margin-top: 15px;" type="file" name="file">
+                    <input style="margin-top: 15px;" type="file" name="file" onchange="file_n_change();">
+                    <span id="file_n">현재 파일 : <? echo $no_res['attach_file'];?></span>
                     <!--                </div>-->
                 </div>
                 <div class="board_line">
@@ -194,12 +194,11 @@ $ac_r_size = count($ac_range)-1;
     ?>
     <script>
         $('#notice_div').val("<? echo $no_res['type'];?>");
-        // $("option[value='126']").attr("selected", true);
-        <?php
-//        for($i=0; $i<count($range)-1; $i++) {
-//            echo '$("option[value=\''.$range[$i].'\']").attr("selected", true);';
-//        }
-        ?>
+        function file_n_change() {
+            $('#file_n').html("");
+        }
+
+
         ClassicEditor
             .create( document.querySelector( '#content' ) )
             .catch( error => {
