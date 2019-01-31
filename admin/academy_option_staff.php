@@ -69,6 +69,7 @@ $manager_get_name = $_GET['manager_get_name'];
                 <div class="search_btn"><a href="#none">검색</a></div>
             </div>
         </div>
+        <form action="academy_option_staff_del.php" method="post" id="staff_form">
         <div class="view_section">
             <table>
                 <thead>
@@ -94,7 +95,7 @@ $manager_get_name = $_GET['manager_get_name'];
                         while($res = mysqli_fetch_array($result)) {
                             if($t >= $page*10 && $t <= ($page*10+10)) {
                                 echo '<tr style="text-align:center">';
-                                echo '<td style="width:20px" ><input type="checkbox" name="chk_list" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'"></td>';
+                                echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'"></td>';
                                 echo '<td><span>'.$res['client_name'].'</span></td>';
                                 echo '<td><span>'.$res['manager_id'].'</span></td>';
                                 echo '<td>'.$res['manager_name'].'</td>';
@@ -107,6 +108,7 @@ $manager_get_name = $_GET['manager_get_name'];
                         ?>
                 </tbody>
             </table>
+        </form>
         </div>
         <div class="section_footer">
             <div class="list_btn_wrap">
@@ -123,7 +125,7 @@ $manager_get_name = $_GET['manager_get_name'];
                 <div class="next_btn"><a href="./academy_option_staff.php?page=<?=$page+1;?>"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
-                <div class="delete_btn"><a href="./academy_option_staff_del.php?">선택삭제</a></div>
+                <div class="delete_btn" onclick="del_academy()"><a href="#">선택삭제</a></div>
             </div>
         </div>
         <form action="ac_manager_chk.php" id="manager_form" method="POST">
@@ -199,6 +201,9 @@ include_once('tail.php');
 <script>
     $('#manager_id').val('<? echo $manager_get_id;?>');
     $('#manager_name').val('<? echo $manager_get_name;?>');
+    function del_academy() {
+        if(confirm("삭제하시겠습니까?")) $('#staff_form').submit();
+    }
 
     function outh_manager() {
         // alert($('#manager_id').val());
