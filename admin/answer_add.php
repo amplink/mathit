@@ -255,6 +255,15 @@ include_once('_common.php');
     $("div#section_3").hide();
     $("div#section_4").hide();
 
+    $.ajax({
+        type: "GET",
+        url: "book_info.php?grade="+$('#grade option:selected').val()+"&semester="+$('#semester option:selected').val(),
+        dataType: "html",
+        success: function(response){
+            $("#unit").html(response);
+        }
+    });
+
     function change(n) {
         if(n==1) {
             $("div#section_1").show();
