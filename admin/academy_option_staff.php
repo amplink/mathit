@@ -24,6 +24,7 @@ if(!$_GET['page']) {
 
 $manager_get_id = $_GET['manager_get_id'];
 $manager_get_name = $_GET['manager_get_name'];
+$manager_get_chk = $_GET['manager_get_chk'];
 ?>
 
 <!DOCTYPE html>
@@ -94,12 +95,21 @@ $manager_get_name = $_GET['manager_get_name'];
                         $t = 0;
                         while($res = mysqli_fetch_array($result)) {
                             if($t >= $page*10 && $t <= ($page*10+10)) {
-                                echo '<tr style="text-align:center">';
-                                echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'"></td>';
-                                echo '<td><span>'.$res['client_name'].'</span></td>';
-                                echo '<td><span>'.$res['manager_id'].'</span></td>';
-                                echo '<td>'.$res['manager_name'].'</td>';
-                                echo '</tr>';
+                                if($manager_get_chk == $res['client_name']) {
+                                    echo '<tr style="text-align:center">';
+                                    echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'" checked="true"></td>';
+                                    echo '<td><span>'.$res['client_name'].'</span></td>';
+                                    echo '<td><span>'.$res['manager_id'].'</span></td>';
+                                    echo '<td>'.$res['manager_name'].'</td>';
+                                    echo '</tr>';
+                                }else {
+                                    echo '<tr style="text-align:center">';
+                                    echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'"></td>';
+                                    echo '<td><span>'.$res['client_name'].'</span></td>';
+                                    echo '<td><span>'.$res['manager_id'].'</span></td>';
+                                    echo '<td>'.$res['manager_name'].'</td>';
+                                    echo '</tr>';
+                                }
                                 $i++;
                             }
                             $t++;
@@ -186,6 +196,7 @@ $manager_get_name = $_GET['manager_get_name'];
     </form>
     <form action="./outh_manager.php" method="get" id="manager_post_form">
         <input type="hidden" name="manager_get_id" id="manager_get_id">
+        <input type="hidden" name="manager_get_chk" id="manager_get_chk">
     </form>
 <?php
 include_once('tail.php');
@@ -201,59 +212,23 @@ include_once('tail.php');
 <script>
     $('#manager_id').val('<? echo $manager_get_id;?>');
     $('#manager_name').val('<? echo $manager_get_name;?>');
+    $('input[type=checkbox]').on('change', function () {
+       $('#manager_get_chk').val(this.value);
+    });
+    $('#ac_name').val('<? echo $manager_get_chk; ?>');
     function del_academy() {
         if(confirm("삭제하시겠습니까?")) $('#staff_form').submit();
     }
-
     function outh_manager() {
         // alert($('#manager_id').val());
         $('#manager_get_id').val($('#manager_id').val());
         $('#manager_post_form').submit();
     }
     function get_ac_name(n) {
-        $('#ac_name').val($('#'+n).val());
+
     }
     function sul3mit() {
         $('#manager_name').attr('disabled',false);
         $('#manager_form').submit();
     }
-    // function createCORSRequest(method, url) {
-    //     var xhr = new XMLHttpRequest();
-    //     if ("withCredentials" in xhr) {
-    //
-    //         // Check if the XMLHttpRequest object has a "withCredentials" property.
-    //         // "withCredentials" only exists on XMLHTTPRequest2 objects.
-    //         xhr.open(method, url, true);
-    //
-    //     } else if (typeof XDomainRequest != "undefined") {
-    //
-    //         // Otherwise, check if XDomainRequest.
-    //         // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-    //         xhr = new XDomainRequest();
-    //         xhr.open(method, url);
-    //
-    //     } else {
-    //
-    //         // Otherwise, CORS is not supported by the browser.
-    //         xhr = null;
-    //
-    //     }
-    //     return xhr;
-    // }
-
-    // function outh_manager() {
-    //     $.ajax({
-    //         type: 'GET',
-    //         url: 'https://www.edusys.co.kr:8080/api/math/teacher?client_no=126&id=mathit1',
-    //         success: function (data) {
-    //             alert("AJAX SUccess!!");
-    //
-    //             $('#manager_name').val(data[0]);
-    //
-    //         },
-    //         error: function () {
-    //             alert("아이디를 확인해주세요");
-    //         }
-    //     })
-    // }
 </script>
