@@ -91,7 +91,9 @@ $book_type = $_GET['book_type'];
                                 <option value="2">2학기</option>
                             </select></td>
                         <td><select name="unit" id="unit" onclick="book_info();">
-                                <div id="unit_data"></div>
+                                <div id="unit_data">
+                                    <option value="<?=$unit?>" selected><?=$unit?></option>
+                                </div>
                             </select></td>
                         <td><select name="level" id="level">
                                 <option value="루트">루트</option>
@@ -251,10 +253,8 @@ $book_type = $_GET['book_type'];
     $("div#section_3").hide();
     $("div#section_4").hide();
 
-    $("#unit_data").html("<option value='<? echo $unit; ?>' selected><? echo $unit; ?></option>");
     $("option[value='<? echo $grade; ?>']").prop('selected', true);
     $("option[value='<? echo $semester; ?>']").prop('selected', true);
-    //$("option[value='<?// echo $unit; ?>//']").prop('selected', true);
     $("option[value='<? echo $level; ?>']").prop('selected', true);
     $("option[value='<? echo $book_type; ?>']").prop('selected', true);
 
