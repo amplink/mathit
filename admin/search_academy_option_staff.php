@@ -26,7 +26,7 @@ $manager_get_id = $_GET['manager_get_id'];
 $manager_get_name = $_GET['manager_get_name'];
 $manager_get_chk = $_GET['manager_get_chk'];
 
-$search = $_GET['search'];
+$search = "%".$_GET['search']."%";
 ?>
 
 <!DOCTYPE html>
@@ -68,8 +68,8 @@ $search = $_GET['search'];
             <div class="l_nav_menu"><a href="academy_option_staff.php" class="on">관리자 지정</a></div>
         </div>
         <div class="search_box_wrap">
-            <div class="search_input_box"><input type="text"></div>
-            <div class="search_btn"><a href="#none">검색</a></div>
+            <div class="search_input_box"><input type="text" id="search_val"></div>
+            <div class="search_btn" onclick="search();"><a href="#none">검색</a></div>
         </div>
     </div>
     <form action="academy_option_staff_del.php" method="post" id="staff_form">
@@ -91,7 +91,7 @@ $search = $_GET['search'];
                 <!--                        <td>문재인</td>-->
                 <!--                    </tr>-->
                 <?php
-                $sql = "select * from `academy` where `client_name`='$search';";
+                $sql = "select * from `academy` where `client_name` like '$search';";
                 $result = mysqli_query($connect_db, $sql);
                 $i=0;
                 $t = 0;
@@ -236,5 +236,8 @@ include_once('tail.php');
     function sul3mit() {
         $('#manager_name').attr('disabled',false);
         $('#manager_form').submit();
+    }
+    function search() {
+        location.href = './search_academy_option_staff.php?search='+$('#search_val').val();
     }
 </script>

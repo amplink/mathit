@@ -20,7 +20,7 @@ if(!$_GET['page']) {
     $page = $_GET['page']-1;
 }
 
-$search = $_GET['search'];
+$search = "%".$_GET['search']."%";
 
 ?>
 
@@ -31,8 +31,8 @@ $search = $_GET['search'];
             <p>공지사항</p>
         </div>
         <div class="search_box_wrap">
-            <div class="search_input_box"><input type="text"></div>
-            <div class="search_btn"><a href="#none">검색</a></div>
+            <div class="search_input_box"><input type="text" id="search_val"></div>
+            <div class="search_btn" onclick="search();"><a href="#none">검색</a></div>
         </div>
     </div>
     <div class="view_section">
@@ -67,7 +67,7 @@ $search = $_GET['search'];
                     $client_arr[$res['client_id']] = $res['client_name'];
                 }
 
-                $sql = "select * from `notify` where `title`='$search'";
+                $sql = "select * from `notify` where `title` like '$search'";
                 $result = mysqli_query($connect_db, $sql);
                 $i=1;
                 $count = 0;
@@ -139,5 +139,7 @@ include_once('tail.php');
         if(confirm("삭제하시겠습니까?")) $('#notice_form').submit();
     }
 
-
+    function search() {
+        location.href = './search_notice_home.php?search='+$('#search_val').val();
+    }
 </script>
