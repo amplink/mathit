@@ -53,9 +53,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
     echo $option_hidden;
     ?>
-
     <?php if ($is_category) { ?>
     <div class="bo_w_select write_div">
+
         <label for="ca_name"  class="sound_only">분류<strong>필수</strong></label>
         <select name="ca_name" id="ca_name" required>
             <option value="">분류를 선택하세요</option>

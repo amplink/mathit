@@ -11,6 +11,12 @@ if ($is_nogood) $colspan++;
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
 ?>
+<head>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/answer_add_2.css" />
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/answer_add.js"></script>
+</head>
 <!-- 게시판 목록 시작 { -->
 <div id="bo_list" style="width:<?php echo $width; ?>">
 
@@ -72,12 +78,18 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             <?php if ($is_good) { ?><th scope="col"><?php echo subject_sort_link('wr_good', $qstr2, 1) ?>추천 <i class="fa fa-sort" aria-hidden="true"></i></a></th><?php } ?>
             <?php if ($is_nogood) { ?><th scope="col"><?php echo subject_sort_link('wr_nogood', $qstr2, 1) ?>비추천 <i class="fa fa-sort" aria-hidden="true"></i></a></th><?php } ?>
             <th scope="col"><?php echo subject_sort_link('wr_datetime', $qstr2, 1) ?>날짜  <i class="fa fa-sort" aria-hidden="true"></i></a></th>
+            <th>파일</th>
         </tr>
         </thead>
         <tbody>
         <?php
         for ($i=0; $i<count($list); $i++) {
-         ?>
+            //민석추가{
+            $ss_name = 'ss_view_'.$bo_table.'_'.$list[$i]['wr_id'];
+
+            if (!get_session($ss_name)) set_session($ss_name, TRUE);
+            //}
+        ?>
         <tr class="<?php if ($list[$i]['is_notice']) echo "bo_notice"; ?>">
             <?php if ($is_checkbox) { ?>
             <td class="td_chk">
@@ -103,14 +115,14 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                 <a href="<?php echo $list[$i]['ca_name_href'] ?>" class="bo_cate_link"><?php echo $list[$i]['ca_name'] ?></a>
                 <?php } ?>
                 <div class="bo_tit">
-                    
+
                     <a href="<?php echo $list[$i]['href'] ?>">
                         <?php echo $list[$i]['icon_reply'] ?>
                         <?php
                             if (isset($list[$i]['icon_secret'])) echo rtrim($list[$i]['icon_secret']);
                          ?>
                         <?php echo $list[$i]['subject'] ?>
-                       
+
                     </a>
                     <?php
                     // if ($list[$i]['file']['count']) { echo '<'.$list[$i]['file']['count'].'>'; }
@@ -128,7 +140,17 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             <?php if ($is_good) { ?><td class="td_num"><?php echo $list[$i]['wr_good'] ?></td><?php } ?>
             <?php if ($is_nogood) { ?><td class="td_num"><?php echo $list[$i]['wr_nogood'] ?></td><?php } ?>
             <td class="td_datetime"><?php echo $list[$i]['datetime2'] ?></td>
+            <!-- 민석 추가 -->
 
+            <td><?php
+            var_dump($list);
+                if ($list[$i]['file'][0]['file']) { ?>
+
+                <img src="<?php echo $list[$i]['file'][0]['href']; ?>"/>
+
+            <?php } ?>
+            </td>
+            <!---->
         </tr>
         <?php } ?>
         <?php if (count($list) == 0) { echo '<tr><td colspan="'.$colspan.'" class="empty_table">게시물이 없습니다.</td></tr>'; } ?>
@@ -153,7 +175,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     <?php } ?>
 
     </form>
-     
+
        <!-- 게시판 검색 시작 { -->
     <fieldset id="bo_sch">
         <legend>게시물 검색</legend>
@@ -177,7 +199,163 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         <button type="submit" value="검색" class="sch_btn"><i class="fa fa-search" aria-hidden="true"></i><span class="sound_only">검색</span></button>
         </form>
     </fieldset>
-    <!-- } 게시판 검색 끝 -->   
+    <!-- } 게시판 검색 끝 -->
+</div>
+
+<?php
+// 파일 출력
+$v_img_count = count($view['file']);
+if($v_img_count) {
+    echo "<div id=\"bo_v_img\">\n";
+
+    for ($i=0; $i<=count($view['file']); $i++) {
+        if ($view['file'][$i]['view']) {
+            //echo $view['file'][$i]['view'];
+            echo get_view_thumbnail($view['file'][$i]['view']);
+        }
+    }
+
+    echo "</div>\n";
+}
+?>
+<div class="section">
+    <div class="head_section">
+        <div class="upside">
+            <p>교재정보 등록</p>
+            <div class="btn_wrap">
+                <div class="complete_btn"><a href="answer_manegement.php">완료</a></div>
+                <div class="cancel_btn"><a href="answer_manegement.php">취소</a></div>
+            </div>
+        </div>
+        <div class="downside">
+            <table>
+                <thead>
+                <tr>
+                    <th>교재구분</th>
+                    <th>학년</th>
+                    <th>학기</th>
+                    <th>단원</th>
+                    <th>레벨</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <select name="textbook" id="textbook">
+                            <option value="alpha" >알파</option>
+                            <option value="beta" selected>베타</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="grade" id="grade">
+                            <option value="grade_1">초등 1학년</option>
+                        </select>
+                    </td>
+                    <td><select name="semester" id="semester">
+                            <option value="semester_1">1학기</option>
+                        </select></td>
+                    <td><select name="unit" id="unit">
+                            <option value="unit_1">단원</option>
+                        </select></td>
+                    <td><select name="level" id="level">
+                            <option value="level_1">레벨 1</option>
+                        </select></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="view_section">
+        <div class="upside_2">
+            <p>정답지 작성</p>
+            <div class="r_nav">
+                <div class="r_nav_menu">
+                    <p class="on">개념다지기</p>
+                </div>
+                <div class="r_nav_menu">
+                    <p class="">단원마무리</p>
+                </div>
+                <div class="r_nav_menu">
+                    <p class="">도전문제</p>
+                </div>
+            </div>
+        </div>
+        <div class="downside_2">
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>문항번호</th>
+                    <th>정답이미지</th>
+                    <th>풀이이미지</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="plus_icon"><img src="img/plus.png" alt="plus"></div>
+                    </td>
+                    <td><input type="text" placeholder="문항번호"></td>
+                    <td><input type="text" placeholder="정답이미지 추가">
+                        <div class="search_btn"><a href="#none">찾기</a></div>
+                    </td>
+                    <td><input type="text" placeholder="풀이이미지 추가">
+                        <div class="search_btn"><a href="#none">찾기</a></div>
+                    </td>
+                    <td>
+                        <div class="minus_icon"><img src="img/minus.png" alt="minus"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="plus_icon"><img src="img/plus.png" alt="plus"></div>
+                    </td>
+                    <td><input type="text" placeholder="문항번호"></td>
+                    <td><input type="text" placeholder="정답이미지 추가">
+                        <div class="search_btn"><a href="#none">찾기</a></div>
+                    </td>
+                    <td><input type="text" placeholder="풀이이미지 추가">
+                        <div class="search_btn"><a href="#none">찾기</a></div>
+                    </td>
+                    <td>
+                        <div class="minus_icon"><img src="img/minus.png" alt="minus"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="plus_icon"><img src="img/plus.png" alt="plus"></div>
+                    </td>
+                    <td><input type="text" placeholder="문항번호"></td>
+                    <td><input type="text" placeholder="정답이미지 추가">
+                        <div class="search_btn"><a href="#none">찾기</a></div>
+                    </td>
+                    <td><input type="text" placeholder="풀이이미지 추가">
+                        <div class="search_btn"><a href="#none">찾기</a></div>
+                    </td>
+                    <td>
+                        <div class="minus_icon"><img src="img/minus.png" alt="minus"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="plus_icon"><img src="img/plus.png" alt="plus"></div>
+                    </td>
+                    <td><input type="text" placeholder="문항번호"></td>
+                    <td><input type="text" placeholder="정답이미지 추가">
+                        <div class="search_btn"><a href="#none">찾기</a></div>
+                    </td>
+                    <td><input type="text" placeholder="풀이이미지 추가">
+                        <div class="search_btn"><a href="#none">찾기</a></div>
+                    </td>
+                    <td>
+                        <div class="minus_icon"><img src="img/minus.png" alt="minus"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <?php if($is_checkbox) { ?>
 <noscript>
