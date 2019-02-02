@@ -64,7 +64,7 @@ if(!$_GET['page']) {
                         $client_arr[$res['client_id']] = $res['client_name'];
                     }
 
-                    $sql = "select * from `notify`";
+                    $sql = "select * from `notify` ORDER BY 'event_time' DESC";
                     $result = mysqli_query($connect_db, $sql);
                     $i=1;
                     $count = 0;

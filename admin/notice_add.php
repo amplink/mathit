@@ -186,8 +186,9 @@ include_once('head.php');
         .create( document.querySelector( '#content' ) )
         .catch( error => {
             console.error( error );
-        } );
+        });
 </script>
+
 <?php
 include_once('tail.php');
 ?>
