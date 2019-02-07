@@ -18,8 +18,9 @@ include_once(G5_LIB_PATH.'/poll.lib.php');
 include_once(G5_LIB_PATH.'/visit.lib.php');
 include_once(G5_LIB_PATH.'/connect.lib.php');
 include_once(G5_LIB_PATH.'/popular.lib.php');
-if($_SESSION['uid']) {
+if(!$_SESSION['uid']) {
     echo "<script>alert('로그인을 먼저 해주세요.');</script>";
+    echo "<script>location.href='login.php';</script>";
 }
 ?>
 <!-- 상단 시작 { -->
@@ -36,7 +37,7 @@ if($_SESSION['uid']) {
     </nav>
     <div class="header_right">
         <div class="user_img"><img src="img/user.png" style="margin-top:-30px" alt="user_img"></div>
-        <p class="user_id" style="margin-top:20px">admin</p>
+        <p class="user_id" style="margin-top:20px"><?=$_SESSION['uid']?></p>
         <div class="logout_btn"><a href="../bbs/logout.php">로그아웃</a></div>
         <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>
     </div>

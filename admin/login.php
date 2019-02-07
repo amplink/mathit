@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="auto_id">
-                        <input type="checkbox">
+                        <input type="checkbox" name="chk" value="1">
                         <p>아이디 저장하기</p>
                     </div>
                     <div class="login_btn" onclick="submit();"><a>로그인</a></div>
