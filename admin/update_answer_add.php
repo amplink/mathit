@@ -73,12 +73,11 @@ $book_type = $_GET['book_type'];
 //
 
                         ?>
-                        <td><select name="book_type" id="textbook">
-                                <option value="수학의정석" selected>수학의 정석</option>
-                                <option value="국어의정석">국어의 정석</option>
-                                <option value="영어의정석">영어의 정석</option>
+                        <td><select name="book_type" id="textbook" disabled>
+                                <option value="알파" selected>알파</option>
+                                <option value="베타">베타</option>
                             </select></td>
-                        <td><select name="grade" id="grade">
+                        <td><select name="grade" id="grade" disabled>
                                 <option value="3">초등 3학년</option>
                                 <option value="4">초등 4학년</option>
                                 <option value="5">초등 5학년</option>
@@ -86,16 +85,16 @@ $book_type = $_GET['book_type'];
                                 <option value="7">중등 1학년</option>
                                 <option value="8">중등 2학년</option>
                             </select></td>
-                        <td><select name="semester" id="semester">
+                        <td><select name="semester" id="semester" disabled>
                                 <option value="1">1학기</option>
                                 <option value="2">2학기</option>
                             </select></td>
-                        <td><select name="unit" id="unit" onclick="book_info();">
+                        <td><select name="unit" id="unit" onclick="book_info();" disabled>
                                 <div id="unit_data">
                                     <option value="<?=$unit?>" selected><?=$unit?></option>
                                 </div>
                             </select></td>
-                        <td><select name="level" id="level">
+                        <td><select name="level" id="level" disabled    >
                                 <option value="루트">루트</option>
                                 <option value="파이">파이</option>
                                 <option value="시그마">시그마</option>
@@ -139,23 +138,34 @@ $book_type = $_GET['book_type'];
                     <?
                     $sql = "select * from `answer_master` where `grade` = '$grade' and `semester` = '$semester' and `unit` = '$unit' and `level` = '$level' and `book_type` = '$book_type' and `c_name` = '개념마스터' order by `seq` asc;";
                     $res = mysqli_query($connect_db, $sql);
-
+                    $i=0;
                     while($r = mysqli_fetch_array($res)) {
+                        $event_time = $r['event_time'];
                     ?>
                     <tr id="item_section_1">
                         <td>
                             <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
                         </td>
                         <td><input type="text" name="a_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
-                        <td><input type="file" name="a_answer_image[]"></span></td>
-                        <td><input type="file" name="a_explain_image[]"></span></td>
+                        <td>
+                            <img src="<?=$r['answer_image']?>" width="40" height="40">
+                            <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')">
+                            <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
+                        </td>
+                        <td>
+                            <img src="<?=$r['explain_image']?>" width="40" height="40">
+                            <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
+                            <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
+                        </td>
                         <td>
                             <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
                         </td>
                     </tr>
                     <?
+                    $i++;
                     }
                     ?>
+                    <input type="hidden" name="event" value="<?=$event_time?>">
                     </tbody>
                 </table>
             </div>
@@ -172,17 +182,35 @@ $book_type = $_GET['book_type'];
                     </tr>
                     </thead>
                     <tbody>
-                    <tr id="item_section_2">
-                        <td>
-                            <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
-                        </td>
-                        <td><input type="text" name="b_item_number[]" placeholder="문항번호"></td>
-                        <td><input type="file" name="b_answer_image[]"></td>
-                        <td><input type="file" name="b_explain_image[]"></td>
-                        <td>
-                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                        </td>
-                    </tr>
+                    <?
+                    $sql = "select * from `answer_master` where `grade` = '$grade' and `semester` = '$semester' and `unit` = '$unit' and `level` = '$level' and `book_type` = '$book_type' and `c_name` = '개념확인' order by `seq` asc;";
+                    $res = mysqli_query($connect_db, $sql);
+                    $i=0;
+                    while($r = mysqli_fetch_array($res)) {
+                        ?>
+                        <tr id="item_section_2">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td><input type="text" name="b_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
+                            <td>
+                                <img src="<?=$r['answer_image']?>" width="40" height="40">
+                                <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')">
+                                <input type="hidden" name="b_answer_image[]" id="a_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
+                            </td>
+                            <td>
+                                <img src="<?=$r['explain_image']?>" width="40" height="40">
+                                <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
+                                <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
+                        <?
+                        $i++;
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -199,17 +227,35 @@ $book_type = $_GET['book_type'];
                     </tr>
                     </thead>
                     <tbody>
-                    <tr id="item_section_3">
-                        <td>
-                            <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
-                        </td>
-                        <td><input type="text" name="c_item_number[]" placeholder="문항번호"></td>
-                        <td><input type="file" name="c_answer_image[]"></td>
-                        <td><input type="file" name="c_explain_image[]"></td>
-                        <td>
-                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                        </td>
-                    </tr>
+                    <?
+                    $sql = "select * from `answer_master` where `grade` = '$grade' and `semester` = '$semester' and `unit` = '$unit' and `level` = '$level' and `book_type` = '$book_type' and `c_name` = '서술과코칭' order by `seq` asc;";
+                    $res = mysqli_query($connect_db, $sql);
+                    $i=0;
+                    while($r = mysqli_fetch_array($res)) {
+                        ?>
+                        <tr id="item_section_3">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td><input type="text" name="c_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
+                            <td>
+                                <img src="<?=$r['answer_image']?>" width="40" height="40">
+                                <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')">
+                                <input type="hidden" name="c_answer_image[]" id="c_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
+                            </td>
+                            <td>
+                                <img src="<?=$r['explain_image']?>" width="40" height="40">
+                                <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')">
+                                <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
+                        <?
+                        $i++;
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -226,17 +272,35 @@ $book_type = $_GET['book_type'];
                     </tr>
                     </thead>
                     <tbody>
-                    <tr id="item_section_4">
-                        <td>
-                            <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
-                        </td>
-                        <td><input type="text" name="d_item_number[]" placeholder="문항번호"></td>
-                        <td><input type="file" name="d_answer_image[]"></td>
-                        <td><input type="file" name="d_explain_image[]"></td>
-                        <td>
-                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                        </td>
-                    </tr>
+                    <?
+                    $sql = "select * from `answer_master` where `grade` = '$grade' and `semester` = '$semester' and `unit` = '$unit' and `level` = '$level' and `book_type` = '$book_type' and `c_name` = '이야기수학' order by `seq` asc;";
+                    $res = mysqli_query($connect_db, $sql);
+                    $i=0;
+                    while($r = mysqli_fetch_array($res)) {
+                        ?>
+                        <tr id="item_section_4">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td><input type="text" name="d_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
+                            <td>
+                                <img src="<?=$r['answer_image']?>" width="40" height="40">
+                                <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')">
+                                <input type="hidden" name="d_answer_image[]" id="d_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
+                            </td>
+                            <td>
+                                <img src="<?=$r['explain_image']?>" width="40" height="40">
+                                <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')">
+                                <input type="hidden" name="d_explain_image[]" id="d_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
+                        <?
+                        $i++;
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -248,6 +312,12 @@ $book_type = $_GET['book_type'];
 
 </html>
 <script>
+    var a = 10;
+    var b = 10;
+    var c = 10;
+    var d = 10;
+
+
     $("div#section_1").show();
     $("div#section_2").hide();
     $("div#section_3").hide();
@@ -285,22 +355,21 @@ $book_type = $_GET['book_type'];
         }
     }
 
-    function append_div(previous,idx) {
-        // var t = "a";
-        // if(n==1) t = "a";
-        // else if(n==2) t = "b";
-        // else if(n==3) t = "c";
-        // else if(n==4) t = "d";
+    function append_div(previous, idx) {
+        var cnt;
+        if(idx == 'a') cnt = ++a;
+        else if(idx == 'b') cnt = ++b;
+        else if(idx == 'c') cnt = ++c;
+        else if(idx == 'd') cnt = ++d;
 
         var text = '<tr class="item_section">\n' + '<td>\n' +
             '<div class="plus_icon" onclick="append_div(this,idx)">' +
             '<img src="img/plus.png" alt="plus"></div></td>\n' +
             '<td><input type="text" name="'+idx+'_item_number[]" placeholder="문항번호"></td>\n' +
-            '<td><input type="file" name="'+idx+'_answer_image[]"></td>\n' +
-            '<td><input type="file" name="'+idx+'_explain_image[]"></td>\n' +
+            '<td><input type="file" id="'+idx+'_answer_file_'+cnt+'" onchange="readImage1(this, '+cnt+', \''+idx+'\')"><input type="hidden" name="'+idx+'_answer_image[]" id='+idx+'_answer_base_'+cnt+'></td>\n' +
+            '<td><input type="file" id="'+idx+'_answer_base_'+cnt+'" onchange="readImage2(this, '+cnt+', \''+idx+'\')"><input type="hidden" name="'+idx+'_explain_image[]" id='+idx+'_explain_base_'+cnt+'></td>\n' +
             '<td><div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div></td>\n' +
             '</tr>';
-        // $("#item_section_"+n).parent().append(text);
         $(previous).parent().parent().after(text);
     }
 
@@ -311,6 +380,27 @@ $book_type = $_GET['book_type'];
     function myFunction() {
         $("#answer_add_form").submit();
     }
+
+    function readImage1(input, count, idx) {
+        if (input.files && input.files[0]) {
+            var FR= new FileReader();
+            FR.onload = function(e) {
+                $("#"+idx+"_answer_base_"+count).val(e.target.result);
+            };
+            FR.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readImage2(input, count, idx) {
+        if (input.files && input.files[0]) {
+            var FR= new FileReader();
+            FR.onload = function(e) {
+                $("#"+idx+"_explain_base_"+count).val(e.target.result);
+            };
+            FR.readAsDataURL(input.files[0]);
+        }
+    }
+
     function book_info() {
         $.ajax({
             type: "GET",
