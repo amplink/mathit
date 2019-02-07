@@ -161,7 +161,7 @@ $book_type = $_GET['book_type'];
                             <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
                         </td>
                         <td>
-                            <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7">
+                            <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
                             <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
                             <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
                         </td>
