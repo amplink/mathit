@@ -187,6 +187,10 @@ include_once('head.php');
         .catch( error => {
             console.error( error );
         });
+
+    window.onbeforeunload = function() {
+        return true;
+    }
 </script>
 
 <?php
