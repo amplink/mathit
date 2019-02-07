@@ -31,6 +31,7 @@ $section_size[1] = count($section_2[0]);
 $section_size[2] = count($section_3[0]);
 $section_size[3] = count($section_4[0]);
 
+
 $sql = "delete from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level';";
 sql_query($sql);
 

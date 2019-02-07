@@ -172,7 +172,7 @@ include_once('_common.php');
                             <input type="hidden" name="b_answer_image[]" id="b_answer_base_<?=$i;?>">
                         </td>
                         <td>
-                            <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
+                            <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
                             <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>">
                         </td>
                         <td>

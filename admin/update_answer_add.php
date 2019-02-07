@@ -94,7 +94,7 @@ $book_type = $_GET['book_type'];
                                     <option value="<?=$unit?>" selected><?=$unit?></option>
                                 </div>
                             </select></td>
-                        <td><select name="level" id="level" disabled    >
+                        <td><select name="level" id="level" disabled>
                                 <option value="루트">루트</option>
                                 <option value="파이">파이</option>
                                 <option value="시그마">시그마</option>
@@ -164,6 +164,27 @@ $book_type = $_GET['book_type'];
                     <?
                     $i++;
                     }
+                    if($i==0) {
+                        ?>
+                        <tr id="item_section_1">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td><input type="text" name="a_item_number[]" placeholder="문항번호"></td>
+                            <td>
+                                <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')">
+                                <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
+                                <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
+                        <?
+                    }
                     ?>
                     <input type="hidden" name="event" value="<?=$event_time?>">
                     </tbody>
@@ -210,6 +231,27 @@ $book_type = $_GET['book_type'];
                         <?
                         $i++;
                     }
+                    if($i==0) {
+                        ?>
+                        <tr id="item_section_2">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td><input type="text" name="b_item_number[]" placeholder="문항번호"></td>
+                            <td>
+                                <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')">
+                                <input type="hidden" name="b_answer_image[]" id="b_answer_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
+                                <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
+                        <?
+                    }
                     ?>
                     </tbody>
                 </table>
@@ -255,6 +297,27 @@ $book_type = $_GET['book_type'];
                         <?
                         $i++;
                     }
+                    if($i==0) {
+                        ?>
+                        <tr id="item_section_3">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td><input type="text" name="c_item_number[]" placeholder="문항번호"></td>
+                            <td>
+                                <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')">
+                                <input type="hidden" name="c_answer_image[]" id="c_answer_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')">
+                                <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
+                        <?
+                    }
                     ?>
                     </tbody>
                 </table>
@@ -299,6 +362,27 @@ $book_type = $_GET['book_type'];
                         </tr>
                         <?
                         $i++;
+                    }
+                    if($i==0) {
+                        ?>
+                        <tr id="item_section_4">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td><input type="text" name="d_item_number[]" placeholder="문항번호"></td>
+                            <td>
+                                <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')">
+                                <input type="hidden" name="d_answer_image[]" id="d_answer_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')">
+                                <input type="hidden" name="d_explain_image[]" id="d_explain_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
+                        <?
                     }
                     ?>
                     </tbody>
@@ -378,6 +462,7 @@ $book_type = $_GET['book_type'];
     }
 
     function myFunction() {
+        $("select").prop('disabled', false);
         $("#answer_add_form").submit();
     }
 
