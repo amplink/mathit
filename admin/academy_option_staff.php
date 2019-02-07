@@ -82,12 +82,6 @@ $manager_get_chk = $_GET['manager_get_chk'];
                     </tr>
                 </thead>
                 <tbody>
-<!--                    <tr>-->
-<!--                        <td><input type="checkbox"></td>-->
-<!--                        <td><span>필승학원</span><span>(서울)</span></td>-->
-<!--                        <td><span>Kakao</span></td>-->
-<!--                        <td>문재인</td>-->
-<!--                    </tr>-->
                         <?php
                         $sql = "select * from `academy`";
                         $result = mysqli_query($connect_db, $sql);
@@ -97,14 +91,14 @@ $manager_get_chk = $_GET['manager_get_chk'];
                             if($t >= $page*10 && $t <= ($page*10+10)) {
                                 if($manager_get_chk == $res['client_name']) {
                                     echo '<tr style="text-align:center">';
-                                    echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'" checked="true"></td>';
+                                    echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name(this);" id="'.$i.'" checked="true"></td>';
                                     echo '<td><span>'.$res['client_name'].'</span></td>';
                                     echo '<td><span>'.$res['manager_id'].'</span></td>';
                                     echo '<td>'.$res['manager_name'].'</td>';
                                     echo '</tr>';
                                 }else {
                                     echo '<tr style="text-align:center">';
-                                    echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name('.$i.');" id="'.$i.'"></td>';
+                                    echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name(this);" id="'.$i.'"></td>';
                                     echo '<td><span>'.$res['client_name'].'</span></td>';
                                     echo '<td><span>'.$res['manager_id'].'</span></td>';
                                     echo '<td>'.$res['manager_name'].'</td>';
@@ -228,8 +222,8 @@ include_once('tail.php');
         $('#manager_get_id').val($('#manager_id').val());
         $('#manager_post_form').submit();
     }
-    function get_ac_name(n) {
-
+    function get_ac_name(e) {
+        $('#ac_name').val(e.value);
     }
     function sul3mit() {
         $('#manager_name').attr('disabled',false);
