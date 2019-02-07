@@ -12,6 +12,14 @@ $book_type = $_GET['book_type'];
 <html>
 
 <head>
+    <style>
+        .pt-17 {
+            padding-top: 17px;
+        }
+        .pt-7 {
+            vertical-align: middle;
+        }
+    </style>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MathIT Admin</title>
@@ -146,14 +154,14 @@ $book_type = $_GET['book_type'];
                         <td>
                             <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
                         </td>
-                        <td><input type="text" name="a_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
+                        <td class="pt-17"><input type="text" name="a_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
                         <td>
-                            <img src="<?=$r['answer_image']?>" width="40" height="40">
+                            <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7">
                             <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')">
                             <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
                         </td>
                         <td>
-                            <img src="<?=$r['explain_image']?>" width="40" height="40">
+                            <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7">
                             <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
                             <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
                         </td>
@@ -213,14 +221,14 @@ $book_type = $_GET['book_type'];
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
                             </td>
-                            <td><input type="text" name="b_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
+                            <td class="pt-17"><input type="text" name="b_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
                             <td>
-                                <img src="<?=$r['answer_image']?>" width="40" height="40">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7">
                                 <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')">
                                 <input type="hidden" name="b_answer_image[]" id="a_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
                             </td>
                             <td>
-                                <img src="<?=$r['explain_image']?>" width="40" height="40">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7">
                                 <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
                                 <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
                             </td>
@@ -279,14 +287,14 @@ $book_type = $_GET['book_type'];
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
                             </td>
-                            <td><input type="text" name="c_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
+                            <td class="pt-17"><input type="text" name="c_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
                             <td>
-                                <img src="<?=$r['answer_image']?>" width="40" height="40">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7">
                                 <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')">
                                 <input type="hidden" name="c_answer_image[]" id="c_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
                             </td>
                             <td>
-                                <img src="<?=$r['explain_image']?>" width="40" height="40">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7">
                                 <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')">
                                 <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
                             </td>
@@ -345,14 +353,14 @@ $book_type = $_GET['book_type'];
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
                             </td>
-                            <td><input type="text" name="d_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
+                            <td class="pt-17"><input type="text" name="d_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
                             <td>
-                                <img src="<?=$r['answer_image']?>" width="40" height="40">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7">
                                 <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')">
                                 <input type="hidden" name="d_answer_image[]" id="d_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
                             </td>
                             <td>
-                                <img src="<?=$r['explain_image']?>" width="40" height="40">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7">
                                 <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')">
                                 <input type="hidden" name="d_explain_image[]" id="d_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
                             </td>
