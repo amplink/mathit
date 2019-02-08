@@ -397,11 +397,19 @@ include_once('_common.php');
     }
 
     function chk_sigma(e) {
-        $("#unit option:contains('총정리(1)')").val("중간평가");
-        $("#unit option:contains('총정리(1)')").text("중간평가");
+        if($("#book_type").val() == "베타") {
+            $("#unit option:contains('총정리(1)')").val("중간평가");
+            $("#unit option:contains('총정리(1)')").text("중간평가");
 
-        $("#unit option:contains('총정리(2)')").val("기말평가");
-        $("#unit option:contains('총정리(2)')").text("기말평가");
+            $("#unit option:contains('총정리(2)')").val("기말평가");
+            $("#unit option:contains('총정리(2)')").text("기말평가");
+        }else {
+            $("#unit option:contains('중간평가')").val("총정리(1)");
+            $("#unit option:contains('중간평가')").text("총정리(1)");
+
+            $("#unit option:contains('기말평가')").val("총정리(2)");
+            $("#unit option:contains('기말평가')").text("총정리(2)");
+        }
         if($('#book_type').val() == "알파" && e.value == "시그마") {
             show_all();
             $("#nav_1").text("유형마스터");

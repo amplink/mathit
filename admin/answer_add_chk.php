@@ -60,7 +60,7 @@ if($res) {
 }
 
 if($section_1[0][0]) {
-    $c_name = "개념마스터";
+    if($book_type == "알파")
     for($i=0; $i<$section_size[0]; $i++) {
         $answer_id = rand(1, 22222).":".date("mds");
         $sql = "INSERT INTO `answer_master`
