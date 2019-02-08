@@ -188,10 +188,12 @@ if($book_type == "베타") {
                                 <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
                             </td>
                             <td><input type="text" name="a_item_number[]" placeholder="문항번호"></td>
+                            <td></td>
                             <td>
                                 <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')">
                                 <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>">
                             </td>
+                            <td></td>
                             <td>
                                 <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
                                 <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>">
@@ -214,8 +216,8 @@ if($book_type == "베타") {
                     <tr>
                         <th></th>
                         <th>문항번호</th>
-                        <th>정답이미지</th>
-                        <th>풀이이미지</th>
+                        <th colspan="2">정답이미지</th>
+                        <th colspan="2">풀이이미지</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -232,12 +234,16 @@ if($book_type == "베타") {
                             </td>
                             <td class="pt-17"><input type="text" name="b_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
                             <td>
-                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                            </td>
+                            <td style="border-left: none;">
                                 <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')">
                                 <input type="hidden" name="b_answer_image[]" id="b_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
                             </td>
                             <td>
-                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                            </td>
+                            <td style="border-left: none;">
                                 <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
                                 <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
                             </td>
@@ -255,10 +261,12 @@ if($book_type == "베타") {
                                 <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
                             </td>
                             <td><input type="text" name="b_item_number[]" placeholder="문항번호"></td>
+                            <td></td>
                             <td>
                                 <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')">
                                 <input type="hidden" name="b_answer_image[]" id="b_answer_base_<?=$i;?>">
                             </td>
+                            <td></td>
                             <td>
                                 <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
                                 <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>">
@@ -280,8 +288,8 @@ if($book_type == "베타") {
                     <tr>
                         <th></th>
                         <th>문항번호</th>
-                        <th>정답이미지</th>
-                        <th>풀이이미지</th>
+                        <th colspan="2">정답이미지</th>
+                        <th colspan="2">풀이이미지</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -298,12 +306,16 @@ if($book_type == "베타") {
                             </td>
                             <td class="pt-17"><input type="text" name="c_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
                             <td>
-                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                            </td>
+                            <td>
                                 <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')">
                                 <input type="hidden" name="c_answer_image[]" id="c_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
                             </td>
                             <td>
-                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                            </td>
+                            <td>
                                 <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')">
                                 <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
                             </td>
@@ -321,10 +333,12 @@ if($book_type == "베타") {
                                 <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
                             </td>
                             <td><input type="text" name="c_item_number[]" placeholder="문항번호"></td>
+                            <td></td>
                             <td>
                                 <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')">
                                 <input type="hidden" name="c_answer_image[]" id="c_answer_base_<?=$i;?>">
                             </td>
+                            <td></td>
                             <td>
                                 <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')">
                                 <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>">
@@ -346,8 +360,8 @@ if($book_type == "베타") {
                     <tr>
                         <th></th>
                         <th>문항번호</th>
-                        <th>정답이미지</th>
-                        <th>풀이이미지</th>
+                        <th colspan="2">정답이미지</th>
+                        <th colspan="2">풀이이미지</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -364,12 +378,16 @@ if($book_type == "베타") {
                             </td>
                             <td class="pt-17"><input type="text" name="d_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
                             <td>
-                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                            </td>
+                            <td>
                                 <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')">
                                 <input type="hidden" name="d_answer_image[]" id="d_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
                             </td>
                             <td>
-                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                            </td>
+                            <td>
                                 <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')">
                                 <input type="hidden" name="d_explain_image[]" id="d_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
                             </td>
@@ -387,10 +405,12 @@ if($book_type == "베타") {
                                 <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
                             </td>
                             <td><input type="text" name="d_item_number[]" placeholder="문항번호"></td>
+                            <td></td>
                             <td>
                                 <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')">
                                 <input type="hidden" name="d_answer_image[]" id="d_answer_base_<?=$i;?>">
                             </td>
+                            <td></td>
                             <td>
                                 <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')">
                                 <input type="hidden" name="d_explain_image[]" id="d_explain_base_<?=$i;?>">
@@ -464,10 +484,12 @@ if($book_type == "베타") {
         else if(idx == 'd') cnt = ++d;
 
         var text = '<tr class="item_section">\n' + '<td>\n' +
-            '<div class="plus_icon" onclick="append_div(this,idx)">' +
+            '<div class="plus_icon" onclick="append_div(this, \'' + idx + '\')">' +
             '<img src="img/plus.png" alt="plus"></div></td>\n' +
             '<td><input type="text" name="'+idx+'_item_number[]" placeholder="문항번호"></td>\n' +
+            '<td></td>' +
             '<td><input type="file" id="'+idx+'_answer_file_'+cnt+'" onchange="readImage1(this, '+cnt+', \''+idx+'\')"><input type="hidden" name="'+idx+'_answer_image[]" id='+idx+'_answer_base_'+cnt+'></td>\n' +
+            '<td></td>' +
             '<td><input type="file" id="'+idx+'_answer_base_'+cnt+'" onchange="readImage2(this, '+cnt+', \''+idx+'\')"><input type="hidden" name="'+idx+'_explain_image[]" id='+idx+'_explain_base_'+cnt+'></td>\n' +
             '<td><div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div></td>\n' +
             '</tr>';

@@ -78,7 +78,7 @@ include_once('_common.php');
                             <td><select name="unit" id="unit">
                                     <div id="unit_data"></div>
                                 </select></td>
-                            <td><select name="level" id="level" onchange="book_info()">
+                            <td><select name="level" id="level" onchange="">
                                     <option value="루트">루트</option>
                                     <option value="파이">파이</option>
                                     <option value="시그마">시그마</option>
