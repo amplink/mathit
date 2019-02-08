@@ -374,6 +374,12 @@ include_once('_common.php');
             success: function(response){
                 $("#unit").html(response);
                 chk_unit($('#unit'));
+                if($('#book_type').val() == "베타") {
+                    $("#unit option:contains('총정리(1)')").text("중간평가");
+                    $("#unit option:contains('총정리(1)')").val("중간평가");
+                    $("#unit option:contains('총정리(2)')").text("기말평가");
+                    $("#unit option:contains('총정리(2)')").val("기말평가");
+                }
             }
         });
     }
@@ -404,7 +410,7 @@ include_once('_common.php');
             $("#nav_4").parent().hide();
             $("#nav_3").parent().css("border-right", "0px");
         }else if($('#book_type').val() == "베타" && e.value != "시그마") {
-            // show_all();
+            show_all();
             $("#nav_1").text("개념다지기");
             $("#nav_2").text("단원마무리");
             $("#nav_3").text("도전문제");
@@ -435,25 +441,20 @@ include_once('_common.php');
                 }
             }
         }else {
-            if($('#unit').val() == "총정리(1)") {
+            if(e.value == "총정리(1)") {
                 show_all();
                 $("#nav_1").text("중간평가 1회");
                 $("#nav_2").text("중간평가 2회");
                 $("#nav_3").parent().hide();
                 $("#nav_4").parent().hide();
                 $("#nav_2").parent().css("border-right", "0px");
-            } else if (e.value == "총정리(2)") {
+            } else if(e.value == "총정리(2)") {
                 show_all();
                 $("#nav_1").text("기말평가 1회");
                 $("#nav_2").text("기말평가 2회");
                 $("#nav_3").parent().hide();
                 $("#nav_4").parent().hide();
                 $("#nav_2").parent().css("border-right", "0px");
-            } else {
-                $("#nav_1").text("실력확인");
-                $("#nav_2").text("단원마무리");
-                $("#nav_3").parent().show();
-                $("#nav_2").parent().css("border-right", "solid 1px rgb(150, 150, 150)");
             }
         }
         if($('#book_type').val() == "베타") {
@@ -494,7 +495,7 @@ include_once('_common.php');
                 $("#nav_2").parent().css("border-right", "0px");
             } else {
                 show_all();
-                $("#nav_1").text("실력확인");
+                $("#nav_1").text("개념마스터");
                 $("#nav_2").text("단원마무리");
                 $("#nav_3").parent().show();
                 // $("#nav_4").parent().hide();
