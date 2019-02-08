@@ -29,6 +29,26 @@ $section_size[1] = count($section_2[0]);
 $section_size[2] = count($section_3[0]);
 $section_size[3] = count($section_4[0]);
 
+$cnt = 0;
+for($i=0; $i<$section_size[0]; $i++) {
+    if($section_1[0][$i]) $cnt++;
+}
+for($i=0; $i<$section_size[1]; $i++) {
+    if($section_2[0][$i]) $cnt++;
+}
+for($i=0; $i<$section_size[2]; $i++) {
+    if($section_3[0][$i]) $cnt++;
+}
+for($i=0; $i<$section_size[3]; $i++) {
+    if($section_4[0][$i]) $cnt++;
+}
+
+if($cnt == 0) {
+    echo "<script>alert('입력값이 없어 등록이 되지 않았습니다.');</script>";
+    echo "<script>location.href='./answer_manegement.php';</script>";
+    exit;
+}
+
 if($section_1[0][0]) {
     $c_name = "개념마스터";
     for($i=0; $i<$section_size[0]; $i++) {

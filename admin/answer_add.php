@@ -63,12 +63,13 @@ include_once('_common.php');
                                     <option value="베타">베타</option>
                                 </select></td>
                             <td><select name="grade" id="grade">
-                                    <option value="3">초등 3학년</option>
-                                    <option value="4">초등 4학년</option>
-                                    <option value="5">초등 5학년</option>
-                                    <option value="6">초등 6학년</option>
-                                    <option value="7">중등 1학년</option>
-                                    <option value="8">중등 2학년</option>
+                                    <option value="3">초3</option>
+                                    <option value="4">초4</option>
+                                    <option value="5">초5</option>
+                                    <option value="6">초6</option>
+                                    <option value="7">중1</option>
+                                    <option value="8">중2</option>
+                                    <option value="9">중3</option>
                                 </select></td>
                             <td><select name="semester" id="semester">
                                     <option value="1">1학기</option>
