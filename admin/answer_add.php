@@ -375,10 +375,11 @@ include_once('_common.php');
                 $("#unit").html(response);
                 chk_unit($('#unit'));
                 if($('#book_type').val() == "베타") {
-                    $("#unit option:contains('총정리(1)')").text("중간평가");
                     $("#unit option:contains('총정리(1)')").val("중간평가");
-                    $("#unit option:contains('총정리(2)')").text("기말평가");
+                    $("#unit option:contains('총정리(1)')").text("중간평가");
+
                     $("#unit option:contains('총정리(2)')").val("기말평가");
+                    $("#unit option:contains('총정리(2)')").text("기말평가");
                 }
             }
         });
@@ -396,6 +397,11 @@ include_once('_common.php');
     }
 
     function chk_sigma(e) {
+        $("#unit option:contains('총정리(1)')").val("중간평가");
+        $("#unit option:contains('총정리(1)')").text("중간평가");
+
+        $("#unit option:contains('총정리(2)')").val("기말평가");
+        $("#unit option:contains('총정리(2)')").text("기말평가");
         if($('#book_type').val() == "알파" && e.value == "시그마") {
             show_all();
             $("#nav_1").text("유형마스터");
@@ -441,14 +447,14 @@ include_once('_common.php');
                 }
             }
         }else {
-            if(e.value == "총정리(1)") {
+            if($('#unit').val() == "중간평가") {
                 show_all();
                 $("#nav_1").text("중간평가 1회");
                 $("#nav_2").text("중간평가 2회");
                 $("#nav_3").parent().hide();
                 $("#nav_4").parent().hide();
                 $("#nav_2").parent().css("border-right", "0px");
-            } else if(e.value == "총정리(2)") {
+            } else if($('#unit').val() == "기말평가") {
                 show_all();
                 $("#nav_1").text("기말평가 1회");
                 $("#nav_2").text("기말평가 2회");
@@ -479,14 +485,14 @@ include_once('_common.php');
                 }
             }
         }else {
-            if(e.value == "총정리(1)") {
+            if(e.value == "중간평가") {
                 show_all();
                 $("#nav_1").text("중간평가 1회");
                 $("#nav_2").text("중간평가 2회");
                 $("#nav_3").parent().hide();
                 $("#nav_4").parent().hide();
                 $("#nav_2").parent().css("border-right", "0px");
-            } else if (e.value == "총정리(2)") {
+            } else if (e.value == "기말평가") {
                 show_all();
                 $("#nav_1").text("기말평가 1회");
                 $("#nav_2").text("기말평가 2회");
