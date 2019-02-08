@@ -58,11 +58,11 @@ include_once('_common.php');
                     </thead>
                     <tbody>
                         <tr>
-                            <td><select name="book_type" id="textbook">
+                            <td><select name="book_type" id="textbook" onchange="go_to_another()">
                                     <option value="알파" selected>알파</option>
                                     <option value="베타">베타</option>
                                 </select></td>
-                            <td><select name="grade" id="grade">
+                            <td><select name="grade" id="grade" onchange="book_info()">
                                     <option value="3">초3</option>
                                     <option value="4">초4</option>
                                     <option value="5">초5</option>
@@ -71,14 +71,14 @@ include_once('_common.php');
                                     <option value="8">중2</option>
                                     <option value="9">중3</option>
                                 </select></td>
-                            <td><select name="semester" id="semester">
+                            <td><select name="semester" id="semester" onchange="book_info()">
                                     <option value="1">1학기</option>
                                     <option value="2">2학기</option>
                                 </select></td>
-                            <td><select name="unit" id="unit" onclick="book_info();">
+                            <td><select name="unit" id="unit">
                                     <div id="unit_data"></div>
                                 </select></td>
-                            <td><select name="level" id="level">
+                            <td><select name="level" id="level" onchange="book_info()">
                                     <option value="루트">루트</option>
                                     <option value="파이">파이</option>
                                     <option value="시그마">시그마</option>
@@ -375,5 +375,9 @@ include_once('_common.php');
                 $("#unit").html(response);
             }
         });
+    }
+
+    function go_to_another() {
+        location.href="./answer_add_beta.php";
     }
 </script>
