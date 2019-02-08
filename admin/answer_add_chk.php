@@ -43,6 +43,11 @@ for($i=0; $i<$section_size[3]; $i++) {
     if($section_4[0][$i]) $cnt++;
 }
 
+if($book_type == "베타") {
+    if($unit == "총정리(1)") $unit = "중간평가";
+    else if($unit == "총정리(2)") $unit = "기말평가";
+}
+
 if($cnt == 0) {
     echo "<script>alert('입력값이 없어 등록이 되지 않았습니다.');</script>";
     echo "<script>location.href='./answer_manegement.php';</script>";
@@ -60,7 +65,18 @@ if($res) {
 }
 
 if($section_1[0][0]) {
-    if($book_type == "알파")
+    if($book_type == "알파") {
+        if($level == "시그마") $c_name = "유형마스터";
+        else $c_name = "개념마스터";
+    }else {
+        if($level == "시그마") $c_name = "실력확인";
+        else {
+            if($unit == "중간평가") $c_name = "중간평가 1회";
+            else if($unit == "기말평가") $c_name = "기말평가 1회";
+            else $c_name = "개념다지기";
+        }
+    }
+
     for($i=0; $i<$section_size[0]; $i++) {
         $answer_id = rand(1, 22222).":".date("mds");
         $sql = "INSERT INTO `answer_master`
@@ -71,7 +87,14 @@ if($section_1[0][0]) {
 }
 
 if($section_2[0][0]) {
-    $c_name = "개념확인";
+    if($book_type == "알파") {
+        if($level == "시그마") $c_name = "유형확인";
+        else $c_name = "개념확인";
+    }else {
+        if($unit == "중간평가") $c_name = "중간평가 2회";
+        else if($unit == "기말평가") $c_name = "기말평가 2회";
+        else $c_name = "단원마무리";
+    }
     for($i=0; $i<$section_size[1]; $i++) {
         $answer_id = rand(22222, 44444).":".date("mds");
         $sql = "INSERT INTO `answer_master`
@@ -82,7 +105,8 @@ if($section_2[0][0]) {
 }
 
 if($section_3[0][0]) {
-    $c_name = "서술과코칭";
+    if($book_type == "베타") $c_name = "도전문제";
+    else $c_name = "서술과코칭";
     for($i=0; $i<$section_size[2]; $i++) {
         $answer_id = rand(44444, 66666).":".date("mds");
         $sql = "INSERT INTO `answer_master`
