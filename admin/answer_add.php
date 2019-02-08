@@ -58,8 +58,8 @@ include_once('_common.php');
                     </thead>
                     <tbody>
                         <tr>
-                            <td><select name="book_type" id="textbook" onchange="go_to_another()">
-                                    <option value="알파" selected>알파</option>
+                            <td><select name="book_type" id="book_type" onchange="chk_sigma($('#level'))">
+                                    <option value="알파">알파</option>
                                     <option value="베타">베타</option>
                                 </select></td>
                             <td><select name="grade" id="grade" onchange="book_info()">
@@ -378,20 +378,133 @@ include_once('_common.php');
         });
     }
 
-    function chk_unit(e) {
-        if(e.value == "총정리(1)" || e.value == "총정리(2)") {
-            $("#nav_3").parent().hide();
-            $("#nav_4").parent().hide();
-            $("#nav_2").parent().css("border-right", "0px");
-        }else {
-            $("#nav_3").parent().show();
-            $("#nav_4").parent().show();
-            $("#nav_2").parent().css("border-right", "solid 1px rgb(150, 150, 150)");
-        }
+    function show_all() {
+        $("#nav_1").parent().show();
+        $("#nav_2").parent().show();
+        $("#nav_3").parent().show();
+        $("#nav_4").parent().show();
+
+        $("#nav_1").parent().css("border-right", "solid 1px rgb(150, 150, 150)");
+        $("#nav_2").parent().css("border-right", "solid 1px rgb(150, 150, 150)");
+        $("#nav_3").parent().css("border-right", "solid 1px rgb(150, 150, 150)");
     }
 
     function chk_sigma(e) {
-        if(e.value == "시그마") location.href='./answer_add_sigma.php';
+        if($('#book_type').val() == "알파" && e.value == "시그마") {
+            show_all();
+            $("#nav_1").text("유형마스터");
+            $("#nav_2").text("유형확인");
+            $("#nav_3").parent().hide();
+            $("#nav_3").parent().hide();
+        }else if($('#book_type').val() == "베타" && e.value == "시그마") {
+            show_all();
+            $("#nav_1").text("실력확인");
+            $("#nav_2").text("단원마무리");
+            $("#nav_3").text("도전문제");
+            $("#nav_4").parent().hide();
+            $("#nav_3").parent().css("border-right", "0px");
+        }else if($('#book_type').val() == "베타" && e.value != "시그마") {
+            // show_all();
+            $("#nav_1").text("개념다지기");
+            $("#nav_2").text("단원마무리");
+            $("#nav_3").text("도전문제");
+            $("#nav_4").parent().hide();
+            $("#nav_3").parent().css("border-right", "0px");
+        }else if($('#book_type').val() == "알파" && e.value != "시그마"){
+            show_all();
+            $("#nav_1").text("개념마스터");
+            $("#nav_2").text("개념확인");
+            $("#nav_3").text("서술과코칭");
+            $("#nav_4").parent().show();
+            $("#nav_4").text("이야기수학");
+            $("#nav_2").parent().css("border-right", "solid 1px rgb(150, 150, 150)");
+        }
+
+        if($('#book_type').val() == "알파") {
+            // alert(e.value);
+            if($('#unit').val() == "총정리(1)" || $('#unit').val() == "총정리(2)") {
+                show_all();
+                $("#nav_3").parent().hide();
+                $("#nav_4").parent().hide();
+                $("#nav_2").parent().css("border-right", "0px");
+            }else {
+                show_all();
+                if($('#book_type').val() == "베타") {
+                    $('#nav_4').parent().hide();
+                    $('#nav_3').parent().css("border-right", "0px");
+                }
+            }
+        }else {
+            if($('#unit').val() == "총정리(1)") {
+                show_all();
+                $("#nav_1").text("중간평가 1회");
+                $("#nav_2").text("중간평가 2회");
+                $("#nav_3").parent().hide();
+                $("#nav_4").parent().hide();
+                $("#nav_2").parent().css("border-right", "0px");
+            } else if (e.value == "총정리(2)") {
+                show_all();
+                $("#nav_1").text("기말평가 1회");
+                $("#nav_2").text("기말평가 2회");
+                $("#nav_3").parent().hide();
+                $("#nav_4").parent().hide();
+                $("#nav_2").parent().css("border-right", "0px");
+            } else {
+                $("#nav_1").text("실력확인");
+                $("#nav_2").text("단원마무리");
+                $("#nav_3").parent().show();
+                $("#nav_2").parent().css("border-right", "solid 1px rgb(150, 150, 150)");
+            }
+        }
+        if($('#book_type').val() == "베타") {
+            $('#nav_4').parent().hide();
+            $('#nav_3').parent().css("border-right", "0px");
+        }
+    }
+
+    function chk_unit(e) {
+        if($('#book_type').val() == "알파") {
+            // alert(e.value);
+            if(e.value == "총정리(1)" || e.value == "총정리(2)") {
+                show_all();
+                $("#nav_3").parent().hide();
+                $("#nav_4").parent().hide();
+                $("#nav_2").parent().css("border-right", "0px");
+            }else {
+                show_all();
+                if($('#book_type').val() == "베타") {
+                    $('#nav_4').parent().hide();
+                    $('#nav_3').parent().css("border-right", "0px");
+                }
+            }
+        }else {
+            if(e.value == "총정리(1)") {
+                show_all();
+                $("#nav_1").text("중간평가 1회");
+                $("#nav_2").text("중간평가 2회");
+                $("#nav_3").parent().hide();
+                $("#nav_4").parent().hide();
+                $("#nav_2").parent().css("border-right", "0px");
+            } else if (e.value == "총정리(2)") {
+                show_all();
+                $("#nav_1").text("기말평가 1회");
+                $("#nav_2").text("기말평가 2회");
+                $("#nav_3").parent().hide();
+                $("#nav_4").parent().hide();
+                $("#nav_2").parent().css("border-right", "0px");
+            } else {
+                show_all();
+                $("#nav_1").text("실력확인");
+                $("#nav_2").text("단원마무리");
+                $("#nav_3").parent().show();
+                // $("#nav_4").parent().hide();
+                $("#nav_2").parent().css("border-right", "solid 1px rgb(150, 150, 150)");
+            }
+        }
+        if($('#book_type').val() == "베타") {
+            $('#nav_4').parent().hide();
+            $('#nav_3').parent().css("border-right", "0px");
+        }
     }
 
     function go_to_another() {
