@@ -24,9 +24,6 @@ $section_size[0] = count($section_1[0]);
 $section_size[1] = count($section_2[0]);
 $section_size[2] = count($section_3[0]);
 
-if($unit == "총정리(1)") $unit = "중간평가";
-else if($unit == "총정리(2)") $unit = "기말평가";
-
 $cnt = 0;
 for($i=0; $i<$section_size[0]; $i++) {
     if($section_1[0][$i]) $cnt++;
@@ -57,7 +54,7 @@ if($res) {
 if($section_1[0][0]) {
     if($unit == "중간평가") $c_name = "중간평가 1회";
     else if($unit == "기말평가") $c_name = "기말평가 1회";
-    else $c_name = "개념다지기";
+    else $c_name = "실력확인";
 
     for($i=0; $i<$section_size[0]; $i++) {
         $answer_id = rand(1, 22222).":".date("mds");
@@ -72,7 +69,6 @@ if($section_2[0][0]) {
     if($unit == "중간평가") $c_name = "중간평가 2회";
     else if($unit == "기말평가") $c_name = "기말평가 2회";
     else $c_name = "단원마무리";
-
     for($i=0; $i<$section_size[1]; $i++) {
         $answer_id = rand(22222, 44444).":".date("mds");
         $sql = "INSERT INTO `answer_master`

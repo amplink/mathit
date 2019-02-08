@@ -17,25 +17,25 @@ include_once('_common.php');
 </head>
 
 <body>
-<form enctype='multipart/form-data' action="answer_add_chk.php" method="POST" id="answer_add_form">
-<div class="header" style="width:calc(100% - 40px)">
-    <div class="logo_wrap">
-        <div class="logo"><img src="img/logo.png" alt="logo"></div>
-        <p>ADMIN</p>
+<form enctype='multipart/form-data' action="answer_add_sigma_chk.php" method="POST" id="answer_add_form">
+    <div class="header" style="width:calc(100% - 40px)">
+        <div class="logo_wrap">
+            <div class="logo"><img src="img/logo.png" alt="logo"></div>
+            <p>ADMIN</p>
+        </div>
+        <nav>
+            <div class="nav_menu"><a href="index.php">홈</a></div>
+            <div class="nav_menu"><a href="notice_home.php">공지사항관리</a></div>
+            <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>
+            <div class="nav_menu"><a href="answer_manegement.php" class="on">정답지관리</a></div>
+        </nav>
+        <div class="header_right">
+            <div class="user_img"><img src="img/user.png" alt="user_img"></div>
+            <p class="user_id">admin</p>
+            <div class="logout_btn"><a href="login.php">로그아웃</a></div>
+            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>
+        </div>
     </div>
-    <nav>
-        <div class="nav_menu"><a href="index.php">홈</a></div>
-        <div class="nav_menu"><a href="notice_home.php">공지사항관리</a></div>
-        <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>
-        <div class="nav_menu"><a href="answer_manegement.php" class="on">정답지관리</a></div>
-    </nav>
-    <div class="header_right">
-        <div class="user_img"><img src="img/user.png" alt="user_img"></div>
-        <p class="user_id">admin</p>
-        <div class="logout_btn"><a href="login.php">로그아웃</a></div>
-        <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>
-    </div>
-</div>
     <div class="section" style="width:100%">
         <div class="head_section"  style="width:calc(100% - 100px)">
             <div class="upside">
@@ -48,42 +48,42 @@ include_once('_common.php');
             <div class="downside">
                 <table>
                     <thead>
-                        <tr>
-                            <th>교재구분</th>
-                            <th>학년</th>
-                            <th>학기</th>
-                            <th>단원</th>
-                            <th>레벨</th>
-                        </tr>
+                    <tr>
+                        <th>교재구분</th>
+                        <th>학년</th>
+                        <th>학기</th>
+                        <th>단원</th>
+                        <th>레벨</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><select name="book_type" id="textbook" onchange="go_to_another()">
-                                    <option value="알파" selected>알파</option>
-                                    <option value="베타">베타</option>
-                                </select></td>
-                            <td><select name="grade" id="grade" onchange="book_info()">
-                                    <option value="3">초등 3</option>
-                                    <option value="4">초등 4</option>
-                                    <option value="5">초등 5</option>
-                                    <option value="6">초등 6</option>
-                                    <option value="7">중등 1</option>
-                                    <option value="8">중등 2</option>
-                                    <option value="9">중등 3</option>
-                                </select></td>
-                            <td><select name="semester" id="semester" onchange="book_info()">
-                                    <option value="1">1학기</option>
-                                    <option value="2">2학기</option>
-                                </select></td>
-                            <td><select name="unit" id="unit" onchange="chk_unit(this);">
-                                    <div id="unit_data"></div>
-                                </select></td>
-                            <td><select name="level" id="level" onchange="chk_sigma(this);">
-                                    <option value="루트">루트</option>
-                                    <option value="파이">파이</option>
-                                    <option value="시그마">시그마</option>
-                                </select></td>
-                        </tr>
+                    <tr>
+                        <td><select name="book_type" id="textbook" onchange="go_to_another()">
+                                <option value="알파" selected>알파</option>
+                                <option value="베타">베타</option>
+                            </select></td>
+                        <td><select name="grade" id="grade" onchange="book_info()">
+                                <option value="3">초등 3</option>
+                                <option value="4">초등 4</option>
+                                <option value="5">초등 5</option>
+                                <option value="6">초등 6</option>
+                                <option value="7">중등 1</option>
+                                <option value="8">중등 2</option>
+                                <option value="9">중등 3</option>
+                            </select></td>
+                        <td><select name="semester" id="semester" onchange="book_info()">
+                                <option value="1">1학기</option>
+                                <option value="2">2학기</option>
+                            </select></td>
+                        <td><select name="unit" id="unit" onchange="chk_unit(this)">
+                                <div id="unit_data"></div>
+                            </select></td>
+                        <td><select name="level" id="level" onchange="chk_sigma(this)">
+                                <option value="루트">루트</option>
+                                <option value="파이">파이</option>
+                                <option value="시그마" selected>시그마</option>
+                            </select></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -93,10 +93,10 @@ include_once('_common.php');
                 <p>정답지 작성</p>
                 <div class="r_nav">
                     <div class="r_nav_menu" onclick="change(1)">
-                        <p class="on" id="nav_1">개념마스터</p>
+                        <p class="on" id="nav_1">유형마스터</p>
                     </div>
                     <div class="r_nav_menu" onclick="change(2)">
-                        <p class="" id="nav_2">개념확인</p>
+                        <p class="" id="nav_2">유형확인</p>
                     </div>
                     <div class="r_nav_menu" onclick="change(3)">
                         <p class="" id="nav_3">서술과코칭</p>
@@ -110,37 +110,37 @@ include_once('_common.php');
             <div class="downside_2" id="section_1">
                 <table>
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th>문항번호</th>
-                            <th>정답이미지</th>
-                            <th>풀이이미지</th>
-                            <th></th>
-                        </tr>
+                    <tr>
+                        <th></th>
+                        <th>문항번호</th>
+                        <th>정답이미지</th>
+                        <th>풀이이미지</th>
+                        <th></th>
+                    </tr>
                     </thead>
                     <tbody>
                     <?
                     for($i=0; $i<10; $i++) {
 
-                    ?>
-                    <tr id="item_section_1">
-                        <td>
-                            <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
-                        </td>
-                        <td><input type="text" name="a_item_number[]" placeholder="문항번호"></td>
-                        <td>
-                            <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')">
-                            <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
-                            <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                        </td>
-                    </tr>
-                    <?
+                        ?>
+                        <tr id="item_section_1">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td><input type="text" name="a_item_number[]" placeholder="문항번호"></td>
+                            <td>
+                                <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')">
+                                <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
+                                <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
+                        <?
                     }
                     ?>
                     </tbody>
@@ -162,25 +162,25 @@ include_once('_common.php');
                     <?
                     for($i=0; $i<10; $i++) {
 
-                    ?>
-                    <tr id="item_section_2">
-                        <td>
-                            <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
-                        </td>
-                        <td><input type="text" name="b_item_number[]" placeholder="문항번호"></td>
-                        <td>
-                            <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')">
-                            <input type="hidden" name="b_answer_image[]" id="b_answer_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
-                            <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                        </td>
-                    </tr>
-                    <?
+                        ?>
+                        <tr id="item_section_2">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td><input type="text" name="b_item_number[]" placeholder="문항번호"></td>
+                            <td>
+                                <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')">
+                                <input type="hidden" name="b_answer_image[]" id="b_answer_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
+                                <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
+                        <?
                     }
                     ?>
                     </tbody>
@@ -202,25 +202,25 @@ include_once('_common.php');
                     <?
                     for($i=0; $i<10; $i++) {
 
-                    ?>
-                    <tr id="item_section_3">
-                        <td>
-                            <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
-                        </td>
-                        <td><input type="text" name="c_item_number[]" placeholder="문항번호"></td>
-                        <td>
-                            <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')">
-                            <input type="hidden" name="c_answer_image[]" id="c_answer_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')">
-                            <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                        </td>
-                    </tr>
-                    <?
+                        ?>
+                        <tr id="item_section_3">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td><input type="text" name="c_item_number[]" placeholder="문항번호"></td>
+                            <td>
+                                <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')">
+                                <input type="hidden" name="c_answer_image[]" id="c_answer_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')">
+                                <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
+                        <?
                     }
                     ?>
                     </tbody>
@@ -242,25 +242,25 @@ include_once('_common.php');
                     <?
                     for($i=0; $i<10; $i++) {
 
-                    ?>
-                    <tr id="item_section_4">
-                        <td>
-                            <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
-                        </td>
-                        <td><input type="text" name="d_item_number[]" placeholder="문항번호"></td>
-                        <td>
-                            <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')">
-                            <input type="hidden" name="d_answer_image[]" id="d_answer_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')">
-                            <input type="hidden" name="d_explain_image[]" id="d_explain_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                        </td>
-                    </tr>
-                    <?
+                        ?>
+                        <tr id="item_section_4">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td><input type="text" name="d_item_number[]" placeholder="문항번호"></td>
+                            <td>
+                                <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')">
+                                <input type="hidden" name="d_answer_image[]" id="d_answer_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')">
+                                <input type="hidden" name="d_explain_image[]" id="d_explain_base_<?=$i;?>">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
+                        <?
                     }
                     ?>
                     </tbody>
@@ -391,7 +391,7 @@ include_once('_common.php');
     }
 
     function chk_sigma(e) {
-        if(e.value == "시그마") location.href='./answer_add_sigma.php';
+        if(e.value != "시그마") location.href='./answer_add.php';
     }
 
     function go_to_another() {

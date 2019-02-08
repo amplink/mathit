@@ -17,7 +17,7 @@ include_once('_common.php');
 </head>
 
 <body>
-<form enctype='multipart/form-data' action="answer_add_beta_chk.php" method="POST" id="answer_add_form">
+<form enctype='multipart/form-data' action="answer_add_beta_sigma_chk.php" method="POST" id="answer_add_form">
     <div class="header" style="width:calc(100% - 40px)">
         <div class="logo_wrap">
             <div class="logo"><img src="img/logo.png" alt="logo"></div>
@@ -71,17 +71,17 @@ include_once('_common.php');
                                 <option value="8">중등 2</option>
                                 <option value="9">중등 3</option>
                             </select></td>
-                        <td><select name="semester" id="semester" onchange="book_info();">
+                        <td><select name="semester" id="semester" onchange="book_info()">
                                 <option value="1">1학기</option>
                                 <option value="2">2학기</option>
                             </select></td>
-                        <td><select name="unit" id="unit" onchange="chk_unit(this)">
-                                <div id="unit_data"></div>
+                        <td><select name="unit" id="unit" onchange="chk_unit(this)" onloadeddata="chk_unit(this)">
+
                             </select></td>
                         <td><select name="level" id="level" onchange="chk_sigma(this)">
                                 <option value="루트">루트</option>
                                 <option value="파이">파이</option>
-                                <option value="시그마">시그마</option>
+                                <option value="시그마" selected>시그마</option>
                             </select></td>
                     </tr>
                     </tbody>
@@ -93,7 +93,7 @@ include_once('_common.php');
                 <p>정답지 작성</p>
                 <div class="r_nav">
                     <div class="r_nav_menu" onclick="change(1)">
-                        <p class="on" id="nav_1">개념다지기</p>
+                        <p class="on" id="nav_1">실력확인</p>
                     </div>
                     <div class="r_nav_menu" onclick="change(2)">
                         <p class="" id="nav_2">단원마무리</p>
@@ -247,10 +247,11 @@ include_once('_common.php');
         dataType: "html",
         success: function(response){
             $("#unit").html(response);
-            $("#unit option:contains('총정리(1)')").text("중간평가");
             $("#unit option:contains('총정리(1)')").val("중간평가");
-            $("#unit option:contains('총정리(2)')").text("기말평가");
+            $("#unit option:contains('총정리(1)')").text("중간평가");
             $("#unit option:contains('총정리(2)')").val("기말평가");
+            $("#unit option:contains('총정리(2)')").text("기말평가");
+            chk_unit($('#unit'));
         }
     });
 
@@ -325,22 +326,22 @@ include_once('_common.php');
             dataType: "html",
             success: function(response){
                 $("#unit").html(response);
-                $("#unit option:contains('총정리(1)')").text("중간평가");
                 $("#unit option:contains('총정리(1)')").val("중간평가");
-                $("#unit option:contains('총정리(2)')").text("기말평가");
+                $("#unit option:contains('총정리(1)')").text("중간평가");
                 $("#unit option:contains('총정리(2)')").val("기말평가");
+                $("#unit option:contains('총정리(2)')").text("기말평가");
                 chk_unit($('#unit'));
             }
         });
     }
 
     function chk_unit(e) {
-        if(e.value == "총정리(1)") {
+        if(e.value == "중간평가") {
             $("#nav_1").text("중간평가 1회");
             $("#nav_2").text("중간평가 2회");
             $("#nav_3").parent().hide();
             $("#nav_2").parent().css("border-right", "0px");
-        } else if (e.value == "총정리(2)") {
+        } else if (e.value == "기말평가") {
             $("#nav_1").text("기말평가 1회");
             $("#nav_2").text("기말평가 2회");
             $("#nav_3").parent().hide();
@@ -354,7 +355,7 @@ include_once('_common.php');
     }
 
     function chk_sigma(e) {
-        if(e.value == "시그마") location.href='./answer_add_beta_sigma.php';
+        if(e.value != "시그마") location.href='./answer_add_beta.php';
     }
 
     function go_to_another() {

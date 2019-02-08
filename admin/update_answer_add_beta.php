@@ -117,10 +117,17 @@ $book_type = $_GET['book_type'];
                 <p>정답지 작성</p>
                 <div class="r_nav">
                     <div class="r_nav_menu" onclick="change(1)">
-                        <p class="on" id="nav_1">개념다지기</p>
+                        <p class="on" id="nav_1">
+                            <?
+                            if($level == "시그마") echo "실력확인";
+                            else echo "개념다지기";
+                            ?>
+                        </p>
                     </div>
                     <div class="r_nav_menu" onclick="change(2)">
-                        <p class="" id="nav_2">단원마무리</p>
+                        <p class="" id="nav_2">
+                            단원마무리
+                        </p>
                     </div>
                     <div class="r_nav_menu" onclick="change(3)">
                         <p class="" id="nav_3">도전문제</p>
@@ -141,7 +148,13 @@ $book_type = $_GET['book_type'];
                     </thead>
                     <tbody>
                     <?
-                    $sql = "select * from `answer_master` where `grade` = '$grade' and `semester` = '$semester' and `unit` = '$unit' and `level` = '$level' and `book_type` = '$book_type' and `c_name` = '개념다지기' order by `seq` asc;";
+                    if($level == "시그마") $c_name = "실력확인";
+                    else $c_name =  "개념다지기";
+
+                    if($unit == "중간평가") $c_name = "중간평가 1회";
+                    else if($unit == "기말평가") $c_name = "기말평가 1회";
+
+                    $sql = "select * from `answer_master` where `grade` = '$grade' and `semester` = '$semester' and `unit` = '$unit' and `level` = '$level' and `book_type` = '$book_type' and `c_name` = '$c_name' order by `seq` asc;";
                     $res = mysqli_query($connect_db, $sql);
                     $i=0;
                     while($r = mysqli_fetch_array($res)) {
@@ -215,7 +228,12 @@ $book_type = $_GET['book_type'];
                     </thead>
                     <tbody>
                     <?
-                    $sql = "select * from `answer_master` where `grade` = '$grade' and `semester` = '$semester' and `unit` = '$unit' and `level` = '$level' and `book_type` = '$book_type' and `c_name` = '단원마무리' order by `seq` asc;";
+
+                    if($unit == "중간평가") $c_name = "중간평가 2회";
+                    else if($unit == "기말평가") $c_name = "기말평가 2회";
+                    else $c_name = "단원마무리";
+
+                    $sql = "select * from `answer_master` where `grade` = '$grade' and `semester` = '$semester' and `unit` = '$unit' and `level` = '$level' and `book_type` = '$book_type' and `c_name` = '$c_name' order by `seq` asc;";
                     $res = mysqli_query($connect_db, $sql);
                     $i=0;
                     while($r = mysqli_fetch_array($res)) {
@@ -367,6 +385,20 @@ $book_type = $_GET['book_type'];
     $("option[value='<? echo $semester; ?>']").prop('selected', true);
     $("option[value='<? echo $level; ?>']").prop('selected', true);
     $("option[value='<? echo $book_type; ?>']").prop('selected', true);
+
+    if($('#unit').val() == "중간평가") {
+        $("#nav_3").parent().hide();
+        $("#nav_1").text("중간평가 1회");
+        $("#nav_2").text("중간평가 2회");
+        $("#nav_2").parent().css('border-right', '0px');
+    }
+
+    if($('#unit').val() == "기말평가") {
+        $("#nav_3").parent().hide();
+        $("#nav_1").text("기말평가 1회");
+        $("#nav_2").text("기말평가 2회");
+        $("#nav_2").parent().css('border-right', '0px');
+    }
 
     function change(n) {
         if(n==1) {

@@ -31,12 +31,30 @@ $section_size[1] = count($section_2[0]);
 $section_size[2] = count($section_3[0]);
 $section_size[3] = count($section_4[0]);
 
+$cnt = 0;
+for($i=0; $i<$section_size[0]; $i++) {
+    if($section_1[0][$i]) $cnt++;
+}
+for($i=0; $i<$section_size[1]; $i++) {
+    if($section_2[0][$i]) $cnt++;
+}
+for($i=0; $i<$section_size[2]; $i++) {
+    if($section_3[0][$i]) $cnt++;
+}
+for($i=0; $i<$section_size[3]; $i++) {
+    if($section_4[0][$i]) $cnt++;
+}
+
+if($cnt == 0) {
+    $section_1[0][0] = ".";
+}
 
 $sql = "delete from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level';";
 sql_query($sql);
 
 if($section_1[0][0]) {
-    $c_name = "개념마스터";
+    if($level == "시그마") $c_name = "유형마스터";
+    else $c_name = "개념마스터";
     for($i=0; $i<$section_size[0]; $i++) {
         $answer_id = rand(1, 22222).":".date("mds");
         $sql = "INSERT INTO `answer_master`
@@ -47,7 +65,8 @@ if($section_1[0][0]) {
 }
 
 if($section_2[0][0]) {
-    $c_name = "개념확인";
+    if($level == "시그마") $c_name = "유형확인";
+    else $c_name = "개념확인";
     for($i=0; $i<$section_size[1]; $i++) {
         $answer_id = rand(22222, 44444).":".date("mds");
         $sql = "INSERT INTO `answer_master`

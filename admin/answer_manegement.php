@@ -65,8 +65,8 @@ if(!$_GET['page']) {
                         }
                        if($n != 1) {
                            if($t >= $page*10 && $t <= ($page*10+10)) {
-                               if($ac_data['grade'] <= 6) $r_grade = "초등 ".$ac_data['grade']."학년";
-                               else $r_grade = "중등 ".($ac_data['grade']-6)."학년";
+                               if($ac_data['grade'] <= 6) $r_grade = "초등 ".$ac_data['grade'];
+                               else $r_grade = "중등 ".($ac_data['grade']-6);
                                $del_value = $ac_data['book_type']."|".$ac_data['unit']."|".$ac_data['grade']."|".$ac_data['semester']."|".$ac_data['level'];
                                echo '<tr>';
                                echo '     <td><input type="checkbox" name="answer_chk[]" value="'.$del_value.'"></td>';
