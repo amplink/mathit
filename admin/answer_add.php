@@ -58,7 +58,7 @@ include_once('_common.php');
                     </thead>
                     <tbody>
                         <tr>
-                            <td><select name="book_type" id="book_type" onchange="chk_sigma($('#level'))">
+                            <td><select name="book_type" id="book_type" onchange="chk_sigma(this)">
                                     <option value="알파">알파</option>
                                     <option value="베타">베타</option>
                                 </select></td>
@@ -396,7 +396,13 @@ include_once('_common.php');
         $("#nav_3").parent().css("border-right", "solid 1px rgb(150, 150, 150)");
     }
 
-    function chk_sigma(e) {
+    function chk_sigma(f) {
+
+
+        //f is garabage event
+        var e = $("#level")[0];
+
+
         if($("#book_type").val() == "베타") {
             $("#unit option:contains('총정리(1)')").val("중간평가");
             $("#unit option:contains('총정리(1)')").text("중간평가");
