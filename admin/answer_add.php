@@ -515,11 +515,12 @@ include_once('_common.php');
                 $("#nav_2").parent().css("border-right", "0px");
             } else {
                 show_all();
-                $("#nav_1").text("개념마스터");
-                $("#nav_2").text("단원마무리");
+                // $("#nav_1").text("개념마스터");
+                // $("#nav_2").text("단원마무리");
                 $("#nav_3").parent().show();
                 // $("#nav_4").parent().hide();
                 $("#nav_2").parent().css("border-right", "solid 1px rgb(150, 150, 150)");
+                chk_sigma(e);
             }
         }
         if($('#book_type').val() == "베타") {
