@@ -45,7 +45,7 @@ if (G5_IS_MOBILE) {
     echo '<meta name="format-detection" content="telephone=no">'.PHP_EOL;
 } else {
     echo '<meta http-equiv="imagetoolbar" content="no">'.PHP_EOL;
-    echo '<link rel="icon" type="image/png" sizes="96x96" href="'.G5_ADMIN_URL.'/img/f.png">'.PHP_EOL;
+    echo '<link rel="icon" type="image/png" sizes="96x96" href="img/f.png">'.PHP_EOL;
     echo '<meta http-equiv="X-UA-Compatible" content="IE=Edge">'.PHP_EOL;
 }
 
