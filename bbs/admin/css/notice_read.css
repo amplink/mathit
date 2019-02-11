@@ -1,0 +1,302 @@
+.section {
+    width: 100%;
+    height: auto;
+    padding: 0 30px;
+}
+
+.head_section {
+    width: 100%;
+    height: 60px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 10px rgb(200, 200, 200);
+    padding: 0 20px;
+    margin-top: 20px;
+}
+
+.l_title {
+    position: relative;
+    top: 18px;
+    display: inline-block;
+}
+
+.l_title p {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/*
+
+.search_box_wrap {
+    display: inline-block;
+    width: 300px;
+    float: right;
+    text-align: right;
+}
+
+.search_box_wrap>div {
+    display: inline-block;
+}
+
+.search_input_box {
+    position: relative;
+    top: 13px;
+    width: 170px;
+    height: 30px;
+    border: solid 1px rgb(150, 150, 150);
+    border-right: none;
+}
+
+.search_input_box>input {
+    width: 150px;
+    height: 30px;
+    border: none;
+    padding: 0 10px;
+}
+
+.search_btn {
+    position: relative;
+    top: 14px;
+    right: 4px;
+    width: 60px;
+    height: 32px;
+    line-height: 32px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: rgb(2, 99, 34);
+}
+
+.search_btn a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+*/
+
+.view_section {
+    position: relative;
+    width: 100%;
+    height: 690px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 10px rgb(200, 200, 200);
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+.board_line {
+    width: 100%;
+    height: 60px;
+    border-bottom: solid 1px rgb(150, 150, 150);
+}
+
+.date_div {
+    display: inline-block;
+    width: calc(50% - 3px);
+    height: 100%;
+    border-right: 1px solid rgb(150, 150, 150);
+}
+
+.title_box {
+    display: inline-block;
+    width: 150px;
+    height: 60px;
+    line-height: 60px;
+    background-color: rgb(220, 220, 220);
+    vertical-align: top;
+}
+
+.title_box p {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.contents_box {
+    display: inline-block;
+}
+
+.contents_box>select {
+    position: relative;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    height: 40px;
+    padding: 10px;
+}
+
+.contents_box>p {
+    position: relative;
+    top: 20px;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.writer_div {
+    position: relative;
+    right: 4px;
+    display: inline-block;
+    width: calc(50% - 2px);
+    height: 100%;
+    vertical-align: top;
+}
+
+.radio_group {
+    position: relative;
+    top: 18px;
+    left: 10px;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.notice_range {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.radio_group p {
+    display: inline-block;
+    font-size: 18px;
+}
+
+.contents_box>input {
+    position: relative;
+    top: 9px;
+    left: 10px;
+    display: inline-block;
+    width: 500px;
+    height: 18px;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.input_btn {
+    position: relative;
+    top: 10px;
+    display: inline-block;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    background-color: rgb(2, 99, 34);
+    border-radius: 5px;
+}
+
+.input_btn>a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.smart_edit_input_section {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.section_footer {
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+}
+
+.button_wrap {
+    height: 40px;
+    float: right;
+}
+
+.button_wrap>div {
+    display: inline-block;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+}
+
+.modify_btn {
+    background-color: rgb(2, 99, 34);
+    margin-right: 10px;
+}
+
+.modify_btn a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.list_btn {
+    background-color: rgb(255, 255, 255);
+}
+
+.list_btn a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+
+/*
+
+.list_btn_wrap {
+    position: absolute;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.list_btn_wrap>div {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+.list_btn_wrap>div>a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.list_btn_wrap>div>a>img {
+    width: 100%;
+}
+
+.list_btn_wrap>ul {
+    position: relative;
+    bottom: 5px;
+    display: inline-block;
+}
+
+.list_btn_wrap>ul>li {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    margin: 0 10px;
+}
+
+.list_btn_wrap>ul>li>a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: rgb(150, 150, 150);
+}
+
+.list_btn_wrap>ul>li>a.on {
+    color: rgb(50, 50, 50);
+    font-weight: 600;
+}
+
+*/
