@@ -36,14 +36,14 @@ if(!$_GET['page']) {
             <table>
                 <thead>
                     <tr style="text-align:center">
-                        <th><input type="checkbox" id="all_select"></th>
-                        <th>번호</th>
-                        <th>유형</th>
-                        <th>제목</th>
-                        <th>작성일</th>
-                        <th>대상학원 아이디</th>
-                        <th>공지범위</th>
-                        <th>&nbsp;</th>
+                        <th style="width: 5%;"><input type="checkbox" id="all_select"></th>
+                        <th style="width: 5%;">번호</th>
+                        <th style="width: 10%;">유형</th>
+                        <th style="width: 25%;">제목</th>
+                        <th style="width: 15%;">작성일</th>
+                        <th style="width: 20%;">대상학원 아이디</th>
+                        <th style="width: 15%;">공지범위</th>
+                        <th style="width: 5%;">&nbsp</th>
                     </tr>
                 </thead>
                 <tbody>
