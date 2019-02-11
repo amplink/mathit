@@ -204,9 +204,9 @@ $ac_r_size = count($ac_range)-1;
             .catch( error => {
                 console.error( error );
             } );
-        window.onbeforeunload = function() {
-            return true;
-        }
+        // window.onbeforeunload = function() {
+        //     return true;
+        // }
     </script>
 <?php
 include_once('tail.php');

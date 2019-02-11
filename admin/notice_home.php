@@ -95,6 +95,7 @@ if(!$_GET['page']) {
                                 else $client .= $client_arr[$range[$j]].", ";
                             }
                         }
+                        if($res['attach_file']) $res['title'] = $res['title']."<img src='./img/disc.png' width='18' height='18'>";
                         if($i >= $page*10 && $i <= ($page*10+10)) echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>".$i."</a></td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td><td><a style='' href='./update_notice_add.php?id=".$res['id']."'>수정</a></td></tr>";
                         $i++;
                     }

@@ -91,7 +91,7 @@ include_once('head.php');
                             $res = mysqli_query($connect_db, $sql);
                             while($ac = mysqli_fetch_array($res)) {
                                 ?>
-                                <option value="<?=$ac["client_id"];?>"><?=$ac["client_name"];?></option>
+                                <option value="<?=$ac["client_id"];?>" selected><?=$ac["client_name"];?></option>
                                 <?php
                                 $i++;
                             }
@@ -181,6 +181,7 @@ include_once('head.php');
         if($('#all_select').prop('checked')) $('.radio_group>input[type=checkbox]').prop('checked', true);
         else $('input[type=checkbox]').prop('checked', false);
     });
+
     // }
     ClassicEditor
         .create( document.querySelector( '#content' ) )
@@ -188,9 +189,9 @@ include_once('head.php');
             console.error( error );
         });
 
-    window.onbeforeunload = function() {
-        return true;
-    }
+    // window.onbeforeunload = function() {
+    //
+    // }
 </script>
 
 <?php
