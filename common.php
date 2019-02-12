@@ -661,6 +661,34 @@ function api_calls_get($link) {
 
     return $res;
 };
+
+// mathit api call function(GET, not json)
+function api_calls_get_str($link) {
+    $url = 'https://www.edusys.co.kr:8080'.$link;
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//    curl_setopt($ch, CURLOPT_PUT, 1);
+
+    $res = curl_exec ($ch);
+
+    curl_close($ch);
+
+    return $res;
+}
+
+// 페이지 이동
+function location_href($link) {
+    echo "<script>location.href='".$link."';</script>";
+}
+
+// 알림창
+function alert_msg($msg) {
+    echo "<script>alert('".$msg."');</script>";
+}
+
 ob_start();
 
 // 자바스크립트에서 go(-1) 함수를 쓰면 폼값이 사라질때 해당 폼의 상단에 사용하면

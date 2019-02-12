@@ -32,7 +32,7 @@ if ($url) {
     $link = G5_BBS_URL.'/board.php?bo_table='.$bo_table;
 } else {
     //190130 앰플링크 손민석
-    $link = G5_URL."/admin/login.php";
+    $link = G5_URL."/login.php";
 }
 
 goto_url($link);
