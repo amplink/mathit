@@ -16,9 +16,6 @@
     left: 6px;
 }
 
-.homework_menu:nth-child(2) {
-}
-
 .homework_menu a {
     display: block;
     width: 100%;
@@ -60,7 +57,7 @@
 
 .left_box {
     display: inline-block;
-    width: 360px;
+    width: 300px;
     height: 100%;
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
@@ -179,7 +176,8 @@ table tbody tr:nth-child(2n) {
 
 .right_wrap {
     display: inline-block;
-    width: calc(100% - 458px);
+    width: calc(100% - 352px);
+    float: right;
 }
 
 .right_box {
@@ -187,12 +185,14 @@ table tbody tr:nth-child(2n) {
     height: 100%;
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
+    box-sizing: border-box;
     padding: 0 20px;
 }
 
 .right_box_1 {
     border-bottom: solid 1px rgb(220, 220, 220);
     padding: 20px 0;
+    overflow: hidden;
 }
 
 .r_left_box {
@@ -254,6 +254,7 @@ table tbody tr:nth-child(2n) {
 .r_right_box {
     display: inline-block;
     width: calc(50% - 2px);
+    float: right;
 }
 
 .right_box_2 {
@@ -300,8 +301,6 @@ table tbody tr:nth-child(2n) {
 }
 
 .r_btn_wrap {
-    position: relative;
-    left: 40px;
     float: right;
 }
 
@@ -327,6 +326,3 @@ table tbody tr:nth-child(2n) {
 .student_delete_btn {
     width: 130px;
 }
-
-
-

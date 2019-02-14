@@ -55,7 +55,7 @@
 
 .s_info_left {
     display: inline-block;
-    width: calc(50% - 12px);
+    width: auto;
     height: 100%;
     padding-right: 10px;
 }
@@ -67,13 +67,17 @@
 
 .l_div_text {
     display: inline-block;
-    width: 100px;
+    width: 40px;
     height: 20px;
     font-size: 18px;
     font-weight: 600;
     border-left: solid 4px rgb(32, 175, 68);
     vertical-align: top;
-    padding-left: 20px;
+    padding-left: 10px;
+}
+
+.record_detail_table_section .l_div_text {
+    width: 80px;
 }
 
 .r_div_content {
@@ -86,7 +90,7 @@
 
 .s_info_right {
     display: inline-block;
-    width: calc(50% - 12px);
+    width: auto;
     height: 100%;
     padding-left: 10px;
     vertical-align: top;

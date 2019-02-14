@@ -16,9 +16,6 @@
     left: 6px;
 }
 
-.homework_menu:nth-child(2) {
-}
-
 .homework_menu a {
     display: block;
     width: 100%;
@@ -56,11 +53,12 @@
     width: 100%;
     max-width: 1400px;
     margin: auto;
+    overflow: hidden;
 }
 
 .left_box {
     display: inline-block;
-    width: 360px;
+    width: 300px;
     height: 100%;
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
@@ -179,7 +177,8 @@ table tbody tr:nth-child(2n) {
 
 .right_wrap {
     display: inline-block;
-    width: calc(100% - 458px);
+    width: calc(100% - 352px);
+    float: right;
 }
 
 .right_box {
@@ -187,12 +186,14 @@ table tbody tr:nth-child(2n) {
     height: 100%;
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
+    box-sizing: border-box;
     padding: 0 20px;
 }
 
 .right_box_1 {
     border-bottom: solid 1px rgb(220, 220, 220);
     padding: 20px 0;
+    overflow: hidden;
 }
 
 .r_left_box {
@@ -203,7 +204,9 @@ table tbody tr:nth-child(2n) {
 .division {
     width: 100%;
     height: 30px;
+    overflow: hidden;
     margin-top: 10px;
+    white-space: nowrap;
 }
 
 .division:first-child {
@@ -212,16 +215,25 @@ table tbody tr:nth-child(2n) {
 
 .l_div_title {
     display: inline-block;
-    width: 100px;
+    width: 90px;
     font-size: 18px;
     font-weight: 600;
     border-left: solid 4px rgb(32, 175, 68);
-    padding-left: 15px;
+    padding-left: 10px;
 }
 
-.division input {
+.l_input {
     display: inline-block;
-    width: 257px;
+    width: auto;
+    min-width: 130px;
+    max-width: 250px;
+    height: 15px;
+    padding: 5px;
+}
+
+.division .score_input_1 {
+    display: inline-block;
+    width: 48px;
     height: 15px;
     padding: 5px;
 }
@@ -247,7 +259,7 @@ table tbody tr:nth-child(2n) {
 }
 
 .score_input:nth-child(3) {
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .score_input input {
@@ -257,6 +269,7 @@ table tbody tr:nth-child(2n) {
 .r_right_box {
     display: inline-block;
     width: calc(50% - 2px);
+    float: right;
 }
 
 .division select {
@@ -319,8 +332,6 @@ table tbody tr:nth-child(2n) {
 }
 
 .r_btn_wrap {
-    position: relative;
-    left: 40px;
     float: right;
 }
 
@@ -342,5 +353,3 @@ table tbody tr:nth-child(2n) {
     color: rgb(255, 255, 255);
     text-align: center;
 }
-
-

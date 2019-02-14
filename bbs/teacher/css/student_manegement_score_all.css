@@ -29,6 +29,14 @@
     padding: 10px;
 }
 
+.student_table_section table thead tr th:nth-child(1) {
+    min-width: 120px;
+}
+
+.student_table_section table thead tr th:nth-child(2) {
+    min-width: 60px;
+}
+
 .student_table_section table tbody tr td {
     background-color: rgb(233, 240, 243);
     border-right: solid 1px rgb(230, 230, 230);
