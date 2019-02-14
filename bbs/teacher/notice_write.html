@@ -59,16 +59,16 @@
                     <p>공지범위</p>
                 </div>
                 <div class="option_content">
-                    <div class="range_radio"><input type="checkbox" name="read_range">
+                    <div class="range_radio"><input type="checkbox" name="read_range" class="check_all">
                         <p>전체</p>
                     </div>
-                    <div class="range_radio"><input type="checkbox" name="read_range">
+                    <div class="range_radio"><input type="checkbox" name="read_range" class="oj">
                         <p>전임강사</p>
                     </div>
-                    <div class="range_radio"><input type="checkbox" name="read_range">
-                        <p>관리자</p>
+                    <div class="range_radio"><input type="checkbox" name="read_range" class="oj">
+                        <p>체점강사</p>
                     </div>
-                    <div class="range_radio"><input type="checkbox" name="read_range">
+                    <div class="range_radio"><input type="checkbox" name="read_range" class="oj">
                         <p>학생</p>
                     </div>
                 </div>
@@ -181,6 +181,13 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function(){
+          $('.check_all').click(function(){
+              $('.oj').prop('checked', this.checked);
+          });
+        });
+    </script>
 </body>
 
 </html>
