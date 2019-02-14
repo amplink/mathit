@@ -662,23 +662,6 @@ function api_calls_get($link) {
     return $res;
 };
 
-// mathit api call function(GET, not json)
-function api_calls_get_str($link) {
-    $url = 'https://www.edusys.co.kr:8080'.$link;
-
-    $ch = curl_init();
-
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-//    curl_setopt($ch, CURLOPT_PUT, 1);
-
-    $res = curl_exec ($ch);
-
-    curl_close($ch);
-
-    return $res;
-}
-
 // 페이지 이동
 function location_href($link) {
     echo "<script>location.href='".$link."';</script>";
