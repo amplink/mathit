@@ -32,7 +32,7 @@
 
 .l_section {
     display: inline-block;
-    width: calc(40% - 43px);
+    width: 508px;
     height: 100%;
     border-right: solid 1px rgb(220, 220, 220);
     padding: 0 20px;
@@ -173,21 +173,21 @@
 /**/
 
 .r_section {
+    position: relative;
+    right: 4px;
     display: inline-block;
-    width: calc(60% - 2px);
+    width: calc(100% - 553px);
     height: 100%;
-    vertical-align: top;
+    float: right;
 }
 
 .board_line {
-    width: 100%;
+    width: 101%;
     height: 40px;
     border-bottom: solid 1px rgb(220, 220, 220);
 }
 
 .title_side {
-    position: relative;
-    right: 4px;
     display: inline-block;
     width: 150px;
     height: 100%;
@@ -204,24 +204,24 @@
 }
 
 .content_side {
-    display: inline-block;
-    width: calc(100% - 165px);
-    padding-left: 10px;
+    width: calc(100% - 172px);
+    height: calc(100% - 10px);
+    float: right;
+    padding: 5px 10px;
 }
 
 .content_side p {
     font-size: 14px;
+    line-height: 30px;
 }
 
 .content_side input {
-    width: 500px;
-    height: 15px;
+    width: calc(100% - 20px);
+    height: calc(100% - 10px);
     padding: 3px 5px;
 }
 
 .board_main_text_section {
-    position: relative;
-    right: 4px;
     width: calc(100% - 36px);
     height: 447px;
     background-color: rgb(240, 240, 240);

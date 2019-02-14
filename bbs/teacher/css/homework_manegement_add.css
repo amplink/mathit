@@ -16,9 +16,6 @@
     left: 6px;
 }
 
-.homework_menu:nth-child(2) {
-}
-
 .homework_menu a {
     display: block;
     width: 100%;
@@ -252,10 +249,11 @@ table tbody tr:nth-child(2n) {
 
 .book_table {
     width: calc(100% - 2px);
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
     border: solid 1px rgb(220, 220, 220);
     margin-top: 10px;
+    padding-bottom: 10px;
 }
 
 .book_table tbody tr td {

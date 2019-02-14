@@ -87,6 +87,7 @@
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
     margin: auto;
+    overflow: hidden;
 }
 
 .l_section {
@@ -102,7 +103,8 @@
     width: calc(60% - 42px);
     height: 100%;
     border-right: solid 1px rgb(220, 220, 220);
-    padding: 0 20px;
+    float: right;
+    border-left: solid 1px rgb(220, 220, 220);
 }
 
 .title_section {
@@ -130,7 +132,7 @@
     border: solid 1px rgb(220, 220, 220);
     background-color: rgb(235, 235, 235);
     overflow-x: hidden;
-    overflow-y: auto; 
+    overflow-y: auto;
     margin-top: 10px;
 }
 
@@ -162,36 +164,13 @@
     background-color: rgb(252, 252, 252);
 }
 
-.img_input_place {
+.paper_img_input {
+    width: 80%;
+    height: 100%;
+    background-color: rgb(220, 220, 220);
     background-position: center;
     background-size: cover;
-}
-
-.prev_btn {
-    position: relative;
-    top: 280px;
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-}
-
-.prev_btn img {
-    width: 100%;
-}
-
-.next_btn {
-    position: relative;
-    top: 280px;
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-}
-
-.next_btn img {
-    display: inline-block;
-    width: 100%;
+    margin: auto;
 }
 
 .paper_img_section {
