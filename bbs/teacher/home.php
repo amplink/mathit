@@ -1,9 +1,75 @@
 <?php
 include_once ('./_common.php');
 session_start();
-if(!$_SESSION['t_id']) {
+if(!$_SESSION['t_uid']) {
     alert('로그인을 먼저 해주세요.');
     location_href("./login.php");
+}
+$ac = $_SESSION['client_no'];
+$link = "/api/math/class?client_no=".$ac;
+$r = api_calls_get($link);
+
+// 학기
+$t_year = array();
+$chk = 0;
+$cnt = 0;
+for($i=1; $i<count($r); $i++) {
+    $chk = 0;
+    for($j=0; $j<count($t_year); $j++) {
+        if($t_year[$j] == $r[$i][3]) $chk = 1;
+    }
+    if(!$chk) {
+        $t_year[$cnt] = $r[$i][3];
+        $cnt++;
+    }
+}
+$year = array();
+$quarter = array();
+
+for($i=0; $i<count($t_year); $i++) {
+    $t = explode(" ", $t_year[$i]);
+    $year[$i] = $t[0];
+    $quarter[$i] = $t[1];
+}
+
+// 시간표
+$link = "/api/math/teacher_class?client_no=126&t_uid=".$_SESSION['t_uid'];
+$r = api_calls_get($link);
+
+$d_uid = array();
+$chk = 0;
+$cnt = 0;
+for($i=1; $i<count($r); $i++) {
+    $chk = 0;
+    for($j=0; $j<count($d_uid); $j++) {
+        if($d_uid[$j] == $r[$i][0]) $chk = 1;
+    }
+    if(!$chk) {
+        $d_uid[$cnt] = $r[$i][0];
+        $d_name[$cnt] = $r[$i][4];
+        $cnt++;
+    }
+}
+
+$time = array();
+$cnt = 0;
+for($i=0; $i<count($d_uid); $i++) {
+    $link = "/api/math/timetable?client_no=".$ac."&d_uid=".$d_uid[$i];
+    $r = api_calls_get($link);
+    if(count($r)) {
+        for($j=0; $j<count($r); $j++) {
+            $cnt = 0;
+            if($r[$j][2] == $_SESSION['t_uid']) {
+                $time[$i] = $r[$j][0];
+                for($k=1; $k<count($r[$j]); $k++) {
+                    if($k%3==0) {
+                        if($r[$j][$k]) $day[$i][$cnt] = $r[$j][$k];
+                        $cnt++;
+                    }
+                }
+            }
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -29,7 +95,7 @@ if(!$_SESSION['t_id']) {
     </div>
     <div class="home_btn"><a href="home.html"><img src="img/home.png" alt="home_icon"></a></div>
     <div class="logo_section">
-        <div class="logo"><a href="home.html"><img src="img/logo_white.png" alt="header_logo"></a></div>
+        <div class="logo"><a href="home.php"><img src="img/logo_white.png" alt="header_logo"></a></div>
         <p class="navigation_text">HOME</p>
     </div>
     <div class="member_info_wrap">
@@ -48,14 +114,14 @@ if(!$_SESSION['t_id']) {
                 <p class="left_text">학기</p>
                 <div class="day_select">
                     <select name="year_select" id="year_select">
-                        <option value="2018">2018</option>
-                        <option value="2019">2019</option>
+                        <?
+                            for($i=0; $i<count($year); $i++) echo "<option value='".$year[$i]."'>".$year[$i]."</option>";
+                        ?>
                     </select>
                     <select name="quarter_select" id="quarter_select">
-                        <option value="1_quarter">1분기</option>
-                        <option value="2_quarter">2분기</option>
-                        <option value="3_quarter">3분기</option>
-                        <option value="4_quarter">4분기</option>
+                        <?
+                            for($i=0; $i<count($quarter); $i++) echo "<option value='".$quarter[$i]."'>".$quarter[$i]."</option>";
+                        ?>
                     </select>
                 </div>
             </div>
@@ -83,128 +149,108 @@ if(!$_SESSION['t_id']) {
             <tbody>
             <tr>
                 <td>1교시</td>
-                <td>pm 3:00 ~ 4:00</td>
-                <td class="class_type_1">
-                    <!---->
-                    <a href="student_manegement_record.html">
-                        <div class="class_info">
-                            <p class="class_name">루트</p>
-                            <p class="class_grade">초6</p>
-                            <p class="class_other">
-                                <span>(</span>
-                                <span>10</span>
-                                <span>)</span>
-                            </p>
-                        </div>
-                    </a>
-                    <!---->
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>pm 4:00 ~ 5:30</td>
+                <?php
+                for($i=0; $i<7; $i++) {
+                    if($day[0][$i]) {
+                        ?>
+                        <td>
+                            <a href="student_manegement_record.html">
+                                <div class="class_info">
+                        <?php
+                        for($j=0; $j<count($time); $j++) {
+                            if($time[$j] == 1) {
+                                echo "<p>".$d_name[$j]."</p>";
+                            }
+                        }
+                        ?>
+                                </div>
+                            </a>
+                        </td>
+                        <?php
+                    }else {
+                        echo "<td></td>";
+                    }
+                }
+                ?>
             </tr>
             <tr>
                 <td>2교시</td>
-                <td>pm 4:00 ~ 5:00</td>
-                <td></td>
-                <td class="class_type_2">
-                    <!---->
-                    <a href="student_manegement_record.html">
-                        <div class="class_info">
-                            <p class="class_name">루트</p>
-                            <p class="class_grade">초6</p>
-                            <p class="class_other">
-                                <span>(</span>
-                                <span>10</span>
-                                <span>)</span>
-                            </p>
-                        </div>
-                    </a>
-                    <!---->
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>pm 5:30 ~ 7:00</td>
+                <?php
+                for($i=0; $i<7; $i++) {
+                    if($day[0][$i]) {
+                        ?>
+                        <td>
+                            <a href="student_manegement_record.html">
+                                <div class="class_info">
+                                    <?php
+                                    for($j=0; $j<count($time); $j++) {
+                                        if($time[$j] == 2) {
+                                            echo "<p>".$d_name[$j]."</p>";
+                                        }
+                                    }?>
+                                </div>
+                            </a>
+                        </td>
+                        <?php
+                    }else {
+                        echo "<td></td>";
+                    }
+                }
+                ?>
             </tr>
             <tr>
                 <td>3교시</td>
-                <td>pm 5:00 ~ 6:00</td>
-                <td></td>
-                <td></td>
-                <td class="class_type_3">
-                    <!---->
-                    <a href="student_manegement_record.html">
-                        <div class="class_info">
-                            <p class="class_name">루트</p>
-                            <p class="class_grade">초6</p>
-                            <p class="class_other">
-                                <span>(</span>
-                                <span>10</span>
-                                <span>)</span>
-                            </p>
-                        </div>
-                    </a>
-                    <!---->
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>pm 7:00 ~ 8:30</td>
+                <?php
+                for($i=0; $i<7; $i++) {
+                    if($day[0][$i]) {
+                        ?>
+                        <td>
+                            <a href="student_manegement_record.html">
+                                <div class="class_info">
+                                    <?php
+                                    for($j=0; $j<count($time); $j++) {
+                                        if($time[$j] == 3) {
+                                            echo "<p>".$d_name[$j]."</p>";
+                                        }
+                                    }?>
+                                </div>
+                            </a>
+                        </td>
+                        <?php
+                    }else {
+                        echo "<td></td>";
+                    }
+                }
+                ?>
             </tr>
             <tr>
                 <td>4교시</td>
-                <td>pm 6:00 ~ 7:00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="class_type_4">
-                    <!---->
-                    <a href="student_manegement_record.html">
-                        <div class="class_info">
-                            <p class="class_name">루트</p>
-                            <p class="class_grade">초6</p>
-                            <p class="class_other">
-                                <span>(</span>
-                                <span>10</span>
-                                <span>)</span>
-                            </p>
-                        </div>
-                    </a>
-                    <!---->
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>5교시</td>
-                <td>pm 7:00 ~ 8:00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="class_type_5">
-                    <!---->
-                    <a href="student_manegement_record.html">
-                        <div class="class_info">
-                            <p class="class_name">루트</p>
-                            <p class="class_grade">초6</p>
-                            <p class="class_other">
-                                <span>(</span>
-                                <span>10</span>
-                                <span>)</span>
-                            </p>
-                        </div>
-                    </a>
-                    <!---->
-                </td>
-                <td></td>
-                <td></td>
+                <td>pm 8:30 ~ 10:00</td>
+                <?php
+                for($i=0; $i<7; $i++) {
+                    if($day[0][$i]) {
+                        ?>
+                        <td>
+                            <a href="student_manegement_record.html">
+                                <div class="class_info">
+                                    <?php
+                                    for($j=0; $j<count($time); $j++) {
+                                        if($time[$j] == 4) {
+                                            echo "<p>".$d_name[$j]."</p>";
+                                        }
+                                    }?>
+                                </div>
+                            </a>
+                        </td>
+                        <?php
+                    }else {
+                        echo "<td></td>";
+                    }
+                }
+                ?>
             </tr>
             </tbody>
         </table>
@@ -260,14 +306,19 @@ if(!$_SESSION['t_id']) {
     <div class="hamnav_menu_wrap">
         <div class="hamnav_menu"><a href="#none"><span>학급목록</span></a>
             <div class="hamnav_class_list">
-                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">루트</span><span
-                            class="class_grade_">초6</span></a></div>
-                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">파이</span><span
-                            class="class_grade_">초6</span></a></div>
-                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">시그마</span><span
-                            class="class_grade_">초6</span></a></div>
-                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">루트</span><span
-                            class="class_grade_">중1</span></a></div>
+<!--                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">루트</span><span-->
+<!--                            class="class_grade_">초6</span></a></div>-->
+                <?php
+                for($i=0; $i<count($d_name); $i++) {
+                    ?>
+                    <div class="hamnav_class"><a href="student_manegement_record.html">
+                            <span class="class_title"><?=$d_name[$i]?></span>
+                        </a>
+                    </div>
+                    <?php
+                }
+                ?>
+
             </div>
         </div>
         <div class="hamnav_menu"><a href="homework_manegement_add.html"><span>숙제생성</span></a></div>
@@ -315,3 +366,6 @@ if(!$_SESSION['t_id']) {
 </body>
 
 </html>
+<script>
+
+</script>
