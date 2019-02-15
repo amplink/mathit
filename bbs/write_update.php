@@ -195,9 +195,9 @@ if ($w == '' || $w == 'u') {
 
 $is_use_captcha = ((($board['bo_use_captcha'] && $w !== 'u') || $is_guest) && !$is_admin) ? 1 : 0;
 
-if ($is_use_captcha && !chk_captcha()) {
-    alert('자동등록방지 숫자가 틀렸습니다.');
-}
+//if ($is_use_captcha && !chk_captcha()) {
+//    alert('자동등록방지 숫자가 틀렸습니다.');
+//}
 
 if ($w == '' || $w == 'r') {
     if (isset($_SESSION['ss_datetime'])) {
