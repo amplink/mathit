@@ -260,26 +260,18 @@ for($i=0; $i<count($d_uid); $i++) {
             <p>공지사항</p>
         </div>
         <div class="notice_contents_wrap">
-            <div class="notice_content">
-                <a href="#none"><span>&#149;</span> 공지사항 제목 또는 미리보기 내용 내용이 길어지면 생략됩니다 길어지면 생략됩니다 길어지면 생략됩니다. 공지사항
-                    제목 또는 미리보기 내용 내용이 길어지면 생략됩니다 길어지면 생략됩니다 길어지면 생략됩니다. 공지사항 제목 또는 미리보기 내용 내용이 길어지면 생략됩니다 길어지면
-                    생략됩니다 길어지면 생략됩니다.</a>
-            </div>
-            <div class="notice_content">
-                <a href="#none"><span>&#149;</span> 공지사항 제목 또는 미리보기 내용</a>
-            </div>
-            <div class="notice_content">
-                <a href="#none"><span>&#149;</span> 공지사항 제목 또는 미리보기 내용</a>
-            </div>
-            <div class="notice_content">
-                <a href="#none"><span>&#149;</span> 공지사항 제목 또는 미리보기 내용</a>
-            </div>
-            <div class="notice_content">
-                <a href="#none"><span>&#149;</span> 공지사항 제목 또는 미리보기 내용</a>
-            </div>
-            <div class="notice_content">
-                <a href="#none"><span>&#149;</span> 공지사항 미리보기 6개까지 노출a</a>
-            </div>
+            <?php
+            $sql = "select * from `teacher_notice`";
+            $result = mysqli_query($connect_db, $sql);
+            while($res = mysqli_fetch_array($result)) {
+                ?>
+                <div class="notice_content">
+                    <a href="./notice_list.php?seq=<?=$res['seq']?>"><span>&#149;</span><?=$res['title']?></a>
+                </div>
+                <?
+            }
+
+            ?>
         </div>
     </div>
 </section>
