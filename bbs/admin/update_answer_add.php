@@ -61,11 +61,11 @@ if($book_type == "베타") {
                 <p>교재정보 등록</p>
                 <div class="btn_wrap">
                     <div class="complete_btn" onclick="myFunction()"><a href="#">완료</a></div>
-                    <div class="cancel_btn"><a href="answer_manegement.php">취소</a></div>
+                    <div class="cancel_btn" onclick="button_can()"><a href="./answer_manegement.php">취소</a></div>
                 </div>
             </div>
             <div class="downside">
-                <table>
+                <table> 
                     <thead>
                     <tr>
                         <th>교재구분</th>
@@ -173,14 +173,14 @@ if($book_type == "베타") {
                         </td>
                         <td class="pt-17"><input type="text" name="a_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
                         <td>
-                            <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                            <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_answer_img_<?=$i;?>">
                         </td>
                         <td style="border-left: none;">
                             <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')">
                             <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
                         </td>
                         <td>
-                            <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                            <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_answer_img_<?=$i;?>">
                         </td>
                         <td style="border-left: none;">
                             <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
@@ -248,14 +248,14 @@ if($book_type == "베타") {
                             </td>
                             <td class="pt-17"><input type="text" name="b_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
                             <td>
-                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="b_answer_img_<?=$i;?>">
                             </td>
                             <td style="border-left: none;">
                                 <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')">
                                 <input type="hidden" name="b_answer_image[]" id="b_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
                             </td>
                             <td>
-                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="b_explain_img_<?=$i;?>">
                             </td>
                             <td style="border-left: none;">
                                 <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
@@ -320,14 +320,14 @@ if($book_type == "베타") {
                             </td>
                             <td class="pt-17"><input type="text" name="c_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
                             <td>
-                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="c_answer_img_<?=$i;?>">
                             </td>
                             <td>
                                 <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')">
                                 <input type="hidden" name="c_answer_image[]" id="c_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
                             </td>
                             <td>
-                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="c_explain_img_<?=$i;?>">
                             </td>
                             <td>
                                 <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')">
@@ -392,14 +392,14 @@ if($book_type == "베타") {
                             </td>
                             <td class="pt-17"><input type="text" name="d_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>"></td>
                             <td>
-                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="d_answer_img_<?=$i;?>">
                             </td>
                             <td>
                                 <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')">
                                 <input type="hidden" name="d_answer_image[]" id="d_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
                             </td>
                             <td>
-                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="d_explain_img_<?=$i;?>">
                             </td>
                             <td>
                                 <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')">
@@ -528,6 +528,7 @@ if($book_type == "베타") {
             var FR= new FileReader();
             FR.onload = function(e) {
                 $("#"+idx+"_answer_base_"+count).val(e.target.result);
+                $("#"+idx+"_answer_img_"+count).attr("src", e.target.result);
             };
             FR.readAsDataURL(input.files[0]);
         }
@@ -538,6 +539,7 @@ if($book_type == "베타") {
             var FR= new FileReader();
             FR.onload = function(e) {
                 $("#"+idx+"_explain_base_"+count).val(e.target.result);
+                $("#"+idx+"_explain_img_"+count).attr("src", e.target.result);
             };
             FR.readAsDataURL(input.files[0]);
         }
@@ -552,5 +554,14 @@ if($book_type == "베타") {
                 $("#unit").html(response);
             }
         });
+    }
+
+    var isShow = 0;
+
+    function button_can() {
+        isShow = 1;
+    }
+    window.onbeforeunload = function () {
+        if(isShow) return "저장하지 않고 떠나시겠습니까?";
     }
 </script>
