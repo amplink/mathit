@@ -128,7 +128,7 @@ include_once('_common.php');
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
                             </td>
-                            <td class="pt-17"><input type="text" name="a_item_number[]" placeholder="문항번호" value=""></td>
+                            <td class="pt-17"><input type="text" name="a_item_number[]" placeholder="문항번호" value="" id="a_item_number_<?=$i?>"></td>
                             <td>
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_answer_img_<?=$i;?>">
                             </td>
@@ -174,7 +174,7 @@ include_once('_common.php');
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
                             </td>
-                            <td class="pt-17"><input type="text" name="b_item_number[]" placeholder="문항번호" value=""></td>
+                            <td class="pt-17"><input type="text" name="b_item_number[]" placeholder="문항번호" value="" id="b_item_number_<?=$i?>"></td>
                             <td>
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="b_answer_img_<?=$i;?>">
                             </td>
@@ -220,7 +220,7 @@ include_once('_common.php');
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
                             </td>
-                            <td class="pt-17"><input type="text" name="c_item_number[]" placeholder="문항번호" value=""></td>
+                            <td class="pt-17"><input type="text" name="c_item_number[]" placeholder="문항번호" value="" id="c_item_number_<?=$i?>"></td>
                             <td>
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="c_answer_img_<?=$i;?>">
                             </td>
@@ -266,7 +266,7 @@ include_once('_common.php');
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
                             </td>
-                            <td class="pt-17"><input type="text" name="d_item_number[]" placeholder="문항번호" value=""></td>
+                            <td class="pt-17"><input type="text" name="d_item_number[]" placeholder="문항번호" value="" id="d_item_number_<?=$i?>"></td>
                             <td>
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="d_answer_img_<?=$i;?>">
                             </td>
@@ -561,6 +561,15 @@ include_once('_common.php');
     var isCnt = 0;
 
     function myFunction1() {
+        var cnt = 0;
+        if($("#a_item_number_0").val()) cnt++;
+        if($("#b_item_number_0").val()) cnt++;
+        if($("#c_item_number_0").val()) cnt++;
+        if($("#d_item_number_0").val()) cnt++;
+        if(cnt == 0) {
+            alert("입력값이 없어 등록되지 않았습니다.");
+            return;
+        }
         var str = $("#answer_add_form").serialize();
 
         $.ajax({
