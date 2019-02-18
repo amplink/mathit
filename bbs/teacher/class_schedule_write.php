@@ -50,21 +50,21 @@ session_start();
             </div>
         </div>
     </div>
+    <form action="class_schedule_write_chk.php" method="post" id="s_form" enctype="multipart/form-data">
     <div class="write_board_section">
         <div class="board_option_line">
             <div class="option_title">
                 <p>제출유형</p>
             </div>
             <div class="option_content">
-                <div class="type_radio"><input type="radio" name="write_type" value="수업계획표">
+                <div class="type_radio"><input type="radio" name="type" value="수업계획표">
                     <p>수업계획표</p>
                 </div>
-                <div class="type_radio"><input type="radio" name="write_type" value="수업일지">
+                <div class="type_radio"><input type="radio" name="type" value="수업일지">
                     <p>수업일지</p>
                 </div>
             </div>
         </div>
-        <form action="class_schedule_write_chk.php" method="post" id="s_form">
         <div class="board_option_line">
             <div class="option_title">
                 <p>공개범위</p>
@@ -97,7 +97,7 @@ session_start();
                 <p>첨부파일</p>
             </div>
             <div class="option_content">
-                <input type="type" placeholder="첨부파일" name="bf_file[]">
+                <input type="file" placeholder="첨부파일" name="bf_file[]">
 <!--                <div class="file_add_btn"><a href="#none">첨부파일</a></div>-->
             </div>
         </div>

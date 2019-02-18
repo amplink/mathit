@@ -315,8 +315,8 @@ for($i=0; $i<count($d_uid); $i++) {
         </div>
         <div class="hamnav_menu"><a href="homework_manegement_add.html"><span>숙제생성</span></a></div>
         <div class="hamnav_menu"><a href="student_manegement_score_all.html"><span>채점바로가기</span></a></div>
-        <div class="hamnav_menu"><a href="class_schedule_list.html"><span>수업계획표/일지</span></a></div>
-        <div class="hamnav_menu"><a href="notice_list.html"><span>공지사항</span></a></div>
+        <div class="hamnav_menu"><a href="class_schedule_list.php"><span>수업계획표/일지</span></a></div>
+        <div class="hamnav_menu"><a href="notice_list.php"><span>공지사항</span></a></div>
     </div>
     <div class="alarm_box_wrap_wrap">
         <div class="alarm_box_wrap">

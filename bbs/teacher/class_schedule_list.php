@@ -97,8 +97,8 @@ session_start();
                 <p class="left_text">수업계획표/일지</p>
             </div>
             <div class="head_right">
-                <div class="class_menu on"><a href="class_schedule_list.html" class="on">조회</a></div>
-                <div class="class_menu"><a href="class_schedule_write.html">작성</a></div>
+                <div class="class_menu on"><a href="class_schedule_list.php" class="on">조회</a></div>
+                <div class="class_menu"><a href="class_schedule_write.php">작성</a></div>
             </div>
         </div>
     </div>
@@ -154,122 +154,32 @@ session_start();
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><span>1</span></td>
-                        <td><span>제목이 들어갈자리</span>
-                            <div class="new">
-                                <p>new</p>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="have_sign"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span>1</span></td>
-                        <td><span>제목이 들어갈자리</span>
-                            <div class="new">
-                                <p>new</p>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="have_sign"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span>1</span></td>
-                        <td><span>제목이 들어갈자리</span>
-                            <div class="new">
-                                <p>new</p>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="have_sign"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span>1</span></td>
-                        <td><span>제목이 들어갈자리</span>
-                            <div class="new">
-                                <p>new</p>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="have_sign"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span>1</span></td>
-                        <td><span>제목이 들어갈자리</span>
-                            <div class="new">
-                                <p>new</p>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="have_sign"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span>1</span></td>
-                        <td><span>제목이 들어갈자리</span>
-                            <div class="new">
-                                <p>new</p>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="have_sign"></div>
-                        </td>
-                    </tr>
+                    <?php
+                    $sql = "select * from `teacher_schedule`";
+                    $result = mysqli_query($connect_db, $sql);
+                    $i=1;
+                    while($res = mysqli_fetch_array($result)) {
+                        ?>
+                        <tr onclick="call_content(<?=$res['seq']?>)">
+                            <td><span><?=$i?></span></td>
+                            <td><span><?=$res['title']?></span>
+                                <div class="new">
+                                    <p>new</p>
+                                </div>
+                            </td>
+                            <td>
+                                <?php if($res['file_url']) ?><div class="have_sign"></div>
+                            </td>
+                        </tr>
+                        <?
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="r_section">
-            <div class="board_line">
-                <div class="title_side">
-                    <p>제목</p>
-                </div>
-                <div class="content_side">
-                    <p>3-2학기 정규교재</p>
-                </div>
-            </div>
-            <div class="board_line">
-                <div class="title_side">
-                    <p>작성일</p>
-                </div>
-                <div class="content_side">
-                    <p>2018-11-15</p>
-                </div>
-            </div>
-            <div class="board_line">
-                <div class="title_side">
-                    <p>작성자</p>
-                </div>
-                <div class="content_side">
-                    <p>운영자</p>
-                </div>
-            </div>
-            <div class="board_line">
-                <div class="title_side">
-                    <p>첨부파일</p>
-                </div>
-                <div class="content_side">
-                    <input type="text" placeholder="mathit.jpg">
-                </div>
-            </div>
-            <div class="board_main_text_section">
-                <div class="main_text">
-                    <p>본문 내용이 들어갈자리</p>
-                </div>
-            </div>
-            <div class="btn_section">
-                <div class="l_btn_wrap"></div>
-                <div class="r_btn_wrap">
-                    <div class="add_file_down_btn">
-                        <a href="#none">첨부파일 받기</a>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </section>
@@ -348,3 +258,15 @@ session_start();
 </body>
 
 </html>
+<script>
+    function call_content(seq) {
+        $.ajax({
+            type: "GET",
+            url: "class_schedule_content.php?seq="+seq,
+            dataType: "html",
+            success: function(response){
+                $(".r_section").html(response);
+            }
+        });
+    }
+</script>

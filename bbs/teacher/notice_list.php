@@ -169,12 +169,8 @@ session_start();
         dataType: "html",
         success: function(response){
             $("#notice_val").html(response);
-        }
+        },
     });
-    var seq = <?php echo $_GET['seq'];?>;
-    if(seq) {
-        call_content(seq);
-    }
     function call_content(seq) {
         $.ajax({
             type: "GET",
