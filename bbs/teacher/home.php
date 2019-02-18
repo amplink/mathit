@@ -104,7 +104,7 @@ for($i=0; $i<count($d_uid); $i++) {
             <p class="member_name"><?=$_SESSION['t_name']?></p>
             <p class="member_grade"><?=$_SESSION['t_task']?></p>
         </div>
-        <div class="logout_btn"><a href="../logout.php?url=/bbs/teacher'">로그아웃</a></div>
+        <div class="logout_btn"><a href="../logout.php?url=/bbs/teacher">로그아웃</a></div>
     </div>
 </header>
 <section>

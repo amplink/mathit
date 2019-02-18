@@ -43,7 +43,7 @@ include_once('_common.php');
                 <div class="btn_wrap">
                     <div class="complete_btn" onclick="myFunction()"><a href="#">완료</a></div>
                     <div class="complete_btn" onclick="myFunction1()"><a href="#">중간저장</a></div>
-                    <div class="cancel_btn"><a href="answer_manegement.php">취소</a></div>
+                    <div class="cancel_btn" onclick="button_can()"><a href="./answer_manegement.php">취소</a></div>
                 </div>
             </div>
             <div class="downside">
@@ -575,4 +575,13 @@ include_once('_common.php');
     function go_to_another() {
         location.href="answer_add_beta.php";
     }
+    var isShow = 0;
+
+    function button_can() {
+        isShow = 1;
+    }
+    window.onbeforeunload = function () {
+        if(isShow) return "저장하지 않고 떠나시겠습니까?";
+    }
+
 </script>
