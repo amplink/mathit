@@ -160,8 +160,8 @@ include_once('_common.php');
                     <tr>
                         <th></th>
                         <th>문항번호</th>
-                        <th>정답이미지</th>
-                        <th>풀이이미지</th>
+                        <th colspan="2">정답이미지</th>
+                        <th colspan="2">풀이이미지</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -206,8 +206,8 @@ include_once('_common.php');
                     <tr>
                         <th></th>
                         <th>문항번호</th>
-                        <th>정답이미지</th>
-                        <th>풀이이미지</th>
+                        <th colspan="2">정답이미지</th>
+                        <th colspan="2">풀이이미지</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -252,8 +252,8 @@ include_once('_common.php');
                     <tr>
                         <th></th>
                         <th>문항번호</th>
-                        <th>정답이미지</th>
-                        <th>풀이이미지</th>
+                        <th colspan="2">정답이미지</th>
+                        <th colspan="2">풀이이미지</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -558,6 +558,7 @@ include_once('_common.php');
             $('#nav_3').parent().css("border-right", "0px");
         }
     }
+    var isCnt = 0;
 
     function myFunction1() {
         var str = $("#answer_add_form").serialize();
@@ -570,7 +571,7 @@ include_once('_common.php');
                 alert(error);
             },
             success : function(e){
-                if(e==0) {
+                if(e==0 && isCnt==0) {
                     $.ajax({
                         type : 'post',
                         url : './answer_add_chk1.php',
@@ -580,10 +581,34 @@ include_once('_common.php');
                         },
                         success : function(json){
                             alert("중간 등록이 완료되었습니다.");
+                            isCnt++;
                         },
                     });
-                } else {
-                    alert("중복된 교재정보입니다.");
+                } else if (isCnt != 0) {
+                    $.ajax({
+                        type : 'post',
+                        url : './update_answer_add_chk.php',
+                        data : str,
+                        error: function(xhr, status, error){
+                            alert(error);
+                        },
+                        success : function(json){
+                            $.ajax({
+                                type : 'post',
+                                url : './answer_add_chk1.php',
+                                data : str,
+                                error: function(xhr, status, error){
+                                    alert(error);
+                                },
+                                success : function(json){
+                                    alert("중간 등록이 완료되었습니다.");
+                                    isCnt++;
+                                },
+                            });
+                        }
+                    });
+                } else if(e == 1) {
+                    alert("중복된 교재입니다.");
                 }
             },
         });
@@ -593,7 +618,6 @@ include_once('_common.php');
         location.href="answer_add_beta.php";
     }
     var isShow = 0;
-
     function button_can() {
         isShow = 1;
     }
