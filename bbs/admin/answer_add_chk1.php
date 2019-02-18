@@ -127,7 +127,7 @@ if($section_4[0][0]) {
     }
 }
 
-//echo "<script>alert('중간등록이 완료되었습니다.');</script>";
-//echo "<script>history.back();</script>";
+echo "<script>alert('중간등록이 완료되었습니다.');</script>";
+echo "<script>history.back();</script>";
 
 ?>

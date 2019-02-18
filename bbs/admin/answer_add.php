@@ -559,15 +559,30 @@ include_once('_common.php');
 
     function myFunction1() {
         var str = $("#answer_add_form").serialize();
+
         $.ajax({
             type : 'post',
-            url : './answer_add_chk1.php',
+            url : './answer_add_double_chk.php',
             data : str,
             error: function(xhr, status, error){
                 alert(error);
             },
-            success : function(json){
-                alert("중간 등록이 완료되었습니다.");
+            success : function(e){
+                if(e==0) {
+                    $.ajax({
+                        type : 'post',
+                        url : './answer_add_chk1.php',
+                        data : str,
+                        error: function(xhr, status, error){
+                            alert(error);
+                        },
+                        success : function(json){
+                            alert("중간 등록이 완료되었습니다.");
+                        },
+                    });
+                } else {
+                    alert("중복된 교재정보입니다.");
+                }
             },
         });
     }
