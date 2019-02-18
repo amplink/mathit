@@ -65,7 +65,7 @@ if($book_type == "베타") {
                 </div>
             </div>
             <div class="downside">
-                <table> 
+                <table>
                     <thead>
                     <tr>
                         <th>교재구분</th>
