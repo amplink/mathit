@@ -42,6 +42,7 @@ include_once('_common.php');
                 <p>교재정보 등록</p>
                 <div class="btn_wrap">
                     <div class="complete_btn" onclick="myFunction()"><a href="#">완료</a></div>
+                    <div class="complete_btn" onclick="myFunction1()"><a href="#">중간저장</a></div>
                     <div class="cancel_btn"><a href="answer_manegement.php">취소</a></div>
                 </div>
             </div>
@@ -113,8 +114,8 @@ include_once('_common.php');
                         <tr>
                             <th></th>
                             <th>문항번호</th>
-                            <th>정답이미지</th>
-                            <th>풀이이미지</th>
+                            <th colspan="2">정답이미지</th>
+                            <th colspan="2">풀이이미지</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -123,23 +124,29 @@ include_once('_common.php');
                     for($i=0; $i<10; $i++) {
 
                     ?>
-                    <tr id="item_section_1">
-                        <td>
-                            <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
-                        </td>
-                        <td><input type="text" name="a_item_number[]" placeholder="문항번호"></td>
-                        <td>
-                            <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')">
-                            <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
-                            <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                        </td>
-                    </tr>
+                        <tr id="item_section_1">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td class="pt-17"><input type="text" name="a_item_number[]" placeholder="문항번호" value=""></td>
+                            <td>
+                                <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_answer_img_<?=$i;?>">
+                            </td>
+                            <td style="border-left: none;">
+                                <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')">
+                                <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>" value="">
+                            </td>
+                            <td>
+                                <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_explain_img_<?=$i;?>">
+                            </td>
+                            <td style="border-left: none;">
+                                <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
+                                <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>" value="">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
                     <?
                     }
                     ?>
@@ -163,23 +170,29 @@ include_once('_common.php');
                     for($i=0; $i<10; $i++) {
 
                     ?>
-                    <tr id="item_section_2">
-                        <td>
-                            <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
-                        </td>
-                        <td><input type="text" name="b_item_number[]" placeholder="문항번호"></td>
-                        <td>
-                            <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')">
-                            <input type="hidden" name="b_answer_image[]" id="b_answer_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
-                            <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                        </td>
-                    </tr>
+                        <tr id="item_section_2">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td class="pt-17"><input type="text" name="b_item_number[]" placeholder="문항번호" value=""></td>
+                            <td>
+                                <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="b_answer_img_<?=$i;?>">
+                            </td>
+                            <td style="border-left: none;">
+                                <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')">
+                                <input type="hidden" name="b_answer_image[]" id="b_answer_base_<?=$i;?>" value="">
+                            </td>
+                            <td>
+                                <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="b_explain_img_<?=$i;?>">
+                            </td>
+                            <td style="border-left: none;">
+                                <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
+                                <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>" value="">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
                     <?
                     }
                     ?>
@@ -203,23 +216,29 @@ include_once('_common.php');
                     for($i=0; $i<10; $i++) {
 
                     ?>
-                    <tr id="item_section_3">
-                        <td>
-                            <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
-                        </td>
-                        <td><input type="text" name="c_item_number[]" placeholder="문항번호"></td>
-                        <td>
-                            <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')">
-                            <input type="hidden" name="c_answer_image[]" id="c_answer_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')">
-                            <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                        </td>
-                    </tr>
+                        <tr id="item_section_3">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td class="pt-17"><input type="text" name="c_item_number[]" placeholder="문항번호" value=""></td>
+                            <td>
+                                <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="c_answer_img_<?=$i;?>">
+                            </td>
+                            <td>
+                                <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')">
+                                <input type="hidden" name="c_answer_image[]" id="c_answer_base_<?=$i;?>" value="">
+                            </td>
+                            <td>
+                                <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="c_explain_img_<?=$i;?>">
+                            </td>
+                            <td>
+                                <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')">
+                                <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>" value="">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
                     <?
                     }
                     ?>
@@ -243,23 +262,29 @@ include_once('_common.php');
                     for($i=0; $i<10; $i++) {
 
                     ?>
-                    <tr id="item_section_4">
-                        <td>
-                            <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
-                        </td>
-                        <td><input type="text" name="d_item_number[]" placeholder="문항번호"></td>
-                        <td>
-                            <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')">
-                            <input type="hidden" name="d_answer_image[]" id="d_answer_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')">
-                            <input type="hidden" name="d_explain_image[]" id="d_explain_base_<?=$i;?>">
-                        </td>
-                        <td>
-                            <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
-                        </td>
-                    </tr>
+                        <tr id="item_section_4">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td class="pt-17"><input type="text" name="d_item_number[]" placeholder="문항번호" value=""></td>
+                            <td>
+                                <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="d_answer_img_<?=$i;?>">
+                            </td>
+                            <td>
+                                <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')">
+                                <input type="hidden" name="d_answer_image[]" id="d_answer_base_<?=$i;?>" value="">
+                            </td>
+                            <td>
+                                <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="d_explain_img_<?=$i;?>">
+                            </td>
+                            <td>
+                                <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')">
+                                <input type="hidden" name="d_explain_image[]" id="d_explain_base_<?=$i;?>" value="">
+                            </td>
+                            <td>
+                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                            </td>
+                        </tr>
                     <?
                     }
                     ?>
@@ -343,6 +368,7 @@ include_once('_common.php');
     }
 
     function myFunction() {
+        $("#answer_add_form").attr("action", "./answer_add_chk.php");
         $("#answer_add_form").submit();
     }
 
@@ -351,6 +377,7 @@ include_once('_common.php');
             var FR= new FileReader();
             FR.onload = function(e) {
                 $("#"+idx+"_answer_base_"+count).val(e.target.result);
+                $("#"+idx+"_answer_img_"+count).attr("src", e.target.result);
             };
             FR.readAsDataURL(input.files[0]);
         }
@@ -361,6 +388,7 @@ include_once('_common.php');
             var FR= new FileReader();
             FR.onload = function(e) {
                 $("#"+idx+"_explain_base_"+count).val(e.target.result);
+                $("#"+idx+"_explain_img_"+count).attr("src", e.target.result);
             };
             FR.readAsDataURL(input.files[0]);
         }
@@ -527,6 +555,21 @@ include_once('_common.php');
             $('#nav_4').parent().hide();
             $('#nav_3').parent().css("border-right", "0px");
         }
+    }
+
+    function myFunction1() {
+        var str = $("#answer_add_form").serialize();
+        $.ajax({
+            type : 'post',
+            url : './answer_add_chk1.php',
+            data : str,
+            error: function(xhr, status, error){
+                alert(error);
+            },
+            success : function(json){
+                alert("중간 등록이 완료되었습니다.");
+            },
+        });
     }
 
     function go_to_another() {
