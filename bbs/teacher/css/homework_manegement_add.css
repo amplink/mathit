@@ -297,3 +297,119 @@ table tbody tr:nth-child(2n) {
 .ui-datepicker th {
     background-color: rgb(255, 255, 255);
 }
+
+/*--------------------------*/
+
+.placeholder {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    font-size: 13px;
+    line-height: 1;
+}
+
+.placeholder.selector .var_option {/*문항번호텍스트*/
+    position: relative;
+}
+
+.placeholder.selector .checkbox {/*문항체크박스위치*/
+    position: absolute;
+    display: block;
+    width: 155px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.placeholder.selector .var_option .checkbox i {/*문항체크박스 크기 등*/
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: 1px solid #aaa;
+    border-radius: 1px;
+    background-color: #efe;
+}
+
+.placeholder.selector .var_option.selected .checkbox i {/*선택된 체크박스의 컬러*/
+    background-color: rgb(20, 150, 20);
+    border-color: transparent;
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+}
+
+.placeholder .var_option:hover {/*뒷배경색 onMouse*/
+    /*background-color: #111;*/
+    background-color: #eee;
+}
+
+.headbox {
+    position: relative;
+    border: 1px solid #bbb;
+    cursor: default;
+}
+
+.headbox,
+.combobox { /*헤드박스와 콤보박스*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.headbox .identifier {
+    padding: 4px 22px 4px 8px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.arrow {
+    position: absolute;
+    background-image: url('/teacher/img/dropdown.png');
+    background-size: auto;
+    background-repeat: no-repeat;
+    width: 13px;
+    height: 13px;
+    top: 0;
+    right: 5px;
+    bottom: 0;
+    margin: auto;
+}
+
+.combobox { /*콤보박스*/
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    max-height: 140px;
+    overflow: auto;
+    width: 100%;
+    z-index: 100;
+}
+
+.search input { /*검색창 크기*/
+    width: 100%;
+    padding: 2px 4px;
+    border: 0;
+}
+
+.var_option,
+.search,
+.group_label { /*각 항목들간의 간격*/
+    padding: 6px 8px;
+    border-bottom: 1px solid #eee;
+    cursor: default;
+}
+
+
+.group_label {
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
