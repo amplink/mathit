@@ -9,7 +9,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 //    return;
 //}
 session_start();
-if($_SESSION['t_id']) location_href("./home.html");
+if($_SESSION['t_id']) location_href("./home.php");
 else {
     location_href("./login.php");
 }
