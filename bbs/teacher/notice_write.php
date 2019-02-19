@@ -149,10 +149,19 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
 ?>
 <script>
     ClassicEditor
-        .create( document.querySelector( '#content' ) )
+        .create( document.querySelector( '#content' ),  {
+            toolbar: [
+                'headings',
+                'bold',
+                'italic',
+                'link',
+                'unlink'
+            ]
+        })
         .catch( error => {
             console.error( error );
         });
+
     $(document).ready(function(){
         $('.check_all').click(function(){
             $('.oj').prop('checked', this.checked);
@@ -160,5 +169,8 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
         $('.save_btn').click(function () {
            $('#write_form').submit();
         });
+        $('#cancel_button').click(function () {
+            location.href = 'notice_list.php';
+        })
     });
 </script>

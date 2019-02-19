@@ -170,7 +170,15 @@ include_once ('head.php');
 </html>
 <script>
     ClassicEditor
-        .create( document.querySelector( '#content' ) )
+        .create( document.querySelector( '#content' ) , {
+            toolbar: [
+                'headings',
+                'bold',
+                'italic',
+                'link',
+                'unlink'
+            ]
+        })
         .catch( error => {
             console.error( error );
         });
