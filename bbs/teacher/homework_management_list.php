@@ -1,3 +1,7 @@
+<?php
+include_once ('_common.php');
+include_once ('head.php');
+?>
 <!DOCTYPE html>
 <html>
 
@@ -60,29 +64,7 @@
     </script>
 
 </head>
-
 <body>
-<header>
-    <div class="hamburger_btn">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <div class="home_btn"><a href="home.html"><img src="img/home.png" alt="home_icon"></a></div>
-    <div class="logo_section">
-        <div class="logo"><a href="home.html"><img src="img/logo_white.png" alt="header_logo"></a></div>
-        <p class="navigation_text">숙제관리</p>
-    </div>
-    <div class="member_info_wrap">
-        <div class="member_img"><img src="img/user.png" alt="member_img"></div>
-        <div class="member_info">
-            <p class="member_name">강태민</p>
-            <p class="member_grade">전임강사</p>
-        </div>
-        <div class="logout_btn"><a href="login.html">로그아웃</a></div>
-    </div>
-</header>
-
 <section>
     <div class="head_section">
         <div class="head_section_1400">
@@ -232,60 +214,60 @@
                             </td>
 
                             <td><select name="textbook" id="textbook">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
 
                             <td><select name="grade" id="grade">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
 
                             <td><select name="semester" id="semester">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
 
                             <td><select name="level" id="level">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
 
                             <td><select name="unit" id="unit">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
 
                             <!-- 1번 숙제 -->
                             <td><select name="corner" id="corner">
-                                <option value="base">선택</option>
-                            </select>
+                                    <option value="base">선택</option>
+                                </select>
                             </td>
                             <td><select name="Q_number" id="Q_number">
-                                <option value="base">전체</option>
-                            </select>
+                                    <option value="base">전체</option>
+                                </select>
                             </td>
                             <!-- 2번 숙제 -->
                             <td><select name="corner" id="corner">
-                                <option value="base">선택</option>
-                            </select>
+                                    <option value="base">선택</option>
+                                </select>
                             </td>
                             <td><select name="Q_number" id="Q_number">
-                                <option value="base">전체</option>
-                            </select>
+                                    <option value="base">전체</option>
+                                </select>
                             </td>
                             <!-- 3번 숙제 -->
                             <td><select name="corner" id="corner">
-                                <option value="base">선택</option>
-                            </select>
+                                    <option value="base">선택</option>
+                                </select>
                             </td>
                             <td><select name="Q_number" id="Q_number">
-                                <option value="base">전체</option>
-                            </select>
+                                    <option value="base">전체</option>
+                                </select>
                             </td>
                             <!-- 4번 숙제-->
                             <td><select name="corner" id="corner">
-                                <option value="base">선택</option>
-                            </select>
+                                    <option value="base">선택</option>
+                                </select>
                             </td>
                             <td><select name="Q_number" id="Q_number">
-                                <option value="base">전체</option>
-                            </select>
+                                    <option value="base">전체</option>
+                                </select>
                             </td>
                             <td>
                                 <span>2018-07-01</span>
@@ -307,55 +289,55 @@
                                 <span>숙제명</span>
                             </td>
                             <td><select name="textbook" id="textbook">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
                             <td><select name="grade" id="grade">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
                             <td><select name="semester" id="semester">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
                             <td><select name="level" id="level">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
                             <td><select name="unit" id="unit">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
                             <!-- 1번 숙제 -->
                             <td><select name="corner" id="corner">
-                                <option value="base">선택</option>
-                            </select>
+                                    <option value="base">선택</option>
+                                </select>
                             </td>
                             <td><select name="Q_number" id="Q_number">
-                                <option value="base">전체</option>
-                            </select>
+                                    <option value="base">전체</option>
+                                </select>
                             </td>
                             <!-- 2번 숙제 -->
                             <td><select name="corner" id="corner">
-                                <option value="base">선택</option>
-                            </select>
+                                    <option value="base">선택</option>
+                                </select>
                             </td>
                             <td><select name="Q_number" id="Q_number">
-                                <option value="base">전체</option>
-                            </select>
+                                    <option value="base">전체</option>
+                                </select>
                             </td>
                             <!-- 3번 숙제 -->
                             <td><select name="corner" id="corner">
-                                <option value="base">선택</option>
-                            </select>
+                                    <option value="base">선택</option>
+                                </select>
                             </td>
                             <td><select name="Q_number" id="Q_number">
-                                <option value="base">전체</option>
-                            </select>
+                                    <option value="base">전체</option>
+                                </select>
                             </td>
                             <!-- 4번 숙제-->
                             <td><select name="corner" id="corner">
-                                <option value="base">선택</option>
-                            </select>
+                                    <option value="base">선택</option>
+                                </select>
                             </td>
                             <td><select name="Q_number" id="Q_number">
-                                <option value="base">전체</option>
-                            </select>
+                                    <option value="base">전체</option>
+                                </select>
                             </td>
 
                             <td>
@@ -404,56 +386,56 @@
                                 <span>숙제명</span>
                             </td>
                             <td><select name="textbook" id="textbook">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
                             <td><select name="grade" id="grade">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
                             <td><select name="semester" id="semester">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
                             <td><select name="level" id="level">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
                             <td><select name="unit" id="unit">
-                                <option value="base">선택</option>
-                            </select></td>
+                                    <option value="base">선택</option>
+                                </select></td>
 
                             <!-- 1번 숙제 -->
                             <td><select name="corner" id="corner">
-                                <option value="base">선택</option>
-                            </select>
+                                    <option value="base">선택</option>
+                                </select>
                             </td>
                             <td><select name="Q_number" id="Q_number">
-                                <option value="base">전체</option>
-                            </select>
+                                    <option value="base">전체</option>
+                                </select>
                             </td>
                             <!-- 2번 숙제 -->
                             <td><select name="corner" id="corner">
-                                <option value="base">선택</option>
-                            </select>
+                                    <option value="base">선택</option>
+                                </select>
                             </td>
                             <td><select name="Q_number" id="Q_number">
-                                <option value="base">전체</option>
-                            </select>
+                                    <option value="base">전체</option>
+                                </select>
                             </td>
                             <!-- 3번 숙제 -->
                             <td><select name="corner" id="corner">
-                                <option value="base">선택</option>
-                            </select>
+                                    <option value="base">선택</option>
+                                </select>
                             </td>
                             <td><select name="Q_number" id="Q_number">
-                                <option value="base">전체</option>
-                            </select>
+                                    <option value="base">전체</option>
+                                </select>
                             </td>
                             <!-- 4번 숙제-->
                             <td><select name="corner" id="corner">
-                                <option value="base">선택</option>
-                            </select>
+                                    <option value="base">선택</option>
+                                </select>
                             </td>
                             <td><select name="Q_number" id="Q_number">
-                                <option value="base">전체</option>
-                            </select>
+                                    <option value="base">전체</option>
+                                </select>
 
                             </td>
                             <td>
@@ -479,78 +461,6 @@
         </div>
     </div>
 </section>
-
-<!--hamburger-->
-
-<div class="hamburder_nav">
-    <div class="ham_member_info_wrap">
-        <div class="close_btn_line">
-            <div class="close_btn"><img src="img/close.png" alt="close_icon"></div>
-        </div>
-        <div class="ham_member_info_line">
-            <div class="ham_member_img"><img src="img/user.png" alt="member_img"></div>
-            <div class="ham_member_info">
-                <p class="ham_member_name">강태민</p>
-                <p class="ham_member_grade">전임강사</p>
-            </div>
-        </div>
-        <div class="ham_other_btn_line">
-            <div class="setting_btn"><a href="setting.html"><img src="img/setting.png" alt="setting_icon"></a></div>
-            <div class="alarm_btn"><a href="#none"><img src="img/alarm.png" alt="alarm_icon"></a></div>
-        </div>
-    </div>
-    <div class="hamnav_menu_wrap">
-        <div class="hamnav_menu"><a href="#none"><span>학급목록</span></a>
-            <div class="hamnav_class_list">
-                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">루트</span><span
-                        class="class_grade_">초6</span></a></div>
-                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">파이</span><span
-                        class="class_grade_">초6</span></a></div>
-                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">시그마</span><span
-                        class="class_grade_">초6</span></a></div>
-                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">루트</span><span
-                        class="class_grade_">중1</span></a></div>
-            </div>
-        </div>
-        <div class="hamnav_menu"><a href="homework_manegement_add.html"><span>숙제생성</span></a></div>
-        <div class="hamnav_menu"><a href="student_manegement_score_all.html"><span>채점바로가기</span></a></div>
-        <div class="hamnav_menu"><a href="class_schedule_list.html"><span>수업계획표/일지</span></a></div>
-        <div class="hamnav_menu"><a href="notice_list.html"><span>공지사항</span></a></div>
-    </div>
-    <div class="alarm_box_wrap_wrap">
-        <div class="alarm_box_wrap">
-            <div class="alarm_tri"><img src="img/alarm_tri.png" alt="alarm_tri_icon"></div>
-            <div class="alarm_box">
-                <ul>
-                    <li>
-                        <div class="alarm_content">
-                            <p>알림내용이 들어갈자리입니다.</p>
-                        </div>
-                        <div class="alarm_time">
-                            <p><span>5분</span><span> 전</span></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="alarm_content">
-                            <p>알림내용이 들어갈자리입니다.</p>
-                        </div>
-                        <div class="alarm_time">
-                            <p><span>5분</span><span> 전</span></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="alarm_content">
-                            <p>알림내용이 들어갈자리입니다.</p>
-                        </div>
-                        <div class="alarm_time">
-                            <p><span>5분</span><span> 전</span></p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
     $(document).ready(function () {
         $('.grade_select_box table tbody tr').click(function () {

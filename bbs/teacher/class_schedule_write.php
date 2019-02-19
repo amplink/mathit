@@ -1,6 +1,6 @@
 <?php
 include_once ('_common.php');
-session_start();
+include_once ('head.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,26 +18,6 @@ session_start();
 </head>
 
 <body>
-<header>
-    <div class="hamburger_btn">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <div class="home_btn"><a href="home.html"><img src="img/home.png" alt="home_icon"></a></div>
-    <div class="logo_section">
-        <div class="logo"><a href="home.html"><img src="img/logo_white.png" alt="header_logo"></a></div>
-        <p class="navigation_text">수업계획표/일지</p>
-    </div>
-    <div class="member_info_wrap">
-        <div class="member_img"><img src="img/user.png" alt="member_img"></div>
-        <div class="member_info">
-            <p class="member_name">강태민</p>
-            <p class="member_grade">전임강사</p>
-        </div>
-        <div class="logout_btn"><a href="login.html">로그아웃</a></div>
-    </div>
-</header>
 <section>
     <div class="head_section">
         <div class="head_section_1400">
@@ -45,8 +25,8 @@ session_start();
                 <p class="left_text">수업계획표/일지</p>
             </div>
             <div class="head_right">
-                <div class="class_menu"><a href="class_schedule_list.html">조회</a></div>
-                <div class="class_menu on"><a href="class_schedule_write.html" class="on">작성</a></div>
+                <div class="class_menu"><a href="class_schedule_list.php">조회</a></div>
+                <div class="class_menu on"><a href="class_schedule_write.php" class="on">작성</a></div>
             </div>
         </div>
     </div>
