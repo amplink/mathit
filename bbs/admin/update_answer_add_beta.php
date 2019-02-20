@@ -23,6 +23,7 @@ $book_type = $_GET['book_type'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MathIT Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/answer_add_2.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
