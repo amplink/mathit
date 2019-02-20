@@ -110,7 +110,12 @@
     display: inline-block;
     width: 600px;
     height: 15px;
+    font-size: 18px;
     padding: 5px;
+}
+
+.option_content>input::placeholder {
+    font-size: 16px;
 }
 
 .option_content>select {

@@ -52,8 +52,14 @@ body {
     width: calc(100% - 10px);
     height: 25px;
     border: solid 1px rgb(150, 150, 150);
+    font-size: 20px;
     padding: 5px;
     margin-top: 10px;
+}
+
+.login_input_section>form>input::placeholder {
+    font-size: 16px;
+
 }
 
 .login_input_section select {
