@@ -76,6 +76,7 @@ include_once ('head.php');
 </head>
 
 <body>
+
 <section>
     <div class="head_section">
         <div class="head_section_1400">
@@ -93,15 +94,26 @@ include_once ('head.php');
             <p class="box_title">출제 대상 선택</p>
             <div class="box_menu_wrap">
                 <p>학기</p>
-                <select name="year_select" id="year_select">
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
+                <select name="year_select" id="year_select" onchange="select_year();">
+                    <option value="">선택</option>
+                    <?php
+                    for($i=0; $i<count($year); $i++) {
+                    ?>
+                    <option value="<?=$year[$i]?>"><?=$year[$i]?></option>
+                        <?php
+                    }
+                    ?>
+
                 </select>
-                <select name="quarter_select" id="quarter_select">
-                    <option value="1_quarter">1분기</option>
-                    <option value="2_quarter">2분기</option>
-                    <option value="3_quarter">3분기</option>
-                    <option value="4_quarter">4분기</option>
+                <select name="quarter_select" id="quarter_select" onchange="select_year();">
+                    <option value="">선택</option>
+                    <?php
+                    for($i=0; $i<count($quarter); $i++) {
+                        ?>
+                        <option value="<?=$quarter[$i]?>"><?=$quarter[$i]?></option>
+                        <?php
+                    }
+                    ?>
                 </select>
             </div>
             <div class="grade_select_box select_table">
@@ -111,16 +123,7 @@ include_once ('head.php');
                         <th>수업목록</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td><span>초등 3학년</span><span>이산수학</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>중등 1학년</span><span>덧셈</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>중등 2학년</span><span>상미분방정식</span></td>
-                    </tr>
+                    <tbody id="classlist" >
                     </tbody>
                 </table>
             </div>
@@ -133,22 +136,7 @@ include_once ('head.php');
                         <th>담당 교사</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><span>월수금</span><span>2</span></td>
-                        <td><span>퇴계이황</span></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><span>화목토</span><span>2</span></td>
-                        <td><span>가우스</span></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><span>월수금</span><span>2</span></td>
-                        <td><span>유클리드</span></td>
-                    </tr>
+                    <tbody id="day" >
                     </tbody>
                 </table>
             </div>
@@ -159,19 +147,19 @@ include_once ('head.php');
                         <th>학생목록</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td><span>고이즈미</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>킹목사</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>조지부시</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>홍길동</span></td>
-                    </tr>
+                    <tbody id="students">
+<!--                    <tr>-->
+<!--                        <td><span>고이즈미</span></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><span>킹목사</span></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><span>조지부시</span></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><span>홍길동</span></td>-->
+<!--                    </tr>-->
                     </tbody>
                 </table>
             </div>
@@ -288,36 +276,14 @@ include_once ('head.php');
                                             <div class="container">
                                                 <select name="Q_number1" class="custumdropdown" custumdrop="question">
                                                     <optiongroup >
-                                                        <option value="1">1</option>
-                                                        <option value="1">2</option>
-                                                        <option value="1">3</option>
-                                                        <option value="1">4</option>
-                                                        <option value="1">5</option>
-                                                        <option value="1">6</option>
-                                                        <option value="1">7</option>
-                                                        <option value="1">8</option>
-                                                        <option value="1">9</option>
-                                                        <option value="1">10</option>
-                                                        <option value="1">11</option>
-                                                        <option value="1">12</option>
-                                                        <option value="1">13</option>
-                                                        <option value="1">14</option>
-                                                        <option value="1">15</option>
-                                                        <option value="1">16</option>
-                                                        <option value="1">17</option>
-                                                        <option value="1">18</option>
-                                                        <option value="1">19</option>
-                                                        <option value="1">20</option>
-                                                        <option value="1">21</option>
-                                                        <option value="1">22</option>
-                                                        <option value="1">23</option>
-                                                        <option value="1">24</option>
-                                                        <option value="1">25</option>
-                                                        <option value="1">26</option>
-                                                        <option value="1">27</option>
-                                                        <option value="1">28</option>
-                                                        <option value="1">29</option>
-                                                        <option value="1">30</option>
+                                                        <option class="checkbox" value="1">1</option>
+                                                        <option class="checkbox" value="2">2</option>
+                                                        <option class="checkbox" value="3">3</option>
+<!--                                                        <option class="checkbox" value="1">1</option>-->
+<!--                                                        <option class="checkbox" value="1">1</option>-->
+<!--                                                        <option class="checkbox" value="1">1</option>-->
+<!--                                                        <option class="checkbox" value="1">1</option>-->
+
                                                     </optiongroup>
                                                 </select>
                                                 <script src="js/homework_manegement_add.js"></script>
@@ -504,7 +470,7 @@ include_once ('head.php');
     function submit() {
         var send_array = Array();
         var send_cnt = 0;
-        var chkbox = $(".check");
+        var chkbox = $(".checkbox");
 
         for(i=0;i<chkbox.length;i++) {
             if (chkbox[i].checked ){
@@ -513,8 +479,56 @@ include_once ('head.php');
             }
         }
 
-
+        // $("#checkboxes").val(send_array);
         $('#all').submit();
+    }
+    // var send_array = Array();
+    // var chkbox = $(".checkSelect");
+    // for(i=0;i<chkbox.length;i++) {
+    //     if (chkbox[i].checked == true){
+    //         send_array.push(chkbox[i].value);
+    //     }
+    // }
+        var r2 =  new Array();
+    function select_year() {
+        $("#classlist").empty();
+        var y = document.getElementById("year_select");
+        var year = y.options[y.selectedIndex].text;
+        var q = document.getElementById("quarter_select");
+        var quarter = q.options[q.selectedIndex].text;
+        r2 = <?= json_encode($r2) ?>;
+        for(var i=0; i<r2.length; i++) {
+           if(r2[i][3] == year+" "+quarter){
+                $("#classlist").append("<tr ><td >"+r2[i][4]+"</td></tr>");
+            }
+        }
+        $("#classlist").children().click(select_class);
+    }
+    function select_class() {
+        var day = '월목토';
+        var numofstudent = 4;
+        var nameofteacher = '박기월';
+        var i = 1;
+        // for (var i = 0; ; i++) {
+        // if (r2[i][4] == 요일반이름이 있는 테이블에서의 클래스명) {
+              $("#day").append("<tr><td>" + i + "</td> <td>" + day + "(" + numofstudent + ")" + "</td> <td>" + nameofteacher + "</td> </tr>");
+        alert("select_class");
+        // }
+        // }
+        $("#day").children().click(select_day);
+    }
+    function select_day() {
+        var nameofstudent = "유길상";
+        // for (var i = 0; ; i++) {
+        // if (요일반이름 == 학생이름이 있는 테이블에서의 요일반이름) {
+                $("#students").append("<tr ><td >"+nameofstudent+"</td></tr>");
+        // }
+        // }
+        $("#students").children().click(select_student);
+        alert("select_day");
+    }
+    function select_student() { //특수학생 제외 함수
+
     }
 </script>
 </body>
