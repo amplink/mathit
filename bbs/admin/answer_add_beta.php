@@ -135,7 +135,11 @@ include_once('_common.php');
                                 <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>">
                             </td>
                             <td>
-                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                                <?
+                                if ($i > 0) {
+                                   echo '<div class="minus_icon" onclick = "delete_div(this)" ><img src = "img/minus.png" alt = "minus" ></div >';
+                                 }
+                                ?>
                             </td>
                         </tr>
                         <?
@@ -175,7 +179,11 @@ include_once('_common.php');
                                 <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>">
                             </td>
                             <td>
-                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                                <?
+                                if ($i > 0) {
+                                    echo '<div class="minus_icon" onclick = "delete_div(this)" ><img src = "img/minus.png" alt = "minus" ></div >';
+                                }
+                                ?>
                             </td>
                         </tr>
                         <?
@@ -215,7 +223,11 @@ include_once('_common.php');
                                 <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>">
                             </td>
                             <td>
-                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                                <?
+                                if ($i > 0) {
+                                    echo '<div class="minus_icon" onclick = "delete_div(this)" ><img src = "img/minus.png" alt = "minus" ></div >';
+                                }
+                                ?>
                             </td>
                         </tr>
                         <?

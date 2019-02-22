@@ -181,7 +181,11 @@ $book_type = $_GET['book_type'];
                                 <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
                             </td>
                             <td>
-                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                                <?
+                                if ($i > 0) {
+                                    echo '<div class="minus_icon" onclick = "delete_div(this)" ><img src = "img/minus.png" alt = "minus" ></div >';
+                                }
+                                ?>
                             </td>
                         </tr>
                         <?
@@ -209,7 +213,11 @@ $book_type = $_GET['book_type'];
                                 <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>" value="">
                             </td>
                             <td>
-                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                                <?
+                                if ($i > 0) {
+                                    echo '<div class="minus_icon" onclick = "delete_div(this)" ><img src = "img/minus.png" alt = "minus" ></div >';
+                                }
+                                ?>
                             </td>
                         </tr>
                         <?
@@ -263,7 +271,11 @@ $book_type = $_GET['book_type'];
                                 <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
                             </td>
                             <td>
-                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                                <?
+                                if ($i > 0) {
+                                    echo '<div class="minus_icon" onclick = "delete_div(this)" ><img src = "img/minus.png" alt = "minus" ></div >';
+                                }
+                                ?>
                             </td>
                         </tr>
                         <?
@@ -291,7 +303,11 @@ $book_type = $_GET['book_type'];
                                 <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>" value="">
                             </td>
                             <td>
-                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                                <?
+                                if ($i > 0) {
+                                    echo '<div class="minus_icon" onclick = "delete_div(this)" ><img src = "img/minus.png" alt = "minus" ></div >';
+                                }
+                                ?>
                             </td>
                         </tr>
                         <?
@@ -339,7 +355,11 @@ $book_type = $_GET['book_type'];
                                 <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
                             </td>
                             <td>
-                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                                <?
+                                if ($i > 0) {
+                                    echo '<div class="minus_icon" onclick = "delete_div(this)" ><img src = "img/minus.png" alt = "minus" ></div >';
+                                }
+                                ?>
                             </td>
                         </tr>
                         <?
@@ -367,7 +387,11 @@ $book_type = $_GET['book_type'];
                                 <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>" value="">
                             </td>
                             <td>
-                                <div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div>
+                                <?
+                                if ($i > 0) {
+                                    echo '<div class="minus_icon" onclick = "delete_div(this)" ><img src = "img/minus.png" alt = "minus" ></div >';
+                                }
+                                ?>
                             </td>
                         </tr>
                         <?
@@ -384,10 +408,10 @@ $book_type = $_GET['book_type'];
 
 </html>
 <script>
-    var a = 10;
-    var b = 10;
-    var c = 10;
-    var d = 10;
+    var a = 1000;
+    var b = 1000;
+    var c = 1000;
+    var d = 1000;
 
 
     $("div#section_1").show();
