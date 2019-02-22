@@ -1,6 +1,10 @@
 <?php
 include_once ('_common.php');
 include_once ('head.php');
+
+$Banlist  = api_calls_get("/api/math/class?client_no=".$ac);
+$studentlist = api_calls_get("/api/math/student_list?client_no=".$ac);
+$teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 ?>
 <!DOCTYPE html>
 <html>
@@ -132,11 +136,12 @@ include_once ('head.php');
                     <thead>
                     <tr>
                         <th>번호</th>
-                        <th>요일</th>
+                        <th>회차</th>
+                        <th>학생수</th>
                         <th>담당 교사</th>
                     </tr>
                     </thead>
-                    <tbody id="day" >
+                    <tbody id="grouplist" >
                     </tbody>
                 </table>
             </div>
@@ -489,43 +494,70 @@ include_once ('head.php');
     //         send_array.push(chkbox[i].value);
     //     }
     // }
-        var r2 =  new Array();
+        var Banlist =  new Array();
+        var yq = 0;
     function select_year() {
         $("#classlist").empty();
         var y = document.getElementById("year_select");
         var year = y.options[y.selectedIndex].text;
         var q = document.getElementById("quarter_select");
         var quarter = q.options[q.selectedIndex].text;
-        r2 = <?= json_encode($r2) ?>;
-        for(var i=0; i<r2.length; i++) {
-           if(r2[i][3] == year+" "+quarter){
-                $("#classlist").append("<tr ><td >"+r2[i][4]+"</td></tr>");
+        yq  = year+" "+quarter;
+        Banlist = <?= json_encode($Banlist) ?>;
+        for(var i=0; i<Banlist.length; i++) {
+           if(Banlist[i][3] == yq){
+                $("#classlist").append("<tr ><td >"+Banlist[i][4]+"</td></tr>");
             }
         }
-        $("#classlist").children().click(select_class);
+        $("#classlist").children().click(select_SuUp);
     }
-    function select_class() {
-        var day = '월목토';
-        var numofstudent = 4;
-        var nameofteacher = '박기월';
-        var i = 1;
-        // for (var i = 0; ; i++) {
-        // if (r2[i][4] == 요일반이름이 있는 테이블에서의 클래스명) {
-              $("#day").append("<tr><td>" + i + "</td> <td>" + day + "(" + numofstudent + ")" + "</td> <td>" + nameofteacher + "</td> </tr>");
-        alert("select_class");
-        // }
-        // }
-        $("#day").children().click(select_day);
+    var uid_array = new Array;
+    var Ban_array = new Array;
+    var studentlist = 0;
+    function select_SuUp() {
+        var numofstudent = 0;
+        var nameofteacher = 0;
+        var clicked_td = $(this).text();
+        studentlist = <?= json_encode($studentlist) ?>;
+        teacherlist = <?= json_encode($teacherlist) ?>;
+        $("#grouplist").empty();
+        for (var i = 0; i < Banlist.length; i++) {
+            if (Banlist[i][3] == yq && Banlist[i][4] == clicked_td){
+                for (var k = 0; k < studentlist.length; k++) {
+                    if (Banlist[i][0] == studentlist[k][18]) {
+                        numofstudent++;
+                    }
+                }
+
+                for(var u = 0; u < teacherlist.length; u++){
+                    if(Banlist[i][6] == teacherlist[u][0]){
+                        nameofteacher = teacherlist[u][3];
+                        break;
+                    }
+                }
+                var j = 1;
+                Ban_array[j-1] = Banlist[i][5];
+                uid_array[j-1] = Banlist[i][0];
+                $("#grouplist").append("<tr><td>" + j + "</td> <td >" + Banlist[i][5] + "</td> <td>" + numofstudent + "</td> <td>" + nameofteacher + "</td> </tr>");
+                j++;
+            }
+        }
+        $("#grouplist").children().click(select_Ban);
     }
-    function select_day() {
-        var nameofstudent = "유길상";
-        // for (var i = 0; ; i++) {
-        // if (요일반이름 == 학생이름이 있는 테이블에서의 요일반이름) {
-                $("#students").append("<tr ><td >"+nameofstudent+"</td></tr>");
-        // }
-        // }
+    function select_Ban() {
+        var clicked_td = $(this).children().eq(1).text();
+        var nameofstudent = 0;
+        for (var i = 0; i < Ban_array.length; i++) {
+            if (Ban_array[i] == clicked_td) {
+                for(var j = 0; j < studentlist.length; j++){
+                    if(studentlist[j][18] == uid_array[i]) {
+                        $("#students").append("<tr ><td >" + studentlist[j][3] + "</td></tr>");
+                    }
+                }
+            }
+        }
         $("#students").children().click(select_student);
-        alert("select_day");
+        // alert("select_ban");
     }
     function select_student() { //특수학생 제외 함수
 
