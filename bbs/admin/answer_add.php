@@ -386,8 +386,23 @@ include_once('_common.php');
     }
 
     function myFunction() {
-        $("#answer_add_form").attr("action", "./answer_add_chk.php");
-        $("#answer_add_form").submit();
+        var str = $("#answer_add_form").serialize();
+        $.ajax({
+            type : 'post',
+            url : './answer_add_double_chk.php',
+            data : str,
+            error: function(xhr, status, error){
+            alert(error);
+            },
+            success : function(e) {
+                if(e==1 && isCnt == 0) {
+                    alert('중복된 교재정보입니다.');
+                }else {
+                    $("#answer_add_form").attr("action", "./answer_add_chk.php");
+                    $("#answer_add_form").submit();
+                }
+            }
+        });
     }
 
     function readImage1(input, count, idx) {
