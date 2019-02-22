@@ -102,7 +102,8 @@ if(!$_GET['page']) {
                     $count = $t;
                     for($i=0; $i<$count/10; $i++) {
                         $cnt = $i+1;
-                        echo '<li><a href="./answer_manegement.php?page='.$cnt.'">'.$cnt.'</a></li>';
+                        if($cnt==$_GET['page']) echo '<li><a href="./answer_manegement.php?page='.$cnt.'" class="on">'.$cnt.'</a></li>';
+                        else echo '<li><a href="./answer_manegement.php?page='.$cnt.'">'.$cnt.'</a></li>';
                     }
                     ?>
                 </ul>
