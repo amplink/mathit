@@ -153,18 +153,6 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                     </tr>
                     </thead>
                     <tbody id="students">
-<!--                    <tr>-->
-<!--                        <td><span>고이즈미</span></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td><span>킹목사</span></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td><span>조지부시</span></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td><span>홍길동</span></td>-->
-<!--                    </tr>-->
                     </tbody>
                 </table>
             </div>
@@ -484,16 +472,8 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
             }
         }
 
-        // $("#checkboxes").val(send_array);
         $('#all').submit();
     }
-    // var send_array = Array();
-    // var chkbox = $(".checkSelect");
-    // for(i=0;i<chkbox.length;i++) {
-    //     if (chkbox[i].checked == true){
-    //         send_array.push(chkbox[i].value);
-    //     }
-    // }
         var Banlist =  new Array();
         var yq = 0;
     function select_year() {
@@ -546,7 +526,6 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
     }
     function select_Ban() {
         var clicked_td = $(this).children().eq(1).text();
-        var nameofstudent = 0;
         for (var i = 0; i < Ban_array.length; i++) {
             if (Ban_array[i] == clicked_td) {
                 for(var j = 0; j < studentlist.length; j++){
@@ -555,12 +534,11 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                     }
                 }
             }
-        }
+            }
         $("#students").children().click(select_student);
-        // alert("select_ban");
     }
     function select_student() { //특수학생 제외 함수
-
+        // alert("select_student");
     }
 </script>
 </body>
