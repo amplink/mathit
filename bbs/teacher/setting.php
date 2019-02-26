@@ -34,7 +34,7 @@ include_once ('head.php');
     <div class="setting_box">
         <div class="setting_head">
             <p>메뉴권한 설정</p>
-            <div class="save_setting_btn"><a href="$('#setting_form').submit();'">저장</a></div>
+            <div class="save_setting_btn" onclick="submit();"><a href="#">저장</a></div>
         </div>
 
         <table>
@@ -63,17 +63,17 @@ include_once ('head.php');
                 ?>
                 <tr>
                     <td><span><?=$r[$i][3]?></span></td>
-                    <td><select name="member_type" id="member_type" name="type">
+                    <td><select name="type[]" id="type_<?=$r[$i][0]?>">
                             <option value="전임강사">전임강사</option>
                             <option value="채점강사">채점강사</option>
                         </select></td>
-                    <td><input type="checkbox" name="hm_create"></td>
-                    <td><input type="checkbox" name="hm_mg"></td>
-                    <td><input type="checkbox" name="score_mg"></td>
-                    <td><input type="checkbox" name="consult_mg"></td>
-                    <td><input type="checkbox" name="grade_card"></td>
-                    <td><input type="checkbox" name="notice"></td>
-                    <td><input type="checkbox" name="admin_menu"></td>
+                    <td><input type="checkbox" name="hm_create[]" value="<?=$r[$i][0]?>" id="hm_create_<?=$r[$i][0]?>"></td>
+                    <td><input type="checkbox" name="hm_mg[]" value="<?=$r[$i][0]?>" id="hm_mg_<?=$r[$i][0]?>"></td>
+                    <td><input type="checkbox" name="score_mg[]" value="<?=$r[$i][0]?>" id="score_mg_<?=$r[$i][0]?>"></td>
+                    <td><input type="checkbox" name="consult_mg[]" value="<?=$r[$i][0]?>" id="consult_mg_<?=$r[$i][0]?>"></td>
+                    <td><input type="checkbox" name="grade_card[]" value="<?=$r[$i][0]?>" id="grade_card_<?=$r[$i][0]?>"></td>
+                    <td><input type="checkbox" name="notice[]" value="<?=$r[$i][0]?>" id="notice_<?=$r[$i][0]?>"></td>
+                    <td><input type="checkbox" name="admin_menu[]" value="<?=$r[$i][0]?>" id="admin_menu_<?=$r[$i][0]?>"></td>
                 </tr>
                 <?
             }
@@ -86,7 +86,7 @@ include_once ('head.php');
     <div class="app_box">
         <div class="app_head">
             <p>앱 정보 및 설정</p>
-            <div class="save_setting_btn"><a href="#none">저장</a></div>
+            <div class="save_setting_btn" onclick="submit_alarm()"><a href="#none">저장</a></div>
         </div>
         <div class="app_contnet_section">
             <div class="l_side">
@@ -102,10 +102,10 @@ include_once ('head.php');
                 <div class="line_">
                     <p class="content_title">푸시알람</p>
                     <div class="content_side">
-                        <div class="radio_on"><input type="radio" name="push_alarm">
+                        <div class="radio_on"><input type="radio" name="push_alarm" value="1" id="alarm_on">
                             <p>on</p>
                         </div>
-                        <div class="radio_on"><input type="radio" name="push_alarm">
+                        <div class="radio_on"><input type="radio" name="push_alarm" value="0" id="alarm_off">
                             <p>off</p>
                         </div>
                     </div>
@@ -113,10 +113,10 @@ include_once ('head.php');
                 <div class="line_">
                     <p class="content_title">효과음</p>
                     <div class="content_side">
-                        <div class="radio_on"><input type="radio" name="sound">
+                        <div class="radio_on"><input type="radio" name="sound" value="1" id="sound_on">
                             <p>on</p>
                         </div>
-                        <div class="radio_on"><input type="radio" name="sound">
+                        <div class="radio_on"><input type="radio" name="sound" value="0" id="sound_off">
                             <p>off</p>
                         </div>
                     </div>
@@ -127,5 +127,38 @@ include_once ('head.php');
     </form>
 </section>
 </body>
-
 </html>
+<?php
+$sql = "select * from `teacher_setting`";
+$result = mysqli_query($connect_db, $sql);
+while($res = mysqli_fetch_array($result)) {
+    if($res['type']=="전임강사") echo "<script>$('#type_".$res['t_id']."').val('전임강사');</script>";
+    else echo "<script>$('#type_".$res['t_id']."').val('채점강사');</script>";
+
+    if($res['hm_create']) echo "<script>$('#hm_create_".$res['t_id']."').prop('checked', true);</script>";
+    if($res['hm_mg']) echo "<script>$('#hm_mg_".$res['t_id']."').prop('checked', true);</script>";
+    if($res['score_mg']) echo "<script>$('#score_mg_".$res['t_id']."').prop('checked', true);</script>";
+    if($res['consult_mg']) echo "<script>$('#consult_mg_".$res['t_id']."').prop('checked', true);</script>";
+    if($res['grade_card']) echo "<script>$('#grade_card_".$res['t_id']."').prop('checked', true);</script>";
+    if($res['notice']) echo "<script>$('#notice_".$res['t_id']."').prop('checked', true);</script>";
+    if($res['admin_menu']) echo "<script>$('#admin_menu_".$res['t_id']."').prop('checked', true);</script>";
+}
+
+$sql = "select * from `app_setting`";
+$result = mysqli_query($connect_db, $sql);
+while($res = mysqli_fetch_array($result)) {
+    if($res['alarm']) echo "<script>$('#alarm_on').prop('checked', true);</script>";
+    else echo "<script>$('#alarm_off').prop('checked', true);</script>";
+
+    if($res['melody']) echo "<script>$('#sound_on').prop('checked', true);</script>";
+    else echo "<script>$('#sound_off').prop('checked', true);</script>";
+}
+?>
+<script>
+    function submit() {
+        $('#setting_form').submit();
+    }
+    function submit_alarm() {
+        $('#setting_app_form').submit();
+    }
+</script>

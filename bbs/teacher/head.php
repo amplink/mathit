@@ -103,7 +103,7 @@ for($i=0; $i<count($d_uid); $i++) {
             </div>
         </div>
         <div class="ham_other_btn_line">
-            <div class="setting_btn"><a href="setting.html"><img src="img/setting.png" alt="setting_icon"></a></div>
+            <div class="setting_btn"><a href="setting.php"><img src="img/setting.png" alt="setting_icon"></a></div>
             <div class="alarm_btn"><a href="#none"><img class="test11" src="img/alarm.png" alt="alarm_icon"></a></div>
         </div>
     </div>
@@ -115,7 +115,7 @@ for($i=0; $i<count($d_uid); $i++) {
                 <?php
                 for($i=0; $i<count($d_name); $i++) {
                     ?>
-                    <div class="hamnav_class"><a href="student_manegement_record.html">
+                    <div class="hamnav_class"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>">
                             <span class="class_title"><?=$d_name[$i]?></span>
                         </a>
                     </div>
@@ -125,8 +125,8 @@ for($i=0; $i<count($d_uid); $i++) {
 
             </div>
         </div>
-        <div class="hamnav_menu"><a href="homework_manegement_add.html"><span>숙제생성</span></a></div>
-        <div class="hamnav_menu"><a href="student_manegement_score_all.html"><span>채점바로가기</span></a></div>
+        <div class="hamnav_menu"><a href="homework_management_add.php"><span>숙제생성</span></a></div>
+        <div class="hamnav_menu"><a href="student_management_score_all.php"><span>채점바로가기</span></a></div>
         <div class="hamnav_menu"><a href="class_schedule_list.php"><span>수업계획표/일지</span></a></div>
         <div class="hamnav_menu"><a href="notice_list.php"><span>공지사항</span></a></div>
     </div>
