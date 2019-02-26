@@ -77,8 +77,8 @@ $manager_get_chk = $_GET['manager_get_chk'];
                     <tr style="text-align:center">
                         <th><input type="checkbox" id="all_select"></th>
                         <th>학원명</th>
-                        <th>관리자아이디</th>
-                        <th>이름</th>
+                        <th>관리자 아이디</th>
+                        <th>관리자 이름</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -137,7 +137,7 @@ $manager_get_chk = $_GET['manager_get_chk'];
             <div class="line">
                 <div class="name">
                     <div class="lside">
-                        <p>관리자아이디</p>
+                        <p>관리자 아이디</p>
                     </div>
 
                     <div class="rside">

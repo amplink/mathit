@@ -54,9 +54,9 @@ include_once('head.php');
         <div class="" style="text-align: center;">
             <div class="title_logo_wrap"><img src="img/logo.png" alt="title_logo"></div>
             <p>
-                <span>안녕하세요 </span>
+                <span>안녕하세요. </span>
                 <span>MATH IT Admin</span>
-                <span>페이지 입니다..</span>
+                <span>페이지 입니다.</span>
             </p>
         </div>
     </div>

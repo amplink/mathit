@@ -41,7 +41,7 @@ if(!$_GET['page']) {
                         <th style="width: 10%;">유형</th>
                         <th style="">제목</th>
                         <th style="width: 13%;">작성일</th>
-                        <th style="width: 15%;">대상학원 아이디</th>
+                        <th style="width: 15%;">학원명</th>
                         <th style="width: 11%;">공지범위</th>
                         <th style="width: 4%;">&nbsp</th>
                     </tr>

@@ -10,6 +10,7 @@ include_once ('head.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MathIt - teacher</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/consult_manegement_personal.css" />

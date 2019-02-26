@@ -31,14 +31,14 @@
                             <p class="input_title">아이디</p>
                             <div class="id_box">
                                 <div class="input_img"><img src="img/mail.png" alt="id_mail_img"></div>
-                                <input name="user_id" type="text" placeholder="아이디를 입력해주세요" class="login_input">
+                                <input name="user_id" type="text" placeholder="아이디를 입력해 주세요" class="login_input">
                             </div>
                         </div>
                         <div class="pass_wrap">
                             <p class="input_title">비밀번호</p>
                             <div class="pass_box">
                                 <div class="input_img"><img src="img/lock.png" alt="lock_img"></div>
-                                <input name="user_pw" type="password" placeholder="비밀번호를 입력해주세요" class="login_input">
+                                <input name="user_pw" type="password" placeholder="비밀번호를 입력해 주세요" class="login_input">
                             </div>
                         </div>
                     </div>

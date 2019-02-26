@@ -40,7 +40,8 @@ if(!$_GET['page']) {
                         <th>학기</th>
                         <th>단원</th>
                         <th>레벨</th>
-                        <th colspan="2">교재구분</th>
+                        <th>교재구분</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
