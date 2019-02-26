@@ -31,10 +31,11 @@ for($i=0; $i<count($t_year); $i++) {
 }
 
 // 시간표
-$link = "/api/math/teacher_class?client_no=126&t_uid=".$_SESSION['t_uid'];
+$link = "/api/math/teacher_class?client_no=".$ac."&t_uid=".$_SESSION['t_uid'];
 $r = api_calls_get($link);
 
 $d_uid = array();
+$c_uid = array();
 $chk = 0;
 $cnt = 0;
 for($i=1; $i<count($r); $i++) {
@@ -44,6 +45,7 @@ for($i=1; $i<count($r); $i++) {
     }
     if(!$chk) {
         $d_uid[$cnt] = $r[$i][0];
+        $c_uid[$cnt] = $r[$i][1];
         $d_name[$cnt] = $r[$i][4];
         $cnt++;
     }
@@ -115,7 +117,7 @@ for($i=0; $i<count($d_uid); $i++) {
                 <?php
                 for($i=0; $i<count($d_name); $i++) {
                     ?>
-                    <div class="hamnav_class"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>">
+                    <div class="hamnav_class"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>">
                             <span class="class_title"><?=$d_name[$i]?></span>
                         </a>
                     </div>

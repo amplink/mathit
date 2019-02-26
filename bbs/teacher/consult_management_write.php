@@ -1,6 +1,19 @@
 <?php
 include_once ('_common.php');
 include_once ('head.php');
+
+$link = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$_GET['d_uid']."&c_uid=".$_GET['c_uid'];
+$r = api_calls_get($link);
+
+for($i=1; $i<count($r); $i++) {
+    if($r[$i][1] == $_GET['s_id']) $student_name = $r[$i][2];
+}
+
+for($i=0; $i<count($d_name); $i++) {
+    if($d_uid[$i] == $_GET['d_uid'] && $c_uid[$i] == $_GET['c_uid']) {
+        $class_name = $d_name[$i];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,49 +30,19 @@ include_once ('head.php');
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/common.js"></script>
-    <script>
-        $( function() {
-            $( "#datepicker" ).datepicker({
-                showOn: "button",
-                buttonImage: "img/calendar.png",
-                buttonImageOnly: true,
-                buttonText: "Select date",
-                nextText: "다음달",
-                prevText: "이전달",
-                changeMonth: true,
-                dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-                dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-                monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-                monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                numberOfMonths: 1
-            });
-        } );
-    </script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
 </head>
 
 <body id="x_alarm_btn">
+<form action="consult_management_write_chk.php" method="post" id="consult_form">
 <section>
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
-                <p class="left_text">
-                    <span>초6</span>
-                    <span>미적분학</span>
-                </p>
-                <p>
-                    <span>(</span>
-                    <span>월수금</span>
-                    <span> 반</span>
-                    <span>)</span>
-                </p>
-                <p>
-                    <span> - </span>
-                    <span>엘사</span>
-                    <span> 학생</span>
-                </p>
+                <p class="left_text"><span><?=$class_name?>&nbsp;&nbsp;<?=$student_name?></span></p>
             </div>
             <div class="head_right">
-                <div class="consult_list_btn"><a href="consult_manegement_personal.html">상담내역</a></div>
+                <div class="consult_list_btn"><a href="consult_management_personal.php">상담내역</a></div>
             </div>
         </div>
     </div>
@@ -67,11 +50,11 @@ include_once ('head.php');
         <div class="head_line">
             <div class="writer">
                 <p>상담자</p>
-                <p><span>김대리</span></p>
+                <p><span><?=$_SESSION['t_name']?></span></p>
             </div>
             <div class="write_date">
                 <p>상담일자</p>
-                <input type="text" id="datepicker">
+                <input type="text" id="datepicker" name="date">
             </div>
         </div>
         <div class="head_line">
@@ -79,12 +62,16 @@ include_once ('head.php');
                 <p>상담세부설정</p>
             </div>
             <select name="consult_genre" id="consult_genre">
-                <option value="base">상담유형</option>
-                <option value="consult_genre_1">상담유형1</option>
+                <option value="">상담유형</option>
+                <option value="정기상담">정규상담</option>
+                <option value="상시상담">상시상담</option>
             </select>
             <select name="consult_topic" id="consult_topic">
-                <option value="base">상담주제</option>
-                <option value="consult_topic_1">상담주제1</option>
+                <option value="">상담주제</option>
+                <option value="신규상담">신규상담</option>
+                <option value="성적상담">성적상담</option>
+                <option value="분기상담">분기상담</option>
+                <option value="기타">기타</option>
             </select>
         </div>
         <div class="head_line">
@@ -116,13 +103,50 @@ include_once ('head.php');
                 </div>
             </div>
         </div>
-        <div class="textarea_section"><textarea name="" id="" cols="30" rows="10"></textarea></div>
+        <div class="textarea_section"><textarea name="content" id="content" cols="30" rows="10"></textarea></div>
         <div class="btn_section">
-            <div class="save_btn"><a href="#none">저장</a></div>
+            <div class="save_btn" onclick="submit()"><a href="#none">저장</a></div>
         </div>
         <div class="back_logo"><img src="img/logo_black.png" alt="back_logo"></div>
     </div>
+    <input type="hidden" name="s_name" value="<?=$student_name?>">
 </section>
+</form>
 </body>
-
 </html>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#content' ),  {
+            toolbar: [
+                'headings',
+                'bold',
+                'italic',
+                'link',
+                'unlink'
+            ]
+        })
+        .catch( error => {
+            console.error( error );
+        });
+
+    $( function() {
+        $( "#datepicker" ).datepicker({
+            showOn: "button",
+            buttonImage: "img/calendar.png",
+            buttonImageOnly: true,
+            buttonText: "Select date",
+            nextText: "다음달",
+            prevText: "이전달",
+            changeMonth: true,
+            dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+            dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+            monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            numberOfMonths: 1
+        });
+    } );
+
+    function submit() {
+        $("#consult_form").submit();
+    }
+</script>
