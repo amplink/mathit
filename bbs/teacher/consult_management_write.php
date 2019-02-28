@@ -34,15 +34,15 @@ for($i=0; $i<count($d_name); $i++) {
 </head>
 
 <body id="x_alarm_btn">
-<form action="consult_management_write_chk.php" method="post" id="consult_form">
+<form action="consult_management_write_chk.php?s_id=<?=$_GET['s_id']?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>" method="post" id="consult_form">
 <section>
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
-                <p class="left_text"><span><?=$class_name?>&nbsp;&nbsp;<?=$student_name?></span></p>
+                <p class="left_text"><span><?=$class_name?><?=$student_name?></span></p>
             </div>
             <div class="head_right">
-                <div class="consult_list_btn"><a href="consult_management_personal.php">상담내역</a></div>
+                <div class="consult_list_btn"><a href="consult_management_personal.php?s_id=<?=$_GET['s_id']?>&s_name=<?=$student_name?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">상담내역</a></div>
             </div>
         </div>
     </div>
@@ -76,29 +76,29 @@ for($i=0; $i<count($d_name); $i++) {
         </div>
         <div class="head_line">
             <div class="radio_box">
-                <div class="radio_div"><input type="radio" name="object">
+                <div class="radio_div"><input type="radio" name="object" value="학부모">
                     <p>학부모</p>
                 </div>
-                <div class="radio_div"><input type="radio" name="object">
+                <div class="radio_div"><input type="radio" name="object" value="학생">
                     <p>학생</p>
                 </div>
-                <div class="radio_div"><input type="radio" name="object">
+                <div class="radio_div"><input type="radio" name="object" value="기타">
                     <p>기타</p>
                 </div>
             </div>
             <div class="radio_box">
-                <div class="radio_div"><input type="radio" name="consult_way">
+                <div class="radio_div"><input type="radio" name="consult_way" value="전화">
                     <p>전화</p>
                 </div>
-                <div class="radio_div"><input type="radio" name="consult_way">
+                <div class="radio_div"><input type="radio" name="consult_way" value="대면">
                     <p>대면</p>
                 </div>
             </div>
             <div class="radio_box">
-                <div class="radio_div"><input type="radio" name="web_open">
+                <div class="radio_div"><input type="radio" name="web_open" value="공개">
                     <p>공개</p>
                 </div>
-                <div class="radio_div"><input type="radio" name="web_open">
+                <div class="radio_div"><input type="radio" name="web_open" value="비공개">
                     <p>비공개</p>
                 </div>
             </div>
@@ -110,6 +110,7 @@ for($i=0; $i<count($d_name); $i++) {
         <div class="back_logo"><img src="img/logo_black.png" alt="back_logo"></div>
     </div>
     <input type="hidden" name="s_name" value="<?=$student_name?>">
+    <p><?=$student_name?></p>
 </section>
 </form>
 </body>

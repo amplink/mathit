@@ -1,6 +1,8 @@
 <?php
 include_once ('_common.php');
 include_once ('head.php');
+$student_name = $_GET['s_name'];
+$s_id = $_GET['s_id'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,24 +77,10 @@ include_once ('head.php');
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
-                <p class="left_text">
-                    <span>초6</span>
-                    <span>미적분학</span>
-                </p>
-                <p>
-                    <span>(</span>
-                    <span>월수금</span>
-                    <span> 반</span>
-                    <span>)</span>
-                </p>
-                <p>
-                    <span> - </span>
-                    <span>엘사</span>
-                    <span> 학생</span>
-                </p>
+                <p>&nbsp;&nbsp;상담내역 - <?=$student_name?></p>
             </div>
             <div class="head_right">
-                <div class="consult_mane_btn"><a href="consult_manegement_write.html">상담관리</a></div>
+                <div class="consult_mane_btn"><a href="consult_management_write.php?s_id=<?=$s_id?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">상담관리</a></div>
             </div>
         </div>
     </div>
@@ -128,49 +116,57 @@ include_once ('head.php');
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td><span>2018-05-21</span></td>
-                    <td><span>레드벨벳</span></td>
-                    <td><span>이수만</span></td>
-                    <td><span>학생</span></td>
-                    <td><span>정규</span></td>
-                </tr>
-                <tr>
-                    <td><span>2018-05-21</span></td>
-                    <td><span>블랙핑크</span></td>
-                    <td><span>양현석</span></td>
-                    <td><span>학부모</span></td>
-                    <td><span>정규</span></td>
-                </tr>
-                <tr>
-                    <td><span>2018-05-21</span></td>
-                    <td><span>트와이스</span></td>
-                    <td><span>박진영</span></td>
-                    <td><span>학생</span></td>
-                    <td><span>상시</span></td>
-                </tr>
-                <tr>
-                    <td><span>2018-05-21</span></td>
-                    <td><span>아이즈원</span></td>
-                    <td><span>국프</span></td>
-                    <td><span>학생</span></td>
-                    <td><span>정규</span></td>
-                </tr>
+                <?php
+                $sql = "select * from `teacher_consult` where `t_name` = '".$_SESSION['t_name']."';";
+                $result = mysqli_query($connect_db, $sql);
+                while($res = mysqli_fetch_array($result)) {
+                    ?>
+                    <tr onclick="call_consult(<?=$res['seq']?>);">
+                        <td><span><?=$res['date']?></span></td>
+                        <td><span><?=$res['s_name']?></span></td>
+                        <td><span><?=$res['t_name']?></span></td>
+                        <td><span><?=$res['object']?></span></td>
+                        <td><span><?=$res['consult_genre']?></span></td>
+                    </tr>
+                    <?
+                }
+                ?>
                 </tbody>
             </table>
         </div>
+        <form action="consult_management_personal_chk.php" method="post" id="consult_form">
+        <div id="content_c"></div>
         <div class="textarea_input_section">
-            <p>상담내용</p>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-            <div class="btn_section">
-                <div class="btn_wrap">
-                    <div class="modify_btn"><a href="#none">수정</a></div>
-                    <div class="delete_btn"><a href="#none">삭제</a></div>
-                </div>
-            </div>
+            <p>상담내용</p><br>
+            <div id="textarea"></div>
         </div>
+        </form>
     </div>
 </section>
 </body>
-
 </html>
+<script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+<script>
+    function call_consult(seq) {
+        $.ajax({
+            type: "GET",
+            url: "call_consult.php?seq="+seq,
+            dataType: "html",
+            success: function(response){
+                $("#textarea").html(response);
+            },
+            error: function (e) {
+                alert("불러오기 실패");
+            }
+        });
+    }
+
+    function submit_val() {
+        $("#consult_form").submit();
+    }
+
+    function del_val() {
+        $("#consult_form").attr('action', "consult_management_personal_del.php");
+        $("#consult_form").submit();
+    }
+</script>

@@ -16,6 +16,6 @@ $sql = "INSERT INTO `teacher_consult` (`seq`, `t_name`, `s_name`, `consult_genre
 sql_query($sql);
 
 alert_msg("등록이 완료되었습니다.");
-location_href("./consult_management_personal.php?s_name=".$s_name);
+location_href("./consult_management_personal.php?s_id=".$_GET['s_id']."s_name=".$s_name."&d_uid=".$_GET['d_uid']."&c_uid=".$_GET['c_uid']);
 
 ?>
