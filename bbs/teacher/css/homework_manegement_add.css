@@ -387,7 +387,7 @@ table tbody tr:nth-child(2n) {
 }
 
 .combobox { /*콤보박스*/
-    position: absolute;
+    position: relative;
     background-color: #fff;
     border: 1px solid #ccc;
     max-height: 140px;

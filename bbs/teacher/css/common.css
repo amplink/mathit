@@ -21,6 +21,7 @@ body {
     min-width: 1024px;
     height: 100%;
     background-color: rgb(245, 248, 250);
+    overflow-y: auto;
 }
 
 body {
