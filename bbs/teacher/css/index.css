@@ -1,19 +1,24 @@
 .day_select {
+    position: relative;
+    bottom: 4px;
     display: inline-block;
     margin-left: 20px;
 }
 
 .day_select select {
-    width: 100px;
-    height: 30px;
-    padding: 5px;
+    width: 80px;
+    height: 25px;
+    padding: 2px;
 }
 
 .head_right>div {
     display: inline-block;
-    width: 100px;
-    height: 28px;
-    line-height: 28px;
+    width: 80px;
+    height: 25px;
+    line-height: 25px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     border-radius: 20px;
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(32, 175, 68);
