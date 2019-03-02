@@ -71,6 +71,11 @@
     border-right: solid 1px rgb(220, 220, 220);
 }
 
+.board_option_line:nth-child(1) {
+    position: relative;
+    bottom: 1px;
+}
+
 .option_title {
     display: inline-block;
     width: 150px;

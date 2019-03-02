@@ -93,6 +93,8 @@
     width: calc(60% - 42px);
     height: 100%;
     padding: 0 20px;
+    float: right;
+
 }
 
 .content_line {
@@ -111,6 +113,11 @@
     margin-top: 0;
 }
 
+.content_line:nth-child(7) .content_side {
+    margin-top: 15px;
+    width: 100%;
+}
+
 .content_side {
     display: inline-block;
 }
@@ -119,4 +126,8 @@
     width: 215px;
     height: 15px;
     padding: 3px 5px;
+}
+
+.content_side textarea {
+    width: 356px;
 }

@@ -263,6 +263,11 @@
     border-bottom: solid 1px rgb(220, 220, 220);
 }
 
+.board_line:nth-child(1) {
+    position: relative;
+    bottom: 1px;
+}
+
 .title_side {
     display: inline-block;
     width: 150px;
