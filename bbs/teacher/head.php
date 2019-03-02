@@ -72,6 +72,9 @@ for($i=0; $i<count($d_uid); $i++) {
     }
 }
 ?>
+<head>
+    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
+</head>
 <header>
     <div class="hamburger_btn">
         <span></span>
