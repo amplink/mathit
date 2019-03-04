@@ -100,7 +100,7 @@ if($result) {
                 <p>공지대상</p>
             </div>
             <div class="option_content">
-                <select name="target" id="class_select">
+                <select name="target" id="class_select" style="margin-top: 5px;">
                     <?php
                     for($i=0; $i<count($d_name); $i++) echo "<option value='".$d_name[$i]."'>$d_name[$i]</option>";
                     ?>
@@ -112,7 +112,7 @@ if($result) {
                 <p>제목</p>
             </div>
             <div class="option_content">
-                <input type="text" placeholder="제목을 입력하세요" name="title" required value="<?=$res['title']?>">
+                <input type="text" style="margin-top: 5px;" placeholder="제목을 입력하세요" name="title" required value="<?=$res['title']?>">
             </div>
         </div>
         <div class="board_option_line">
