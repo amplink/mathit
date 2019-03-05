@@ -10,14 +10,17 @@ include_once ('head.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MathIt - teacher</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/record_manegement_add.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/jquery-ui.js"></script>
 </head>
 
 <body>
 <section>
+    <form action="record_management_add_chk.php" method="post" id="record_form">
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
@@ -35,14 +38,14 @@ include_once ('head.php');
             <div class="box_menu_wrap">
                 <p>학기</p>
                 <select name="year_select" id="year_select">
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
+                    <?
+                    for($i=0; $i<count($year); $i++) echo "<option value='".$year[$i]."'>".$year[$i]."</option>";
+                    ?>
                 </select>
                 <select name="quarter_select" id="quarter_select">
-                    <option value="1_quarter">1분기</option>
-                    <option value="2_quarter">2분기</option>
-                    <option value="3_quarter">3분기</option>
-                    <option value="4_quarter">4분기</option>
+                    <?
+                    for($i=0; $i<count($quarter); $i++) echo "<option value='".$quarter[$i]."'>".$quarter[$i]."</option>";
+                    ?>
                 </select>
             </div>
             <div class="grade_select_box select_table content">
@@ -53,46 +56,50 @@ include_once ('head.php');
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><span>초등 3학년</span><span>이산수학</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>중등 1학년</span><span>덧셈</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>중등 2학년</span><span>상미분방정식</span></td>
-                    </tr>
+                    <?php
+                    for($i=0; $i<count($d_name); $i++) {
+                        ?>
+                        <tr>
+                            <td onclick="lecture('<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
+                        </tr>
+                        <?
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
-            <div class="class_select_box select_table">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>반 이름</th>
-                        <th>담당 교사</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><span>월수금</span><span>2</span></td>
-                        <td><span>퇴계이황</span></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><span>화목토</span><span>2</span></td>
-                        <td><span>가우스</span></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><span>월수금</span><span>2</span></td>
-                        <td><span>유클리드</span></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+<!--            <div class="class_select_box select_table">-->
+<!--                <table>-->
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                        <th>번호</th>-->
+<!--                        <th>반 이름</th>-->
+<!--                        <th>담당 교사</th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                    --><?php
+//                    $cnt = 1;
+//                    for($i=0; $i<count($day); $i++) {
+//                        echo "<tr><td>$cnt</td><td><span>";
+//                        for($j=0; $j<7; $j++) {
+//                            if($day[$i][$j] == 1) {
+//                                if($j==0) echo "월";
+//                                if($j==1) echo "화";
+//                                if($j==2) echo "수";
+//                                if($j==3) echo "목";
+//                                if($j==4) echo "금";
+//                                if($j==5) echo "토";
+//                                if($j==6) echo "일";
+//                            }
+//                        }
+//                        echo "</span></td><td><span>".$_SESSION['t_name']."</span></td>";
+//                        $cnt++;
+//                    }
+//                    ?>
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--            </div>-->
             <div class="student_list_box select_table">
                 <table>
                     <thead>
@@ -102,16 +109,16 @@ include_once ('head.php');
                     </thead>
                     <tbody>
                     <tr>
-                        <td><span>중간평가</span></td>
+                        <td onclick="chk_test_genre(1)"><span>중간평가</span></td>
                     </tr>
                     <tr>
-                        <td><span>기말평가</span></td>
+                        <td onclick="chk_test_genre(2)"><span>기말평가</span></td>
                     </tr>
                     <tr>
-                        <td><span>분기테스트</span></td>
+                        <td onclick="chk_test_genre(3)"><span>분기테스트</span></td>
                     </tr>
                     <tr>
-                        <td><span>입반테스트</span></td>
+                        <td onclick="chk_test_genre(4)"><span>입반테스트</span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -123,36 +130,30 @@ include_once ('head.php');
                     <div class="r_left_box">
                         <div class="division">
                             <p class="l_div_title">대상반</p>
-                            <input type="text" placeholder="반 이름을 입력해주세요">
+                            <a id="text_class"></a>
+                            <input type="hidden" name="class" id="class">
                         </div>
                         <div class="division">
                             <p class="l_div_title">시험일</p>
-                            <input type="text">
-                            <div class="calendar_img"><img src="img/calendar.png" alt="calendar_icon"></div>
+                            <input type="text" name="date" id="datepicker">
                         </div>
                         <div class="division">
                             <p class="l_div_title">기준만점</p>
-                            <input type="text" placeholder="기준점수">
+                            <input type="text" placeholder="기준점수" name="standard_score">
                             <span> 점</span>
                         </div>
                         <div class="division">
                             <p class="l_div_title">영역별 점수</p>
-                            <div class="score_input"><input type="text" placeholder="점수"><span> 점</span></div>
-                            <div class="score_input"><input type="text" placeholder="점수"><span> 점</span></div>
+                            <div class="score_input"><input type="text" placeholder="점수" name="sub_score1"><span> 점</span></div>
+                            <div class="score_input"><input type="text" placeholder="점수" name="sub_score2"><span> 점</span></div>
                         </div>
                     </div>
                     <div class="r_right_box">
                         <div class="division">
-                            <p class="l_div_title">시험유형</p><input type="text" placeholder="시험유형을 입력해주세요">
+                            <p class="l_div_title">시험유형</p><a id="text_genre"></a><input type="hidden" name="test_genre" id="test_genre">
                         </div>
                         <div class="division">
-                            <p class="l_div_title">시험명</p><input type="text" placeholder="시험명을 입력해주세요">
-                        </div>
-                        <div class="division">
-                            <p class="l_div_title">학년 선택</p>
-                            <select name="grade_select" id="grade_select">
-                                <option value="base">선택</option>
-                            </select>
+                            <p class="l_div_title">시험명</p><input type="text" placeholder="시험명을 입력해주세요" name="title">
                         </div>
                     </div>
                 </div>
@@ -167,19 +168,7 @@ include_once ('head.php');
                                 <th>평균 점수</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td><span>파퀴아오</span></td>
-                                <td><input type="text" name="score_add"><span>점</span></td>
-                                <td><input type="text" name="score_add"><span>점</span></td>
-                                <td><span>4</span><span>점</span></td>
-                            </tr>
-                            <tr>
-                                <td><span>박근혜</span></td>
-                                <td><input type="text" name="score_add"><span>점</span></td>
-                                <td><input type="text" name="score_add"><span>점</span></td>
-                                <td><span>1.5</span><span>점</span></td>
-                            </tr>
+                            <tbody id="student_list">
                             </tbody>
                         </table>
                     </div>
@@ -191,11 +180,12 @@ include_once ('head.php');
                     <div class="print_btn"><a href="#none">출력</a></div>
                 </div>
                 <div class="r_btn_wrap">
-                    <div class="complete_btn"><a href="#none">평가완료</a></div>
+                    <div class="complete_btn" onclick="submit()"><a>평가완료</a></div>
                 </div>
             </div>
         </div>
     </div>
+    </form>
 </section>
 </body>
 <script>
@@ -227,6 +217,71 @@ include_once ('head.php');
             }
         })
     })
+    
+    function lecture(e) {
+        $('#text_class').text(e);
+        $('#class').val(e);
+        $.ajax({
+            type: "GET",
+            url: "call_student_list.php?class="+e,
+            dataType: "html",
+            success: function(response){
+                $("#student_list").html(response);
+            }
+        });
+    }
+
+    function chk_test_genre(e) {
+        if(e==1) {
+            $('#text_genre').text("중간평가");
+            $('#test_genre').val("중간평가");
+        }
+        if(e==2) {
+            $('#text_genre').text("기말평가");
+            $('#test_genre').val("기말평가");
+        }
+        if(e==3) {
+            $('#text_genre').text("분기테스트");
+            $('#test_genre').val("분기테스트");
+        }
+        if(e==4) {
+            $('#text_genre').text("입반테스트");
+            $('#test_genre').val("입반테스트");
+        }
+    }
+
+    $( function() {
+        $( "#datepicker" ).datepicker({
+            showOn: "button",
+            buttonImage: "img/calendar.png",
+            buttonImageOnly: true,
+            buttonText: "Select date",
+            nextText: "다음달",
+            prevText: "이전달",
+            changeMonth: true,
+            dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+            dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+            monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            numberOfMonths: 1
+        });
+        $('.ui-datepicker-trigger').width(25);
+        $('.ui-datepicker-trigger').css('top', "4px");
+        $('.ui-datepicker-trigger').css('position', "relative");
+        $('.ui-datepicker-trigger').css('margin-left', "8px");
+    } );
+
+    function set_avg(e) {
+        var k = e+1;
+        var t = parseInt($('#score_add'+e).val(), 10);
+        var p = parseInt($('#score_add'+k).val(), 10);
+        var val = (t+p)/2;
+        $('#avg').text(val);
+    }
+
+    function submit() {
+        $('#record_form').submit();
+    }
 </script>
 </body>
 
