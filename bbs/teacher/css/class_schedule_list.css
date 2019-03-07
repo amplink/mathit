@@ -1,8 +1,8 @@
 .class_menu {
     display: inline-block;
-    width: 150px;
-    height: 53px;
-    line-height: 43px;
+    width: 130px;
+    height: 55px;
+    line-height: 37px;
     background-color: rgb(255, 255, 255);
     border: solid 2px rgb(220, 220, 220);
     border-top-left-radius: 15px;
@@ -20,7 +20,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: rgb(150, 150, 150);
     text-align: center;
@@ -29,7 +29,7 @@
 
 .class_menu.on {
     height: 55px;
-    line-height: 45px;
+    line-height: 37px;
     border-bottom: none;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .class_menu:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
 }
 
 .class_menu:hover a {
@@ -82,9 +82,9 @@
 .option_title {
     display: inline-block;
     width: 100px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
-    border-left: solid 4px rgb(32, 175, 68);
+    border-left: solid 2px rgb(32, 175, 68);
     padding-left: 15px;
 }
 
@@ -102,6 +102,7 @@
 .type_chk {
     display: inline-block;
     width: auto;
+    font-size: 14px;
     margin-right: 15px;
 }
 
@@ -259,26 +260,22 @@
 
 .board_line {
     width: 101%;
-    height: 40px;
+    height: 35px;
     border-bottom: solid 1px rgb(220, 220, 220);
-}
-
-.board_line:nth-child(1) {
-    position: relative;
-    bottom: 1px;
 }
 
 .title_side {
     display: inline-block;
     width: 150px;
     height: 100%;
-    line-height: 40px;
+    line-height: 35px;
+    letter-spacing: 2px;
     background-color: rgb(41, 124, 62);
     border-right: solid 1px rgb(220, 220, 220);
 }
 
 .title_side p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: rgb(255, 255, 255);
     text-align: center;
@@ -288,12 +285,12 @@
     width: calc(100% - 172px);
     height: calc(100% - 10px);
     float: right;
-    padding: 5px 10px;
+    padding: 0 10px;
 }
 
 .content_side p {
-    font-size: 18px;
-    line-height: 30px;
+    font-size: 16px;
+    line-height: 35px;
 }
 
 .content_side input {
@@ -324,9 +321,9 @@
 }
 
 .add_file_down_btn {
-    width: 150px;
-    height: 40px;
-    line-height: 40px;
+    width: 130px;
+    height: 35px;
+    line-height: 35px;
     background-color: rgb(32, 175, 68);
     border-radius: 30px;
 }

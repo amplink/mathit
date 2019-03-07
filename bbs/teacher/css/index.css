@@ -1,6 +1,6 @@
 .day_select {
     position: relative;
-    bottom: 4px;
+    bottom: 1px;
     display: inline-block;
     margin-left: 20px;
 }
@@ -12,10 +12,12 @@
 }
 
 .head_right>div {
+    position: relative;
+    bottom: 3px;
     display: inline-block;
-    width: 80px;
-    height: 25px;
-    line-height: 25px;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -65,17 +67,18 @@
 }
 
 .class_table_section table thead tr th {
-    height: 30px;
-    font-size: 18px;
+    height: 40px;
+    font-size: 16px;
+    letter-spacing: 4px;
     background-color: rgb(32, 175, 68);
     color: rgb(255, 255, 255);
     border-bottom: solid 1px rgb(220, 220, 220);
-    padding: 10px;
+    padding: 5px;
 }
 
 .class_table_section table thead tr th.on {
     background-color: rgb(19, 145, 50);
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .class_table_section table thead tr th:nth-child(1) {
@@ -142,10 +145,12 @@
 
 .class_table_section table tbody tr td:first-child,
 .class_table_section table tbody tr td:nth-child(2) {
+    height: 60px;
     background-color: rgb(240, 240, 240);
     border-right: solid 1px rgb(220, 220, 220);
-    font-size: 18px;
+    font-size: 14px;
     text-align: center;
+    padding: 5px;
 }
 
 .class_table_section table tbody tr:nth-child(2n) td:first-child,
@@ -163,6 +168,11 @@
     box-shadow: 0px 3px 5px rgba(0, 0, 0, .5);
 }
 
+.class_info {
+    font-size: 14px;
+    line-height: 18px;
+}
+
 .notice_list_wrap {
     display:flex;
     width: 100%;
@@ -177,14 +187,14 @@
 
 .notice_title {
     display: inline-block;
-    width: 222px;
+    width: 200px;
     height: 100%;
     background-color: rgb(240, 240, 240);
     border-right: solid 1px rgb(220, 220, 220);
 }
 
 .notice_title p {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
     text-align: center;
     padding: 10px 0;
@@ -211,7 +221,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    font-size: 18px;
+    font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
