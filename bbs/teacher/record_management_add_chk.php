@@ -13,6 +13,9 @@ $score_add2 = $_POST['score_add2'];
 $teacher = $_SESSION['t_name'];
 $student = $_POST['student_name'];
 
+$sql = "delete * from `teacher_score` where `title` = '$title' and `test_genre` = '$test_genre' and `class` = '$class';";
+sql_query($sql);
+
 for($i=0; $i<count($student); $i++) {
     $sql = "INSERT INTO `teacher_score` (`seq`, `class`, `test_genre`, `title`, `date`, `standard`, `sub_score1`, `sub_score2`, `score1`, `score2`, `teacher`, `student`, `event_time`) 
 VALUES (NULL, '$class', '$test_genre', '$title', '$date', '$standard', '$sub_score1', '$sub_score2', '$score_add1[$i]', '$score_add2[$i]', '$teacher', '$student[$i]', CURRENT_TIMESTAMP);";

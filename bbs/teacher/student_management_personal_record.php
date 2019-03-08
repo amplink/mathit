@@ -1,6 +1,20 @@
 <?php
 include_once ('_common.php');
 include_once ('head.php');
+
+$link = "/api/math/student?client_no=".$_SESSION['client_no']."&id=".$_GET['s_id'];
+$r = api_calls_get($link);
+$student_name = $r[3];
+
+$link = "/api/math/class?client_no=".$_SESSION['client_no'];
+$r = api_calls_get($link);
+for($i=0; $i<count($r); $i++) {
+    if($r[$i][0] == $_GET['d_uid'] && $r[$i][1] == $_GET['c_uid']) {
+        $class = $r[$i][4];
+    }
+}
+$sql = "select * from `teacher_score` where `student` = '$student_name';";
+$result = mysqli_query($connect_db, $sql);
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,20 +36,11 @@ include_once ('head.php');
         <div class="head_section_1400">
             <div class="head_left">
                 <p class="left_text">
-                    <span>초6</span>
-                    <span>미적분학</span>
+                    <span><?=$class?></span>
                 </p>
+                <p> 성적표 </p>
                 <p>
-                    <span>(</span>
-                    <span>월수금</span>
-                    <span> 반</span>
-                    <span>)</span>
-                </p>
-                <p> 성적표</p>
-                <p>
-                    <span> - </span>
-                    <span>엘사</span>
-                    <span> 학생</span>
+                    <span> - <?=$student_name?></span>
                 </p>
             </div>
             <div class="head_right">
@@ -53,53 +58,28 @@ include_once ('head.php');
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td><span>2018 - 1분기 중간평가</span></td>
-                <td><span>2018-04-15</span></td>
-                <td>
-                    <div class="paper">
-                        <a href="student_manegement_personal_mid_record_detail.html">
-                            <img src="img/paper.png" alt="paper_icon">
-                        </a>
-                    </div>
-                    <div class="print"><a href=""><img src="img/printer.png" alt="printer_icon"></a></div>
-                    <div class="mail"><a href=""><img src="img/mail.png" alt="mail_icon"></a></div>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><span>2018 - 2분기 기말평가</span></td>
-                <td><span>2018-06-17</span></td>
-                <td>
-                    <div class="paper"><a href="student_manegement_personal_final_record_detail.html"><img src="img/paper.png"
-                                                                                                           alt="paper_icon"></a></div>
-                    <div class="print"><a href=""><img src="img/printer.png" alt="printer_icon"></a></div>
-                    <div class="mail"><a href=""><img src="img/mail.png" alt="mail_icon"></a></div>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td><span>2018 - 3분기 분기테스트</span></td>
-                <td><span>2018-09-16</span></td>
-                <td>
-                    <div class="paper"><a href="student_manegement_personal_quarter_record_detail.html"><img
-                                src="img/paper.png" alt="paper_icon"></a></div>
-                    <div class="print"><a href=""><img src="img/printer.png" alt="printer_icon"></a></div>
-                    <div class="mail"><a href=""><img src="img/mail.png" alt="mail_icon"></a></div>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td><span>2018 - 4분기 입반테스트</span></td>
-                <td><span>2018-11-28</span></td>
-                <td>
-                    <div class="paper"><a href="student_manegement_personal_quarter_record_detail.html"><img src="img/paper.png"
-                                                                                                             alt="paper_icon"></a></div>
-                    <div class="print"><a href=""><img src="img/printer.png" alt="printer_icon"></a></div>
-                    <div class="mail"><a href=""><img src="img/mail.png" alt="mail_icon"></a></div>
-                </td>
-            </tr>
+            <?php
+            $cnt = 1;
+            while($res = mysqli_fetch_array($result)) {
+                ?>
+                <tr>
+                    <td><?=$cnt?></td>
+                    <td><span><?=$res['title']?></span></td>
+                    <td><span><?=$res['date']?></span></td>
+                    <td>
+                        <div class="paper">
+                            <a href="student_management_personal_mid_record_detail.php?d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_name=<?=$student_name?>&title=<?=$res['title']?>">
+                                <img src="img/paper.png" alt="paper_icon">
+                            </a>
+                        </div>
+                        <div class="print"><a href=""><img src="img/printer.png" alt="printer_icon"></a></div>
+                        <div class="mail"><a href=""><img src="img/mail.png" alt="mail_icon"></a></div>
+                    </td>
+                </tr>
+                <?
+                $cnt++;
+            }
+            ?>
             </tbody>
         </table>
     </div>

@@ -73,8 +73,8 @@ include_once ('head.php');
                 <p class="left_text">숙제관리</p>
             </div>
             <div class="head_right">
-                <div class="homework_menu"><a href="homework_manegement_add.html">숙제생성</a></div>
-                <div class="homework_menu on"><a href="homework_manegement_list.html" class="on">숙제조회</a></div>
+                <div class="homework_menu"><a href="homework_management_add.php">숙제생성</a></div>
+                <div class="homework_menu on"><a href="homework_management_list.php" class="on">숙제조회</a></div>
             </div>
         </div>
     </div>

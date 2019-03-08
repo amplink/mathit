@@ -1,6 +1,6 @@
 <?php
-
 include_once('./_common.php');
+
 $name = $_POST['name'];
 $from = $_POST['from'];
 $to = $_POST['to'];
@@ -17,14 +17,35 @@ $corner3 = $_POST['corner3'];
 $Q_number3 = $_POST['Q_number3'];
 $corner4 = $_POST['corner4'];
 $Q_number4 = $_POST['Q_number4'];
+$student_list = $_POST['student_list'];
 
-$connect = sql_connect(G5_MYSQL_HOST, G5_MYSQL_USER, G5_MYSQL_PASSWORD) or die('DB Connect Error');
-$select  = sql_select_db(G5_MYSQL_DB, $connect) or die('DB Error');
-mysqli_set_charset($connect, 'utf8');
-session_start();
+for($i=0; $i<count($Q_number1); $i++) {
+    if($i==count($Q_number1)-1) $q_number1 .= $Q_number1[$i];
+    else $q_number1 .= $Q_number1[$i].",";
+}
+for($i=0; $i<count($Q_number2); $i++) {
+    if($i==count($Q_number2)-1) $q_number2 .= $Q_number2[$i];
+    else $q_number2 .= $Q_number2[$i].",";
+}
+for($i=0; $i<count($Q_number3); $i++) {
+    if($i==count($Q_number3)-1) $q_number3 .= $Q_number3[$i];
+    else $q_number3 .= $Q_number3[$i].",";
+}
+for($i=0; $i<count($Q_number4); $i++) {
+    if($i==count($Q_number4)) $q_number4 .= $Q_number4[$i];
+    else $q_number4 .= $Q_number4[$i].",";
+}
+
+for($i=0; $i<count($student_list); $i++) {
+    if($i==count($student_list[$i])-1) $st .= $student_list[$i];
+    else $st .= $student_list[$i].",";
+}
+$sql = "delete from `homework` where `name`='$name';";
+sql_query($sql);
 
 $query = "INSERT INTO homework SET
                          `name`='$name',
+                         `student` = '$st',
                          `_from`='$from',
                          `_to`='$to',
                          `textbook`='$textbook',
@@ -33,33 +54,18 @@ $query = "INSERT INTO homework SET
                          `level`='$level',
                          `unit`='$unit',
                          `corner1`='$corner1',
-                         `Q_number1`='$Q_number1',
+                         `Q_number1`='$q_number1',
                          `corner2`='$corner2',
-                         `Q_number2`='$Q_number2',
+                         `Q_number2`='$q_number2',
                          `corner3`='$corner3',
-                         `Q_number3`='$Q_number3',
+                         `Q_number3`='$q_number3',
                          `corner4`='$corner4',
-                         `Q_number4`='$Q_number4'
+                         `Q_number4`='$q_number4'
                                 ";
 
-$result = mysqli_query($connect,$query);
-mysqli_close($connect);
+sql_query($query);
 
-
-    if($result){
-        echo "<script>alert(\"숙제정보가 입력되었습니다.\"); history.back(-2); </script>";
-    }else{
-        echo "<script>alert(\"누락된 정보가 있습니다.\"); history.back(-2); </script>";
-    }
-
+alert_msg("등록이 완료되었습니다.");
+location_href("homework_management_list.php");
 ?>
-
-<html>
-<head>
-    <title>MathIt - teacher</title>
-</head>
-<body>
-
-</body>
-</html>
 

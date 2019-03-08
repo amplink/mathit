@@ -3,7 +3,7 @@ include_once ('_common.php');
 
 $class = $_GET['class'];
 
-$link = "/api/math/class?client_no=126";
+$link = "/api/math/class?client_no=".$_SESSION['client_no'];
 $r = api_calls_get($link);
 
 for($i=0; $i<count($r); $i++) {
