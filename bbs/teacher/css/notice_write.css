@@ -42,42 +42,33 @@
 
 .board_option_line {
     width: 100%;
-    height: 40px;
+    height: 35px;
     border-bottom: solid 1px rgb(220, 220, 220);
     border-right: solid 1px rgb(220, 220, 220);
-}
-
-.board_option_line:nth-child(1) {
-    position: relative;
-    bottom: 1px;
-}
-
-.board_option_line:nth-child(5) {
-    position: relative;
-    top: 1px;
+    overflow: hidden;
 }
 
 .option_title {
     display: inline-block;
     width: 150px;
     height: 100%;
-    line-height: 40px;
+    line-height: 35px;
     background-color: rgb(41, 124, 62);
     text-align: center;
     vertical-align: top;
 }
 
 .option_title p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: rgb(255, 255, 255);
 }
 
 .option_content {
     display: inline-block;
-    width: calc(100% - 175px);
-    line-height: 40px;
-    padding-left: 20px;
+    width: calc(100% - 165px);
+    line-height: 35px;
+    float: right;
 }
 
 .type_radio {
@@ -120,12 +111,17 @@
     display: inline-block;
     width: 600px;
     height: 15px;
-    font-size: 18px;
+    font-size: 16px;
     padding: 5px;
 }
 
 .option_content>input::placeholder {
     font-size: 16px;
+}
+
+.board_option_line:nth-child(5) .option_content>input {
+    font-size: 13px;
+    padding: 0;
 }
 
 .option_content>select {
@@ -171,9 +167,9 @@
 
 .save_btn {
     display: inline-block;
-    width: 120px;
-    height: 40px;
-    line-height: 40px;
+    width: 100px;
+    height: 35x;
+    line-height: 35px;
     background-color: rgb(32, 175, 68);
     border-radius: 30px;
 }
@@ -182,7 +178,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: rgb(255, 255, 255);
     text-align: center;
@@ -190,19 +186,20 @@
 
 .cancel_btn {
     display: inline-block;
-    width: 120px;
-    height: 38px;
-    line-height: 38px;
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
     border: solid 1px rgb(32, 175, 68);
     border-radius: 30px;
     margin: 0 10px;
+    box-sizing: border-box;
 }
 
 .cancel_btn a {
     display: block;
     width: 100%;
     height: 100%;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: rgb(32, 175, 68);
     text-align: center;

@@ -30,6 +30,8 @@
 }
 
 .head_right>div {
+    position: relative;
+    bottom: 3px;
     display: inline-block;
     width: 100px;
     height: 28px;
@@ -80,11 +82,11 @@
 
 .class_table_section table thead tr th {
     height: 30px;
-    font-size: 18px;
+    font-size: 16px;
     background-color: rgb(32, 175, 68);
     color: rgb(255, 255, 255);
     border-bottom: solid 1px rgb(220, 220, 220);
-    padding: 10px;
+    padding: 8px;
 }
 
 .class_table_section table thead tr th:nth-child(1) {

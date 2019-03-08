@@ -1,10 +1,12 @@
 .head_left p {
     display: inline-block;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
 }
 
 .consult_mane_btn {
+    position: relative;
+    bottom: 3px;
     display: inline-block;
     width: 100px;
     height: 28px;
@@ -124,7 +126,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: rgb(255, 255, 255);
     text-align: center;
@@ -200,9 +202,9 @@
 
 .modify_btn {
     display: inline-block;
-    width: 130px;
-    height: 40px;
-    line-height: 40px;
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
     background-color: rgb(32, 175, 68);
     border-radius: 30px;
 }
@@ -211,7 +213,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: rgb(255, 255, 255);
     text-align: center;
@@ -219,19 +221,20 @@
 
 .delete_btn {
     display: inline-block;
-    width: 130px;
-    height: 38px;
-    line-height: 38px;
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
     border: solid 1px rgb(32, 175, 68);
     border-radius: 30px;
     margin-left: 5px;
+    box-sizing: border-box;
 }
 
 .delete_btn a {
     display: block;
     width: 100%;
     height: 100%;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     text-align: center;
 }
