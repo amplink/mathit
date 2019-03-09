@@ -6,8 +6,8 @@ body {
 
 .login_box {
     position: relative;
-    width: 400px;
-    height: 600px;
+    width: 300px;
+    height: 500px;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, .3);
     background-color: rgb(255, 255, 255);
     padding: 20px;
@@ -15,7 +15,7 @@ body {
 
 .logo_line {
     width: auto;
-    margin-top: 70px;
+    margin-top: 50px;
 }
 
 .login_logo {
@@ -52,14 +52,17 @@ body {
     width: calc(100% - 10px);
     height: 25px;
     border: solid 1px rgb(150, 150, 150);
-    font-size: 20px;
+    font-size: 16px;
     padding: 5px;
     margin-top: 10px;
 }
 
+.login_input_section>form>input:nth-child(2) {
+    font-family: '돋움', Dotum, '굴림', Gulim, Helvetica, Sans-serif;
+}
+
 .login_input_section>form>input::placeholder {
     font-size: 16px;
-
 }
 
 .login_input_section select {
@@ -119,4 +122,5 @@ body {
     font-weight: 600;
     color: rgb(255, 255, 255);
     text-align: center;
+    cursor: pointer;
 }
