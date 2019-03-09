@@ -42,7 +42,7 @@
     top: 20px;
     width: 100%;
     max-width: 1400px;
-    height: 700px;
+    height: auto;
     max-height: 700px;
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
@@ -176,6 +176,7 @@
     width: calc(100% - 40px);
     height: 40px;
     padding: 0 20px;
+    padding-bottom: 10px;
 }
 
 .save_btn {
@@ -208,3 +209,10 @@
 .back_logo img {
     width: 100%;
 }
+
+/*----------------------*/
+
+.ck-content {
+    min-height: 300px;
+}
+

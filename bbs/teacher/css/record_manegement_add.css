@@ -1,7 +1,7 @@
 .homework_menu {
     display: inline-block;
     width: 130px;
-    height: 55px;
+    height: 53px;
     line-height: 37px;
     background-color: rgb(255, 255, 255);
     border: solid 2px rgb(220, 220, 220);
@@ -229,13 +229,27 @@ table tbody tr:nth-child(2n) {
     padding-left: 10px;
 }
 
-.division:nth-child(2) .l_div_title {
-    top: -2px;
+.r_left_box .division:nth-child(2) .l_div_title {
+    top: -7px;
 }
 
-.division:nth-child(2) input {
+.r_left_box .division:nth-child(2) input {
     position: relative;
-    bottom: 5px;
+    bottom: 8px;
+}
+
+.r_left_box .division:nth-child(3) input {
+    position: relative;
+    top: 1px;
+}
+
+.r_right_box .division:nth-child(2) .l_div_title {
+    top: 2px;
+}
+
+.r_right_box .division:nth-child(2) input {
+    position: relative;
+    top: 1px;
 }
 
 .l_input {
@@ -370,4 +384,10 @@ table tbody tr:nth-child(2n) {
     font-weight: 600;
     color: rgb(255, 255, 255);
     text-align: center;
+}
+
+/*----------------*/
+
+.ui-datepicker-trigger {
+    top: -1px;
 }
