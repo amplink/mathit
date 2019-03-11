@@ -7,6 +7,6 @@ $sql = "select * from `teacher_score` where `class` = '$class' and `test_genre` 
 $result = mysqli_query($connect_db, $sql);
 while($res = mysqli_fetch_array($result)) {
     $tt = $res['title'];
-    echo "<tr><td onclick='call_data(\"$tt\")'>".$res['title']."</td></tr>";
+    echo "<tr><td onclick=\"call_data('".$tt."')\">".$res['title']."</td></tr>";
 }
 ?>

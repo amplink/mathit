@@ -37,8 +37,8 @@ include_once ('head.php');
                 </div>
             </div>
             <div class="head_right">
-                <div class="hw_make_btn"><a href="homework_manegement_add.html">숙제생성</a></div>
-                <div class="scoring_shortcut_btn"><a href="student_manegement_score_all.html">채점바로가기</a></div>
+                <div class="hw_make_btn"><a href="homework_management_add.php">숙제생성</a></div>
+                <div class="scoring_shortcut_btn"><a href="student_management_score_all.php">채점바로가기</a></div>
             </div>
         </div>
     </div>
@@ -66,17 +66,15 @@ include_once ('head.php');
                     if($day[0][$i]) {
                         ?>
                         <td>
-                            <a href="student_manegement_record.html">
-                                <div class="class_info">
+                            <div class="class_info">
                         <?php
                         for($j=0; $j<count($time); $j++) {
                             if($time[$j] == 1) {
-                                echo "<p>".$d_name[$j]."</p>";
+                                echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
                             }
                         }
                         ?>
-                                </div>
-                            </a>
+                            </div>
                         </td>
                         <?php
                     }else {
@@ -93,16 +91,14 @@ include_once ('head.php');
                     if($day[0][$i]) {
                         ?>
                         <td>
-                            <a href="student_manegement_record.html">
-                                <div class="class_info">
-                                    <?php
-                                    for($j=0; $j<count($time); $j++) {
-                                        if($time[$j] == 2) {
-                                            echo "<p>".$d_name[$j]."</p>";
-                                        }
-                                    }?>
-                                </div>
-                            </a>
+                            <div class="class_info">
+                                <?php
+                                for($j=0; $j<count($time); $j++) {
+                                    if($time[$j] == 2) {
+                                        echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
+                                    }
+                                }?>
+                            </div>
                         </td>
                         <?php
                     }else {
@@ -119,16 +115,14 @@ include_once ('head.php');
                     if($day[0][$i]) {
                         ?>
                         <td>
-                            <a href="student_manegement_record.html">
-                                <div class="class_info">
+                            <div class="class_info">
                                     <?php
                                     for($j=0; $j<count($time); $j++) {
                                         if($time[$j] == 3) {
-                                            echo "<p>".$d_name[$j]."</p>";
+                                            echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
                                         }
                                     }?>
-                                </div>
-                            </a>
+                            </div>
                         </td>
                         <?php
                     }else {
@@ -145,16 +139,14 @@ include_once ('head.php');
                     if($day[0][$i]) {
                         ?>
                         <td>
-                            <a href="student_manegement_record.html">
                                 <div class="class_info">
                                     <?php
                                     for($j=0; $j<count($time); $j++) {
                                         if($time[$j] == 4) {
-                                            echo "<p>".$d_name[$j]."</p>";
+                                            echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
                                         }
                                     }?>
                                 </div>
-                            </a>
                         </td>
                         <?php
                     }else {

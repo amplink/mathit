@@ -50,7 +50,7 @@ $res = mysqli_fetch_array($result);
                     <div class="score_average">
                         <div class="up_average">
                             <p class="lt">100점 만점</p>
-                            <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", $tot/$cnt/2)?></span><span>점</span></p>
+                            <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", ($tot/$cnt/2))?></span><span>점</span></p>
                         </div>
                         <div class="down_average">
                             <p class="lt">최고 점수</p>
