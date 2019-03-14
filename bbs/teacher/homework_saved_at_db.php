@@ -60,7 +60,8 @@ $query = "INSERT INTO homework SET
                          `corner3`='$corner3',
                          `Q_number3`='$q_number3',
                          `corner4`='$corner4',
-                         `Q_number4`='$q_number4'
+                         `Q_number4`='$q_number4',
+                         `checked` = '0'
                                 ";
 
 sql_query($query);

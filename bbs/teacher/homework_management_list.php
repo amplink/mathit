@@ -12,10 +12,13 @@ include_once ('head.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_list.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
     <script src="js/common.js"></script>
-
+    <script src="js/homework_manegement_add.js"></script>
     <style>
         .students_checks{
             display: none;
@@ -42,28 +45,6 @@ include_once ('head.php');
             color:green;
         }
     </style>
-    <script type="text/javascript">
-        var status_complete_onoff = 0;
-        $(document).ready(function () {
-            $("#status_complete").on("click", function(){
-                toggle_status_complete();
-
-            });
-            $("#close_x_btn").on("click", function(){
-                toggle_status_complete();
-            });
-        });
-        function toggle_status_complete(){
-            if(status_complete_onoff == 1){
-                $(".students_checks").hide();
-                status_complete_onoff = 0;
-            }else{
-                $(".students_checks").show();
-                status_complete_onoff = 1;
-            }
-        }
-    </script>
-
 </head>
 <body>
 <section>
@@ -73,99 +54,68 @@ include_once ('head.php');
                 <p class="left_text">숙제관리</p>
             </div>
             <div class="head_right">
-                <div class="homework_menu"><a href="homework_management_add.php">숙제생성</a></div>
-                <div class="homework_menu on"><a href="homework_management_list.php" class="on">숙제조회</a></div>
+                <div class="homework_menu on"><a href="homework_management_add.php" class="on">숙제생성</a></div>
+                <div class="homework_menu"><a href="homework_management_list.php">숙제조회</a></div>
             </div>
         </div>
     </div>
-    <div class="wrapper">
-        <div class="left_box">
-            <p class="box_title">출제 대상 선택</p>
-            <div class="box_menu_wrap">
-                <p>학기</p>
-                <select name="year_select" id="year_select">
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                </select>
-                <select name="quarter_select" id="quarter_select">
-                    <option value="1_quarter">1분기</option>
-                    <option value="2_quarter">2분기</option>
-                    <option value="3_quarter">3분기</option>
-                    <option value="4_quarter">4분기</option>
-                </select>
+        <div class="wrapper">
+            <div class="left_box">
+                <p class="box_title">출제 대상 선택</p>
+                <div class="box_menu_wrap">
+                    <p>학기</p>
+                    <select name="year_select" id="year_select" onchange="select_year()">
+                        <?php
+                        for($i=0; $i<count($year); $i++) {
+                            ?>
+                            <option value="<?=$year[$i]?>"><?=$year[$i]?></option>
+                            <?php
+                        }
+                        ?>
+
+                    </select>
+                    <select name="quarter_select" id="quarter_select" onchange="select_year()">
+                        <?php
+                        for($i=0; $i<count($quarter); $i++) {
+                            ?>
+                            <option value="<?=$quarter[$i]?>"><?=$quarter[$i]?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="grade_select_box select_table content">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>수업목록</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        for($i=0; $i<count($d_name); $i++) {
+                            ?>
+                            <tr>
+                                <td onclick="lecture(<?=$d_uid[$i]?>,<?=$c_uid[$i]?>)"><span><?=$d_name[$i]?></span></td>
+                            </tr>
+                            <?
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="student_list_box select_table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>학생목록</th>
+                        </tr>
+                        </thead>
+                        <tbody id="students">
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="grade_select_box select_table">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>수업목록</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><span>초등 3학년</span><span>이산수학</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>중등 1학년</span><span>덧셈</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>중등 2학년</span><span>상미분방정식</span></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="class_select_box select_table">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>요일</th>
-                        <th>담당 교사</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><span>월수금</span><span>2</span></td>
-                        <td><span>퇴계이황</span></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><span>화목토</span><span>2</span></td>
-                        <td><span>가우스</span></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><span>월수금</span><span>2</span></td>
-                        <td><span>유클리드</span></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="student_list_box select_table">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>학생목록</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><span>고이즈미</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>킹목사</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>조지부시</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>홍길동</span></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
         <div class="right_wrap">
             <div class="right_box">
                 <p class="box_title">숙제목록</p>
@@ -205,253 +155,227 @@ include_once ('head.php');
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <div class="x_btn"><img src="img/close.png" alt="delete_icon"></div>
-                            </td>
+                        <?php
+                        $sql = "select * from `homework`";
+                        $result = sql_query($sql);
+                        $i=0;
+                        while($res = mysqli_fetch_array($result)) {
+                            ?>
+                            <tr>
+                                <td>
+                                    <div class="x_btn"><img src="img/close.png" alt="delete_icon" onclick="del_homework('<?=$res['name']?>')"></div>
+                                </td>
+                                <td>
+                                    <span><?=$res['name']?></span>
+                                </td>
 
-                            <td>
-                                <span>숙제명</span>
-                            </td>
+                                <td><select name="textbook" id="textbook">
+                                        <?php
+                                        if($res['textbook']=="알파") {
+                                            ?>
+                                            <option value="알파" selected>알파</option>
+                                            <option value="베타">베타</option>
+                                            <?php
+                                        }else {
+                                            ?>
+                                            <option value="알파">알파</option>
+                                            <option value="베타" selected>베타</option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select></td>
+                                <td><select name="grade" id="grade<?=$i?>" onchange="">
+                                        <option value="초3">초3</option>
+                                        <option value="초4">초4</option>
+                                        <option value="초5">초5</option>
+                                        <option value="초6">초6</option>
+                                        <option value="중1">중1</option>
+                                        <option value="중2">중2</option>
+                                        <option value="중3">중3</option>
+                                        <?php
+                                        echo "<script>$('#grade$i').val('".$res['grade']."');</script>";
+                                        ?>
+                                    </select></td>
+                                <td><select name="semester" id="semester" onchange="">
+                                        <?php
+                                        if($res['semester']=="1학기") {
+                                            ?>
+                                            <option value="1학기" selected>1학기</option>
+                                            <option value="2학기">2학기</option>
+                                            <?php
+                                        }else {
+                                            ?>
+                                            <option value="1학기">1학기</option>
+                                            <option value="2학기" selected>2학기</option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select></td>
+                                <td><select name="level" id="level<?=$i?>">
+                                        <option value="루트">루트</option>
+                                        <option value="파이">파이</option>
+                                        <option value="시그마">시그마</option>
+                                        <?php
+                                        echo "<script>$('#level$i').val('".$res['level']."');</script>";
+                                        ?>
+                                    </select></td>
+                                <script>
+                                    book_info(<?=$i?>);
+                                </script>
+                                <td>
+                                    <select name="unit" id="unit">
+                                        <option value="<?=$res['unit']?>"><?=$res['unit']?></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="corner1" id="corner1<?=$i?>">
+                                        <option value="개념마스터">개념마스터</option>
+                                        <option value="개념확인">개념확인</option>
+                                        <option value="서술과 코칭">서술과 코칭</option>
+                                        <option value="이야기수학">이야기수학</option>
+                                        <option value="개념다지기">개념다지기</option>
+                                        <option value="단원마무리">단원마무리</option>
+                                        <option value="도전 문제">도전 문제</option>
+                                        <?php
+                                        echo "<script>$('#corner1$i').val('".$res['corner1']."');</script>";
+                                        ?>
+                                    </select>
+                                </td>
 
-                            <td><select name="textbook" id="textbook">
-                                    <option value="base">선택</option>
-                                </select></td>
+                                <td>
+                                    <select name="Q_number1[]" id="Q_number1" class="custumdropdown" custumdrop="question" multiple="multiple">
+                                        <?php
+                                        $q_1 = explode(",", $res['Q_number1']);
+                                        $cnt = 0;
+                                        for($i=1; $i<=30; $i++) {
+                                            if($q_1[$cnt] == $i) {
+                                                echo "<option class='checkbox' value='$i' selected>$i</option>";
+                                                $cnt++;
+                                            }
+                                            else echo "<option class='checkbox' value='$i'>$i</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="corner2" id="corner2<?=$i?>">
+                                        <option value="개념마스터">개념마스터</option>
+                                        <option value="개념확인">개념확인</option>
+                                        <option value="서술과 코칭">서술과 코칭</option>
+                                        <option value="이야기수학">이야기수학</option>
+                                        <option value="개념다지기">개념다지기</option>
+                                        <option value="단원마무리">단원마무리</option>
+                                        <option value="도전 문제">도전 문제</option>
+                                        <?php
+                                        echo "<script>$('#corner2$i').val('".$res['corner2']."');</script>";
+                                        ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="Q_number2[]" id="Q_number2" class="custumdropdown" custumdrop="question" multiple="multiple">
+                                        <?php
+                                        $q_2 = explode(",", $res['Q_number2']);
+                                        $cnt = 0;
+                                        for($i=1; $i<=30; $i++) {
+                                            if($q_2[$cnt] == $i) {
+                                                echo "<option class='checkbox' value='$i' selected>$i</option>";
+                                                $cnt++;
+                                            }
+                                            else echo "<option class='checkbox' value='$i'>$i</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </td>
 
-                            <td><select name="grade" id="grade">
-                                    <option value="base">선택</option>
-                                </select></td>
+                                <td>
+                                    <select name="corner3" id="corner3<?=$i?>">
+                                        <option value="개념마스터">개념마스터</option>
+                                        <option value="개념확인">개념확인</option>
+                                        <option value="서술과 코칭">서술과 코칭</option>
+                                        <option value="이야기수학">이야기수학</option>
+                                        <option value="개념다지기">개념다지기</option>
+                                        <option value="단원마무리">단원마무리</option>
+                                        <option value="도전 문제">도전 문제</option>
+                                        <?php
+                                        echo "<script>$('#corner3$i').val('".$res['corner3']."');</script>";
+                                        ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="Q_number3[]" id="Q_number3" class="custumdropdown" custumdrop="question" multiple="multiple">
+                                        <?php
+                                        $q_3 = explode(",", $res['Q_number3']);
+                                        $cnt = 0;
+                                        for($i=1; $i<=30; $i++) {
+                                            if($q_3[$cnt] == $i) {
+                                                echo "<option class='checkbox' value='$i' selected>$i</option>";
+                                                $cnt++;
+                                            }
+                                            else echo "<option class='checkbox' value='$i'>$i</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </td>
 
-                            <td><select name="semester" id="semester">
-                                    <option value="base">선택</option>
-                                </select></td>
-
-                            <td><select name="level" id="level">
-                                    <option value="base">선택</option>
-                                </select></td>
-
-                            <td><select name="unit" id="unit">
-                                    <option value="base">선택</option>
-                                </select></td>
-
-                            <!-- 1번 숙제 -->
-                            <td><select name="corner" id="corner">
-                                    <option value="base">선택</option>
-                                </select>
-                            </td>
-                            <td><select name="Q_number" id="Q_number">
-                                    <option value="base">전체</option>
-                                </select>
-                            </td>
-                            <!-- 2번 숙제 -->
-                            <td><select name="corner" id="corner">
-                                    <option value="base">선택</option>
-                                </select>
-                            </td>
-                            <td><select name="Q_number" id="Q_number">
-                                    <option value="base">전체</option>
-                                </select>
-                            </td>
-                            <!-- 3번 숙제 -->
-                            <td><select name="corner" id="corner">
-                                    <option value="base">선택</option>
-                                </select>
-                            </td>
-                            <td><select name="Q_number" id="Q_number">
-                                    <option value="base">전체</option>
-                                </select>
-                            </td>
-                            <!-- 4번 숙제-->
-                            <td><select name="corner" id="corner">
-                                    <option value="base">선택</option>
-                                </select>
-                            </td>
-                            <td><select name="Q_number" id="Q_number">
-                                    <option value="base">전체</option>
-                                </select>
-                            </td>
-                            <td>
-                                <span>2018-07-01</span>
-                            </td>
-                            <td>
-                                <span>2018-08-01</span>
-                            </td>
-                            <td>
-                                <p class="complete_text">완료</p>
-                                <p class="ing_text" style="display: none; color: blue;">진행중</p>
-                                <div class="resend_btn" style="display: none;"><a href="#none">재전송</a></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="x_btn"><img src="img/close.png" alt="delete_icon"></div>
-                            </td>
-                            <td>
-                                <span>숙제명</span>
-                            </td>
-                            <td><select name="textbook" id="textbook">
-                                    <option value="base">선택</option>
-                                </select></td>
-                            <td><select name="grade" id="grade">
-                                    <option value="base">선택</option>
-                                </select></td>
-                            <td><select name="semester" id="semester">
-                                    <option value="base">선택</option>
-                                </select></td>
-                            <td><select name="level" id="level">
-                                    <option value="base">선택</option>
-                                </select></td>
-                            <td><select name="unit" id="unit">
-                                    <option value="base">선택</option>
-                                </select></td>
-                            <!-- 1번 숙제 -->
-                            <td><select name="corner" id="corner">
-                                    <option value="base">선택</option>
-                                </select>
-                            </td>
-                            <td><select name="Q_number" id="Q_number">
-                                    <option value="base">전체</option>
-                                </select>
-                            </td>
-                            <!-- 2번 숙제 -->
-                            <td><select name="corner" id="corner">
-                                    <option value="base">선택</option>
-                                </select>
-                            </td>
-                            <td><select name="Q_number" id="Q_number">
-                                    <option value="base">전체</option>
-                                </select>
-                            </td>
-                            <!-- 3번 숙제 -->
-                            <td><select name="corner" id="corner">
-                                    <option value="base">선택</option>
-                                </select>
-                            </td>
-                            <td><select name="Q_number" id="Q_number">
-                                    <option value="base">전체</option>
-                                </select>
-                            </td>
-                            <!-- 4번 숙제-->
-                            <td><select name="corner" id="corner">
-                                    <option value="base">선택</option>
-                                </select>
-                            </td>
-                            <td><select name="Q_number" id="Q_number">
-                                    <option value="base">전체</option>
-                                </select>
-                            </td>
-
-                            <td>
-                                <span>2018-07-01</span>
-                            </td>
-                            <td>
-                                <span>2018-08-01</span>
-                            </td>
-                            <td>
-
-                                <p class="complete_text" style="display: none;">완료</p>
-                                <div>
-                                    <p class="ing_text" id="status_complete" style="color: blue;cursor: pointer;">진행중</p>
-                                    <div class="students_checks" style="background:rgb(255, 228, 73);
-                                                                                position: absolute;
-                                                                                padding: 10px;width: 97px;right: 80px;">
-                                        <div class="checks_names_wrap">
-                                            <div style="float:right;cursor: pointer;" id="close_x_btn"><b>X</b></div>
-                                        </div>
-                                        <div class="checks_names_wrap">
-                                            <div class="checks_names" style="float:left;display:block;">고이즈미</div>
-                                            <div class="checks_names_values" ><span id="chkNameVal1" class="checkNames_span green_color_on">완료</span></div>
-                                        </div>
-                                        <div class="checks_names_wrap">
-                                            <div class="checks_names" style="float:left;display:block;">킹목사</div>
-                                            <div class="checks_names_values" ><span id="chkNameVal2" class="checkNames_span orange_color_on">1차</span></div>
-                                        </div>
-                                        <div class="checks_names_wrap">
-                                            <div class="checks_names" style="float:left;display:block;">조지부시</div>
-                                            <div class="checks_names_values" ><span id="chkNameVal3" class="checkNames_span red_color_on">2차</span></div>
-                                        </div>
-                                        <div class="checks_names_wrap">
-                                            <div class="checks_names" style="float:left;display:block;">홍길동</div>
-                                            <div class="checks_names_values" ><span id="chkNameVal4" class="checkNames_span green_color_on">완료</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="resend_btn" style="display: none;"><a href="#none">재전송</a></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="x_btn"><img src="img/close.png" alt="delete_icon"></div>
-                            </td>
-                            <td>
-                                <span>숙제명</span>
-                            </td>
-                            <td><select name="textbook" id="textbook">
-                                    <option value="base">선택</option>
-                                </select></td>
-                            <td><select name="grade" id="grade">
-                                    <option value="base">선택</option>
-                                </select></td>
-                            <td><select name="semester" id="semester">
-                                    <option value="base">선택</option>
-                                </select></td>
-                            <td><select name="level" id="level">
-                                    <option value="base">선택</option>
-                                </select></td>
-                            <td><select name="unit" id="unit">
-                                    <option value="base">선택</option>
-                                </select></td>
-
-                            <!-- 1번 숙제 -->
-                            <td><select name="corner" id="corner">
-                                    <option value="base">선택</option>
-                                </select>
-                            </td>
-                            <td><select name="Q_number" id="Q_number">
-                                    <option value="base">전체</option>
-                                </select>
-                            </td>
-                            <!-- 2번 숙제 -->
-                            <td><select name="corner" id="corner">
-                                    <option value="base">선택</option>
-                                </select>
-                            </td>
-                            <td><select name="Q_number" id="Q_number">
-                                    <option value="base">전체</option>
-                                </select>
-                            </td>
-                            <!-- 3번 숙제 -->
-                            <td><select name="corner" id="corner">
-                                    <option value="base">선택</option>
-                                </select>
-                            </td>
-                            <td><select name="Q_number" id="Q_number">
-                                    <option value="base">전체</option>
-                                </select>
-                            </td>
-                            <!-- 4번 숙제-->
-                            <td><select name="corner" id="corner">
-                                    <option value="base">선택</option>
-                                </select>
-                            </td>
-                            <td><select name="Q_number" id="Q_number">
-                                    <option value="base">전체</option>
-                                </select>
-
-                            </td>
-                            <td>
-                                <span>2018-07-01</span>
-                            </td>
-                            <td>
-                                <span>2018-08-01</span>
-                            </td>
-                            <td>
-                                <p class="complete_text" style="display: none;">완료</p>
-                                <p class="ing_text" style="display: none; color: blue;">진행중</p>
-                                <div class="resend_btn"><a href="#none">재전송</a></div>
-                            </td>
-
-                        </tr>
+                                <td>
+                                    <select name="corner4[]" id="corner4<?=$i?>">
+                                        <option value="개념마스터">개념마스터</option>
+                                        <option value="개념확인">개념확인</option>
+                                        <option value="서술과 코칭">서술과 코칭</option>
+                                        <option value="이야기수학">이야기수학</option>
+                                        <option value="개념다지기">개념다지기</option>
+                                        <option value="단원마무리">단원마무리</option>
+                                        <option value="도전 문제">도전 문제</option>
+                                        <?php
+                                        echo "<script>$('#corner4$i').val('".$res['corner4']."');</script>";
+                                        ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="Q_number4" id="Q_number4" class="custumdropdown" custumdrop="question" multiple="multiple">
+                                        <?php
+                                        $q_4 = explode(",", $res['Q_number4']);
+                                        $cnt = 0;
+                                        for($i=1; $i<=30; $i++) {
+                                            if($q_4[$cnt] == $i) {
+                                                echo "<option class='checkbox' value='$i' selected>$i</option>";
+                                                $cnt++;
+                                            }
+                                            else echo "<option class='checkbox' value='$i'>$i</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <span>2018-07-01</span>
+                                </td>
+                                <td>
+                                    <span>2018-08-01</span>
+                                </td>
+                                <td>
+                                    <?php
+                                    $date = str_replace("/", "-", $res['_from']);
+                                    $date = explode('-', $date);
+                                    $datee = $date[2].'-'.$date[0].'-'.$date[1];
+                                    $today = date("Y-m-d");
+                                    $c_date = date_create($datee);
+                                    $c_today = date_create($today);
+                                    $diff = date_diff($c_today, $c_date);
+                                    $k = $diff->format("%R%a");
+                                    if($k < 0) {
+                                        if($res['checked']==0) {
+                                            echo '<p class="ing_text" style=" color: blue;">진행중</p>';
+                                        }else echo '<p class="complete_text">완료</p>';
+                                    }else if($k > 0) {
+                                        echo '<div class="resend_btn" style="display: none;"><a href="#none">재전송</a></div>';
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                            <?php
+                            $i++;
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -488,7 +412,47 @@ include_once ('head.php');
                 $('.student_list_box table tbody tr').not(this).removeClass('on');
             }
         })
+
+        $('.custumdropdown').homework_manegement_add();
     })
+
+    var status_complete_onoff = 0;
+    $(document).ready(function () {
+        $("#status_complete").on("click", function(){
+            toggle_status_complete();
+
+        });
+        $("#close_x_btn").on("click", function(){
+            toggle_status_complete();
+        });
+    });
+
+    function lecture(a, b) {
+        $.ajax({
+            type: "GET",
+            url: "call_student_homework.php?d_uid="+a+"&c_uid="+b,
+            dataType: "html",
+            success: function(response){
+                $("#students").html(response);
+            }
+        });
+    }
+
+    function del_homework(e) {
+        if(confirm("삭제하시겠습니까?")) {
+            location.href = "del_homework.php?name="+e;
+        }
+    }
+
+    function toggle_status_complete(){
+        if(status_complete_onoff == 1){
+            $(".students_checks").hide();
+            status_complete_onoff = 0;
+        }else{
+            $(".students_checks").show();
+            status_complete_onoff = 1;
+        }
+    }
 </script>
 </body>
 

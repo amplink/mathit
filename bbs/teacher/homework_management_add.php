@@ -158,15 +158,15 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                         <p class="box_title">숙제 정보 입력</p>
                         <div class="homework_title_input">
                             <p class="l_text">숙제명</p>
-                            <input type="text" placeholder="숙제명을 입력해주세요" name ="name">
+                            <input type="text" placeholder="숙제명을 입력해주세요" name ="name" required>
                         </div>
                         <div class="homework_deadline_wrap">
                             <div class="date_range">
-                                <p class="l_text">시작일</p><input type="text" name="from" id="from">
+                                <p class="l_text">시작일</p><input type="text" name="from" id="from" required>
                             </div>
                             <span>~</span>
                             <div class="date_range">
-                                <p class="l_text">종료일</p><input type="text" name="to" id="to">
+                                <p class="l_text">종료일</p><input type="text" name="to" id="to" required>
                             </div>
                         </div>
                     </div>
@@ -201,7 +201,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                                     <option value="알파">알파</option>
                                                     <option value="베타">베타</option>
                                                 </select></td>
-                                            <td><select name="grade" id="grade">
+                                            <td><select name="grade" id="grade" onchange="book_info()">
                                                     <option value="초3">초3</option>
                                                     <option value="초4">초4</option>
                                                     <option value="초5">초5</option>
@@ -210,7 +210,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                                     <option value="중2">중2</option>
                                                     <option value="중3">중3</option>
                                                 </select></td>
-                                            <td><select name="semester" id="semester">
+                                            <td><select name="semester" id="semester" onchange="book_info()">
                                                     <option value="1학기">1학기</option>
                                                     <option value="2학기">2학기</option>
                                                 </select></td>
@@ -219,34 +219,11 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                                     <option value="파이">파이</option>
                                                     <option value="시그마">시그마</option>
                                                 </select></td>
-                                            <td><select name="unit" id="unit">
-                                                    <option value="덧셈과 뺄셈(1)">덧셈과 뺄셈(1)</option>
-                                                    <option value="덧셈과 뺄셈(2)">덧셈과 뺄셈(2)</option>
-                                                    <option value="평면도형">평면도형</option>
-                                                    <option value="나눗셈">나눗셈</option>
-                                                    <option value="총정리(1)">총정리(1)</option>
-                                                    <option value="곱셈">곱셈</option>
-                                                    <option value="길이와 시간">길이와 시간</option>
-                                                    <option value="분수와 소수(1)">분수와 소수(1)</option>
-                                                    <option value="분수와 소수(2)">분수와 소수(2)</option>
-                                                    <option value="총정리(2)">총정리(2)</option>
+                                            <td>
+                                                <select name="unit" id="unit">
 
-                                                    <option value="곱셈">곱셈</option>
-                                                    <option value="곱셈,나눗셈">곱셈,나눗셈</option>
-                                                    <option value="나눗셈">나눗셈</option>
-                                                    <option value="원">원</option>
-                                                    <option value="총정리(1)">총정리(1)</option>
-                                                    <option value="분수(1)">분수(1)</option>
-                                                    <option value="분수(2)">분수(2)</option>
-                                                    <option value="들이와 무게">들이와 무게</option>
-                                                    <option value="자료의 정리">자료의 정리</option>
-                                                    <option value="총정리(2)">총정리(2)</option>
-                                                    <option value="큰 수(1)">큰 수(1)</option>
-                                                    <option value="큰 수(2)">큰 수(2)</option>
-                                                    <option value="각도">각도</option>
-                                                    <option value="곱셈과 나눗셈(1)">곱셈과 나눗셈(1)</option>
-                                                    <option value="총정리(1)">총정리(1)</option>
-                                                </select></td>
+                                                </select>
+                                            </td>
                                             <td>
                                                 <select name="corner1" id="corner">
                                                     <option value="개념마스터">개념마스터</option>
@@ -372,12 +349,11 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
             }
         })
         select_year();
+        book_info();
     })
     function submit() {
-        // var chkbox = $('#Q_number1');
-        // alert(chkbox.val());
-
-        $('#all').submit();
+        if($("input[name=student_list\\[\\]]").val()) $('#all').submit();
+        else alert("학생을 선택해주세요.");
     }
     var Banlist =  new Array();
     var yq = 0;
@@ -416,54 +392,31 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
             }
         });
     }
-    //var uid_array = new Array;
-    //var Ban_array = new Array;
-    //var studentlist = 0;
-    //function select_SuUp() {
-    //    var numofstudent = 0;
-    //    var nameofteacher = 0;
-    //    var clicked_td = $(this).text();
-    //    studentlist = <?//= json_encode($studentlist) ?>//;
-    //    teacherlist = <?//= json_encode($teacherlist) ?>//;
-    //    $("#grouplist").empty();
-    //    for (var i = 0; i < Banlist.length; i++) {
-    //        if (Banlist[i][3] == yq && Banlist[i][4] == clicked_td){
-    //            for (var k = 0; k < studentlist.length; k++) {
-    //                if (Banlist[i][0] == studentlist[k][18]) {
-    //                    numofstudent++;
-    //                }
-    //            }
-    //
-    //            for(var u = 0; u < teacherlist.length; u++){
-    //                if(Banlist[i][6] == teacherlist[u][0]){
-    //                    nameofteacher = teacherlist[u][3];
-    //                    break;
-    //                }
-    //            }
-    //            var j = 1;
-    //            Ban_array[j-1] = Banlist[i][5];
-    //            uid_array[j-1] = Banlist[i][0];
-    //            $("#grouplist").append("<tr><td>" + j + "</td> <td >" + Banlist[i][5] + "</td> <td>" + numofstudent + "</td> <td>" + nameofteacher + "</td> </tr>");
-    //            j++;
-    //        }
-    //    }
-    //    $("#grouplist").children().click(select_Ban);
-    //}
-    //function select_Ban() {
-    //    var clicked_td = $(this).children().eq(1).text();
-    //    for (var i = 0; i < Ban_array.length; i++) {
-    //        if (Ban_array[i] == clicked_td) {
-    //            for(var j = 0; j < studentlist.length; j++){
-    //                if(studentlist[j][18] == uid_array[i]) {
-    //                    $("#students").append("<tr ><td >" + studentlist[j][3] + "</td></tr>");
-    //                }
-    //            }
-    //        }
-    //        }
-    //    $("#students").children().click(select_student);
-    //}
-    function select_student() { //특수학생 제외 함수
-        // alert("select_student");
+
+    function book_info() {
+        var tt = $("#grade").val();
+        var ttt = $("#semester").val();
+        var grade, semester;
+
+        if(tt=="초3") grade = 3;
+        if(tt=="초4") grade = 4;
+        if(tt=="초5") grade = 5;
+        if(tt=="초6") grade = 6;
+        if(tt=="중1") grade = 7;
+        if(tt=="중2") grade = 8;
+        if(tt=="중3") grade = 9;
+
+        if(ttt=="1학기") semester = 1;
+        if(ttt=="2학기") semester = 2;
+
+        $.ajax({
+            type: "GET",
+            url: "call_book_info.php?grade="+grade+"&semester="+semester,
+            dataType: "html",
+            success: function(response) {
+                $("#unit").html(response);
+            }
+        })
     }
 </script>
 </body>
