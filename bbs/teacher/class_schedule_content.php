@@ -45,10 +45,21 @@ $res = mysqli_fetch_array($result);
         </div>
     </div>
     <div class="btn_section">
-        <div class="l_btn_wrap"></div>
+        <div class="l_btn_wrap">
+<!--            --><?php //if($res['writer'] == $_SESSION['t_name']) ?><!--<div class="modify_btn"><a href="notice_write.php?seq=--><?//=$res['seq']?><!--">수정</a></div>-->
+            <?php if($res['writer'] == $_SESSION['t_name']) ?><div class="delete_btn"><a href="class_schedule_del.php?&seq=<?=$res['seq']?>">삭제</a></div>
+        </div>
         <div class="r_btn_wrap">
-            <div class="add_file_down_btn">
-                <a href="<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기</a>
-            </div>
+            <?php if($res['file_url']) {
+                ?>
+                <div class="modify_btn" style="">
+                    <a href="<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기</a>
+                </div>
+                <div class="delete_btn">
+                    <a href="class_schedule_file_del.php?seq=<?=$res['seq']?>">첨부파일 삭제</a>
+                </div>
+                <?php
+            }
+            ?>
         </div>
     </div>

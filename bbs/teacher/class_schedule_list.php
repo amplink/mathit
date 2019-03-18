@@ -14,6 +14,7 @@ include_once ('head.php');
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/class_schedule_list.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/notice_list.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/common.js"></script>
@@ -149,10 +150,16 @@ include_once ('head.php');
                                 </div>
                             </td>
                             <td>
-                                <?php if($res['file_url']) ?><div class="have_sign"></div>
+                                <?php if($res['file_url']) {
+                                    ?>
+                                    <div class="have_sign"></div>
+                                <?php
+                                }
+                                ?>
                             </td>
                         </tr>
                         <?
+                        $i++;
                     }
                     ?>
                     </tbody>

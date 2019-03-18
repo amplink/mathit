@@ -18,7 +18,7 @@ while($res = mysqli_fetch_array($result)) {
         </td>
         <td>
             <?php
-            if($res['file_name']) echo "<div class='have_sign'></div>";
+            if($res['file_url']) echo "<div class='have_sign'></div>";
             ?>
         </td>
     </tr>
