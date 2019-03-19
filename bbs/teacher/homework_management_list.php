@@ -54,8 +54,8 @@ include_once ('head.php');
                 <p class="left_text">숙제관리</p>
             </div>
             <div class="head_right">
-                <div class="homework_menu on"><a href="homework_management_add.php" class="on">숙제생성</a></div>
-                <div class="homework_menu"><a href="homework_management_list.php">숙제조회</a></div>
+                <div class="homework_menu"><a href="homework_management_add.php">숙제생성</a></div>
+                <div class="homework_menu on"><a href="homework_management_list.php" class="on">숙제조회</a></div>
             </div>
         </div>
     </div>
@@ -64,24 +64,18 @@ include_once ('head.php');
                 <p class="box_title">출제 대상 선택</p>
                 <div class="box_menu_wrap">
                     <p>학기</p>
-                    <select name="year_select" id="year_select" onchange="select_year()">
+                    <select name="year_select" id="year_select" onchange="move_page()">
                         <?php
-                        for($i=0; $i<count($year); $i++) {
-                            ?>
-                            <option value="<?=$year[$i]?>"><?=$year[$i]?></option>
-                            <?php
+                        for($i=2018; $i<2030; $i++) {
+                            echo "<option value='$i'>$i"."년"."</option>";
                         }
                         ?>
-
                     </select>
-                    <select name="quarter_select" id="quarter_select" onchange="select_year()">
-                        <?php
-                        for($i=0; $i<count($quarter); $i++) {
-                            ?>
-                            <option value="<?=$quarter[$i]?>"><?=$quarter[$i]?></option>
-                            <?php
-                        }
-                        ?>
+                    <select name="quarter_select" id="quarter_select" onchange="move_page()">
+                        <option value="1">1분기</option>
+                        <option value="2">2분기</option>
+                        <option value="3">3분기</option>
+                        <option value="4">4분기</option>
                     </select>
                 </div>
                 <div class="grade_select_box select_table content">
@@ -453,6 +447,16 @@ include_once ('head.php');
             status_complete_onoff = 1;
         }
     }
+
+    function move_page() {
+        var a = $('#quarter_select').val();
+        var b = $('#year_select').val();
+        // alert(a);
+        location.href = './homework_management_list.php?s_year='+b+'&s_quarter='+a;
+    }
+
+    $("#year_select").val(<?php echo $s_year;?>);
+    $("#quarter_select").val(<?php echo $s_quarter;?>);
 </script>
 </body>
 

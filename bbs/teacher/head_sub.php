@@ -3,24 +3,13 @@ if(!$_SESSION['t_uid']) {
     alert('로그인을 먼저 해주세요.');
     location_href("./login.php");
 }
-if($_GET['s_year'] && $_GET['s_quarter']) {
-    $s_year = $_GET['s_year'];
-    $s_quarter = $_GET['s_quarter'];
-    if($s_quarter == 1) {
-        $a_quarter = "0101";
-    }else if($s_quarter == 2) $a_quarter = "0301";
-    else if($s_quarter == 3) $a_quarter = "0601";
-    else if($s_quarter == 4) $a_quarter = "0901";
-}else {
-    $s_year = date("Y");
-    $a_quarter = date("md");
-    $mon = date("m");
-    if($mon >= 1 && $mon <= 2) $s_quarter = 1;
-    else if($mon >= 3 && $mon <= 5) $s_quarter = 2;
-    else if($mon >= 6 && $mon <= 8) $s_quarter = 3;
-    else $s_quarter = 4;
-}
-
+$s_year = $_GET['s_year'];
+$s_quarter = $_GET['s_quarter'];
+if($s_quarter == 1) {
+    $a_quarter = "0101";
+}else if($s_quarter == 2) $a_quarter = "0301";
+else if($s_quarter == 3) $a_quarter = "0601";
+else if($s_quarter == 4) $a_quarter = "0901";
 $date = $s_year.$a_quarter;
 
 $ac = $_SESSION['client_no'];

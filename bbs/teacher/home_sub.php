@@ -1,6 +1,6 @@
 <?php
 include_once ('./_common.php');
-include_once ('head.php');
+include_once ('head_sub.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -70,13 +70,13 @@ include_once ('head.php');
                         ?>
                         <td>
                             <div class="class_info">
-                        <?php
-                        for($j=0; $j<count($time); $j++) {
-                            if($time[$j] == 1) {
-                                echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
-                            }
-                        }
-                        ?>
+                                <?php
+                                for($j=0; $j<count($time); $j++) {
+                                    if($time[$j] == 1) {
+                                        echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
+                                    }
+                                }
+                                ?>
                             </div>
                         </td>
                         <?php
@@ -119,12 +119,12 @@ include_once ('head.php');
                         ?>
                         <td>
                             <div class="class_info">
-                                    <?php
-                                    for($j=0; $j<count($time); $j++) {
-                                        if($time[$j] == 3) {
-                                            echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
-                                        }
-                                    }?>
+                                <?php
+                                for($j=0; $j<count($time); $j++) {
+                                    if($time[$j] == 3) {
+                                        echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
+                                    }
+                                }?>
                             </div>
                         </td>
                         <?php
@@ -142,14 +142,14 @@ include_once ('head.php');
                     if($day[0][$i]) {
                         ?>
                         <td>
-                                <div class="class_info">
-                                    <?php
-                                    for($j=0; $j<count($time); $j++) {
-                                        if($time[$j] == 4) {
-                                            echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
-                                        }
-                                    }?>
-                                </div>
+                            <div class="class_info">
+                                <?php
+                                for($j=0; $j<count($time); $j++) {
+                                    if($time[$j] == 4) {
+                                        echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
+                                    }
+                                }?>
+                            </div>
                         </td>
                         <?php
                     }else {
@@ -193,7 +193,7 @@ include_once ('head.php');
         var a = $('#quarter_select').val();
         var b = $('#year_select').val();
         // alert(a);
-        location.href = './home.php?s_year='+b+'&s_quarter='+a;
+        location.href = './home_sub.php?s_year='+b+'&s_quarter='+a;
     }
 
     $("#year_select").val(<?php echo $s_year;?>);

@@ -37,15 +37,18 @@ include_once ('head.php');
             <p class="box_title">출제대상 선택</p>
             <div class="box_menu_wrap">
                 <p>학기</p>
-                <select name="year_select" id="year_select">
-                    <?
-                    for($i=0; $i<count($year); $i++) echo "<option value='".$year[$i]."'>".$year[$i]."</option>";
+                <select name="year_select" id="year_select" onchange="move_page()">
+                    <?php
+                    for($i=2018; $i<2030; $i++) {
+                        echo "<option value='$i'>$i"."년"."</option>";
+                    }
                     ?>
                 </select>
-                <select name="quarter_select" id="quarter_select">
-                    <?
-                    for($i=0; $i<count($quarter); $i++) echo "<option value='".$quarter[$i]."'>".$quarter[$i]."</option>";
-                    ?>
+                <select name="quarter_select" id="quarter_select" onchange="move_page()">
+                    <option value="1">1분기</option>
+                    <option value="2">2분기</option>
+                    <option value="3">3분기</option>
+                    <option value="4">4분기</option>
                 </select>
             </div>
             <div class="grade_select_box select_table content">
@@ -278,6 +281,16 @@ include_once ('head.php');
         var val = (t+p)/2;
         $('#avg').text(val);
     }
+
+    function move_page() {
+        var a = $('#quarter_select').val();
+        var b = $('#year_select').val();
+        // alert(a);
+        location.href = './record_management_add.php?s_year='+b+'&s_quarter='+a;
+    }
+
+    $("#year_select").val(<?php echo $s_year;?>);
+    $("#quarter_select").val(<?php echo $s_quarter;?>);
 
     function submit() {
         $('#record_form').submit();
