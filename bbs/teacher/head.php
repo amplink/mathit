@@ -1,5 +1,8 @@
 <?php
+include_once ('_common.php');
+
 if(!$_SESSION['t_uid']) {
+
     alert('로그인을 먼저 해주세요.');
     location_href("./login.php");
 }
@@ -24,6 +27,7 @@ if($_GET['s_year'] && $_GET['s_quarter']) {
 $date = $s_year.$a_quarter;
 
 $ac = $_SESSION['client_no'];
+
 $link = "/api/math/class?client_no=".$ac."&date=".$date;
 $r = api_calls_get($link);
 
