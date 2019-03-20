@@ -12,6 +12,7 @@ session_destroy(); // 세션해제함
 // 자동로그인 해제 --------------------------------
 set_cookie('ck_mb_id', '', 0);
 set_cookie('ck_auto', '', 0);
+set_cookie('ck_client_no', "", 0);
 // 자동로그인 해제 end --------------------------------
 
 if ($url) {
