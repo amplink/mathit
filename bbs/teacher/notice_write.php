@@ -5,7 +5,7 @@ include_once ('head.php');
 // 시간표
 $link = "/api/math/teacher_class?client_no=126&t_uid=".$_SESSION['t_uid'];
 $r = api_calls_get($link);
-
+$t = $_GET['t'];
 $d_uid = array();
 $chk = 0;
 $cnt = 0;
@@ -27,7 +27,7 @@ $sql = "select * from `teacher_notice` where `seq` = '$seq';";
 $result = mysqli_query($connect_db, $sql);
 if($result) {
     $res = mysqli_fetch_array($result);
-    $type = explode(',', $res['type']);
+//    $type = explode(',', $res['type']);
     $range = explode(',', $res['n_range']);
 }
 ?>
@@ -59,7 +59,7 @@ if($result) {
             </div>
         </div>
     </div>
-    <form action="./notice_write_chk.php" method="post" id="write_form" enctype="multipart/form-data">
+    <form action="./notice_write_chk.php?t=<?=$t?>" method="post" id="write_form" enctype="multipart/form-data">
     <input type="hidden" name="seq" value="<?=$seq?>">
     <div class="write_board_section">
         <div class="board_option_line">
@@ -67,10 +67,13 @@ if($result) {
                 <p>공지유형</p>
             </div>
             <div class="option_content">
-                <div class="type_radio"><input type="checkbox" name="notice_type[]" value="중요공지">
+                <?php
+//                if($res['type']=="중요공지")
+                ?>
+                <div class="type_radio"><input type="radio" name="notice_type" value="중요공지" <?php if($res['type'] == "중요공지") echo "checked";?>>
                     <p>중요공지</p>
                 </div>
-                <div class="type_radio"><input type="checkbox" name="notice_type[]" value="일반공지">
+                <div class="type_radio"><input type="radio" name="notice_type" value="일반공지" <?php if($res['type'] == "일반공지") echo "checked";?>>
                     <p>일반공지</p>
                 </div>
             </div>
@@ -112,7 +115,7 @@ if($result) {
                 <p>제목</p>
             </div>
             <div class="option_content">
-                <input type="text" style="margin-top: 5px;" placeholder="제목을 입력하세요" name="title" required value="<?=$res['title']?>">
+                <input type="text" style="margin-top: 5px;" placeholder="제목을 입력하세요" name="title" value="<?=$res['title']?>" id="title">
             </div>
         </div>
         <div class="board_option_line">
@@ -168,9 +171,13 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
             $('.oj').prop('checked', this.checked);
         });
         $('.save_btn').click(function () {
-           $('#write_form').submit();
+            if(!$('#title').val()) {
+                alert('제목을 입력하세요.');
+            }else {
+                $('#write_form').submit();
+            }
         });
-        $('#cancel_button').click(function () {
+        $('.cancel_btn').click(function () {
             location.href = 'notice_list.php';
         })
     });
