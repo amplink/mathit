@@ -1,305 +1,147 @@
 <?php
 	include_once ('_common.php');
 	
-	if($_SERVER['REQUEST_METHOD'] != 'POST'){
+	if($_SERVER['REQUEST_METHOD'] != 'POST') :
 
-		alert_msg("Àß¸øµÈ Á¢±Ù¹æ¹ýÀÔ´Ï´Ù.");
-		location_href("./index.php");
-		exit;
-	}
-
-	//º¯¼ö ¹ÞÀ½.
-
-	$id = trim($_POST['id']);					//¾ÆÀÌµð
-	$pw = trim($_POST['pw']);					//ºñ¹Ð¹øÈ£
-	$ac = trim($_POST['academy_select']);		//ÇÐ¿ø
-	$auto_login = trim($_POST['auto_login']);	//ÀÚµ¿·Î±×ÀÎ
-
-	if($id != true): //¾ÆÀÌµð
-
-		alert_msg("¾ÆÀÌµð¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
-		location_href("./index.php");
+		alert_msg("ìž˜ëª»ëœ ì ‘ê·¼ë°©ë²•ìž…ë‹ˆë‹¤.");
+		location_href("./login.php");
 		exit;
 
-	elseif($pw != true): //ºñ¹Ð¹øÈ£
+	endif;
+
+	$id = trim($_POST['id']);					//ì•„ì´ë””
+	$pw = trim($_POST['pw']);					//ë¹„ë°€ë²ˆí˜¸
+	$ac = trim($_POST['academy_select']);		//í•™ì›
+	$auto_login = trim($_POST['auto_login']);	//ìžë™ë¡œê·¸ì¸
+
+	if($id != true): //ì•„ì´ë””
+
+		alert_msg("ì•„ì´ë””ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+		location_href("./login.php");
+		exit;
+
+	elseif($pw != true): //ë¹„ë°€ë²ˆí˜¸
 	
-		alert_msg("ºñ¹Ð¹øÈ£¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
-		location_href("./index.php");
+		alert_msg("ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+		location_href("./login.php");
 		exit;
 
-	elseif($ac != true): //ÇÐ¿ø
+	elseif($ac != true): //í•™ì›
 	
-		alert_msg("Ä·ÆÛ½º¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
-		location_href("./index.php");
+		alert_msg("ìº í¼ìŠ¤ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
+		location_href("./login.php");
 		exit;
 
 	endif;
 
 
-	$pw = md5($pw); //ÇöÀç »ç¿ëºÒ°¡ ³ªÁß¿¡ ¼­·Î È®ÀÎÈÄ ¿¬µ¿ÇØ¾ßÇÔ.
-	
-	//¼±»ý´Ô ÀüÃ¼ Á¤º¸ °¡Á®¿À±â
+	//ì„ ìƒë‹˜ ì „ì²´ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 	$link = "/api/math/teacher_list?client_no=".$ac;
 	$r = api_calls_get($link);
 
 	$i=0;
-	for($i=0; $i<count($r); $i++) {
+	for($i=0; $i<count($r); $i++) :
+
+		//ì„ ìƒë‹˜ ë‹¨ë… ê²€ì‚¬
+		$link_1 = "/api/math/teacher?client_no=".$ac."&id=".$id;
+		$r_1 = api_calls_get($link_1);
 		
-		if ($r[$i][2] && $r[$i][1] == $id) {
+		//ì„ ìƒë‹˜ ë‹¨ë…ì—ì„œ ëˆ„ë½ëœ ì •ë³´ê°€ ìžˆì–´ ì „ì²´ì •ë³´ì™€ ë¹„êµí•œë‹¤.
+		if( $r[$i][0] == $r_1[0] ) :
 
-			$total_uid =  $r[$i][0];	//UID
-			$total_tid	= $r[$i][1];		//¾ÆÀÌµð
-			$total_name = $r[$i][3];  //ÀÌ¸§
-			$total_task = $r[$i][4];	//´ç´ã¾÷¹«
-			$total_hp	= $r[$i][5];	//ÇÚµåÆù
-			$total_tel = $r[$i][6];	//ÁýÀüÈ­
-			$total_email = $r[$i][7];	//ÀÌ¸ÞÀÏ
-			$total_img = $r[$i][8];	//IMG(°­»ç»çÁø)
-			$total_memo = $r[$i][9];	//°­»ç¸Þ¸ð
-		}
-	}
-
-
-	//È¸¿ø·Î±×ÀÎ(·Î±×ÀÎ °­»ç¸¸)
-	$link = "/api/math/teacher?client_no=".$ac."&id=".$id;
-	$r = api_calls_get($link);
-
-	$m_uid = $r[0];		//UID
-	$m_tid = $r[1];		//¾ÆÀÌµð
-	$m_name = $r[3];	//ÀÌ¸§
-	$m_task = $r[4];	//´ç´ã¾÷¹«
-	$m_hp	= $r[5];	//ÇÚµåÆù
-	$m_tel = $r[6];		//ÁýÀüÈ­
-	$m_email = $r[7];	//ÀÌ¸ÞÀÏ
-	$m_img = $r[8];		//IMG(°­»ç»çÁø)
-	$m_memo = $r[9];	//°­»ç¸Þ¸ð
-
-
-	//·Î±×ÀÎ °­»ç ¿Í ÀüÃ¼¸®½ºÆ® ¿¡¼­ ºñ±³ ( ´©¶ô Á¤º¸ ¾øÀ½ Ã³¸® )
-
-
-	//UID ³»¿ë 
-	if($t_uid == $m_uid):
-		
-		$uid = $m_uid;
-
-	else :
-		
-		if($t_uid):
-
-			$uid = $t_uid;
-
-		elseif($m_uid):
-
-			$uid = $m_uid;
+			$uid	= $r[$i][0];	//UID
+			$tid	= $r[$i][1];	//ì•„ì´ë””
+			$hash	= $r[$i][2];	//ë¹„ë°€ë²ˆí˜¸ í•´ì‰¬
+			$name   = $r[$i][3];	//ì´ë¦„
+			$task   = $r[$i][4];	//ë‹¹ë‹´ì—…ë¬´
+			$hp	    = $r[$i][5];	//í•¸ë“œí°
+			$tel	= $r[$i][6];	//ì§‘ì „í™”
+			$email  = $r[$i][7];	//ì´ë©”ì¼
+			$img	= $r[$i][8];	//IMG(ê°•ì‚¬ì‚¬ì§„)
+			$memo	= $r[$i][9];	//ê°•ì‚¬ë©”ëª¨
 
 		endif;
 
-	endif;
-
-
-	//¾ÆÀÌµð ³»¿ë 
-	if($t_tid == $m_tid):
-		
-		$t_id = $m_tid;
-
-	else :
-		
-		if($t_tid):
-
-			$t_id = $t_tid;
-
-		elseif($m_tid):
-
-			$t_id = $m_tid;
-
-		endif;
-
-	endif;
-
-	//ÀÌ¸§
-	if($t_name == $m_name):
-		
-		$name = $m_name;
-
-	else :
-		
-		if($t_name):
-
-			$name = $t_name;
-
-		elseif($m_name):
-
-			$name = $m_name;
-
-		endif;
-
-	endif;
-
-	//´ç´ã¾÷¹«
-	if($t_task == $m_task):
-		
-		$task = $m_task;
-
-	else :
-		
-		if($t_task):
-
-			$task = $t_task;
-
-		elseif($m_task):
-
-			$task = $m_task;
-
-		endif;
-
-	endif;
-
-	//ÇÚµåÆù
-	if($t_hp == $m_hp):
-		
-		$hp = $m_hp;
-
-	else :
-		
-		if($t_hp):
-
-			$hp = $t_hp;
-
-		elseif($m_hp):
-
-			$hp = $m_hp;
-
-		endif;
-
-	endif;
-
-	//ÀüÈ­
-	if($t_tel == $m_tel):
-		
-		$tel = $m_tel;
-
-	else :
-		
-		if($t_tel):
-
-			$tel = $t_tel;
-
-		elseif($m_tel):
-
-			$tel = $m_tel;
-
-		endif;
-
-	endif;
-
-	//ÀÌ¸ÞÀÏ
-	if($t_email == $m_email):
-		
-		$email = $m_email;
-
-	else :
-		
-		if($t_email):
-
-			$email = $t_email;
-
-		elseif($m_email):
-
-			$email = $m_email;
-
-		endif;
-
-	endif;
-
-	//IMG(°­»ç»çÁø)
-	if($t_img == $m_img):
-		
-		$img = $m_img;
-
-	else :
-		
-		if($t_img):
-
-			$img = $t_img;
-
-		elseif($m_img):
-
-			$img = $m_img;
-
-		endif;
-
-	endif;
-
-	//°­»ç¸Þ¸ð
-	if($t_memo == $m_memo):
-		
-		$memo = $m_memo;
-
-	else :
-		
-		if($t_memo):
-
-			$memo = $t_memo;
-
-		elseif($m_memo):
-
-			$memo = $m_memo;
-
-		endif;
-
-	endif;
-
-	//·Î±×ÀÎ Á¤º¸
-	if($uid){
-
-		//¼¼¼ÇÀúÀå
-		set_session('t_uid', $uid);
-		set_session('t_id', $t_id);
-		set_session('t_name', $name);
-		set_session('t_task', $task);
-		set_session('t_hp', $hp);
-		set_session('t_tel', $tel);
-		set_session('t_email', $email);
-		set_session('t_img', $img);
-		set_session('t_memo', $memo);
-		set_session('client_no', $ac);
-
-		//ÀÚµ¿ ·Î±×ÀÎ ÀúÀå
-		if($auto_login == true ){
-
-			// 3.27
-			// ÀÚµ¿·Î±×ÀÎ ---------------------------
-			// ÄíÅ° 3ÀÏ ÀúÀå
-			$key = md5(COOKIE_KEY . $_SERVER['SERVER_ADDR'] . $_SERVER['SERVER_SOFTWARE'] . $_SERVER['HTTP_USER_AGENT'] . $t_id . $ac);
-
-			set_cookie('ck_mb_id', $t_id, 86400 * 3);
-			set_cookie('ck_client_no', $ac, 86400 * 3);
-			set_cookie('ck_auto', $key, 86400 * 3);
-
-			// ÀÚµ¿·Î±×ÀÎ end ---------------------------
-
-
-		}else {
-
-			set_cookie('ck_mb_id', "", 0);
-			set_cookie('ck_client_no', "", 0);
-			set_cookie('ck_auto', "", 0);
+	endfor;
+
+
+	//ë¡œê·¸ì¸ ì²˜ë¦¬
+	if($uid) :
+
+		//ë¹„ë°€ë²ˆí˜¸ ê²€ì¦
+		if ( password_verify( $pw, $hash ) ) : //(í‰ë¬¸ì•”í˜¸, í•´ì‰¬ê°’)
+
+			//ì„¸ì…˜ì €ìž¥
+			set_session('t_uid', $uid);
+			set_session('t_id', $tid);
+			set_session('t_name', $name);
+			set_session('t_task', $task);
+			set_session('t_hp', $hp);
+			set_session('t_tel', $tel);
+			set_session('t_email', $email);
+			set_session('t_img', $img);
+			set_session('t_memo', $memo);
+			set_session('client_no', $ac);
+
+			//ìžë™ ë¡œê·¸ì¸ ì €ìž¥
+			if($auto_login == true ){
+
+				// 3.27
+				// ìžë™ë¡œê·¸ì¸ ---------------------------
+				// ì¿ í‚¤ 3ì¼ ì €ìž¥
+				$key = md5(COOKIE_KEY . $_SERVER['SERVER_ADDR'] . $_SERVER['SERVER_SOFTWARE'] . $_SERVER['HTTP_USER_AGENT'] . $t_id . $ac);
+				set_cookie('ck_mb_id', $t_id, 86400 * 3);
+				set_cookie('ck_client_no', $ac, 86400 * 3);
+				set_cookie('ck_auto', $key, 86400 * 3);
+				// ìžë™ë¡œê·¸ì¸ end ---------------------------
+
+			}else {
+
+				set_cookie('ck_mb_id', "", 0);
+				set_cookie('ck_client_no', "", 0);
+				set_cookie('ck_auto', "", 0);
+				
+			}
+
+			//ì„¸ì…˜ì €ìž¥ ì—¬ë¶€ ì²´í¬
+			if( get_session('t_uid') ) :
 			
-		}
+				alert_msg($name." ì„ ìƒ(ê°•ì‚¬)ë‹˜ (".$task.") í™˜ì˜í•©ë‹ˆë‹¤.");
+				location_href("./home.php");
+				exit;
 
-		alert_msg($name." ¼±»ý(°­»ç)´Ô (".$task.") È¯¿µÇÕ´Ï´Ù.");
-		location_href("./home.php");
+			else:
+			
+				alert_msg("ìº í¼ìŠ¤ ë˜ëŠ” ì•„ì´ë”” ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");	
+				location_href("./login.php");
+				exit;
+
+			endif;
+
+
+
+		else :
+
+			alert_msg("ìº í¼ìŠ¤ ë˜ëŠ” ì•„ì´ë”” ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");	
+			location_href("./login.php");
+			exit;
+
+		endif;
+
+	else :
+
+		alert_msg("ìº í¼ìŠ¤ ë˜ëŠ” ì•„ì´ë”” ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");	
+		location_href("./login.php");
 		exit;
 
+	endif;
 
-	}else {
-
-		alert_msg("Ä·ÆÛ½º ¶Ç´Â ¾ÆÀÌµð ¿Í ºñ¹Ð¹øÈ£¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");	
-		location_href("./login.php");
-		exit;		
-
-	}
-	
 	exit;
+
+
+
+
+
+
+
 ?>
