@@ -144,7 +144,8 @@
 }
 
 .class_table_section table tbody tr td:first-child,
-.class_table_section table tbody tr td:nth-child(2) {
+.class_table_section table tbody tr td:nth-child(2),
+.class_table_section table tbody tr td:nth-child(8){
     height: 60px;
     background-color: rgb(240, 240, 240);
     border-right: solid 1px rgb(220, 220, 220);
@@ -154,7 +155,8 @@
 }
 
 .class_table_section table tbody tr:nth-child(2n) td:first-child,
-.class_table_section table tbody tr:nth-child(2n) td:nth-child(2) {
+.class_table_section table tbody tr:nth-child(2n) td:nth-child(2),
+.class_table_section table tbody tr:nth-child(2n) td:nth-child(8){
     background-color: rgb(250, 250, 250);
 } 
 
@@ -163,7 +165,8 @@
 .class_table_section table tbody tr td:nth-child(5):hover,
 .class_table_section table tbody tr td:nth-child(6):hover,
 .class_table_section table tbody tr td:nth-child(7):hover,
-.class_table_section table tbody tr td:nth-child(8):hover {
+.class_table_section table tbody tr td:nth-child(9):hover,
+.class_table_section table tbody tr td:nth-child(10):hover{
     transform: translateY(-5px);
     box-shadow: 0px 3px 5px rgba(0, 0, 0, .5);
 }
@@ -171,6 +174,10 @@
 .class_info {
     font-size: 14px;
     line-height: 18px;
+}
+
+.class_table_section table tbody tr td a:hover {
+	text-decoration: underline;
 }
 
 .notice_list_wrap {
