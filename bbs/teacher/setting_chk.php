@@ -43,6 +43,6 @@ VALUES (NULL, '".$r[$i][0]."', '".$r[$i][3]."', '".$type[$i-1]."', '$c_hm_create
     }
 }
 alert_msg("등록이 완료되었습니다.");
-location_href("./setting.php");
+location_href("./home.php");
 
 ?>

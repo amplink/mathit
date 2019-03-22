@@ -1,100 +1,177 @@
 <?php
-include_once ('_common.php');
+	include_once ('_common.php');
 
-if(!$_SESSION['t_uid']) {
+	if(!$_SESSION['t_uid']) {
 
-    alert('로그인을 먼저 해주세요.');
-    location_href("./login.php");
-}
-if($_GET['s_year'] && $_GET['s_quarter']) {
-    $s_year = $_GET['s_year'];
-    $s_quarter = $_GET['s_quarter'];
-    if($s_quarter == 1) {
-        $a_quarter = "0101";
-    }else if($s_quarter == 2) $a_quarter = "0301";
-    else if($s_quarter == 3) $a_quarter = "0601";
-    else if($s_quarter == 4) $a_quarter = "0901";
-}else {
-    $s_year = date("Y");
-    $a_quarter = date("md");
-    $mon = date("m");
-    if($mon >= 1 && $mon <= 2) $s_quarter = 1;
-    else if($mon >= 3 && $mon <= 5) $s_quarter = 2;
-    else if($mon >= 6 && $mon <= 8) $s_quarter = 3;
-    else $s_quarter = 4;
-}
+		alert('로그인을 먼저 해주세요.');
+		location_href("./login.php");
+	}
 
-$date = $s_year.$a_quarter;
+	if($_GET['s_year'] && $_GET['s_quarter']) {
 
-$ac = $_SESSION['client_no'];
+		$s_year = $_GET['s_year'];
+		$s_quarter = $_GET['s_quarter'];
+		
+		if($s_quarter == 1) { $a_quarter = "0101";
+		
+		}else if($s_quarter == 2) {$a_quarter = "0301";
+		
+		}else if($s_quarter == 3) {$a_quarter = "0601";
 
-$link = "/api/math/class?client_no=".$ac."&date=".$date;
-$r = api_calls_get($link);
+		}else if($s_quarter == 4) {$a_quarter = "0901";
 
-// 학기
-$t_year = array();
-$chk = 0;
-$cnt = 0;
-for($i=1; $i<count($r); $i++) {
-    $chk = 0;
-    for($j=0; $j<count($t_year); $j++) {
-        if($t_year[$j] == $r[$i][3]) $chk = 1;
-    }
-    if(!$chk) {
-        $t_year[$cnt] = $r[$i][3];
-        $cnt++;
-    }
-}
-$year = array();
-$quarter = array();
+		}
 
-for($i=0; $i<count($t_year); $i++) {
-    $t = explode(" ", $t_year[$i]);
-    $year[$i] = $t[0];
-    $quarter[$i] = $t[1];
-}
+	}else {
 
-// 시간표
-$link = "/api/math/teacher_class?client_no=".$ac."&t_uid=".$_SESSION['t_uid']."&date=".$date;
-$r = api_calls_get($link);
+		$s_year = date("Y");
+		$a_quarter = date("md");
+		$mon = date("m");
 
-$d_uid = array();
-$c_uid = array();
-$chk = 0;
-$cnt = 0;
-for($i=1; $i<count($r); $i++) {
-    $chk = 0;
-    for($j=0; $j<count($d_uid); $j++) {
-        if($d_uid[$j] == $r[$i][0]) $chk = 1;
-    }
-    if(!$chk) {
-        $d_uid[$cnt] = $r[$i][0];
-        $c_uid[$cnt] = $r[$i][1];
-        $d_name[$cnt] = $r[$i][4];
-        $cnt++;
-    }
-}
+		if($mon >= 1 && $mon <= 2) $s_quarter = 1;
+		else if($mon >= 3 && $mon <= 5) $s_quarter = 2;
+		else if($mon >= 6 && $mon <= 8) $s_quarter = 3;
+		else $s_quarter = 4;
+	}
 
-$time = array();
-$cnt = 0;
-for($i=0; $i<count($d_uid); $i++) {
-    $link = "/api/math/timetable?client_no=".$ac."&d_uid=".$d_uid[$i];
-    $r = api_calls_get($link);
-    if(count($r)) {
-        for($j=0; $j<count($r); $j++) {
-            $cnt = 0;
-            if($r[$j][2] == $_SESSION['t_uid']) {
-                $time[$i] = $r[$j][0];
-                for($k=1; $k<count($r[$j]); $k++) {
-                    if($k%3==0) {
-                        if($r[$j][$k]) $day[$i][$cnt] = $r[$j][$k];
-                        $cnt++;
-                    }
-                }
-            }
-        }
-    }
-}
+	$date = $s_year.$a_quarter;
+
+	$ac = $_SESSION['client_no'];
+
+	$link = "/api/math/class?client_no=".$ac."&date=".$date;
+	$r = api_calls_get($link);
+
+
+	// 학기
+	$t_year = array();
+	$chk = 0;
+	$cnt = 0;
+	for($i=1; $i<count($r); $i++) {
+		$chk = 0;
+		for($j=0; $j<count($t_year); $j++) {
+			if($t_year[$j] == $r[$i][3]) $chk = 1;
+		}
+		if(!$chk) {
+			$t_year[$cnt] = $r[$i][3];
+			$cnt++;
+		}
+	}
+	$year = array();
+	$quarter = array();
+
+	for($i=0; $i<count($t_year); $i++) {
+		$t = explode(" ", $t_year[$i]);
+		$year[$i] = $t[0];
+		$quarter[$i] = $t[1];
+	}
+
+
+	// 시간표
+	$link = "/api/math/teacher_class?client_no=".$ac."&t_uid=".$_SESSION['t_uid']."&date=".$date;
+	$r = api_calls_get($link);
+
+	$d_uid = array();
+	$c_uid = array();
+	$chk = 0;
+	$cnt = 0;
+	for($i=1; $i<count($r); $i++) {
+		$chk = 0;
+		for($j=0; $j<count($d_uid); $j++) {
+			if($d_uid[$j] == $r[$i][0]) $chk = 1;
+		}
+		if(!$chk) {
+			$d_uid[$cnt] = $r[$i][0];
+			$c_uid[$cnt] = $r[$i][1];
+			$d_name[$cnt] = $r[$i][4];
+			$d_yoie[$cnt] = $r[$i][5];
+			$cnt++;
+		}
+	}
+
+	$time = array();
+	$cnt = 0;
+
+	for($i=0; $i<count($d_uid); $i++) {
+
+		$link = "/api/math/timetable?client_no=".$ac."&d_uid=".$d_uid[$i];
+		$r = api_calls_get($link);
+		if(count($r)) {
+
+			for($j=0; $j<count($r); $j++) {
+			
+				$cnt = 0;
+
+				if($r[$j][2] == $_SESSION['t_uid']) { //해당 선생(강사)님
+					
+					$time[$i] = $r[$j][0];
+
+					for($k=1; $k<count($r[$j]); $k++) {
+											
+						if($k%3 == 0) {
+
+							if($r[$j][$k]) :
+
+								$day[$i][$cnt] = $r[$j][$k];
+
+							endif;
+
+							$cnt++;
+						}
+					} 
+				}
+
+		  }
+
+		}
+	}
+
+	//네비게이터
+
+	$nav_url = str_replace("/bbs/teacher/","",$_SERVER['PHP_SELF']);
+	$nav_url = str_replace(".php","",$nav_url);
+	$nav_url = str_replace(".html","",$nav_url);
+	$nav_url = str_replace(".htm","",$nav_url);
+
+
+	if($nav_url == "home" || $nav_url == "home_sub"):
+	
+		$nav_text = "HOME";
+
+	elseif($nav_url == "student_management_record"):
+
+		$nav_text = "원생관리";
+
+	elseif($nav_url == "homework_management_personal" || $nav_url == "homework_management_add"):
+
+		$nav_text = "숙제관리";
+	
+	elseif($nav_url == "consult_management_write" || $nav_url == "consult_management_personal" || $nav_url == "homework_management_list"):
+
+		$nav_text = "상담관리";
+
+	elseif($nav_url == "student_management_personal_record" || $nav_url == "student_management_personal_mid_record_detail" ):
+
+		$nav_text = "성적표";
+
+
+	elseif($nav_url == "record_management_list" || $nav_url == "record_management_add"):
+
+		$nav_text = "성적관리";
+
+	elseif($nav_url == "student_management_score_all" || $nav_url == "student_management_score_each"):
+
+		$nav_text = "채점하기";
+
+	else :
+	
+		$nav_text = $nav_url;
+
+	endif;
+
+
+
+
+
 ?>
 <head>
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
@@ -108,17 +185,18 @@ for($i=0; $i<count($d_uid); $i++) {
     <div class="home_btn"><a href="home.php"><img src="img/home.png" alt="home_icon"></a></div>
     <div class="logo_section">
         <div class="logo"><a href="home.php"><img src="img/logo_white.png" alt="header_logo"></a></div>
-        <p class="navigation_text">HOME</p>
+        <p class="navigation_text"><?php echo $nav_text;?></p>
     </div>
     <div class="member_info_wrap">
         <div class="member_img"><img src="img/user.png" alt="member_img"></div>
         <div class="member_info">
-            <p class="member_name"><?=$_SESSION['t_name']?></p>
+            <p class="member_name"><?=$_SESSION['t_name']?>(<?=$_SESSION['t_uid']?>)</p>
             <p class="member_grade"><?=$_SESSION['t_task']?></p>
         </div>
         <div class="logout_btn"><a href="../logout.php?url=/bbs/teacher/">로그아웃</a></div>
     </div>
 </header>
+
 <div class="hamburder_nav" style="z-index: 99;">
     <div class="ham_member_info_wrap">
         <div class="close_btn_line">
@@ -136,6 +214,7 @@ for($i=0; $i<count($d_uid); $i++) {
             <div class="alarm_btn"><a href="#none"><img class="test11" src="img/alarm.png" alt="alarm_icon"></a></div>
         </div>
     </div>
+
     <div class="hamnav_menu_wrap">
         <div class="hamnav_menu"><a href="#none"><span>학급목록</span></a>
             <div class="hamnav_class_list">
@@ -143,9 +222,17 @@ for($i=0; $i<count($d_uid); $i++) {
                 <!--                            class="class_grade_">초6</span></a></div>-->
                 <?php
                 for($i=0; $i<count($d_name); $i++) {
-                    ?>
+
+					//해당 수업에 학생 정보
+					$link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$i]."&c_uid=".$c_uid[$i];
+					$r_4 = api_calls_get($link_4);
+
+                ?>
+
+
+
                     <div class="hamnav_class"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>">
-                            <span class="class_title"><?=$d_name[$i]?></span>
+                            <span class="class_title"><?=$d_name[$i]?> ( <?php echo (count($r_4)-1);?> ) </span>
                         </a>
                     </div>
                     <?php
@@ -154,11 +241,13 @@ for($i=0; $i<count($d_uid); $i++) {
 
             </div>
         </div>
+
         <div class="hamnav_menu"><a href="homework_management_add.php"><span>숙제생성</span></a></div>
         <div class="hamnav_menu"><a href="student_management_score_all.php"><span>채점바로가기</span></a></div>
         <div class="hamnav_menu"><a href="class_schedule_list.php"><span>수업계획표/일지</span></a></div>
         <div class="hamnav_menu"><a href="notice_list.php"><span>공지사항</span></a></div>
     </div>
+
     <div class="alarm_box_wrap_wrap">
         <div class="alarm_box_wrap">
             <div class="alarm_tri"><img src="img/alarm_tri.png" alt="alarm_tri_icon"></div>

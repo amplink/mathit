@@ -1,7 +1,24 @@
 <?php
 include_once ('./_common.php');
 include_once ('head_sub.php');
+	
+	//시간함수 압축본
+	function hour_24to12 ($date_str){ $result = ""; $zero = ""; $time = explode(":",trim($date_str)); $hour = (int)$time[0]; $minute = (int)$time[1]; if($minute >= 0  && $minute <= 9): $minute = "0".$minute; else : $minute = $minute; endif; /*데이터 출력*/ if($hour == 24): /*24는 00 이므로 강제로 변경*/ $result = "AM 00:".$minute;		elseif($hour == 12): /*12는 PM으로 변환다.*/ $result = "PM ".$hour.":".$minute; elseif($hour > 12): $hour = $hour - 12; if($hour >= 0  && $hour <= 9): $result = "PM 0".$hour.":".$minute; else : $result = "PM ".$hour.":".$minute; endif; else : if($hour >= 0  && $hour <= 9): $result = "AM 0".$hour.":".$minute; else : $result = "AM ".$hour.":".$minute; endif;endif; return $result; }
+
+	//월 ~금 까지 교시 표시
+	$week1_time[1] = hour_24to12 ("16:00")." ~ ".hour_24to12 ("17:30");
+	$week1_time[2] = hour_24to12 ("17:30")." ~ ".hour_24to12 ("19:00");
+	$week1_time[3] = hour_24to12 ("19:00")." ~ ".hour_24to12 ("20:30");
+	$week1_time[4] = hour_24to12 ("20:30")." ~ ".hour_24to12 ("22:00");
+	
+	//주말(토,일) 교시 표시
+	$week2_time[1] = hour_24to12 ("10:00")." ~ ".hour_24to12 ("11:30");
+	$week2_time[2] = hour_24to12 ("11:30")." ~ ".hour_24to12 ("13:00");
+	$week2_time[3] = hour_24to12 ("13:00")." ~ ".hour_24to12 ("14:30");
+	$week2_time[4] = hour_24to12 ("14:30")." ~ ".hour_24to12 ("16:00");
+				
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -15,6 +32,37 @@ include_once ('head_sub.php');
     <link rel="stylesheet" type="text/css" media="screen" href="css/index.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
+	<script type="text/javascript" language="javascript">
+
+		$( document ).ready(function() {
+
+			$("#quarter_select").val('<?php echo $s_quarter;?>');
+			$("#year_select").val('<?php echo $s_year;?>');
+
+			$('#quarter_select').change(function () {
+
+				var a = $('#quarter_select').val();
+				var b = $('#year_select').val();
+
+				location.replace('./home_sub.php?s_year='+b+'&s_quarter='+a);
+
+			});
+
+
+			$('#year_select').change(function () {
+
+				var a = $('#quarter_select').val();
+				var b = $('#year_select').val();
+
+				location.replace('./home_sub.php?s_year='+b+'&s_quarter='+a);
+
+			});
+
+
+		});
+	</script>
+
+
 </head>
 
 <body>
@@ -24,18 +72,17 @@ include_once ('head_sub.php');
             <div class="head_left">
                 <p class="left_text">학기</p>
                 <div class="day_select">
-                    <select name="year_select" id="year_select" onchange="move_page()">
+                    <select name="year_select" id="year_select">
                         <?php
-                        for($i=2018; $i<2030; $i++) {
+                        for($i=2018; $i< ( date(Y)+10 ); $i++) {
                             echo "<option value='$i'>$i"."년"."</option>";
                         }
                         ?>
                     </select>
-                    <select name="quarter_select" id="quarter_select" onchange="move_page()">
-                        <option value="1">1분기</option>
-                        <option value="2">2분기</option>
-                        <option value="3">3분기</option>
-                        <option value="4">4분기</option>
+                    <select name="quarter_select" id="quarter_select">
+						<?php for($i=1;$i<=4;$i++) : ?>
+                        <option value="<?php echo $i?>"><?php echo $i;?>분기</option>
+						<?php endfor; ?>
                     </select>
                 </div>
             </div>
@@ -48,129 +95,120 @@ include_once ('head_sub.php');
     <div class="class_table_section" style="z-index: 1;">
         <table>
             <thead>
-            <tr>
-                <th class="schedule">교시</th>
-                <th class="blank">시간</th>
-                <th class="day on">월</th>
-                <th class="day">화</th>
-                <th class="day">수</th>
-                <th class="day">목</th>
-                <th class="day">금</th>
-                <th class="day">토</th>
-                <th class="day">일</th>
-            </tr>
+				<tr>
+					<th class="schedule">교시</th>
+					<th class="blank">시간</th>
+					<th class="day <?php if(date(w) == "1"):?>on<?php endif?>">월</th>
+					<th class="day <?php if(date(w) == "2"):?>on<?php endif?>">화</th>
+					<th class="day <?php if(date(w) == "3"):?>on<?php endif?>">수</th>
+					<th class="day <?php if(date(w) == "4"):?>on<?php endif?>">목</th>
+					<th class="day <?php if(date(w) == "5"):?>on<?php endif?>">금</th>
+					<th class="blank">시간</th>
+					<th class="day <?php if(date(w) == "6"):?>on<?php endif?>">토</th>
+					<th class="day <?php if(date(w) == "7"):?>on<?php endif?>">일</th>
+				</tr>
             </thead>
-            <tbody>
-            <tr>
-                <td>1교시</td>
-                <td>pm 4:00 ~ 5:30</td>
+<tbody>
+				<?
+				for($s=1; $s<=4; $s++):
+				?>
+				
+				<tr>
+					<td><?php echo $s ?>교시</td>
+					<td><?php echo str_replace('~',"<br>~<br>",$week1_time[$s]);?></td>
                 <?php
-                for($i=0; $i<7; $i++) {
-                    if($day[0][$i]) {
-                        ?>
+                for($i=0; $i<5; $i++) :
+				?>
+
+                   <? if($day[0][$i]) : ?>
+
                         <td>
                             <div class="class_info">
                                 <?php
                                 for($j=0; $j<count($time); $j++) {
-                                    if($time[$j] == 1) {
-                                        echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
+
+								   if($time[$j] == $s) { //교시 표시
+
+										//해당 수업에 학생 정보
+										$link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j];
+										$r_4 = api_calls_get($link_4);
+
+
+                                        echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
                                     }
                                 }
                                 ?>
                             </div>
                         </td>
-                        <?php
-                    }else {
-                        echo "<td></td>";
-                    }
-                }
-                ?>
-            </tr>
-            <tr>
-                <td>2교시</td>
-                <td>pm 5:30 ~ 7:00</td>
                 <?php
-                for($i=0; $i<7; $i++) {
-                    if($day[0][$i]) {
-                        ?>
+                    else : 
+
+                        echo "<td></td>";
+
+                    endif;
+				?>
+
+				<?php
+				endfor;
+                ?>
+					<td><?php echo str_replace('~',"<br>~<br>",$week2_time[$s]);?></td>
+
+                <?php
+                for($i=5; $i<7; $i++) :
+				?>
+                   <? if($day[0][$i]) : ?>
+
                         <td>
                             <div class="class_info">
                                 <?php
                                 for($j=0; $j<count($time); $j++) {
-                                    if($time[$j] == 2) {
-                                        echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
+								
+								   if($time[$j] == $s) { //교시 표시
+										
+										//해당 수업에 학생 정보
+										$link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j];
+										$r_4 = api_calls_get($link_4);
+
+
+                                        echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
                                     }
-                                }?>
+                                }
+                                ?>
                             </div>
                         </td>
-                        <?php
-                    }else {
-                        echo "<td></td>";
-                    }
-                }
-                ?>
-            </tr>
-            <tr>
-                <td>3교시</td>
-                <td>pm 7:00 ~ 8:30</td>
                 <?php
-                for($i=0; $i<7; $i++) {
-                    if($day[0][$i]) {
-                        ?>
-                        <td>
-                            <div class="class_info">
-                                <?php
-                                for($j=0; $j<count($time); $j++) {
-                                    if($time[$j] == 3) {
-                                        echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
-                                    }
-                                }?>
-                            </div>
-                        </td>
-                        <?php
-                    }else {
+                    else : 
+
                         echo "<td></td>";
-                    }
-                }
+
+                    endif;
+				?>
+
+				<?php
+				endfor;
                 ?>
-            </tr>
-            <tr>
-                <td>4교시</td>
-                <td>pm 8:30 ~ 10:00</td>
-                <?php
-                for($i=0; $i<7; $i++) {
-                    if($day[0][$i]) {
-                        ?>
-                        <td>
-                            <div class="class_info">
-                                <?php
-                                for($j=0; $j<count($time); $j++) {
-                                    if($time[$j] == 4) {
-                                        echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."</a><br>";
-                                    }
-                                }?>
-                            </div>
-                        </td>
-                        <?php
-                    }else {
-                        echo "<td></td>";
-                    }
-                }
-                ?>
-            </tr>
-            </tbody>
+
+				</tr>
+
+				<? endfor; ?>
+
+			</tbody>
         </table>
     </div>
+
+
+
     <div class="notice_list_wrap">
         <div class="notice_title">
             <p>공지사항</p>
         </div>
         <div class="notice_contents_wrap">
+
             <?php
-            $sql = "select * from `teacher_notice` order by `seq` desc";
-            $result = mysqli_query($connect_db, $sql);
+            $sql = "select * from `teacher_notice` order by `seq` desc limit 0,5";
+            $result = sql_query($sql);
             $i=1;
-            while($res = mysqli_fetch_array($result)) {
+            while($res = sql_fetch_array($result)) {
                 ?>
                 <div class="notice_content">
                     <a href="./notice_list.php?seq=<?=$res['seq']?>"><span>&#149;</span><?=$res['title']?></a>
@@ -183,19 +221,11 @@ include_once ('head_sub.php');
             ?>
         </div>
     </div>
+
+
+
 </section>
 
 </body>
 
 </html>
-<script>
-    function move_page() {
-        var a = $('#quarter_select').val();
-        var b = $('#year_select').val();
-        // alert(a);
-        location.href = './home_sub.php?s_year='+b+'&s_quarter='+a;
-    }
-
-    $("#year_select").val(<?php echo $s_year;?>);
-    $("#quarter_select").val(<?php echo $s_quarter;?>);
-</script>

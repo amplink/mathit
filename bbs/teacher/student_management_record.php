@@ -2,14 +2,21 @@
 include_once ('_common.php');
 include_once ('head.php');
 
+//해당 수업에 학생 정보
 $link = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$_GET['d_uid']."&c_uid=".$_GET['c_uid'];
 $r = api_calls_get($link);
 
 for($i=0; $i<count($d_name); $i++) {
+
     if($d_uid[$i] == $_GET['d_uid'] && $c_uid[$i] == $_GET['c_uid']) {
+
         $class_name = $d_name[$i];
     }
+
 }
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,12 +43,13 @@ for($i=0; $i<count($d_name); $i++) {
             <div class="head_right">
                 <div class="report_manegement_btn"><a href="record_management_list.php">성적관리</a></div>
                 <div class="hw_make_btn"><a href="homework_management_add.php">숙제생성</a></div>
-                <div class="scoring_shortcut_btn"><a href="student_management_score_each.php">채점바로가기</a></div>
+                <div class="scoring_shortcut_btn"><a href="student_management_score_each.php?d_uid=<?=$_GET[d_uid]?>&c_uid=<?=$_GET[c_uid]?>">채점바로가기</a></div>
             </div>
         </div>
     </div>
     <div class="class_table_section">
-        <table>
+
+		<table>
             <thead>
             <tr>
                 <th>이름</th>
@@ -64,7 +72,10 @@ for($i=0; $i<count($d_name); $i++) {
                 <?
             }
             ?>
-            </tbody>
+
+
+			
+			</tbody>
         </table>
     </div>
 </section>

@@ -104,24 +104,6 @@ include_once ('head.php');
             }
         });
     }
-
-    $('#search_val').keyup(function(e) {
-       if(e.keyCode == 13) search();
-    });
-
-    function del_content(e) {
-        var a = confirm("삭제하시겠습니까?");
-        if(a == true) {
-            location.href = "notice_write_chk.php?t=2&seq="+e;
-        }
-    }
-
-    function del_attatch(e) {
-        if(confirm("삭제하시겠습니까?")) {
-            location.href = "notice_file_del.php?seq="+e;
-        }
-    }
-
     ClassicEditor
         .create( document.querySelector( '#content' ) )
         .catch( error => {
