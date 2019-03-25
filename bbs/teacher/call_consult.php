@@ -16,7 +16,6 @@ $res = mysqli_fetch_array($result);
         <input type="hidden" value="<?=$res['seq']?>" name="seq">
     </div>
 </div>
-<script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
 <script>
     ClassicEditor
         .create( document.querySelector( '#content' ),  {

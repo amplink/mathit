@@ -12,5 +12,5 @@ $sql = "INSERT INTO `app_setting` (`t_id`, `alarm`, `melody`, `event_time`) VALU
 mysqli_query($connect_db, $sql);
 
 alert_msg("등록이 완료되었습니다.");
-location_href('./home.php');
+location_href('./setting.php');
 ?>

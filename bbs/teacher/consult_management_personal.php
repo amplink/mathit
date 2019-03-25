@@ -16,6 +16,7 @@ $s_id = $_GET['s_id'];
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/consult_manegement_personal.css" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/common.js"></script>
@@ -108,11 +109,12 @@ $s_id = $_GET['s_id'];
             <table>
                 <thead>
                 <tr>
-                    <th>상담일</th>
-                    <th>학생명</th>
-                    <th>상담자</th>
-                    <th>대상</th>
-                    <th>유형</th>
+                    <th style="width: 10%;">선택</th>
+                    <th style="width: 18%;">상담일</th>
+                    <th style="width: 18%;">학생명</th>
+                    <th style="width: 18%;">상담자</th>
+                    <th style="width: 18%;">대상</th>
+                    <th style="width: 18%;">유형</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -122,6 +124,7 @@ $s_id = $_GET['s_id'];
                 while($res = mysqli_fetch_array($result)) {
                     ?>
                     <tr onclick="call_consult(<?=$res['seq']?>);">
+                        <td><span><input type="radio" name="t" id="<?=$res['seq']?>"></span></td>
                         <td><span><?=$res['date']?></span></td>
                         <td><span><?=$res['s_name']?></span></td>
                         <td><span><?=$res['t_name']?></span></td>
@@ -145,9 +148,9 @@ $s_id = $_GET['s_id'];
 </section>
 </body>
 </html>
-<script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
 <script>
     function call_consult(seq) {
+        $("#"+seq).prop("checked", true);
         $.ajax({
             type: "GET",
             url: "call_consult.php?seq="+seq,

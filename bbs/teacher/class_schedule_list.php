@@ -89,13 +89,10 @@ include_once ('head.php');
             <div class="table_option_line">
                 <p class="option_title">제출유형</p>
                 <div class="option_contnets">
-                    <div class="type_chk"><input type="checkbox">
-                        <p>전체</p>
-                    </div>
-                    <div class="type_chk"><input type="checkbox">
+                    <div class="type_chk"><input type="radio" value="수업계획표" name="type">
                         <p>수업계획표</p>
                     </div>
-                    <div class="type_chk"><input type="checkbox">
+                    <div class="type_chk"><input type="radio" value="수업일지" name="type">
                         <p>수업일지</p>
                     </div>
                 </div>
@@ -104,28 +101,34 @@ include_once ('head.php');
                 <p class="option_title">강사명</p>
                 <div class="option_contnets">
                     <select name="teacher_select" id="teacher_select">
-                        <option value="base">선택</option>
-                        <option value="teacher_1">퇴계이황</option>
+                        <option value="">선택</option>
+                        <?php
+                        $link = "/api/math/teacher_list?client_no=".$ac;
+                        $r = api_calls_get($link);
+                        for($i=1; $i<count($r); $i++) {
+                            echo "<option value='".$r[$i][3]."'>".$r[$i][3]."</option>";
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
             <div class="table_option_line">
                 <p class="option_title">제목</p>
                 <div class="option_contnets">
-                    <input type="text" placeholder="제목을 입력하세요">
+                    <input type="text" placeholder="제목을 입력하세요" id="title">
+                    <div class="search_btn" onclick="search()"><a>검색</a></div>
                 </div>
             </div>
-            <div class="table_option_line">
-                <p class="option_title">날짜</p>
-                <div class="option_contnets">
-                    <div class="date_range"><input type="text" id="from" name="from">
-                    </div>
-                    <span>~</span>
-                    <div class="date_range"><input type="text" id="to" name="to">
-                    </div>
-                    <div class="search_btn"><a href="#none">검색</a></div>
-                </div>
-            </div>
+<!--            <div class="table_option_line">-->
+<!--                <p class="option_title">날짜</p>-->
+<!--                <div class="option_contnets">-->
+<!--                    <div class="date_range"><input type="text" id="from" name="from">-->
+<!--                    </div>-->
+<!--                    <span>~</span>-->
+<!--                    <div class="date_range"><input type="text" id="to" name="to">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="class_schedule_table">
                 <table>
                     <thead>
@@ -135,33 +138,7 @@ include_once ('head.php');
                         <th>첨부파일</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <?php
-                    $sql = "select * from `teacher_schedule`";
-                    $result = mysqli_query($connect_db, $sql);
-                    $i=1;
-                    while($res = mysqli_fetch_array($result)) {
-                        ?>
-                        <tr onclick="call_content(<?=$res['seq']?>)">
-                            <td><span><?=$i?></span></td>
-                            <td><span><?=$res['title']?></span>
-                                <div class="new">
-                                    <p>new</p>
-                                </div>
-                            </td>
-                            <td>
-                                <?php if($res['file_url']) {
-                                    ?>
-                                    <div class="have_sign"></div>
-                                <?php
-                                }
-                                ?>
-                            </td>
-                        </tr>
-                        <?
-                        $i++;
-                    }
-                    ?>
+                    <tbody id="schedule_list">
                     </tbody>
                 </table>
             </div>
@@ -184,5 +161,21 @@ include_once ('head.php');
                 $(".r_section").html(response);
             }
         });
+    }
+
+    search();
+    function search() {
+        var type = $("input[name=type]:checked").val();
+        var writer = $("#teacher_select").val();
+        var title = $("#title").val();
+
+        $.ajax({
+            type : "GET",
+            url: "class_schedule_write_search.php?type="+type+"&title="+title+"&writer="+writer,
+            dataType: "html",
+            success: function(response) {
+                $("#schedule_list").html(response);
+            }
+        })
     }
 </script>

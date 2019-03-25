@@ -152,7 +152,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                         <p class="box_title">숙제 정보 입력</p>
                         <div class="homework_title_input">
                             <p class="l_text">숙제명</p>
-                            <input type="text" placeholder="숙제명을 입력해주세요" name ="name" required>
+                            <input type="text" placeholder="숙제명을 입력해주세요" name ="name" id="name">
                         </div>
                         <div class="homework_deadline_wrap">
                             <div class="date_range">
@@ -342,11 +342,19 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 $('.student_list_box table tbody tr').not(this).removeClass('on');
             }
         })
+        $('.custumdropdown input[type=checkbox]').prop("checked", "true");
         select_year();
         book_info();
     })
     function submit() {
-        if($("input[name=student_list\\[\\]]").val()) $('#all').submit();
+        if($("input[name=student_list\\[\\]]").val()) {
+            if($("#name").val() && $("#from").val() && $("#to").val()) {
+                $(window).unbind('beforeunload');
+                $('#all').submit();
+            }else {
+                alert('입력이 빠진 것이 없는지 확인해주세요.');
+            }
+        }
         else alert("학생을 선택해주세요.");
     }
     var Banlist =  new Array();
@@ -419,6 +427,10 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         // alert(a);
         location.href = './homework_management_add.php?s_year='+b+'&s_quarter='+a;
     }
+
+    $(window).bind('beforeunload', function () {
+        return "저장하지 않고 페이지를 벗어나시겠습니까?";
+    })
 
     $("#year_select").val(<?php echo $s_year;?>);
     $("#quarter_select").val(<?php echo $s_quarter;?>);

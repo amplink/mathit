@@ -1,6 +1,15 @@
 <?php
 include_once ('_common.php');
 include_once ('head.php');
+
+$t_name = $_SESSION['t_name'];
+$sql = "select * from `teacher_setting` where `t_name`='$t_name';";
+$result = mysqli_query($connect_db, $sql);
+$res = mysqli_fetch_array($result);
+if($res['admin_menu']==0) {
+    alert_msg("관리자 권한이 없습니다.");
+    location_href("./home.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,7 +69,7 @@ include_once ('head.php');
 
             // Array ( [0] => 1208 [1] => mathit1 [2] => $2y$10$sRyNvKSfIQav0luJVWK9KuIM8Rd4F77.h.DNEhlqO9B [3] => 박상은 [4] => MATH IT 원장 [5] => [6] => [7] => [8] => https://www.buybook.co.kr/data/aca/staff/126/mathit1.png?=1541640380 [9] => 뿌리가 튼튼하면 그 어떤 교육정책에도 흔들림이 없다. )
 
-            for($i=1; $i<count($r); $i++) {
+            for($i=2; $i<count($r); $i++) {
                 ?>
                 <tr>
                     <td><span><?=$r[$i][3]?></span></td>

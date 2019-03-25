@@ -110,7 +110,6 @@ for($i=0; $i<count($d_name); $i++) {
         <div class="back_logo"><img src="img/logo_black.png" alt="back_logo"></div>
     </div>
     <input type="hidden" name="s_name" value="<?=$student_name?>">
-    <p><?=$student_name?></p>
 </section>
 </form>
 </body>
