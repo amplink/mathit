@@ -47,9 +47,8 @@ $res = mysqli_fetch_array($result);
 </div>
 <div class="btn_section">
     <div class="l_btn_wrap">
-        <?php if($res['writer'] == $_SESSION['t_name']) ?><div class="modify_btn"><a href="notice_write.php?seq=<?=$res['seq']?>">수정</a></div>
-        <?php if($res['writer'] == $_SESSION['t_name']) ?><div class="delete_btn"><a href="notice_write_chk.php?t=2&seq=<?=$res['seq']?>">삭제</a></div>
-    </div>
+        <?php if($res['writer'] == $_SESSION['t_name']) ?><div class="modify_btn"><a href="notice_write.php?seq=<?=$res['seq']?>&t=3">수정</a></div>
+        <?php if($res['writer'] == $_SESSION['t_name']) ?><div class="delete_btn" onclick="del_content(<?=$res['seq']?>)"><a>삭제</a></div></div>
     <div class="r_btn_wrap">
         <?php if($res['file_url']) {
         ?>

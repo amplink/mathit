@@ -138,12 +138,14 @@ $res = mysqli_fetch_array($result);
         window.print();
     }
 
-    function del_score() {
-        $('#score_form').submit();
+    function all_del_score() {
+        if(confirm("선택 학생을 삭제하시겠습니까?")) $('#score_form').submit();
     }
 
-    function all_del_score() {
-        $('input[type=checkbox]').prop('checked', true);
-        del_score();
+    function del_score() {
+        if(confirm("모든 학생을 삭제하시겠습니까?")) {
+            $('input[type=checkbox]').prop('checked', true);
+            del_score();
+        }
     }
 </script>

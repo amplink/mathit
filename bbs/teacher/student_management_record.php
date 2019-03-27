@@ -41,7 +41,7 @@ for($i=0; $i<count($d_name); $i++) {
                 <p class="left_text"><span><?=$class_name?></span></p>
             </div>
             <div class="head_right">
-                <div class="report_manegement_btn"><a href="record_management_list.php">성적관리</a></div>
+                <div class="report_manegement_btn"><a href="record_management_add.php">성적관리</a></div>
                 <div class="hw_make_btn"><a href="homework_management_add.php">숙제생성</a></div>
                 <div class="scoring_shortcut_btn"><a href="student_management_score_each.php?d_uid=<?=$_GET[d_uid]?>&c_uid=<?=$_GET[c_uid]?>">채점바로가기</a></div>
             </div>

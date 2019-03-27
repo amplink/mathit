@@ -3,8 +3,8 @@
 
 	if(!$_SESSION['t_uid']) {
 
-		alert('로그인을 먼저 해주세요.');
-		location_href("./login.php");
+		alert_msg('로그인을 먼저 해주세요.');
+		location_href("login.php");
 	}
 
 	if($_GET['s_year'] && $_GET['s_quarter']) {

@@ -1,7 +1,5 @@
 <?php
 include_once ('_common.php');
-include_once ('head.php');
-
 $t_name = $_SESSION['t_name'];
 $sql = "select * from `teacher_setting` where `t_name`='$t_name';";
 $result = mysqli_query($connect_db, $sql);
@@ -10,6 +8,7 @@ if($res['admin_menu']==0) {
     alert_msg("관리자 권한이 없습니다.");
     location_href("./home.php");
 }
+include_once ('head.php');
 ?>
 <!DOCTYPE html>
 <html>
