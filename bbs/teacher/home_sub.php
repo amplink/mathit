@@ -1,6 +1,6 @@
 <?php
 include_once ('./_common.php');
-include_once ('head_sub.php');
+include_once ('head.php');
 	
 	//시간함수 압축본
 	function hour_24to12 ($date_str){ $result = ""; $zero = ""; $time = explode(":",trim($date_str)); $hour = (int)$time[0]; $minute = (int)$time[1]; if($minute >= 0  && $minute <= 9): $minute = "0".$minute; else : $minute = $minute; endif; /*데이터 출력*/ if($hour == 24): /*24는 00 이므로 강제로 변경*/ $result = "AM 00:".$minute;		elseif($hour == 12): /*12는 PM으로 변환다.*/ $result = "PM ".$hour.":".$minute; elseif($hour > 12): $hour = $hour - 12; if($hour >= 0  && $hour <= 9): $result = "PM 0".$hour.":".$minute; else : $result = "PM ".$hour.":".$minute; endif; else : if($hour >= 0  && $hour <= 9): $result = "AM 0".$hour.":".$minute; else : $result = "AM ".$hour.":".$minute; endif;endif; return $result; }

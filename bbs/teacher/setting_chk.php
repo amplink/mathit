@@ -14,6 +14,14 @@ $grade_card = $_POST['grade_card'];
 $notice = $_POST['notice'];
 $admin_menu = $_POST['admin_menu'];
 
+$sql = "select * from `academy`;";
+$result = sql_query($sql);
+$manager = array();
+$i=0;
+while($res = mysqli_fetch_array($result)) {
+    $manager[$i] = $res['manager_id'];
+}
+
 for($i=1; $i<count($r); $i++) {
     $c_hm_create = 0;
     $c_hm_mg = 0;
@@ -22,6 +30,18 @@ for($i=1; $i<count($r); $i++) {
     $c_grade_card = 0;
     $c_notice = 0;
     $c_admin_menu = 0;
+
+    for($j=0; $j<count($manager); $j++) {
+        if($manager[$j] == $r[$i][1]) {
+            $c_hm_create = 1;
+            $c_hm_mg = 1;
+            $c_score_mg = 1;
+            $c_consult_mg = 1;
+            $c_grade_card = 1;
+            $c_notice = 1;
+            $c_admin_menu = 1;
+        }
+    }
 
     $sql = "select * from `teacher_setting` where `t_id` = '".$r[$i][0]."';";
     $result = mysqli_query($connect_db, $sql);

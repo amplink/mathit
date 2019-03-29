@@ -121,3 +121,6 @@ include_once ('head.php');
             console.error( error );
         });
 </script>
+<?php
+if($_GET['seq']) echo "<script>call_content($seq);</script>";
+?>

@@ -1,11 +1,11 @@
 <?php
 	include_once ('_common.php');
 
-	if(!$_SESSION['t_uid']) {
-
-		alert_msg('로그인을 먼저 해주세요.');
-		location_href("login.php");
-	}
+//	if(!$_SESSION['t_uid']) {
+//
+//		alert_msg('로그인을 먼저 해주세요.');
+//		location_href("login.php");
+//	}
 
 	if($_GET['s_year'] && $_GET['s_quarter']) {
 
@@ -141,11 +141,11 @@
 
 		$nav_text = "원생관리";
 
-	elseif($nav_url == "homework_management_personal" || $nav_url == "homework_management_add"):
+	elseif($nav_url == "homework_management_personal" || $nav_url == "homework_management_add" || $nav_url == "homework_management_list"):
 
 		$nav_text = "숙제관리";
 	
-	elseif($nav_url == "consult_management_write" || $nav_url == "consult_management_personal" || $nav_url == "homework_management_list"):
+	elseif($nav_url == "consult_management_write" || $nav_url == "consult_management_personal"):
 
 		$nav_text = "상담관리";
 
@@ -162,17 +162,35 @@
 
 		$nav_text = "채점하기";
 
+    elseif($nav_url == "class_schedule_list"):
+        $nav_text = "수업계획표/일지";
+
+    elseif($nav_url == "notice_list"):
+        $nav_text = "공지사항";
+
+    elseif($nav_url == "setting" || $nav_url == "setting_individual"):
+        $nav_text = "설정";
+
 	else :
 	
 		$nav_text = $nav_url;
 
 	endif;
-
-
-
-
-
 ?>
+<script>
+    window.onload = function () {
+        $.ajax({
+            url: "test.php",
+            dataType: "text",
+            success: function (response) {
+                if(response == 1){
+                    alert("로그인 후 이용해주세요");
+                    location.href = "login.php";
+                }
+            }
+        });
+    }
+</script>
 <head>
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
 </head>
@@ -188,12 +206,12 @@
         <p class="navigation_text"><?php echo $nav_text;?></p>
     </div>
     <div class="member_info_wrap">
-        <div class="member_img"><img src="img/user.png" alt="member_img"></div>
+        <div class="member_img"><a href="setting_individual.php"><img src="img/user.png" alt="member_img"></a></div>
         <div class="member_info">
-            <p class="member_name"><?=$_SESSION['t_name']?>(<?=$_SESSION['t_uid']?>)</p>
-            <p class="member_grade"><?=$_SESSION['t_task']?></p>
+            <a href="setting_individual.php"><p class="member_name"><?=$_SESSION['t_name']?></p></a>
+            <a href="setting_individual.php"><p class="member_grade"><?=$_SESSION['t_task']?></p></a>
         </div>
-        <div class="logout_btn"><a href="../logout.php?url=/bbs/teacher/">로그아웃</a></div>
+        <div class="logout_btn"><a href="./logout.php">로그아웃</a></div>
     </div>
 </header>
 
@@ -203,10 +221,10 @@
             <div class="close_btn"><img src="img/close.png" alt="close_icon"></div>
         </div>
         <div class="ham_member_info_line">
-            <div class="ham_member_img"><img src="img/user.png" alt="member_img"></div>
+            <div class="ham_member_img"><a href="setting_individual.php"><img src="img/user.png" alt="member_img"></a></div>
             <div class="ham_member_info">
-                <p class="ham_member_name"><?=$_SESSION['t_name']?></p>
-                <p class="ham_member_grade"><?=$_SESSION['t_task']?></p>
+                <a href="setting_individual.php"><p class="ham_member_name"><?=$_SESSION['t_name']?></p></a>
+                <a href="setting_individual.php"><p class="ham_member_grade"><?=$_SESSION['t_task']?></p></a>
             </div>
         </div>
         <div class="ham_other_btn_line">
@@ -228,9 +246,6 @@
 					$r_4 = api_calls_get($link_4);
 
                 ?>
-
-
-
                     <div class="hamnav_class"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>">
                             <span class="class_title"><?=$d_name[$i]?> ( <?php echo (count($r_4)-1);?> ) </span>
                         </a>

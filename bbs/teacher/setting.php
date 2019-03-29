@@ -67,24 +67,37 @@ include_once ('head.php');
             $r = api_calls_get($link);
 
             // Array ( [0] => 1208 [1] => mathit1 [2] => $2y$10$sRyNvKSfIQav0luJVWK9KuIM8Rd4F77.h.DNEhlqO9B [3] => 박상은 [4] => MATH IT 원장 [5] => [6] => [7] => [8] => https://www.buybook.co.kr/data/aca/staff/126/mathit1.png?=1541640380 [9] => 뿌리가 튼튼하면 그 어떤 교육정책에도 흔들림이 없다. )
-
-            for($i=2; $i<count($r); $i++) {
-                ?>
-                <tr>
-                    <td><span><?=$r[$i][3]?></span></td>
-                    <td><select name="type[]" id="type_<?=$r[$i][0]?>">
-                            <option value="전임강사">전임강사</option>
-                            <option value="채점강사">채점강사</option>
-                        </select></td>
-                    <td><input type="checkbox" name="hm_create[]" value="<?=$r[$i][0]?>" id="hm_create_<?=$r[$i][0]?>"></td>
-                    <td><input type="checkbox" name="hm_mg[]" value="<?=$r[$i][0]?>" id="hm_mg_<?=$r[$i][0]?>"></td>
-                    <td><input type="checkbox" name="score_mg[]" value="<?=$r[$i][0]?>" id="score_mg_<?=$r[$i][0]?>"></td>
-                    <td><input type="checkbox" name="consult_mg[]" value="<?=$r[$i][0]?>" id="consult_mg_<?=$r[$i][0]?>"></td>
-                    <td><input type="checkbox" name="grade_card[]" value="<?=$r[$i][0]?>" id="grade_card_<?=$r[$i][0]?>"></td>
-                    <td><input type="checkbox" name="notice[]" value="<?=$r[$i][0]?>" id="notice_<?=$r[$i][0]?>"></td>
-                    <td><input type="checkbox" name="admin_menu[]" value="<?=$r[$i][0]?>" id="admin_menu_<?=$r[$i][0]?>"></td>
-                </tr>
-                <?
+            $sql = "select * from `academy`;";
+            $result = sql_query($sql);
+            $manager = array();
+            $t = 0;
+            while($res = mysqli_fetch_array($result)) {
+                $manager[$t] = $res['manager_id'];
+            }
+            $chk = 0;
+            for($i=1; $i<count($r); $i++) {
+                for($j=0; $j<count($manager); $j++) {
+                    if($manager[$j] == $r[$i][1]) $chk = 1;
+                }
+                if(!$chk) {
+                    ?>
+                    <tr>
+                        <td><span><?=$r[$i][3]?></span></td>
+                        <td><select name="type[]" id="type_<?=$r[$i][0]?>">
+                                <option value="전임강사">전임강사</option>
+                                <option value="채점강사">채점강사</option>
+                            </select></td>
+                        <td><input type="checkbox" name="hm_create[]" value="<?=$r[$i][0]?>" id="hm_create_<?=$r[$i][0]?>"></td>
+                        <td><input type="checkbox" name="hm_mg[]" value="<?=$r[$i][0]?>" id="hm_mg_<?=$r[$i][0]?>"></td>
+                        <td><input type="checkbox" name="score_mg[]" value="<?=$r[$i][0]?>" id="score_mg_<?=$r[$i][0]?>"></td>
+                        <td><input type="checkbox" name="consult_mg[]" value="<?=$r[$i][0]?>" id="consult_mg_<?=$r[$i][0]?>"></td>
+                        <td><input type="checkbox" name="grade_card[]" value="<?=$r[$i][0]?>" id="grade_card_<?=$r[$i][0]?>"></td>
+                        <td><input type="checkbox" name="notice[]" value="<?=$r[$i][0]?>" id="notice_<?=$r[$i][0]?>"></td>
+                        <td><input type="checkbox" name="admin_menu[]" value="<?=$r[$i][0]?>" id="admin_menu_<?=$r[$i][0]?>"></td>
+                    </tr>
+                    <?
+                }
+                $chk = 0;
             }
             ?>
             </tbody>

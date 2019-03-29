@@ -89,6 +89,9 @@ include_once ('head.php');
             <div class="table_option_line">
                 <p class="option_title">제출유형</p>
                 <div class="option_contnets">
+                    <div class="type_chk"><input type="radio" value="" name="type">
+                        <p>전체</p>
+                    </div>
                     <div class="type_chk"><input type="radio" value="수업계획표" name="type">
                         <p>수업계획표</p>
                     </div>
@@ -101,7 +104,7 @@ include_once ('head.php');
                 <p class="option_title">강사명</p>
                 <div class="option_contnets">
                     <select name="teacher_select" id="teacher_select">
-                        <option value="">선택</option>
+                        <option value="">전체</option>
                         <?php
                         $link = "/api/math/teacher_list?client_no=".$ac;
                         $r = api_calls_get($link);
@@ -152,6 +155,7 @@ include_once ('head.php');
 
 </html>
 <script>
+
     function call_content(seq) {
         $.ajax({
             type: "GET",
@@ -175,6 +179,17 @@ include_once ('head.php');
             dataType: "html",
             success: function(response) {
                 $("#schedule_list").html(response);
+            }
+        })
+    }
+    function attach_file_del(seq) {
+        $.ajax({
+            type: "GET",
+            url: "class_schedule_file_del.php?seq="+seq,
+            success: function(response) {
+                alert("첨부파일 삭제가 완료되었습니다.");
+                search();
+                call_content(seq);
             }
         })
     }

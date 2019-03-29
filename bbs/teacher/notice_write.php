@@ -70,7 +70,7 @@ if($result) {
                     <div class="type_radio"><input type="radio" name="notice_type" value="중요공지" <?php if($res['type'] == "중요공지") echo "checked";?>>
                         <p>중요공지</p>
                     </div>
-                    <div class="type_radio"><input type="radio" name="notice_type" value="일반공지">
+                    <div class="type_radio"><input type="radio" name="notice_type" value="일반공지" <?php if($res['type'] == "일반공지") echo "checked";?>>
                         <p>일반공지</p>
                     </div>
                 </div>
