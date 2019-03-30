@@ -162,10 +162,10 @@
 
 		$nav_text = "채점하기";
 
-    elseif($nav_url == "class_schedule_list"):
+    elseif($nav_url == "class_schedule_list" || $nav_url == "class_schedule_write" || $nav_url == "class_schedule_update"):
         $nav_text = "수업계획표/일지";
 
-    elseif($nav_url == "notice_list"):
+    elseif($nav_url == "notice_list" || $nav_url == "notice_write"):
         $nav_text = "공지사항";
 
     elseif($nav_url == "setting" || $nav_url == "setting_individual"):

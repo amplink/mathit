@@ -71,7 +71,7 @@ for($i=0; $i<count($d_name); $i++) {
 							<div class="chk_box"></div>
 						</td>
 						<td>
-							<div class="scoring_btn"><a href="#none">채점하기</a></div>
+							<div class="scoring_btn"><a href="scoring.php">채점하기</a></div>
 						</td>
 
 					</tr>
