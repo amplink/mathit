@@ -83,13 +83,13 @@ if($result) {
                     <div class="range_radio"><input type="checkbox" class="check_all">
                         <p>전체</p>
                     </div>
-                    <div class="range_radio"><input type="checkbox" name="range[]" class="oj" value="전임강사">
+                    <div class="range_radio"><input type="checkbox" name="range[]" class="oj" value="전임강사" onchange="cancel_chk_all()">
                         <p>전임강사</p>
                     </div>
-                    <div class="range_radio"><input type="checkbox" name="range[]" class="oj" value="채점강사">
-                        <p>체점강사</p>
+                    <div class="range_radio"><input type="checkbox" name="range[]" class="oj" value="채점강사" onchange="cancel_chk_all()">
+                        <p>채점강사</p>
                     </div>
-                    <div class="range_radio"><input type="checkbox" name="range[]" class="oj" value="학생">
+                    <div class="range_radio"><input type="checkbox" name="range[]" class="oj" value="학생" onchange="cancel_chk_all()">
                         <p>학생</p>
                     </div>
                 </div>
@@ -178,4 +178,19 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
             location.href = 'notice_list.php';
         })
     });
+
+    function cancel_chk_all() {
+        if($('.check_all').prop('checked', true)) {
+            var boxlengh = $('.oj').length;
+            var checkedlength = $('.oj:checked').length;
+            if(boxlengh == checkedlength) {
+                $('.check_all').prop('checked', true);
+            }else {
+                $('.check_all').prop('checked', false);
+            }
+        }
+        else {
+            $('.check_all').prop('checked', true)
+        }
+    }
 </script>

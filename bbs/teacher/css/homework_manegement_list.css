@@ -226,11 +226,11 @@ table tbody tr:nth-child(2n) {
 }
 
 .homework_list_table table {
-    width: 1550px;
+    width: 1900px;
 }
 
 .homework_list_table table thead tr th:nth-child(2) {
-    width: 150px;
+    width: 120px;
 }
 
 .x_btn {
@@ -250,7 +250,7 @@ table tbody tr:nth-child(2n) {
 }
 
 .homework_list_table table tbody tr td:nth-child(2) {
-    max-width: 150px;
+    max-width: 200px;
 }
 
 .homework_list_table table tbody tr td:nth-child(2) span {
@@ -260,7 +260,7 @@ table tbody tr:nth-child(2n) {
 }
 
 .homework_list_table table tbody tr td select {
-    width: 70px;
+    width: 90px;
     height: 20px;
     padding: 2px;
 }

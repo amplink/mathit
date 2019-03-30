@@ -195,10 +195,10 @@ while($res = mysqli_fetch_array($result)) {
             </select>
         </td>
         <td>
-            <span>2018-07-01</span>
+            <span><?=$res['_from']?></span>
         </td>
         <td>
-            <span>2018-08-01</span>
+            <span><?=$res['_to']?></span>
         </td>
         <td>
             <?php

@@ -312,7 +312,7 @@ table tbody tr:nth-child(2n) {
 .placeholder {
     position: relative;
     display: inline-block;
-    width: 120px;
+    width: 90px;
     font-size: 13px;
     line-height: 1;
 }

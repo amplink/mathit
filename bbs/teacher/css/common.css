@@ -349,6 +349,13 @@ select {
     color: rgb(255, 255, 255);
 }
 
+.disable {
+    background-color: #8b8b8b;
+}
+.disable>a:hover {
+    background-color: #8b8b8b;
+}
+
 .hamnav_menu>a {
     display: block;
     width: 100%;
