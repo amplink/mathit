@@ -18,6 +18,7 @@ $Q_number3 = $_POST['Q_number3'];
 $corner4 = $_POST['corner4'];
 $Q_number4 = $_POST['Q_number4'];
 $student_list = $_POST['student_list'];
+$class_name = $_POST['class_name'];
 
 for($i=0; $i<count($Q_number1); $i++) {
     if($i==count($Q_number1)-1) $q_number1 .= $Q_number1[$i];
@@ -32,19 +33,19 @@ for($i=0; $i<count($Q_number3); $i++) {
     else $q_number3 .= $Q_number3[$i].",";
 }
 for($i=0; $i<count($Q_number4); $i++) {
-    if($i==count($Q_number4)) $q_number4 .= $Q_number4[$i];
+    if($i==count($Q_number4)-1) $q_number4 .= $Q_number4[$i];
     else $q_number4 .= $Q_number4[$i].",";
 }
 
 for($i=0; $i<count($student_list); $i++) {
-    if($i==count($student_list[$i])-1) $st .= $student_list[$i];
+    if($i==count($student_list)-1) $st .= $student_list[$i];
     else $st .= $student_list[$i].",";
 }
-$sql = "delete from `homework` where `name`='$name';";
-sql_query($sql);
 
 $query = "INSERT INTO homework SET
+                         `seq` = NULL,
                          `name`='$name',
+                         `class_name` = '$class_name',
                          `student` = '$st',
                          `_from`='$from',
                          `_to`='$to',

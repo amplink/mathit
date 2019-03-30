@@ -14,8 +14,10 @@ for($i=0; $i<count($d_name); $i++) {
     }
 
 }
-
-
+$t_name = $_SESSION['t_name'];
+$sql = "select * from `teacher_setting` where `t_name`='$t_name';";
+$result = sql_query($sql);
+$res = mysqli_fetch_array($result);
 
 ?>
 <!DOCTYPE html>
@@ -41,9 +43,9 @@ for($i=0; $i<count($d_name); $i++) {
                 <p class="left_text"><span><?=$class_name?></span></p>
             </div>
             <div class="head_right">
-                <div class="report_manegement_btn"><a href="record_management_add.php">성적관리</a></div>
-                <div class="hw_make_btn"><a href="homework_management_add.php">숙제생성</a></div>
-                <div class="scoring_shortcut_btn"><a href="student_management_score_each.php?d_uid=<?=$_GET[d_uid]?>&c_uid=<?=$_GET[c_uid]?>">채점바로가기</a></div>
+                <div class="report_manegement_btn <?php if(!$res['score_mg']) echo "disable";?>"><a href="record_management_add.php">성적관리</a></div>
+                <div class="hw_make_btn <?php if(!$res['hm_create']) echo "disable";?>"><a href="homework_management_add.php">숙제생성</a></div>
+                <div class="scoring_shortcut_btn <?php if(!$res['hm_mg']) echo "disable";?>"><a href="student_management_score_each.php?d_uid=<?=$_GET[d_uid]?>&c_uid=<?=$_GET[c_uid]?>">채점바로가기</a></div>
             </div>
         </div>
     </div>
@@ -63,22 +65,21 @@ for($i=0; $i<count($d_name); $i++) {
                 <tr>
                     <td><span><?=$r[$i][2]?></span></td>
                     <td>
-                        <div class="hw_manegement_btn disable"><a href="homework_management_personal.php?s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">숙제관리</a></div>
-                        <div class="con_manegement_btn"><a href="consult_management_write.php?s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">상담관리</a></div>
-                        <div class="report_view_btn disable"><a href="student_management_personal_record.php?s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">성적표</a></div>
-                        <div class="scoring_list_btn"><a href="scoring_list.php?s_id=s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">채점목록</a></div>
+                        <div class="hw_manegement_btn <?php if(!$res['hm_mg']) echo "disable";?>"><a href="homework_management_personal.php?s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">숙제관리</a></div>
+                        <div class="con_manegement_btn <?php if(!$res['consult_mg']) echo "disable";?>"><a href="consult_management_write.php?s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">상담관리</a></div>
+                        <div class="report_view_btn <?php if(!$res['grade_card']) echo "disable";?>"><a href="student_management_personal_record.php?s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">성적표</a></div>
+                        <div class="scoring_list_btn <?php if(!$res['hm_mg']) echo "disable";?>"><a href="scoring_list.php?s_id=s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">채점목록</a></div>
                     </td>
                 </tr>
                 <?
             }
             ?>
-
-
-			
 			</tbody>
         </table>
     </div>
 </section>
 </body>
-
 </html>
+<script>
+    $('.disable a').prop('href', '#');
+</script>

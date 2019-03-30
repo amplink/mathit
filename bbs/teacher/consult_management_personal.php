@@ -78,7 +78,7 @@ $s_id = $_GET['s_id'];
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
-                <p>&nbsp;&nbsp;상담내역 - <?=$student_name?></p>
+                <p>&nbsp;&nbsp;상담내역</p>
             </div>
             <div class="head_right">
                 <div class="consult_mane_btn"><a href="consult_management_write.php?s_id=<?=$s_id?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">상담관리</a></div>

@@ -22,7 +22,7 @@ for($i=1; $i<count($r); $i++) {
     <td><span><?=$r[$i][2]?></span><input type="hidden" name="student_name[]" value="<?=$r[$i][2]?>"></td>
     <td><input type="text" name="score_add1[]" onchange="set_avg(<?=$i?>)" id="score_add<?=$i?>"><span>점</span></td>
     <td><input type="text" name="score_add2[]" onchange="set_avg(<?=$i?>)" id="score_add<?=$k?>"><span>점</span></td>
-    <td><span id="avg">점</span></td>
+    <td><span id="avg<?=$i?>"></span></td>
 </tr>
 <?php
 }

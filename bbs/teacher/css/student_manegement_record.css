@@ -160,4 +160,13 @@
     color: rgb(150, 150, 150);
 }
 
+.head_right div.disable{
+    background-color: rgb(230, 230, 230);
+    border: solid 1px rgb(200, 200, 200);
+}
+
+.head_right div.disable a{
+    color: rgb(150, 150, 150);
+}
+
 /**/

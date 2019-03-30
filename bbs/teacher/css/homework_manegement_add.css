@@ -260,8 +260,7 @@ table tbody tr:nth-child(2n) {
 
 .book_table {
     width: calc(100% - 2px);
-    overflow-x: auto;
-    overflow-y: hidden;
+
     border: solid 1px rgb(220, 220, 220);
     margin-top: 10px;
 }

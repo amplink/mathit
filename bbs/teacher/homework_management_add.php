@@ -126,7 +126,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                     for($i=0; $i<count($d_name); $i++) {
                         ?>
                         <tr>
-                            <td onclick="lecture(<?=$d_uid[$i]?>,<?=$c_uid[$i]?>)"><span><?=$d_name[$i]?></span></td>
+                            <td onclick="lecture(<?=$d_uid[$i]?>,<?=$c_uid[$i]?>,'<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
                         </tr>
                         <?
                     }
@@ -153,6 +153,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                         <div class="homework_title_input">
                             <p class="l_text">숙제명</p>
                             <input type="text" placeholder="숙제명을 입력해주세요" name ="name" id="name">
+                            <input type="hidden" name="class_name" id="class_name">
                         </div>
                         <div class="homework_deadline_wrap">
                             <div class="date_range">
@@ -167,7 +168,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                     <div class="right_box_2">
                         <p class="box_title">교재 선택</p>
                         <div class="book_table">
-                            <div class="book_table" style="overflow:scroll;">
+                            <div class="book_table">
                                 <table>
                                     <thead>
                                     <tr>
@@ -176,15 +177,6 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                         <th>학기</th>
                                         <th>레벨</th>
                                         <th>단원명</th>
-
-                                        <th>코너명</th>
-                                        <th>문항번호</th>
-
-                                        <th>코너명</th>
-                                        <th>문항번호</th>
-
-                                        <th>코너명</th>
-                                        <th>문항번호</th>
 
                                         <th>코너명</th>
                                         <th>문항번호</th>
@@ -243,7 +235,9 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                                     });
                                                 </script>
                                             </td>
-
+                                        </tr>
+                                        <tr>
+                                            <td></td><td></td><td></td><td></td><td></td>
                                             <td>
                                                 <select name="corner2" id="corner2">
                                                     <option value="개념마스터">개념마스터</option>
@@ -262,7 +256,9 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                                     ?>
                                                 </select>
                                             </td>
-
+                                        </tr>
+                                        <tr>
+                                            <td></td><td></td><td></td><td></td><td></td>
                                             <td>
                                                 <select name="corner3" id="corner3">
                                                     <option value="개념마스터">개념마스터</option>
@@ -281,9 +277,11 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                                     ?>
                                                 </select>
                                             </td>
-
+                                        </tr>
+                                        <tr>
+                                            <td></td><td></td><td></td><td></td><td></td>
                                             <td>
-                                                <select name="corner4[]" id="corner4">
+                                                <select name="corner4" id="corner4">
                                                     <option value="개념마스터">개념마스터</option>
                                                     <option value="개념확인">개념확인</option>
                                                     <option value="서술과 코칭">서술과 코칭</option>
@@ -294,7 +292,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="Q_number4" id="Q_number4" class="custumdropdown" custumdrop="question" multiple="multiple">
+                                                <select name="Q_number4[]" id="Q_number4" class="custumdropdown" custumdrop="question" multiple="multiple">
                                                     <?php
                                                     for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
                                                     ?>
@@ -384,13 +382,14 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         }
     }
 
-    function lecture(a, b) {
+    function lecture(a, b, c) {
         $.ajax({
             type: "GET",
             url: "call_student_homework.php?d_uid="+a+"&c_uid="+b,
             dataType: "html",
             success: function(response){
                 $("#students").html(response);
+                $("#class_name").val(c);
             }
         });
     }
@@ -430,7 +429,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 
     $(window).bind('beforeunload', function () {
         return "저장하지 않고 페이지를 벗어나시겠습니까?";
-    })
+    });
 
     $("#year_select").val(<?php echo $s_year;?>);
     $("#quarter_select").val(<?php echo $s_quarter;?>);

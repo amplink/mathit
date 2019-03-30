@@ -58,7 +58,6 @@
 .left_box {
     display: inline-block;
     width: 300px;
-    height: 100%;
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
     vertical-align: top;
@@ -96,7 +95,7 @@
 
 .grade_select_box {
     width: calc(100% - 2px);
-    height: 200px;
+    height: 170px;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: rgb(235, 235, 235);
@@ -106,7 +105,7 @@
 
 .class_select_box {
     width: calc(100% - 2px);
-    height: 200px;
+    height: 170px;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: rgb(235, 235, 235);
@@ -116,7 +115,7 @@
 
 .student_list_box {
     width: calc(100% - 2px);
-    height: 200px;
+    height: 170px;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: rgb(235, 235, 235);
@@ -183,7 +182,7 @@ table tbody tr:nth-child(2n) {
 
 .right_box {
     width: 100%;
-    height: 100%;
+    height: 600px;
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
     box-sizing: border-box;
@@ -264,9 +263,10 @@ table tbody tr:nth-child(2n) {
 
 .student_each_score_table {
     width: calc(100% - 2px);
-    height: 420px;
+    height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
+    overflow: scroll;
     background-color: rgb(235, 235, 235);
     border: solid 1px rgb(220, 220, 220);
 }

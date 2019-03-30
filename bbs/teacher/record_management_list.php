@@ -172,6 +172,10 @@ include_once ('head.php');
         })
     });
 
+    $(window).bind('beforeunload', function () {
+        return "저장하지 않고 페이지를 벗어나시겠습니까?";
+    });
+
     var class_name;
     var test_genre;
 

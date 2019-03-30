@@ -39,7 +39,7 @@ for($i=0; $i<count($d_name); $i++) {
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
-                <p class="left_text"><span><?=$class_name?><?=$student_name?></span></p>
+                <p class="left_text"><span><?=$class_name?> - <?=$student_name?> 학생</span></p>
             </div>
             <div class="head_right">
                 <div class="consult_list_btn"><a href="consult_management_personal.php?s_id=<?=$_GET['s_id']?>&s_name=<?=$student_name?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">상담내역</a></div>

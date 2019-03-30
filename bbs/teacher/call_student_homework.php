@@ -8,8 +8,8 @@ $link = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid
 $r = api_calls_get($link);
 for($i=1; $i<count($r); $i++) {
     ?>
-        <tr>
-            <td onclick="student_select(<?=$r[$i][0]?>)"><input type="checkbox" name="student_list[]" value="<?=$r[$i][2]?>" checked><span><?=$r[$i][2]?></span></td>
+        <tr onclick="student_select(<?=$r[$i][0]?>)">
+            <td ><input type="checkbox" name="student_list[]" value="<?=$r[$i][2]?>" checked><span><?=$r[$i][2]?></span></td>
         </tr>
     <?
 }

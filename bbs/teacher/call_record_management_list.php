@@ -123,13 +123,13 @@ $res = mysqli_fetch_array($result);
     </div>
     <div class="add_btn_wrap">
         <div class="l_btn_wrap">
-            <div class="score_delete_btn w_b" onclick="del_score()"><a>전체삭제</a></div>
-            <div class="student_delete_btn w_b" onclick="all_del_score()"><a>선택학생 삭제</a></div>
+            <div class="score_delete_btn w_b" onclick="all_del_score()"><a>전체삭제</a></div>
+            <div class="student_delete_btn w_b" onclick="del_score()"><a>선택학생 삭제</a></div>
         </div>
         <div class="r_btn_wrap">
             <div class="excel_btn f_b"><a href="#none">EXCEL</a></div>
             <div class="print_btn f_b" onclick="print_data()"><a>출력</a></div>
-<!--            <div class="complete_btn f_b"><a href="#none">저장</a></div>-->
+            <div class="complete_btn f_b" onclick='save()'><a>저장</a></div>
         </div>
     </div>
 </form>
@@ -138,14 +138,17 @@ $res = mysqli_fetch_array($result);
         window.print();
     }
 
-    function all_del_score() {
-        if(confirm("선택 학생을 삭제하시겠습니까?")) $('#score_form').submit();
+    function save() {
+        $(window).unbind('beforeunload');
+        $('#score_form').submit();
     }
 
     function del_score() {
-        if(confirm("모든 학생을 삭제하시겠습니까?")) {
-            $('input[type=checkbox]').prop('checked', true);
-            del_score();
-        }
+        $('input[type=checkbox]:checked').parent().parent().css('display', 'none');
+    }
+
+    function all_del_score() {
+        $('input[type=checkbox]').prop('checked', true);
+        del_score();
     }
 </script>

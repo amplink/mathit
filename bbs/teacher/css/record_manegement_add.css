@@ -59,7 +59,7 @@
 .left_box {
     display: inline-block;
     width: 300px;
-    height: 100%;
+    height: 533px;
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
     vertical-align: top;
@@ -184,7 +184,6 @@ table tbody tr:nth-child(2n) {
 
 .right_box {
     width: 100%;
-    height: 666px;
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
     box-sizing: border-box;
@@ -318,7 +317,7 @@ table tbody tr:nth-child(2n) {
 
 .student_each_score_table {
     width: calc(100% - 2px);
-    height: 430px;
+    height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: rgb(235, 235, 235);

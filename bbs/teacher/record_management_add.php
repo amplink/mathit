@@ -142,13 +142,13 @@ include_once ('head.php');
                         </div>
                         <div class="division">
                             <p class="l_div_title">기준만점</p>
-                            <input type="text" placeholder="기준점수" name="standard_score">
+                            <input type="text" placeholder="기준점수" name="standard_score" value="100" id="standard_score">
                             <span> 점</span>
                         </div>
                         <div class="division">
                             <p class="l_div_title">영역별 점수</p>
-                            <div class="score_input"><input type="text" placeholder="점수" name="sub_score1"><span> 점</span></div>
-                            <div class="score_input"><input type="text" placeholder="점수" name="sub_score2"><span> 점</span></div>
+                            <div class="score_input"><input type="text" placeholder="점수" name="sub_score1" value="100" id="sub_score1"><span> 점</span></div>
+                            <div class="score_input"><input type="text" placeholder="점수" name="sub_score2" value="100" id="sub_score2"><span> 점</span></div>
                         </div>
                     </div>
                     <div class="r_right_box">
@@ -156,7 +156,7 @@ include_once ('head.php');
                             <p class="l_div_title">시험유형</p><a id="text_genre"></a><input type="hidden" name="test_genre" id="test_genre">
                         </div>
                         <div class="division">
-                            <p class="l_div_title">시험명</p><input type="text" placeholder="시험명을 입력해주세요" name="title">
+                            <p class="l_div_title">시험명</p><input type="text" placeholder="시험명을 입력해주세요" name="title" id="title">
                         </div>
                     </div>
                 </div>
@@ -278,8 +278,11 @@ include_once ('head.php');
         var k = e+1;
         var t = parseInt($('#score_add'+e).val(), 10);
         var p = parseInt($('#score_add'+k).val(), 10);
-        var val = (t+p)/2;
-        $('#avg').text(val);
+        var val;
+        if(p) val = (t+p)/2;
+        else val = t;
+
+        $('#avg'+e).text(val+"점");
     }
 
     function move_page() {
@@ -292,8 +295,17 @@ include_once ('head.php');
     $("#year_select").val(<?php echo $s_year;?>);
     $("#quarter_select").val(<?php echo $s_quarter;?>);
 
+    $(window).bind('beforeunload', function () {
+        return "저장하지 않고 페이지를 벗어나시겠습니까?";
+    })
+
     function submit() {
-        $('#record_form').submit();
+        if($('#title').val() && $('#datepicker').val() && $('#standard_score').val() && $('#sub_score1').val() && $('#sub_score2').val() && $('#test_genre')) {
+            $(window).unbind('beforeunload');
+            $('#record_form').submit();
+        }else {
+            alert('입력값이 빠진것이  없는지 확인해주세요.');
+        }
     }
 </script>
 </body>
