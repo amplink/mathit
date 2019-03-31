@@ -182,6 +182,10 @@ include_once ('head.php');
             }
         })
     }
+
+    $('#title').keyup(function(e) {
+        if(e.keyCode == 13) search();
+    });
     function attach_file_del(seq) {
         $.ajax({
             type: "GET",

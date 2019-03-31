@@ -201,13 +201,26 @@ include_once ('head.php');
         <div class="notice_contents_wrap">
 
             <?php
+            $ac = $_SESSION['client_no'];
+            $task = $_SESSION['t_task'];
+//            alert_msg($task);
+            $sql = "select * from `notify` where `client_id`='$ac' limit 0, 5;";
+            $result = sql_query($sql);
+            while($res = mysqli_fetch_array($result)) {
+                ?>
+                <div class="notice_content">
+                    <a href="./notice_list.php?seq=<?=$res['id']?>&chk=1"><span>&#149;</span><?=$res['title']?></a>
+                </div>
+                <?php
+            }
+
             $sql = "select * from `teacher_notice` order by `seq` desc limit 0,5";
             $result = sql_query($sql);
             $i=1;
             while($res = sql_fetch_array($result)) {
                 ?>
                 <div class="notice_content">
-                    <a href="./notice_list.php?seq=<?=$res['seq']?>"><span>&#149;</span><?=$res['title']?></a>
+                    <a href="./notice_list.php?seq=<?=$res['seq']?>&chk=0"><span>&#149;</span><?=$res['title']?></a>
                 </div>
                 <?
                 if($i==5) break;

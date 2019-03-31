@@ -2,20 +2,47 @@
 include_once ('_common.php');
 include_once ('head.php');
 
-// 시간표
-$link = "/api/math/teacher_class?client_no=126&t_uid=".$_SESSION['t_uid'];
-$r = api_calls_get($link);
-$t = $_GET['t'];
-$d_uid = array();
-$chk = 0;
-$cnt = 0;
-for($i=1; $i<count($r); $i++) {
-    $chk = 0;
-    for($j=0; $j<count($d_uid); $j++) {
-        if($d_uid[$j] == $r[$i][0]) $chk = 1;
+$t_name = $_SESSION['t_name'];
+$sql = "select * from `teacher_setting` where `t_name`='$t_name';";
+$result = sql_query($sql);
+$res = mysqli_fetch_array($result);
+
+$t_type = $res['type'];
+$t_notice = $res['notice'];
+
+if($t_type == "채점강사") {
+    if($t_notice) {
+        $cnt = 0;
+        $r = api_calls_get("/api/math/class?client_no=".$_SESSION['client_no']);
+        for($i=1; $i<count($r); $i++) {
+            $d_name[$cnt] = $r[$i][4];
+            $cnt++;
+        }
+    }else {
+        // 시간표
+        $link = "/api/math/teacher_class?client_no=126&t_uid=".$_SESSION['t_uid'];
+        $r = api_calls_get($link);
+        $t = $_GET['t'];
+        $d_uid = array();
+        $chk = 0;
+        $cnt = 0;
+        for($i=1; $i<count($r); $i++) {
+            $chk = 0;
+            for($j=0; $j<count($d_uid); $j++) {
+                if($d_uid[$j] == $r[$i][0]) $chk = 1;
+            }
+            if(!$chk) {
+                $d_uid[$cnt] = $r[$i][0];
+                $d_name[$cnt] = $r[$i][4];
+                $cnt++;
+            }
+        }
     }
-    if(!$chk) {
-        $d_uid[$cnt] = $r[$i][0];
+
+}else {
+    $cnt = 0;
+    $r = api_calls_get("/api/math/class?client_no=".$_SESSION['client_no']);
+    for($i=1; $i<count($r); $i++) {
         $d_name[$cnt] = $r[$i][4];
         $cnt++;
     }
@@ -43,9 +70,15 @@ if($result) {
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/notice_write.css" />
+    <link rel="stylesheet" type="text/css" href="css/multiselect.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+<!--    <script src="js/helper.js"></script>-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+<!--    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-multiselect.css">
+    <script src="js/bootstrap-multiselect.js"></script>
 </head>
 
 <body>
@@ -100,7 +133,7 @@ if($result) {
                     <p>공지대상</p>
                 </div>
                 <div class="option_content">
-                    <select name="target" id="class_select" style="margin-top: 5px;">
+                    <select name="target[]" id="class_select" style="margin-top: 5px;" multiple="multiple" required>
                         <?php
                         for($i=0; $i<count($d_name); $i++) echo "<option value='".$d_name[$i]."'>$d_name[$i]</option>";
                         ?>
@@ -177,8 +210,8 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
         $('.cancel_btn').click(function () {
             location.href = 'notice_list.php';
         })
+        $('#class_select').multiselect();
     });
-
     function cancel_chk_all() {
         if($('.check_all').prop('checked', true)) {
             var boxlengh = $('.oj').length;
@@ -194,3 +227,4 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
         }
     }
 </script>
+<script src="js/multiselect.min.js"></script>

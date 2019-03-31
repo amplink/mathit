@@ -1,6 +1,11 @@
 <?php
 include_once ('_common.php');
 include_once ('head.php');
+
+$t_name = $_SESSION['t_name'];
+$sql = "select * from `teacher_setting` where `t_name`='$t_name';";
+$result = sql_query($sql);
+$res = mysqli_fetch_array($result);
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +31,13 @@ include_once ('head.php');
                 <p class="left_text">공지사항</p>
             </div>
             <div class="head_right">
-                <div class="write_btn"><a href="notice_write.php">공지사항 등록</a></div>
+                <?php
+                if($res['notice']) {
+                    ?>
+                    <div class="write_btn"><a href="notice_write.php">공지사항 등록</a></div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -104,6 +115,7 @@ include_once ('head.php');
             }
         });
     }
+
     $('#search_val').keyup(function(e) {
         if(e.keyCode == 13) search();
     });
@@ -122,5 +134,5 @@ include_once ('head.php');
         });
 </script>
 <?php
-if($_GET['seq']) echo "<script>call_content($seq);</script>";
+if($_GET['seq']) echo "<script>call_content('$seq');</script>";
 ?>

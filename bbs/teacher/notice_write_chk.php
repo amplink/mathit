@@ -37,9 +37,16 @@ if(count($type) == 0) {
     exit;
 }
 
-for($i=0; $i<count($range); $i++) $r_range .= $range[$i].",";
+for($i=0; $i<count($range); $i++) {
+    if($i==count($range)-1) $r_range .= $range[$i];
+    else $r_range .= $range[$i].",";
+}
 //for($i=0; $i<count($type); $i++) $r_type .= $type[$i].",";
 //alert_msg($r_type);
+for($i=0; $i<count($target); $i++) {
+    if($i==count($target)-1) $r_target .= $target[$i];
+    else $r_target .= $target[$i].",";
+}
 
 if($seqq > 0) { // 수정이면
     $sql = "select * from `teacher_notice` where  `seq` = '$seqq';";

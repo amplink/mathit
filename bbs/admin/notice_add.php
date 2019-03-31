@@ -58,7 +58,7 @@ include_once('head.php');
 <!--            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>-->
 <!--        </div>-->
 <!--    </div>-->
-    <form action="notice_add_chk.php" method="POST" id="notice_bbs">
+    <form action="notice_add_chk.php" method="POST" id="notice_bbs" enctype="multipart/form-data">
     <div class="section">
         <div class="head_section">
             <div class="l_title">
@@ -126,15 +126,15 @@ include_once('head.php');
                         <p>전체</p>
                     </div>
                     <div class="radio_group">
-                        <input type="checkbox" name="notice_range[]" class="notice_range" value="0">
+                        <input type="checkbox" name="notice_range[]" class="notice_range" value="전임강사" onchange="cancel_chk_all()">
                         <p>전임강사</p>
                     </div>
                     <div class="radio_group">
-                        <input type="checkbox" name="notice_range[]" class="notice_range" value="1">
+                        <input type="checkbox" name="notice_range[]" class="notice_range" value="채점강사" onchange="cancel_chk_all()">
                         <p>채점강사</p>
                     </div>
                     <div class="radio_group">
-                        <input type="checkbox" name="notice_range[]" class="notice_range" value="2">
+                        <input type="checkbox" name="notice_range[]" class="notice_range" value="학생" onchange="cancel_chk_all()">
                         <p>학생</p>
                     </div>
                 </div>
@@ -152,7 +152,7 @@ include_once('head.php');
                     <p class="title_text">첨부파일</p>
                 </div>
 <!--                <div class="contents_box">-->
-                    <input style="margin-top: 15px;" type="file" name="file">
+                    <input style="margin-top: 15px;" type="file" name="bf_file[]">
 <!--                </div>-->
             </div>
             <div class="board_line">
@@ -192,6 +192,21 @@ include_once('head.php');
     // window.onbeforeunload = function() {
     //
     // }
+
+    function cancel_chk_all() {
+        if($('#all_select').prop('checked', true)) {
+            var boxlengh = $('.notice_range').length;
+            var checkedlength = $('.notice_range:checked').length;
+            if(boxlengh == checkedlength) {
+                $('#all_select').prop('checked', true);
+            }else {
+                $('#all_select').prop('checked', false);
+            }
+        }
+        else {
+            $('.check_all').prop('checked', true)
+        }
+    }
 </script>
 
 <?php
