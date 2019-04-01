@@ -19,6 +19,57 @@ include_once ('head.php');
     <script src="js/jquery-ui.js"></script>
     <script src="js/common.js"></script>
     <script src="js/homework_manegement_add.js"></script>
+    <script>
+        $( function() {
+            var dateFormat = "yy-mm-dd",
+                from = $( "#from" )
+                    .datepicker({
+                        showOn: "button",
+                        buttonImage: "img/calendar.png",
+                        buttonImageOnly: true,
+                        buttonText: "Select date",
+                        nextText: "다음달",
+                        prevText: "이전달",
+                        changeMonth: true,
+                        dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+                        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+                        monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+                        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                        numberOfMonths: 2
+                    })
+                    .on( "change", function() {
+                        to.datepicker( "option", "minDate", getDate( this ) );
+                    }),
+                to = $( "#to" ).datepicker({
+                    showOn: "button",
+                    buttonImage: "img/calendar.png",
+                    buttonImageOnly: true,
+                    buttonText: "Select date",
+                    nextText: "다음달",
+                    prevText: "이전달",
+                    changeMonth: true,
+                    dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+                    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+                    monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+                    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                    numberOfMonths: 2
+                })
+                    .on( "change", function() {
+                        from.datepicker( "option", "maxDate", getDate( this ) );
+                    });
+
+            function getDate( element ) {
+                var date;
+                try {
+                    date = $.datepicker.parseDate( dateFormat, element.value );
+                } catch( error ) {
+                    date = null;
+                }
+
+                return date;
+            }
+        } );
+    </script>
     <style>
         .students_checks{
             display: none;
@@ -115,7 +166,7 @@ include_once ('head.php');
                 <p class="box_title">숙제목록</p>
                 <div class="table_option_wrap">
                     <div class="table_option">
-                        <input type="checkbox">
+                        <input type="checkbox" id="clear" onchange="clear_btn()">
                         <p>완료한 숙제 목록에서 제외</p>
                     </div>
                 </div>
@@ -160,6 +211,14 @@ include_once ('head.php');
         </div>
     </div>
 </section>
+<!--<form action="homework_resend.php" id="resend_form">-->
+<!--    <input type="hidden" name="r_name" id="r_name">-->
+<!--    <input type="hidden" name="r_textbook" id="r_textbook">-->
+<!--    <input type="hidden" name="r_grade" id="r_grade">-->
+<!--    <input type="hidden" name="r_semester" id="r_semester">-->
+<!--    <input type="hidden" name="r_unit" id="r_unit">-->
+<!--    <input type="hidden" name="">-->
+<!--</form>-->
 <script>
     $(document).ready(function () {
         $('.grade_select_box table tbody tr').click(function () {
@@ -242,8 +301,41 @@ include_once ('head.php');
         location.href = './homework_management_list.php?s_year='+b+'&s_quarter='+a;
     }
 
+    function clear_btn() {
+        // if($('#clear').attr('checked', false)) $('.complete_text').parent().parent().hide();
+        // else $('.complete_text').parent().parent().show();
+    }
+
+    function book_info1(e) {
+        var tt = $("#grade"+e).val();
+        var ttt = $("#semester"+e).val();
+        var grade, semester;
+
+        if(tt=="초3") grade = 3;
+        if(tt=="초4") grade = 4;
+        if(tt=="초5") grade = 5;
+        if(tt=="초6") grade = 6;
+        if(tt=="중1") grade = 7;
+        if(tt=="중2") grade = 8;
+        if(tt=="중3") grade = 9;
+
+        if(ttt=="1학기") semester = 1;
+        if(ttt=="2학기") semester = 2;
+
+        $.ajax({
+            type: "GET",
+            url: "call_book_info.php?grade="+grade+"&semester="+semester,
+            dataType: "html",
+            success: function(response) {
+                $("#unit"+e).html(response);
+            }
+        })
+    }
+
     $("#year_select").val(<?php echo $s_year;?>);
     $("#quarter_select").val(<?php echo $s_quarter;?>);
+
+    $('.ui-datepicker-trigger').css('width', '20px');
 </script>
 </body>
 

@@ -349,11 +349,12 @@ select {
     color: rgb(255, 255, 255);
 }
 
-.disable {
-    background-color: #8b8b8b;
+div.dis a{
+    color: #8b8b8b !important;
 }
-.disable>a:hover {
-    background-color: #8b8b8b;
+
+div.dis a span{
+    color: #8b8b8b !important;
 }
 
 .hamnav_menu>a {

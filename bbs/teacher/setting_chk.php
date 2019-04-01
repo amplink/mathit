@@ -18,8 +18,20 @@ $sql = "select * from `academy`;";
 $result = sql_query($sql);
 $manager = array();
 $i=0;
+
 while($res = mysqli_fetch_array($result)) {
     $manager[$i] = $res['manager_id'];
+    $i++;
+}
+
+$sql = "select * from `teacher_setting`;";
+$result = sql_query($sql);
+$user_list = array();
+
+$i=0;
+while($res = mysqli_fetch_array($result)) {
+    $user_list[$i] = $res['t_id'];
+    $i++;
 }
 
 for($i=1; $i<count($r); $i++) {
@@ -31,36 +43,63 @@ for($i=1; $i<count($r); $i++) {
     $c_notice = 0;
     $c_admin_menu = 0;
 
-    for($j=0; $j<count($manager); $j++) {
-        if($manager[$j] == $r[$i][1]) {
+    $sql = "select * from `teacher_setting` where `t_id` = '".$r[$i][0]."';";
+    $result = mysqli_query($connect_db, $sql);
+    if($result) {
+        $sql = "delete from `teacher_setting` where `t_id` = '".$r[$i][0]."'";
+        mysqli_query($connect_db, $sql);
+
+        if($type[$i-1] == "전임강사") {
             $c_hm_create = 1;
             $c_hm_mg = 1;
             $c_score_mg = 1;
             $c_consult_mg = 1;
             $c_grade_card = 1;
             $c_notice = 1;
-            $c_admin_menu = 1;
-        }
-    }
 
-    $sql = "select * from `teacher_setting` where `t_id` = '".$r[$i][0]."';";
-    $result = mysqli_query($connect_db, $sql);
-    if($result) {
-        $sql = "delete from `teacher_setting` where `t_id` = '".$r[$i][0]."'";
-        mysqli_query($connect_db, $sql);
-        for($j=0; $j<count($r); $j++) {
-            if($hm_create[$j] == $r[$i][0]) $c_hm_create = 1;
-            if($hm_mg[$j] == $r[$i][0]) $c_hm_mg = 1;
-            if($score_mg[$j] == $r[$i][0]) $c_score_mg = 1;
-            if($consult_mg[$j] == $r[$i][0]) $c_consult_mg = 1;
-            if($grade_card[$j] == $r[$i][0]) $c_grade_card = 1;
-            if($notice[$j] == $r[$i][0]) $c_notice = 1;
-            if($admin_menu[$j] == $r[$i][0]) $c_admin_menu = 1;
+            for($j=0; $j<count($r); $j++) {
+                if($hm_create[$j] == $r[$i][0]) $c_hm_create = 1;
+                if($hm_mg[$j] == $r[$i][0]) $c_hm_mg = 1;
+                if($score_mg[$j] == $r[$i][0]) $c_score_mg = 1;
+                if($consult_mg[$j] == $r[$i][0]) $c_consult_mg = 1;
+                if($grade_card[$j] == $r[$i][0]) $c_grade_card = 1;
+                if($notice[$j] == $r[$i][0]) $c_notice = 1;
+                if($admin_menu[$j] == $r[$i][0]) $c_admin_menu = 1;
+            }
+        } else{
+            $c_hm_mg = 1;
+            $c_grade_card = 1;
+            $c_consult_mg = 1;
+            $c_score_mg = 1;
+
+            for($j=0; $j<count($r); $j++) {
+                if($hm_create[$j] == $r[$i][0]) $c_hm_create = 1;
+                if($hm_mg[$j] == $r[$i][0]) $c_hm_mg = 1;
+                if($score_mg[$j] == $r[$i][0]) $c_score_mg = 1;
+                if($consult_mg[$j] == $r[$i][0]) $c_consult_mg = 1;
+                if($grade_card[$j] == $r[$i][0]) $c_grade_card = 1;
+                if($notice[$j] == $r[$i][0]) $c_notice = 1;
+                if($admin_menu[$j] == $r[$i][0]) $c_admin_menu = 1;
+            }
         }
+
+        for($j=0; $j<count($manager); $j++) {
+            if($manager[$j] == $r[$i][1]) {
+                $c_hm_create = 1;
+                $c_hm_mg = 1;
+                $c_score_mg = 1;
+                $c_consult_mg = 1;
+                $c_grade_card = 1;
+                $c_notice = 1;
+                $c_admin_menu = 1;
+            }
+        }
+
         $sql = "INSERT INTO `teacher_setting` (`seq`, `t_id`, `t_name`, `type`, `hm_create`, `hm_mg`, `score_mg`, `consult_mg`, `grade_card`, `notice`, `admin_menu`, `event_time`) 
 VALUES (NULL, '".$r[$i][0]."', '".$r[$i][3]."', '".$type[$i-1]."', '$c_hm_create', '$c_hm_mg', '$c_score_mg', '$c_consult_mg', '$c_grade_card', '$c_notice', '$c_admin_menu', CURRENT_TIMESTAMP);";
         mysqli_query($connect_db, $sql);
     }
+
 }
 alert_msg("등록이 완료되었습니다.");
 location_href("./setting.php");

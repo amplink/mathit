@@ -264,10 +264,10 @@
             </div>
         </div>
 
-        <div class="hamnav_menu <?php if(!$res['hm_create']) echo "disable";?>"><a href="homework_management_add.php"><span>숙제생성</span></a></div>
-        <div class="hamnav_menu <?php if(!$res['hm_mg']) echo "disable";?>"><a href="student_management_score_all.php"><span>채점바로가기</span></a></div>
+        <div class="hamnav_menu <?php if(!$res['hm_create']) echo "dis";?>"><a href="homework_management_add.php"><span>숙제생성</span></a></div>
+        <div class="hamnav_menu"><a href="student_management_score_all.php"><span>채점바로가기</span></a></div>
         <div class="hamnav_menu"><a href="class_schedule_list.php"><span>수업계획표/일지</span></a></div>
-        <div class="hamnav_menu <?php if(!$res['notice']) echo "disable";?>"><a href="notice_list.php"><span>공지사항</span></a></div>
+        <div class="hamnav_menu"><a href="notice_list.php"><span>공지사항</span></a></div>
     </div>
 
     <div class="alarm_box_wrap_wrap">
@@ -310,5 +310,5 @@
     </div>
 </div>
 <script>
-    $('.disable a').prop('href','#');
+    $('.dis a').prop('href','#');
 </script>

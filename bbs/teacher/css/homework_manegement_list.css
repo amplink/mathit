@@ -250,7 +250,7 @@ table tbody tr:nth-child(2n) {
 }
 
 .homework_list_table table tbody tr td:nth-child(2) {
-    max-width: 200px;
+    max-width: 400px;
 }
 
 .homework_list_table table tbody tr td:nth-child(2) span {
@@ -299,4 +299,8 @@ table tbody tr:nth-child(2n) {
     font-weight: 600;
     color: rgb(255, 255, 255);
     text-align: center;
+}
+.ui-datepicker-trigger {
+    width: 20px;
+    height: 20px;
 }
