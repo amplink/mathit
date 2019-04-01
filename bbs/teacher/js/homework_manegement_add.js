@@ -29,7 +29,7 @@
                 var add = this.$select.is('[custumdrop]') ? ' selector' : ''; //체크박스유무
                 this.$select.wrap('<div class="placeholder' + add + '"></div>');
                 this.$select.before('<div class="headbox"><div class="identifier">' +
-                    this.settings.placeholder + '</div><span class="arrow"></span></div>');
+                    this.settings.placeholder + '</div><span class="arrow" style="margin-top:-3px"><input type="checkbox" name="allChk" class="allChk"></span></div>');
                 this.$select.before('<div class="combobox hidden"></div>');
                 this.$select.addClass('hidden');
                 this.reload();
@@ -38,8 +38,8 @@
             reload: function() {
                 var choices = '';
                 if (this.settings.showSearch) {
-                    choices += '<div class="search"><input type="search" placeholder="' +
-                        this.settings.searchText + '" /></div>';
+                   /* choices += '<div class="search"><input type="search" placeholder="' +
+                        this.settings.searchText + '" /></div>';*/
                 }
                 choices += this.build(this.$select);
                 this.$select.siblings('.combobox').html(choices);
@@ -124,6 +124,28 @@
         $wrap.find('.combobox').toggleClass('hidden');
         $wrap.find('.search input').focus();
     });
+
+    $(document).on('click', '.allChk', function() {
+        var $wrap = $(this).closest('.placeholder');
+
+        if($(".allChk").is(":checked")){
+			$wrap.find('.var_option').addClass('selected');
+			var selected = [];
+
+			$(this).toggleClass('selected');
+			$wrap.find('.var_option.selected').each(function(i, el) {
+				selected.push($(el).attr('data-value'));
+			});
+		}else{
+           $wrap.find('.var_option').removeClass('selected');
+
+		}
+
+        $wrap.find('select').val(selected);
+        $wrap.find('select').homework_manegement_add('reloadDropdown');
+
+    });
+
 
     $(document).on('click', '.var_option', function() {
         var $this = this;
