@@ -43,8 +43,8 @@ if(strpos($seq, ":")) {
         </div>
     </div>
     <div class="board_main_text_section">
-        <div class="main_text">
-            <p><?=$res['content']?></p>
+        <div class="main_text" style="height:440px">
+            <p><?=$res['contents']?></p>
         </div>
     </div>
     <div class="btn_section">
@@ -52,7 +52,7 @@ if(strpos($seq, ":")) {
         <div class="r_btn_wrap">
             <?php if($res['attach_file_url']) {
                 ?>
-                <div class="modify_btn" style="">
+                <div class="modify_btn" style="width:130px">
                     <a href="../admin/<?=$res['attach_file_url'].$res['attach_file']?>" download>첨부파일 받기</a>
                 </div>
                 <?php
@@ -100,7 +100,7 @@ if(strpos($seq, ":")) {
     </div>
     <div class="board_main_text_section">
         <div class="main_text">
-            <p><?=$res['contents']?></p>
+            <p><?=$res['content']?></p>
         </div>
     </div>
     <div class="btn_section">
@@ -110,10 +110,10 @@ if(strpos($seq, ":")) {
         <div class="r_btn_wrap">
             <?php if($res['file_url']) {
                 ?>
-                <div class="modify_btn" style="">
+                <div class="modify_btn" style="width:130px">
                     <a href="<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기</a>
                 </div>
-                <div class="delete_btn">
+                <div class="delete_btn" style="width:130px">
                     <a href="notice_file_del.php?seq=<?=$res['seq']?>">첨부파일 삭제</a>
                 </div>
                 <?php
