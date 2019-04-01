@@ -87,23 +87,31 @@ $s_id = $_GET['s_id'];
     </div>
     <div class="student_consult_box">
         <div class="head_line">
+		
+		  <form action="<?=$_SERVER['PHP_SELF']?>" method="get" id="form_search">
+		    <input type="hidden" name="s_id" id="s_id" value="<?=$_GET['s_id']?>">
+			<input type="hidden" name="s_name" id="s_name" value="<?=$_GET['s_name']?>">
+			<input type="hidden" name="d_uid" id="d_uid" value="<?=$_GET['d_uid']?>">
+			<input type="hidden" name="c_uid" id="c_uid" value="<?=$_GET['c_uid']?>">
+			<input type="hidden" name="month" id="month" value="<?=$_GET['month']?>">
+
             <div class="day_input">
                 <div class="date_range">
-                    <input type="text" id="from">
+                    <input type="text" id="from" name="start" value="<?=$_GET['start']?>">
                 </div>
                 <span> ~ </span>
                 <div class="date_range">
-                    <input type="text" id="to">
+                    <input type="text" id="to" name="end" value="<?=$_GET['end']?>">
                 </div>
             </div>
-            <div class="search_btn"><a href="#none">검색</a></div>
+            <div class="search_btn"><a href="javascript:consult_search();">검색</a></div>
             <div class="month_btn_wrap">
-                <div class="month_btn"><a href="#none">1개월</a></div>
-                <div class="month_btn"><a href="#none">2개월</a></div>
-                <div class="month_btn"><a href="#none">3개월</a></div>
-                <div class="month_btn"><a href="#none">전체</a></div>
+                <div class="month_btn"><a href="javascript:month_ago('1');">1개월</a></div>
+                <div class="month_btn"><a href="javascript:month_ago('2');">2개월</a></div>
+                <div class="month_btn"><a href="javascript:month_ago('3');">3개월</a></div>
+                <div class="month_btn"><a href="javascript:month_ago('all');">전체</a></div>
             </div>
-
+          </form>
         </div>
         <div class="consult_table">
             <table>
@@ -119,7 +127,16 @@ $s_id = $_GET['s_id'];
                 </thead>
                 <tbody>
                 <?php
-                $sql = "select * from `teacher_consult` where `t_name` = '".$_SESSION['t_name']."';";
+                $sql = "select * from `teacher_consult` where `t_name` = '".$_SESSION['t_name']."'";
+
+				if(is_numeric($_GET['month'])){
+                    $sql .= " and (date >= date_format(date_add(now(), interval -".$_GET['month']." month), '%m/%d/%Y')
+					               and date <= date_format(now(), '%m/%d/%Y'))";
+				}
+				else if($_GET['start'] && $_GET['end']){
+                    $sql .= " and (date BETWEEN '".$_GET['start']."' and '".$_GET['end']."') ";
+				}
+
                 $result = mysqli_query($connect_db, $sql);
                 while($res = mysqli_fetch_array($result)) {
                     ?>
@@ -172,4 +189,14 @@ $s_id = $_GET['s_id'];
         $("#consult_form").attr('action', "consult_management_personal_del.php");
         $("#consult_form").submit();
     }
+
+	function consult_search(){
+		$("#month").val("");
+		$("#form_search").submit();
+	}
+
+	function month_ago(m){
+        $("#month").val(m);
+		$("#form_search").submit();
+	}
 </script>
