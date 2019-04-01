@@ -17,7 +17,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css?v=201904011" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/common.js"></script>
@@ -227,7 +227,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                                     for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
                                                     ?>
                                                 </select>
-                                                <script src="js/homework_manegement_add.js"></script>
+                                                <script src="js/homework_manegement_add.js?v=201904011"></script>
 
                                                 <script>
                                                     $(function() {
