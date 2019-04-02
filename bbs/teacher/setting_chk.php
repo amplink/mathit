@@ -34,7 +34,7 @@ for($i=0;$i<count($tid);$i++){
 
 	sql_query(
 		"update teacher_setting set 
-
+            type = '$type[$i]',
 			hm_create = $hc,
 			hm_mg = $hm,
 			score_mg = $sm,

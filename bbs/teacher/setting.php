@@ -44,7 +44,7 @@ include_once ('head.php');
     <div class="setting_box">
         <div class="setting_head">
             <p>메뉴권한 설정</p>
-            <div class="save_setting_btn" onclick="submit();"><a href="#">저장</a></div>
+            <div class="save_setting_btn"><a href="javascript:submit();">저장</a></div>
         </div>
 
         <table>
@@ -96,10 +96,10 @@ include_once ('head.php');
              ?>
                     <tr>
 					    <input type="hidden" name="tid[]" value="<?=$r[$i][0]?>">
-                        <td><span><?=$r[$i][3]?><?=$r[$i][0]?></span></td>
+                        <td><span><?=$r[$i][3]?></span></td>
                         <td><select name="type[]" id="type_<?=$r[$i][0]?>">
-                                <option value="전임강사">전임강사</option>
-                                <option value="채점강사">채점강사</option>
+                                <option value="전임강사" <?echo ($res2['type']=='전임강사')?"selected":"";?>>전임강사</option>
+                                <option value="채점강사" <?echo ($res2['type']=='채점강사')?"selected":"";?>>채점강사</option>
                             </select></td>
                         <td><input type="checkbox" name="hm_create[]" value="<?=$r[$i][0]?>" id="hm_create_<?=$r[$i][0]?>" <?=$checked1?>></td>
                         <td><input type="checkbox" name="hm_mg[]" value="<?=$r[$i][0]?>" id="hm_mg_<?=$r[$i][0]?>" <?=$checked2?>></td>
