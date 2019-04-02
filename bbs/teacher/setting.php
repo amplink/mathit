@@ -4,6 +4,7 @@ $t_name = $_SESSION['t_name'];
 $sql = "select * from `teacher_setting` where `t_name`='$t_name';";
 $result = mysqli_query($connect_db, $sql);
 $res = mysqli_fetch_array($result);
+
 if($res['admin_menu']==0) {
     alert_msg("관리자 권한이 없습니다.");
     location_href("./home.php");
@@ -26,7 +27,7 @@ include_once ('head.php');
 
 <body>
 <section>
-    <form action="setting_chk.php" method="post" id="setting_form">
+    <form action="setting_chk2.php" method="post" id="setting_form">
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
@@ -80,20 +81,33 @@ include_once ('head.php');
                     if($manager[$j] == $r[$i][1]) $chk = 1;
                 }
                 if(!$chk) {
-                    ?>
+					$sql2 = "select * from `teacher_setting` where `t_id`='".$r[$i][0]."';";
+					$result2 = mysqli_query($connect_db, $sql2);
+					$res2 = mysqli_fetch_array($result2);
+
+					$checked1 = ($res2['hm_create']==1)?"checked":"";
+					$checked2 = ($res2['hm_mg']==1)?"checked":"";
+					$checked3 = ($res2['score_mg']==1)?"checked":"";
+					$checked4 = ($res2['consult_mg']==1)?"checked":"";
+					$checked5 = ($res2['grade_card']==1)?"checked":"";
+					$checked6 = ($res2['notice']==1)?"checked":"";
+					$checked7 = ($res2['admin_menu']==1)?"checked":"";
+
+             ?>
                     <tr>
-                        <td><span><?=$r[$i][3]?></span></td>
+					    <input type="hidden" name="tid[]" value="<?=$r[$i][0]?>">
+                        <td><span><?=$r[$i][3]?><?=$r[$i][0]?></span></td>
                         <td><select name="type[]" id="type_<?=$r[$i][0]?>">
                                 <option value="전임강사">전임강사</option>
                                 <option value="채점강사">채점강사</option>
                             </select></td>
-                        <td><input type="checkbox" name="hm_create[]" value="<?=$r[$i][0]?>" id="hm_create_<?=$r[$i][0]?>"></td>
-                        <td><input type="checkbox" name="hm_mg[]" value="<?=$r[$i][0]?>" id="hm_mg_<?=$r[$i][0]?>"></td>
-                        <td><input type="checkbox" name="score_mg[]" value="<?=$r[$i][0]?>" id="score_mg_<?=$r[$i][0]?>"></td>
-                        <td><input type="checkbox" name="consult_mg[]" value="<?=$r[$i][0]?>" id="consult_mg_<?=$r[$i][0]?>"></td>
-                        <td><input type="checkbox" name="grade_card[]" value="<?=$r[$i][0]?>" id="grade_card_<?=$r[$i][0]?>"></td>
-                        <td><input type="checkbox" name="notice[]" value="<?=$r[$i][0]?>" id="notice_<?=$r[$i][0]?>"></td>
-                        <td><input type="checkbox" name="admin_menu[]" value="<?=$r[$i][0]?>" id="admin_menu_<?=$r[$i][0]?>"></td>
+                        <td><input type="checkbox" name="hm_create[]" value="<?=$r[$i][0]?>" id="hm_create_<?=$r[$i][0]?>" <?=$checked1?>></td>
+                        <td><input type="checkbox" name="hm_mg[]" value="<?=$r[$i][0]?>" id="hm_mg_<?=$r[$i][0]?>" <?=$checked2?>></td>
+                        <td><input type="checkbox" name="score_mg[]" value="<?=$r[$i][0]?>" id="score_mg_<?=$r[$i][0]?>" <?=$checked3?>></td>
+                        <td><input type="checkbox" name="consult_mg[]" value="<?=$r[$i][0]?>" id="consult_mg_<?=$r[$i][0]?>" <?=$checked4?>></td>
+                        <td><input type="checkbox" name="grade_card[]" value="<?=$r[$i][0]?>" id="grade_card_<?=$r[$i][0]?>" <?=$checked5?>></td>
+                        <td><input type="checkbox" name="notice[]" value="<?=$r[$i][0]?>" id="notice_<?=$r[$i][0]?>" <?=$checked6?>></td>
+                        <td><input type="checkbox" name="admin_menu[]" value="<?=$r[$i][0]?>"  id="admin_menu_<?=$r[$i][0]?>" <?=$checked7?>></td>
                     </tr>
                     <?
                 }
@@ -153,7 +167,7 @@ include_once ('head.php');
 <?php
 $sql = "select * from `teacher_setting`";
 $result = mysqli_query($connect_db, $sql);
-while($res = mysqli_fetch_array($result)) {
+/*while($res = mysqli_fetch_array($result)) {
     if($res['type']=="전임강사") echo "<script>$('#type_".$res['t_id']."').val('전임강사');</script>";
     else echo "<script>$('#type_".$res['t_id']."').val('채점강사');</script>";
 
@@ -164,7 +178,7 @@ while($res = mysqli_fetch_array($result)) {
     if($res['grade_card']) echo "<script>$('#grade_card_".$res['t_id']."').prop('checked', true);</script>";
     if($res['notice']) echo "<script>$('#notice_".$res['t_id']."').prop('checked', true);</script>";
     if($res['admin_menu']) echo "<script>$('#admin_menu_".$res['t_id']."').prop('checked', true);</script>";
-}
+}*/
 
 $sql = "select * from `app_setting`";
 $result = mysqli_query($connect_db, $sql);
