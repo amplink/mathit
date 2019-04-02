@@ -3,45 +3,38 @@ include_once ('_common.php');
 ?>
 <?php
 $class_name = $_GET['class_name'];
-
 $sql = "select * from `homework` where `class_name`='$class_name';";
 $result = sql_query($sql);
 $i=0;
-
 while($res = mysqli_fetch_array($result)) {
     $start_date = str_replace("/", "-", $res['_from']);
     $start_date = explode('-', $start_date);
     $today_to_start = $start_date[2].'-'.$start_date[0].'-'.$start_date[1];
-
     $end_date = str_replace("/", "-", $res['_to']);
     $end_date = explode('-', $end_date);
     $today_to_end = $end_date[2].'-'.$end_date[0].'-'.$end_date[1];
-
     $today = date("Y-m-d");
-
     $c_start = date_create($today_to_start);
     $c_today = date_create($today);
     $c_end = date_create($today_to_end);
-
     $start_diff = date_diff($c_today, $c_start);
     $end_diff = date_diff($c_today, $c_end);
-
     $sd = $start_diff->format("%R%a");
     $ed = $end_diff->format("%R%a");
     ?>
-    <tr>
+    <div>
         <form action="homework_resend.php?seq=<?=$res['seq']?>" method="POST" id="resend_form<?=$i?>" enctype="multipart/form-data">
-            <td>
+            <span>
                 <div class="x_btn"><img src="img/close.png" alt="delete_icon" onclick="del_homework('<?=$res['name']?>')"></div>
-            </td>
-            <td>
+            </span>
+            <span>
                 <?php
                 if($sd > 0 && $ed > 0) echo "<span><input type='text' name='title' value='".$res['name']."'></span>";
                 else echo "<span>".$res['name']."</span>"
                 ?>
-            </td>
+            </span>
 
-            <td><select name="textbook" id="textbook">
+            <span><select name="textbook" id="textbook">
                     <?php
                     if($res['textbook']=="알파") {
                         ?>
@@ -55,8 +48,8 @@ while($res = mysqli_fetch_array($result)) {
                         <?php
                     }
                     ?>
-                </select></td>
-            <td><select name="grade" id="grade<?=$i?>" onchange="book_info1(<?=$i?>)">
+                </select></span>
+            <span><select name="grade" id="grade<?=$i?>" onchange="book_info1(<?=$i?>)">
                     <option value="초3">초3</option>
                     <option value="초4">초4</option>
                     <option value="초5">초5</option>
@@ -67,8 +60,8 @@ while($res = mysqli_fetch_array($result)) {
                     <?php
                     echo "<script>$('#grade$i').val('".$res['grade']."');</script>";
                     ?>
-                </select></td>
-            <td><select name="semester" id="semester<?=$i?>" onchange="book_info1(<?=$i?>)">
+                </select></span>
+            <span><select name="semester" id="semester<?=$i?>" onchange="book_info1(<?=$i?>)">
                     <?php
                     if($res['semester']=="1학기") {
                         ?>
@@ -82,21 +75,21 @@ while($res = mysqli_fetch_array($result)) {
                         <?php
                     }
                     ?>
-                </select></td>
-            <td><select name="level" id="level<?=$i?>">
+                </select></span>
+            <span><select name="level" id="level<?=$i?>">
                     <option value="루트">루트</option>
                     <option value="파이">파이</option>
                     <option value="시그마">시그마</option>
                     <?php
                     echo "<script>$('#level$i').val('".$res['level']."');</script>";
                     ?>
-                </select></td>
-            <td>
+                </select></span>
+            <span>
                 <select name="unit" id="unit<?=$i?>">
                     <option value="<?=$res['unit']?>"><?=$res['unit']?></option>
                 </select>
-            </td>
-            <td>
+            </span>
+            <span>
                 <select name="corner1" id="corner1<?=$i?>">
                     <option value="개념마스터">개념마스터</option>
                     <option value="개념확인">개념확인</option>
@@ -109,9 +102,9 @@ while($res = mysqli_fetch_array($result)) {
                     echo "<script>$('#corner1$i').val('".$res['corner1']."');</script>";
                     ?>
                 </select>
-            </td>
+            </span>
 
-            <td>
+            <span>
                 <select name="Q_number1[]" id="Q_number1" class="custumdropdown" custumdrop="question" multiple="multiple">
                     <?php
                     $q_1 = explode(",", $res['Q_number1']);
@@ -125,8 +118,8 @@ while($res = mysqli_fetch_array($result)) {
                     }
                     ?>
                 </select>
-            </td>
-            <td>
+            </span>
+            <span>
                 <select name="corner2" id="corner2<?=$i?>">
                     <option value="개념마스터">개념마스터</option>
                     <option value="개념확인">개념확인</option>
@@ -139,8 +132,8 @@ while($res = mysqli_fetch_array($result)) {
                     echo "<script>$('#corner2$i').val('".$res['corner2']."');</script>";
                     ?>
                 </select>
-            </td>
-            <td>
+            </span>
+            <span>
                 <select name="Q_number2[]" id="Q_number2" class="custumdropdown" custumdrop="question" multiple="multiple">
                     <?php
                     $q_2 = explode(",", $res['Q_number2']);
@@ -154,9 +147,9 @@ while($res = mysqli_fetch_array($result)) {
                     }
                     ?>
                 </select>
-            </td>
+            </span>
 
-            <td>
+            <span>
                 <select name="corner3" id="corner3<?=$i?>">
                     <option value="개념마스터">개념마스터</option>
                     <option value="개념확인">개념확인</option>
@@ -169,8 +162,8 @@ while($res = mysqli_fetch_array($result)) {
                     echo "<script>$('#corner3$i').val('".$res['corner3']."');</script>";
                     ?>
                 </select>
-            </td>
-            <td>
+            </span>
+            <span>
                 <select name="Q_number3[]" id="Q_number3" class="custumdropdown" custumdrop="question" multiple="multiple">
                     <?php
                     $q_3 = explode(",", $res['Q_number3']);
@@ -184,9 +177,9 @@ while($res = mysqli_fetch_array($result)) {
                     }
                     ?>
                 </select>
-            </td>
+            </span>
 
-            <td>
+            <span>
                 <select name="corner4" id="corner4<?=$i?>">
                     <option value="개념마스터">개념마스터</option>
                     <option value="개념확인">개념확인</option>
@@ -199,8 +192,8 @@ while($res = mysqli_fetch_array($result)) {
                     echo "<script>$('#corner4$i').val('".$res['corner4']."');</script>";
                     ?>
                 </select>
-            </td>
-            <td>
+            </span>
+            <span>
                 <select name="Q_number4[]" id="Q_number4" class="custumdropdown" custumdrop="question" multiple="multiple">
                     <?php
                     $q_4 = explode(",", $res['Q_number4']);
@@ -214,8 +207,8 @@ while($res = mysqli_fetch_array($result)) {
                     }
                     ?>
                 </select>
-            </td>
-            <td>
+            </span>
+            <span>
                 <span>
                     <?php
                     $_from = $res['_from'];
@@ -224,16 +217,16 @@ while($res = mysqli_fetch_array($result)) {
                     else echo $res['_from'];
                     ?>
                 </span>
-            </td>
-            <td>
+            </span>
+            <span>
                 <span>
                     <?php
                     if($sd > 0 && $ed > 0) echo '<input type="text" name="to" id="to" value="'.$_to.'" required>';
                     else echo $res['_to'];
                     ?>
                 </span>
-            </td>
-            <td>
+            </span>
+            <span>
                 <?php
                 if($sd < 0 && $ed > 0) {
                     echo '<p class="ing_text" style=" color: blue;">진행중</p>';
@@ -242,7 +235,6 @@ while($res = mysqli_fetch_array($result)) {
                 }else if($sd < 0 && $ed < 0) {
                     echo '<p class="complete_text">완료</p>';
                 }
-
     //            if($sd < 0) {
     //                if($res['checked']==0) {
     //                    echo '<p class="ing_text" style=" color: blue;">진행중</p>';
@@ -251,16 +243,17 @@ while($res = mysqli_fetch_array($result)) {
     //                echo '<div class="resend_btn"><a>재전송</a></div>';
     //            }
                 ?>
-            </td>
+            </span>
         </form>
-    </tr>
+    </div>
     <?php
     $i++;
 }
 ?>
 <script>
     function resend(e) {
-        $('#resend_form'+e).submit();
+
+      $('#resend_form'+e).submit();
     }
 </script>
 <script>
@@ -301,7 +294,6 @@ while($res = mysqli_fetch_array($result)) {
                 .on( "change", function() {
                     from.datepicker( "option", "maxDate", getDate( this ) );
                 });
-
         function getDate( element ) {
             var date;
             try {
@@ -309,7 +301,6 @@ while($res = mysqli_fetch_array($result)) {
             } catch( error ) {
                 date = null;
             }
-
             return date;
         }
     } );
