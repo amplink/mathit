@@ -210,7 +210,7 @@
     <div class="home_btn"><a href="home.php"><img src="img/home.png" alt="home_icon"></a></div>
     <div class="logo_section">
         <div class="logo"><a href="home.php"><img src="img/logo_white.png" alt="header_logo"></a></div>
-        <p class="navigation_text"><?php echo $nav_text;?></p>
+<!--        <p class="navigation_text">--><?php //echo $nav_text;?><!--</p>-->
     </div>
     <div class="member_info_wrap">
         <div class="member_img"><a href="setting_individual.php"><img src="img/user.png" alt="member_img"></a></div>
@@ -241,7 +241,7 @@
     </div>
 
     <div class="hamnav_menu_wrap">
-        <div class="hamnav_menu"><a href="#none"><span>학급목록</span></a>
+        <div class="hamnav_menu" onclick="class_show()"><a href="#"><span>학급목록</span></a>
             <div class="hamnav_class_list">
                 <!--                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">루트</span><span-->
                 <!--                            class="class_grade_">초6</span></a></div>-->
@@ -264,9 +264,10 @@
             </div>
         </div>
 
-        <div class="hamnav_menu <?php if(!$res['hm_create']) echo "dis";?>"><a href="homework_management_add.php"><span>숙제생성</span></a></div>
-        <div class="hamnav_menu"><a href="student_management_score_all.php"><span>채점바로가기</span></a></div>
-        <div class="hamnav_menu"><a href="class_schedule_list.php"><span>수업계획표/일지</span></a></div>
+        <div class="hamnav_menu <?php if(!$res['hm_create']) echo "dis";?>"><a href="homework_management_add.php"><span>숙제관리</span></a></div>
+        <div class="hamnav_menu"><a href="record_management_add.php"><span>성적관리</span></a></div>
+        <div class="hamnav_menu"><a href="student_management_score_all.php"><span>채점관리</span></a></div>
+        <div class="hamnav_menu"><a href="class_schedule_write.php"><span>수업관리</span></a></div>
         <div class="hamnav_menu"><a href="notice_list.php"><span>공지사항</span></a></div>
     </div>
 
@@ -311,4 +312,15 @@
 </div>
 <script>
     $('.dis a').prop('href','#');
+    $('.hamnav_class_list').hide();
+    var chk_class = 0;
+    function class_show() {
+        if(chk_class == 0) {
+            $('.hamnav_class_list').show();
+            chk_class = 1;
+        }else {
+            $('.hamnav_class_list').hide()
+            chk_class = 0;
+        }
+    }
 </script>

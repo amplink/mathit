@@ -70,8 +70,9 @@
 
 .option_contnets {
     display: inline-block;
-    width: calc(100% - 128px);
+    /*width: calc(100% - 128px);*/
     vertical-align: top;
+    float: right;
 }
 
 .option_contnets>input {

@@ -58,6 +58,19 @@ $res = mysqli_fetch_array($result);
                         </div>
                     </div>
                 </div>
+                <div class="division col2">
+                    <p class="l_div_title">전체평균</p>
+                    <div class="score_average">
+                        <div class="up_average">
+                            <p class="lt">100점 만점</p>
+                            <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", $a_tot/$a_cnt/2)?></span><span>점</span></p>
+                        </div>
+                        <div class="down_average">
+                            <p class="lt">최고 점수</p>
+                            <p class="rt"><span style="color: red;"><?=sprintf("%.1f", $a_tot/$a_cnt/2)?></span><span>점</span></p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="r_right_box">
                 <div class="division">
@@ -72,20 +85,6 @@ $res = mysqli_fetch_array($result);
                     <p class="l_div_title">응시인원</p>
                     <p class="r_div_content"><span><?=$a_cnt?></span></p>
                 </div>
-                <div class="division col2">
-                    <p class="l_div_title">전체평균</p>
-                    <div class="score_average">
-                        <div class="up_average">
-                            <p class="lt">100점 만점</p>
-                            <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", $a_tot/$a_cnt/2)?></span><span>점</span></p>
-                        </div>
-                        <div class="down_average">
-                            <p class="lt">최고 점수</p>
-                            <p class="rt"><span style="color: red;"><?=sprintf("%.1f", $a_tot/$a_cnt/2)?></span><span>점</span></p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
         <div class="right_box_2">
@@ -124,7 +123,7 @@ $res = mysqli_fetch_array($result);
     <div class="add_btn_wrap">
         <div class="l_btn_wrap">
             <div class="score_delete_btn w_b" onclick="all_del_score()"><a>전체삭제</a></div>
-            <div class="student_delete_btn w_b" onclick="del_score()"><a>선택학생 삭제</a></div>
+            <div class="student_delete_btn w_b" onclick="del_score()"><a>선택삭제</a></div>
         </div>
         <div class="r_btn_wrap">
             <div class="excel_btn f_b"><a href="#none">EXCEL</a></div>

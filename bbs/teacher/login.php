@@ -12,6 +12,8 @@
 		location_href("./home.php");
 		exit;
 	}
+
+	$re = $_GET['re'];
 ?>
 
 
@@ -119,12 +121,12 @@
 	</script>
 </head>
 
-<body>
+<body style="background-image: url('./img/login_back.png'); background-repeat: no-repeat; background-position: center; -webkit-background-size: cover; background-size: cover;">
 <div class="login_box">
     <div class="logo_line">
-        <div class="login_logo"><img src="img/logo.png" alt="login_logo"></div>
+        <div class="login_logo"><img src="img/login_logo.png" alt="login_logo"></div>
     </div>
-    <p class="login_info">아이디와 비밀번호를 입력해주세요</p>
+<!--    <p class="login_info">아이디와 비밀번호를 입력해주세요</p>-->
     <div class="login_input_section">
 
         <form id="login_form">
@@ -135,7 +137,7 @@
 
             <select name="academy_select" id="academy_select" required>
 
-                <option value="">캠퍼스선택</option>
+                <option value="">캠퍼스 선택</option>
                 <?php
 					while( $res = sql_fetch_array($result) ) {
 					    echo "<option value='".$res['client_id']."'>".$res['client_name']."</option>";
@@ -146,14 +148,20 @@
 
             <div class="id_save">
 				<input type="checkbox" name="auto_login" value="1" id="auto_login">
-                <p>자동로그인</p>
+                <p>자동 로그인</p>
             </div>
 
         </form>
     </div>
-    <div class="login_error_section" id="error_div">
-<!--        <p style="color: red;">아이디 또는 비밀번호가 틀렸습니다.</p>-->
-    </div>
+    <?php
+    if($re) {
+        ?>
+        <div class="login_error_section" id="error_div" style="margin-top: 20px;">
+            <p style="color: red;">아이디 또는 비밀번호가 틀렸습니다.</p>
+        </div>
+        <?php
+    }
+    ?>
 
     <div class="login_btn_section" id="login_btn_section">
         <a onclick="">로그인</a>

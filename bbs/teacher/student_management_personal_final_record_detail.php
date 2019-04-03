@@ -95,7 +95,7 @@ $today_date = date("Y-m-d");
                 </div>
             </div>
             <div class="record_detail_table_section">
-                <p class="l_div_text">중간평가</p><span>평균 - 80점</span>
+                <p class="l_div_text">기말평가</p><span>평균 - 80점</span>
                 <div class="record_detail_table">
                     <table>
                         <thead>

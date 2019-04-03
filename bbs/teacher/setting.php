@@ -51,7 +51,7 @@ include_once ('head.php');
             <thead>
             <tr>
                 <th>이름</th>
-                <th>회원유형</th>
+                <th>회원 구분</th>
                 <th>숙제생성</th>
                 <th>숙제관리</th>
                 <th>성적관리</th>

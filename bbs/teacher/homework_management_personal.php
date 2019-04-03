@@ -72,20 +72,17 @@ include_once ('head.php');
                 <th>시작일</th>
                 <th>숙제명</th>
                 <th>마감일</th>
-                <th>1차 정답률</th>
-                <th>2차 정답률</th>
+                <th>1차</th>
+                <th>2차</th>
                 <th colspan="2">제출 상태</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td><span>2018-09-20</span></td>
-                <td><span>주교제</span><span>p 10 ~ 11</span></td>
+                <td><span>주교재</span><span>p 10 ~ 11</span></td>
                 <td>
-                    <span>~ </span>
                     <span>2018-09-20</span><br>
-                    <span>24</span>
-                    <span>시 까지</span>
                 </td>
                 <td>
                     <span>16 / 20</span><br>
@@ -109,170 +106,13 @@ include_once ('head.php');
                     <div class="detail_show_disable_btn" style="display: none;"><a href="#none">상세보기</a></div>
                 </td>
             </tr>
-            <tr>
-                <td><span>2018-09-20</span></td>
-                <td><span>주교제</span><span>p 10 ~ 11</span></td>
-                <td>
-                    <span>~ </span>
-                    <span>2018-09-20</span><br>
-                    <span>24</span>
-                    <span>시 까지</span>
-                </td>
-                <td>
-                    <span>16 / 20</span><br>
-                    <span>80%</span>
-                </td>
-                <td>
-                    <span>16 / 20</span><br>
-                    <span>80%</span>
-                </td>
-                <td>
-                    <p class="first_submitted hide green">1차 제출</p>
-                    <p class="second_submitted show blue">2차 제출</p>
-                    <p class="first_scroing_done hide green">1차 채점 완료</p>
-                    <p class="final_scroing_done hide blue">숙제 완료</p>
-                    <p class="not_submit hide">미제출</p>
-                    <p class="excess_date hide red">기한초과제출</p>
-                </td>
-                <td>
-                    <div class="td_blank"></div>
-                    <div class="detail_show_btn" style="display: none;"><a href="#none">상세보기</a></div>
-                    <div class="detail_show_disable_btn"><a href="#none">상세보기</a></div>
-                </td>
-            </tr>
-            <tr>
-                <td><span>2018-09-20</span></td>
-                <td><span>주교제</span><span>p 10 ~ 11</span></td>
-                <td>
-                    <span>~ </span>
-                    <span>2018-09-20</span><br>
-                    <span>24</span>
-                    <span>시 까지</span>
-                </td>
-                <td>
-                    <span>16 / 20</span><br>
-                    <span>80%</span>
-                </td>
-                <td>
-                    <span>16 / 20</span><br>
-                    <span>80%</span>
-                </td>
-                <td>
-                    <p class="first_submitted hide green">1차 제출</p>
-                    <p class="second_submitted hide blue">2차 제출</p>
-                    <p class="first_scroing_done show green">1차 채점 완료</p>
-                    <p class="final_scroing_done hide blue">숙제 완료</p>
-                    <p class="not_submit hide">미제출</p>
-                    <p class="excess_date hide red">기한초과제출</p>
-                </td>
-                <td>
-                    <div class="td_blank"></div>
-                    <div class="detail_show_btn" style="display: none;"><a href="#none">상세보기</a></div>
-                    <div class="detail_show_disable_btn"><a href="#none">상세보기</a></div>
-                </td>
-            </tr>
-            <tr>
-                <td><span>2018-09-20</span></td>
-                <td><span>주교제</span><span>p 10 ~ 11</span></td>
-                <td>
-                    <span>~ </span>
-                    <span>2018-09-20</span><br>
-                    <span>24</span>
-                    <span>시 까지</span>
-                </td>
-                <td>
-                    <span>16 / 20</span><br>
-                    <span>80%</span>
-                </td>
-                <td>
-                    <span>16 / 20</span><br>
-                    <span>80%</span>
-                </td>
-                <td>
-                    <p class="first_submitted hide green">1차 제출</p>
-                    <p class="second_submitted hide blue">2차 제출</p>
-                    <p class="first_scroing_done hide green">1차 채점 완료</p>
-                    <p class="final_scroing_done show blue">숙제 완료</p>
-                    <p class="not_submit hide">미제출</p>
-                    <p class="excess_date hide red">기한초과제출</p>
-                </td>
-                <td>
-                    <div class="td_blank"></div>
-                    <div class="detail_show_btn"><a href="#none">상세보기</a></div>
-                    <div class="detail_show_disable_btn" style="display: none;"><a href="#none">상세보기</a></div>
-                </td>
-            </tr>
-            <tr>
-                <td><span>2018-09-20</span></td>
-                <td><span>주교제</span><span>p 10 ~ 11</span></td>
-                <td>
-                    <span>~ </span>
-                    <span>2018-09-20</span><br>
-                    <span>24</span>
-                    <span>시 까지</span>
-                </td>
-                <td>
-                    <span>16 / 20</span><br>
-                    <span>80%</span>
-                </td>
-                <td>
-                    <span>16 / 20</span><br>
-                    <span>80%</span>
-                </td>
-                <td>
-                    <p class="first_submitted hide green">1차 제출</p>
-                    <p class="second_submitted hide blue">2차 제출</p>
-                    <p class="first_scroing_done hide green">1차 채점 완료</p>
-                    <p class="final_scroing_done hide blue">숙제 완료</p>
-                    <p class="not_submit show">미제출</p>
-                    <p class="excess_date hide red">기한초과제출</p>
-                </td>
-                <td>
-                    <div class="td_blank"></div>
-                    <div class="detail_show_btn" style="display: none;"><a href="#none">상세보기</a></div>
-                    <div class="detail_show_disable_btn"><a href="#none">상세보기</a></div>
-                </td>
-            </tr>
-            <tr>
-                <td><span>2018-09-20</span></td>
-                <td><span>주교제</span><span>p 10 ~ 11</span></td>
-                <td>
-                    <span>~ </span>
-                    <span>2018-09-20</span><br>
-                    <span>24</span>
-                    <span>시 까지</span>
-                </td>
-                <td>
-                    <span>16 / 20</span><br>
-                    <span>80%</span>
-                </td>
-                <td>
-                    <span>16 / 20</span><br>
-                    <span>80%</span>
-                </td>
-                <td>
-                    <p class="first_submitted hide green">1차 제출</p>
-                    <p class="second_submitted hide blue">2차 제출</p>
-                    <p class="first_scroing_done hide green">1차 채점 완료</p>
-                    <p class="final_scroing_done hide blue">숙제 완료</p>
-                    <p class="not_submit hide">미제출</p>
-                    <p class="excess_date show red">기한초과제출</p>
-                </td>
-                <td>
-                    <div class="td_blank"></div>
-                    <div class="detail_show_btn" style="display: none;"><a href="#none">상세보기</a></div>
-                    <div class="detail_show_disable_btn"><a href="#none">상세보기</a></div>
-                </td>
-            </tr>
             </tbody>
         </table>
     </div>
 </section>
 
 <!--modal-->
-
 <div class="modal_wrap">
-    <div class="black_back"></div>
     <div class="modal_box">
         <div class="modal_head">
             <p>
@@ -304,7 +144,7 @@ include_once ('head.php');
                     <p class="year_date">2018-09-20</p>
                     <span> / </span>
                     <p class="time">
-                        <span>pm</span>
+                        <span>PM</span>
                         <span>17:05</span>
                     </p>
                 </div>
@@ -318,14 +158,14 @@ include_once ('head.php');
                     <p class="year_date">2018-09-20</p>
                     <span> / </span>
                     <p class="time">
-                        <span>pm</span>
+                        <span>PM</span>
                         <span>17:05</span>
                     </p>
                 </div>
             </div>
         </div>
         <div class="modal_div">
-            <p class="modal_subtitle">오답문항 상세보기</p>
+            <p class="modal_subtitle">오답 문항 상세보기</p>
             <div class="modal_content">
                 <div class="first">
                     <p>1차 :</p>
@@ -352,3 +192,8 @@ include_once ('head.php');
 </body>
 
 </html>
+<script>
+    $('.modal_wrap').draggable({
+        handle: '.modal_head'
+    })
+</script>

@@ -52,12 +52,22 @@ $res = mysqli_fetch_array($result);
             </div>
             <div class="table_option_line">
                 <p class="option_title">공지 목록</p>
-                <div class="option_contnets">
-<!--                    <p>-->
-<!--                        <span>새공지</span>-->
-<!--                        <span>9</span>-->
-<!--                        <span>개</span>-->
-<!--                    </p>-->
+                <div class="option_contnets" style="float: right;">
+                    <p>
+                        <?php
+                        $sql = "select * from `teacher_notice`;";
+                        $result = sql_query($sql);
+                        $cnt = 0;
+                        while($res = mysqli_fetch_array($result)) $cnt++;
+
+                        $sql = "select * from `notify`;";
+                        $result = sql_query($sql);
+                        while($res = mysqli_fetch_array($result)) $cnt++;
+                        ?>
+                        <span>새공지</span>
+                        <span><?=$cnt?></span>
+                        <span>개</span>
+                    </p>
                 </div>
             </div>
             <div class="class_schedule_table">

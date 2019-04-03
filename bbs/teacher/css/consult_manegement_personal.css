@@ -149,13 +149,16 @@
 }
 
 .consult_table table thead tr th {
-    width: 20%;
+    width: 14%;
     font-size: 14px;
     font-weight: 400;
     background-color: rgb(41, 124, 62);
     color: rgb(255, 255, 255);
     border-bottom: solid 1px rgb(220, 220, 220);
     padding: 5px;
+}
+.consult_table table thead tr th:nth-child(1) {
+    width: 5%;
 }
 
 .consult_table table tbody tr td {

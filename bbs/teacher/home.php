@@ -89,8 +89,8 @@ include_once ('head.php');
                 </div>
             </div>
             <div class="head_right">
-                <div class="hw_make_btn <?php if(!$res['hm_create']) echo "dis";?>"><a href="homework_management_add.php">숙제생성</a></div>
-                <div class="scoring_shortcut_btn"><a href="student_management_score_all.php">채점바로가기</a></div>
+                <div class="hw_make_btn <?php if(!$res['hm_create']) echo "dis";?>"><a href="homework_management_add.php">숙제관리</a></div>
+                <div class="scoring_shortcut_btn"><a href="student_management_score_all.php">채점관리</a></div>
             </div>
         </div>
     </div>
@@ -124,7 +124,7 @@ include_once ('head.php');
 
                    <? if($day[0][$i]) : ?>
 
-                        <td>
+                        <td style="<? if(($i+1)==date(w)) echo 'background: rgba(0, 0, 0, 0.05);';?>">
                             <div class="class_info">
                                 <?php
                                 for($j=0; $j<count($time); $j++) {
@@ -197,10 +197,13 @@ include_once ('head.php');
 			</tbody>
         </table>
     </div>
+    <div class="notice_title">
+        <p>공지사항</p>
+    </div>
     <div class="notice_list_wrap">
-        <div class="notice_title">
-            <p>공지사항</p>
-        </div>
+<!--        <div class="notice_title">-->
+<!--            <p>공지사항</p>-->
+<!--        </div>-->
         <div class="notice_contents_wrap">
 
             <?php

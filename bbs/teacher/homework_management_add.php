@@ -118,7 +118,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 <table>
                     <thead>
                     <tr>
-                        <th>수업목록</th>
+                        <th>수업 목록</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -138,7 +138,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 <table>
                     <thead>
                     <tr>
-                        <th>학생목록</th>
+                        <th>학생 목록</th>
                     </tr>
                     </thead>
                     <tbody id="students">
@@ -159,7 +159,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                             <div class="date_range">
                                 <p class="l_text">시작일</p><input type="text" name="from" id="from" required>
                             </div>
-                            <span>~</span>
+                            <span style="margin-right: 20px;">~</span>
                             <div class="date_range">
                                 <p class="l_text">종료일</p><input type="text" name="to" id="to" required>
                             </div>
@@ -343,6 +343,8 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         $('.custumdropdown input[type=checkbox]').prop("checked", "true");
         select_year();
         book_info();
+        $('.allChk').click();
+        $('.allChk').prop('checked', true);
     })
     function submit() {
         if($("input[name=student_list\\[\\]]").val()) {

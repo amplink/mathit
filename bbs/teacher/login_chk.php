@@ -113,7 +113,7 @@
 		else :
 
 			alert_msg("캠퍼스 또는 아이디 와 비밀번호를 확인해주세요.");
-			location_href("./login.php");
+			location_href("./login.php?re=1");
 			exit;
 
 		endif;
@@ -125,7 +125,7 @@
 	else :
 //
 		alert_msg("캠퍼스 또는 아이디 와 비밀번호를 확인해주세요.");
-		location_href("./login.php");
+		location_href("./login.php?re=1");
 		exit;
 
 	endif;

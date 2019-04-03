@@ -49,17 +49,16 @@ for($i=0; $i<count($d_name); $i++) {
     <div class="consult_board_box">
         <div class="head_line">
             <div class="writer">
-                <p>상담자</p>
-                <p><span><?=$_SESSION['t_name']?></span></p>
+                <p><span>상담자</span></p>
+                <p><?=$_SESSION['t_name']?></p>
             </div>
             <div class="write_date">
-                <p>상담일자</p>
                 <input type="text" id="datepicker" name="date">
             </div>
         </div>
         <div class="head_line">
             <div class="consult_detail">
-                <p>상담세부설정</p>
+                <p>상담 세부설정</p>
             </div>
             <select name="consult_genre" id="consult_genre">
                 <option value="">상담유형</option>

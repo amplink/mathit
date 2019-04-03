@@ -97,20 +97,20 @@ if($result) {
         <div class="write_board_section">
             <div class="board_option_line">
                 <div class="option_title">
-                    <p>공지유형</p>
+                    <p>공지 유형</p>
                 </div>
                 <div class="option_content">
                     <div class="type_radio"><input type="radio" name="notice_type" value="중요공지" <?php if($res['type'] == "중요공지") echo "checked";?>>
-                        <p>중요공지</p>
+                        <p>중요 공지</p>
                     </div>
                     <div class="type_radio"><input type="radio" name="notice_type" value="일반공지" <?php if($res['type'] == "일반공지") echo "checked";?>>
-                        <p>일반공지</p>
+                        <p>일반 공지</p>
                     </div>
                 </div>
             </div>
             <div class="board_option_line">
                 <div class="option_title">
-                    <p>공지범위</p>
+                    <p>공지 범위</p>
                 </div>
                 <div class="option_content">
                     <div class="range_radio"><input type="checkbox" class="check_all">
@@ -130,7 +130,7 @@ if($result) {
             <input type="hidden" name="wr_name" value="<?=$_SESSION['t_name']?>">
             <div class="board_option_line">
                 <div class="option_title">
-                    <p>공지대상</p>
+                    <p>공지 대상</p>
                 </div>
                 <div class="option_content">
                     <select name="target[]" id="class_select" style="margin-top: 5px;" multiple="multiple" required>

@@ -123,12 +123,13 @@ if($_GET['month'] == 'all'){
             <table>
                 <thead>
                 <tr>
-                    <th style="width: 10%;">선택</th>
-                    <th style="width: 18%;">상담일</th>
-                    <th style="width: 18%;">학생명</th>
-                    <th style="width: 18%;">상담자</th>
-                    <th style="width: 18%;">대상</th>
-                    <th style="width: 18%;">유형</th>
+                    <th>선택</th>
+                    <th>학생명</th>
+                    <th>상담일</th>
+                    <th>상담자</th>
+                    <th>대상</th>
+                    <th>상담유형</th>
+                    <th>상담주제</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -148,11 +149,12 @@ if($_GET['month'] == 'all'){
                     ?>
                     <tr onclick="call_consult(<?=$res['seq']?>);">
                         <td><span><input type="radio" name="t" id="<?=$res['seq']?>"></span></td>
-                        <td><span><?=$res['date']?></span></td>
                         <td><span><?=$res['s_name']?></span></td>
+                        <td><span><?=$res['date']?></span></td>
                         <td><span><?=$res['t_name']?></span></td>
                         <td><span><?=$res['object']?></span></td>
                         <td><span><?=$res['consult_genre']?></span></td>
+                        <td><span><?=$res['consult_topic']?></span></td>
                     </tr>
                     <?
                 }

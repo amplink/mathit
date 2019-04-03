@@ -57,13 +57,13 @@
 
 .left_box {
     display: inline-block;
-    width: 360px;
+    width: 200px;
     height: 100%;
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
     vertical-align: top;
     padding: 0 20px;
-    padding-bottom: 20px;
+    padding-bottom: 2px;
     margin-right: 10px;
 }
 
@@ -88,7 +88,7 @@
 
 .box_menu_wrap select {
     display: inline-block;
-    width: 100px;
+    width: 70px;
     height: 30px;
     padding: 5px;
 }
@@ -176,7 +176,7 @@ table tbody tr:nth-child(2n) {
 
 .right_wrap {
     display: inline-block;
-    width: calc(100% - 458px);
+    width: calc(100% - 300px);
 }
 
 .right_box {
@@ -270,7 +270,7 @@ table tbody tr:nth-child(2n) {
 }
 
 .resend_btn {
-    width: 60px;
+    /*width: 60px;*/
     height: 20px;
     line-height: 20px;
     border-radius: 15px;

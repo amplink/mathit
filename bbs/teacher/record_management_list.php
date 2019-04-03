@@ -31,7 +31,7 @@ include_once ('head.php');
     </div>
     <div class="wrapper">
         <div class="left_box">
-            <p class="box_title">출제대상 선택</p>
+            <p class="box_title">출제 대상 선택</p>
             <div class="box_menu_wrap">
                 <p>학기</p>
                 <select name="year_select" id="year_select" onchange="move_page()">
@@ -52,7 +52,7 @@ include_once ('head.php');
                 <table>
                     <thead>
                     <tr>
-                        <th>수업목록</th>
+                        <th>수업 목록</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -127,7 +127,7 @@ include_once ('head.php');
                 <table>
                     <thead>
                         <tr>
-                            <th>시험목록</th>
+                            <th>시험 목록</th>
                         </tr>
                     </thead>
                     <tbody id="test_list">

@@ -1,5 +1,61 @@
 <?php
 include_once ('_common.php');
-var_dump($_POST);
-var_dump($_GET);
+$seq = $_GET['seq'];
+
+$name = $_POST['title'];
+$from = $_POST['from'];
+$to = $_POST['to'];
+$textbook = $_POST['textbook'];
+$grade = $_POST['grade'];
+$semester = $_POST['semester'];
+$level = $_POST['level'];
+$unit = $_POST['unit'];
+$corner1 = $_POST['corner1'];
+$Q_number1 = $_POST['Q_number1'];
+$corner2 = $_POST['corner2'];
+$Q_number2 = $_POST['Q_number2'];
+$corner3 = $_POST['corner3'];
+$Q_number3 = $_POST['Q_number3'];
+$corner4 = $_POST['corner4'];
+$Q_number4 = $_POST['Q_number4'];
+
+for($i=0; $i<count($Q_number1); $i++) {
+    if($i==count($Q_number1)-1) $q_number1 .= $Q_number1[$i];
+    else $q_number1 .= $Q_number1[$i].",";
+}
+for($i=0; $i<count($Q_number2); $i++) {
+    if($i==count($Q_number2)-1) $q_number2 .= $Q_number2[$i];
+    else $q_number2 .= $Q_number2[$i].",";
+}
+for($i=0; $i<count($Q_number3); $i++) {
+    if($i==count($Q_number3)-1) $q_number3 .= $Q_number3[$i];
+    else $q_number3 .= $Q_number3[$i].",";
+}
+for($i=0; $i<count($Q_number4); $i++) {
+    if($i==count($Q_number4)-1) $q_number4 .= $Q_number4[$i];
+    else $q_number4 .= $Q_number4[$i].",";
+}
+
+$sql = "update `homework` set 
+                         `name`='$name',
+                         `_from`='$from',
+                         `_to`='$to',
+                         `textbook`='$textbook',
+                         `grade`='$grade',
+                         `semester`='$semester',
+                         `level`='$level',
+                         `unit`='$unit',
+                         `corner1`='$corner1',
+                         `Q_number1`='$q_number1',
+                         `corner2`='$corner2',
+                         `Q_number2`='$q_number2',
+                         `corner3`='$corner3',
+                         `Q_number3`='$q_number3',
+                         `corner4`='$corner4',
+                         `Q_number4`='$q_number4',
+                         `checked` = '0' where `seq`='$seq';";
+
+sql_query($sql);
+alert_msg("수정되었습니다.");
+location_href("./homework_management_list.php");
 ?>

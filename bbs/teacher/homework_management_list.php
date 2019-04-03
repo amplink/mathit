@@ -133,7 +133,7 @@ include_once ('head.php');
                     <table>
                         <thead>
                         <tr>
-                            <th>수업목록</th>
+                            <th>수업 목록</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -153,7 +153,7 @@ include_once ('head.php');
                     <table>
                         <thead>
                         <tr>
-                            <th>학생목록</th>
+                            <th>학생 목록</th>
                         </tr>
                         </thead>
                         <tbody id="students">
@@ -163,11 +163,11 @@ include_once ('head.php');
             </div>
         <div class="right_wrap">
             <div class="right_box">
-                <p class="box_title">숙제목록</p>
+                <p class="box_title">숙제 목록</p>
                 <div class="table_option_wrap">
                     <div class="table_option">
                         <input type="checkbox" id="clear" onchange="clear_btn()">
-                        <p>완료한 숙제 목록에서 제외</p>
+                        <p>완료한 숙제 제외</p>
                     </div>
                 </div>
                 <div class="homework_list_table">

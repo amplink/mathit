@@ -34,7 +34,7 @@ include_once ('head.php');
     </div>
     <div class="wrapper">
         <div class="left_box">
-            <p class="box_title">출제대상 선택</p>
+            <p class="box_title">출제 대상 선택</p>
             <div class="box_menu_wrap">
                 <p>학기</p>
                 <select name="year_select" id="year_select" onchange="move_page()">
@@ -55,7 +55,7 @@ include_once ('head.php');
                 <table>
                     <thead>
                     <tr>
-                        <th>수업목록</th>
+                        <th>수업 목록</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -141,14 +141,9 @@ include_once ('head.php');
                             <input type="text" name="date" id="datepicker">
                         </div>
                         <div class="division">
-                            <p class="l_div_title">기준만점</p>
-                            <input type="text" placeholder="기준점수" name="standard_score" value="100" id="standard_score">
+                            <p class="l_div_title">기준 만점</p>
+                            <input type="text" placeholder="기준점수" name="standard_score" value="100" id="standard_score" style="width: 100px;">
                             <span> 점</span>
-                        </div>
-                        <div class="division">
-                            <p class="l_div_title">영역별 점수</p>
-                            <div class="score_input"><input type="text" placeholder="점수" name="sub_score1" value="100" id="sub_score1"><span> 점</span></div>
-                            <div class="score_input"><input type="text" placeholder="점수" name="sub_score2" value="100" id="sub_score2"><span> 점</span></div>
                         </div>
                     </div>
                     <div class="r_right_box">
@@ -157,6 +152,11 @@ include_once ('head.php');
                         </div>
                         <div class="division">
                             <p class="l_div_title">시험명</p><input type="text" placeholder="시험명을 입력해주세요" name="title" id="title">
+                        </div>
+                        <div class="division">
+                            <p class="l_div_title">영역별 점수</p>
+                            <div class="score_input"><input type="text" placeholder="점수" name="sub_score1" value="100" id="sub_score1"><span> 점</span></div>
+                            <div class="score_input"><input type="text" placeholder="점수" name="sub_score2" value="100" id="sub_score2"><span> 점</span></div>
                         </div>
                     </div>
                 </div>

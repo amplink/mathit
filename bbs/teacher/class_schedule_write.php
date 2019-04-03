@@ -35,7 +35,7 @@ include_once ('head.php');
     <div class="write_board_section">
         <div class="board_option_line">
             <div class="option_title">
-                <p>제출유형</p>
+                <p>제출 유형</p>
             </div>
             <div class="option_content">
                 <div class="type_radio"><input type="radio" name="type" value="수업계획표" checked>
@@ -48,7 +48,7 @@ include_once ('head.php');
         </div>
         <div class="board_option_line">
             <div class="option_title">
-                <p>공개범위</p>
+                <p>공개 범위</p>
             </div>
             <div class="option_content">
                 <div class="range_radio"><input type="radio" name="read_range" value="전체" checked>

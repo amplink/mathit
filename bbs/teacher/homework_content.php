@@ -29,10 +29,7 @@ while($res = mysqli_fetch_array($result)) {
                     <div class="x_btn"><img src="img/close.png" alt="delete_icon" onclick="del_homework('<?=$res['name']?>')"></div>
                 </td>
                 <td>
-                    <?php
-                    if($sd > 0 && $ed > 0) echo "<input type='text' name='title' value='".$res['name']."'>";
-                    else echo $res['name'];
-                    ?>
+                    <input type='text' name='title' value='<?=$res['name']?>'>
                 </td>
 
                 <td><select name="textbook" id="textbook">
@@ -212,21 +209,57 @@ while($res = mysqli_fetch_array($result)) {
                     <?php
                     $_from = $res['_from'];
                     $_to = $res['_to'];
-                    if($sd > 0 && $ed > 0) echo '<input type="text" name="from" id="from" style="width: 70px;" value="'.$_from.'" required>';
-                    else echo $res['_from'];
+                    echo '<input type="text" name="from" id="from'.$i.'" style="width: 70px;" value="'.$_from.'" required>';
                     ?>
                 </td>
                 <td style="max-width: 200px; width: 200px;">
                     <?php
-                    if($sd > 0 && $ed > 0) echo '<input type="text" name="to" id="to" style="width: 70px;" value="'.$_to.'" required>';
-                    else echo $res['_to'];
+                    echo '<input type="text" name="to" id="to'.$i.'" style="width: 70px;" value="'.$_to.'" required>';
                     ?>
                 </td>
                 </td>
                 <td>
                     <?php
                     if($sd < 0 && $ed > 0) {
-                        echo '<p class="ing_text" style=" color: blue;">진행중</p>';
+                        ?>
+                        <p class="ing_text" id="status_complete<?=$i?>" style="color: blue;cursor: pointer;" onclick="show_box(<?=$i?>)">진행중</p>
+                        <div class="students_checks<?=$i?>" style="background:rgb(255, 228, 73);
+                                                                                position: absolute;
+                                                                                padding: 10px;width: 97px;right: 80px; visibility: hidden;">
+                            <div class="checks_names_wrap">
+                                <div style="float:right;cursor: pointer;" id="close_x_btn<?=$i?>" onclick="blind_box(<?=$i?>)"><b>X</b></div>
+                            </div>
+                            <?php
+                            $students = $res['student'];
+                            $students = explode(',', $students);
+                            for($k=0; $k<count($students); $k++) {
+                                ?>
+                                <div class="checks_names_wrap">
+                                    <div class="checks_names" style="float:left;display:block;"><?=$students[$k]?></div>
+                                    <div class="checks_names_values" ><span id="chkNameVal1" class="checkNames_span green_color_on">완료</span></div>
+                                </div>
+                                <?php
+                            }
+                            ?>
+<!--                            <div class="checks_names_wrap">-->
+<!--                                <div class="checks_names" style="float:left;display:block;">고이즈미</div>-->
+<!--                                <div class="checks_names_values" ><span id="chkNameVal1" class="checkNames_span green_color_on">완료</span></div>-->
+<!--                            </div>-->
+<!--                            <div class="checks_names_wrap">-->
+<!--                                <div class="checks_names" style="float:left;display:block;">킹목사</div>-->
+<!--                                <div class="checks_names_values" ><span id="chkNameVal2" class="checkNames_span orange_color_on">1차</span></div>-->
+<!--                            </div>-->
+<!--                            <div class="checks_names_wrap">-->
+<!--                                <div class="checks_names" style="float:left;display:block;">조지부시</div>-->
+<!--                                <div class="checks_names_values" ><span id="chkNameVal3" class="checkNames_span red_color_on">2차</span></div>-->
+<!--                            </div>-->
+<!--                            <div class="checks_names_wrap">-->
+<!--                                <div class="checks_names" style="float:left;display:block;">홍길동</div>-->
+<!--                                <div class="checks_names_values" ><span id="chkNameVal4" class="checkNames_span green_color_on">완료</span></div>-->
+<!--                            </div>-->
+                        </div>
+                    <?php
+
                     }else if($sd > 0 && $ed > 0) {
                         echo '<div class="resend_btn" onclick="resend('.$i.')"><a>재전송</a></div>';
                     }else if($sd < 0 && $ed < 0) {
@@ -255,51 +288,61 @@ while($res = mysqli_fetch_array($result)) {
     }
 </script>
 <script>
-    $( function() {
-        var dateFormat = "yy-mm-dd",
-            from = $( "#from" )
-                .datepicker({
-                    showOn: "button",
-                    buttonImage: "img/calendar.png",
-                    buttonImageOnly: true,
-                    buttonText: "Select date",
-                    nextText: "다음달",
-                    prevText: "이전달",
-                    changeMonth: true,
-                    dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-                    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-                    monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-                    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                    numberOfMonths: 2
-                })
-                .on( "change", function() {
-                    to.datepicker( "option", "minDate", getDate( this ) );
-                }),
-            to = $( "#to" ).datepicker({
-                showOn: "button",
-                buttonImage: "img/calendar.png",
-                buttonImageOnly: true,
-                buttonText: "Select date",
-                nextText: "다음달",
-                prevText: "이전달",
-                changeMonth: true,
-                dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-                dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-                monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-                monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                numberOfMonths: 2
-            })
-                .on( "change", function() {
-                    from.datepicker( "option", "maxDate", getDate( this ) );
-                });
-        function getDate( element ) {
-            var date;
-            try {
-                date = $.datepicker.parseDate( dateFormat, element.value );
-            } catch( error ) {
-                date = null;
+        $( function() {
+            for(var i=0; i<<?php echo $i;?>; i++) {
+                var dateFormat = "yy-mm-dd",
+                    from = $("#from" + i).datepicker({
+                        showOn: "button",
+                        buttonImage: "img/calendar.png",
+                        buttonImageOnly: true,
+                        buttonText: "Select date",
+                        nextText: "다음달",
+                        prevText: "이전달",
+                        changeMonth: true,
+                        dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+                        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+                        monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+                        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                        numberOfMonths: 2
+                    })
+                        .on("change", function () {
+                            to.datepicker("option", "minDate", getDate(this));
+                        }),
+                    to = $("#to" + i).datepicker({
+                        showOn: "button",
+                        buttonImage: "img/calendar.png",
+                        buttonImageOnly: true,
+                        buttonText: "Select date",
+                        nextText: "다음달",
+                        prevText: "이전달",
+                        changeMonth: true,
+                        dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+                        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+                        monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+                        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                        numberOfMonths: 2
+                    })
+                        .on("change", function () {
+                            from.datepicker("option", "maxDate", getDate(this));
+                        });
             }
-            return date;
+            function getDate( element ) {
+                var date;
+                try {
+                    date = $.datepicker.parseDate( dateFormat, element.value );
+                } catch( error ) {
+                    date = null;
+                }
+                return date;
+            }
+        } );
+        function show_box(e) {
+            if($('.students_checks'+e).css('visibility', 'hidden')) {
+                $('.students_checks'+e).css('visibility', '');
+            }
         }
-    } );
+
+        function blind_box(e) {
+            $('.students_checks'+e).css('visibility', 'hidden');
+        }
 </script>

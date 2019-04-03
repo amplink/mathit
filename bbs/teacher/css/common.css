@@ -336,7 +336,6 @@ select {
     transition: all .2s;
 }
 
-.hamnav_menu:first-child,
 .hamnav_menu:last-child {
     border: none;
 }

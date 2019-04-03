@@ -63,6 +63,22 @@
     width: 150px;
 }
 
+.homework_table_section table thead tr th:nth-child(2) {
+    width: 400px;
+}
+
+.homework_table_section table thead tr th:nth-child(3) {
+    width: 150px;
+}
+
+.homework_table_section table thead tr th:nth-child(4) {
+    width: 150px;
+}
+
+.homework_table_section table thead tr th:nth-child(5) {
+    width: 150px;
+}
+
 .homework_table_section table tbody tr td {
     background-color: rgb(233, 240, 243);
     border-right: solid 1px rgb(230, 230, 230);
@@ -74,9 +90,9 @@
     background-color: rgb(248, 251, 252);
 }
 
-.homework_table_section table tbody tr td:nth-child(6) {
-    border-right: none;
-}
+/*.homework_table_section table tbody tr td:nth-child(6) {*/
+    /*border-right: none;*/
+/*}*/
 
 .homework_table_section table tbody tr td:nth-child(4) span:nth-child(3),
 .homework_table_section table tbody tr td:nth-child(5) span:nth-child(3) {

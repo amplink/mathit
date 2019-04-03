@@ -87,7 +87,7 @@ include_once ('head.php');
     <div class="contents_box">
         <div class="l_section">
             <div class="table_option_line">
-                <p class="option_title">제출유형</p>
+                <p class="option_title">제출 유형</p>
                 <div class="option_contnets">
                     <div class="type_chk"><input type="radio" value="" name="type">
                         <p>전체</p>
@@ -101,7 +101,7 @@ include_once ('head.php');
                 </div>
             </div>
             <div class="table_option_line">
-                <p class="option_title">강사명</p>
+                <p class="option_title">작성자</p>
                 <div class="option_contnets">
                     <select name="teacher_select" id="teacher_select">
                         <option value="">전체</option>
