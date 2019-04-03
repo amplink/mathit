@@ -324,7 +324,7 @@ table tbody tr:nth-child(2n) {
 .placeholder.selector .checkbox {/*문항체크박스위치*/
     position: absolute;
     display: block;
-    width: 100px;
+    width: 130px;
     top: 0;
     left: 0;
     bottom: 0;
