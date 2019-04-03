@@ -44,6 +44,7 @@ for($i=0; $i<count($student_list); $i++) {
 
 $query = "INSERT INTO homework SET
                          `seq` = NULL,
+						 `client_id`='$_SESSION[t_id]',
                          `name`='$name',
                          `class_name` = '$class_name',
                          `student` = '$st',
