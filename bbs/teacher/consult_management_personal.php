@@ -3,6 +3,12 @@ include_once ('_common.php');
 include_once ('head.php');
 $student_name = $_GET['s_name'];
 $s_id = $_GET['s_id'];
+
+
+if($_GET['month'] == 'all'){
+   $start = "";
+   $end = "";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -97,11 +103,11 @@ $s_id = $_GET['s_id'];
 
             <div class="day_input">
                 <div class="date_range">
-                    <input type="text" id="from" name="start" value="<?=$_GET['start']?>">
+                    <input type="text" id="from" name="start" value="<?=$start?>">
                 </div>
                 <span> ~ </span>
                 <div class="date_range">
-                    <input type="text" id="to" name="end" value="<?=$_GET['end']?>">
+                    <input type="text" id="to" name="end" value="<?=$end?>">
                 </div>
             </div>
             <div class="search_btn"><a href="javascript:consult_search();">검색</a></div>
@@ -133,8 +139,8 @@ $s_id = $_GET['s_id'];
                     $sql .= " and (date >= date_format(date_add(now(), interval -".$_GET['month']." month), '%m/%d/%Y')
 					               and date <= date_format(now(), '%m/%d/%Y'))";
 				}
-				else if($_GET['start'] && $_GET['end']){
-                    $sql .= " and (date BETWEEN '".$_GET['start']."' and '".$_GET['end']."') ";
+				else if($start && $end){
+                    $sql .= " and (date BETWEEN '".$start."' and '".$end."') ";
 				}
 
                 $result = mysqli_query($connect_db, $sql);
