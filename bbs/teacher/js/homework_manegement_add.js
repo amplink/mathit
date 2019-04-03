@@ -128,7 +128,7 @@
     $(document).on('click', '.allChk', function() {
         var $wrap = $(this).closest('.placeholder');
 
-        if($(".allChk").is(":checked")){
+        if($wrap.find(".allChk").is(":checked")){
 			$wrap.find('.var_option').addClass('selected');
 			var selected = [];
 
