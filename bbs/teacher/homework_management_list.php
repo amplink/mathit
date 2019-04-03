@@ -199,10 +199,10 @@ include_once ('head.php');
                             <th>상태</th>
                         </tr>
                         </thead>
-                        <tbody id="homework_content">
-
-                        </tbody>
                     </table>
+                    <div id="homework_content">
+
+                    </div>
                 </div>
             </div>
             <!-- <div class="add_btn_wrap">

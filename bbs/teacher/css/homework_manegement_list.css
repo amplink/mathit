@@ -132,7 +132,7 @@ table thead tr th {
     font-weight: 400;
     color: rgb(255, 255, 255);
     background-color: rgb(41, 124, 62);
-    padding: 5px;
+    padding: 5 15 5 15px;
 }
 
 table tbody tr td {
@@ -229,9 +229,13 @@ table tbody tr:nth-child(2n) {
     width: 1900px;
 }
 
-.homework_list_table table thead tr th:nth-child(2) {
-    width: 120px;
+.homework_list_table table thead tr th:nth-child(1) {
+    width: 10px;
 }
+.homework_list_table table thead tr th {
+    width: 70px;
+}
+
 
 .x_btn {
     width: 15px;
@@ -245,7 +249,7 @@ table tbody tr:nth-child(2n) {
 }
 
 .homework_list_table table tbody tr td {
-    border-right: solid 1px rgb(220, 220, 220);
+    /*border-right: solid 1px rgb(220, 220, 220);*/
     padding: 10px 5px;
 }
 
@@ -303,4 +307,16 @@ table tbody tr:nth-child(2n) {
 .ui-datepicker-trigger {
     width: 20px;
     height: 20px;
+}
+.homework_cont td {
+    width: 140px;
+}
+.homework_cont td:nth-child(1) {
+    width: 30px;
+}
+.homework_cont td:nth-child(2) {
+    max-width: 200px !important;
+}
+.homework_cont td:nth-child(2) input {
+    width: 70px;
 }

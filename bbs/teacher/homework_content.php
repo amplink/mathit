@@ -24,226 +24,224 @@ while($res = mysqli_fetch_array($result)) {
     ?>
     <div>
         <form action="homework_resend.php?seq=<?=$res['seq']?>" method="POST" id="resend_form<?=$i?>" enctype="multipart/form-data">
-            <span>
-                <div class="x_btn"><img src="img/close.png" alt="delete_icon" onclick="del_homework('<?=$res['name']?>')"></div>
-            </span>
-            <span>
-                <?php
-                if($sd > 0 && $ed > 0) echo "<span><input type='text' name='title' value='".$res['name']."'></span>";
-                else echo "<span>".$res['name']."</span>"
-                ?>
-            </span>
+            <table class="homework_cont">
+                <td>
+                    <div class="x_btn"><img src="img/close.png" alt="delete_icon" onclick="del_homework('<?=$res['name']?>')"></div>
+                </td>
+                <td>
+                    <?php
+                    if($sd > 0 && $ed > 0) echo "<input type='text' name='title' value='".$res['name']."'>";
+                    else echo $res['name'];
+                    ?>
+                </td>
 
-            <span><select name="textbook" id="textbook">
-                    <?php
-                    if($res['textbook']=="알파") {
-                        ?>
-                        <option value="알파" selected>알파</option>
-                        <option value="베타">베타</option>
+                <td><select name="textbook" id="textbook">
                         <?php
-                    }else {
+                        if($res['textbook']=="알파") {
+                            ?>
+                            <option value="알파" selected>알파</option>
+                            <option value="베타">베타</option>
+                            <?php
+                        }else {
+                            ?>
+                            <option value="알파">알파</option>
+                            <option value="베타" selected>베타</option>
+                            <?php
+                        }
                         ?>
-                        <option value="알파">알파</option>
-                        <option value="베타" selected>베타</option>
+                    </select></td>
+                <td><select name="grade" id="grade<?=$i?>" onchange="book_info1(<?=$i?>)">
+                        <option value="초3">초3</option>
+                        <option value="초4">초4</option>
+                        <option value="초5">초5</option>
+                        <option value="초6">초6</option>
+                        <option value="중1">중1</option>
+                        <option value="중2">중2</option>
+                        <option value="중3">중3</option>
                         <?php
-                    }
-                    ?>
-                </select></span>
-            <span><select name="grade" id="grade<?=$i?>" onchange="book_info1(<?=$i?>)">
-                    <option value="초3">초3</option>
-                    <option value="초4">초4</option>
-                    <option value="초5">초5</option>
-                    <option value="초6">초6</option>
-                    <option value="중1">중1</option>
-                    <option value="중2">중2</option>
-                    <option value="중3">중3</option>
-                    <?php
-                    echo "<script>$('#grade$i').val('".$res['grade']."');</script>";
-                    ?>
-                </select></span>
-            <span><select name="semester" id="semester<?=$i?>" onchange="book_info1(<?=$i?>)">
-                    <?php
-                    if($res['semester']=="1학기") {
+                        echo "<script>$('#grade$i').val('".$res['grade']."');</script>";
                         ?>
-                        <option value="1학기" selected>1학기</option>
-                        <option value="2학기">2학기</option>
+                    </select></td>
+                <td><select name="semester" id="semester<?=$i?>" onchange="book_info1(<?=$i?>)">
                         <?php
-                    }else {
+                        if($res['semester']=="1학기") {
+                            ?>
+                            <option value="1학기" selected>1학기</option>
+                            <option value="2학기">2학기</option>
+                            <?php
+                        }else {
+                            ?>
+                            <option value="1학기">1학기</option>
+                            <option value="2학기" selected>2학기</option>
+                            <?php
+                        }
                         ?>
-                        <option value="1학기">1학기</option>
-                        <option value="2학기" selected>2학기</option>
+                    </select></td>
+                <td><select name="level" id="level<?=$i?>">
+                        <option value="루트">루트</option>
+                        <option value="파이">파이</option>
+                        <option value="시그마">시그마</option>
                         <?php
-                    }
-                    ?>
-                </select></span>
-            <span><select name="level" id="level<?=$i?>">
-                    <option value="루트">루트</option>
-                    <option value="파이">파이</option>
-                    <option value="시그마">시그마</option>
-                    <?php
-                    echo "<script>$('#level$i').val('".$res['level']."');</script>";
-                    ?>
-                </select></span>
-            <span>
-                <select name="unit" id="unit<?=$i?>">
-                    <option value="<?=$res['unit']?>"><?=$res['unit']?></option>
-                </select>
-            </span>
-            <span>
-                <select name="corner1" id="corner1<?=$i?>">
-                    <option value="개념마스터">개념마스터</option>
-                    <option value="개념확인">개념확인</option>
-                    <option value="서술과 코칭">서술과 코칭</option>
-                    <option value="이야기수학">이야기수학</option>
-                    <option value="개념다지기">개념다지기</option>
-                    <option value="단원마무리">단원마무리</option>
-                    <option value="도전 문제">도전 문제</option>
-                    <?php
-                    echo "<script>$('#corner1$i').val('".$res['corner1']."');</script>";
-                    ?>
-                </select>
-            </span>
+                        echo "<script>$('#level$i').val('".$res['level']."');</script>";
+                        ?>
+                    </select></td>
+                <td>
+                    <select name="unit" id="unit<?=$i?>">
+                        <option value="<?=$res['unit']?>"><?=$res['unit']?></option>
+                    </select>
+                </td>
+                <td>
+                    <select name="corner1" id="corner1<?=$i?>">
+                        <option value="개념마스터">개념마스터</option>
+                        <option value="개념확인">개념확인</option>
+                        <option value="서술과 코칭">서술과 코칭</option>
+                        <option value="이야기수학">이야기수학</option>
+                        <option value="개념다지기">개념다지기</option>
+                        <option value="단원마무리">단원마무리</option>
+                        <option value="도전 문제">도전 문제</option>
+                        <?php
+                        echo "<script>$('#corner1$i').val('".$res['corner1']."');</script>";
+                        ?>
+                    </select>
+                </td>
 
-            <span>
-                <select name="Q_number1[]" id="Q_number1" class="custumdropdown" custumdrop="question" multiple="multiple">
-                    <?php
-                    $q_1 = explode(",", $res['Q_number1']);
-                    $cnt = 0;
-                    for($j=1; $j<=30; $j++) {
-                        if($q_1[$cnt] == $j) {
-                            echo "<option class='checkbox' value='$j' selected>$j</option>";
-                            $cnt++;
+                <td>
+                    <select name="Q_number1[]" id="Q_number1" class="custumdropdown" custumdrop="question" multiple="multiple">
+                        <?php
+                        $q_1 = explode(",", $res['Q_number1']);
+                        $cnt = 0;
+                        for($j=1; $j<=30; $j++) {
+                            if($q_1[$cnt] == $j) {
+                                echo "<option class='checkbox' value='$j' selected>$j</option>";
+                                $cnt++;
+                            }
+                            else echo "<option class='checkbox' value='$j'>$j</option>";
                         }
-                        else echo "<option class='checkbox' value='$j'>$j</option>";
-                    }
-                    ?>
-                </select>
-            </span>
-            <span>
-                <select name="corner2" id="corner2<?=$i?>">
-                    <option value="개념마스터">개념마스터</option>
-                    <option value="개념확인">개념확인</option>
-                    <option value="서술과 코칭">서술과 코칭</option>
-                    <option value="이야기수학">이야기수학</option>
-                    <option value="개념다지기">개념다지기</option>
-                    <option value="단원마무리">단원마무리</option>
-                    <option value="도전 문제">도전 문제</option>
-                    <?php
-                    echo "<script>$('#corner2$i').val('".$res['corner2']."');</script>";
-                    ?>
-                </select>
-            </span>
-            <span>
-                <select name="Q_number2[]" id="Q_number2" class="custumdropdown" custumdrop="question" multiple="multiple">
-                    <?php
-                    $q_2 = explode(",", $res['Q_number2']);
-                    $cnt = 0;
-                    for($j=1; $j<=30; $j++) {
-                        if($q_2[$cnt] == $j) {
-                            echo "<option class='checkbox' value='$j' selected>$j</option>";
-                            $cnt++;
+                        ?>
+                    </select>
+                </td>
+                <td>
+                    <select name="corner2" id="corner2<?=$i?>">
+                        <option value="개념마스터">개념마스터</option>
+                        <option value="개념확인">개념확인</option>
+                        <option value="서술과 코칭">서술과 코칭</option>
+                        <option value="이야기수학">이야기수학</option>
+                        <option value="개념다지기">개념다지기</option>
+                        <option value="단원마무리">단원마무리</option>
+                        <option value="도전 문제">도전 문제</option>
+                        <?php
+                        echo "<script>$('#corner2$i').val('".$res['corner2']."');</script>";
+                        ?>
+                    </select>
+                </td>
+                <td>
+                    <select name="Q_number2[]" id="Q_number2" class="custumdropdown" custumdrop="question" multiple="multiple">
+                        <?php
+                        $q_2 = explode(",", $res['Q_number2']);
+                        $cnt = 0;
+                        for($j=1; $j<=30; $j++) {
+                            if($q_2[$cnt] == $j) {
+                                echo "<option class='checkbox' value='$j' selected>$j</option>";
+                                $cnt++;
+                            }
+                            else echo "<option class='checkbox' value='$j'>$j</option>";
                         }
-                        else echo "<option class='checkbox' value='$j'>$j</option>";
-                    }
-                    ?>
-                </select>
-            </span>
+                        ?>
+                    </select>
+                </td>
 
-            <span>
-                <select name="corner3" id="corner3<?=$i?>">
-                    <option value="개념마스터">개념마스터</option>
-                    <option value="개념확인">개념확인</option>
-                    <option value="서술과 코칭">서술과 코칭</option>
-                    <option value="이야기수학">이야기수학</option>
-                    <option value="개념다지기">개념다지기</option>
-                    <option value="단원마무리">단원마무리</option>
-                    <option value="도전 문제">도전 문제</option>
-                    <?php
-                    echo "<script>$('#corner3$i').val('".$res['corner3']."');</script>";
-                    ?>
-                </select>
-            </span>
-            <span>
-                <select name="Q_number3[]" id="Q_number3" class="custumdropdown" custumdrop="question" multiple="multiple">
-                    <?php
-                    $q_3 = explode(",", $res['Q_number3']);
-                    $cnt = 0;
-                    for($j=1; $j<=30; $j++) {
-                        if($q_3[$cnt] == $j) {
-                            echo "<option class='checkbox' value='$j' selected>$j</option>";
-                            $cnt++;
+                <td>
+                    <select name="corner3" id="corner3<?=$i?>">
+                        <option value="개념마스터">개념마스터</option>
+                        <option value="개념확인">개념확인</option>
+                        <option value="서술과 코칭">서술과 코칭</option>
+                        <option value="이야기수학">이야기수학</option>
+                        <option value="개념다지기">개념다지기</option>
+                        <option value="단원마무리">단원마무리</option>
+                        <option value="도전 문제">도전 문제</option>
+                        <?php
+                        echo "<script>$('#corner3$i').val('".$res['corner3']."');</script>";
+                        ?>
+                    </select>
+                </td>
+                <td>
+                    <select name="Q_number3[]" id="Q_number3" class="custumdropdown" custumdrop="question" multiple="multiple">
+                        <?php
+                        $q_3 = explode(",", $res['Q_number3']);
+                        $cnt = 0;
+                        for($j=1; $j<=30; $j++) {
+                            if($q_3[$cnt] == $j) {
+                                echo "<option class='checkbox' value='$j' selected>$j</option>";
+                                $cnt++;
+                            }
+                            else echo "<option class='checkbox' value='$j'>$j</option>";
                         }
-                        else echo "<option class='checkbox' value='$j'>$j</option>";
-                    }
-                    ?>
-                </select>
-            </span>
+                        ?>
+                    </select>
+                </td>
 
-            <span>
-                <select name="corner4" id="corner4<?=$i?>">
-                    <option value="개념마스터">개념마스터</option>
-                    <option value="개념확인">개념확인</option>
-                    <option value="서술과 코칭">서술과 코칭</option>
-                    <option value="이야기수학">이야기수학</option>
-                    <option value="개념다지기">개념다지기</option>
-                    <option value="단원마무리">단원마무리</option>
-                    <option value="도전 문제">도전 문제</option>
-                    <?php
-                    echo "<script>$('#corner4$i').val('".$res['corner4']."');</script>";
-                    ?>
-                </select>
-            </span>
-            <span>
-                <select name="Q_number4[]" id="Q_number4" class="custumdropdown" custumdrop="question" multiple="multiple">
-                    <?php
-                    $q_4 = explode(",", $res['Q_number4']);
-                    $cnt = 0;
-                    for($j=1; $j<=30; $j++) {
-                        if($q_4[$cnt] == $j) {
-                            echo "<option class='checkbox' value='$j' selected>$j</option>";
-                            $cnt++;
+                <td>
+                    <select name="corner4" id="corner4<?=$i?>">
+                        <option value="개념마스터">개념마스터</option>
+                        <option value="개념확인">개념확인</option>
+                        <option value="서술과 코칭">서술과 코칭</option>
+                        <option value="이야기수학">이야기수학</option>
+                        <option value="개념다지기">개념다지기</option>
+                        <option value="단원마무리">단원마무리</option>
+                        <option value="도전 문제">도전 문제</option>
+                        <?php
+                        echo "<script>$('#corner4$i').val('".$res['corner4']."');</script>";
+                        ?>
+                    </select>
+                </td>
+                <td>
+                    <select name="Q_number4[]" id="Q_number4" class="custumdropdown" custumdrop="question" multiple="multiple">
+                        <?php
+                        $q_4 = explode(",", $res['Q_number4']);
+                        $cnt = 0;
+                        for($j=1; $j<=30; $j++) {
+                            if($q_4[$cnt] == $j) {
+                                echo "<option class='checkbox' value='$j' selected>$j</option>";
+                                $cnt++;
+                            }
+                            else echo "<option class='checkbox' value='$j'>$j</option>";
                         }
-                        else echo "<option class='checkbox' value='$j'>$j</option>";
-                    }
-                    ?>
-                </select>
-            </span>
-            <span>
-                <span>
+                        ?>
+                    </select>
+                <td style="max-width: 200px; width: 200px;">
                     <?php
                     $_from = $res['_from'];
                     $_to = $res['_to'];
-                    if($sd > 0 && $ed > 0) echo '<input type="text" name="from" id="from" value="'.$_from.'" required>';
+                    if($sd > 0 && $ed > 0) echo '<input type="text" name="from" id="from" style="width: 70px;" value="'.$_from.'" required>';
                     else echo $res['_from'];
                     ?>
-                </span>
-            </span>
-            <span>
-                <span>
+                </td>
+                <td style="max-width: 200px; width: 200px;">
                     <?php
-                    if($sd > 0 && $ed > 0) echo '<input type="text" name="to" id="to" value="'.$_to.'" required>';
+                    if($sd > 0 && $ed > 0) echo '<input type="text" name="to" id="to" style="width: 70px;" value="'.$_to.'" required>';
                     else echo $res['_to'];
                     ?>
-                </span>
-            </span>
-            <span>
-                <?php
-                if($sd < 0 && $ed > 0) {
-                    echo '<p class="ing_text" style=" color: blue;">진행중</p>';
-                }else if($sd > 0 && $ed > 0) {
-                    echo '<div class="resend_btn" onclick="resend('.$i.')"><a>재전송</a></div>';
-                }else if($sd < 0 && $ed < 0) {
-                    echo '<p class="complete_text">완료</p>';
-                }
-    //            if($sd < 0) {
-    //                if($res['checked']==0) {
-    //                    echo '<p class="ing_text" style=" color: blue;">진행중</p>';
-    //                }else echo '<p class="complete_text">완료</p>';
-    //            }else {
-    //                echo '<div class="resend_btn"><a>재전송</a></div>';
-    //            }
-                ?>
-            </span>
+                </td>
+                </td>
+                <td>
+                    <?php
+                    if($sd < 0 && $ed > 0) {
+                        echo '<p class="ing_text" style=" color: blue;">진행중</p>';
+                    }else if($sd > 0 && $ed > 0) {
+                        echo '<div class="resend_btn" onclick="resend('.$i.')"><a>재전송</a></div>';
+                    }else if($sd < 0 && $ed < 0) {
+                        echo '<p class="complete_text">완료</p>';
+                    }
+                    //            if($sd < 0) {
+                    //                if($res['checked']==0) {
+                    //                    echo '<p class="ing_text" style=" color: blue;">진행중</p>';
+                    //                }else echo '<p class="complete_text">완료</p>';
+                    //            }else {
+                    //                echo '<div class="resend_btn"><a>재전송</a></div>';
+                    //            }
+                    ?>
+                </td>
+            </table>
         </form>
     </div>
     <?php
@@ -253,7 +251,7 @@ while($res = mysqli_fetch_array($result)) {
 <script>
     function resend(e) {
 
-      $('#resend_form'+e).submit();
+        $('#resend_form'+e).submit();
     }
 </script>
 <script>
