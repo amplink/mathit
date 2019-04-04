@@ -3560,4 +3560,24 @@ function option_array_checked($option, $arr=array()){
 
     return $checked;
 }
+
+function status_view($state){
+
+	switch($state){
+        case "a1" :
+			$str = '<p class="first_submitted show green">1차 제출</p>';
+			break;
+        case "a2" :
+			$str = '<p class="second_submitted show blue">2차 제출</p>';
+			break;
+        case "s1" :
+			$str = '<p class="first_scroing_done show green">1차 채점 완료</p>';
+			break;
+        case "s2" :
+			$str = '<p class="second_submitted show blue">숙제 완료</p>';
+			break;			
+	}
+	return $str;
+
+}
 ?>
