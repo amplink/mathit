@@ -49,6 +49,6 @@ for($i=0;$i<count($tid);$i++){
 }
 
 alert_msg("등록이 완료되었습니다.");
-location_href("./setting2.php");
+location_href("./setting.php");
 
 ?>
