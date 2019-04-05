@@ -60,8 +60,9 @@ include_once ('head.php');
 
 	$sql = "SELECT 
 	           id, class_name, student_name, h_id, current_status, 
-			   wrong_anwer_1, wrong_anwer_2, apply_count
-			FROM 
+			   wrong_anwer_1, wrong_anwer_2, apply_count,
+			   student_id,  d_uid, c_uid 
+			FROM
 	          `homework_assign_list`  
 	        WHERE 
 			  id='$_GET[id]' AND client_id='$ac'";
@@ -123,6 +124,10 @@ include_once ('head.php');
 	<form action="./scoring_act.php" name="scoreForm" id="scoreForm" method="post">
 	    <input type="hidden" name="current_status" value="<?=$res['current_status']?>">
 		<input type="hidden" name="id" value="<?=$res['id']?>">
+		<input type="hidden" name="c_uid" value="<?=$res['c_uid']?>">
+		<input type="hidden" name="d_uid" value="<?=$res['d_uid']?>">
+		<input type="hidden" name="s_id" value="<?=$res['student_id']?>">
+		<input type="hidden" name="tempSave" id="tempSave">
 		<div class="scoring_box">
 
 
@@ -133,7 +138,8 @@ include_once ('head.php');
 					<input type="hidden" name="corner_name" value="<?=$res2['corner'.$corner]?>">
 				</div>
 				<p>
-				<select name="corner" onChange="chCorner(this.value)">
+				<span>
+				 <select name="corner" onChange="chCorner(this.value)">
 	<?
 	$tot = count($corner_arr);
 		for($i=1; $i<=$tot; $i++){
@@ -143,7 +149,12 @@ include_once ('head.php');
 		}
 	?>
 				 
-				</select>
+				 </select>
+				</span>
+				<span style="float:right">
+                   <!--<span class="complete_btn"><a href="javascript:saveStep()">완료</a></span>-->
+                   <a href="javascript:saveStep()">임시저장</a>
+				</span>
 				</p>
 				<div class="score_board_table">
 				<table>
@@ -242,7 +253,20 @@ include_once ('head.php');
 	});
 
 	function chCorner(obj){
-       location.href = "./scoring.php?h_id=<?=$_GET['h_id']?>&id=<?=$_GET['id']?>&corner="+obj;
+		/*var chk = 0;
+		$('.marking').each(function() {
+			 if($(this).is(':checked')){
+			    chk++;
+			 }
+		});
+
+		if(chk == 0){
+           location.href = "./scoring.php?h_id=<?=$_GET['h_id']?>&id=<?=$_GET['id']?>&corner="+obj;
+		}else{
+	  	  $("#tempSave").val("1");
+          $("#scoreForm").submit();
+		}*/
+		location.href = "./scoring.php?h_id=<?=$_GET['h_id']?>&id=<?=$_GET['id']?>&corner="+obj;
 	}
 
 	function complete(){
@@ -252,17 +276,30 @@ include_once ('head.php');
 				//DATA += ","+($(this).val());
 			    chk++;
 			 }
-		  });
+		});
 
-		  if(chk == 0){
-             if(!confirm('채점결과 만점 입니다. \n맞습니까?')){
-        	    return false;
-			 } 
-		  }
+		if(chk == 0){
+           if(!confirm('채점결과 만점 입니다. \n완료 할까요?')) return false;
+		}
 
         $("#scoreForm").submit();
+	}
 
+	function saveStep(){
+        var chk = 0;
+		$("#tempSave").val("1");
+		$('.marking').each(function() {
+			 if($(this).is(':checked')){
+			    chk++;
+			 }
+		});
 
+		if(chk == 0){
+           alert("오답 체크가 안되었습니다."); 
+		   return false;
+		}
+
+        $("#scoreForm").submit();
 	}
 
 </script>
