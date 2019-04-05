@@ -401,10 +401,19 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
     }
 
     function chk_type() {
+        if($('#textbook').val() == "베타") {
+            $('#unit option[value="총정리(1)"]').text("중간평가");
+            $('#unit option[value="총정리(1)"]').val("중간평가");
+
+            $('#unit option[value="총정리(2)"]').text("기말평가");
+            $('#unit option[value="총정리(2)"]').val("기말평가");
+        }
+
         var textbook = $('#textbook').val();
         var level = $('#level').val();
         var book = $('#unit').val();
         // alert(book);
+
         if(textbook == "알파" && (level == "루트" || level == "파이")) {
             if(book == "총정리(1)" || book == "총정리(2)") {
                 for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="개념마스터">개념마스터</option>' +
@@ -447,7 +456,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="기말평가1회">기말평가1회</option>' +
                     '<option value="기말평가2회">기말평가2회</option>');
             }else {
-                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="개념다지기">개념다지기</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="실력확인">실력확인</option>' +
                     '<option value="단원마무리">단원마무리</option>' +
                     '<option value="도전문제">도전문제</option>');
             }

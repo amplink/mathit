@@ -300,7 +300,7 @@ include_once ('head.php');
     })
 
     function submit() {
-        if($('#title').val() && $('#datepicker').val() && $('#standard_score').val() && $('#sub_score1').val() && $('#sub_score2').val() && $('#test_genre')) {
+        if($('#title').val() && $('#datepicker').val() && $('#standard_score').val() && $('#sub_score1').val() && $('#sub_score2').val() && $('#test_genre').val()) {
             $(window).unbind('beforeunload');
             $('#record_form').submit();
         }else {

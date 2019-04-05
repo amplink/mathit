@@ -48,7 +48,7 @@ for($i=0; $i<count($d_name); $i++) {
     </div>
     <div class="consult_board_box">
         <div class="head_line">
-            <div class="writer">
+            <div class="writer" style="top: -3px;">
                 <p><span>상담자</span></p>
                 <p><?=$_SESSION['t_name']?></p>
             </div>
@@ -57,7 +57,7 @@ for($i=0; $i<count($d_name); $i++) {
             </div>
         </div>
         <div class="head_line">
-            <div class="consult_detail">
+            <div class="consult_detail" style="top: 0px;">
                 <p>상담 세부설정</p>
             </div>
             <select name="consult_genre" id="consult_genre">

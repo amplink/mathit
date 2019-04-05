@@ -107,9 +107,9 @@ $res = mysqli_fetch_array($result);
                         ?>
                         <tr>
                             <td><input type="checkbox" name="chk_list[]" value="<?=$res['seq']?>"></td>
-                            <td><span><?=$res['student']?></span></td>
-                            <td><span><?=$res['score1']?> 점</span></td>
-                            <td><span><?=$res['score2']?> 점</span></td>
+                            <td><span><input type="hidden" name="student[]" value="<?=$res['student']?>"><?=$res['student']?></span></td>
+                            <td><span><input type="text" name="score1[]" value="<?=$res['score1']?>"> 점</span></td>
+                            <td><span><input type="text" name="score2[]" value="<?=$res['score2']?>"> 점</span></td>
                             <td><span><?=sprintf("%.1f", ($res['score1']+$res['score2'])/2)?> 점</span></td>
                         </tr>
                         <?

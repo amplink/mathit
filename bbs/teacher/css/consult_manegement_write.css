@@ -63,7 +63,7 @@
 .writer {
     position: relative;
     margin-right: 18px;
-    top: 6px;
+    top: -3px;
     display: inline-block;
     border-left: solid 2px rgb(32, 175, 68);
     padding-left: 15px;
@@ -110,7 +110,7 @@
 .consult_detail {
     position: relative;
     margin-right: 20px;
-    top: 6px;
+    /*top: 0px;*/
     display: inline-block;
     border-left: solid 2px rgb(32, 175, 68);
     padding-left: 15px;

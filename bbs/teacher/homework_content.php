@@ -32,7 +32,7 @@ while($res = mysqli_fetch_array($result)) {
                     <input type='text' name='title' value='<?=$res['name']?>'>
                 </td>
 
-                <td><select name="textbook" id="textbook">
+                <td><select name="textbook" id="textbook<?=$i?>" onchange="chk_type(<?=$i?>)">
                         <?php
                         if($res['textbook']=="알파") {
                             ?>
@@ -47,7 +47,7 @@ while($res = mysqli_fetch_array($result)) {
                         }
                         ?>
                     </select></td>
-                <td><select name="grade" id="grade<?=$i?>" onchange="book_info1(<?=$i?>)">
+                <td><select name="grade" id="grade<?=$i?>" onclick="book_info1(<?=$i?>)">
                         <option value="초3">초3</option>
                         <option value="초4">초4</option>
                         <option value="초5">초5</option>
@@ -59,7 +59,7 @@ while($res = mysqli_fetch_array($result)) {
                         echo "<script>$('#grade$i').val('".$res['grade']."');</script>";
                         ?>
                     </select></td>
-                <td><select name="semester" id="semester<?=$i?>" onchange="book_info1(<?=$i?>)">
+                <td><select name="semester" id="semester<?=$i?>" onclick="book_info1(<?=$i?>)">
                         <?php
                         if($res['semester']=="1학기") {
                             ?>
@@ -74,7 +74,7 @@ while($res = mysqli_fetch_array($result)) {
                         }
                         ?>
                     </select></td>
-                <td><select name="level" id="level<?=$i?>">
+                <td><select name="level" id="level<?=$i?>" onchange="chk_type(<?=$i?>)">
                         <option value="루트">루트</option>
                         <option value="파이">파이</option>
                         <option value="시그마">시그마</option>
@@ -83,22 +83,13 @@ while($res = mysqli_fetch_array($result)) {
                         ?>
                     </select></td>
                 <td>
-                    <select name="unit" id="unit<?=$i?>">
+                    <select name="unit" id="unit<?=$i?>" onchange="chk_type(<?=$i?>)" onclick="book_info1(<?=$i?>)">
                         <option value="<?=$res['unit']?>"><?=$res['unit']?></option>
                     </select>
                 </td>
                 <td>
                     <select name="corner1" id="corner1<?=$i?>">
-                        <option value="개념마스터">개념마스터</option>
-                        <option value="개념확인">개념확인</option>
-                        <option value="서술과 코칭">서술과 코칭</option>
-                        <option value="이야기수학">이야기수학</option>
-                        <option value="개념다지기">개념다지기</option>
-                        <option value="단원마무리">단원마무리</option>
-                        <option value="도전 문제">도전 문제</option>
-                        <?php
-                        echo "<script>$('#corner1$i').val('".$res['corner1']."');</script>";
-                        ?>
+                        <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
                     </select>
                 </td>
 
@@ -119,16 +110,7 @@ while($res = mysqli_fetch_array($result)) {
                 </td>
                 <td>
                     <select name="corner2" id="corner2<?=$i?>">
-                        <option value="개념마스터">개념마스터</option>
-                        <option value="개념확인">개념확인</option>
-                        <option value="서술과 코칭">서술과 코칭</option>
-                        <option value="이야기수학">이야기수학</option>
-                        <option value="개념다지기">개념다지기</option>
-                        <option value="단원마무리">단원마무리</option>
-                        <option value="도전 문제">도전 문제</option>
-                        <?php
-                        echo "<script>$('#corner2$i').val('".$res['corner2']."');</script>";
-                        ?>
+                        <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
                     </select>
                 </td>
                 <td>
@@ -149,16 +131,7 @@ while($res = mysqli_fetch_array($result)) {
 
                 <td>
                     <select name="corner3" id="corner3<?=$i?>">
-                        <option value="개념마스터">개념마스터</option>
-                        <option value="개념확인">개념확인</option>
-                        <option value="서술과 코칭">서술과 코칭</option>
-                        <option value="이야기수학">이야기수학</option>
-                        <option value="개념다지기">개념다지기</option>
-                        <option value="단원마무리">단원마무리</option>
-                        <option value="도전 문제">도전 문제</option>
-                        <?php
-                        echo "<script>$('#corner3$i').val('".$res['corner3']."');</script>";
-                        ?>
+                        <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
                     </select>
                 </td>
                 <td>
@@ -179,16 +152,7 @@ while($res = mysqli_fetch_array($result)) {
 
                 <td>
                     <select name="corner4" id="corner4<?=$i?>">
-                        <option value="개념마스터">개념마스터</option>
-                        <option value="개념확인">개념확인</option>
-                        <option value="서술과 코칭">서술과 코칭</option>
-                        <option value="이야기수학">이야기수학</option>
-                        <option value="개념다지기">개념다지기</option>
-                        <option value="단원마무리">단원마무리</option>
-                        <option value="도전 문제">도전 문제</option>
-                        <?php
-                        echo "<script>$('#corner4$i').val('".$res['corner4']."');</script>";
-                        ?>
+                        <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
                     </select>
                 </td>
                 <td>
@@ -336,6 +300,7 @@ while($res = mysqli_fetch_array($result)) {
                 return date;
             }
         } );
+
         function show_box(e) {
             var size = <?php echo $i;?>;
             if($('.students_checks'+e).css('visibility', 'hidden')) {
@@ -348,5 +313,68 @@ while($res = mysqli_fetch_array($result)) {
 
         function blind_box(e) {
             $('.students_checks'+e).css('visibility', 'hidden');
+        }
+
+        function chk_type(e) {
+            if($('#textbook'+e).val() == "베타") {
+                $('#unit'+e+' option[value="총정리(1)"]').text("중간평가");
+                $('#unit'+e+' option[value="총정리(1)"]').val("중간평가");
+
+                $('#unit'+e+' option[value="총정리(2)"]').text("기말평가");
+                $('#unit'+e+' option[value="총정리(2)"]').val("기말평가");
+            }
+
+            var textbook = $('#textbook'+e).val();
+            var level = $('#level'+e).val();
+            var book = $('#unit'+e).val();
+            // alert(book);
+
+            if(textbook == "알파" && (level == "루트" || level == "파이")) {
+                if(book == "총정리(1)" || book == "총정리(2)") {
+                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="개념마스터">개념마스터</option>' +
+                        '<option value="개념확인">개념확인</option>');
+                }else {
+                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="개념마스터">개념마스터</option>' +
+                        '                                                    <option value="개념확인">개념확인</option>' +
+                        '                                                    <option value="서술과 코칭">서술과 코칭</option>' +
+                        '                                                    <option value="이야기수학">이야기수학</option>');
+                }
+            }
+            if(textbook == "알파" && level == "시그마") {
+                if(book == "총정리(1)" || book == "총정리(2)") {
+                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="유형마스터">유형마스터</option>' +
+                        '<option value="유형확인">유형확인</option>');
+                }
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="유형마스터">유형마스터</option>' +
+                    '<option value="유형확인">유형확인</option>' +
+                    '<option value="서술과 코칭">서술과 코칭</option>' +
+                    '<option value="이야기수학">이야기수학</option>');
+            }
+            if(textbook == "베타" && (level == "루트" || level == "파이")) {
+                if(book == "중간평가") {
+                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="중간평가1회">중간평가1회</option>' +
+                        '<option value="중간평가2회">중간평가2회</option>');
+                }else if(book == "기말평가"){
+                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="기말평가1회">기말평가1회</option>' +
+                        '<option value="기말평가2회">기말평가2회</option>');
+                }else {
+                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="개념다지기">개념다지기</option>' +
+                        '<option value="단원마무리">단원마무리</option>' +
+                        '<option value="도전문제">도전문제</option>');
+                }
+            }
+            if(textbook == "베타" && level == "시그마") {
+                if(book == "중간평가") {
+                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="중간평가1회">중간평가1회</option>' +
+                        '<option value="중간평가2회">중간평가2회</option>');
+                }else if(book == "기말평가"){
+                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="기말평가1회">기말평가1회</option>' +
+                        '<option value="기말평가2회">기말평가2회</option>');
+                }else {
+                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="실력확인">실력확인</option>' +
+                        '<option value="단원마무리">단원마무리</option>' +
+                        '<option value="도전문제">도전문제</option>');
+                }
+            }
         }
 </script>

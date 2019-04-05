@@ -328,6 +328,7 @@ include_once ('head.php');
             dataType: "html",
             success: function(response) {
                 $("#unit"+e).html(response);
+                chk_type(e);
             }
         })
     }
