@@ -297,7 +297,7 @@ include_once ('head.php');
 
     $(window).bind('beforeunload', function () {
         return "저장하지 않고 페이지를 벗어나시겠습니까?";
-    })
+    });
 
     function submit() {
         if($('#title').val() && $('#datepicker').val() && $('#standard_score').val() && $('#sub_score1').val() && $('#sub_score2').val() && $('#test_genre').val()) {

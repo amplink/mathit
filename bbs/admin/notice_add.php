@@ -144,7 +144,7 @@ include_once('head.php');
                     <p class="title_text">제목</p>
                 </div>
                 <div class="contents_box">
-                    <input type="text" placeholder="제목을 입력해주세요" name="title" required>
+                    <input type="text" placeholder="제목을 입력해주세요" name="title" id="title" required>
                 </div>
             </div>
             <div class="board_line">
@@ -167,7 +167,7 @@ include_once('head.php');
         </div>
         <div class="section_footer">
             <div class="button_wrap">
-                <div class="save_btn" ><input class="l_save_btn" type="submit" value="저장"></div>
+                <div class="save_btn" ><input class="l_save_btn" type="button" value="저장" onclick="submit_chk()"></div>
                 <div class="cancel_btn"><a href="notice_home.php">취소</a></div>
             </div>
         </div>
@@ -192,6 +192,19 @@ include_once('head.php');
     // window.onbeforeunload = function() {
     //
     // }
+
+    $(window).bind('beforeunload', function () {
+        return "저장하지 않고 페이지를 벗어나시겠습니까?";
+    });
+
+    function submit_chk() {
+        if($('.notice_range').val() && $('#title').val()) {
+            $(window).unbind('beforeunload');
+            $('#notice_bbs').submit();
+        }else {
+            alert('제목 또는 범위를 입력해주세요.');
+        }
+    }
 
     function cancel_chk_all() {
         if($('#all_select').prop('checked', true)) {
