@@ -183,7 +183,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                     </tr>
                                     </thead>
                                         <tr>
-                                            <td><select name="textbook" id="textbook">
+                                            <td><select name="textbook" id="textbook" onchange="chk_type()">
                                                     <option value="알파">알파</option>
                                                     <option value="베타">베타</option>
                                                 </select></td>
@@ -200,25 +200,19 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                                     <option value="1학기">1학기</option>
                                                     <option value="2학기">2학기</option>
                                                 </select></td>
-                                            <td><select name="level" id="level">
+                                            <td><select name="level" id="level" onchange="chk_type()">
                                                     <option value="루트">루트</option>
                                                     <option value="파이">파이</option>
                                                     <option value="시그마">시그마</option>
                                                 </select></td>
                                             <td>
-                                                <select name="unit" id="unit">
+                                                <select name="unit" id="unit" onchange="chk_type()">
 
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="corner1" id="corner">
-                                                    <option value="개념마스터">개념마스터</option>
-                                                    <option value="개념확인">개념확인</option>
-                                                    <option value="서술과 코칭">서술과 코칭</option>
-                                                    <option value="이야기수학">이야기수학</option>
-                                                    <option value="개념다지기">개념다지기</option>
-                                                    <option value="단원마무리">단원마무리</option>
-                                                    <option value="도전 문제">도전 문제</option>
+                                                <select name="corner1" id="corner1">
+
                                                 </select>
                                             </td>
                                             <td>
@@ -240,13 +234,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                             <td></td><td></td><td></td><td></td><td></td>
                                             <td>
                                                 <select name="corner2" id="corner2">
-                                                    <option value="개념마스터">개념마스터</option>
-                                                    <option value="개념확인">개념확인</option>
-                                                    <option value="서술과 코칭">서술과 코칭</option>
-                                                    <option value="이야기수학">이야기수학</option>
-                                                    <option value="개념다지기">개념다지기</option>
-                                                    <option value="단원마무리">단원마무리</option>
-                                                    <option value="도전 문제">도전 문제</option>
+
                                                 </select>
                                             </td>
                                             <td>
@@ -261,13 +249,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                             <td></td><td></td><td></td><td></td><td></td>
                                             <td>
                                                 <select name="corner3" id="corner3">
-                                                    <option value="개념마스터">개념마스터</option>
-                                                    <option value="개념확인">개념확인</option>
-                                                    <option value="서술과 코칭">서술과 코칭</option>
-                                                    <option value="이야기수학">이야기수학</option>
-                                                    <option value="개념다지기">개념다지기</option>
-                                                    <option value="단원마무리">단원마무리</option>
-                                                    <option value="도전 문제">도전 문제</option>
+
                                                 </select>
                                             </td>
                                             <td>
@@ -282,13 +264,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                             <td></td><td></td><td></td><td></td><td></td>
                                             <td>
                                                 <select name="corner4" id="corner4">
-                                                    <option value="개념마스터">개념마스터</option>
-                                                    <option value="개념확인">개념확인</option>
-                                                    <option value="서술과 코칭">서술과 코칭</option>
-                                                    <option value="이야기수학">이야기수학</option>
-                                                    <option value="개념다지기">개념다지기</option>
-                                                    <option value="단원마무리">단원마무리</option>
-                                                    <option value="도전 문제">도전 문제</option>
+
                                                 </select>
                                             </td>
                                             <td>
@@ -343,6 +319,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         $('.custumdropdown input[type=checkbox]').prop("checked", "true");
         select_year();
         book_info();
+        chk_type();
         $('.allChk').click();
         $('.allChk').prop('checked', true);
     })
@@ -418,8 +395,64 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
             dataType: "html",
             success: function(response) {
                 $("#unit").html(response);
+                chk_type();
             }
-        })
+        });
+    }
+
+    function chk_type() {
+        var textbook = $('#textbook').val();
+        var level = $('#level').val();
+        var book = $('#unit').val();
+        // alert(book);
+        if(textbook == "알파" && (level == "루트" || level == "파이")) {
+            if(book == "총정리(1)" || book == "총정리(2)") {
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="개념마스터">개념마스터</option>' +
+                    '<option value="개념확인">개념확인</option>');
+            }else {
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="개념마스터">개념마스터</option>' +
+                    '                                                    <option value="개념확인">개념확인</option>' +
+                    '                                                    <option value="서술과 코칭">서술과 코칭</option>' +
+                    '                                                    <option value="이야기수학">이야기수학</option>');
+            }
+        }
+        if(textbook == "알파" && level == "시그마") {
+            if(book == "총정리(1)" || book == "총정리(2)") {
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="유형마스터">유형마스터</option>' +
+                    '<option value="유형확인">유형확인</option>');
+            }
+            for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="유형마스터">유형마스터</option>' +
+                '<option value="유형확인">유형확인</option>' +
+                '<option value="서술과 코칭">서술과 코칭</option>' +
+                '<option value="이야기수학">이야기수학</option>');
+        }
+        if(textbook == "베타" && (level == "루트" || level == "파이")) {
+            if(book == "중간평가") {
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="중간평가1회">중간평가1회</option>' +
+                    '<option value="중간평가2회">중간평가2회</option>');
+            }else if(book == "기말평가"){
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="기말평가1회">기말평가1회</option>' +
+                    '<option value="기말평가2회">기말평가2회</option>');
+            }else {
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="개념다지기">개념다지기</option>' +
+                    '<option value="단원마무리">단원마무리</option>' +
+                    '<option value="도전문제">도전문제</option>');
+            }
+        }
+        if(textbook == "베타" && level == "시그마") {
+            if(book == "중간평가") {
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="중간평가1회">중간평가1회</option>' +
+                    '<option value="중간평가2회">중간평가2회</option>');
+            }else if(book == "기말평가"){
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="기말평가1회">기말평가1회</option>' +
+                    '<option value="기말평가2회">기말평가2회</option>');
+            }else {
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="개념다지기">개념다지기</option>' +
+                    '<option value="단원마무리">단원마무리</option>' +
+                    '<option value="도전문제">도전문제</option>');
+            }
+        }
+
     }
 
     function move_page() {

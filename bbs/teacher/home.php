@@ -124,7 +124,7 @@ include_once ('head.php');
 
                    <? if($day[0][$i]) : ?>
 
-                        <td style="<? if(($i+1)==date(w)) echo 'background: rgba(0, 0, 0, 0.05);';?>">
+                        <td style="<? if(($i+1)==date(w)) echo 'background: #C6FF70;';?>">
                             <div class="class_info">
                                 <?php
                                 for($j=0; $j<count($time); $j++) {
