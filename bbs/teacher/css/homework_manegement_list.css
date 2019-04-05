@@ -132,7 +132,6 @@ table thead tr th {
     font-weight: 400;
     color: rgb(255, 255, 255);
     background-color: rgb(41, 124, 62);
-    padding: 5 15 5 15px;
 }
 
 table tbody tr td {
@@ -230,12 +229,12 @@ table tbody tr:nth-child(2n) {
 }
 
 .homework_list_table table thead tr th:nth-child(1) {
-    width: 10px;
+    width: 20px;
 }
 .homework_list_table table thead tr th {
-    width: 70px;
+    width: 140px;
+    padding: 5px 5px 5px 5px;
 }
-
 
 .x_btn {
     width: 15px;
@@ -318,5 +317,5 @@ table tbody tr:nth-child(2n) {
     max-width: 200px !important;
 }
 .homework_cont td:nth-child(2) input {
-    width: 70px;
+    width: 80px;
 }

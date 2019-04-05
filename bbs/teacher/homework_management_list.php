@@ -166,7 +166,7 @@ include_once ('head.php');
                 <p class="box_title">숙제 목록</p>
                 <div class="table_option_wrap">
                     <div class="table_option">
-                        <input type="checkbox" id="clear" onchange="clear_btn()">
+                        <input type="checkbox" id="clear" onclick="clear_btn()">
                         <p>완료한 숙제 제외</p>
                     </div>
                 </div>
@@ -196,7 +196,7 @@ include_once ('head.php');
 
                             <th>시작일</th>
                             <th>종료일</th>
-                            <th>상태</th>
+                            <th style="width: 70px;">상태</th>
                         </tr>
                         </thead>
                     </table>
@@ -302,8 +302,8 @@ include_once ('head.php');
     }
 
     function clear_btn() {
-        // if($('#clear').attr('checked', false)) $('.complete_text').parent().parent().hide();
-        // else $('.complete_text').parent().parent().show();
+        if($('#clear').prop('checked')) $('.complete_text').parent().parent().hide();
+        else $('.complete_text').parent().parent().show();
     }
 
     function book_info1(e) {

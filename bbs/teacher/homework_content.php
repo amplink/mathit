@@ -337,7 +337,11 @@ while($res = mysqli_fetch_array($result)) {
             }
         } );
         function show_box(e) {
+            var size = <?php echo $i;?>;
             if($('.students_checks'+e).css('visibility', 'hidden')) {
+                for(var i=0; i<size; i++) {
+                    $('.students_checks'+i).css('visibility', 'hidden');
+                }
                 $('.students_checks'+e).css('visibility', '');
             }
         }

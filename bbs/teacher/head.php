@@ -209,7 +209,7 @@
     </div>
     <div class="home_btn"><a href="home.php"><img src="img/home.png" alt="home_icon"></a></div>
     <div class="logo_section">
-        <div class="logo"><a href="home.php"><img src="img/logo_white.png" alt="header_logo"></a></div>
+        <div class="logo"><a href="home.php"><img src="img/main_logo.png" alt="header_logo"></a></div>
 <!--        <p class="navigation_text">--><?php //echo $nav_text;?><!--</p>-->
     </div>
     <div class="member_info_wrap">
