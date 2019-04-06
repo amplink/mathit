@@ -18,6 +18,5 @@ for($i=0; $i<count($chk_list); $i++) {
     $sql = "delete from `teacher_score` where `seq` = '$chk_list[$i]';";
     sql_query($sql);
 }
-alert_msg("완료되었습니다.");
-location_href("./record_management_list.php");
+exit;
 ?>

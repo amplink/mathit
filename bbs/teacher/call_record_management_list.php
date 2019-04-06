@@ -31,7 +31,8 @@ $sql = "select * from `teacher_score` where `class` = '$class' and `test_genre` 
 $result = mysqli_query($connect_db, $sql);
 $res = mysqli_fetch_array($result);
 ?>
-<form action="record_management_del.php?class=<?=$class?>&test_genre=<?=$test_genre?>&title=<?=$title?>" method="post" id="score_form">
+<form method="post" id="score_form">
+    <input type="hidden" value="record_management_del.php?class=<?=$class?>&test_genre=<?=$test_genre?>&title=<?=$title?>" id="url">
     <div class="right_box">
         <div class="right_box_1">
             <div class="r_left_box">
@@ -127,19 +128,14 @@ $res = mysqli_fetch_array($result);
         </div>
         <div class="r_btn_wrap">
             <div class="excel_btn f_b"><a href="#none">EXCEL</a></div>
-            <div class="print_btn f_b" onclick="print_data()"><a>출력</a></div>
-            <div class="complete_btn f_b" onclick='save()'><a>저장</a></div>
+            <div class="print_btn f_b" onclick="print_data()"><a href="">출력</a></div>
+            <div class="complete_btn f_b" onclick='save()'><a href="">저장</a></div>
         </div>
     </div>
 </form>
 <script>
     function print_data() {
         window.print();
-    }
-
-    function save() {
-        $(window).unbind('beforeunload');
-        $('#score_form').submit();
     }
 
     function del_score() {

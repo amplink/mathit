@@ -315,6 +315,9 @@ include_once('_common.php');
 
 </html>
 <script>
+    $(window).bind('beforeunload', function () {
+        return "저장하지 않고 페이지를 벗어나시겠습니까?";
+    });
     var a = 1000;
     var b = 1000;
     var c = 1000;
@@ -398,6 +401,7 @@ include_once('_common.php');
                 if(e==1 && isCnt == 0) {
                     alert('중복된 교재정보입니다.');
                 }else {
+                    $(window).unbind('beforeunload');
                     $("#answer_add_form").attr("action", "./answer_add_chk.php");
                     $("#answer_add_form").submit();
                 }
@@ -656,13 +660,6 @@ include_once('_common.php');
 
     function go_to_another() {
         location.href="answer_add_beta.php";
-    }
-    var isShow = 0;
-    function button_can() {
-        isShow = 1;
-    }
-    window.onbeforeunload = function () {
-        if(isShow) return "저장하지 않고 떠나시겠습니까?";
     }
 
 </script>

@@ -496,6 +496,9 @@ if($book_type == "베타") {
 
 </html>
 <script>
+    $(window).bind('beforeunload', function () {
+        return "저장하지 않고 페이지를 벗어나시겠습니까?";
+    });
     var a = 1000;
     var b = 1000;
     var c = 1000;
@@ -569,6 +572,7 @@ if($book_type == "베타") {
 
     function myFunction() {
         $("select").prop('disabled', false);
+        $(window).unbind('beforeunload');
         $("#answer_add_form").submit();
     }
 
@@ -603,14 +607,5 @@ if($book_type == "베타") {
                 $("#unit").html(response);
             }
         });
-    }
-
-    var isShow = 0;
-
-    function button_can() {
-        isShow = 1;
-    }
-    window.onbeforeunload = function () {
-        if(isShow) return "저장하지 않고 떠나시겠습니까?";
     }
 </script>

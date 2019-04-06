@@ -1,6 +1,10 @@
 <?php
 include_once ('_common.php');
 include_once ('head.php');
+
+$class = $_GET['class'];
+$test_genre = $_GET['test_genre'];
+$title = $_GET['title'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -219,6 +223,21 @@ include_once ('head.php');
         });
     }
 
+    function save() {
+        $(window).unbind('beforeunload');
+        var url = $('#url').val();
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: $('#score_form').serialize(),
+            success: function(response) {
+                alert('완료되었습니다.');
+                // location.href='./call_record_management_list.php?class='+t_class+'&test_genre='+test_genre+'&title'+title;
+            }
+        });
+        return false;
+    }
+
     function move_page() {
         var a = $('#quarter_select').val();
         var b = $('#year_select').val();
@@ -232,3 +251,13 @@ include_once ('head.php');
 </body>
 
 </html>
+<?php
+if($class) {
+    if($test_genre == "중간평가") $e = 1;
+    if($test_genre == "기말평가") $e = 2;
+    if($test_genre == "입반테스트") $e = 4;
+    if($test_genre == "분기테스트") $e = 3;
+
+    echo "<script>lecture('$class');chk_test_genre($e);call_data('$title')</script>";
+}
+?>
