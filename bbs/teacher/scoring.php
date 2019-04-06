@@ -56,7 +56,7 @@ include_once ('head.php');
 
 <?
 
-    $corner = ($_GET['corner'])?$_GET['corner']:"1";
+    $corner = 1;
 
 	$sql = "SELECT 
 	           id, class_name, student_name, h_id, current_status, 
@@ -72,8 +72,6 @@ include_once ('head.php');
 
     $wrong_anwer = $res['wrong_anwer_'.$res['apply_count']];
 
-    $grade_arr = array("초3"=>"3", "초4"=>"4", "초5"=>"5", "초6"=>"6",  "중1"=>"7", "중2"=>"8", "중3"=>"9");
-    $semester_arr = array("1학기"=>"1", "2학기"=>"2");
 	$sql = "SELECT 
 	           textbook, grade, semester, level, unit, corner1,
 			   Q_number1, corner2, Q_number2,corner3, Q_number3
@@ -92,6 +90,7 @@ include_once ('head.php');
 		}
 	}
 
+	$tot = count($corner_arr);
 ?>
 
     <div class="head_section">
@@ -115,7 +114,7 @@ include_once ('head.php');
             <div class="head_right">
                 <div class="resend_btn"><a href="#none">재전송 요청</a></div>
                 <div class="complete_btn"><a href="javascript:complete()">완료</a></div>
-                <div class="cancel_btn"><a href="#none">취소</a></div>
+                <div class="cancel_btn"><a href="javascript:history.back()">취소</a></div>
             </div>
         </div>
     </div>
@@ -128,6 +127,8 @@ include_once ('head.php');
 		<input type="hidden" name="d_uid" value="<?=$res['d_uid']?>">
 		<input type="hidden" name="s_id" value="<?=$res['student_id']?>">
 		<input type="hidden" name="tempSave" id="tempSave">
+		<input type="hidden" name="cornerType" id="cornerType" value="1">
+		<input type="hidden" name="cornerTot" id="cornerTot" value="<?=$tot?>">
 		<div class="scoring_box">
 
 
@@ -138,43 +139,41 @@ include_once ('head.php');
 					<input type="hidden" name="corner_name" value="<?=$res2['corner'.$corner]?>">
 				</div>
 				<p>
-				<span>
-				 <select name="corner" onChange="chCorner(this.value)">
+				<div style="width:500px;height:1px">
+				 <div style="padding-left:10px;text-align:right">
 	<?
-	$tot = count($corner_arr);
 		for($i=1; $i<=$tot; $i++){
-			if($i == $corner) $select = "selected";
-			else                      $select = "";
-			echo "<option value='".$i."' ".$select.">".$res2['corner'.$i]."</option>";
+			if($i == $corner) $chk = "checked";
+			else              $chk = "";
+			echo "&nbsp;<input type='radio' name='corner' value='".$i."' ".$chk." onclick='cornerView(".$i.")'><span style='font-size:16px;'>".$res2['corner'.$i]."</span>";
 		}
-	?>
-				 
-				 </select>
-				</span>
-				<span style="float:right">
-                   <!--<span class="complete_btn"><a href="javascript:saveStep()">완료</a></span>-->
+
+	?> 
+                 </div>
+				</div>
+				<div style="height:25px"></div>
+				<!--<span style="float:right">
                    <a href="javascript:saveStep()">임시저장</a>
-				</span>
+				</span>-->
 				</p>
 				<div class="score_board_table">
 				<table>
 					<thead>
 					<tr>
 						<th style="text-align:left;padding-left:40px">문항&nbsp;&nbsp;</th>
-						<th style="text-align:center;padding-right:40px">정답</th>
-						<th style="text-align:right;padding-right:35px"><input type="checkbox" id="allCheck"></th>
+						<th style="text-align:center;padding-right:80px">정답</th>
+						<th style="text-align:right;padding-right:13px"><input type="checkbox" id="allCheck"></th>
 					</tr>
 					</thead>
 				</table>
 				</div>
 				<div class="score_board_table" style="height:500px;overflow:auto;margin-top:-1px">
-				  <table>
-					<tbody>
+
 
 
 	<?
 		$sql = "SELECT 
-				   item_number, answer_image
+				   item_number, answer_image, c_name
 				FROM 
 				  `answer_master`  
 				WHERE 
@@ -183,30 +182,50 @@ include_once ('head.php');
 				   AND semester='".$semester_arr[$res2[semester]]."'
 				   AND unit = '".$res2[unit]."'
 				   AND level = '".$res2[level]."'
-				   AND c_name = '".$corner_arr[$corner]."'
-				ORDER BY item_number ASC";
+				   -- AND c_name = '".$corner_arr[$corner]."'
+				ORDER BY c_name, item_number ASC";
 
         $wrongData =  json_decode($wrong_anwer,true);
+		//print_r($wrongData);
 		$result3 = mysqli_query($connect_db, $sql);
+		
+		$group = array();
+		foreach ( $result3 as $value ) {
+			$group[$value['c_name']][] = $value;
+		}
 
-		$wrongArr = explode(",",$wrongData[$corner]);
+		$tot = count($group);
 
-		while($res3 = mysqli_fetch_array($result3)) {
+		for($i=1; $i<=$tot; $i++){
 
+            $chkAnswers = explode(",",$Q_number_arr[$i]);
+            if($i == 1) $style = "show";
+			else        $style = "none";
+			echo "<div id='corner_$i' style='display:$style'>				  
+			       <table>
+					<tbody>";
+			for($j=0; $j<=count($group[$res2['corner'.$i]]); $j++){
+
+				if(!$group[$res2['corner'.$i]][$j]['item_number']) continue;
+				if(!in_array($group[$res2['corner'.$i]][$j]['item_number'], $chkAnswers)) continue;
+
+				$wrongArr = explode(",",$wrongData[$i]);
 	?>
-						<tr>
-							<td><span><?=$res3['item_number']?></span></td>
-							<td>
-								<div class="img_input_place"><img src="<?=$res3['answer_image']?>" height="30"></div>
-							</td>
-							<td><input type="checkbox" name="marking[]" value="<?=$res3['item_number']?>" id="marking" class="marking" <? if(in_array($res3['item_number'], $wrongArr)) echo "checked"; ?>></td>
-						</tr>
 
+						<tr class="group_<?=$i?>">
+							<td width="70"><span><?=$group[$res2['corner'.$i]][$j]['item_number']?></span></td>
+							<td width="390">
+								<div class="img_input_place"><img src="<?=$group[$res2['corner'.$i]][$j]['answer_image']?>" height="30"></div>
+							</td>
+							<td><input type="checkbox" name="marking<?=$i?>[]" value="<?=$group[$res2['corner'.$i]][$j]['item_number']?>" id="marking" class="marking<?=$i?>" <? if(in_array($group[$res2['corner'.$i]][$j]['item_number'], $wrongArr)) echo "checked"; ?>></td>
+						</tr>
 	<?
+
+			}
+			 echo "</tbody></table></div>";
 		}
 	?>
-						</tbody>
-					  </table>
+
 				</div>
 			</div>
 			<div class="r_section">
@@ -244,10 +263,11 @@ include_once ('head.php');
 
     $(function(){ 
 		$("#allCheck").click(function(){ 
+			var no = $("#cornerType").val();
 			if($("#allCheck").prop("checked")) { 
-				$("input[type=checkbox]").prop("checked",true); 
+				$(".marking"+no).prop("checked",true); 
 			} else { 
-				$("input[type=checkbox]").prop("checked",false); 
+				$(".marking"+no).prop("checked",false); 
 			} 
 		});
 	});
@@ -300,6 +320,24 @@ include_once ('head.php');
 		}
 
         $("#scoreForm").submit();
+	}
+
+	function cornerView(no){
+        var chk = 0;
+		$("[id ^= 'corner_']").hide();
+		$("#corner_"+no).show();
+		$("#cornerType").val(no);
+        var n = 0;
+		$(".marking"+no).each(function() {
+		   if($(".marking"+no).eq(n).is(':checked')){
+			  chk++;
+		   }
+		   n++;
+		});
+
+		if(chk != $(".marking"+no).length) $("#allCheck").prop("checked",false);
+		else                               $("#allCheck").prop("checked",true);
+
 	}
 
 </script>

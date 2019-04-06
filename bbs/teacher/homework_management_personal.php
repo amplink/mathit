@@ -17,10 +17,11 @@ include_once ('head.php');
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/common.js"></script>
-    <script src="js/homework_manegement_personal.js"></script>
+    <script src="js/homework_manegement_personal.js?v=20100408"></script>
     <script>
         $( function() {
             $( "#datepicker" ).datepicker({
+				//dateFormat: "yy-mm-dd",
                 showOn: "button",
                 buttonImage: "img/calendar.png",
                 buttonImageOnly: true,
@@ -36,35 +37,96 @@ include_once ('head.php');
             });
         } );
     </script>
+	<style>
+		.search_btn {
+			display: inline-block;
+			width: 80px;
+			height: 25px;
+			line-height: 25px;
+			border-radius: 20px;
+			background-color: rgb(32, 175, 68);
+			margin-left: 10px;
+			cursor: pointer;
+		}
+		.search_btn a {
+			display: block;
+			width: 100%;
+			height: 100%;
+			font-size: 14px;
+			font-weight: 600;
+			color: rgb(255, 255, 255);
+			text-align: center;
+		}
+	</style>
 </head>
 
 <body>
 <section>
+  <form action="<?=$_SERVER['PHP_SELF'];?>" id="searchForm" method="get">
+    <input type="hidden" name="s_id" value="<?=$_GET['s_id']?>">
+	<input type="hidden" name="d_uid" value="<?=$_GET['d_uid']?>">
+	<input type="hidden" name="c_uid" value="<?=$_GET['c_uid']?>">
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
+
+<?
+	$sql = "SELECT 
+	           class_name, student_name, 
+			   apply_status_1, apply_status_2,
+			   submit_date1, submit_date2
+			FROM 
+	          `homework_assign_list`  
+	        WHERE 
+			  student_id='$_GET[s_id]' AND c_uid='$_GET[c_uid]' AND client_id='$ac'";
+
+	$result = mysqli_query($connect_db, $sql);
+	$res = mysqli_fetch_array($result);
+?>
                 <p class="left_text">
-                    <span>초6</span>
-                    <span>미적분학</span>
+                    <span><?=$res['class_name']?></span>
                 </p>
-                <p>
+               <!-- <p>
                     <span>(</span>
                     <span>월수금</span>
                     <span> 반</span>
                     <span>)</span>
-                </p>
+                </p>-->
                 <p>
                     <span> - </span>
-                    <span>엘사</span>
+                    <span><?=$res['student_name']?></span>
                     <span> 학생</span>
                 </p>
             </div>
             <div class="head_right">
                 <p>시작일 조회</p>
-                <input type="text" id="datepicker">
+<?
+     if($_GET['beginDate']) $beginDate = $_GET['beginDate'];
+	 else					$beginDate = date('m')."/01/".date('Y');
+?>
+                <input type="text" name="beginDate" id="datepicker" value="<?=$beginDate?>">
+				<p><div class="search_btn" onclick="search();"><a>검색</a></div></p>
             </div>
         </div>
     </div>
+  </form>
+<?
+	$sql = "SELECT 
+	           A.*,
+			   B._from, B._to, B.name, B.grade, B.semester, B.unit,
+			   B.Q_number1, B.Q_number2, B.Q_number3 
+			FROM 
+	          `homework_assign_list` A 
+			INNER JOIN 
+			  `homework` B
+			ON B.seq = A.h_id
+	        WHERE 
+			  A.student_id='$_GET[s_id]' AND A.c_uid='$_GET[c_uid]' AND A.client_id='$ac'";
+	if($_GET['beginDate']) $sql .= " AND _from >= '".$_GET['beginDate']."'";
+
+	$result2 = mysqli_query($connect_db, $sql);
+?>
+
     <div class="homework_table_section">
         <table>
             <thead>
@@ -78,117 +140,246 @@ include_once ('head.php');
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><span>2018-09-20</span></td>
-                <td><span>주교재</span><span>p 10 ~ 11</span></td>
+<?
+    $i = 0;
+	while($res2 = mysqli_fetch_array($result2)) {
+?>
+           <tr>
+                <td><span><?=substr($res2['_from'],6,4)?>-<?=substr($res2['_from'],0,2)?>-<?=substr($res2['_from'],3,2)?></span>
+				</td>
+                <td><span><?=$res2['name']?>
+				    <br><span><?=$res2['grade']?> - </span><span><?=$res2['semester']?> </span><span>(<?=$res2['unit']?>)</span>
+				</td>
                 <td>
-                    <span>2018-09-20</span><br>
+                    <span>~ </span>
+                    <span><?=substr($res2['_to'],6,4)?>-<?=substr($res2['_to'],0,2)?>-<?=substr($res2['_to'],3,2)?></span><br>
                 </td>
                 <td>
-                    <span>16 / 20</span><br>
-                    <span>80%</span>
+<?
+
+	if($res2['score_status_1'] == 'Y'){
+	   $wrong_tot1 = 0;
+	   $q_tot1 = count(explode(",",$res2['Q_number1']));
+	   $wrong1 = json_decode($res2['wrong_anwer_1'],true);
+	   if($wrong1){
+		   foreach ($wrong1 as $value) {
+			 $wrong_tot1 += count(explode(",",$value));
+		   }
+	   }
+       $score1 = round((($q_tot1-$wrong_tot1)/$q_tot1) * 100);
+
+?>
+                    <span><?=$q_tot1-$wrong_tot1?> / <?=$q_tot1?></span><br>
+                    <span><?=$score1?>%</span>
+<?
+	}
+?>
                 </td>
                 <td>
-                    <span>16 / 20</span><br>
-                    <span>80%</span>
+<?
+    if($res2['score_status_2'] == 'Y'){
+	  $wrong_tot2 = 0;
+	  $q_tot2 = count(explode(",",$res2['Q_number2']));
+	  $wrong2 = json_decode($res2['wrong_anwer_2'],true);
+	  if($wrong2){
+		  foreach ($wrong2 as $value) {
+			 $wrong_tot2 += count(explode(",",$value));
+		  }
+	  }
+      $score2 = round(($wrong_tot2/$q_tot2) * 100);
+?>
+                    <span><?=$wrong_tot2?> / <?=$q_tot2?></span><br>
+                    <span><?=$score2?>%</span>
                 </td>
+<? 
+	}	
+?>
                 <td>
-                    <p class="first_submitted show green">1차 제출</p>
-                    <p class="second_submitted hide blue">2차 제출</p>
-                    <p class="first_scroing_done hide green">1차 채점 완료</p>
-                    <p class="final_scroing_done hide blue">숙제 완료</p>
-                    <p class="not_submit hide">미제출</p>
-                    <p class="excess_date hide red">기한초과제출</p>
+<? 
+	echo status_view($res2['current_status']);
+?>
+
+                </td>
                 </td>
                 <td>
                     <div class="td_blank"></div>
-                    <div class="detail_show_btn"><a href="#none">상세보기</a></div>
-                    <div class="detail_show_disable_btn" style="display: none;"><a href="#none">상세보기</a></div>
+                    <div class="detail_show_btn" id="<?=$i?>"><a>상세보기</a>
+					
+					
+
+
+
+
+
+
+					
+					
+					
+					</div>
+					<!--<div class="detail_show_disable_btn"><a>상세보기</a></div>-->
                 </td>
             </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
 
+				
 <!--modal-->
-<div class="modal_wrap">
+<div class="modal_wrap" id="modal_wrap<?=$i?>">
     <div class="modal_box">
         <div class="modal_head">
             <p>
-                <span>초6</span>
-                <span>회로이론</span>
+                <span><?=$res['class_name']?></span>
             </p>
-            <p>
+            <!--<p>
                 <span>(</span>
                 <span>월수금</span>
                 <span> 반 )</span>
-            </p>
+            </p>-->
             <p>
                 <span> - </span>
-                <span>전두환</span>
+                <span><?=$res['student_name']?></span>
                 <span> 학생</span>
             </p>
-            <div class="r_exit_btn"><img src="img/close.png" alt="close_btn"></div>
+            <div class="r_exit_btn" style="padding-top:20px" id="<?=$i?>"><img src="img/close.png" alt="close_btn"></div>
         </div>
-        <div class="modal_div">
+        <div class="modal_div" style="text-align:left">
             <p class="modal_subtitle">제출 일시</p>
             <div class="modal_content">
                 <div class="first">
                     <p>1차 :</p>
                     <p>
-                        <span>정상 제출</span>
-                        <span style="display: none">기한초과제출</span>
-                        <span style="color: red; display: none;">미제출</span>
+<? 
+	if($res2['apply_status_1'] == 'Y') {?>
+     <span>정상제출</span>
+<?
+	}else if($res2['apply_status_1'] == 'N') {
+?>
+	<span style="color: red;">미제출</span>      
+<?
+	}else{
+?>	
+    <span style="display: none">기한초과제출</span>
+<?
+	}
+?>	                        
                     </p>
-                    <p class="year_date">2018-09-20</p>
+
+<?
+	if($res2['apply_status_1'] == 'Y'){
+?>
+                    <p class="year_date" style="padding-left:10px"><?=substr($res2['submit_date1'],"0","10")?></p>
                     <span> / </span>
                     <p class="time">
-                        <span>PM</span>
-                        <span>17:05</span>
+                        <span><?=substr($res2['submit_date1'],"11","5")?></span>
                     </p>
+<?
+	}
+?>	
                 </div>
                 <div class="second">
                     <p>2차 :</p>
                     <p>
-                        <span style="display: none;">정상 제출</span>
-                        <span style="display: none;">기한초과제출</span>
-                        <span style="color: red;">미제출</span>
+<? 
+	if($res2['apply_status_2'] == 'Y') {?>
+     <span>정상제출</span>
+<?
+	}else if($res2['apply_status_2'] == 'N') {
+?>
+	<span style="color: red;">미제출</span>      
+<?
+	}else{
+?>	
+    <span style="display: none">기한초과제출</span>
+<?
+	}
+?>	
                     </p>
-                    <p class="year_date">2018-09-20</p>
+<?
+	if($res2['apply_status_2'] == 'Y'){
+?>
+                    <p class="year_date" style="padding-left:10px"><?=substr($res2['submit_date2'],"0","10")?></p>
                     <span> / </span>
                     <p class="time">
-                        <span>PM</span>
-                        <span>17:05</span>
+                        <span><?=substr($res2['submit_date2'],"11","5")?></span>
                     </p>
+<?
+	}
+?>	
                 </div>
             </div>
         </div>
-        <div class="modal_div">
+        <div class="modal_div" style="text-align:left">
             <p class="modal_subtitle">오답 문항 상세보기</p>
             <div class="modal_content">
                 <div class="first">
+
+<?
+	if($res2['score_status_1'] == 'Y'){
+?>
                     <p>1차 :</p>
-                    <p><span>1, 4, 5, 7, 8</span></p>
+                    <p><span>
+
+<?
+	   if($wrong1){
+	  	  foreach ($wrong1 as $value) {
+		    echo $value;
+		  }
+       }
+?>
+
+                    </span></p>
                     <p>
-                        <span>(</span>
-                        <span>5/10</span>
+
+
+                        <span><? if($wrong_tot1 == 0) echo "만점"; ?> (</span>
+						<?=$q_tot1-$wrong_tot1?> / <?=$q_tot1?></span>
                         <span>)</span>
                     </p>
+<?
+	}
+?>	
+
                 </div>
                 <div class="second">
+
+<?
+	if($res2['score_status_2'] == 'Y'){
+?>
                     <p>2차 :</p>
-                    <p><span>1, 4, 5, 7, 8</span></p>
+                    <p><span>
+					
+<?
+	   if($wrong1){
+		  foreach ($wrong2 as $value) {
+		     echo $value;
+		  }
+       }
+?>
+				
+					</span></p>
                     <p>
-                        <span>(</span>
-                        <span>5/10</span>
+                        <span><? if($wrong_tot2 == 0) echo "만점"; ?> (</span>
+                        <span><?=$q_tot2-$wrong_tot2?> / <?=$q_tot2?></span>
                         <span>)</span>
                     </p>
+<?
+	}
+?>	
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<?
+  $i++;
+	}
+?>
+
+            </tbody>
+        </table>
+    </div>
+</section>
+
 </body>
 
 </html>
@@ -196,4 +387,9 @@ include_once ('head.php');
     $('.modal_wrap').draggable({
         handle: '.modal_head'
     })
+
+    function search() {
+	   //var date = $("#datepicker").val();
+       $("#searchForm").submit();
+    }
 </script>

@@ -42,50 +42,44 @@ include_once ('head.php');
             </tr>
             </thead>
             <tbody>
-                <?php
-                $sql = "select * from `homework`";
-                $result = mysqli_query($connect_db, $sql);
-                while($res = mysqli_fetch_array($result)) {
-                    $student_name = explode(",", $res['student']);
-                    if($student_name[1]) {
-                        for($i=0; $i<count($student_name); $i++) {
-                            ?>
-                            <tr>
-                                <td><span><?=$res['grade']?></span><span><?=$res['level']?></span></td>
-                                <td><span><?=$student_name[$i]?></span></td>
-                                <td><span><?=$res['name']?></span><br><?=$res['grade']."-".$res['semester']."-".$res['unit']?></td>
-                                <td><span><?=$res['_from']?> ~ <?=$res['_to']?></span></td>
-                                <td>
-                                    <!-- 나중에 처리 -->
-                                    <div class="chk_box on"></div>
-                                    <div class="chk_box"></div>
-                                </td>
-                                <td>
-                                    <div class="scoring_btn"><a href="#none">채점하기</a></div>
-                                </td>
-                            </tr>
-                            <?php
-                        }
-                    }else {
-                        ?>
-                        <tr>
-                            <td><span><?=$res['grade']?></span><span><?=$res['level']?></span></td>
-                            <td><span><?=$res['student']?></span></td>
-                            <td><span><?=$res['name']?></span><br><?=$res['grade']."-".$res['semester']."-".$res['unit']?></td>
-                            <td><span><?=$res['_from']?> ~ <?=$res['_to']?></span></td>
-                            <td>
-                                <!-- 나중에 처리 -->
-                                <div class="chk_box on"></div>
-                                <div class="chk_box"></div>
-                            </td>
-                            <td>
-                                <div class="scoring_btn"><a href="#none">채점하기</a></div>
-                            </td>
-                        </tr>
-                        <?php
-                    }
-                }
-                ?>
+<?php
+
+	$sql = "SELECT 
+	           A.*,
+			   B._from, B._to, B.name, B.grade, B.semester, B.unit,
+			   B.Q_number1, B.Q_number2, B.Q_number3 
+			FROM 
+	          `homework_assign_list` A 
+			INNER JOIN 
+			  `homework` B
+			ON B.seq = A.h_id
+	        WHERE 
+			  A.score_status_1='N' AND A.client_id='$ac'";
+
+	$result = mysqli_query($connect_db, $sql);
+	while($res = mysqli_fetch_array($result)) {
+?>
+			<tr>
+				<td><span><?=$res['class_name']?></span></td>
+				<td><span><?=$res['student_name']?></span></td>
+				<td><span><?=$res['name']?></span><br><?=$res['grade']."-".$res['semester']."-".$res['unit']?></td>
+				<td><span><?=substr($res['_from'],6,4)?>-<?=substr($res['_from'],0,2)?>-<?=substr($res['_from'],3,2)?> ~ <?=substr($res['_to'],6,4)?>-<?=substr($res['_to'],0,2)?>-<?=substr($res['_to'],3,2)?></span></td>
+				<td>
+<?
+	$chk1 = ($res['apply_status_1'] == 'Y')?"on":"";
+	$chk2 = ($res['apply_status_2'] == 'Y')?"on":"";
+?>
+					<!-- 나중에 처리 -->
+					<div class="chk_box <?=$chk1?>"></div>
+					<div class="chk_box <?=$chk2?>"></div>
+				</td>
+				<td>
+					<div class="scoring_btn"><a href="scoring.php?id=<?=$res['id']?>">채점하기 </a></div>
+				</td>
+			</tr>
+<?php
+	}
+?>
             </tbody>
         </table>
     </div>

@@ -154,6 +154,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                             <p class="l_text">숙제명</p>
                             <input type="text" placeholder="숙제명을 입력해주세요" name ="name" id="name">
                             <input type="hidden" name="class_name" id="class_name">
+							<input type="hidden" name="corner_no" id="corner_no" value="corner1">
                         </div>
                         <div class="homework_deadline_wrap">
                             <div class="date_range">
@@ -211,21 +212,23 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="corner1" id="corner1">
+                                                <select name="corner1" id="corner1" class="corner" onclick="cornerSel('1');" data-key="1">
 
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="Q_number1[]" id="Q_number1" class="custumdropdown" custumdrop="question" multiple="multiple">
+                                                <select name="Q_number1[]" id="Q_number1" class="custumdropdown1" id="custumdropdown1" custumdrop="question" multiple="multiple">
                                                     <?php
                                                     for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
                                                     ?>
                                                 </select>
-                                                <script src="js/homework_manegement_add.js?v=201904011"></script>
+                                                <script src="js/homework_manegement_add.js?v=201904051"></script>
 
                                                 <script>
                                                     $(function() {
-                                                        $('.custumdropdown').homework_manegement_add();
+														$('[id^=Q_number]').empty();
+                                                        //$('.custumdropdown').homework_manegement_add();
+
                                                     });
                                                 </script>
                                             </td>
@@ -233,12 +236,12 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                         <tr>
                                             <td></td><td></td><td></td><td></td><td></td>
                                             <td>
-                                                <select name="corner2" id="corner2">
+                                                <select name="corner2" id="corner2" class="corner" onclick="cornerSel('2');" data-key="2">
 
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="Q_number2[]" id="Q_number2" class="custumdropdown" custumdrop="question" multiple="multiple">
+                                                <select name="Q_number2[]" id="Q_number2" class="custumdropdown2" id="custumdropdown2" custumdrop="question" multiple="multiple">
                                                     <?php
                                                     for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
                                                     ?>
@@ -248,12 +251,12 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                         <tr>
                                             <td></td><td></td><td></td><td></td><td></td>
                                             <td>
-                                                <select name="corner3" id="corner3">
+                                                <select name="corner3" id="corner3" class="corner" onclick="cornerSel('3');" data-key="3">
 
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="Q_number3[]" id="Q_number3" class="custumdropdown" custumdrop="question" multiple="multiple">
+                                                <select name="Q_number3[]" id="Q_number3" class="custumdropdown3" id="custumdropdown3" custumdrop="question" multiple="multiple">
                                                     <?php
                                                     for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
                                                     ?>
@@ -263,12 +266,12 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                         <tr>
                                             <td></td><td></td><td></td><td></td><td></td>
                                             <td>
-                                                <select name="corner4" id="corner4">
+                                                <select name="corner4" id="corner4" class="corner" onclick="cornerSel('4');" data-key="4">
 
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="Q_number4[]" id="Q_number4" class="custumdropdown" custumdrop="question" multiple="multiple">
+                                                <select name="Q_number4[]" id="Q_number4" class="custumdropdown4" id="custumdropdown4" custumdrop="question" multiple="multiple">
                                                     <?php
                                                     for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
                                                     ?>
@@ -316,6 +319,43 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 $('.student_list_box table tbody tr').not(this).removeClass('on');
             }
         })
+
+
+        $('.corner').click(function () {
+
+		  if($(this).val() != '선택'){
+
+			 var params = $("#all").serialize();
+             var no = $(this).data("key");
+			 var n = no -1;
+			 $("#corner_no").val($(this).val());
+
+			 //alert($("#corner_no").val());
+			 $.ajax({
+				type: "POST",
+				url: "call_corner_content.php?no="+no+"&val="+$(this).val(),
+				data:params,
+				dataType: "json",
+				success: function(response){
+				  //console.log(response.str1);
+				  //if(response) console.log(response.str1);
+				  //alert(response.str2);
+				  //$("#Q_number"+no).empty();
+				  //$('.combobox').children().empty();
+				  //$('.combobox').eq(n).html(response.str1);
+
+				 $('.combobox:eq('+n+')').html(response.str1);
+				 $("#Q_number"+no).append(response.str2);			  
+				 $('.custumdropdown'+no).homework_manegement_add();
+				}
+			 });
+		  }
+
+
+        });
+
+
+
         $('.custumdropdown input[type=checkbox]').prop("checked", "true");
         select_year();
         book_info();
@@ -398,6 +438,14 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 chk_type();
             }
         });
+
+        if($('#textbook').val() == "베타") {
+            $('#unit option[value="총정리(1)"]').text("중간평가");
+            $('#unit option[value="총정리(1)"]').val("중간평가");
+
+            $('#unit option[value="총정리(2)"]').val("기말평가");
+            $('#unit option[value="총정리(2)"]').val("기말평가");
+        }
     }
 
     function chk_type() {
@@ -416,10 +464,10 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 
         if(textbook == "알파" && (level == "루트" || level == "파이")) {
             if(book == "총정리(1)" || book == "총정리(2)") {
-                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="개념마스터">개념마스터</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option>선택</option><option value="개념마스터">개념마스터</option>' +
                     '<option value="개념확인">개념확인</option>');
             }else {
-                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="개념마스터">개념마스터</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option>선택</option><option value="개념마스터">개념마스터</option>' +
                     '                                                    <option value="개념확인">개념확인</option>' +
                     '                                                    <option value="서술과 코칭">서술과 코칭</option>' +
                     '                                                    <option value="이야기수학">이야기수학</option>');
@@ -427,36 +475,36 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         }
         if(textbook == "알파" && level == "시그마") {
             if(book == "총정리(1)" || book == "총정리(2)") {
-                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="유형마스터">유형마스터</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option>선택</option><option value="유형마스터">유형마스터</option>' +
                     '<option value="유형확인">유형확인</option>');
             }
-            for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="유형마스터">유형마스터</option>' +
+            for(var i=1; i<=4; i++) $('#corner'+i).html('<option>선택</option><option value="유형마스터">유형마스터</option>' +
                 '<option value="유형확인">유형확인</option>' +
                 '<option value="서술과 코칭">서술과 코칭</option>' +
                 '<option value="이야기수학">이야기수학</option>');
         }
         if(textbook == "베타" && (level == "루트" || level == "파이")) {
             if(book == "중간평가") {
-                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="중간평가1회">중간평가1회</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option>선택</option><option value="중간평가1회">중간평가1회</option>' +
                     '<option value="중간평가2회">중간평가2회</option>');
             }else if(book == "기말평가"){
-                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="기말평가1회">기말평가1회</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option>선택</option><option value="기말평가1회">기말평가1회</option>' +
                     '<option value="기말평가2회">기말평가2회</option>');
             }else {
-                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="개념다지기">개념다지기</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option>선택</option><option value="개념다지기">개념다지기</option>' +
                     '<option value="단원마무리">단원마무리</option>' +
                     '<option value="도전문제">도전문제</option>');
             }
         }
         if(textbook == "베타" && level == "시그마") {
             if(book == "중간평가") {
-                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="중간평가1회">중간평가1회</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option>선택</option><option value="중간평가1회">중간평가1회</option>' +
                     '<option value="중간평가2회">중간평가2회</option>');
             }else if(book == "기말평가"){
-                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="기말평가1회">기말평가1회</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option>선택</option><option value="기말평가1회">기말평가1회</option>' +
                     '<option value="기말평가2회">기말평가2회</option>');
             }else {
-                for(var i=1; i<=4; i++) $('#corner'+i).html('<option value="실력확인">실력확인</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i).html('<option>선택</option><option value="실력확인">실력확인</option>' +
                     '<option value="단원마무리">단원마무리</option>' +
                     '<option value="도전문제">도전문제</option>');
             }
@@ -470,6 +518,36 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         // alert(a);
         location.href = './homework_management_add.php?s_year='+b+'&s_quarter='+a;
     }
+
+    function cornerSel(no){
+
+	 /* if($("#corner"+no).val() != '선택'){
+		 var n = no - 1;
+         var params = $("#all").serialize();
+
+		 $("#corner_no").val("corner"+no);
+		 //alert($("#corner_no").val());
+         $.ajax({
+            type: "POST",
+            url: "call_corner_content.php",
+			data:params,
+            dataType: "json",
+            success: function(response){
+              // console.log(response);
+			  if(response) console.log(response.str1);
+			  alert(response.str2);
+			  //$("#Q_number"+no).empty();
+			  //$('.combobox').children().empty();
+			  //$('.combobox').eq(n).html(response.str1);
+			  
+			 // $('.combobox:eq('+n+')').html(response.str1);
+			 $("#Q_number"+no).append(response.str2);			  
+			  $('.custumdropdown'+no).homework_manegement_add(response.str1);
+            }
+         });
+	  }*/
+	}
+
 
     $(window).bind('beforeunload', function () {
         return "저장하지 않고 페이지를 벗어나시겠습니까?";
