@@ -3575,9 +3575,21 @@ function status_view($state){
 			break;
         case "s2" :
 			$str = '<p class="second_submitted show blue">숙제 완료</p>';
+			break;	
+        case "s3" :
+			$str = '<p class="second_submitted show blue">숙제 완료</p>';
+			break;	
+        case "s0" :
+			$str = '<p class="not_submit hide">미제출</p>';
 			break;			
+        case "s0" :
+			$str = '<p class="excess_date show red">기한초과제출</p>';
+			break;				
 	}
 	return $str;
 
 }
+
+$grade_arr = array("초3"=>"3", "초4"=>"4", "초5"=>"5", "초6"=>"6",  "중1"=>"7", "중2"=>"8", "중3"=>"9");
+$semester_arr = array("1학기"=>"1", "2학기"=>"2");
 ?>
