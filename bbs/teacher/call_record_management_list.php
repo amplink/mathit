@@ -129,7 +129,7 @@ $res = mysqli_fetch_array($result);
         <div class="r_btn_wrap">
             <div class="excel_btn f_b"><a href="#none">EXCEL</a></div>
             <div class="print_btn f_b" onclick="print_data()"><a href="">출력</a></div>
-            <div class="complete_btn f_b" onclick='save()'><a href="">저장</a></div>
+            <div class="complete_btn f_b" onclick='save()' onmouseover="cursor()"><a>저장</a></div>
         </div>
     </div>
 </form>
@@ -145,5 +145,8 @@ $res = mysqli_fetch_array($result);
     function all_del_score() {
         $('input[type=checkbox]').prop('checked', true);
         del_score();
+    }
+    function cursor() {
+        $('.complete_btn').css('cursor', 'pointer');
     }
 </script>

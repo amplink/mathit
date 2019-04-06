@@ -59,7 +59,39 @@ for($i=0; $i<count($d_uid); $i++) {
     }
 }
 
+//if($day[0][$i]) : ?>
+<!---->
+<!--    <td style="--><?php
+//    $kk = $i+1;
+//    if($kk == 7) $kk = 0;
+//    if(($kk)==date(w)) {
+//        echo 'background: #C6FF70;';
+//    }?><!--">-->
+<!--        <div class="class_info">-->
+<!--            --><?php
+//            for($j=0; $j<count($time); $j++) {
+//
+//                if($time[$j] == $s) { //교시 표시
+//
+//                    //해당 수업에 학생 정보
+//                    $link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j];
+//                    $r_4 = api_calls_get($link_4);
+//
+//
+//                    echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
+//                }
+//            }
+//            ?>
+<!--        </div>-->
+<!--    </td>-->
+<?php
+//else :
+//
+//    echo "<td></td>";
+//
+//endif;
 var_dump($day);
 echo "00000000<br><br>";
 var_dump($time);
+var_dump($d_name);
 ?>

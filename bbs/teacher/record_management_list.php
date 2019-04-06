@@ -182,6 +182,7 @@ $title = $_GET['title'];
 
     var class_name;
     var test_genre;
+    var title;
 
     function lecture(e) {
         class_name = e;
@@ -212,6 +213,7 @@ $title = $_GET['title'];
     }
 
     function call_data(e) {
+        title = e;
         // alert("call_record_management_list.php?class="+class_name+"&genre="+test_genre+"&title="+e);
         $.ajax({
             type: "GET",
@@ -232,7 +234,7 @@ $title = $_GET['title'];
             data: $('#score_form').serialize(),
             success: function(response) {
                 alert('완료되었습니다.');
-                // location.href='./call_record_management_list.php?class='+t_class+'&test_genre='+test_genre+'&title'+title;
+                call_data(title);
             }
         });
         return false;
