@@ -234,7 +234,8 @@ $title = $_GET['title'];
             data: $('#score_form').serialize(),
             success: function(response) {
                 alert('완료되었습니다.');
-                call_data(title);
+                if(response == 1) call_data(title);
+                else location.href = './record_management_list.php';
             }
         });
         return false;
