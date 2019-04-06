@@ -18,6 +18,7 @@
 
         // 생성자
         function homework_manegement_add(select, settings) {
+			//this.reload();
             this.$select = $(select);
             this.settings = settings;
             this.create();

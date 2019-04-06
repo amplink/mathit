@@ -1,8 +1,12 @@
 $(document).ready(function(){
     $('.detail_show_btn').click(function(){
-        $('.modal_wrap').addClass('on');
+		//alert($(this).html());
+		var id = $(this).attr('id');
+         $('#modal_wrap'+id).css('display','block');
     })
     $('.r_exit_btn').click(function(){
-        $('.modal_wrap').removeClass('on');
+		var id = $(this).attr('id');
+        $('#modal_wrap'+id).css('display','none');
+		//alert($(this).parent().parent().parent('.modal_wrap').html());
     })
 })
