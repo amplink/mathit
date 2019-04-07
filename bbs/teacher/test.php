@@ -28,9 +28,11 @@ for($i=0; $i<count($d_uid); $i++) {
 
     $link = "/api/math/timetable?client_no=".$ac."&d_uid=".$d_uid[$i];
     $r = api_calls_get($link);
+    $kk = 0;
 
     if(count($r)) {
-
+        var_dump($r);
+        echo "<br><br><br>";
         for($j=0; $j<count($r); $j++) {
 
             $cnt = 0;
@@ -38,15 +40,16 @@ for($i=0; $i<count($d_uid); $i++) {
             if($r[$j][2] == $_SESSION['t_uid']) { //해당 선생(강사)님
 
                 $time[$i] = $r[$j][0];
-
+//                $time1[$i][$kk] = $r[$j][0];
+//                $kk++;
                 for($k=1; $k<count($r[$j]); $k++) {
 
                     if($k%3 == 0) {
 
                         if($r[$j][$k]) :
-
                             $day[$i][$cnt] = $r[$j][$k];
-
+                            $time1[$i][$cnt][$kk] = $r[$j][0];
+                            $kk++;
                         endif;
 
                         $cnt++;
@@ -90,8 +93,11 @@ for($i=0; $i<count($d_uid); $i++) {
 //    echo "<td></td>";
 //
 //endif;
-var_dump($day);
-echo "00000000<br><br>";
 var_dump($time);
+echo "<br><br>";
+var_dump($day);
+echo "<br><br>";
+var_dump($time1);
+echo "<br><br>";
 var_dump($d_name);
 ?>

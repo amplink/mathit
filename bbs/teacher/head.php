@@ -91,39 +91,41 @@
 	$time = array();
 	$cnt = 0;
 
-	for($i=0; $i<count($d_uid); $i++) {
+    for($i=0; $i<count($d_uid); $i++) {
 
-		$link = "/api/math/timetable?client_no=".$ac."&d_uid=".$d_uid[$i];
-		$r = api_calls_get($link);
-		if(count($r)) {
+        $link = "/api/math/timetable?client_no=".$ac."&d_uid=".$d_uid[$i];
+        $r = api_calls_get($link);
+        $kk = 0;
 
-			for($j=0; $j<count($r); $j++) {
-			
-				$cnt = 0;
+        if(count($r)) {
+            for($j=0; $j<count($r); $j++) {
 
-				if($r[$j][2] == $_SESSION['t_uid']) { //해당 선생(강사)님
-					
-					$time[$i] = $r[$j][0];
+                $cnt = 0;
 
-					for($k=1; $k<count($r[$j]); $k++) {
-											
-						if($k%3 == 0) {
+                if($r[$j][2] == $_SESSION['t_uid']) { //해당 선생(강사)님
 
-							if($r[$j][$k]) :
+//                    $time[$i] = $r[$j][0];
+//                    $time1[$i][$kk] = $r[$j][0];
+//                    $kk++;
+                    for($k=1; $k<count($r[$j]); $k++) {
 
-								$day[$i][$cnt] = $r[$j][$k];
+                        if($k%3 == 0) {
 
-							endif;
+                            if($r[$j][$k]) :
+                                $day[$i][$cnt] = $r[$j][$k];
+                                $time1[$i][$cnt][$kk] = $r[$j][0];
+                                $kk++;
+                            endif;
 
-							$cnt++;
-						}
-					} 
-				}
+                            $cnt++;
+                        }
+                    }
+                }
 
-		  }
+            }
 
-		}
-	}
+        }
+    }
 
 	//네비게이터
 
