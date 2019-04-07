@@ -21,10 +21,21 @@ $today_date = date("Y-m-d");
 
 <body>
 <section>
+
+<?
+	$link = "/api/math/student_att?client_no=".$_SESSION['client_no']."&stu_id=".$_GET['s_id']."&d_id=".$_GET['d_id']."&c_id=".$_GET['c_id']."&from=".$_GET['d_id']."&to=".$_GET['d_id'];
+	$r = api_calls_get($link);
+	//$student_name = $r[3];
+
+	$sql = "select * from `teacher_score` where `student` = '$_GET[s_name]' and `student_id` = '$_GET[s_id]';";
+	$result = mysqli_query($connect_db, $sql);
+	$res = mysqli_fetch_array($result);
+?>
+
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
-                <p class="left_text">중간성적표</p>
+                <p class="left_text"><?=$res['test_genre']?></p>
                 <p class="record_date"><?=$today_date?></p>
             </div>
             <div class="head_right">
@@ -42,13 +53,7 @@ $today_date = date("Y-m-d");
                         <p class="l_div_text">학급</p>
                         <div class="r_div_content">
                             <p>
-                                <span>초6</span>
-                                <span>집합론</span>
-                            </p>
-                            <p>
-                                <span>(</span>
-                                <span>월수금</span>
-                                <span>)</span>
+                                <span><?=$res['class']?></span>
                             </p>
                         </div>
                     </div>
@@ -56,7 +61,7 @@ $today_date = date("Y-m-d");
                         <p class="l_div_text">강사</p>
                         <div class="r_div_content">
                             <p>
-                                <span>탈레스</span>
+                                <span><?=$res['teacher']?></span>
                             </p>
                         </div>
                     </div>
@@ -64,7 +69,7 @@ $today_date = date("Y-m-d");
                         <p class="l_div_text">학생</p>
                         <div class="r_div_content">
                             <p>
-                                <span>최불암</span>
+                                <span><?=$res['student']?></span>
                             </p>
                         </div>
                     </div>
@@ -109,8 +114,8 @@ $today_date = date("Y-m-d");
                         </thead>
                         <tbody>
                         <tr>
-                            <td><span>79</span></td>
-                            <td><span>81</span></td>
+                            <td><span><?=$res['score1']?></span></td>
+                            <td><span><?=$res['score2']?></span></td>
                             <td><span>90</span></td>
                             <td><span>80</span></td>
                             <td><span>100</span></td>
@@ -120,7 +125,29 @@ $today_date = date("Y-m-d");
                 </div>
             </div>
             <br>
-            <p class="l_div_text">숙제제출 현황</p>
+
+<?
+	$sql = "SELECT 
+	           B.apply_status_1, B.apply_status_2,
+	           B.score_status_1, B.score_status_2, 
+			   B.wrong_anwer_1, B.wrong_anwer_2, 
+			   ifnull ( B.current_status, 's0' ) as current_status, 
+			   B.submit_date1, B.submit_date2, 
+			   A.seq, A._from, A._to, A.name, A.grade, A.semester, A.unit,
+			   A.Q_number1, A.Q_number2, A.Q_number3, A.Q_number4, A.name 
+			FROM 
+              `homework` A
+			LEFT JOIN 
+             `homework_assign_list` B  
+			ON A.seq = B.h_id
+	        WHERE 
+			   match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
+			AND A.c_uid='$_GET[c_uid]' AND A.client_id='$ac' AND B.apply_status_1 IS NOT NULL";
+	$result2 = mysqli_query($connect_db, $sql);
+?>
+
+            <p class="l_div_text" style="width:200px;">숙제제출 현황</p>
+			<p style="height:10px"></p>
             <div class="student_record_table_section">
                 <table>
                     <thead>
@@ -133,34 +160,66 @@ $today_date = date("Y-m-d");
                     </tr>
                     </thead>
                     <tbody>
+<?
+    $i = 0;
+	while($res2 = mysqli_fetch_array($result2)) {
+	   $wrong_tot1 = 0;
+       $q_tot1 = 0;
+       for($i=1; $i<4; $i++){
+           if($res2['Q_number'.$i]) $q_tot1 += count(explode(",",$res2['Q_number'.$i]));
+	   }
+
+	   $wrong1 = json_decode($res2['wrong_anwer_1'],true);
+	   if($wrong1){
+		   foreach ($wrong1 as $value) {
+			 $wrong_tot1 += count(explode(",",$value));
+		   }
+	   }
+       $score1 = round((($q_tot1-$wrong_tot1)/$q_tot1) * 100);
+
+	   $wrong_tot2 = 0;
+       $q_tot2 = 0;
+       for($i=1; $i<4; $i++){
+           if($res2['Q_number'.$i]) $q_tot2 += count(explode(",",$res2['Q_number'.$i]));
+	   }
+	   $wrong2 = json_decode($res2['wrong_anwer_2'],true);
+	   if($wrong2){
+		   foreach ($wrong2 as $value) {
+			 $wrong_tot2 += count(explode(",",$value));
+		   }
+	   }
+       $score2 = round((($wrong_tot1-$wrong_tot2)/$wrong_tot1) * 100);
+
+?>
+
                     <tr>
                         <td>
-                            <span>2018-09-03</span>
+                            <span><?=substr($res2['_from'],6,10)?>-<?=substr($res2['_from'],0,2)?>-<?=substr($res2['_from'],3,2)?></span>
                         </td>
                         <td>
-                            <span>주교재</span>
-                            <span>p2~5</span>
+                            <span><?=$res2['name']?></span>
                         </td>
                         <td>
-                            <span>2018-09-04</span>
+                            <span><? echo ($res2['submit_date2'])?substr($res2['submit_date2'],0,10):substr($res2['submit_date1'],0,10);?></span>
                         </td>
                         <td>
-                            <span>11</span>
-                            <span>/</span>
-                            <span>20</span>
+                            <span><?=$q_tot1-$wrong_tot1?> / <?=$q_tot1?></span>
                         </td>
                         <td>
-                            <span>3</span>
-                            <span>/</span>
-                            <span>3</span>
+                            <span><?=$wrong_tot1-$wrong_tot2?> / <?=$wrong_tot1?></span>
                         </td>
                     </tr>
+
+<?
+	}
+?>
+
+
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="r_box">
-            <div class="graph_input_section"></div>
+        <div class="r_box" style="position:absolute;z-index:999;width:900px;height:600px"><? include "./chart.php";?>
         </div>
     </div>
     <div class="down_box">

@@ -112,8 +112,14 @@ include_once ('head.php');
                 </p>
             </div>
             <div class="head_right">
-                <div class="resend_btn"><a href="#none">재전송 요청</a></div>
+                <div class="resend_btn"><a href="javascript:alert('서비스 준비중 입니다.')">재전송 요청</a></div>
+<? 
+	if($res['current_status'] == 'a1' or $res['current_status'] == 'a2'){
+?>
                 <div class="complete_btn"><a href="javascript:complete()">완료</a></div>
+<?
+	}
+?>
                 <div class="cancel_btn"><a href="javascript:history.back()">취소</a></div>
             </div>
         </div>
@@ -188,7 +194,6 @@ include_once ('head.php');
         $wrongData =  json_decode($wrong_anwer,true);
 		//print_r($wrongData);
 		$result3 = mysqli_query($connect_db, $sql);
-		
 		$group = array();
 		foreach ( $result3 as $value ) {
 			$group[$value['c_name']][] = $value;
@@ -291,7 +296,7 @@ include_once ('head.php');
 
 	function complete(){
 		var chk = 0;
-		$('.marking').each(function() {
+		$('[class ^= marking]').each(function() {
 			 if($(this).is(':checked')){
 				//DATA += ","+($(this).val());
 			    chk++;

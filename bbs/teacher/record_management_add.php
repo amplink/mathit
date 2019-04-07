@@ -136,7 +136,7 @@ include_once ('head.php');
                             <a id="text_class"></a>
                             <input type="hidden" name="class" id="class">
                         </div>
-                        <div class="division">
+                        <div class="division" style="padding-top:5px">
                             <p class="l_div_title">시험일</p>
                             <input type="text" name="date" id="datepicker">
                         </div>

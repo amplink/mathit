@@ -66,25 +66,14 @@ include_once ('head.php');
     <input type="hidden" name="s_id" value="<?=$_GET['s_id']?>">
 	<input type="hidden" name="d_uid" value="<?=$_GET['d_uid']?>">
 	<input type="hidden" name="c_uid" value="<?=$_GET['c_uid']?>">
+	<input type="hidden" name="class_name" value="<?=$_GET['class_name']?>">
+	<input type="hidden" name="student" value="<?=$_GET['student']?>">
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
 
-<?
-	$sql = "SELECT 
-	           class_name, student_name, 
-			   apply_status_1, apply_status_2,
-			   submit_date1, submit_date2
-			FROM 
-	          `homework_assign_list`  
-	        WHERE 
-			  student_id='$_GET[s_id]' AND c_uid='$_GET[c_uid]' AND client_id='$ac'";
-
-	$result = mysqli_query($connect_db, $sql);
-	$res = mysqli_fetch_array($result);
-?>
                 <p class="left_text">
-                    <span><?=$res['class_name']?></span>
+                    <span><?=$_GET['class_name']?></span>
                 </p>
                <!-- <p>
                     <span>(</span>
@@ -94,7 +83,7 @@ include_once ('head.php');
                 </p>-->
                 <p>
                     <span> - </span>
-                    <span><?=$res['student_name']?></span>
+                    <span><?=$_GET['student']?></span>
                     <span> 학생</span>
                 </p>
             </div>
@@ -112,16 +101,21 @@ include_once ('head.php');
   </form>
 <?
 	$sql = "SELECT 
-	           A.*,
-			   B._from, B._to, B.name, B.grade, B.semester, B.unit,
-			   B.Q_number1, B.Q_number2, B.Q_number3 
+	           B.apply_status_1, B.apply_status_2,
+	           B.score_status_1, B.score_status_2, 
+			   B.wrong_anwer_1, B.wrong_anwer_2, 
+			   ifnull ( B.current_status, 's0' ) as current_status, 
+			   B.submit_date1, B.submit_date2, 
+			   A._from, A._to, A.name, A.grade, A.semester, A.unit,
+			   A.Q_number1, A.Q_number2, A.Q_number3, A.Q_number4 
 			FROM 
-	          `homework_assign_list` A 
-			INNER JOIN 
-			  `homework` B
-			ON B.seq = A.h_id
+              `homework` A
+			LEFT JOIN 
+             `homework_assign_list` B  
+			ON A.seq = B.h_id
 	        WHERE 
-			  A.student_id='$_GET[s_id]' AND A.c_uid='$_GET[c_uid]' AND A.client_id='$ac'";
+			   match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
+			AND A.c_uid='$_GET[c_uid]' AND A.client_id='$ac'";
 	if($_GET['beginDate']) $sql .= " AND _from >= '".$_GET['beginDate']."'";
 
 	$result2 = mysqli_query($connect_db, $sql);
@@ -158,8 +152,13 @@ include_once ('head.php');
 <?
 
 	if($res2['score_status_1'] == 'Y'){
+
 	   $wrong_tot1 = 0;
-	   $q_tot1 = count(explode(",",$res2['Q_number1']));
+       $q_tot1 = 0;
+       for($i=1; $i<4; $i++){
+           if($res2['Q_number'.$i]) $q_tot1 += count(explode(",",$res2['Q_number'.$i]));
+	   }
+
 	   $wrong1 = json_decode($res2['wrong_anwer_1'],true);
 	   if($wrong1){
 		   foreach ($wrong1 as $value) {
@@ -172,27 +171,31 @@ include_once ('head.php');
                     <span><?=$q_tot1-$wrong_tot1?> / <?=$q_tot1?></span><br>
                     <span><?=$score1?>%</span>
 <?
-	}
+	} else { echo "<span> - </span>"; }
 ?>
                 </td>
                 <td>
 <?
     if($res2['score_status_2'] == 'Y'){
-	  $wrong_tot2 = 0;
-	  $q_tot2 = count(explode(",",$res2['Q_number2']));
-	  $wrong2 = json_decode($res2['wrong_anwer_2'],true);
-	  if($wrong2){
-		  foreach ($wrong2 as $value) {
+
+	   $wrong_tot2 = 0;
+       $q_tot2 = 0;
+       for($i=1; $i<4; $i++){
+           if($res2['Q_number'.$i]) $q_tot2 += count(explode(",",$res2['Q_number'.$i]));
+	   }
+	   $wrong2 = json_decode($res2['wrong_anwer_2'],true);
+	   if($wrong2){
+		   foreach ($wrong2 as $value) {
 			 $wrong_tot2 += count(explode(",",$value));
-		  }
-	  }
-      $score2 = round(($wrong_tot2/$q_tot2) * 100);
+		   }
+	   }
+       $score2 = round((($wrong_tot1-$wrong_tot2)/$wrong_tot1) * 100);
 ?>
-                    <span><?=$wrong_tot2?> / <?=$q_tot2?></span><br>
+                    <span><?=$wrong_tot1-$wrong_tot2?> / <?=$wrong_tot1?></span><br>
                     <span><?=$score2?>%</span>
-                </td>
+
 <? 
-	}	
+	} else { echo "<span> - </span>"; }	
 ?>
                 <td>
 <? 
@@ -205,15 +208,7 @@ include_once ('head.php');
                     <div class="td_blank"></div>
                     <div class="detail_show_btn" id="<?=$i?>"><a>상세보기</a>
 					
-					
-
-
-
-
-
-
-					
-					
+						
 					
 					</div>
 					<!--<div class="detail_show_disable_btn"><a>상세보기</a></div>-->
@@ -226,7 +221,7 @@ include_once ('head.php');
     <div class="modal_box">
         <div class="modal_head">
             <p>
-                <span><?=$res['class_name']?></span>
+                <span><?=$_GET['class_name']?></span>
             </p>
             <!--<p>
                 <span>(</span>
@@ -235,7 +230,7 @@ include_once ('head.php');
             </p>-->
             <p>
                 <span> - </span>
-                <span><?=$res['student_name']?></span>
+                <span><?=$_GET['student']?></span>
                 <span> 학생</span>
             </p>
             <div class="r_exit_btn" style="padding-top:20px" id="<?=$i?>"><img src="img/close.png" alt="close_btn"></div>
@@ -250,7 +245,7 @@ include_once ('head.php');
 	if($res2['apply_status_1'] == 'Y') {?>
      <span>정상제출</span>
 <?
-	}else if($res2['apply_status_1'] == 'N') {
+	}else if($res2['apply_status_1'] == 'N' or empty($res2['apply_status_1'])) {
 ?>
 	<span style="color: red;">미제출</span>      
 <?
@@ -281,7 +276,7 @@ include_once ('head.php');
 	if($res2['apply_status_2'] == 'Y') {?>
      <span>정상제출</span>
 <?
-	}else if($res2['apply_status_2'] == 'N') {
+	}else if($res2['apply_status_2'] == 'N' or empty($res2['apply_status_2'])) {
 ?>
 	<span style="color: red;">미제출</span>      
 <?
@@ -357,7 +352,7 @@ include_once ('head.php');
 					</span></p>
                     <p>
                         <span><? if($wrong_tot2 == 0) echo "만점"; ?> (</span>
-                        <span><?=$q_tot2-$wrong_tot2?> / <?=$q_tot2?></span>
+                        <span><?=$wrong_tot1-$wrong_tot2?> / <?=$wrong_tot1?></span>
                         <span>)</span>
                     </p>
 <?

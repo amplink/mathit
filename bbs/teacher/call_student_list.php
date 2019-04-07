@@ -19,7 +19,10 @@ for($i=1; $i<count($r); $i++) {
     $k = $i+1;
 ?>
 <tr>
-    <td><span><?=$r[$i][2]?></span><input type="hidden" name="student_name[]" value="<?=$r[$i][2]?>"></td>
+    <td><span><?=$r[$i][2]?></span>
+	<input type="hidden" name="student_name[]" value="<?=$r[$i][2]?>">
+	<input type="hidden" name="student_id[]" value="<?=$r[$i][1]?>">
+	</td>
     <td><input type="text" name="score_add1[]" onchange="set_avg(<?=$i?>)" id="score_add<?=$i?>"><span>점</span></td>
     <td><input type="text" name="score_add2[]" onchange="set_avg(<?=$i?>)" id="score_add<?=$k?>"><span>점</span></td>
     <td><span id="avg<?=$i?>"></span></td>

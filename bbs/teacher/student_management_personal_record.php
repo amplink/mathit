@@ -13,7 +13,7 @@ for($i=0; $i<count($r); $i++) {
         $class = $r[$i][4];
     }
 }
-$sql = "select * from `teacher_score` where `student` = '$student_name';";
+$sql = "select * from `teacher_score` where `student` = '$student_name' and `student_id` = '$_GET[s_id]';";
 $result = mysqli_query($connect_db, $sql);
 ?>
 <!DOCTYPE html>
@@ -68,7 +68,7 @@ $result = mysqli_query($connect_db, $sql);
                     <td><span><?=$res['date']?></span></td>
                     <td>
                         <div class="paper">
-                            <a href="student_management_personal_mid_record_detail.php?d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_name=<?=$student_name?>&title=<?=$res['title']?>">
+                            <a href="student_management_personal_mid_record_detail.php?d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_name=<?=$student_name?>&title=<?=$res['title']?>&s_id=<?=$res['student_id']?>">
                                 <img src="img/paper.png" alt="paper_icon">
                             </a>
                         </div>
