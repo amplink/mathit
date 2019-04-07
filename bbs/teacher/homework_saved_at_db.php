@@ -19,6 +19,8 @@ $corner4 = $_POST['corner4'];
 $Q_number4 = $_POST['Q_number4'];
 $student_list = $_POST['student_list'];
 $class_name = $_POST['class_name'];
+$d_id = $_POST['d_id'];
+$c_id = $_POST['c_id'];
 
 for($i=0; $i<count($Q_number1); $i++) {
     if($i==count($Q_number1)-1) $q_number1 .= $Q_number1[$i];
@@ -50,6 +52,8 @@ for($i=0; $i<count($student_list); $i++) {
 
 $query = "INSERT INTO homework SET
 						 `client_id`='$_SESSION[client_no]',
+						 `d_id`='$d_id',
+						 `c_id`='$c_id',
                          `name`='$name',
                          `class_name` = '$class_name',
                          `student` = '$st',
