@@ -275,14 +275,14 @@ include_once ('head.php');
     } );
 
     function set_avg(e) {
-        var k = e+1;
+        var k = e-1;
         var t = parseInt($('#score_add'+e).val(), 10);
         var p = parseInt($('#score_add'+k).val(), 10);
         var val;
         if(p) val = (t+p)/2;
         else val = t;
 
-        $('#avg'+e).text(val+"점");
+        $('#avg'+e/2).text(val+"점");
     }
 
     function move_page() {
