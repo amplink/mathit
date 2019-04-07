@@ -17,7 +17,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css?v=201904011" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css?v=20190407" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/common.js"></script>
@@ -155,6 +155,8 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                             <input type="text" placeholder="숙제명을 입력해주세요" name ="name" id="name">
                             <input type="hidden" name="class_name" id="class_name">
 							<input type="hidden" name="corner_no" id="corner_no" value="corner1">
+							<input type="hidden" name="d_id" id="d_id">
+							<input type="hidden" name="c_id" id="c_id">
                         </div>
                         <div class="homework_deadline_wrap">
                             <div class="date_range">
@@ -411,6 +413,8 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 $("#class_name").val(c);
             }
         });
+				$("#d_id").val(a);
+				$("#c_id").val(b);
     }
 
     function book_info() {

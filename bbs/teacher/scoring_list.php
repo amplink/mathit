@@ -12,7 +12,7 @@ include_once ('head.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/scoring_list.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/scoring_list.css?v=20180407" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
 </head>
@@ -60,7 +60,7 @@ include_once ('head.php');
 			  A.student_id='$_GET[s_id]' AND A.c_uid='$_GET[c_uid]' AND A.client_id='$ac'";
 
 	$result2 = mysqli_query($connect_db, $sql);
-	$res2 = mysqli_fetch_array($result2)
+	//$res2 = mysqli_fetch_array($result2);
 ?>
 
         <div class="scoring_table_section">
@@ -75,7 +75,9 @@ include_once ('head.php');
                     </tr>
                 </thead>
                 <tbody>
-
+<?
+	while($res2 = mysqli_fetch_array($result2)){
+?>
 
                     <tr>
                         <td><span><?=substr($res2['_from'],6,4)?>-<?=substr($res2['_from'],0,2)?>-<?=substr($res2['_from'],3,2)?></span></td>
@@ -92,9 +94,18 @@ include_once ('head.php');
 ?>
                         </td>
                         <td>
-                            <div class="scoring_btn"><a href="scoring.php?id=<?=$res2['id']?>">채점하기</a></div>
+<? 
+	$addStyle = ($res2['current_status'] == 's1' or $res2['current_status'] == 's2' 
+	             or $res2['current_status'] == 's3')?"disabledbutton":"";
+?>
+						
+                            <div class="scoring_btn <?=$addStyle?>"><a href="scoring.php?id=<?=$res2['id']?>">채점하기</a></div>
                         </td>
                     </tr>
+<?
+	}
+?>
+
                 </tbody>
             </table>
         </div>

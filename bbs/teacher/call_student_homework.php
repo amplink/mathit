@@ -9,7 +9,7 @@ $r = api_calls_get($link);
 for($i=1; $i<count($r); $i++) {
     ?>
         <tr onclick="student_select(<?=$r[$i][0]?>)">
-            <td ><input type="checkbox" name="student_list[]" value="<?=$r[$i][2]?>" checked><span><?=$r[$i][2]?></span></td>
+            <td ><input type="checkbox" name="student_list[]" value="<?=$r[$i][2]?>@<?=$r[$i][1]?>" checked><span><?=$r[$i][2]?></span></td>
         </tr>
     <?
 }

@@ -65,7 +65,7 @@ $res = mysqli_fetch_array($result);
                 <tr>
                     <td><span><?=$r[$i][2]?></span></td>
                     <td>
-                        <div class="hw_manegement_btn <?php if(!$res['hm_mg']) echo "disable";?>"><a href="homework_management_personal.php?s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">숙제</a></div>
+                        <div class="hw_manegement_btn <?php if(!$res['hm_mg']) echo "disable";?>"><a href="homework_management_personal.php?s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&class_name=<?=$class_name?>&student=<?=$r[$i][2]?>">숙제</a></div>
                         <div class="con_manegement_btn <?php if(!$res['consult_mg']) echo "disable";?>"><a href="consult_management_write.php?s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">상담</a></div>
                         <div class="report_view_btn <?php if(!$res['grade_card']) echo "disable";?>"><a href="student_management_personal_record.php?s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">성적</a></div>
                         <div class="scoring_list_btn"><a href="scoring_list.php?s_id=<?=$r[$i][1]?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>">채점</a></div>
