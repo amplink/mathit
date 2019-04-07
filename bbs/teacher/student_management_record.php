@@ -55,7 +55,7 @@ $res = mysqli_fetch_array($result);
             <thead>
             <tr>
                 <th>이름</th>
-                <th>관리</th>
+                <th>조회</th>
             </tr>
             </thead>
             <tbody>
