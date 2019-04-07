@@ -123,10 +123,14 @@ $res = mysqli_fetch_array($result);
                     for($i=0; $i<5; $i++) {
                         $kk = $i+1;
                         if($kk == 7) $kk = 0;
-                        if($kk == date(w)) echo "<td style='background-color:#5EC751;'><div class='class_info'>";
+                        if($kk == date(w)) echo "<td style='background-color:#9DF0E1;'><div class='class_info'>";
                         else echo "<td><div class='class_info'>";
                         for($j=0; $j<count($day); $j++) {
-                            if($day[$j][$i] && ($time[$j] == $s)) echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
+                            if($day[$j][$i] && ($time[$j] == $s)) {
+                                $link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j];
+                                $r_4 = api_calls_get($link_4);
+                                echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
+                            }
                         }
                         echo "</div></td>";
                     }
@@ -137,7 +141,7 @@ $res = mysqli_fetch_array($result);
                     for($i=5; $i<7; $i++) {
                         $kk = $i+1;
                         if($kk == 7) $kk = 0;
-                        if($kk == date(w)) echo "<td style='background-color:#5EC751;'><div class='class_info'>";
+                        if($kk == date(w)) echo "<td style='background-color:#9DF0E1;'><div class='class_info'>";
                         else echo "<td><div class='class_info'>";
                         for($j=0; $j<count($day); $j++) {
                             if($day[$j][$i] && ($time[$j] == $s)) echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
