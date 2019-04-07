@@ -85,13 +85,13 @@ include_once('head.php');
                     <div class="contents_box">
 
                         <select name="ac_select[]" id="academy" multiple="multiple" required>
-                            <option value="" onclick="ac_all()" id="ac_all_chk">전체선택</option>
+<!--                            <option value="" onclick="ac_all()" id="ac_all_chk">전체선택</option>-->
                             <?php
                             $sql = "select * from `academy`";
                             $res = mysqli_query($connect_db, $sql);
                             while($ac = mysqli_fetch_array($res)) {
                                 ?>
-                                <option value="<?=$ac["client_id"];?>" selected id="ac_id"><?=$ac["client_name"];?></option>
+                                <option value="<?=$ac["client_id"];?>" id="ac_id" selected><?=$ac["client_name"];?></option>
                                 <?php
                                 $i++;
                             }
@@ -197,17 +197,17 @@ include_once('head.php');
     }
 
     function ac_all(){
-        if($('#ac_all_chk').prop('checked')) {
-            var boxlength = $('#ac_id').length;
-            var checked = $('#ac_id').length;
-            if(boxlength == checked) {
-                $('#ac_id').prop('checked', true);
-            }else {
-                $('#ac_id').prop('checked', false);
-            }
-        }else {
-            // $('#ac_id').prop('checked', false);
-        }
+        // if($('#ac_all_chk').prop('checked')) {
+        //     var boxlength = $('#ac_id').length;
+        //     var checked = $('#ac_id').length;
+        //     if(boxlength == checked) {
+        //         $('#academy option').prop('checked', true);
+        //     }else {
+        //         $('#academy option').prop('checked', false);
+        //     }
+        // }else {
+        //     $('#ac_id').prop('checked', false);
+        // }
     }
 
     function cancel_chk_all() {

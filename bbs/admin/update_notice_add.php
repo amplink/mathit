@@ -176,6 +176,9 @@ $ac_r_size = count($ac_range);
             </div>
             <div class="section_footer">
                 <div class="button_wrap">
+                    <?php
+                    if($no_res['attach_file']) echo '<div class="save_btn" onclick="del_attach()"><input class="l_save_btn" type="button" value="첨부파일 삭제"></div>';
+                    ?>
                     <div class="save_btn" onclick="submit_chk()"><input class="l_save_btn" type="button" value="저장"></div>
                     <div class="cancel_btn"><a href="notice_home.php">취소</a></div>
                 </div>
@@ -230,6 +233,11 @@ $ac_r_size = count($ac_range);
             else {
                 $('.check_all').prop('checked', true)
             }
+        }
+
+        function del_attach() {
+            $(window).unbind('beforeunload');
+            location.href = 'del_notice_attach.php?id='+'<?php echo $no_res['id'];?>';
         }
 
 

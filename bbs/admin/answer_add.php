@@ -658,8 +658,8 @@ include_once('_common.php');
         });
     }
 
-    function go_to_another() {
-        location.href="answer_add_beta.php";
-    }
+    $("#section_1 input[type=text]").keydown(function (key) {
+        if(key.keyCode == 9) $(this).next('#section_1 input[type=text]').focus();
+    });
 
 </script>

@@ -49,9 +49,8 @@ if($book_type == "베타") {
 }
 
 if($cnt == 0) {
-    echo "<script>alert('입력값이 없어 등록이 되지 않았습니다.');</script>";
-    echo "<script>location.href='./answer_manegement.php';</script>";
-    exit;
+    $section_1[0][0] = " ";
+    $section_size[0] += 1;
 }
 
 $sql = "select * from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level';";

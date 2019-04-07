@@ -47,7 +47,7 @@ if(!$_GET['page']) {
                 <tbody>
                 <form action="answer_del.php" method="post" id="answer_form">
                     <?php
-                    $sql = "select * from `answer_master` order by `event_time` asc";
+                    $sql = "select * from `answer_master` where `level` in ('루트', '파이', '시그마') order by `grade` asc, `semester` asc, field(`level`, '루트', '파이', '시그마'),`book_type` desc";
                     $result = mysqli_query($connect_db, $sql);
 
                     $grade = array();
@@ -56,7 +56,7 @@ if(!$_GET['page']) {
                     $semester = array();
                     $book_type = array();
                     $j=0;
-                    $t=1;
+                    $t=0;
                     while($ac_data = mysqli_fetch_array($result)) {
                         $n = 0;
                         for($i=0; $i<count($grade)+1; $i++) {
@@ -65,7 +65,7 @@ if(!$_GET['page']) {
                             }
                         }
                        if($n != 1) {
-                           if($t >= $page*10 && $t <= ($page*10+10)) {
+                           if($j >= $page*15 && $j <= ($page*15+15)) {
                                if($ac_data['grade'] <= 6) $r_grade = "초등 ".$ac_data['grade'];
                                else $r_grade = "중등 ".($ac_data['grade']-6);
                                $del_value = $ac_data['book_type']."|".$ac_data['unit']."|".$ac_data['grade']."|".$ac_data['semester']."|".$ac_data['level'];
@@ -78,16 +78,15 @@ if(!$_GET['page']) {
                                echo '     <td><span>' . $ac_data["book_type"] . '</span></td>';
                                echo "     <td><a href='./update_answer_add.php?grade=".$ac_data['grade']."&semester=".$ac_data['semester']."&unit=".$ac_data['unit']."&level=".$ac_data['level']."&book_type=".$ac_data['book_type']."' style=''>수정</a></td>";
                                echo '</tr>';
-                               $grade[$j] = $ac_data['grade'];
-                               $unit[$j] = $ac_data['unit'];
-                               $level[$j] = $ac_data['level'];
-                               $semester[$j] = $ac_data['semester'];
-                               $book_type[$j] = $ac_data['book_type'];
-                               $j++;
+                               $t++;
                            }
-                           $t++;
+                           $grade[$j] = $ac_data['grade'];
+                           $unit[$j] = $ac_data['unit'];
+                           $level[$j] = $ac_data['level'];
+                           $semester[$j] = $ac_data['semester'];
+                           $book_type[$j] = $ac_data['book_type'];
+                           $j++;
                        }
-
 
                     }
                     ?>
@@ -100,7 +99,7 @@ if(!$_GET['page']) {
                 <div class="prev_btn"><a href="./answer_manegement.php?page=<?=$page;?>"><img src="img/prev.png" alt=""></a></div>
                 <ul>
                     <?
-                    $count = $t;
+                    $count = $j;
                     for($i=0; $i<$count/10; $i++) {
                         $cnt = $i+1;
                         if($cnt==$_GET['page']) echo '<li><a href="./answer_manegement.php?page='.$cnt.'" class="on">'.$cnt.'</a></li>';
