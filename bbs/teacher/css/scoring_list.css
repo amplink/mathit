@@ -25,7 +25,7 @@
 }
 
 .scoring_table_section table thead tr th {
-    height: 20px;
+    height: 30px;
     font-size: 18px;
     background-color: rgb(32, 175, 68);
     color: rgb(255, 255, 255);
@@ -74,4 +74,9 @@
 
 .scoring_btn:hover a {
     color: rgb(255, 255, 255);
+}
+
+.disabledbutton {
+    pointer-events: none;
+    opacity: 0.4;
 }
