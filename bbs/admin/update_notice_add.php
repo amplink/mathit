@@ -19,10 +19,10 @@ $result = mysqli_query($connect_db, $sql);
 $no_res = mysqli_fetch_array($result);
 $type = array();
 $range = explode(",", $no_res['target']);
-$r_size = count($range)-1;
+$r_size = count($range);
 
 $ac_range = explode(',', $no_res['client_id']);
-$ac_r_size = count($ac_range)-1;
+$ac_r_size = count($ac_range);
 ?>
     <!--<!DOCTYPE html>-->
     <!--<html>-->
@@ -73,7 +73,6 @@ $ac_r_size = count($ac_range)-1;
                         </div>
                         <div class="contents_box">
                             <select name="notice_div" id="notice_div">
-                                <option value="전체공지">전체공지</option>
                                 <option value="일반공지">일반공지</option>
                                 <option value="중요공지">중요공지</option>
                             </select>
@@ -130,20 +129,20 @@ $ac_r_size = count($ac_range)-1;
                         <p class="title_text">공지범위</p>
                     </div>
                     <div class="contents_box">
-                        <!--                    <div class="radio_group">-->
-                        <!--                        <input type="checkbox" class="notice_range" onchange="all_select();">-->
-                        <!--                        <p>전체</p>-->
-                        <!--                    </div>-->
                         <div class="radio_group">
-                            <input type="checkbox" name="notice_range[]" class="notice_range" value="0">
+                            <input type="checkbox" class="notice_range" id="all_select">
+                            <p>전체</p>
+                        </div>
+                        <div class="radio_group">
+                            <input type="checkbox" name="notice_range[]" class="notice_range" value="전임강사">
                             <p>전임강사</p>
                         </div>
                         <div class="radio_group">
-                            <input type="checkbox" name="notice_range[]" class="notice_range" value="1">
+                            <input type="checkbox" name="notice_range[]" class="notice_range" value="채점강사">
                             <p>채점강사</p>
                         </div>
                         <div class="radio_group">
-                            <input type="checkbox" name="notice_range[]" class="notice_range" value="2">
+                            <input type="checkbox" name="notice_range[]" class="notice_range" value="학생">
                             <p>학생</p>
                         </div>
                     </div>
@@ -153,7 +152,7 @@ $ac_r_size = count($ac_range)-1;
                         <p class="title_text">제목</p>
                     </div>
                     <div class="contents_box">
-                        <input type="text" placeholder="제목을 입력해주세요" name="title" value="<?=$no_res['title'];?>">
+                        <input type="text" placeholder="제목을 입력해주세요" name="title" value="<?=$no_res['title'];?>" id="title">
                     </div>
                 </div>
                 <div class="board_line">
@@ -177,7 +176,7 @@ $ac_r_size = count($ac_range)-1;
             </div>
             <div class="section_footer">
                 <div class="button_wrap">
-                    <div class="save_btn" ><input class="l_save_btn" type="submit" value="저장"></div>
+                    <div class="save_btn" onclick="submit_chk()"><input class="l_save_btn" type="button" value="저장"></div>
                     <div class="cancel_btn"><a href="notice_home.php">취소</a></div>
                 </div>
             </div>
@@ -186,16 +185,51 @@ $ac_r_size = count($ac_range)-1;
     </body>
     <?
     for($k=0; $k<$r_size; $k++) {
-        echo "<script>$('input[type=checkbox][value=".$range[$k]."]').prop('checked', true);</script>";
+        echo "<script>$('.notice_range[value=".$range[$k]."]').prop('checked', true);</script>";
     }
-//    for($k=0; $k<$ac_r_size; $k++) {
-//        echo "<script>$('option[id=".$ac_range[$k]."]').prop('selected', true);</script>";
-//    }
+    for($k=0; $k<$ac_r_size; $k++) {
+        echo "<script>$('option[id=".$ac_range[$k]."]').prop('selected', true);</script>";
+    }
     ?>
     <script>
+        $("#all_select").on('click', function () {
+            if($('#all_select').prop('checked')) $('.radio_group>input[type=checkbox]').prop('checked', true);
+            else $('input[type=checkbox]').prop('checked', false);
+        });
+
         $('#notice_div').val("<? echo $no_res['type'];?>");
         function file_n_change() {
             $('#file_n').html("");
+        }
+
+        cancel_chk_all();
+
+        $(window).bind('beforeunload', function () {
+            return "저장하지 않고 페이지를 벗어나시겠습니까?";
+        });
+
+        function submit_chk() {
+            if($('.notice_range').val() && $('#title').val()) {
+                $(window).unbind('beforeunload');
+                $('#notice_bbs').submit();
+            }else {
+                alert('제목 또는 범위를 입력해주세요.');
+            }
+        }
+
+        function cancel_chk_all() {
+            if($('#all_select').prop('checked', true)) {
+                var boxlengh = $('.notice_range').length;
+                var checkedlength = $('.notice_range:checked').length;
+                if(boxlengh == checkedlength) {
+                    $('#all_select').prop('checked', true);
+                }else {
+                    $('#all_select').prop('checked', false);
+                }
+            }
+            else {
+                $('.check_all').prop('checked', true)
+            }
         }
 
 

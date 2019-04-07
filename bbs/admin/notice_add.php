@@ -73,7 +73,6 @@ include_once('head.php');
                     </div>
                     <div class="contents_box">
                         <select name="notice_div" id="notice_div">
-                            <option value="전체공지">전체공지</option>
                             <option value="일반공지">일반공지</option>
                             <option value="중요공지">중요공지</option>
                         </select>
@@ -86,12 +85,13 @@ include_once('head.php');
                     <div class="contents_box">
 
                         <select name="ac_select[]" id="academy" multiple="multiple" required>
+                            <option value="" onclick="ac_all()" id="ac_all_chk">전체선택</option>
                             <?php
                             $sql = "select * from `academy`";
                             $res = mysqli_query($connect_db, $sql);
                             while($ac = mysqli_fetch_array($res)) {
                                 ?>
-                                <option value="<?=$ac["client_id"];?>" selected><?=$ac["client_name"];?></option>
+                                <option value="<?=$ac["client_id"];?>" selected id="ac_id"><?=$ac["client_name"];?></option>
                                 <?php
                                 $i++;
                             }
@@ -102,16 +102,6 @@ include_once('head.php');
                         <script type="text/javascript">
                             $('#academy').multiselect();
                         </script>
-
-
-<!--                            -->
-<!--                            $sql = "select * from `academy`";-->
-<!--                            $res = mysqli_query($connect_db, $sql);-->
-<!--                            while($ac = mysqli_fetch_array($res)) {-->
-<!--                                echo "<div class='radio_group'>";-->
-<!--                              echo "<input type='checkbox' name='ac_select[]' class='notice_range' value='".$ac['client_id']."'><p>".$ac['client_name']."</p></div>";-->
-<!--                            }-->
-
                     </div>
 
                 </div>
@@ -203,6 +193,20 @@ include_once('head.php');
             $('#notice_bbs').submit();
         }else {
             alert('제목 또는 범위를 입력해주세요.');
+        }
+    }
+
+    function ac_all(){
+        if($('#ac_all_chk').prop('checked')) {
+            var boxlength = $('#ac_id').length;
+            var checked = $('#ac_id').length;
+            if(boxlength == checked) {
+                $('#ac_id').prop('checked', true);
+            }else {
+                $('#ac_id').prop('checked', false);
+            }
+        }else {
+            // $('#ac_id').prop('checked', false);
         }
     }
 

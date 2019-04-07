@@ -37,7 +37,7 @@ if(!$_GET['page']) {
                 <thead>
                     <tr style="text-align:center">
                         <th style="width: 3%;"><input type="checkbox" id="all_select"></th>
-                        <th style="width: 3%;">번호</th>
+                        <th style="width: 5%">번호</th>
                         <th style="width: 10%;">유형</th>
                         <th style="">제목</th>
                         <th style="width: 13%;">작성일</th>
@@ -75,28 +75,14 @@ if(!$_GET['page']) {
 //                        if($res['type']==0) $type = "전체공지";
 //                        else if($res['type']==1) $type = "일반공지";
 //                        else if($res['type']==2) $type = "중요공지";
-                        $range = explode(",", $res['target']);
-                        foreach($range as $t) {
-                            if($t == 0) $target .= "전임강사,";
-                            else if($t == 1) $target .= "채점강사,";
-                            else if($t == 2) $target .= "학생,";
-                            if($size >= count($range)-1) break;
-                            else $size++;
-                        }
+                        $client_id = $res['client_id'];
+                        $sql = "select * from `academy` where `client_id`='$client_id';";
+                        $rr = sql_query($sql);
+                        $rrr = mysqli_fetch_array($rr);
 
-                        $target[count($target)-2] = "\0";
-
-                        $client = "";
-                        $k = 0;
-                        $range = explode(",", $res['client_id']);
-                        for($j=0; $j<count($range)-1; $j++) {
-                            if ($client_arr[$range[$j]]) {
-                                if($j == count($range)-2) $client .= $client_arr[$range[$j]];
-                                else $client .= $client_arr[$range[$j]].", ";
-                            }
-                        }
+                        if($res['target'] == "전임강사,채점강사,학생") $res['target'] = "전체";
                         if($res['attach_file']) $res['title'] = $res['title']. "<img src='img/disc.png' width='18' height='18'>";
-                        if($i >= $page*10 && $i <= ($page*10+10)) echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>".$i."</a></td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$client."</td><td>$target</td><td><a style='' href='./update_notice_add.php?id=".$res['id']."'>수정</a></td></tr>";
+                        if($i >= $page*10 && $i <= ($page*10+10)) echo "<tr><td><input type='checkbox' name='notice_chk[]' value='".$res['id']."'></td><td>".$i."</a></td><td>".$res['type']."</td><td>".$res['title']."</td><td>".$res['event_time']."</td><td>".$rrr['client_name']."</td><td>".$res['target']."</td><td><a style='' href='./update_notice_add.php?id=".$res['id']."'>수정</a></td></tr>";
                         $i++;
                     }
                     ?>
