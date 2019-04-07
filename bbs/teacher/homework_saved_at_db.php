@@ -38,8 +38,14 @@ for($i=0; $i<count($Q_number4); $i++) {
 }
 
 for($i=0; $i<count($student_list); $i++) {
-    if($i==count($student_list)-1) $st .= $student_list[$i];
-    else $st .= $student_list[$i].",";
+	$student_info = explode("@",$student_list[$i]);
+    if($i==count($student_list)-1){ 
+	   $st .= $student_info[0];
+       $st2 .= $student_info[1];
+	}else{
+	   $st .= $student_info[0].",";
+	   $st2 .= $student_info[1].",";
+	}
 }
 
 $query = "INSERT INTO homework SET
@@ -47,6 +53,7 @@ $query = "INSERT INTO homework SET
                          `name`='$name',
                          `class_name` = '$class_name',
                          `student` = '$st',
+						 `student_id` = '$st2',
                          `_from`='$from',
                          `_to`='$to',
                          `textbook`='$textbook',
