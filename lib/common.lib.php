@@ -3565,25 +3565,25 @@ function status_view($state){
 
 	switch($state){
         case "a1" :
-			$str = '<p class="first_submitted show green">1차 제출</p>';
+			$str = '<font color="green">1차 제출</p>';
 			break;
         case "a2" :
-			$str = '<p class="second_submitted show blue">2차 제출</p>';
+			$str = '<font color="blue">2차 제출</p>';
 			break;
         case "s1" :
-			$str = '<p class="first_scroing_done show green">1차 채점 완료</p>';
+			$str = '<font color="green">1차 채점 완료</p>';
 			break;
         case "s2" :
-			$str = '<p class="second_submitted show blue">숙제 완료</p>';
+			$str = '<font color="blue">숙제 완료</p>';
 			break;	
         case "s3" :
-			$str = '<p class="second_submitted show blue">숙제 완료</p>';
+			$str = '<font color="blue">숙제 완료</p>';
 			break;	
         case "s0" :
-			$str = '<p class="not_submit hide">미제출</p>';
+			$str = '<font color="red">미제출</p>';
 			break;			
         case "s0" :
-			$str = '<p class="excess_date show red">기한초과제출</p>';
+			$str = '<font color="red">기한초과제출</p>';
 			break;				
 	}
 	return $str;
