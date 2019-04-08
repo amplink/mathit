@@ -147,7 +147,14 @@ $res = mysqli_fetch_array($result);
                         if($kk == date(w)) echo "<td style='background-color:#9DF0E1;'><div class='class_info'>";
                         else echo "<td><div class='class_info'>";
                         for($j=0; $j<count($day); $j++) {
-                            if($day[$j][$i] && ($time[$j] == $s)) echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
+                            for($k = 0; $k<7; $k++) {
+                                if($day[$j][$i] && ($time1[$j][$i][$k] == $s)) {
+                                    $link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j];
+                                    $r_4 = api_calls_get($link_4);
+                                    echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
+                                    $class_array[count($class_array)] = $time1[$j][$k];
+                                }
+                            }
                         }
                         echo "</div></td>";
                     }

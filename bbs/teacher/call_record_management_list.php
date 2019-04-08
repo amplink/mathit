@@ -104,16 +104,21 @@ $res = mysqli_fetch_array($result);
                     <?php
                     $sql = "select * from `teacher_score` where `class` = '$class' and `test_genre` = '$test_genre' and `title` = '$title' order by `seq`;";
                     $result = mysqli_query($connect_db, $sql);
+                    $i=1;
+                    $cnt=1;
                     while($res = mysqli_fetch_array($result)) {
                         ?>
                         <tr>
                             <td><input type="checkbox" name="chk_list[]" value="<?=$res['seq']?>"></td>
                             <td><span><input type="hidden" name="student[]" value="<?=$res['student']?>"><?=$res['student']?></span></td>
-                            <td><span><input type="text" name="score1[]" value="<?=$res['score1']?>"> 점</span></td>
-                            <td><span><input type="text" name="score2[]" value="<?=$res['score2']?>"> 점</span></td>
-                            <td><span><?=sprintf("%.1f", ($res['score1']+$res['score2'])/2)?> 점</span></td>
+                            <td><span><input type="text" name="score1[]" value="<?=$res['score1']?>" onchange="set_avg1(<?=$cnt?>)" id="score_add<?=$cnt?>"> 점</span></td>
+                            <?php $cnt++;?>
+                            <td><span><input type="text" name="score2[]" value="<?=$res['score2']?>" onchange="set_avg(<?=$cnt?>)" id="score_add<?=$cnt?>"> 점</span></td>
+                            <td><span id="avg<?=$i?>"><?=sprintf("%.1f", ($res['score1']+$res['score2'])/2)?> 점</span></td>
                         </tr>
                         <?
+                        $i++;
+                        $cnt++;
                     }
                     ?>
                     </tbody>
@@ -148,5 +153,27 @@ $res = mysqli_fetch_array($result);
     }
     function cursor() {
         $('.complete_btn').css('cursor', 'pointer');
+    }
+
+    function set_avg(e) {
+        var k = e-1;
+        var t = parseInt($('#score_add'+e).val(), 10);
+        var p = parseInt($('#score_add'+k).val(), 10);
+        var val;
+        if(p) val = (t+p)/2;
+        else val = t;
+
+        $('#avg'+e/2).text(val+"점");
+    }
+
+    function set_avg1(e) {
+        var k = e+1;
+        var t = parseInt($('#score_add'+e).val(), 10);
+        var p = parseInt($('#score_add'+k).val(), 10);
+        var val;
+        if(p) val = (t+p)/2;
+        else val = t;
+
+        $('#avg'+k/2).text(val+"점");
     }
 </script>

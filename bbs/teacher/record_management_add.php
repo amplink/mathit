@@ -285,6 +285,17 @@ include_once ('head.php');
         $('#avg'+e/2).text(val+"점");
     }
 
+    function set_avg1(e) {
+        var k = e+1;
+        var t = parseInt($('#score_add'+e).val(), 10);
+        var p = parseInt($('#score_add'+k).val(), 10);
+        var val;
+        if(p) val = (t+p)/2;
+        else val = t;
+
+        $('#avg'+k/2).text(val+"점");
+    }
+
     function move_page() {
         var a = $('#quarter_select').val();
         var b = $('#year_select').val();
