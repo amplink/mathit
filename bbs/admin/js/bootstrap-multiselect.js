@@ -412,7 +412,7 @@
             maxHeight: false,
             includeSelectAllOption: false,
             includeSelectAllIfMoreThan: 0,
-            selectAllText: ' Select all',
+            selectAllText: ' 전체선택',
             selectAllValue: 'multiselect-all',
             selectAllName: false,
             selectAllNumber: true,

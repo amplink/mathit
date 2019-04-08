@@ -100,7 +100,12 @@ include_once('head.php');
 
                         </select>
                         <script type="text/javascript">
-                            $('#academy').multiselect();
+                            $('#academy').multiselect({
+                                includeSelectAllOption: true,
+                                selectAllText: "전체선택",
+                               selectAll: function(){
+                               }
+                            });
                         </script>
                     </div>
 

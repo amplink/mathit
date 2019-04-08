@@ -58,7 +58,7 @@ $ac_r_size = count($ac_range);
     <!--            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>-->
     <!--        </div>-->
     <!--    </div>-->
-    <form action="notice_add_chk.php?id=<?=$id;?>" method="POST" id="notice_bbs">
+    <form action="notice_add_chk.php?id=<?=$id;?>" method="POST" id="notice_bbs" enctype="multipart/form-data">
         <div class="section">
             <div class="head_section">
                 <div class="l_title">
@@ -108,7 +108,12 @@ $ac_r_size = count($ac_range);
 
                             </select>
                             <script type="text/javascript">
-                                $('#academy').multiselect();
+                                $('#academy').multiselect({
+                                    includeSelectAllOption: true,
+                                    selectAllText: "전체선택",
+                                    selectAll: function(){
+                                    }
+                                });
                             </script>
 
 
@@ -134,15 +139,15 @@ $ac_r_size = count($ac_range);
                             <p>전체</p>
                         </div>
                         <div class="radio_group">
-                            <input type="checkbox" name="notice_range[]" class="notice_range" value="전임강사">
+                            <input type="checkbox" name="notice_range[]" class="notice_range" value="전임강사" onchange="cancel_chk_all()">
                             <p>전임강사</p>
                         </div>
                         <div class="radio_group">
-                            <input type="checkbox" name="notice_range[]" class="notice_range" value="채점강사">
+                            <input type="checkbox" name="notice_range[]" class="notice_range" value="채점강사" onchange="cancel_chk_all()">
                             <p>채점강사</p>
                         </div>
                         <div class="radio_group">
-                            <input type="checkbox" name="notice_range[]" class="notice_range" value="학생">
+                            <input type="checkbox" name="notice_range[]" class="notice_range" value="학생" onchange="cancel_chk_all()">
                             <p>학생</p>
                         </div>
                     </div>
@@ -160,8 +165,8 @@ $ac_r_size = count($ac_range);
                         <p class="title_text">첨부파일</p>
                     </div>
                     <!--                <div class="contents_box">-->
-                    <input style="margin-top: 15px;" type="file" name="file" onchange="file_n_change();">
-                    <span id="file_n">현재 파일 : <? echo $no_res['attach_file'];?></span>
+                    <input style="margin-top: 15px;" type="file" name="bf_file[]" onchange="file_n_change();">
+                    <span id="file_n">현재 파일 : <? echo $no_res['attach_file'];?></span><?php if($no_res['attach_file']) echo "<img src='../teacher/img/close.png' width='20' height='20' style='margin-left: 20px; cursor: pointer;' onclick='minus()' id='close_img'>";?>
                     <!--                </div>-->
                 </div>
                 <div class="board_line">
@@ -176,14 +181,12 @@ $ac_r_size = count($ac_range);
             </div>
             <div class="section_footer">
                 <div class="button_wrap">
-                    <?php
-                    if($no_res['attach_file']) echo '<div class="save_btn" onclick="del_attach()"><input class="l_save_btn" type="button" value="첨부파일 삭제"></div>';
-                    ?>
                     <div class="save_btn" onclick="submit_chk()"><input class="l_save_btn" type="button" value="저장"></div>
                     <div class="cancel_btn"><a href="notice_home.php">취소</a></div>
                 </div>
             </div>
         </div>
+        <input type="hidden" id="hidden" name="hidden">
     </form>
     </body>
     <?
@@ -240,6 +243,10 @@ $ac_r_size = count($ac_range);
             location.href = 'del_notice_attach.php?id='+'<?php echo $no_res['id'];?>';
         }
 
+        function minus() {
+            $('#file_n').text("현재 파일 : ");
+            $('#hidden').val("1");
+        }
 
         ClassicEditor
             .create( document.querySelector( '#content' ) )

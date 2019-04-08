@@ -47,7 +47,7 @@ if(!$_GET['page']) {
                 <tbody>
                 <form action="answer_del.php" method="post" id="answer_form">
                     <?php
-                    $sql = "select * from `answer_master` where `level` in ('루트', '파이', '시그마') order by `grade` asc, `semester` asc, field(`level`, '루트', '파이', '시그마'),`book_type` desc";
+                    $sql = "select * from `answer_master` where `level` in ('루트', '파이', '시그마') order by `grade` asc, `unit` asc, `semester` asc, field(`level`, '루트', '파이', '시그마'),`book_type` desc";
                     $result = mysqli_query($connect_db, $sql);
 
                     $grade = array();
@@ -107,7 +107,7 @@ if(!$_GET['page']) {
                     }
                     ?>
                 </ul>
-                <div class="next_btn"><a href="./answer_manegement.php?page=<?=$page+1;?>"><img src="img/next.png" alt=""></a></div>
+                <div class="next_btn"><a href="./answer_manegement.php?page=<?=$page+2;?>"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
                 <div class="add_btn"><a href="answer_add.php">정답지추가</a></div>

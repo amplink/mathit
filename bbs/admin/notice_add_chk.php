@@ -10,7 +10,6 @@ $type = $_POST['notice_div'];
 
 $name = $_FILES['bf_file']['tmp_name'][0];
 $name_name = $_FILES['bf_file']['name'][0];
-
 $contents = $_POST['content'];
 $id = date("mds").":".rand(1, 200);
 
@@ -49,6 +48,10 @@ else {
 VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$name_name', '$name_url','$contents', CURRENT_TIMESTAMP);";
         sql_query($sql);
     }else {
+        if($_POST['hidden'] == 1) {
+            $sql = "update `notify` set `attach_file`='', `attach_file_url`='';";
+            sql_query($sql);
+        }
         if($name_name) {
             //저장될 디렉토리
             $base_dir = "file_list";
@@ -71,7 +74,7 @@ VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$name_nam
         mysqli_query($connect_db, $sql);
     }
 
-    echo "<script>alert('공지 등록이 완료되었습니다.');</script>";
+    echo "<script>alert('완료되었습니다.');</script>";
     echo "<script>location.href='./notice_home.php';</script>";
 
 }
