@@ -179,7 +179,15 @@ include_once('head.php');
 
     // }
     ClassicEditor
-        .create( document.querySelector( '#content' ) )
+        .create( document.querySelector( '#content' ),  {
+            toolbar: [
+                'headings',
+                'bold',
+                'italic',
+                'link',
+                'unlink'
+            ]
+        })
         .catch( error => {
             console.error( error );
         });

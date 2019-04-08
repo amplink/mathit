@@ -249,10 +249,18 @@ $ac_r_size = count($ac_range);
         }
 
         ClassicEditor
-            .create( document.querySelector( '#content' ) )
+            .create( document.querySelector( '#content' ),  {
+                toolbar: [
+                    'headings',
+                    'bold',
+                    'italic',
+                    'link',
+                    'unlink'
+                ]
+            })
             .catch( error => {
                 console.error( error );
-            } );
+            });
         // window.onbeforeunload = function() {
         //     return true;
         // }
