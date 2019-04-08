@@ -171,7 +171,7 @@ $res = mysqli_fetch_array($result);
             <p>공지사항</p>
         </div>
     </div>
-    <div class="notice_list_wrap">
+    <div class="notice_list_wrap" style="overflow: scroll;">
         <div class="notice_contents_wrap">
 
             <?php
