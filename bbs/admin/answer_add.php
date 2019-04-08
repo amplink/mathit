@@ -128,7 +128,7 @@ include_once('_common.php');
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
                             </td>
-                            <td class="pt-17"><input type="text" name="a_item_number[]" placeholder="문항번호" value="" id="a_item_number_<?=$i?>"></td>
+                            <td class="pt-17"><input type="text" name="a_item_number[]" placeholder="문항번호" value="" id="a_item_number_<?=$i?>" onkeydown="tab_next('a', <?=$i?>)"></td>
                             <td>
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_answer_img_<?=$i;?>">
                             </td>
@@ -178,7 +178,7 @@ include_once('_common.php');
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
                             </td>
-                            <td class="pt-17"><input type="text" name="b_item_number[]" placeholder="문항번호" value="" id="b_item_number_<?=$i?>"></td>
+                            <td class="pt-17"><input type="text" name="b_item_number[]" placeholder="문항번호" value="" id="b_item_number_<?=$i?>" onkeydown="tab_next('b', <?=$i?>)"></td>
                             <td>
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="b_answer_img_<?=$i;?>">
                             </td>
@@ -228,7 +228,7 @@ include_once('_common.php');
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
                             </td>
-                            <td class="pt-17"><input type="text" name="c_item_number[]" placeholder="문항번호" value="" id="c_item_number_<?=$i?>"></td>
+                            <td class="pt-17"><input type="text" name="c_item_number[]" placeholder="문항번호" value="" id="c_item_number_<?=$i?>" onkeydown="tab_next('c', <?=$i?>)"></td>
                             <td>
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="c_answer_img_<?=$i;?>">
                             </td>
@@ -278,7 +278,7 @@ include_once('_common.php');
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
                             </td>
-                            <td class="pt-17"><input type="text" name="d_item_number[]" placeholder="문항번호" value="" id="d_item_number_<?=$i?>"></td>
+                            <td class="pt-17"><input type="text" name="d_item_number[]" placeholder="문항번호" value="" id="d_item_number_<?=$i?>" onkeydown="tab_next('d', <?=$i?>)"></td>
                             <td>
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="d_answer_img_<?=$i;?>">
                             </td>
@@ -374,7 +374,7 @@ include_once('_common.php');
         var text = '<tr class="item_section">\n' + '<td>\n' +
             '<div class="plus_icon" onclick="append_div(this, \'' + idx + '\')">' +
             '<img src="img/plus.png" alt="plus"></div></td>\n' +
-            '<td><input type="text" name="'+idx+'_item_number[]" placeholder="문항번호"></td>\n' +
+            '<td><input type="text" name="'+idx+'_item_number[]" placeholder="문항번호" onkeydown="tab_next(\'a\', '+cnt+')"></td>\n' +
             '<td><img src="" id="'+idx+'_answer_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;"></td>' +
             '<td><input type="file" id="'+idx+'_answer_file_'+cnt+'" onchange="readImage1(this, '+cnt+', \''+idx+'\')"><input type="hidden" name="'+idx+'_answer_image[]" id='+idx+'_answer_base_'+cnt+'></td>\n' +
             '<td><img src="" id="'+idx+'_explain_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;"></td>' +
@@ -658,8 +658,9 @@ include_once('_common.php');
         });
     }
 
-    $("#section_1 input[type=text]").keydown(function (key) {
-        if(key.keyCode == 9) $(this).next('#section_1 input[type=text]').focus();
-    });
+    function tab_next(t, e) {
+        if(event.keyCode==9) $('#'+t+'_explain_file_'+e).focus();
+    }
+
 
 </script>

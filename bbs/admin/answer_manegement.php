@@ -47,7 +47,7 @@ if(!$_GET['page']) {
                 <tbody>
                 <form action="answer_del.php" method="post" id="answer_form">
                     <?php
-                    $sql = "select * from `answer_master` where `level` in ('루트', '파이', '시그마') order by `grade` asc, `unit` asc, `semester` asc, field(`level`, '루트', '파이', '시그마'),`book_type` desc";
+                    $sql = "select * from `answer_master` where `level` in ('루트', '파이', '시그마') order by `grade` asc, `semester` asc, `unit` asc, field(`level`, '루트', '파이', '시그마'),`book_type` desc";
                     $result = mysqli_query($connect_db, $sql);
 
                     $grade = array();
