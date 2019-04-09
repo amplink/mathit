@@ -21,6 +21,8 @@ include_once ('head.php');
 <body>
 <section>
     <form action="record_management_add_chk.php" method="post" id="record_form">
+	<input type="hidden" name="d_id" id="d_id">
+	<input type="hidden" name="c_id" id="c_id">
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
@@ -44,6 +46,7 @@ include_once ('head.php');
                     }
                     ?>
                 </select>
+				<input type="hidden" name="d_yoie" id="d_yoie">
                 <select name="quarter_select" id="quarter_select" onchange="move_page()">
                     <option value="1">1분기</option>
                     <option value="2">2분기</option>
@@ -63,7 +66,7 @@ include_once ('head.php');
                     for($i=0; $i<count($d_name); $i++) {
                         ?>
                         <tr>
-                            <td onclick="lecture('<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
+                            <td onclick="lecture('<?=$d_name[$i]?>','<?=$d_yoie[$i]?>','<?=$d_uid[$i]?>','<?=$c_uid[$i]?>')"><span><?=$d_name[$i]?></span></td>
                         </tr>
                         <?
                     }
@@ -221,9 +224,10 @@ include_once ('head.php');
         })
     })
     
-    function lecture(e) {
+    function lecture(e, f, a, b) {
         $('#text_class').text(e);
         $('#class').val(e);
+		$("#d_yoie").val(f);
         $.ajax({
             type: "GET",
             url: "call_student_list.php?class="+e,
@@ -232,6 +236,8 @@ include_once ('head.php');
                 $("#student_list").html(response);
             }
         });
+		$("#d_id").val(a);
+		$("#c_id").val(b);
     }
 
     function chk_test_genre(e) {

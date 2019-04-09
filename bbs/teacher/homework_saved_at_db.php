@@ -21,6 +21,9 @@ $student_list = $_POST['student_list'];
 $class_name = $_POST['class_name'];
 $d_id = $_POST['d_id'];
 $c_id = $_POST['c_id'];
+$d_yoie = $_POST['d_yoie'];
+$year = $_POST['year_select'];
+$quarter = $_POST['quarter_select'];
 
 for($i=0; $i<count($Q_number1); $i++) {
     if($i==count($Q_number1)-1) $q_number1 .= $Q_number1[$i];
@@ -55,7 +58,10 @@ $query = "INSERT INTO homework SET
 						 `d_uid`='$d_id',
 						 `c_uid`='$c_id',
                          `name`='$name',
+						 `d_order`='$d_yoie',
                          `class_name` = '$class_name',
+                         `year` = '$year',
+                         `quarter` = '$quarter',
                          `student` = '$st',
 						 `student_id` = '$st2',
                          `_from`='$from',
@@ -81,4 +87,3 @@ sql_query($query);
 alert_msg("등록이 완료되었습니다.");
 location_href("homework_management_list.php");
 ?>
-

@@ -107,6 +107,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                     }
                     ?>
                 </select>
+				<input type="hidden" name="d_yoie" id="d_yoie">
                 <select name="quarter_select" id="quarter_select" onchange="move_page()">
                     <option value="1">1분기</option>
                     <option value="2">2분기</option>
@@ -126,7 +127,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                     for($i=0; $i<count($d_name); $i++) {
                         ?>
                         <tr>
-                            <td onclick="lecture(<?=$d_uid[$i]?>,<?=$c_uid[$i]?>,'<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
+                            <td onclick="lecture('<?=$d_uid[$i]?>','<?=$c_uid[$i]?>','<?=$d_name[$i]?>','<?=$d_yoie[$i]?>')"><span><?=$d_name[$i]?></span></td>
                         </tr>
                         <?
                     }
@@ -403,7 +404,8 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         }
     }
 
-    function lecture(a, b, c) {
+    function lecture(a, b, c, d) {
+		$("#d_yoie").val(d);
         $.ajax({
             type: "GET",
             url: "call_student_homework.php?d_uid="+a+"&c_uid="+b,

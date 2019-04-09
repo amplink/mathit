@@ -88,19 +88,76 @@ $today_date = date("Y-m-d");
                             </p>
                         </div>
                     </div>
+
+
+<?
+	$sql2 = "
+	
+	SELECT  COUNT(C.seq) N1, SUM(C.tot2) N2 FROM (
+		    SELECT 
+	            A.seq,
+			   (SELECT COUNT(h_id) FROM `homework_assign_list` WHERE h_id = A.seq AND student_id = A.student_id AND current_status IN ('s2','s3')) tot2
+			FROM 
+              `homework` A
+			LEFT JOIN 
+             `homework_assign_list` B  
+			ON A.seq = B.h_id 
+	        WHERE 
+			   match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
+			AND A.c_uid='$_GET[c_uid]'
+			-- AND A.quarter='$_GET[c_uid]'
+			AND B.student_id='$_GET[s_id]'
+			AND A.client_id='$ac') C
+			
+			";
+	$result2 = mysqli_query($connect_db, $sql2);
+    $res2 = mysqli_fetch_array($result2);
+	$h_avg = floor(($res2['N2'] / $res2['N1'])*100);
+?>
+
+
+
+
                     <div class="s_info_div">
                         <p class="l_div_text">숙제</p>
                         <div class="r_div_content">
                             <p>
-                                <span>숙제율 : </span>
-                                <span>90%</span>
+                                <span>숙제율 :</span>
+                                <span><?=$h_avg?>%</span>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
+<? 
+   $avg =round(($res['score1'] + $res['score2']) / 2);
+
+
+
+	$sql3 = "SELECT 
+	          SUM(A.score1 + A.score2) / (COUNT(A.seq)*2) avg,
+			  MAX((A.score1 + A.score2) / 2) max,
+			  (SELECT SUM(score1 + score2) / (COUNT(seq)*2) 
+			   FROM `teacher_score` 
+			   WHERE class = '$res[class]' AND year = '$res[year]' 
+			          AND quarter = '$res[quarter]' AND d_order = '$res[d_order]'
+					  AND test_genre='$res[test_genre]') tot2
+			FROM
+              `teacher_score` A
+	        WHERE 
+			    A.class = '$res[class]'
+			AND A.test_genre='$res[test_genre]'
+			AND A.client_id='$ac'
+			
+			";
+
+			echo $sql3;
+	$result3 = mysqli_query($connect_db, $sql3);
+    $res3 = mysqli_fetch_array($result3);
+
+?>
             <div class="record_detail_table_section">
-                <p class="l_div_text">중간평가</p><span>평균 - 80점</span>
+                <p class="l_div_text"><?=$res['test_genre']?></p><span>평균 - <?=$avg?>점</span>
                 <div class="record_detail_table">
                     <table>
                         <thead>
@@ -117,8 +174,8 @@ $today_date = date("Y-m-d");
                             <td><span><?=$res['score1']?></span></td>
                             <td><span><?=$res['score2']?></span></td>
                             <td><span>90</span></td>
-                            <td><span>80</span></td>
-                            <td><span>100</span></td>
+                            <td><span><?=round($res3['avg'])?></span></td>
+                            <td><span><?=round($res3['max'])?></span></td>
                         </tr>
                         </tbody>
                     </table>
@@ -127,7 +184,7 @@ $today_date = date("Y-m-d");
             <br>
 
 <?
-	$sql = "SELECT 
+	$sql4 = "SELECT 
 	           B.apply_status_1, B.apply_status_2,
 	           B.score_status_1, B.score_status_2, 
 			   B.wrong_anwer_1, B.wrong_anwer_2, 
@@ -139,11 +196,15 @@ $today_date = date("Y-m-d");
               `homework` A
 			LEFT JOIN 
              `homework_assign_list` B  
-			ON A.seq = B.h_id
+			ON A.seq = B.h_id 
 	        WHERE 
 			   match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
-			AND A.c_uid='$_GET[c_uid]' AND A.client_id='$ac' AND B.apply_status_1 IS NOT NULL";
-	$result2 = mysqli_query($connect_db, $sql);
+			AND A.c_uid='$_GET[c_uid]' 
+			AND A.client_id='$ac' 
+			AND B.student_id='$_GET[s_id]'
+			AND B.apply_status_1 IS NOT NULL";
+
+	$result4 = mysqli_query($connect_db, $sql4);
 ?>
 
             <p class="l_div_text" style="width:200px;">숙제제출 현황</p>
@@ -162,14 +223,14 @@ $today_date = date("Y-m-d");
                     <tbody>
 <?
     $i = 0;
-	while($res2 = mysqli_fetch_array($result2)) {
+	while($res4 = mysqli_fetch_array($result4)) {
 	   $wrong_tot1 = 0;
        $q_tot1 = 0;
        for($i=1; $i<4; $i++){
-           if($res2['Q_number'.$i]) $q_tot1 += count(explode(",",$res2['Q_number'.$i]));
+           if($res4['Q_number'.$i]) $q_tot1 += count(explode(",",$res4['Q_number'.$i]));
 	   }
 
-	   $wrong1 = json_decode($res2['wrong_anwer_1'],true);
+	   $wrong1 = json_decode($res4['wrong_anwer_1'],true);
 	   if($wrong1){
 		   foreach ($wrong1 as $value) {
 			 $wrong_tot1 += count(explode(",",$value));
@@ -180,9 +241,9 @@ $today_date = date("Y-m-d");
 	   $wrong_tot2 = 0;
        $q_tot2 = 0;
        for($i=1; $i<4; $i++){
-           if($res2['Q_number'.$i]) $q_tot2 += count(explode(",",$res2['Q_number'.$i]));
+           if($res4['Q_number'.$i]) $q_tot2 += count(explode(",",$res4['Q_number'.$i]));
 	   }
-	   $wrong2 = json_decode($res2['wrong_anwer_2'],true);
+	   $wrong2 = json_decode($res4['wrong_anwer_2'],true);
 	   if($wrong2){
 		   foreach ($wrong2 as $value) {
 			 $wrong_tot2 += count(explode(",",$value));
@@ -194,13 +255,13 @@ $today_date = date("Y-m-d");
 
                     <tr>
                         <td>
-                            <span><?=substr($res2['_from'],6,10)?>-<?=substr($res2['_from'],0,2)?>-<?=substr($res2['_from'],3,2)?></span>
+                            <span><?=substr($res4['_from'],6,10)?>-<?=substr($res4['_from'],0,2)?>-<?=substr($res4['_from'],3,2)?></span>
                         </td>
                         <td>
-                            <span><?=$res2['name']?></span>
+                            <span><?=$res4['name']?></span>
                         </td>
                         <td>
-                            <span><? echo ($res2['submit_date2'])?substr($res2['submit_date2'],0,10):substr($res2['submit_date1'],0,10);?></span>
+                            <span><? echo ($res4['submit_date2'])?substr($res4['submit_date2'],0,10):substr($res4['submit_date1'],0,10);?></span>
                         </td>
                         <td>
                             <span><?=$q_tot1-$wrong_tot1?> / <?=$q_tot1?></span>
