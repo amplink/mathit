@@ -85,7 +85,6 @@ include_once ('head.php');
 							<br><span><?=$res2['grade']?> - </span><span><?=$res2['semester']?> </span><span>(<?=$res2['unit']?>)</span></td>
 
 						<td>
-							<span>~ </span>
 							<span><?=substr($res2['_to'],6,4)?>-<?=substr($res2['_to'],0,2)?>-<?=substr($res2['_to'],3,2)?></span><br>
 						</td>
                         <td>
