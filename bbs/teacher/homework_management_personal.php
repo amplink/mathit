@@ -115,7 +115,10 @@ include_once ('head.php');
 			ON A.seq = B.h_id
 	        WHERE 
 			   match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
-			AND A.c_uid='$_GET[c_uid]' AND A.client_id='$ac'";
+			AND A.d_uid='$_GET[d_uid]'
+			AND A.c_uid='$_GET[c_uid]'
+			AND A.s_uid='$_GET[s_uid]'
+			AND A.client_id='$ac'";
 	if($_GET['beginDate']) $sql .= " AND _from >= '".$_GET['beginDate']."'";
 
 	$result2 = mysqli_query($connect_db, $sql);

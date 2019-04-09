@@ -127,7 +127,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                     for($i=0; $i<count($d_name); $i++) {
                         ?>
                         <tr>
-                            <td onclick="lecture('<?=$d_uid[$i]?>','<?=$c_uid[$i]?>','<?=$d_name[$i]?>','<?=$d_yoie[$i]?>')"><span><?=$d_name[$i]?></span></td>
+                            <td onclick="lecture('<?=$d_uid[$i]?>','<?=$c_uid[$i]?>','<?=$d_name[$i]?>','<?=$d_yoie[$i]?>','<?=$s_uid[$i]?>')"><span><?=$d_name[$i]?></span></td>
                         </tr>
                         <?
                     }
@@ -158,6 +158,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 							<input type="hidden" name="corner_no" id="corner_no" value="corner1">
 							<input type="hidden" name="d_id" id="d_id">
 							<input type="hidden" name="c_id" id="c_id">
+							<input type="hidden" name="s_id" id="s_id">
                         </div>
                         <div class="homework_deadline_wrap">
                             <div class="date_range">
@@ -404,7 +405,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         }
     }
 
-    function lecture(a, b, c, d) {
+    function lecture(a, b, c, d, e) {
 		$("#d_yoie").val(d);
         $.ajax({
             type: "GET",
@@ -417,6 +418,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         });
 				$("#d_id").val(a);
 				$("#c_id").val(b);
+				$("#s_id").val(e);
     }
 
     function book_info() {

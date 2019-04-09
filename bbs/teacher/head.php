@@ -82,6 +82,7 @@
 		if(!$chk) {
 			$d_uid[$cnt] = $r[$i][0];
 			$c_uid[$cnt] = $r[$i][1];
+			$s_uid[$cnt] = $r[$i][2];
 			$d_name[$cnt] = $r[$i][4];
 			$d_yoie[$cnt] = $r[$i][5];
 			$cnt++;
@@ -186,18 +187,7 @@
     $res = mysqli_fetch_array($result);
 ?>
 <script>
-    window.onload = function () {
-        $.ajax({
-            url: "test.php",
-            dataType: "text",
-            success: function (response) {
-                if(response == 1){
-                    alert("로그인 후 이용해주세요");
-                    location.href = "login.php";
-                }
-            }
-        });
-    }
+
 </script>
 <head>
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -255,7 +245,7 @@
 					$r_4 = api_calls_get($link_4);
 
                 ?>
-                    <div class="hamnav_class"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>">
+                    <div class="hamnav_class"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>&s_uid=<?=$s_uid[$i]?>">
                             <span class="class_title"><?=$d_name[$i]?> ( <?php echo (count($r_4)-1);?> ) </span>
                         </a>
                     </div>

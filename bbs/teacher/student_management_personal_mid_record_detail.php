@@ -151,7 +151,7 @@ $today_date = date("Y-m-d");
 			
 			";
 
-			echo $sql3;
+			//echo $sql3;
 	$result3 = mysqli_query($connect_db, $sql3);
     $res3 = mysqli_fetch_array($result3);
 

@@ -23,6 +23,7 @@ include_once ('head.php');
     <form action="record_management_add_chk.php" method="post" id="record_form">
 	<input type="hidden" name="d_id" id="d_id">
 	<input type="hidden" name="c_id" id="c_id">
+	<input type="hidden" name="s_id" id="s_id">
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
@@ -66,7 +67,7 @@ include_once ('head.php');
                     for($i=0; $i<count($d_name); $i++) {
                         ?>
                         <tr>
-                            <td onclick="lecture('<?=$d_name[$i]?>','<?=$d_yoie[$i]?>','<?=$d_uid[$i]?>','<?=$c_uid[$i]?>')"><span><?=$d_name[$i]?></span></td>
+                            <td onclick="lecture('<?=$d_name[$i]?>','<?=$d_yoie[$i]?>','<?=$d_uid[$i]?>','<?=$c_uid[$i]?>','<?=$s_uid[$i]?>')"><span><?=$d_name[$i]?></span></td>
                         </tr>
                         <?
                     }
@@ -224,7 +225,7 @@ include_once ('head.php');
         })
     })
     
-    function lecture(e, f, a, b) {
+    function lecture(e, f, a, b, c) {
         $('#text_class').text(e);
         $('#class').val(e);
 		$("#d_yoie").val(f);
@@ -238,6 +239,7 @@ include_once ('head.php');
         });
 		$("#d_id").val(a);
 		$("#c_id").val(b);
+		$("#s_id").val(c);
     }
 
     function chk_test_genre(e) {
