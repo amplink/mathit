@@ -72,6 +72,7 @@
 
 	$d_uid = array();
 	$c_uid = array();
+    $s_uid = array();
 	$chk = 0;
 	$cnt = 0;
 	for($i=1; $i<count($r); $i++) {
