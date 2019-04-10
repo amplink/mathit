@@ -325,7 +325,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         })
 
 
-        $('.corner').click(function () {
+        $('.corner').change(function () {
 
 		  if($(this).val() != '선택'){
 
@@ -333,7 +333,8 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
              var no = $(this).data("key");
 			 var n = no -1;
 			 $("#corner_no").val($(this).val());
-
+             // alert(no);
+              //alert(n);
 			 //alert($("#corner_no").val());
 			 $.ajax({
 				type: "POST",
@@ -341,16 +342,19 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 				data:params,
 				dataType: "json",
 				success: function(response){
-				  //console.log(response.str1);
+				  console.log(response.str2);
 				  //if(response) console.log(response.str1);
 				  //alert(response.str2);
 				  //$("#Q_number"+no).empty();
 				  //$('.combobox').children().empty();
 				  //$('.combobox').eq(n).html(response.str1);
-
-				 $('.combobox:eq('+n+')').html(response.str1);
-				 $("#Q_number"+no).append(response.str2);			  
-				 $('.custumdropdown'+no).homework_manegement_add();
+                   // alert($(this).children().html());
+                   $('.identifier').eq(n).html('선택');
+                   $("input:checkbox[name='allChk']").eq(n).prop("checked", false);
+				   //$('.combobox:eq('+n+')').html(response.str1);
+			       $("#Q_number"+no).parent().parent().find('.combobox').html(response.str1);
+				   $("#Q_number"+no).append(response.str2);
+				   $('.custumdropdown'+no).homework_manegement_add();
 				}
 			 });
 		  }
@@ -358,14 +362,12 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 
         });
 
-
-
-        $('.custumdropdown input[type=checkbox]').prop("checked", "true");
+        //$('.custumdropdown input[type=checkbox]').prop("checked", true);
         select_year();
         book_info();
         chk_type();
-        $('.allChk').click();
-        $('.allChk').prop('checked', true);
+       // $('.allChk').click();
+        //$('.allChk').prop('checked', true);
     })
     function submit() {
         if($("input[name=student_list\\[\\]]").val()) {
