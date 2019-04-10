@@ -88,84 +88,88 @@ while($res = mysqli_fetch_array($result)) {
                     </select>
                 </td>
                 <td>
-                    <select name="corner1" id="corner1<?=$i?>">
+                    <select name="corner1" id="corner1<?=$i?>" data-key="<?=$i?>" data-num="1" class="corner">
                         <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
                     </select>
                 </td>
 
                 <td>
-                    <select name="Q_number1[]" id="Q_number1" class="custumdropdown" custumdrop="question" multiple="multiple">
+                    <select name="Q_number1[]" id="Q_number1_<?=$i?>" class="custumdropdown" custumdrop="question" multiple="multiple">
                         <?php
                         $q_1 = explode(",", $res['Q_number1']);
                         $cnt = 0;
-                        for($j=1; $j<=30; $j++) {
+                        for($j=1; $j<=count($q_1); $j++) {
                             if($q_1[$cnt] == $j) {
-                                echo "<option class='checkbox' value='$j' selected>$j</option>";
-                                $cnt++;
+                                echo "<option class='checkbox' value='".$q_1[$cnt]."' selected>".$q_1[$cnt]."</option>";
                             }
-                            else echo "<option class='checkbox' value='$j'>$j</option>";
+                            else echo "<option class='checkbox' value='".$q_1[$cnt]."'>".$q_1[$cnt]."</option>";
+
+                            $cnt++;
                         }
                         ?>
                     </select>
                 </td>
                 <td>
-                    <select name="corner2" id="corner2<?=$i?>">
+                    <select name="corner2" id="corner2<?=$i?>" data-key="<?=$i?>" data-num="2" class="corner">
                         <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
                     </select>
                 </td>
                 <td>
-                    <select name="Q_number2[]" id="Q_number2" class="custumdropdown" custumdrop="question" multiple="multiple">
+                    <select name="Q_number2[]" id="Q_number2_<?=$i?>" class="custumdropdown" custumdrop="question" multiple="multiple">
                         <?php
                         $q_2 = explode(",", $res['Q_number2']);
                         $cnt = 0;
-                        for($j=1; $j<=30; $j++) {
+                        for($j=1; $j<=count($q_2); $j++) {
                             if($q_2[$cnt] == $j) {
-                                echo "<option class='checkbox' value='$j' selected>$j</option>";
-                                $cnt++;
+                                echo "<option class='checkbox' value='".$q_2[$cnt]."' selected>".$q_2[$cnt]."</option>";
                             }
-                            else echo "<option class='checkbox' value='$j'>$j</option>";
+                            else echo "<option class='checkbox' value='".$q_2[$cnt]."'>".$q_2[$cnt]."</option>";
+
+                            $cnt++;
                         }
                         ?>
                     </select>
                 </td>
 
                 <td>
-                    <select name="corner3" id="corner3<?=$i?>">
+                    <select name="corner3" id="corner3<?=$i?>" data-key="<?=$i?>" data-num="3" class="corner">
                         <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
                     </select>
                 </td>
                 <td>
-                    <select name="Q_number3[]" id="Q_number3" class="custumdropdown" custumdrop="question" multiple="multiple">
+                    <select name="Q_number3[]" id="Q_number3_<?=$i?>" class="custumdropdown" custumdrop="question" multiple="multiple">
                         <?php
                         $q_3 = explode(",", $res['Q_number3']);
                         $cnt = 0;
-                        for($j=1; $j<=30; $j++) {
+                        for($j=1; $j<=count($q_3); $j++) {
                             if($q_3[$cnt] == $j) {
-                                echo "<option class='checkbox' value='$j' selected>$j</option>";
-                                $cnt++;
+                                echo "<option class='checkbox' value='".$q_3[$cnt]."' selected>".$q_3[$cnt]."</option>";
                             }
-                            else echo "<option class='checkbox' value='$j'>$j</option>";
+                            else echo "<option class='checkbox' value='".$q_3[$cnt]."'>".$q_3[$cnt]."</option>";
+
+                            $cnt++;
                         }
                         ?>
                     </select>
                 </td>
 
                 <td>
-                    <select name="corner4" id="corner4<?=$i?>">
+                    <select name="corner4" id="corner4<?=$i?>" data-key="<?=$i?>" data-num="4" class="corner">
                         <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
                     </select>
                 </td>
                 <td>
-                    <select name="Q_number4[]" id="Q_number4" class="custumdropdown" custumdrop="question" multiple="multiple">
+                    <select name="Q_number4[]" id="Q_number4_<?=$i?>" class="custumdropdown" custumdrop="question" multiple="multiple">
                         <?php
                         $q_4 = explode(",", $res['Q_number4']);
                         $cnt = 0;
-                        for($j=1; $j<=30; $j++) {
+                        for($j=1; $j<=count($q_4); $j++) {
                             if($q_4[$cnt] == $j) {
-                                echo "<option class='checkbox' value='$j' selected>$j</option>";
-                                $cnt++;
+                                echo "<option class='checkbox' value='".$q_4[$cnt]."' selected>".$q_4[$cnt]."</option>";
                             }
-                            else echo "<option class='checkbox' value='$j'>$j</option>";
+                            else echo "<option class='checkbox' value='".$q_4[$cnt]."'>".$q_4[$cnt]."</option>";
+
+                            $cnt++;
                         }
                         ?>
                     </select>
@@ -299,6 +303,58 @@ while($res = mysqli_fetch_array($result)) {
                 }
                 return date;
             }
+
+
+
+
+            $('.corner').change(function () {
+                var idx = $(this).data("num");
+                if($(this).val() != '선택'){
+                    var no = $(this).data("key");
+                    var params = $("#resend_form"+no).serialize();
+
+                    var n = no -1;
+                    $("#corner_no").val($(this).val());
+
+                    //alert($("#corner_no").val());
+                    $.ajax({
+                        type: "POST",
+                        url: "call_corner_content.php?no="+no+"&val="+$(this).val(),
+                        data:params,
+                        dataType: "json",
+                        success: function(response){
+                            console.log(response.str1);
+
+                            //$('.custumdropdown').eq(0).empty();
+                            //$('.combobox').eq(0).html("");
+
+                            $("#Q_number"+idx+"_"+no).parent().parent().find('.identifier').html('선택');
+                            $("#Q_number"+idx+"_"+no).parent().parent().find("input:checkbox[name='allChk']").prop("checked", false);
+                            $("#Q_number"+idx+"_"+no).parent().parent().find('.combobox').html(response.str1);
+                            $("#Q_number"+idx+"_"+no).append(response.str2);
+
+
+                            //$("#Q_number"+no).append(response.str2);
+                            $('.custumdropdown').eq(0).homework_manegement_add();
+                        }
+                    });
+                }
+
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
         } );
 
         function show_box(e) {
