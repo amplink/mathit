@@ -24,7 +24,7 @@ $sql = "delete * from `teacher_score` where `title` = '$title' and `test_genre` 
 sql_query($sql);
 
 for($i=0; $i<count($student); $i++) {
-    $sql = "INSERT INTO `teacher_score` (`client_id`, `d_uid`, `c_uid22`, `s_uid`, `class`, `year`, `quarter`, `d_order`, `test_genre`, `title`, `date`, `standard`, `sub_score1`, `sub_score2`, `score1`, `score2`, `teacher`, `student_id`, `student`, `event_time`) 
+    $sql = "INSERT INTO `teacher_score` (`client_id222`, `d_uid`, `c_uid`, `s_uid`, `class`, `year`, `quarter`, `d_order`, `test_genre`, `title`, `date`, `standard`, `sub_score1`, `sub_score2`, `score1`, `score2`, `teacher`, `student_id`, `student`, `event_time`) 
 VALUES ('$_SESSION[client_no]', '$d_id', '$c_id', '$s_id', '$class', '$year', '$quarter', '$d_yoie', '$test_genre', '$title', '$date', '$standard', '$sub_score1', '$sub_score2', '$score_add1[$i]', '$score_add2[$i]', '$teacher', '$student_id[$i]', '$student[$i]', CURRENT_TIMESTAMP);";
     sql_query($sql);
     //echo $sql;
