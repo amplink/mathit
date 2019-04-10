@@ -3590,6 +3590,40 @@ function status_view($state){
 
 }
 
+
+
+function getQuarter($quarter){
+    $period = "A";
+    if(strpos($quarter, "1분기") !== false) {
+        $period = "A";
+    }else if(strpos($quarter, "4분기") !== false) {
+        $period = "B";
+    }
+
+
+    return $period;
+}
+
+
+function getPeriod($period, $mon){
+
+    if($period == 'A') {
+        if($mon == '12' or $mon == '01' or $mon == '02') $s_date = "12/01/".(date("Y")-1);
+        else if($mon == '03' or $mon == '04' or $mon == '05') $s_date = "03/01/".date("Y");
+        else if($mon == '06' or $mon == '07' or $mon == '08') $s_date = "06/01/".date("Y");
+        else if($mon == '09' or $mon == '10' or $mon == '11') $s_date = "09/01/".date("Y");
+    } else if($period == 'B') {
+        if($mon == '01' or $mon == '02' or $mon == '03') $s_date = "01/01/".date("Y");
+        else if($mon == '04' or $mon == '05' or $mon == '06') $s_date = "04/01/".date("Y");
+        else if($mon == '07' or $mon == '08' or $mon == '09') $s_date = "07/01/".date("Y");
+        else if($mon == '10' or $mon == '11' or $mon == '12') $s_date = "10/01/".date("Y");
+    }
+    return $s_date;
+}
+
+
+
+
 $grade_arr = array("초3"=>"3", "초4"=>"4", "초5"=>"5", "초6"=>"6",  "중1"=>"7", "중2"=>"8", "중3"=>"9");
 $semester_arr = array("1학기"=>"1", "2학기"=>"2");
 ?>
