@@ -342,19 +342,18 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 				data:params,
 				dataType: "json",
 				success: function(response){
-				  console.log(response.str2);
-				  //if(response) console.log(response.str1);
-				  //alert(response.str2);
-				  //$("#Q_number"+no).empty();
-				  //$('.combobox').children().empty();
-				  //$('.combobox').eq(n).html(response.str1);
-                   // alert($(this).children().html());
-                   $('.identifier').eq(n).html('선택');
-                   $("input:checkbox[name='allChk']").eq(n).prop("checked", false);
+				   // console.log(response.str2);
+				   //if(response) console.log(response.str1);
+                   //$('.identifier').eq(n).html('선택');
+                   //$("input:checkbox[name='allChk']").eq(n).prop("checked", false);
+                   $("#Q_number"+no).parent().parent().find('.identifier').html('선택');
+                   $("#Q_number"+no).parent().parent().find("input:checkbox[name='allChk']").prop("checked", false);
+
 				   //$('.combobox:eq('+n+')').html(response.str1);
 			       $("#Q_number"+no).parent().parent().find('.combobox').html(response.str1);
 				   $("#Q_number"+no).append(response.str2);
 				   $('.custumdropdown'+no).homework_manegement_add();
+
 				}
 			 });
 		  }
