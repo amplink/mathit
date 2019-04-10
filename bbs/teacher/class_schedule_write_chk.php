@@ -28,6 +28,11 @@ VALUES (NULL, '$type', '$range', '$title', '$writer', '$name_url', '$name_name',
 sql_query($sql);
 //echo $sql;
 
+$sql = "insert into `alarm` set `seq`='', `content`='새로운 수업계획표/일지가 등록되었습니다.', `table_name`='schedule', `target`='$range', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+sql_query($sql);
+
+$sql = "insert into `alarm` set `seq`='', `content`='새로운 수업계획표/일지가 등록되었습니다.', `table_name`='schedule', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+sql_query($sql);
 
 alert_msg("등록이 완료되었습니다.");
 location_href("./class_schedule_list.php");

@@ -86,6 +86,12 @@ $query = "INSERT INTO homework SET
 
 sql_query($query);
 
+$sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='학생', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+sql_query($sql);
+
+$sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+sql_query($sql);
+
 alert_msg("등록이 완료되었습니다.");
 location_href("homework_management_list.php");
 ?>

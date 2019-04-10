@@ -100,6 +100,14 @@ if($seqq > 0) {
     alert_msg("공지수정이 완료되었습니다.");
     location_href("./notice_list.php");
 }else {
+    for($kk=0; $kk<count($range); $kk++) {
+        $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='$range[$kk]', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+        sql_query($sql);
+    }
+
+    $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+    sql_query($sql);
+
     alert_msg("공지등록이 완료되었습니다.");
     location_href("./notice_list.php");
 }

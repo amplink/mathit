@@ -30,6 +30,12 @@ VALUES ('$_SESSION[client_no]', '$d_id', '$c_id', '$s_id', '$class', '$year', '$
     //echo $sql;
 }
 
+$sql = "insert into `alarm` set `seq`='', `content`='새로운 성적표가 등록되었습니다.', `table_name`='score', `target`='학생', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+sql_query($sql);
+
+$sql = "insert into `alarm` set `seq`='', `content`='새로운 성적표가 등록되었습니다.', `table_name`='score', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+sql_query($sql);
+
 alert_msg("등록이 완료되었습니다.");
 location_href("./record_management_list.php");
 ?>
