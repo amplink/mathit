@@ -118,8 +118,10 @@ include_once ('head.php');
 			AND A.d_uid='$_GET[d_uid]'
 			AND A.c_uid='$_GET[c_uid]'
 			AND A.s_uid='$_GET[s_uid]'
+			AND B.student_id= '$_GET[s_id]'
 			AND A.client_id='$ac'";
 	if($_GET['beginDate']) $sql .= " AND _from >= '".$_GET['beginDate']."'";
+
 
 	$result2 = mysqli_query($connect_db, $sql);
 ?>
@@ -144,7 +146,7 @@ include_once ('head.php');
            <tr>
                 <td><span><?=substr($res2['_from'],6,4)?>-<?=substr($res2['_from'],0,2)?>-<?=substr($res2['_from'],3,2)?></span>
 				</td>
-                <td><span><?=$res2['name']?>
+               <td><span><a href=""><?=$res2['name']?></a></span>
 				    <br><span><?=$res2['grade']?> - </span><span><?=$res2['semester']?> </span><span>(<?=$res2['unit']?>)</span>
 				</td>
                 <td>

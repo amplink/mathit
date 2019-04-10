@@ -70,8 +70,8 @@
 
 			// reset the random seed to generate the same data for all charts
 			utils.srand(8);
-			var datapoints = [0, 20, 20, 60, 60, 70, 5, 80, 20, 25, 75, 10, 70];
-			var datapoints2 = [10, 70, 40, 90, 60, 70, 100, 80, 20, 25, 75, 100, 70];
+			var datapoints = [0, 20, 20, 60, 60, 70, 50, 80];
+			var datapoints2 = [10, 70, 40, 90, 60, 70, 100, 80];
 
 			new Chart('chart-' + index, {
 				type: 'line',

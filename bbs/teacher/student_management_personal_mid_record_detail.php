@@ -27,7 +27,13 @@ $today_date = date("Y-m-d");
 	$r = api_calls_get($link);
 	//$student_name = $r[3];
 
-	$sql = "select * from `teacher_score` where `student` = '$_GET[s_name]' and `student_id` = '$_GET[s_id]';";
+	$sql = "SELECT * FROM 
+             `teacher_score` 
+            WHERE 
+                `d_uid` = '$_GET[d_uid]'
+                AND `c_uid` = '$_GET[c_uid]'
+                AND `s_uid` = '$_GET[s_uid]'
+                AND `student_id` = '$_GET[s_id]'";
 	$result = mysqli_query($connect_db, $sql);
 	$res = mysqli_fetch_array($result);
 ?>
@@ -103,13 +109,15 @@ $today_date = date("Y-m-d");
              `homework_assign_list` B  
 			ON A.seq = B.h_id 
 	        WHERE 
-			   match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
+	            A.d_uid='$_GET[d_uid]'
 			AND A.c_uid='$_GET[c_uid]'
-			-- AND A.quarter='$_GET[c_uid]'
+			AND A.s_uid='$_GET[s_uid]'
 			AND B.student_id='$_GET[s_id]'
-			AND A.client_id='$ac') C
-			
+			AND A.client_id='$ac'
+			-- AND match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
+			 ) C
 			";
+	//ECHO $sql2;
 	$result2 = mysqli_query($connect_db, $sql2);
     $res2 = mysqli_fetch_array($result2);
 	$h_avg = floor(($res2['N2'] / $res2['N1'])*100);
@@ -139,13 +147,16 @@ $today_date = date("Y-m-d");
 			  MAX((A.score1 + A.score2) / 2) max,
 			  (SELECT SUM(score1 + score2) / (COUNT(seq)*2) 
 			   FROM `teacher_score` 
-			   WHERE class = '$res[class]' AND year = '$res[year]' 
+			   WHERE  d_uid='$_GET[d_uid]'  AND c_uid='$_GET[c_uid]'
+		           	  AND s_uid='$_GET[s_uid]'AND year = '$res[year]' 
 			          AND quarter = '$res[quarter]' AND d_order = '$res[d_order]'
 					  AND test_genre='$res[test_genre]') tot2
 			FROM
               `teacher_score` A
 	        WHERE 
-			    A.class = '$res[class]'
+	            A.d_uid='$_GET[d_uid]'
+			AND A.c_uid='$_GET[c_uid]'
+			AND A.s_uid='$_GET[s_uid]'
 			AND A.test_genre='$res[test_genre]'
 			AND A.client_id='$ac'
 			
@@ -173,7 +184,7 @@ $today_date = date("Y-m-d");
                         <tr>
                             <td><span><?=$res['score1']?></span></td>
                             <td><span><?=$res['score2']?></span></td>
-                            <td><span>90</span></td>
+                            <td><span><?=round($res3['tot2'])?></span></td>
                             <td><span><?=round($res3['avg'])?></span></td>
                             <td><span><?=round($res3['max'])?></span></td>
                         </tr>
@@ -185,10 +196,10 @@ $today_date = date("Y-m-d");
 
 <?
 	$sql4 = "SELECT 
+               IF (B.wrong_anwer_2 = '', B.wrong_anwer_1, B.wrong_anwer_2) wrong_answer,  
 	           B.apply_status_1, B.apply_status_2,
 	           B.score_status_1, B.score_status_2, 
 			   B.wrong_anwer_1, B.wrong_anwer_2, 
-			   ifnull ( B.current_status, 's0' ) as current_status, 
 			   B.submit_date1, B.submit_date2, 
 			   A.seq, A._from, A._to, A.name, A.grade, A.semester, A.unit,
 			   A.Q_number1, A.Q_number2, A.Q_number3, A.Q_number4, A.name 
@@ -222,7 +233,7 @@ $today_date = date("Y-m-d");
                     </thead>
                     <tbody>
 <?
-    $i = 0;
+    $j = 0;
 	while($res4 = mysqli_fetch_array($result4)) {
 	   $wrong_tot1 = 0;
        $q_tot1 = 0;
@@ -249,7 +260,7 @@ $today_date = date("Y-m-d");
 			 $wrong_tot2 += count(explode(",",$value));
 		   }
 	   }
-       $score2 = round((($wrong_tot1-$wrong_tot2)/$wrong_tot1) * 100);
+       //$score2 = round((($wrong_tot1-$wrong_tot2)/$wrong_tot1) * 100);
 
 ?>
 
@@ -264,14 +275,18 @@ $today_date = date("Y-m-d");
                             <span><? echo ($res4['submit_date2'])?substr($res4['submit_date2'],0,10):substr($res4['submit_date1'],0,10);?></span>
                         </td>
                         <td>
-                            <span><?=$q_tot1-$wrong_tot1?> / <?=$q_tot1?></span>
+                            <span><?=$wrong_tot1?> / <?=$q_tot1?></span>
                         </td>
                         <td>
-                            <span><?=$wrong_tot1-$wrong_tot2?> / <?=$wrong_tot1?></span>
+                            <span><?=$wrong_tot2?> / <?=$wrong_tot1?></span>
                         </td>
                     </tr>
 
 <?
+
+        $wrong_tot = count(explode(",",$res4['wrong_answer']));
+        $score_arr[$j] = round((($q_tot1-$wrong_tot) / $q_tot1) * 100);
+        $j++;
 	}
 ?>
 
@@ -280,6 +295,57 @@ $today_date = date("Y-m-d");
                 </table>
             </div>
         </div>
+        <?
+        $date = (date("Y")-1)."-12-01";
+        $link = "/api/math/class?client_no=".$_SESSION['client_no']."&date=".$date;
+        $r = api_calls_get($link);
+
+        $month = explode("/",$res['date']);
+
+        $flag = getQuarter($r[1][3]);
+        $start_day =  getPeriod($flag, $month[0]);
+
+        //해당분기의 마지막날 구함
+        $timestamp = strtotime("+4 months", strtotime($start_day));
+        $limit_date = date("m/d/Y", $timestamp);
+
+
+        $sql5 = "SELECT 
+	           	IF (B.wrong_anwer_2 = '', B.wrong_anwer_1, B.wrong_anwer_2) wrong_answer,  
+			    A.Q_number1, A.Q_number2, A.Q_number3, A.Q_number4 
+			FROM 
+              `homework` A
+			LEFT JOIN 
+             `homework_assign_list` B  
+			ON A.seq = B.h_id 
+	        WHERE 
+			   match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
+			AND A.c_uid='$_GET[c_uid]' 
+			AND A.client_id='$ac' 
+			AND B.apply_status_1 IS NOT NULL
+            AND (A._from >= '$start_day' AND A._to < '$limit_date')" ;
+
+
+
+        $result5 = mysqli_query($connect_db, $sql5);
+        $j = 0;
+
+        while($res5 = mysqli_fetch_array($result5)) {
+            $all = 0;
+            for($i=1; $i<4; $i++){
+                if($res5['Q_number'.$i]) $all += count(explode(",",$res5['Q_number'.$i]));
+            }
+
+            $wrong_tot = count(explode(",",$res5['wrong_answer']));
+            $score_arr2[$j] = round((($all-$wrong_tot) / $all) * 100);
+           // $score_arr2[$j] =
+
+            $j++;
+        }
+
+
+        ?>
+
         <div class="r_box" style="position:absolute;z-index:999;width:900px;height:600px"><? include "./chart.php";?>
         </div>
     </div>
@@ -289,7 +355,19 @@ $today_date = date("Y-m-d");
             <div class="save_btn"><a href="#none">저장</a></div>
         </div>
         <div class="comment_input_section">
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <textarea name="" id="" cols="30" rows="10"><?
+/*
+                      foreach($score_arr2 as $v){
+
+                          echo $v;
+
+                      }
+*/
+
+print_r($score_arr2);
+
+
+                ?></textarea>
         </div>
     </div>
 </section>
