@@ -17,7 +17,8 @@ sql_query($sql);
 
 $t_name = $_SESSION['t_name'];
 
-$sql = "insert into `alarm` set `seq`='', `content`='새로운 상담이 등록되었습니다.', `table_name`='consult', `target`='$t_name', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+$t_uid = $_SESSION['t_uid'];
+$sql = "insert into `alarm` set `seq`='', `content`='새로운 상담이 등록되었습니다.', `table_name`='consult', `target`='$t_name', `uid`='$t_uid',`chk`='0', `datetime`=CURRENT_TIMESTAMP";
 sql_query($sql);
 $sql = "insert into `alarm` set `seq`='', `content`='새로운 상담이 등록되었습니다.', `table_name`='consult', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
 sql_query($sql);

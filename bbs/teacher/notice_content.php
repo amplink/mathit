@@ -113,8 +113,8 @@ if(strpos($seq, ":")) {
                 <div class="modify_btn" style="width:130px">
                     <a href="<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기</a>
                 </div>
-                <div class="delete_btn" style="width:130px">
-                    <a href="notice_file_del.php?seq=<?=$res['seq']?>">첨부파일 삭제</a>
+                <div class="delete_btn" style="width:130px" onclick="del_attach(<?=$res['seq']?>)">
+                    <a>첨부파일 삭제</a>
                 </div>
                 <?php
             }
@@ -124,3 +124,13 @@ if(strpos($seq, ":")) {
     <?php
 }
 ?>
+<script>
+    function del_attach(seq) {
+            $.ajax({
+                url:"notice_file_del.php?seq="+seq,
+                success: function (response) {
+                    call_content(seq);
+                }
+            })
+    }
+</script>

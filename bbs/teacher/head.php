@@ -1,11 +1,11 @@
 <?php
 	include_once ('_common.php');
 
-//	if(!$_SESSION['t_uid']) {
-//
-//		alert_msg('로그인을 먼저 해주세요.');
-//		location_href("login.php");
-//	}
+	if(!$_SESSION['t_uid']) {
+
+		alert_msg('로그인을 먼저 해주세요.');
+		location_href("login.php");
+	}
 
 	if($_GET['s_year'] && $_GET['s_quarter']) {
 
@@ -188,7 +188,9 @@
     $res = mysqli_fetch_array($result);
 ?>
 <script>
-
+    function show_alarm() {
+        $('#new_span').css('background-color', 'red');
+    }
 </script>
 <head>
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -229,7 +231,11 @@
         </div>
         <div class="ham_other_btn_line">
             <div class="setting_btn"><a href="setting.php"><img src="img/setting.png" alt="setting_icon"></a></div>
-            <div class="alarm_btn"><a href="#none"><img class="test11" src="img/alarm.png" alt="alarm_icon"></a></div>
+            <div class="alarm_btn" onclick="alarm_chk()">
+                <a href="#none"><img class="test11" src="img/alarm.png" alt="alarm_icon">
+                    <span style="border-radius: 50%; width: 10px; height: 10px; position: absolute; top: 15px; left: 65px;" id="new_span"></span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -258,12 +264,17 @@
         </div>
 
         <div class="hamnav_menu <?php if(!$res['hm_create']) echo "dis";?>"><a href="homework_management_add.php"><span>숙제관리</span></a></div>
-        <div class="hamnav_menu"><a href="record_management_add.php"><span>성적관리</span></a></div>
+        <div class="hamnav_menu <?php if(!$res['score_mg']) echo "dis";?>"><a href="record_management_add.php"><span>성적관리</span></a></div>
         <div class="hamnav_menu"><a href="student_management_score_all.php"><span>채점관리</span></a></div>
         <div class="hamnav_menu"><a href="class_schedule_write.php"><span>수업관리</span></a></div>
         <div class="hamnav_menu"><a href="notice_list.php"><span>공지사항</span></a></div>
     </div>
-
+    <?php
+    $t_uid = $_SESSION['t_uid'];
+    $sql = "select * from `alarm` where `uid`='$t_uid' order by `seq` desc;";
+    $a_result = sql_query($sql);
+    $a_cnt = 0;
+    ?>
     <div class="alarm_box_wrap_wrap">
         <div class="alarm_box_wrap">
             <div class="alarm_tri"><img src="img/alarm_tri.png" alt="alarm_tri_icon"></div>
@@ -272,30 +283,24 @@
                     <p id="x_alarm_btn" style="cursor:pointer;font-size:20px;font-weight: bold;text-align: right;">X</p>
                     <div>
                         <ul>
-                            <li>
-                                <div class="alarm_content">
-                                    <p>알림내용이 들어갈자리입니다.</p>
-                                </div>
-                                <div class="alarm_time">
-                                    <p><span>5분</span><span> 전</span></p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="alarm_content">
-                                    <p>알림내용이 들어갈자리입니다.</p>
-                                </div>
-                                <div class="alarm_time">
-                                    <p><span>5분</span><span> 전</span></p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="alarm_content">
-                                    <p>알림내용이 들어갈자리입니다.</p>
-                                </div>
-                                <div class="alarm_time">
-                                    <p><span>5분</span><span> 전</span></p>
-                                </div>
-                            </li>
+                            <?php
+                            while($a_res = mysqli_fetch_array($a_result)) {
+                                ?>
+                                <li>
+                                    <div class="alarm_content">
+                                        <p><?=$a_res['content']?></p>
+                                    </div>
+                                    <div class="alarm_time">
+<!--                                        <p><span>5분</span><span> 전</span></p>-->
+                                    </div>
+                                </li>
+                                <?php
+                                if($a_res['chk']==0) {
+                                    $a_cnt++;
+                                }
+                            }
+                            if($a_cnt > 0) echo "<script>show_alarm();</script>";
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -315,5 +320,14 @@
             $('.hamnav_class_list').hide()
             chk_class = 0;
         }
+    }
+
+    function alarm_chk() {
+        $.ajax({
+            url: 'alarm_chk.php',
+            success: function(response) {
+                $('#new_span').css('background-color', 'transparent');
+            }
+        });
     }
 </script>

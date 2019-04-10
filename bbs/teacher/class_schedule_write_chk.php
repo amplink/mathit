@@ -12,6 +12,16 @@ $name_name = $_FILES['bf_file']['name'][0];
 
 $writer = $_SESSION['t_name'];
 
+$sql = "select * from `teacher_schedule`;";
+$result = sql_query($sql);
+while($res = mysqli_fetch_array($result)) {
+    if($res['title'] == $title) {
+        alert_msg("중복된 제목입니다.");
+        echo "<script>history.back();</script>";
+        exit;
+    }
+}
+
 if($name) {
     $base_dir = "schedule";
     $dir = time().(double)microtime();
@@ -28,8 +38,15 @@ VALUES (NULL, '$type', '$range', '$title', '$writer', '$name_url', '$name_name',
 sql_query($sql);
 //echo $sql;
 
-$sql = "insert into `alarm` set `seq`='', `content`='새로운 수업계획표/일지가 등록되었습니다.', `table_name`='schedule', `target`='$range', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-sql_query($sql);
+$sql = "select * from `teacher_setting`;";
+$result = sql_query($sql);
+while($res = mysqli_fetch_array($result)) {
+    if(($range == "전임강사" || $range == "전체") && $res['type']=="전임강사") {
+        $t_uid = $res['t_id'];
+        $sql = "insert into `alarm` set `seq`='', `content`='새로운 수업계획표/일지가 등록되었습니다.', `table_name`='schedule', `target`='$range', `uid`='$t_uid',`chk`='0', `datetime`=CURRENT_TIMESTAMP";
+        sql_query($sql);
+    }
+}
 
 $sql = "insert into `alarm` set `seq`='', `content`='새로운 수업계획표/일지가 등록되었습니다.', `table_name`='schedule', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
 sql_query($sql);

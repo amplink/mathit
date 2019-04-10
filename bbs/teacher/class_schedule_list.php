@@ -191,7 +191,6 @@ include_once ('head.php');
             type: "GET",
             url: "class_schedule_file_del.php?seq="+seq,
             success: function(response) {
-                alert("첨부파일 삭제가 완료되었습니다.");
                 search();
                 call_content(seq);
             }
