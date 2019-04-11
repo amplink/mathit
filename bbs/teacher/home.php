@@ -128,9 +128,9 @@ $res = mysqli_fetch_array($result);
                         for($j=0; $j<count($day); $j++) {
                             for($k = 0; $k<7; $k++) {
                                 if($day[$j][$i] && ($time1[$j][$i][$k] == $s)) {
-                                    $link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j];
+                                    $link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."&s_uid=".$s_uid[$j];
                                     $r_4 = api_calls_get($link_4);
-                                    echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
+                                    echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."&s_uid=".$s_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
                                     $class_array[count($class_array)] = $time1[$j][$k];
                                 }
                             }
