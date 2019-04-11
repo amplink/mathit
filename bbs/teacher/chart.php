@@ -5,8 +5,8 @@
 <head>
 	<title>Line Chart - Cubic interpolation mode</title>
 	<script src="./js/Chart.min.js"></script>
-	<script src="./js/utils.js?v=201904081"></script>
-	<link rel="stylesheet" type="text/css" href="./css/chart_style.css?v=201904081">
+	<script src="./js/utils.js?v=201904121"></script>
+	<link rel="stylesheet" type="text/css" href="./css/chart_style.css?v=201904011">
 	<style>
 	canvas{
 		-moz-user-select: none;
@@ -27,11 +27,21 @@
 		var inputs = {
 			min: 0,
 			max: 100,
-			count: 8,
-			decimals: 2,
+			count: <?=$max?>,
+			decimals: 20,
 			continuity: 1
 		};
 
+        var MONTHS = [
+            <?
+            $str = "";
+            foreach ($from_date as $v){
+                $str .= "'".substr($v,0,5)."',";
+                //$str .= "'".$v."',";
+            }
+            echo substr($str, 0, -1);
+            ?>
+        ];
 		function generateData(config) {
 			return utils.numbers(Chart.helpers.merge(inputs, config || {}));
 		}
@@ -39,7 +49,7 @@
 		function generateLabels(config) {
 			return utils.months(Chart.helpers.merge({
 				count: inputs.count,
-				section: 3
+				section: 10
 			}, config || {}));
 		}
 
@@ -70,8 +80,8 @@
 
 			// reset the random seed to generate the same data for all charts
 			utils.srand(8);
-			var datapoints = [0, 20, 20, 60, 60, 70, 50, 80];
-			var datapoints2 = [10, 70, 40, 90, 60, 70, 100, 80];
+            var datapoints = [<?=$me_score?>];
+            var datapoints2 = [<?=$tot_score?>];
 
 			new Chart('chart-' + index, {
 				type: 'line',
@@ -81,10 +91,10 @@
 						backgroundColor: utils.transparentize(presets.red),
 						borderColor: presets.red,
 						data: datapoints,
-						label: '김서정',
+						label: '<?=$res['student']?>',
 						fill: boundary
 					},{
-						backgroundColor: utils.transparentize(presets.red),
+						backgroundColor: utils.transparentize(presets.blue),
 						borderColor: presets.blue,
 						data: datapoints2,
 						label: '학년평균',

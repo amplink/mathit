@@ -213,7 +213,8 @@ $today_date = date("Y-m-d");
 			AND A.c_uid='$_GET[c_uid]' 
 			AND A.client_id='$ac' 
 			AND B.student_id='$_GET[s_id]'
-			AND B.apply_status_1 IS NOT NULL";
+			AND B.apply_status_1 IS NOT NULL
+			ORDER BY A.seq asc";
 
 	$result4 = mysqli_query($connect_db, $sql4);
 ?>
@@ -234,6 +235,8 @@ $today_date = date("Y-m-d");
                     <tbody>
 <?
     $j = 0;
+    $score_arr = array();
+    $from_date = array();
 	while($res4 = mysqli_fetch_array($result4)) {
 	   $wrong_tot1 = 0;
        $q_tot1 = 0;
@@ -261,6 +264,8 @@ $today_date = date("Y-m-d");
 		   }
 	   }
        //$score2 = round((($wrong_tot1-$wrong_tot2)/$wrong_tot1) * 100);
+
+        $from_date[$j] = $res4['_from'];
 
 ?>
 
@@ -311,6 +316,7 @@ $today_date = date("Y-m-d");
 
 
         $sql5 = "SELECT 
+                A.seq, B.student_id, A._from,
 	           	IF (B.wrong_anwer_2 = '', B.wrong_anwer_1, B.wrong_anwer_2) wrong_answer,  
 			    A.Q_number1, A.Q_number2, A.Q_number3, A.Q_number4 
 			FROM 
@@ -323,13 +329,14 @@ $today_date = date("Y-m-d");
 			AND A.c_uid='$_GET[c_uid]' 
 			AND A.client_id='$ac' 
 			AND B.apply_status_1 IS NOT NULL
-            AND (A._from >= '$start_day' AND A._to < '$limit_date')" ;
+            AND (A._from >= '$start_day' AND A._to < '$limit_date')
+            ORDER BY A.seq asc" ;
 
 
 
         $result5 = mysqli_query($connect_db, $sql5);
         $j = 0;
-
+        $score_arr2 = array();
         while($res5 = mysqli_fetch_array($result5)) {
             $all = 0;
             for($i=1; $i<4; $i++){
@@ -337,37 +344,62 @@ $today_date = date("Y-m-d");
             }
 
             $wrong_tot = count(explode(",",$res5['wrong_answer']));
-            $score_arr2[$j] = round((($all-$wrong_tot) / $all) * 100);
+            $score_arr2[$res5['seq']][] = round((($all-$wrong_tot) / $all) * 100);
            // $score_arr2[$j] =
 
             $j++;
         }
 
 
+        $i = 0;
+        $avg = array();
+        foreach ($score_arr2 as $key => $v) {
+            $sum = 0;
+            foreach ($score_arr2[$key] as $v2) {
+                $sum += $v2;
+            }
+            $avg[$i] = round($sum / 4);
+            $i++;
+        }
+
+        $me_score = implode(",",$score_arr);
+        $tot_score = implode(",",$avg);
+        // $from_date = implode(",",$from_date);
+        $max = count($from_date);
+
+
+
         ?>
+
+
+
+
+
+
+
+
 
         <div class="r_box" style="position:absolute;z-index:999;width:900px;height:600px"><? include "./chart.php";?>
         </div>
     </div>
-    <div class="down_box">
+    <div class="down_box"style="height:900px">
         <div class="down_head_section">
             <p class="l_div_text">선생님 코멘트</p>
             <div class="save_btn"><a href="#none">저장</a></div>
         </div>
-        <div class="comment_input_section">
-            <textarea name="" id="" cols="30" rows="10"><?
-/*
-                      foreach($score_arr2 as $v){
+        <div class="comment_input_section" style="height:900px">
+            <textarea name="" id="" cols="30" rows="60" style="height:600px">
 
-                          echo $v;
+                <?php
 
-                      }
-*/
-
-print_r($score_arr2);
+               echo $me_score;
+                echo  $tot_score;
 
 
-                ?></textarea>
+                ?>
+
+
+            </textarea>
         </div>
     </div>
 </section>

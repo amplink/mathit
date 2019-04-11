@@ -11,20 +11,7 @@ window.chartColors = {
 };
 
 (function(global) {
-	var MONTHS = [
-		'10',
-		'2',
-		'3',
-		'4',
-		'5',
-		'6',
-		'7',
-		'8',
-		'9',
-		'10',
-		'November',
-		'December'
-	];
+
 
 	var COLORS = [
 		'#4dc9f6',
@@ -57,8 +44,8 @@ window.chartColors = {
 
 		numbers: function(config) {
 			var cfg = config || {};
-			var min = cfg.min || 0;
-			var max = cfg.max || 1;
+			var min =  0;
+			var max = 100;
 			var from = cfg.from || [];
 			var count = cfg.count || 8;
 			var decimals = cfg.decimals || 8;
@@ -81,8 +68,8 @@ window.chartColors = {
 
 		labels: function(config) {
 			var cfg = config || {};
-			var min = cfg.min || 0;
-			var max = cfg.max || 100;
+			var min = 0;
+			var max = 100;
 			var count = cfg.count || 8;
 			var step = (max - min) / count;
 			var decimals = cfg.decimals || 8;
