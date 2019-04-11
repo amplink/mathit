@@ -3584,7 +3584,10 @@ function status_view($state){
 			break;			
         case "s0" :
 			$str = '<font color="red">기한초과제출</p>';
-			break;				
+			break;
+        default:
+            $str = '<font color="red">미제출</p>';
+            break;
 	}
 	return $str;
 
