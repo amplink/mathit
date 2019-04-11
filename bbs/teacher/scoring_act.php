@@ -53,7 +53,8 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
 				   current_status = 's".$count."',
 				   score_status_".$count." = 'Y',
 				   apply_count = ".$count.",
-				   wrong_anwer_".$count." = '".$wrong_anwer."'
+				   wrong_anwer_".$count." = '".$wrong_anwer."',
+				   marking_date".$count." = now()
 				 WHERE  `id` = '".$_POST['id']."'";
 
 		sql_query($sql);
@@ -66,6 +67,7 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
 				  apply_count = ".$count.",
 				  current_status = 's3'.
 				  score_result_".$count." = 'A'".$count.",
+				  marking_date".$count." = now()
 				WHERE  `id` = '".$_POST['id']."'";
 
 		sql_query($sql);
