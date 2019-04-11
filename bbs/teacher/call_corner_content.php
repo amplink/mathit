@@ -20,7 +20,7 @@ $sql = "SELECT
 		   AND unit = '".$unit."'
 		   AND level = '".$level."'
 		   AND c_name = '".$corner."'
-		ORDER BY c_name, item_number ASC";
+		ORDER BY seq, item_number ASC";
 
 
 $result = mysqli_query($connect_db, $sql);
@@ -28,11 +28,8 @@ $result = mysqli_query($connect_db, $sql);
 $str1 = "";
 $str2 = "";
 while($res = mysqli_fetch_array($result)){
-
- $str1 .= "<div class='var_option' data-value='".$res['item_number']."'><span class='checkbox'><i></i></span><div class='room'>".$res['item_number']."</div></div>";
-
- $str2 .= "<option class='checkbox' value='".$res['item_number']."'>".$res['item_number']."</option>";
-
+   $str1 .= "<div class='var_option' data-value='".$res['item_number']."'><span class='checkbox'><i></i></span><div class='room'>".$res['item_number']."</div></div>";
+   $str2 .= "<option class='checkbox' value='".$res['item_number']."'>".$res['item_number']."</option>";
 }
 
 $jsonData['str1'] = $str1;

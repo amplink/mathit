@@ -346,6 +346,9 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 				   //if(response) console.log(response.str1);
                    //$('.identifier').eq(n).html('선택');
                    //$("input:checkbox[name='allChk']").eq(n).prop("checked", false);
+
+                    if(!response.str1) alert('해당코너의 항목이 없습니다.');
+
                    $("#Q_number"+no).parent().parent().find('.identifier').html('선택');
                    $("#Q_number"+no).parent().parent().find("input:checkbox[name='allChk']").prop("checked", false);
 
@@ -478,7 +481,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
             }else {
                 for(var i=1; i<=4; i++) $('#corner'+i).html('<option>선택</option><option value="개념마스터">개념마스터</option>' +
                     '                                                    <option value="개념확인">개념확인</option>' +
-                    '                                                    <option value="서술과 코칭">서술과 코칭</option>' +
+                    '                                                    <option value="서술과코칭">서술과코칭</option>' +
                     '                                                    <option value="이야기수학">이야기수학</option>');
             }
         }
@@ -489,7 +492,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
             }
             for(var i=1; i<=4; i++) $('#corner'+i).html('<option>선택</option><option value="유형마스터">유형마스터</option>' +
                 '<option value="유형확인">유형확인</option>' +
-                '<option value="서술과 코칭">서술과 코칭</option>' +
+                '<option value="서술과코칭">서술과코칭</option>' +
                 '<option value="이야기수학">이야기수학</option>');
         }
         if(textbook == "베타" && (level == "루트" || level == "파이")) {
