@@ -101,7 +101,7 @@ include_once ('head.php');
   </form>
 <?
 	$sql = "SELECT 
-               B.id,
+               A.seq, B.id,
 	           B.apply_status_1, B.apply_status_2,
 	           B.score_status_1, B.score_status_2, 
 			   B.wrong_anwer_1, B.wrong_anwer_2,
@@ -154,7 +154,6 @@ include_once ('head.php');
                         </a>
 				</td>
                 <td>
-                    <span>~ </span>
                     <span><?=substr($res2['_to'],6,4)?>-<?=substr($res2['_to'],0,2)?>-<?=substr($res2['_to'],3,2)?></span><br>
                 </td>
                 <td>
@@ -216,9 +215,11 @@ include_once ('head.php');
                 <td>
                     <div class="td_blank"></div>
                     <div class="detail_show_btn" id="<?=$i?>"><a>상세보기</a>
-					
-						
-					
+                        <? if($res2['apply_status_1'] == 'N') {?>
+                          <a href="./submit_test.php?no=<?=$res2['seq']?>&<?=$_SERVER['QUERY_STRING']?>&s=1">1차 제출</a>
+                        <? }else if($res2['apply_status_2'] == 'N' and $res2['current_status'] == 's1'){ ?>
+                        <a href="./submit_test.php?no=<?=$res2['seq']?>&<?=$_SERVER['QUERY_STRING']?>&s=2">2차 제출</a>
+                        <? } ?>
 					</div>
 					<!--<div class="detail_show_disable_btn"><a>상세보기</a></div>-->
                 </td>

@@ -84,7 +84,45 @@ $query = "INSERT INTO homework SET
                          `checked` = '0'
                                 ";
 
-sql_query($query);
+$result = sql_query($query);
+
+if($result) {
+
+    $last_uid = mysqli_insert_id($connect_db);
+
+    if ($last_uid) {
+        for ($i = 0; $i < count($student_list); $i++) {
+            $student_info = explode("@", $student_list[$i]);
+
+            $id1 = ($_POST['textbook'] == "알파") ? "A" : "B";
+            $id2 = str_replace("초", "", $_POST['grade']);
+            $id2 = str_replace("중", "", $id2);
+            $id3 = "S" . substr($_POST['semester'], 0, 1);
+            $id4 = date('Ymd') . $i;
+            $now = date('Y-m-d');
+            $no = sprintf("%04d",rand (1,10000));
+
+            $id = $_SESSION[client_no] . $id1 . $id2 . $id3 . $id4 . $no;
+
+            $query2 = "INSERT INTO homework_assign_list SET
+                                 `id`='$id',
+                                 `client_id`='$_SESSION[client_no]',
+                                 `d_uid`='$d_id',
+                                 `c_uid`='$c_id',
+                                 `h_id`='$last_uid',
+                                 `student_id`='$student_info[1]',
+                                 `grade` = '$grade',
+                                 `class_name` = '$class_name',
+                                 `student_name` = '$student_info[0]',
+                                 `event_time` = '$now' ";
+
+            //echo $query2;
+            sql_query($query2);
+        }
+    }
+}
+
+
 
 $sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='학생', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
 sql_query($sql);

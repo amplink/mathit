@@ -18,6 +18,12 @@ include_once ('head.php');
 </head>
 
 <body>
+<style>
+    .disabledbutton {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+</style>
 <section>
     <div class="head_section">
         <div class="head_section_1400">
@@ -54,7 +60,9 @@ include_once ('head.php');
 			  `homework` B
 			ON B.seq = A.h_id
 	        WHERE 
-			  A.score_status_1='N' AND A.client_id='$ac'";
+			 (A.score_status_1='N' OR A.score_status_2='N')
+			AND (A.current_status != 's2' OR A.current_status != 's3')
+			AND A.client_id='$ac'";
 
 	$result = mysqli_query($connect_db, $sql);
 	while($res = mysqli_fetch_array($result)) {
@@ -74,8 +82,12 @@ include_once ('head.php');
 					<div class="chk_box <?=$chk2?>"></div>
 				</td>
 				<td>
-					<div class="scoring_btn"><a href="scoring.php?id=<?=$res['id']?>">채점하기 </a></div>
-				</td>
+                    <?php
+                      $addStyle = ($res['current_status'] == 'a1' or $res['current_status'] == 'a2') ? "" : "disabledbutton";
+                    ?>
+                        <div class="scoring_btn <?=$addStyle?>"><a href="scoring.php?id=<?= $res['id'] ?>">채점하기 </a></div>
+
+                </td>
 			</tr>
 <?php
 	}
