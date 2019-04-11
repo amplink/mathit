@@ -9,7 +9,7 @@ $student_name = $r[3];
 $link = "/api/math/class?client_no=".$_SESSION['client_no'];
 $r = api_calls_get($link);
 for($i=0; $i<count($r); $i++) {
-    if($r[$i][0] == $_GET['d_uid'] && $r[$i][1] == $_GET['c_uid']) {
+    if($r[$i][0] == $_GET['d_uid'] && $r[$i][1] == $_GET['c_uid'] && $r[$i][1] == $_GET['s_uid']) {
         $class = $r[$i][4];
     }
 }
@@ -65,16 +65,19 @@ $result = mysqli_query($connect_db, $sql);
             </thead>
             <tbody>
             <?php
-            $cnt = 1;
-            while($res = mysqli_fetch_array($result)) {
-                ?>
+                $cnt = 1;
+                while($res = mysqli_fetch_array($result)) {
+                    if($res['test_genre'] == '분기테스트')  $type= "quarter";
+                    else                                    $type= "mid";
+            ?>
                 <tr>
                     <td><?=$cnt?></td>
-                    <td><span><?=$res['title']?></span></td>
-                    <td><span><?=$res['date']?></span></td>
+                    <td><span><?=$res['year']?>/<?=$res['quarter']?>분기 <?=$res['test_genre']?></span></td>
+                    <td><span><?=substr($res['date'],-4)?>-<?=substr($res['date'],0,2)?>-<?=substr($res['date'],3,2)?></span></td>
                     <td>
                         <div class="paper">
-                            <a href="student_management_personal_mid_record_detail.php?d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_uid=<?=$_GET['s_uid']?>&s_name=<?=$student_name?>&title=<?=$res['title']?>&s_id=<?=$res['student_id']?>">
+                            <!--<a href="student_management_personal_mid_record_detail.php?d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_uid=<?=$_GET['s_uid']?>&s_name=<?=$student_name?>&title=<?=$res['title']?>&s_id=<?=$res['student_id']?>">-->
+                            <a href="student_management_personal_<?=$type?>_record_detail.php?no=<?=$res['seq']?>">
                                 <img src="img/paper.png" alt="paper_icon">
                             </a>
                         </div>

@@ -35,7 +35,7 @@ $today_date = date("Y-m-d");
             <div class="head_right">
                 <div class="print"><img src="img/printer.png" alt="printer_icon"></div>
                 <div class="mail"><img src="img/mail.png" alt="mail_icon"></div>
-                <div class="sub_close_btn"><img src="img/close.png" alt="close_icon"></div>
+                <div class="sub_close_btn"><a href="javascript:history.back()"><img src="img/close.png" alt="close_icon"</a></div>
             </div>
         </div>
     </div>

@@ -101,13 +101,15 @@ include_once ('head.php');
   </form>
 <?
 	$sql = "SELECT 
+               B.id,
 	           B.apply_status_1, B.apply_status_2,
 	           B.score_status_1, B.score_status_2, 
-			   B.wrong_anwer_1, B.wrong_anwer_2, 
+			   B.wrong_anwer_1, B.wrong_anwer_2,
 			   ifnull ( B.current_status, 's0' ) as current_status, 
 			   B.submit_date1, B.submit_date2, 
 			   A._from, A._to, A.name, A.grade, A.semester, A.unit,
-			   A.Q_number1, A.Q_number2, A.Q_number3, A.Q_number4 
+			   A.Q_number1, A.Q_number2, A.Q_number3, A.Q_number4,
+			   A.corner1, A.corner2, A.corner3, A.corner4
 			FROM 
               `homework` A
 			LEFT JOIN 
@@ -146,8 +148,10 @@ include_once ('head.php');
            <tr>
                 <td><span><?=substr($res2['_from'],6,4)?>-<?=substr($res2['_from'],0,2)?>-<?=substr($res2['_from'],3,2)?></span>
 				</td>
-               <td><span><a href=""><?=$res2['name']?></a></span>
-				    <br><span><?=$res2['grade']?> - </span><span><?=$res2['semester']?> </span><span>(<?=$res2['unit']?>)</span>
+               <td><span><a href="./scoring_chat.php?id=<?=$res2['id']?>"><?=$res2['name']?></a></span>
+				    <br><a href="./scoring_chat.php?id=<?=$res2['id']?>">
+                       <span><?=$res2['grade']?> - </span><span><?=$res2['semester']?> </span><span>(<?=$res2['unit']?>)</span>
+                        </a>
 				</td>
                 <td>
                     <span>~ </span>
@@ -306,7 +310,7 @@ include_once ('head.php');
                 </div>
             </div>
         </div>
-        <div class="modal_div" style="text-align:left">
+        <div class="modal_div" style="text-align:left;">
             <p class="modal_subtitle">오답 문항 상세보기</p>
             <div class="modal_content">
                 <div class="first">
@@ -314,15 +318,17 @@ include_once ('head.php');
 <?
 	if($res2['score_status_1'] == 'Y'){
 ?>
-                    <p>1차 :</p>
+                    <p style="vertical-align: top">1차 :</p>
                     <p><span>
 
 <?
-	   if($wrong1){
-	  	  foreach ($wrong1 as $value) {
-		    echo $value;
-		  }
-       }
+    $j = 1;
+    foreach ($wrong1 as $key => $v) {
+        if($wrong1[$j]){
+           echo $res2['corner'.$j]." : ".$wrong1[$j]."<br>";
+        }
+        $j++;
+    }
 ?>
 
                     </span></p>
@@ -343,17 +349,19 @@ include_once ('head.php');
 <?
 	if($res2['score_status_2'] == 'Y'){
 ?>
-                    <p>2차 :</p>
+                    <p style="vertical-align: top">2차 :</p>
                     <p><span>
 					
 <?
-	   if($wrong1){
-		  foreach ($wrong2 as $value) {
-		     echo $value;
-		  }
-       }
+$j = 1;
+foreach ($wrong2 as $key => $v) {
+    if($wrong2[$j]){
+        echo $res2['corner'.$j]." : ".$wrong2[$j]."<br>";
+    }
+    $j++;
+}
 ?>
-				
+
 					</span></p>
                     <p>
                         <span><? if($wrong_tot2 == 0) echo "만점"; ?> (</span>

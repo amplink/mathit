@@ -23,10 +23,9 @@ $today_date = date("Y-m-d");
 <section>
 
 <?
-	$link = "/api/math/student_att?client_no=".$_SESSION['client_no']."&stu_id=".$_GET['s_id']."&d_id=".$_GET['d_id']."&c_id=".$_GET['c_id']."&from=".$_GET['d_id']."&to=".$_GET['d_id'];
-	$r = api_calls_get($link);
 	//$student_name = $r[3];
 
+/*
 	$sql = "SELECT * FROM 
              `teacher_score` 
             WHERE 
@@ -34,8 +33,20 @@ $today_date = date("Y-m-d");
                 AND `c_uid` = '$_GET[c_uid]'
                 AND `s_uid` = '$_GET[s_uid]'
                 AND `student_id` = '$_GET[s_id]'";
+	*/
+
+$sql = "SELECT * FROM 
+             `teacher_score` 
+            WHERE 
+                `seq` = '$_GET[no]'";
+
 	$result = mysqli_query($connect_db, $sql);
 	$res = mysqli_fetch_array($result);
+
+$link = "/api/math/student_att?client_no=".$_SESSION['client_no']."&stu_id=".$res['s_uid']."&d_id=".$res['d_uid']."&c_id=".$res['c_uid']."&from=".$res['d_uid']."&to=".$res['d_uid'];
+$r = api_calls_get($link);
+
+
 ?>
 
     <div class="head_section">
@@ -47,7 +58,7 @@ $today_date = date("Y-m-d");
             <div class="head_right">
                 <div class="print"><img src="img/printer.png" alt="printer_icon"></div>
                 <div class="mail"><img src="img/mail.png" alt="mail_icon"></div>
-                <div class="sub_close_btn"><img src="img/close.png" alt="close_icon"></div>
+                <div class="sub_close_btn"><a href="javascript:history.back()"><img src="img/close.png" alt="close_icon"></a></div>
             </div>
         </div>
     </div>
@@ -109,12 +120,12 @@ $today_date = date("Y-m-d");
              `homework_assign_list` B  
 			ON A.seq = B.h_id 
 	        WHERE 
-	            A.d_uid='$_GET[d_uid]'
-			AND A.c_uid='$_GET[c_uid]'
-			AND A.s_uid='$_GET[s_uid]'
-			AND B.student_id='$_GET[s_id]'
+	            A.d_uid='$res[d_uid]'
+			AND A.c_uid='$res[c_uid]'
+			AND A.s_uid='$res[s_uid]'
+			AND B.student_id='$res[student_id]'
 			AND A.client_id='$ac'
-			-- AND match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
+			-- AND match(A.student_id) against('*$res[student_id]*' in boolean mode) 
 			 ) C
 			";
 	//ECHO $sql2;
@@ -147,16 +158,16 @@ $today_date = date("Y-m-d");
 			  MAX((A.score1 + A.score2) / 2) max,
 			  (SELECT SUM(score1 + score2) / (COUNT(seq)*2) 
 			   FROM `teacher_score` 
-			   WHERE  d_uid='$_GET[d_uid]'  AND c_uid='$_GET[c_uid]'
-		           	  AND s_uid='$_GET[s_uid]'AND year = '$res[year]' 
+			   WHERE  d_uid='$res[d_uid]'  AND c_uid='$res[c_uid]'
+		           	  AND s_uid='$res[s_uid]'AND year = '$res[year]' 
 			          AND quarter = '$res[quarter]' AND d_order = '$res[d_order]'
 					  AND test_genre='$res[test_genre]') tot2
 			FROM
               `teacher_score` A
 	        WHERE 
-	            A.d_uid='$_GET[d_uid]'
-			AND A.c_uid='$_GET[c_uid]'
-			AND A.s_uid='$_GET[s_uid]'
+	            A.d_uid='$res[d_uid]'
+			AND A.c_uid='$res[c_uid]'
+			AND A.s_uid='$res[s_uid]'
 			AND A.test_genre='$res[test_genre]'
 			AND A.client_id='$ac'
 			
@@ -209,10 +220,10 @@ $today_date = date("Y-m-d");
              `homework_assign_list` B  
 			ON A.seq = B.h_id 
 	        WHERE 
-			   match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
-			AND A.c_uid='$_GET[c_uid]' 
+			   match(A.student_id) against('*$res[student_id]*' in boolean mode) 
+			AND A.c_uid='$res[c_uid]' 
 			AND A.client_id='$ac' 
-			AND B.student_id='$_GET[s_id]'
+			AND B.student_id='$res[student_id]'
 			AND B.apply_status_1 IS NOT NULL
 			ORDER BY A.seq asc";
 
@@ -264,7 +275,6 @@ $today_date = date("Y-m-d");
 		   }
 	   }
        //$score2 = round((($wrong_tot1-$wrong_tot2)/$wrong_tot1) * 100);
-
         $from_date[$j] = $res4['_from'];
 
 ?>
@@ -325,8 +335,8 @@ $today_date = date("Y-m-d");
              `homework_assign_list` B  
 			ON A.seq = B.h_id 
 	        WHERE 
-			   match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
-			AND A.c_uid='$_GET[c_uid]' 
+			   match(A.student_id) against('*$res[student_id]*' in boolean mode) 
+			AND A.c_uid='$res[c_uid]' 
 			AND A.client_id='$ac' 
 			AND B.apply_status_1 IS NOT NULL
             AND (A._from >= '$start_day' AND A._to < '$limit_date')
@@ -370,37 +380,29 @@ $today_date = date("Y-m-d");
         ?>
 
 
-
-
-
-
-
-
-
         <div class="r_box" style="position:absolute;z-index:999;width:900px;height:600px"><? include "./chart.php";?>
         </div>
     </div>
-    <div class="down_box"style="height:900px">
+    <div class="down_box">
         <div class="down_head_section">
             <p class="l_div_text">선생님 코멘트</p>
-            <div class="save_btn"><a href="#none">저장</a></div>
+            <div class="save_btn"><a href="javascript:save()">저장</a></div>
         </div>
-        <div class="comment_input_section" style="height:900px">
-            <textarea name="" id="" cols="30" rows="60" style="height:600px">
-
-                <?php
-
-               echo $me_score;
-                echo  $tot_score;
-
-
-                ?>
-
-
-            </textarea>
-        </div>
+        <form name="commentForm" id="commentForm" action="./score_comment_reg.php" method="post">
+            <input type="hidden" name="no" value="<?=$res['seq']?>">
+            <div class="comment_input_section">
+                <textarea name="comment" id="comment" cols="30" rows="10" style="height:180px;width:100%"><?=$res['comment']?></textarea>
+            </div>
+        </form>
     </div>
 </section>
+<script>
+
+    function save() {
+        $("#commentForm").submit();
+    }
+
+</script>
 </body>
 
 </html>

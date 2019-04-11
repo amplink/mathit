@@ -1,3 +1,7 @@
+<?php
+include_once ('_common.php');
+include_once ('head.php');
+?>
 <!DOCTYPE html>
 <html>
 
@@ -15,48 +19,45 @@
 </head>
 
 <body>
-<header>
-    <div class="hamburger_btn">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <div class="home_btn"><a href="home.html"><img src="img/home.png" alt="home_icon"></a></div>
-    <div class="logo_section">
-        <div class="logo"><a href="home.html"><img src="img/logo_white.png" alt="header_logo"></a></div>
-        <p class="navigation_text">제출결과 확인</p>
-    </div>
-    <div class="member_info_wrap">
-        <div class="member_img"><img src="img/user.png" alt="member_img"></div>
-        <div class="member_info">
-            <p class="member_name">강태민</p>
-            <p class="member_grade">전임강사</p>
-        </div>
-        <div class="logout_btn"><a href="login.html">로그아웃</a></div>
-    </div>
-</header>
+
+<?php
+    $sql = "SELECT 
+               A.*, B.*
+            FROM 
+              `homework_assign_list` A,
+              `homework` B
+            WHERE 
+               B.seq = A.h_id
+            AND
+		       A.id = '$_GET[id]'
+		    AND 
+	           A.client_id = '$ac'
+		      ";
+    $result = mysqli_query($connect_db, $sql);
+    $res = mysqli_fetch_array($result);
+?>
+
+
 <section>
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
                 <p class="left_text">
-                    <span>초6</span>
-                    <span>미적분학</span>
+                    <span><?=$res['class_name']?></span>
                 </p>
                 <p>
                     <span>(</span>
-                    <span>월수금</span>
-                    <span> 반</span>
+                    <span><?=$res['d_order']?></span>
                     <span>)</span>
                 </p>
                 <p>
                     <span> - </span>
-                    <span>엘사</span>
+                    <span><?=$res['student_name']?></span>
                     <span> 학생</span>
                 </p>
             </div>
             <div class="head_right">
-                <div class="sub_close_btn"><img src="img/close.png" alt="close_icon"></div>
+                <div class="sub_close_btn"><a href="javascript:history.back()"><img src="img/close.png" alt="close_icon"></a></div>
             </div>
         </div>
     </div>
@@ -68,41 +69,90 @@
         <div class="chat_section content">
             <div class="chat_wrap">
                 <ul>
-                    <li>
-                        <div class="left_speech_wrap">
-                            <div class="l_tri"><img src="img/bubble_tri_left.png" alt=";"></div>
-                            <div class="l_speech_bubble">
-                                <p>[정상제출]<br>
-                                    1차 제출완료.</p>
-                            </div>
-                            <div class="time">
-                                <span>8월</span>
-                                <span>29일</span>
-                                <span>21:00</span>
-                            </div>
-                        </div>
-                    </li>
+
+                    <?php
+                       if($res['apply_status_1'] == 'Y') {
+                    ?>
+                            <li>
+                                <div class="left_speech_wrap">
+                                    <div class="l_tri"><img src="img/bubble_tri_left.png" alt=";"></div>
+                                    <div class="l_speech_bubble">
+                                        <p>[정상제출]<br>
+                                            1차 제출완료.</p>
+                                    </div>
+                                    <div class="time">
+                                        <span><?=substr($res['submit_date1'],5,2)?>월</span>
+                                        <span><?=substr($res['submit_date1'],8,2)?>일</span>
+                                        <span><?=substr($res['submit_date1'],11,5)?></span>
+                                    </div>
+                                </div>
+                            </li>
+                    <?php
+                       }
+
+                       if($res['score_status_1'] == 'Y') {
+
+                           $wrong_tot1 = 0;
+                           $q_tot1 = 0;
+                           for($i=1; $i<4; $i++){
+                               if($res['Q_number'.$i]) $q_tot += count(explode(",",$res['Q_number'.$i]));
+                           }
+
+                           $wrong1 = json_decode($res['wrong_anwer_1'],true);
+                           $wrong2 = json_decode($res['wrong_anwer_2'],true);
+                           if($wrong2){
+                               $j=1;
+                               foreach ($wrong2 as $key => $v) {
+                                   if($wrong2[$j]){
+                                       $str .= $res['corner'.$j]." : ".$wrong2[$j]."<br>";
+                                       $wrong_tot += count(explode(",",$v));
+                                   }
+                                   $j++;
+                               }
+                           }else{
+                               $j=1;
+                               foreach ($wrong1 as $key => $v) {
+                                   if($wrong1[$j]){
+                                       $str .= $res['corner'.$j]." : ".$wrong1[$j]."<br>";
+                                       $wrong_tot += count(explode(",",$v));
+                                   }
+                                   $j++;
+                               }
+                           }
+                           $score = round((($q_tot-$wrong_tot)/$q_tot) * 100);
+                    ?>
                     <li>
                         <div class="blank"></div>
                         <div class="right_speech_wrap">
+                            <div id="hide_wrong_answer1"  style="position:absolute;padding:10px;width:100%;background-color: #FFFFFF;z-index:999;display: none;">
+                                <div class="sub_close_btn" style="padding-right:15px"><a><img src="img/close.png" alt="close_icon"></a></div>
+                                <div style="text-align: left"><?=$str?></div>
+                            </div>
+
                             <div class="time">
-                                <span>8월</span>
-                                <span>29일</span>
-                                <span>21:00</span>
+                                <span><?=substr($res['submit_date1'],5,2)?>월</span>
+                                <span><?=substr($res['submit_date1'],8,2)?>일</span>
+                                <span><?=substr($res['submit_date1'],11,5)?></span>
                             </div>
                             <div class="r_speech_bubble">
-                                <p>홍길동 학생의 채점 결과,<br>
-                                    전체 문항 수 20개 중<br>
-                                    오답 수는 10개입니다.<br>
-                                    (정답률: 50%)<br>
+                                <p><?=$res['student_name']?> 학생의 채점 결과,<br>
+                                    전체 문항 수 <?=$q_tot?>개 중<br>
+                                    오답 수는 <?=$wrong_tot?>개입니다.<br>
+                                    (정답률: <?=$score?>%)<br>
                                     오답을 오답 노트에<br>
                                     다시 풀어 제출해 주세요.<br>
-                                    <a href="#none" style="color: red; text-decoration: underline">오답문항 보기</a>
+                                    <a style="color: red; text-decoration: underline" class="show_wrong_answer" id="hide_wrong_answer1">오답문항 보기</a>
                                 </p>
                             </div>
+
                             <div class="r_tri"><img src="img/bubble_tri_right.png" alt=";"></div>
                         </div>
                     </li>
+                    <?php
+                       }
+
+                       if($res['apply_status_2'] == 'Y') {
+                    ?>
                     <li>
                         <div class="left_speech_wrap">
                             <div class="l_tri"><img src="img/bubble_tri_left.png" alt=";"></div>
@@ -111,22 +161,27 @@
                                     2차 제출완료</p>
                             </div>
                             <div class="time">
-                                <span>8월</span>
-                                <span>29일</span>
-                                <span>21:00</span>
+                                <span><?=substr($res['submit_date2'],5,2)?>월</span>
+                                <span><?=substr($res['submit_date2'],8,2)?>일</span>
+                                <span><?=substr($res['submit_date2'],11,5)?></span>
                             </div>
                         </div>
                     </li>
+                    <?php
+                       }
+
+                       if($res['score_status_2'] == 'Y') {
+                    ?>
                     <li>
                         <div class="blank"></div>
                         <div class="right_speech_wrap">
                             <div class="time">
-                                <span>8월</span>
-                                <span>29일</span>
-                                <span>21:00</span>
+                                <span><?=substr($res['submit_date1'],5,2)?>월</span>
+                                <span><?=substr($res['submit_date1'],8,2)?>일</span>
+                                <span><?=substr($res['submit_date1'],11,5)?></span>
                             </div>
                             <div class="r_speech_bubble">
-                                <p>홍길동 학생의 채점결과, 오답문항<br>
+                                <p><?=$res['student_name']?> 학생의 채점결과, 오답문항<br>
                                     10개 중 정답은 5문항입니다.<br>
                                     (전체문항 20개 중 1차 정답: 10개<br>
                                     / 2차정답: 5개 / 문제: 5개)<br>
@@ -137,6 +192,11 @@
                             <div class="r_tri"><img src="img/bubble_tri_right.png" alt=";"></div>
                         </div>
                     </li>
+                    <?php
+                       }
+
+                       if($res['score_status_1'] == 'Y') {
+                    ?>
                     <li>
                         <div class="left_speech_wrap">
                             <div class="l_tri"><img src="img/bubble_tri_left.png" alt=";"></div>
@@ -144,12 +204,16 @@
                                 <p>말풍선이 최대로 늘어나는 길이를 표시하기 위한 말풍선입니다. 최대 이만큼 늘어납니다.</p>
                             </div>
                             <div class="time">
-                                <span>8월</span>
-                                <span>29일</span>
-                                <span>21:00</span>
+                                <span><?=substr($res['submit_date1'],5,2)?>월</span>
+                                <span><?=substr($res['submit_date1'],8,2)?>일</span>
+                                <span><?=substr($res['submit_date1'],11,5)?></span>
                             </div>
                         </div>
                     </li>
+                    <?php
+                       }
+
+                    ?>
                     <li>
                         <div class="blank"></div>
                         <div class="right_speech_wrap">
@@ -261,6 +325,16 @@
                 mouseWheel:{deltaFactor:40},
                 scrollInertia:400
             });
+
+            $(".sub_close_btn").click(function () {
+                var id = $(this).parent().attr('id');
+                $("#"+id).css("display","none");
+            });
+
+            $(".show_wrong_answer").click(function () {
+                var id = $(this).attr('id');
+                $("#"+id).css("display","block");
+            })
 
         });
     })(jQuery);
