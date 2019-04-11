@@ -11,8 +11,6 @@ window.chartColors = {
 };
 
 (function(global) {
-
-
 	var COLORS = [
 		'#4dc9f6',
 		'#f67019',

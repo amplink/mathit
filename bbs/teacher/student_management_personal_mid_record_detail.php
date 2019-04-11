@@ -367,8 +367,6 @@ $today_date = date("Y-m-d");
         // $from_date = implode(",",$from_date);
         $max = count($from_date);
 
-
-
         ?>
 
 

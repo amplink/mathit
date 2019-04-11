@@ -34,12 +34,12 @@
 
         var MONTHS = [
             <?
-            $str = "";
-            foreach ($from_date as $v){
+              $str = "";
+              foreach ($from_date as $v){
                 $str .= "'".substr($v,0,5)."',";
                 //$str .= "'".$v."',";
-            }
-            echo substr($str, 0, -1);
+              }
+              echo substr($str, 0, -1);
             ?>
         ];
 		function generateData(config) {
