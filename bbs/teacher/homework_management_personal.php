@@ -66,6 +66,7 @@ include_once ('head.php');
     <input type="hidden" name="s_id" value="<?=$_GET['s_id']?>">
 	<input type="hidden" name="d_uid" value="<?=$_GET['d_uid']?>">
 	<input type="hidden" name="c_uid" value="<?=$_GET['c_uid']?>">
+    <input type="hidden" name="s_uid" value="<?=$_GET['s_uid']?>">
 	<input type="hidden" name="class_name" value="<?=$_GET['class_name']?>">
 	<input type="hidden" name="student" value="<?=$_GET['student']?>">
     <div class="head_section">
