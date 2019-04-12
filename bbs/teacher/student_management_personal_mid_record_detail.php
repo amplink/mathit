@@ -35,7 +35,7 @@ $today_date = date("Y-m-d");
                 AND `student_id` = '$_GET[s_id]'";
 	*/
 
-$sql = "SELECT * FROM 
+    $sql = "SELECT * FROM 
              `teacher_score` 
             WHERE 
                 `seq` = '$_GET[no]'";
@@ -43,8 +43,8 @@ $sql = "SELECT * FROM
 	$result = mysqli_query($connect_db, $sql);
 	$res = mysqli_fetch_array($result);
 
-$link = "/api/math/student_att?client_no=".$_SESSION['client_no']."&stu_id=".$res['s_uid']."&d_id=".$res['d_uid']."&c_id=".$res['c_uid']."&from=".$res['d_uid']."&to=".$res['d_uid'];
-$r = api_calls_get($link);
+    //$link = "/api/math/student_att?client_no=".$_SESSION['client_no']."&stu_id=".$res['s_uid']."&d_id=".$res['d_uid']."&c_id=".$res['c_uid']."&from=".$res['d_uid']."&to=".$res['d_uid'];
+    //$r = api_calls_get($link);
 
 
 ?>
@@ -134,9 +134,6 @@ $r = api_calls_get($link);
 	$h_avg = floor(($res2['N2'] / $res2['N1'])*100);
 ?>
 
-
-
-
                     <div class="s_info_div">
                         <p class="l_div_text">숙제</p>
                         <div class="r_div_content">
@@ -151,25 +148,16 @@ $r = api_calls_get($link);
 <? 
    $avg =round(($res['score1'] + $res['score2']) / 2);
 
-
-
 	$sql3 = "SELECT 
 	          SUM(A.score1 + A.score2) / (COUNT(A.seq)*2) avg,
 			  MAX((A.score1 + A.score2) / 2) max,
 			  (SELECT SUM(score1 + score2) / (COUNT(seq)*2) 
 			   FROM `teacher_score` 
-			   WHERE  d_uid='$res[d_uid]'  AND c_uid='$res[c_uid]'
-		           	  AND s_uid='$res[s_uid]'AND year = '$res[year]' 
-			          AND quarter = '$res[quarter]' AND d_order = '$res[d_order]'
-					  AND test_genre='$res[test_genre]') tot2
+			   WHERE  seq = '$_GET[no]') tot2
 			FROM
               `teacher_score` A
 	        WHERE 
-	            A.d_uid='$res[d_uid]'
-			AND A.c_uid='$res[c_uid]'
-			AND A.s_uid='$res[s_uid]'
-			AND A.test_genre='$res[test_genre]'
-			AND A.client_id='$ac'
+	            A.seq = '$_GET[no]'
 			
 			";
 
@@ -311,18 +299,38 @@ $r = api_calls_get($link);
             </div>
         </div>
         <?
-        $date = (date("Y")-1)."-12-01";
-        $link = "/api/math/class?client_no=".$_SESSION['client_no']."&date=".$date;
-        $r = api_calls_get($link);
+        //분기시작일 정보
+        if($res['test_genre'] == '중간평가') {
+            $date = (date("Y") - 1) . "-12-01";
+            $link = "/api/math/class?client_no=" . $_SESSION['client_no'] . "&date=" . $date;
+            $r = api_calls_get($link);
 
-        $month = explode("/",$res['date']);
+            $month = explode("/", $res['date']);
 
-        $flag = getQuarter($r[1][3]);
-        $start_day =  getPeriod($flag, $month[0]);
+            $flag = getQuarter($r[1][3]);
+            $start_day = getPeriod($flag, $month[0]);
+        }else{ //기말평가
+
+            $sql6 = "SELECT  date
+                     FROM
+                      `teacher_score`
+                     WHERE 
+                        d_uid='$res[d_uid]'
+                    AND c_uid='$res[c_uid]'
+                    AND s_uid='$res[s_uid]'
+                    AND d_order='$res[d_order]'
+                    AND test_genre='중간평가'
+                    AND client_id='$ac'
+			";
+
+            $result6 = mysqli_query($connect_db, $sql6);
+            $res6 = mysqli_fetch_array($result6);
+            $start_day = $res6('date');
+        }
 
         //해당분기의 마지막날 구함
-        $timestamp = strtotime("+4 months", strtotime($start_day));
-        $limit_date = date("m/d/Y", $timestamp);
+        //$timestamp = strtotime("+4 months", strtotime($start_day));
+        //$limit_date = date("m/d/Y", $timestamp);
 
 
         $sql5 = "SELECT 
@@ -339,7 +347,7 @@ $r = api_calls_get($link);
 			AND A.c_uid='$res[c_uid]' 
 			AND A.client_id='$ac' 
 			AND B.apply_status_1 IS NOT NULL
-            AND (A._from >= '$start_day' AND A._to < '$limit_date')
+            AND (A._from >= '$start_day' AND A._to < '$res[date]')
             ORDER BY A.seq asc" ;
 
 
