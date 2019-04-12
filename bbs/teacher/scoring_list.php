@@ -94,8 +94,7 @@ include_once ('head.php');
                         </td>
                         <td>
 <? 
-	$addStyle = ($res2['current_status'] == 's1' or $res2['current_status'] == 's2' 
-	             or $res2['current_status'] == 's3')?"disabledbutton":"";
+	$addStyle = ($res2['apply_status_1'] == 's1' or $res2['current_status'] == 's1' or $res2['current_status'] == 's2' or $res2['current_status'] == 's3' or $res2['current_status'] == '')?"disabledbutton":"";
 ?>
 						
                             <div class="scoring_btn <?=$addStyle?>"><a href="scoring.php?id=<?=$res2['id']?>">채점하기</a></div>

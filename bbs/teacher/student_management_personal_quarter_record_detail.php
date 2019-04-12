@@ -19,15 +19,22 @@ $today_date = date("Y-m-d");
 </head>
 
 <body>
+<?php
+    $sql = "select * from `teacher_score` 
+             where 
+            `seq` = '$_GET[no]'";
+    $result = mysqli_query($connect_db, $sql);
+    $res = mysqli_fetch_array($result);
+?>
 <section>
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
                 <p class="left_text">분기성적표</p>
                 <p class="quarter_date">
-                    <span>2018</span>
+                    <span><?=$res['year']?></span>
                     <span>년도 </span>
-                    <span>3</span>
+                    <span><?=$res['quarter']?></span>
                     <span>분기</span>
                 </p>
                 <p class="record_date"><?=$today_date?></p>
@@ -35,7 +42,7 @@ $today_date = date("Y-m-d");
             <div class="head_right">
                 <div class="print"><img src="img/printer.png" alt="printer_icon"></div>
                 <div class="mail"><img src="img/mail.png" alt="mail_icon"></div>
-                <div class="sub_close_btn"><a href="javascript:history.back()"><img src="img/close.png" alt="close_icon"</a></div>
+                <div class="sub_close_btn"><a href="javascript:history.back()"><img src="img/close.png" alt="close_icon"></a></div>
             </div>
         </div>
     </div>
@@ -47,12 +54,11 @@ $today_date = date("Y-m-d");
                         <p class="l_div_text">학급</p>
                         <div class="r_div_content">
                             <p>
-                                <span>초6</span>
-                                <span>집합론</span>
+                                <span><?=$res['class']?></span>
                             </p>
                             <p>
                                 <span>(</span>
-                                <span>월수금</span>
+                                <span><?=$res['d_order']?></span>
                                 <span>)</span>
                             </p>
                         </div>
@@ -61,7 +67,7 @@ $today_date = date("Y-m-d");
                         <p class="l_div_text">강사</p>
                         <div class="r_div_content">
                             <p>
-                                <span>탈레스</span>
+                                <span><?=$res['teacher']?></span>
                             </p>
                         </div>
                     </div>
@@ -69,7 +75,7 @@ $today_date = date("Y-m-d");
                         <p class="l_div_text">학생</p>
                         <div class="r_div_content">
                             <p>
-                                <span>최불암</span>
+                                <span><?=$res['student']?></span>
                             </p>
                         </div>
                     </div>
@@ -92,26 +98,26 @@ $today_date = date("Y-m-d");
                         </thead>
                         <tbody>
                         <tr>
-                            <td><span>긴또깡</span></td>
+                            <td><span><?=$res['student']?></span></td>
                             <td>
-                                <span>35점</span>
+                                <span><?=$res['score1']?>점</span>
                                 <span>/</span>
-                                <span>40점</span>
+                                <span><?=$res['sub_score1']?>점</span>
                             </td>
                             <td>
-                                <span>35점</span>
+                                <span><?=$res['score2']?>점</span>
                                 <span>/</span>
-                                <span>40점</span>
+                                <span><?=$res['sub_score2']?>점</span>
                             </td>
                             <td>
-                                <span>35점</span>
+                                <span><?=$res['score3']?>점</span>
                                 <span>/</span>
-                                <span>40점</span>
+                                <span><?=$res['sub_score3']?>점</span>
                             </td>
                             <td>
-                                <span>35점</span>
+                                <span><?=$res['score1']+$res['score2']+$res['score3']?>점</span>
                                 <span>/</span>
-                                <span>40점</span>
+                                <span><?=$res['sub_score1']+$res['sub_score2']+$res['sub_score3']?>점</span>
                             </td>
                         </tr>
                         <tr>
@@ -136,21 +142,33 @@ $today_date = date("Y-m-d");
         </div>
     </div>
     <div class="down_box">
-        <div class="down_head_section">
-            <p class="l_div_text">학생 수준 진단</p>
-            <div class="save_btn"><a href="#none">저장</a></div>
-        </div>
-        <div class="comment_input_section">
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-        </div>
-        <div class="down_head_section">
-            <p class="l_div_text">선생님 코멘트</p>
-        </div>
-        <div class="comment_input_section">
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-        </div>
+        <form name="commentForm" id="commentForm" action="./score_comment_reg.php" method="post">
+            <input type="hidden" name="no" value="<?=$res['seq']?>">
+            <input type="hidden" name="flag" value="quarter">
+            <div class="down_head_section">
+                <p class="l_div_text">학생 수준 진단</p>
+                <div class="save_btn"><a href="javascript:save()">저장</a></div>
+            </div>
+            <div class="comment_input_section">
+                <textarea name="evaluation" id="evaluation" cols="30" rows="10" style="height:180px;width:100%"><?=$res['evaluation']?></textarea>
+            </div>
+            <div class="down_head_section">
+                <p class="l_div_text">선생님 코멘트</p>
+            </div>
+            <div class="comment_input_section">
+                <textarea name="comment" id="comment" cols="30" rows="10" style="height:180px;width:100%"><?=$res['comment']?></textarea>
+            </div>
+        </form>
+
     </div>
 </section>
+<script>
+
+    function save() {
+        $("#commentForm").submit();
+    }
+
+</script>
 </body>
 
 </html>

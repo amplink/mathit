@@ -3583,7 +3583,7 @@ function status_view($state){
 			$str = '<font color="red">미제출</p>';
 			break;			
         case "s0" :
-			$str = '<font color="red">기한초과제출</p>';
+			$str = '<font color="red">지각 제출</p>';
 			break;
         default:
             $str = '<font color="red">미제출</p>';

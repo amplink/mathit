@@ -390,6 +390,7 @@ $r = api_calls_get($link);
         </div>
         <form name="commentForm" id="commentForm" action="./score_comment_reg.php" method="post">
             <input type="hidden" name="no" value="<?=$res['seq']?>">
+            <input type="hidden" name="flag" value="mid">
             <div class="comment_input_section">
                 <textarea name="comment" id="comment" cols="30" rows="10" style="height:180px;width:100%"><?=$res['comment']?></textarea>
             </div>

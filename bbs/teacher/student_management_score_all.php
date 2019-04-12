@@ -35,7 +35,7 @@ include_once ('head.php');
             </div>
         </div>
     </div>
-    <div class="student_table_section">
+    <div class="student_table_section" style="overflow: auto">
         <table>
             <thead>
             <tr>
