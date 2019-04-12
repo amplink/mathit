@@ -3,7 +3,14 @@ include_once ('_common.php');
 ?>
 <?php
 $class_name = $_GET['class_name'];
-$sql = "select * from `homework` where `class_name`='$class_name';";
+$sql = "select * from `homework` 
+        where 
+		`class_name`='$class_name'
+		and `d_uid`='$_GET[d_uid]'
+		and `c_uid`='$_GET[c_uid]'
+		and `s_uid`='$_GET[s_uid]'
+		and `d_order`='$_GET[d_order]'";
+
 $result = sql_query($sql);
 $i=0;
 while($res = mysqli_fetch_array($result)) {
@@ -111,7 +118,7 @@ while($res = mysqli_fetch_array($result)) {
                 </td>
                 <td>
                     <select name="corner2" id="corner2<?=$i?>" data-key="<?=$i?>" data-num="2" class="corner">
-                        <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
+                        <option value="<?=$res['corner2']?>"><?=$res['corner2']?></option>
                     </select>
                 </td>
                 <td>
@@ -133,7 +140,7 @@ while($res = mysqli_fetch_array($result)) {
 
                 <td>
                     <select name="corner3" id="corner3<?=$i?>" data-key="<?=$i?>" data-num="3" class="corner">
-                        <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
+                        <option value="<?=$res['corner3']?>"><?=$res['corner3']?></option>
                     </select>
                 </td>
                 <td>
@@ -155,7 +162,7 @@ while($res = mysqli_fetch_array($result)) {
 
                 <td>
                     <select name="corner4" id="corner4<?=$i?>" data-key="<?=$i?>" data-num="4" class="corner">
-                        <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
+                        <option value="<?=$res['corner4']?>"><?=$res['corner4']?></option>
                     </select>
                 </td>
                 <td>
@@ -209,24 +216,24 @@ while($res = mysqli_fetch_array($result)) {
                                 <?php
                             }
                             ?>
-<!--                            <div class="checks_names_wrap">-->
-<!--                                <div class="checks_names" style="float:left;display:block;">고이즈미</div>-->
-<!--                                <div class="checks_names_values" ><span id="chkNameVal1" class="checkNames_span green_color_on">완료</span></div>-->
-<!--                            </div>-->
-<!--                            <div class="checks_names_wrap">-->
-<!--                                <div class="checks_names" style="float:left;display:block;">킹목사</div>-->
-<!--                                <div class="checks_names_values" ><span id="chkNameVal2" class="checkNames_span orange_color_on">1차</span></div>-->
-<!--                            </div>-->
-<!--                            <div class="checks_names_wrap">-->
-<!--                                <div class="checks_names" style="float:left;display:block;">조지부시</div>-->
-<!--                                <div class="checks_names_values" ><span id="chkNameVal3" class="checkNames_span red_color_on">2차</span></div>-->
-<!--                            </div>-->
-<!--                            <div class="checks_names_wrap">-->
-<!--                                <div class="checks_names" style="float:left;display:block;">홍길동</div>-->
-<!--                                <div class="checks_names_values" ><span id="chkNameVal4" class="checkNames_span green_color_on">완료</span></div>-->
-<!--                            </div>-->
+                            <!--                            <div class="checks_names_wrap">-->
+                            <!--                                <div class="checks_names" style="float:left;display:block;">고이즈미</div>-->
+                            <!--                                <div class="checks_names_values" ><span id="chkNameVal1" class="checkNames_span green_color_on">완료</span></div>-->
+                            <!--                            </div>-->
+                            <!--                            <div class="checks_names_wrap">-->
+                            <!--                                <div class="checks_names" style="float:left;display:block;">킹목사</div>-->
+                            <!--                                <div class="checks_names_values" ><span id="chkNameVal2" class="checkNames_span orange_color_on">1차</span></div>-->
+                            <!--                            </div>-->
+                            <!--                            <div class="checks_names_wrap">-->
+                            <!--                                <div class="checks_names" style="float:left;display:block;">조지부시</div>-->
+                            <!--                                <div class="checks_names_values" ><span id="chkNameVal3" class="checkNames_span red_color_on">2차</span></div>-->
+                            <!--                            </div>-->
+                            <!--                            <div class="checks_names_wrap">-->
+                            <!--                                <div class="checks_names" style="float:left;display:block;">홍길동</div>-->
+                            <!--                                <div class="checks_names_values" ><span id="chkNameVal4" class="checkNames_span green_color_on">완료</span></div>-->
+                            <!--                            </div>-->
                         </div>
-                    <?php
+                        <?php
 
                     }else if($sd > 0 && $ed > 0) {
                         echo '<div class="resend_btn" onclick="resend('.$i.')"><a>재전송</a></div>';
@@ -256,181 +263,181 @@ while($res = mysqli_fetch_array($result)) {
     }
 </script>
 <script>
-        $( function() {
-            for(var i=0; i<<?php echo $i;?>; i++) {
-                var dateFormat = "yy-mm-dd",
-                    from = $("#from" + i).datepicker({
-                        showOn: "button",
-                        buttonImage: "img/calendar.png",
-                        buttonImageOnly: true,
-                        buttonText: "Select date",
-                        nextText: "다음달",
-                        prevText: "이전달",
-                        changeMonth: true,
-                        dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-                        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-                        monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-                        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                        numberOfMonths: 2
-                    })
-                        .on("change", function () {
-                            to.datepicker("option", "minDate", getDate(this));
-                        }),
-                    to = $("#to" + i).datepicker({
-                        showOn: "button",
-                        buttonImage: "img/calendar.png",
-                        buttonImageOnly: true,
-                        buttonText: "Select date",
-                        nextText: "다음달",
-                        prevText: "이전달",
-                        changeMonth: true,
-                        dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-                        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-                        monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-                        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                        numberOfMonths: 2
-                    })
-                        .on("change", function () {
-                            from.datepicker("option", "maxDate", getDate(this));
-                        });
-            }
-            function getDate( element ) {
-                var date;
-                try {
-                    date = $.datepicker.parseDate( dateFormat, element.value );
-                } catch( error ) {
-                    date = null;
-                }
-                return date;
-            }
-
-
-
-
-            $('.corner').change(function () {
-                var idx = $(this).data("num");
-                if($(this).val() != '선택'){
-                    var no = $(this).data("key");
-                    var params = $("#resend_form"+no).serialize();
-
-                    var n = no -1;
-                    $("#corner_no").val($(this).val());
-
-                    //alert($("#corner_no").val());
-                    $.ajax({
-                        type: "POST",
-                        url: "call_corner_content.php?no="+no+"&val="+$(this).val(),
-                        data:params,
-                        dataType: "json",
-                        success: function(response){
-                            console.log(response.str1);
-
-                            //$('.custumdropdown').eq(0).empty();
-                            //$('.combobox').eq(0).html("");
-
-                            $("#Q_number"+idx+"_"+no).parent().parent().find('.identifier').html('선택');
-                            $("#Q_number"+idx+"_"+no).parent().parent().find("input:checkbox[name='allChk']").prop("checked", false);
-                            $("#Q_number"+idx+"_"+no).parent().parent().find('.combobox').html(response.str1);
-                            $("#Q_number"+idx+"_"+no).append(response.str2);
-
-
-                            //$("#Q_number"+no).append(response.str2);
-                            $('.custumdropdown').eq(0).homework_manegement_add();
-                        }
+    $( function() {
+        for(var i=0; i<<?php echo $i;?>; i++) {
+            var dateFormat = "yy-mm-dd",
+                from = $("#from" + i).datepicker({
+                    showOn: "button",
+                    buttonImage: "img/calendar.png",
+                    buttonImageOnly: true,
+                    buttonText: "Select date",
+                    nextText: "다음달",
+                    prevText: "이전달",
+                    changeMonth: true,
+                    dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+                    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+                    monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+                    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                    numberOfMonths: 2
+                })
+                    .on("change", function () {
+                        to.datepicker("option", "minDate", getDate(this));
+                    }),
+                to = $("#to" + i).datepicker({
+                    showOn: "button",
+                    buttonImage: "img/calendar.png",
+                    buttonImageOnly: true,
+                    buttonText: "Select date",
+                    nextText: "다음달",
+                    prevText: "이전달",
+                    changeMonth: true,
+                    dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+                    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+                    monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+                    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                    numberOfMonths: 2
+                })
+                    .on("change", function () {
+                        from.datepicker("option", "maxDate", getDate(this));
                     });
-                }
-
-
-            });
-
-
-
-
-
-
-
-
-
-
-
-
-
-        } );
-
-        function show_box(e) {
-            var size = <?php echo $i;?>;
-            if($('.students_checks'+e).css('visibility', 'hidden')) {
-                for(var i=0; i<size; i++) {
-                    $('.students_checks'+i).css('visibility', 'hidden');
-                }
-                $('.students_checks'+e).css('visibility', '');
+        }
+        function getDate( element ) {
+            var date;
+            try {
+                date = $.datepicker.parseDate( dateFormat, element.value );
+            } catch( error ) {
+                date = null;
             }
+            return date;
         }
 
-        function blind_box(e) {
-            $('.students_checks'+e).css('visibility', 'hidden');
+
+
+
+        $('.corner').change(function () {
+            var idx = $(this).data("num");
+            if($(this).val() != '선택'){
+                var no = $(this).data("key");
+                var params = $("#resend_form"+no).serialize();
+
+                var n = no -1;
+                $("#corner_no").val($(this).val());
+
+                //alert($("#corner_no").val());
+                $.ajax({
+                    type: "POST",
+                    url: "call_corner_content.php?no="+no+"&val="+$(this).val(),
+                    data:params,
+                    dataType: "json",
+                    success: function(response){
+                        console.log(response.str1);
+
+                        //$('.custumdropdown').eq(0).empty();
+                        //$('.combobox').eq(0).html("");
+
+                        $("#Q_number"+idx+"_"+no).parent().parent().find('.identifier').html('선택');
+                        $("#Q_number"+idx+"_"+no).parent().parent().find("input:checkbox[name='allChk']").prop("checked", false);
+                        $("#Q_number"+idx+"_"+no).parent().parent().find('.combobox').html(response.str1);
+                        $("#Q_number"+idx+"_"+no).append(response.str2);
+
+
+                        //$("#Q_number"+no).append(response.str2);
+                        $('.custumdropdown').eq(0).homework_manegement_add();
+                    }
+                });
+            }
+
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    } );
+
+    function show_box(e) {
+        var size = <?php echo $i;?>;
+        if($('.students_checks'+e).css('visibility', 'hidden')) {
+            for(var i=0; i<size; i++) {
+                $('.students_checks'+i).css('visibility', 'hidden');
+            }
+            $('.students_checks'+e).css('visibility', '');
+        }
+    }
+
+    function blind_box(e) {
+        $('.students_checks'+e).css('visibility', 'hidden');
+    }
+
+    function chk_type(e) {
+        if($('#textbook'+e).val() == "베타") {
+            $('#unit'+e+' option[value="총정리(1)"]').text("중간평가");
+            $('#unit'+e+' option[value="총정리(1)"]').val("중간평가");
+
+            $('#unit'+e+' option[value="총정리(2)"]').text("기말평가");
+            $('#unit'+e+' option[value="총정리(2)"]').val("기말평가");
         }
 
-        function chk_type(e) {
-            if($('#textbook'+e).val() == "베타") {
-                $('#unit'+e+' option[value="총정리(1)"]').text("중간평가");
-                $('#unit'+e+' option[value="총정리(1)"]').val("중간평가");
+        var textbook = $('#textbook'+e).val();
+        var level = $('#level'+e).val();
+        var book = $('#unit'+e).val();
+        // alert(book);
 
-                $('#unit'+e+' option[value="총정리(2)"]').text("기말평가");
-                $('#unit'+e+' option[value="총정리(2)"]').val("기말평가");
+        if(textbook == "알파" && (level == "루트" || level == "파이")) {
+            if(book == "총정리(1)" || book == "총정리(2)") {
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="개념마스터">개념마스터</option>' +
+                    '<option value="개념확인">개념확인</option>');
+            }else {
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="개념마스터">개념마스터</option>' +
+                    '                                                    <option value="개념확인">개념확인</option>' +
+                    '                                                    <option value="서술과코칭">서술과코칭</option>' +
+                    '                                                    <option value="이야기수학">이야기수학</option>');
             }
-
-            var textbook = $('#textbook'+e).val();
-            var level = $('#level'+e).val();
-            var book = $('#unit'+e).val();
-            // alert(book);
-
-            if(textbook == "알파" && (level == "루트" || level == "파이")) {
-                if(book == "총정리(1)" || book == "총정리(2)") {
-                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="개념마스터">개념마스터</option>' +
-                        '<option value="개념확인">개념확인</option>');
-                }else {
-                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="개념마스터">개념마스터</option>' +
-                        '                                                    <option value="개념확인">개념확인</option>' +
-                        '                                                    <option value="서술과 코칭">서술과 코칭</option>' +
-                        '                                                    <option value="이야기수학">이야기수학</option>');
-                }
-            }
-            if(textbook == "알파" && level == "시그마") {
-                if(book == "총정리(1)" || book == "총정리(2)") {
-                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="유형마스터">유형마스터</option>' +
-                        '<option value="유형확인">유형확인</option>');
-                }
+        }
+        if(textbook == "알파" && level == "시그마") {
+            if(book == "총정리(1)" || book == "총정리(2)") {
                 for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="유형마스터">유형마스터</option>' +
-                    '<option value="유형확인">유형확인</option>' +
-                    '<option value="서술과 코칭">서술과 코칭</option>' +
-                    '<option value="이야기수학">이야기수학</option>');
+                    '<option value="유형확인">유형확인</option>');
             }
-            if(textbook == "베타" && (level == "루트" || level == "파이")) {
-                if(book == "중간평가") {
-                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="중간평가1회">중간평가1회</option>' +
-                        '<option value="중간평가2회">중간평가2회</option>');
-                }else if(book == "기말평가"){
-                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="기말평가1회">기말평가1회</option>' +
-                        '<option value="기말평가2회">기말평가2회</option>');
-                }else {
-                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="개념다지기">개념다지기</option>' +
-                        '<option value="단원마무리">단원마무리</option>' +
-                        '<option value="도전문제">도전문제</option>');
-                }
-            }
-            if(textbook == "베타" && level == "시그마") {
-                if(book == "중간평가") {
-                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="중간평가1회">중간평가1회</option>' +
-                        '<option value="중간평가2회">중간평가2회</option>');
-                }else if(book == "기말평가"){
-                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="기말평가1회">기말평가1회</option>' +
-                        '<option value="기말평가2회">기말평가2회</option>');
-                }else {
-                    for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="실력확인">실력확인</option>' +
-                        '<option value="단원마무리">단원마무리</option>' +
-                        '<option value="도전문제">도전문제</option>');
-                }
+            for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="유형마스터">유형마스터</option>' +
+                '<option value="유형확인">유형확인</option>' +
+                '<option value="서술과코칭">서술과코칭</option>' +
+                '<option value="이야기수학">이야기수학</option>');
+        }
+        if(textbook == "베타" && (level == "루트" || level == "파이")) {
+            if(book == "중간평가") {
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="중간평가1회">중간평가1회</option>' +
+                    '<option value="중간평가2회">중간평가2회</option>');
+            }else if(book == "기말평가"){
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="기말평가1회">기말평가1회</option>' +
+                    '<option value="기말평가2회">기말평가2회</option>');
+            }else {
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="개념다지기">개념다지기</option>' +
+                    '<option value="단원마무리">단원마무리</option>' +
+                    '<option value="도전문제">도전문제</option>');
             }
         }
+        if(textbook == "베타" && level == "시그마") {
+            if(book == "중간평가") {
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="중간평가1회">중간평가1회</option>' +
+                    '<option value="중간평가2회">중간평가2회</option>');
+            }else if(book == "기말평가"){
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="기말평가1회">기말평가1회</option>' +
+                    '<option value="기말평가2회">기말평가2회</option>');
+            }else {
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="실력확인">실력확인</option>' +
+                    '<option value="단원마무리">단원마무리</option>' +
+                    '<option value="도전문제">도전문제</option>');
+            }
+        }
+    }
 </script>

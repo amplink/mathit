@@ -110,71 +110,71 @@ include_once ('head.php');
             </div>
         </div>
     </div>
-        <div class="wrapper">
-            <div class="left_box" style="overflow: scroll;">
-                <p class="box_title">출제 대상 선택</p>
-                <div class="box_menu_wrap">
-                    <p>학기</p>
-                    <select name="year_select" id="year_select" onchange="move_page()">
-                        <?php
-                        for($i=2018; $i<2030; $i++) {
-                            echo "<option value='$i'>$i"."년"."</option>";
-                        }
-                        ?>
-                    </select>
-                    <select name="quarter_select" id="quarter_select" onchange="move_page()">
-                        <option value="1">1분기</option>
-                        <option value="2">2분기</option>
-                        <option value="3">3분기</option>
-                        <option value="4">4분기</option>
-                    </select>
-                </div>
-                <div class="grade_select_box select_table content">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>수업 목록</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        for($i=0; $i<count($d_name); $i++) {
-                            ?>
-                            <tr>
-                                <td onclick="lecture('<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
-                            </tr>
-                            <?
-                        }
-                        ?>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="class_select_box select_table">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>번호</th>
-                            <th>반 이름</th>
-                            <th>담당 교사</th>
-                        </tr>
-                        </thead>
-                        <tbody id="class_name">
-
-                        </tbody>
-                    </table>
-                </div>
-                <div class="student_list_box select_table">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>학생 목록</th>
-                        </tr>
-                        </thead>
-                        <tbody id="students">
-                        </tbody>
-                    </table>
-                </div>
+    <div class="wrapper">
+        <div class="left_box" style="overflow: scroll;">
+            <p class="box_title">출제 대상 선택</p>
+            <div class="box_menu_wrap">
+                <p>학기</p>
+                <select name="year_select" id="year_select" onchange="move_page()">
+                    <?php
+                    for($i=2018; $i<2030; $i++) {
+                        echo "<option value='$i'>$i"."년"."</option>";
+                    }
+                    ?>
+                </select>
+                <select name="quarter_select" id="quarter_select" onchange="move_page()">
+                    <option value="1">1분기</option>
+                    <option value="2">2분기</option>
+                    <option value="3">3분기</option>
+                    <option value="4">4분기</option>
+                </select>
             </div>
+            <div class="grade_select_box select_table content">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>수업 목록</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    for($i=0; $i<count($d_name); $i++) {
+                        ?>
+                        <tr>
+                            <td onclick="lecture('<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
+                        </tr>
+                        <?
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="class_select_box select_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>반 이름</th>
+                        <th>담당 교사</th>
+                    </tr>
+                    </thead>
+                    <tbody id="class_name">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="student_list_box select_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>학생 목록</th>
+                    </tr>
+                    </thead>
+                    <tbody id="students">
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div class="right_wrap">
             <div class="right_box" style="height: 93%;">
                 <p class="box_title">숙제 목록</p>
@@ -313,11 +313,11 @@ include_once ('head.php');
             success: function(response){
                 $("#students").html(response);
                 $.ajax({
-                   url: "homework_content.php?class_name="+class_name,
-                   success: function(response) {
-                       $("#homework_content").html(response);
-                       $('.custumdropdown').homework_manegement_add();
-                   }
+                    url: "homework_content.php?class_name="+class_name+"&d_uid="+d+"&c_uid="+c+"&s_uid="+s+"&d_order="+n,
+                    success: function(response) {
+                        $("#homework_content").html(response);
+                        $('.custumdropdown').homework_manegement_add();
+                    }
                 });
             }
         });

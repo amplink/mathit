@@ -209,11 +209,13 @@ include_once ('head.php');
 
                                     <?php
                                     for($i=1; $i<=$tot; $i++) {
+                                        if($res['corner'.$i] == '선택') continue;
+
                                         $chk_wrong_answer = explode(",", $wrong2[$i]);
                                         echo " <br><br><b>".$i.". ".$res['corner'.$i]."</b><br><br>";
                                         for($j=0; $j<=count($group[$res['corner'.$i]]); $j++){
                                             if(!in_array($group[$res['corner'.$i]][$j]['item_number'], $chk_wrong_answer)) continue;
-                                            $wrongArr = explode(",",$wrongData[$i]);
+                                            $wrongArr =  explode(",",$wrongData[$i]);
                                             ?>
                                             <div>
                                                 <span style="display:inline-block;width:55px;height:30px;vertical-align:top;padding-top:5px;"><?=$group[$res['corner'.$i]][$j]['item_number']?>.</span>
