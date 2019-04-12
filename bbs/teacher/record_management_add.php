@@ -36,7 +36,7 @@ include_once ('head.php');
         </div>
     </div>
     <div class="wrapper">
-        <div class="left_box">
+        <div class="left_box" style="overflow: scroll;">
             <p class="box_title">출제 대상 선택</p>
             <div class="box_menu_wrap">
                 <p>학기</p>
@@ -67,7 +67,7 @@ include_once ('head.php');
                     for($i=0; $i<count($d_name); $i++) {
                         ?>
                         <tr>
-                            <td onclick="lecture('<?=$d_name[$i]?>','<?=$d_yoie[$i]?>','<?=$d_uid[$i]?>','<?=$c_uid[$i]?>','<?=$s_uid[$i]?>')"><span><?=$d_name[$i]?></span></td>
+                            <td onclick="lecture('<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
                         </tr>
                         <?
                     }
@@ -75,38 +75,20 @@ include_once ('head.php');
                     </tbody>
                 </table>
             </div>
-<!--            <div class="class_select_box select_table">-->
-<!--                <table>-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                        <th>번호</th>-->
-<!--                        <th>반 이름</th>-->
-<!--                        <th>담당 교사</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                    --><?php
-//                    $cnt = 1;
-//                    for($i=0; $i<count($day); $i++) {
-//                        echo "<tr><td>$cnt</td><td><span>";
-//                        for($j=0; $j<7; $j++) {
-//                            if($day[$i][$j] == 1) {
-//                                if($j==0) echo "월";
-//                                if($j==1) echo "화";
-//                                if($j==2) echo "수";
-//                                if($j==3) echo "목";
-//                                if($j==4) echo "금";
-//                                if($j==5) echo "토";
-//                                if($j==6) echo "일";
-//                            }
-//                        }
-//                        echo "</span></td><td><span>".$_SESSION['t_name']."</span></td>";
-//                        $cnt++;
-//                    }
-//                    ?>
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--            </div>-->
+            <div class="class_select_box select_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>반 이름</th>
+                        <th>담당 교사</th>
+                    </tr>
+                    </thead>
+                    <tbody id="class_name">
+
+                    </tbody>
+                </table>
+            </div>
             <div class="student_list_box select_table">
                 <table>
                     <thead>
@@ -165,19 +147,7 @@ include_once ('head.php');
                     </div>
                 </div>
                 <div class="right_box_2">
-                    <div class="student_each_score_table">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>학생명</th>
-                                <th>1회</th>
-                                <th>2회</th>
-                                <th>평균 점수</th>
-                            </tr>
-                            </thead>
-                            <tbody id="student_list">
-                            </tbody>
-                        </table>
+                    <div class="student_each_score_table" id="student_list">
                     </div>
                 </div>
             </div>
@@ -225,37 +195,64 @@ include_once ('head.php');
         })
     })
     
-    function lecture(e, f, a, b, c) {
+    function lecture(e) {
         $('#text_class').text(e);
         $('#class').val(e);
-		$("#d_yoie").val(f);
         $.ajax({
             type: "GET",
             url: "call_student_list.php?class="+e,
             dataType: "html",
             success: function(response){
-                $("#student_list").html(response);
+                $("#class_name").html(response);
             }
         });
-		$("#d_id").val(a);
-		$("#c_id").val(b);
-		$("#s_id").val(c);
     }
 
     function chk_test_genre(e) {
+        var d = $('#d_id').val();
+        var c = $('#c_id').val();
+
         if(e==1) {
+            $.ajax({
+                type: "GET",
+                url: "call_student_form.php?d_uid="+d+"&c_uid="+c,
+                success: function (response) {
+                    $('#student_list').html(response);
+                }
+            });
             $('#text_genre').text("중간평가");
             $('#test_genre').val("중간평가");
         }
         if(e==2) {
+            $.ajax({
+                type: "GET",
+                url: "call_student_form.php?d_uid="+d+"&c_uid="+c,
+                success: function (response) {
+                    $('#student_list').html(response);
+                }
+            });
             $('#text_genre').text("기말평가");
             $('#test_genre').val("기말평가");
         }
         if(e==3) {
+            $.ajax({
+                type: "GET",
+                url: "call_student_form2.php?d_uid="+d+"&c_uid="+c,
+                success: function (response) {
+                    $('#student_list').html(response);
+                }
+            });
             $('#text_genre').text("분기테스트");
             $('#test_genre').val("분기테스트");
         }
         if(e==4) {
+            $.ajax({
+                type: "GET",
+                url: "call_student_form2.php?d_uid="+d+"&c_uid="+c,
+                success: function (response) {
+                    $('#student_list').html(response);
+                }
+            });
             $('#text_genre').text("입반테스트");
             $('#test_genre').val("입반테스트");
         }
@@ -283,14 +280,14 @@ include_once ('head.php');
     } );
 
     function set_avg(e) {
-        var k = e-1;
+        var k = e+1;
         var t = parseInt($('#score_add'+e).val(), 10);
         var p = parseInt($('#score_add'+k).val(), 10);
         var val;
         if(p) val = (t+p)/2;
         else val = t;
 
-        $('#avg'+e/2).text(val+"점");
+        $('#avg'+e).text(val+"점");
     }
 
     function set_avg1(e) {
@@ -311,6 +308,27 @@ include_once ('head.php');
         location.href = './record_management_add.php?s_year='+b+'&s_quarter='+a;
     }
 
+    function set_plus(e) {
+        var k = e+1;
+        var kk = e+2;
+        var a = parseInt($('#score_add'+e).val());
+        var b = parseInt($('#score_add'+k).val());
+        var c = parseInt($('#score_add'+kk).val());
+        var val;
+        val = a;
+        if(b) val = a+b;
+        if(c) val = a+b+c;
+
+        $('#plus'+e).text(val+" 점");
+    }
+
+    function call_student_form(d, c, s, n) {
+        $('#d_id').val(d);
+        $('#c_id').val(c);
+        $('#s_id').val(s);
+        $('#d_yoie').val(n);
+    }
+
     $("#year_select").val(<?php echo $s_year;?>);
     $("#quarter_select").val(<?php echo $s_quarter;?>);
 
@@ -319,7 +337,7 @@ include_once ('head.php');
     });
 
     function submit() {
-        if($('#title').val() && $('#datepicker').val() && $('#standard_score').val() && $('#sub_score1').val() && $('#sub_score2').val() && $('#test_genre').val()) {
+        if($('#title').val() && $('#datepicker').val() && $('#standard_score').val() && $('#sub_score1').val() && $('#sub_score2').val() && $('#test_genre').val() && $('#d_id').val()) {
             $(window).unbind('beforeunload');
             $('#record_form').submit();
         }else {

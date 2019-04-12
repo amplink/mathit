@@ -10,6 +10,7 @@ $sub_score1 = $_POST['sub_score1'];
 $sub_score2 = $_POST['sub_score2'];
 $score_add1 = $_POST['score_add1'];
 $score_add2 = $_POST['score_add2'];
+$score_add3 = $_POST['score_add3'];
 $teacher = $_SESSION['t_name'];
 $student = $_POST['student_name'];
 $student_id = $_POST['student_id'];
@@ -24,10 +25,9 @@ $sql = "delete * from `teacher_score` where `title` = '$title' and `test_genre` 
 sql_query($sql);
 
 for($i=0; $i<count($student); $i++) {
-    $sql = "INSERT INTO `teacher_score` (`client_id`, `d_uid`, `c_uid`, `s_uid`, `class`, `year`, `quarter`, `d_order`, `test_genre`, `title`, `date`, `standard`, `sub_score1`, `sub_score2`, `score1`, `score2`, `teacher`, `student_id`, `student`, `event_time`) 
-VALUES ('$_SESSION[client_no]', '$d_id', '$c_id', '$s_id', '$class', '$year', '$quarter', '$d_yoie', '$test_genre', '$title', '$date', '$standard', '$sub_score1', '$sub_score2', '$score_add1[$i]', '$score_add2[$i]', '$teacher', '$student_id[$i]', '$student[$i]', CURRENT_TIMESTAMP);";
+    $sql = "INSERT INTO `teacher_score` (`client_id`, `d_uid`, `c_uid`, `s_uid`, `class`, `year`, `quarter`, `d_order`, `test_genre`, `title`, `date`, `standard`, `sub_score1`, `sub_score2`, `score1`, `score2`, `score3`, `teacher`, `student_id`, `student`, `event_time`) 
+VALUES ('$_SESSION[client_no]', '$d_id', '$c_id', '$s_id', '$class', '$year', '$quarter', '$d_yoie', '$test_genre', '$title', '$date', '$standard', '$sub_score1', '$sub_score2', '$score_add1[$i]', '$score_add2[$i]', '$score_add3[$i]', '$teacher', '$student_id[$i]', '$student[$i]', CURRENT_TIMESTAMP);";
     sql_query($sql);
-    //echo $sql;
 }
 
 $sql = "insert into `alarm` set `seq`='', `content`='새로운 성적표가 등록되었습니다.', `table_name`='score', `target`='학생', `chk`='0', `datetime`=CURRENT_TIMESTAMP";

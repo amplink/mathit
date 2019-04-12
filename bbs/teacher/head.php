@@ -190,6 +190,7 @@
 <script>
     function show_alarm() {
         $('#new_span').css('background-color', 'red');
+        $('#new_span1').css('background-color', 'red');
     }
 </script>
 <head>
@@ -202,6 +203,8 @@
         <span></span>
         <span></span>
     </div>
+    <span style="border-radius: 50%; width: 10px; height: 10px; position: absolute; top: 10px; left: 35px;" id="new_span1"></span>
+
     <div class="home_btn"><a href="home.php"><img src="img/home.png" alt="home_icon"></a></div>
     <div class="logo_section">
         <div class="logo"><a href="home.php"><img src="img/main_logo.png" alt="header_logo"></a></div>
@@ -274,24 +277,32 @@
     $sql = "select * from `alarm` where `uid`='$t_uid' order by `seq` desc;";
     $a_result = sql_query($sql);
     $a_cnt = 0;
+    $thisTime=date("Y-m-d H:i:s");
     ?>
     <div class="alarm_box_wrap_wrap">
         <div class="alarm_box_wrap">
             <div class="alarm_tri"><img src="img/alarm_tri.png" alt="alarm_tri_icon"></div>
-            <div class="alarm_box">
+            <div class="alarm_box" style="overflow: scroll;">
                 <div>
                     <p id="x_alarm_btn" style="cursor:pointer;font-size:20px;font-weight: bold;text-align: right;">X</p>
                     <div>
                         <ul>
                             <?php
                             while($a_res = mysqli_fetch_array($a_result)) {
+                                $signdate = $a_res['datetime'];
+                                $someTime=strtotime($thisTime)-strtotime("$signdate GMT");
                                 ?>
                                 <li>
                                     <div class="alarm_content">
                                         <p><?=$a_res['content']?></p>
                                     </div>
                                     <div class="alarm_time">
-<!--                                        <p><span>5분</span><span> 전</span></p>-->
+                                        <p><span>
+                                                <?php
+                                                $cha = ceil($someTime/(60*60*24));
+                                                if($cha <= 0) echo "오늘";
+                                                else echo $cha."일 전";
+                                                ?></span></p>
                                     </div>
                                 </li>
                                 <?php
@@ -327,6 +338,7 @@
             url: 'alarm_chk.php',
             success: function(response) {
                 $('#new_span').css('background-color', 'transparent');
+                $('#new_span1').css('background-color', 'transparent');
             }
         });
     }

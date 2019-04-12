@@ -7,7 +7,6 @@ $grade = $_POST['grade'];
 $unit = $_POST['unit'];
 $semester = $_POST['semester'];
 $level = $_POST['level'];
-
 $event_time = $_POST['event'];
 
 $section_1[0] = $_POST['a_item_number'];
@@ -47,11 +46,10 @@ sql_query($sql);
 
 if($section_1[0][0]) {
     if($level == "시그마") $c_name = "실력확인";
-    else $c_name = "개념다지기";
+    else if($level == "파이" || $level == "루트") $c_name = "개념다지기";
 
     if($unit == "중간평가") $c_name = "중간평가 1회";
     else if($unit == "기말평가") $c_name = "기말평가 1회";
-    else $c_name = "개념다지기";
 
     for($i=0; $i<$section_size[0]; $i++) {
         $answer_id = rand(1, 22222).":".date("mds");

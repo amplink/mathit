@@ -127,11 +127,25 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                     for($i=0; $i<count($d_name); $i++) {
                         ?>
                         <tr>
-                            <td onclick="lecture('<?=$d_uid[$i]?>','<?=$c_uid[$i]?>','<?=$d_name[$i]?>','<?=$d_yoie[$i]?>','<?=$s_uid[$i]?>')"><span><?=$d_name[$i]?></span></td>
+                            <td onclick="lecture('<?=$d_name    [$i]?>')"><span><?=$d_name[$i]?></span></td>
                         </tr>
                         <?
                     }
                     ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="class_select_box select_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>반 이름</th>
+                        <th>담당 교사</th>
+                    </tr>
+                    </thead>
+                    <tbody id="class_name">
+
                     </tbody>
                 </table>
             </div>
@@ -154,7 +168,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                         <div class="homework_title_input">
                             <p class="l_text">숙제명</p>
                             <input type="text" placeholder="숙제명을 입력해주세요" name ="name" id="name">
-                            <input type="hidden" name="class_name" id="class_name">
+                            <input type="hidden" name="class_name" id="class_name1">
 							<input type="hidden" name="corner_no" id="corner_no" value="corner1">
 							<input type="hidden" name="d_id" id="d_id">
 							<input type="hidden" name="c_id" id="c_id">
@@ -409,20 +423,46 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         }
     }
 
-    function lecture(a, b, c, d, e) {
-		$("#d_yoie").val(d);
+    // function lecture() {
+	// 	$("#d_yoie").val(d);
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "call_student_homework.php?d_uid="+a+"&c_uid="+b,
+    //         dataType: "html",
+    //         success: function(response){
+    //             $("#students").html(response);
+    //             $("#class_name").val(c);
+    //         }
+    //     });
+	// 			$("#d_id").val(a);
+	// 			$("#c_id").val(b);
+	// 			$("#s_id").val(e);
+    // }
+    function lecture(e) {
         $.ajax({
             type: "GET",
-            url: "call_student_homework.php?d_uid="+a+"&c_uid="+b,
+            url: "call_student_list.php?class="+e,
+            dataType: "html",
+            success: function(response){
+                $("#class_name").html(response);
+                $("#class_name1").val(e);
+            }
+        });
+    }
+
+    function call_student_form(d, c, s, n) {
+        $('#d_id').val(d);
+        $('#c_id').val(c);
+        $('#s_id').val(s);
+        $('#d_yoie').val(n);
+        $.ajax({
+            type: "GET",
+            url: "call_student_homework.php?d_uid="+d+"&c_uid="+c,
             dataType: "html",
             success: function(response){
                 $("#students").html(response);
-                $("#class_name").val(c);
             }
         });
-				$("#d_id").val(a);
-				$("#c_id").val(b);
-				$("#s_id").val(e);
     }
 
     function book_info() {

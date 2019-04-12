@@ -111,7 +111,7 @@ include_once ('head.php');
         </div>
     </div>
         <div class="wrapper">
-            <div class="left_box">
+            <div class="left_box" style="overflow: scroll;">
                 <p class="box_title">출제 대상 선택</p>
                 <div class="box_menu_wrap">
                     <p>학기</p>
@@ -141,11 +141,25 @@ include_once ('head.php');
                         for($i=0; $i<count($d_name); $i++) {
                             ?>
                             <tr>
-                                <td onclick="lecture(<?=$d_uid[$i]?>,<?=$c_uid[$i]?>,'<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
+                                <td onclick="lecture('<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
                             </tr>
                             <?
                         }
                         ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="class_select_box select_table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>반 이름</th>
+                            <th>담당 교사</th>
+                        </tr>
+                        </thead>
+                        <tbody id="class_name">
+
                         </tbody>
                     </table>
                 </div>
@@ -162,7 +176,7 @@ include_once ('head.php');
                 </div>
             </div>
         <div class="right_wrap">
-            <div class="right_box">
+            <div class="right_box" style="height: 93%;">
                 <p class="box_title">숙제 목록</p>
                 <div class="table_option_wrap">
                     <div class="table_option">
@@ -260,15 +274,46 @@ include_once ('head.php');
         });
     });
 
-    function lecture(a, b, c) {
+    // function lecture(a, b, c) {
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "call_student_homework.php?d_uid="+a+"&c_uid="+b,
+    //         dataType: "html",
+    //         success: function(response){
+    //             $("#students").html(response);
+    //             $.ajax({
+    //                url: "homework_content.php?class_name="+c,
+    //                success: function(response) {
+    //                    $("#homework_content").html(response);
+    //                    $('.custumdropdown').homework_manegement_add();
+    //                }
+    //             });
+    //         }
+    //     });
+    // }
+    var class_name;
+
+    function lecture(e) {
         $.ajax({
             type: "GET",
-            url: "call_student_homework.php?d_uid="+a+"&c_uid="+b,
+            url: "call_student_list.php?class="+e,
+            dataType: "html",
+            success: function(response){
+                $("#class_name").html(response);
+                class_name = e;
+            }
+        });
+    }
+
+    function call_student_form(d, c, s, n) {
+        $.ajax({
+            type: "GET",
+            url: "call_student_homework.php?d_uid="+d+"&c_uid="+c,
             dataType: "html",
             success: function(response){
                 $("#students").html(response);
                 $.ajax({
-                   url: "homework_content.php?class_name="+c,
+                   url: "homework_content.php?class_name="+class_name,
                    success: function(response) {
                        $("#homework_content").html(response);
                        $('.custumdropdown').homework_manegement_add();

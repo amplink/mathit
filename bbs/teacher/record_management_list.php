@@ -22,6 +22,10 @@ $title = $_GET['title'];
 
 <body>
 <section>
+<!--    <input type="hidden" id="c_uid">-->
+<!--    <input type="hidden" id="d_uid">-->
+<!--    <input type="hidden" id="s_uid">-->
+<!--    <input type="hidden" id="d_order">-->
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
@@ -34,7 +38,7 @@ $title = $_GET['title'];
         </div>
     </div>
     <div class="wrapper">
-        <div class="left_box">
+        <div class="left_box" style="overflow: scroll; max-height: 625px;">
             <p class="box_title">출제 대상 선택</p>
             <div class="box_menu_wrap">
                 <p>학기</p>
@@ -72,38 +76,20 @@ $title = $_GET['title'];
                     </tbody>
                 </table>
             </div>
-            <!--            <div class="class_select_box select_table">-->
-            <!--                <table>-->
-            <!--                    <thead>-->
-            <!--                    <tr>-->
-            <!--                        <th>번호</th>-->
-            <!--                        <th>반 이름</th>-->
-            <!--                        <th>담당 교사</th>-->
-            <!--                    </tr>-->
-            <!--                    </thead>-->
-            <!--                    <tbody>-->
-            <!--                    --><?php
-            //                    $cnt = 1;
-            //                    for($i=0; $i<count($day); $i++) {
-            //                        echo "<tr><td>$cnt</td><td><span>";
-            //                        for($j=0; $j<7; $j++) {
-            //                            if($day[$i][$j] == 1) {
-            //                                if($j==0) echo "월";
-            //                                if($j==1) echo "화";
-            //                                if($j==2) echo "수";
-            //                                if($j==3) echo "목";
-            //                                if($j==4) echo "금";
-            //                                if($j==5) echo "토";
-            //                                if($j==6) echo "일";
-            //                            }
-            //                        }
-            //                        echo "</span></td><td><span>".$_SESSION['t_name']."</span></td>";
-            //                        $cnt++;
-            //                    }
-            //                    ?>
-            <!--                    </tbody>-->
-            <!--                </table>-->
-            <!--            </div>-->
+            <div class="class_select_box select_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>반 이름</th>
+                        <th>담당 교사</th>
+                    </tr>
+                    </thead>
+                    <tbody id="class_name">
+
+                    </tbody>
+                </table>
+            </div>
             <div class="student_list_box select_table">
                 <table>
                     <thead>
@@ -180,20 +166,23 @@ $title = $_GET['title'];
         return "저장하지 않고 페이지를 벗어나시겠습니까?";
     });
 
-    var class_name;
+    var d_uid;
+    var c_uid;
+    var s_uid;
+    var d_order;
     var test_genre;
-    var title;
+    var class_name;
 
     function lecture(e) {
-        class_name = e;
         $.ajax({
             type: "GET",
-            url: "call_test_list.php?class="+class_name+"&genre="+test_genre,
+            url: "call_student_list.php?class="+e,
             dataType: "html",
             success: function(response){
-                $("#test_list").html(response);
+                $("#class_name").html(response);
             }
         });
+        class_name = e;
     }
 
     function chk_test_genre(e) {
@@ -201,10 +190,10 @@ $title = $_GET['title'];
         if(e==2) test_genre = "기말평가";
         if(e==3) test_genre = "분기테스트";
         if(e==4) test_genre = "입반테스트";
-        // alert("call_test_list.php?class="+class_name+"&genre="+test_genre);
+
         $.ajax({
             type: "GET",
-            url: "call_test_list.php?class="+class_name+"&genre="+test_genre,
+            url: "call_test_list.php?d_uid="+d_uid+"&c_uid="+c_uid+"&s_uid="+s_uid+"&test_genre="+test_genre,
             dataType: "html",
             success: function(response){
                 $("#test_list").html(response);
@@ -213,7 +202,6 @@ $title = $_GET['title'];
     }
 
     function call_data(e) {
-        title = e;
         // alert("call_record_management_list.php?class="+class_name+"&genre="+test_genre+"&title="+e);
         $.ajax({
             type: "GET",
@@ -223,6 +211,13 @@ $title = $_GET['title'];
                 $(".right_wrap").html(response);
             }
         });
+    }
+
+    function call_student_form(d, c, s, n) {
+        d_uid = d;
+        c_uid = c;
+        s_uid = s;
+        d_order = n;
     }
 
     function save() {
