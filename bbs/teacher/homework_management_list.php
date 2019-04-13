@@ -13,7 +13,7 @@ include_once ('head.php');
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_list.css?v=20190407" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_list.css?v=20190414" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>

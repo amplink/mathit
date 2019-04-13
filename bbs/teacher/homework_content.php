@@ -90,12 +90,25 @@ while($res = mysqli_fetch_array($result)) {
                         ?>
                     </select></td>
                 <td>
-                    <select name="unit" id="unit<?=$i?>" onchange="chk_type(<?=$i?>)" onclick="book_info1(<?=$i?>)">
-                        <option value="<?=$res['unit']?>"><?=$res['unit']?></option>
+                    <select name="unit" id="unit<?=$i?>" onchange="chk_type(<?=$i?>)">
+                        <?
+                        $semester = $semester_arr[$res['semester']];
+                        $grade = $grade_arr[$res['grade']];
+                        $unit = $res['unit'];
+
+                        $sql2 = "select value from `book_info` where `grade` = '$grade' and `semester` = '$semester';";
+                        $result2 = mysqli_query($connect_db, $sql2);
+                        while($res2 = mysqli_fetch_array($result2)) {
+                            $sel = ($unit == $res2['value'])?"selected":"";
+                            ?>
+                            <option value="<?=$res2['value']?>" <?=$sel?>><?=$res2['value']?></option>
+                            <?
+                        }
+                        ?>
                     </select>
                 </td>
                 <td>
-                    <select name="corner1" id="corner1<?=$i?>" data-key="<?=$i?>" data-num="1" class="corner">
+                    <select name="corner1" id="corner1<?=$i?>" onclick="chk_type(<?=$i?>)" data-key="<?=$i?>" data-num="1" class="corner">
                         <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
                     </select>
                 </td>
@@ -105,19 +118,43 @@ while($res = mysqli_fetch_array($result)) {
                         <?php
                         $q_1 = explode(",", $res['Q_number1']);
                         $cnt = 0;
-                        for($j=1; $j<=count($q_1); $j++) {
-                            if($q_1[$cnt] == $j) {
-                                echo "<option class='checkbox' value='".$q_1[$cnt]."' selected>".$q_1[$cnt]."</option>";
-                            }
-                            else echo "<option class='checkbox' value='".$q_1[$cnt]."'>".$q_1[$cnt]."</option>";
 
+                        $textbook = $res['textbook'];
+                        $grade = $grade_arr[$res['grade']];
+                        $semester = $semester_arr[$res['semester']];
+                        $level = $res['level'];
+                        $unit = $res['unit'];
+                        $corner = $_GET['val'];
+
+                        $sql3 = "SELECT 
+								   item_number
+								FROM 
+								  `answer_master`  
+								WHERE 
+								   book_type='".$textbook."' 
+								   AND grade='".$grade."'
+								   AND semester='".$semester."'
+								   AND unit = '".$unit."'
+								   AND level = '".$level."'
+								   AND c_name = '".$res['corner1']."'
+								ORDER BY seq, item_number ASC";
+
+                        $result3 = mysqli_query($connect_db, $sql3);
+
+                        while($res3 = mysqli_fetch_array($result3)){
+
+                            $sel = (in_array($res3['item_number'],$q_1))?"selected":"";
+
+                            echo "<option class='checkbox' value='".$res3['item_number']."' $sel>".$res3['item_number']."</option>";
                             $cnt++;
                         }
+
+
                         ?>
                     </select>
                 </td>
                 <td>
-                    <select name="corner2" id="corner2<?=$i?>" data-key="<?=$i?>" data-num="2" class="corner">
+                    <select name="corner2" id="corner2<?=$i?>" onclick="chk_type(<?=$i?>)" data-key="<?=$i?>" data-num="2" class="corner">
                         <option value="<?=$res['corner2']?>"><?=$res['corner2']?></option>
                     </select>
                 </td>
@@ -126,20 +163,36 @@ while($res = mysqli_fetch_array($result)) {
                         <?php
                         $q_2 = explode(",", $res['Q_number2']);
                         $cnt = 0;
-                        for($j=1; $j<=count($q_2); $j++) {
-                            if($q_2[$cnt] == $j) {
-                                echo "<option class='checkbox' value='".$q_2[$cnt]."' selected>".$q_2[$cnt]."</option>";
-                            }
-                            else echo "<option class='checkbox' value='".$q_2[$cnt]."'>".$q_2[$cnt]."</option>";
 
+                        $sql3 = "SELECT 
+								   item_number
+								FROM 
+								  `answer_master`  
+								WHERE 
+								   book_type='".$textbook."' 
+								   AND grade='".$grade."'
+								   AND semester='".$semester."'
+								   AND unit = '".$unit."'
+								   AND level = '".$level."'
+								   AND c_name = '".$res['corner2']."'
+								ORDER BY seq, item_number ASC";
+
+                        $result3 = mysqli_query($connect_db, $sql3);
+
+                        while($res3 = mysqli_fetch_array($result3)){
+
+                            $sel = (in_array($res3['item_number'],$q_2))?"selected":"";
+
+                            echo "<option class='checkbox' value='".$res3['item_number']."' $sel>".$res3['item_number']."</option>";
                             $cnt++;
                         }
+
                         ?>
                     </select>
                 </td>
 
                 <td>
-                    <select name="corner3" id="corner3<?=$i?>" data-key="<?=$i?>" data-num="3" class="corner">
+                    <select name="corner3" id="corner3<?=$i?>"  onclick="chk_type(<?=$i?>)" data-key="<?=$i?>" data-num="3" class="corner">
                         <option value="<?=$res['corner3']?>"><?=$res['corner3']?></option>
                     </select>
                 </td>
@@ -148,20 +201,36 @@ while($res = mysqli_fetch_array($result)) {
                         <?php
                         $q_3 = explode(",", $res['Q_number3']);
                         $cnt = 0;
-                        for($j=1; $j<=count($q_3); $j++) {
-                            if($q_3[$cnt] == $j) {
-                                echo "<option class='checkbox' value='".$q_3[$cnt]."' selected>".$q_3[$cnt]."</option>";
-                            }
-                            else echo "<option class='checkbox' value='".$q_3[$cnt]."'>".$q_3[$cnt]."</option>";
 
+                        $sql3 = "SELECT 
+								   item_number
+								FROM 
+								  `answer_master`  
+								WHERE 
+								   book_type='".$textbook."' 
+								   AND grade='".$grade."'
+								   AND semester='".$semester."'
+								   AND unit = '".$unit."'
+								   AND level = '".$level."'
+								   AND c_name = '".$res['corner3']."'
+								ORDER BY seq, item_number ASC";
+
+                        $result3 = mysqli_query($connect_db, $sql3);
+
+                        while($res3 = mysqli_fetch_array($result3)){
+
+                            $sel = (in_array($res3['item_number'],$q_3))?"selected":"";
+
+                            echo "<option class='checkbox' value='".$res3['item_number']."' $sel>".$res3['item_number']."</option>";
                             $cnt++;
                         }
+
                         ?>
                     </select>
                 </td>
 
                 <td>
-                    <select name="corner4" id="corner4<?=$i?>" data-key="<?=$i?>" data-num="4" class="corner">
+                    <select name="corner4" id="corner4<?=$i?>"  onclick="chk_type(<?=$i?>)" data-key="<?=$i?>" data-num="4" class="corner">
                         <option value="<?=$res['corner4']?>"><?=$res['corner4']?></option>
                     </select>
                 </td>
@@ -170,14 +239,30 @@ while($res = mysqli_fetch_array($result)) {
                         <?php
                         $q_4 = explode(",", $res['Q_number4']);
                         $cnt = 0;
-                        for($j=1; $j<=count($q_4); $j++) {
-                            if($q_4[$cnt] == $j) {
-                                echo "<option class='checkbox' value='".$q_4[$cnt]."' selected>".$q_4[$cnt]."</option>";
-                            }
-                            else echo "<option class='checkbox' value='".$q_4[$cnt]."'>".$q_4[$cnt]."</option>";
 
+                        $sql3 = "SELECT 
+								   item_number
+								FROM 
+								  `answer_master`  
+								WHERE 
+								   book_type='".$textbook."' 
+								   AND grade='".$grade."'
+								   AND semester='".$semester."'
+								   AND unit = '".$unit."'
+								   AND level = '".$level."'
+								   AND c_name = '".$res['corner4']."'
+								ORDER BY seq, item_number ASC";
+
+                        $result3 = mysqli_query($connect_db, $sql3);
+
+                        while($res3 = mysqli_fetch_array($result3)){
+
+                            $sel = (in_array($res3['item_number'],$q_4))?"selected":"";
+
+                            echo "<option class='checkbox' value='".$res3['item_number']."' $sel>".$res3['item_number']."</option>";
                             $cnt++;
                         }
+
                         ?>
                     </select>
                 <td style="max-width: 200px; width: 200px;">
