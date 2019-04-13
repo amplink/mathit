@@ -8,6 +8,7 @@ $r = api_calls_get($link);
 for($i=0; $i<count($d_name); $i++) {
     if($d_uid[$i] == $_GET['d_uid'] && $c_uid[$i] == $_GET['c_uid']) {
         $class_name = $d_name[$i];
+        $class_type = $d_yoie[$i];
     }
 }
 
@@ -38,7 +39,7 @@ for($i=0; $i<count($d_name); $i++) {
         <div class="head_section">
             <div class="head_section_1400">
 				<div class="head_left">
-					<p class="left_text">미 채점 목록 - <span><?=$class_name?></span></p>
+					<p class="left_text">미 채점 목록 - <span><?=$class_name?>(<?=$class_type?>)</span></p>
 				</div>
                 <div class="head_right">
                 </div>

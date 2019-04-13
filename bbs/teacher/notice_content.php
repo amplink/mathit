@@ -106,14 +106,14 @@ if(strpos($seq, ":")) {
     <div class="btn_section">
         <div class="l_btn_wrap">
             <?php if($res['writer'] == $_SESSION['t_name']) ?><div class="modify_btn"><a href="notice_write.php?seq=<?=$res['seq']?>&t=3">수정</a></div>
-            <?php if($res['writer'] == $_SESSION['t_name']) ?><div class="delete_btn" onclick="del_content(<?=$res['seq']?>)"><a>삭제</a></div></div>
+            <?php if($res['writer'] == $_SESSION['t_name']) ?><div class="delete_btn" style="cursor: pointer;" onclick="del_content(<?=$res['seq']?>)"><a>삭제</a></div></div>
         <div class="r_btn_wrap">
             <?php if($res['file_url']) {
                 ?>
-                <div class="modify_btn" style="width:130px">
+                <div class="modify_btn" style="width:130px;">
                     <a href="<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기</a>
                 </div>
-                <div class="delete_btn" style="width:130px" onclick="del_attach(<?=$res['seq']?>)">
+                <div class="delete_btn" style="width:130px; cursor:pointer;" onclick="del_attach(<?=$res['seq']?>)">
                     <a>첨부파일 삭제</a>
                 </div>
                 <?php

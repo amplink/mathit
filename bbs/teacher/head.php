@@ -205,16 +205,16 @@
     </div>
     <span style="border-radius: 50%; width: 10px; height: 10px; position: absolute; top: 10px; left: 35px;" id="new_span1"></span>
 
-    <div class="home_btn"><a href="home.php"><img src="img/home.png" alt="home_icon"></a></div>
+    <div class="home_btn"><a href="home.php" id="home_a1"><img src="img/home.png" alt="home_icon"></a></div>
     <div class="logo_section">
-        <div class="logo"><a href="home.php"><img src="img/main_logo.png" alt="header_logo"></a></div>
+        <div class="logo"><a href="home.php" id="home_a2"><img src="img/main_logo.png" alt="header_logo"></a></div>
 <!--        <p class="navigation_text">--><?php //echo $nav_text;?><!--</p>-->
     </div>
     <div class="member_info_wrap">
         <div class="member_img"><a href="setting_individual.php"><img src="img/user.png" alt="member_img"></a></div>
         <div class="member_info">
             <a href="setting_individual.php"><p class="member_name"><?=$_SESSION['t_name']?></p></a>
-            <a href="setting_individual.php"><p class="member_grade"><?=$_SESSION['t_task']?></p></a>
+            <a href="setting_individual.php"><p class="member_grade"><?=$res['type']?></p></a>
         </div>
         <div class="logout_btn"><a href="./logout.php">로그아웃</a></div>
     </div>
@@ -229,7 +229,7 @@
             <div class="ham_member_img"><a href="setting_individual.php"><img src="img/user.png" alt="member_img"></a></div>
             <div class="ham_member_info">
                 <a href="setting_individual.php"><p class="ham_member_name"><?=$_SESSION['t_name']?></p></a>
-                <a href="setting_individual.php"><p class="ham_member_grade"><?=$_SESSION['t_task']?></p></a>
+                <a href="setting_individual.php"><p class="ham_member_grade"><?=$res['type']?></p></a>
             </div>
         </div>
         <div class="ham_other_btn_line">
@@ -256,7 +256,7 @@
 
                 ?>
                     <div class="hamnav_class"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>&s_uid=<?=$s_uid[$i]?>">
-                            <span class="class_title"><?=$d_name[$i]?> ( <?php echo (count($r_4)-1);?> ) </span>
+                            <span class="class_title"><?=$d_name[$i]?> ( <?php echo (count($r_4)-1);?> )( <?=$d_yoie[$i]?> )</span>
                         </a>
                     </div>
                     <?php
@@ -343,3 +343,9 @@
         });
     }
 </script>
+<?php
+if($_SESSION['admin']) {
+    echo "<script>$('#home_a1').attr('href', 'setting.php');</script>";
+    echo "<script>$('#home_a2').attr('href', 'setting.php');</script>";
+}
+?>

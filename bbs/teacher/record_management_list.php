@@ -22,10 +22,6 @@ $title = $_GET['title'];
 
 <body>
 <section>
-<!--    <input type="hidden" id="c_uid">-->
-<!--    <input type="hidden" id="d_uid">-->
-<!--    <input type="hidden" id="s_uid">-->
-<!--    <input type="hidden" id="d_order">-->
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
@@ -38,7 +34,7 @@ $title = $_GET['title'];
         </div>
     </div>
     <div class="wrapper">
-        <div class="left_box" style="overflow: scroll; max-height: 625px;">
+        <div class="left_box" style="overflow: scroll; max-height: 685px;">
             <p class="box_title">출제 대상 선택</p>
             <div class="box_menu_wrap">
                 <p>학기</p>
@@ -136,7 +132,7 @@ $title = $_GET['title'];
     $(document).ready(function () {
         $('.grade_select_box table tbody tr').click(function () {
             if ($(this).hasClass('on') === true) {
-                $(this).removeClass('on')
+                // $(this).removeClass('on')
             } else {
                 $(this).addClass('on');
                 $('.grade_select_box table tbody tr').not(this).removeClass('on');
@@ -145,7 +141,7 @@ $title = $_GET['title'];
 
         $('.class_select_box table tbody tr').click(function () {
             if ($(this).hasClass('on') === true) {
-                $(this).removeClass('on')
+                // $(this).removeClass('on')
             } else {
                 $(this).addClass('on');
                 $('.class_select_box table tbody tr').not(this).removeClass('on');
@@ -202,15 +198,39 @@ $title = $_GET['title'];
     }
 
     function call_data(e) {
-        // alert("call_record_management_list.php?class="+class_name+"&genre="+test_genre+"&title="+e);
-        $.ajax({
-            type: "GET",
-            url: "call_record_management_list.php?class="+class_name+"&genre="+test_genre+"&title="+e,
-            dataType: "html",
-            success: function(response){
-                $(".right_wrap").html(response);
-            }
-        });
+        if(test_genre == "입반테스트" || test_genre == "분기테스트") {
+            $.ajax({
+                type: "GET",
+                url: "call_record_management_list2.php?class="+class_name+"&genre="+test_genre+"&title="+e+"&d_order="+d_order,
+                dataType: "html",
+                success: function(response){
+                    $(".right_wrap").html(response);
+                }
+            });
+        }else {
+            $.ajax({
+                type: "GET",
+                url: "call_record_management_list.php?class="+class_name+"&genre="+test_genre+"&title="+e+"&d_order="+d_order,
+                dataType: "html",
+                success: function(response){
+                    $(".right_wrap").html(response);
+                }
+            });
+        }
+    }
+
+    function set_plus(e) {
+        var k = e+1;
+        var kk = e+2;
+        var a = parseInt($('#score_add'+e).val());
+        var b = parseInt($('#score_add'+k).val());
+        var c = parseInt($('#score_add'+kk).val());
+        var val;
+        val = a;
+        if(b) val = a+b;
+        if(c) val = a+b+c;
+
+        $('#plus'+e).text(val+" 점");
     }
 
     function call_student_form(d, c, s, n) {

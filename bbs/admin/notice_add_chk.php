@@ -47,6 +47,8 @@ else {
         $sql = "INSERT INTO `notify` (`id`, `client_id`, `target`, `title`, `author`, `type`, `attach_file`, `attach_file_url`, `contents`, `event_time`)
 VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$name_name', '$name_url','$contents', CURRENT_TIMESTAMP);";
         sql_query($sql);
+        $sql = "INSERT INTO `teacher_notice` SET `seq`= '', `title`='$id', `writer`='관리자', `event_time`= CURRENT_TIMESTAMP";
+        sql_query($sql);
     }else {
         if($_POST['hidden'] == 1) {
             $sql = "update `notify` set `attach_file`='', `attach_file_url`='';";
@@ -68,10 +70,15 @@ VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$name_nam
             $name_url = $base_dir."/".$dir."/";
 
             $sql = "UPDATE `notify` SET `client_id` = '$client_id', `target` = '$target', `title` = '$title', `author` = '$author', `type` = '$type', `attach_file` = '$name_name', `attach_file_url` = '$name_url', `contents` = '$contents', `event_time` = CURRENT_TIMESTAMP WHERE  `id` = '".$_GET['id']."';";
+            sql_query($sql);
+            $sql = "UPDATE `teacher_notice` SET `event_time`=CURRENT_TIMESTAMP where `title`='".$_GET['id']."';";
+            sql_query($sql);
         }else {
             $sql = "UPDATE `notify` SET `client_id` = '$client_id', `target` = '$target', `title` = '$title', `author` = '$author', `type` = '$type', `contents` = '$contents', `event_time` = CURRENT_TIMESTAMP WHERE  `id` = '".$_GET['id']."';";
+            sql_query($sql);
+            $sql = "UPDATE `teacher_notice` SET `event_time`=CURRENT_TIMESTAMP where `title`='".$_GET['id']."';";
+            sql_query($sql);
         }
-        mysqli_query($connect_db, $sql);
     }
 
     echo "<script>alert('완료되었습니다.');</script>";

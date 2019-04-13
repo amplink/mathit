@@ -1,6 +1,16 @@
 <?php
 include_once ('_common.php');
 include_once ('head.php');
+
+$link = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$_GET['d_uid']."&c_uid=".$_GET['c_uid'];
+$r = api_calls_get($link);
+
+for($i=0; $i<count($d_name); $i++) {
+    if($d_uid[$i] == $_GET['d_uid'] && $c_uid[$i] == $_GET['c_uid']) {
+        $class_name = $d_name[$i];
+        $class_type = $d_yoie[$i];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,7 +46,7 @@ include_once ('head.php');
 ?>
 
                     <p class="left_text">
-						<span><?=$res['class_name']?></span>
+						<span><?=$res['class_name']?>(<?=$class_type?>)</span>
                     </p>
                     <p>
                         <span> - </span>

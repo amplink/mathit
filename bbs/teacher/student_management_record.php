@@ -11,6 +11,7 @@ for($i=0; $i<count($d_name); $i++) {
     if($d_uid[$i] == $_GET['d_uid'] && $c_uid[$i] == $_GET['c_uid']) {
 
         $class_name = $d_name[$i];
+        $class_type = $d_yoie[$i];
     }
 
 }
@@ -40,7 +41,7 @@ $res = mysqli_fetch_array($result);
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
-                <p class="left_text"><span><?=$class_name?></span></p>
+                <p class="left_text"><span><?=$class_name?>(<?=$class_type?>)</span></p>
             </div>
             <div class="head_right">
                 <div class="report_manegement_btn <?php if(!$res['score_mg']) echo "disable";?>"><a href="record_management_add.php">성적관리</a></div>

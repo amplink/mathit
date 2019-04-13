@@ -155,7 +155,7 @@ include_once ('head.php');
                     <tr>
                         <th>번호</th>
                         <th>반 이름</th>
-                        <th>담당 교사</th>
+                        <th>담임 교사</th>
                     </tr>
                     </thead>
                     <tbody id="class_name">

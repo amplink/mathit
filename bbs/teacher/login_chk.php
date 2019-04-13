@@ -104,9 +104,18 @@
 
 			//세션저장 여부 체크
 			if( get_session('t_uid') ) :
-
-				alert_msg($name." 선생(강사)님 (".$task.") 환영합니다.");
-				location_href("./home.php");
+                $sql = "select * from `academy` where `client_id`='$ac';";
+			    $result = sql_query($sql);
+			    $res = mysqli_fetch_array($result);
+			    if($res['manager_id']==$id) {
+			        alert_msg("관리자님 환영합니다.");
+                    set_session('admin', 1);
+			        location_href('./setting.php');
+                }else {
+                    alert_msg($name." 선생(강사)님 (".$task.") 환영합니다.");
+                    set_session('admin', 0);
+                    location_href("./home.php");
+                }
 				exit;
 			endif;
 

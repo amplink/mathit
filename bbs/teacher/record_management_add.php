@@ -81,7 +81,7 @@ include_once ('head.php');
                     <tr>
                         <th>번호</th>
                         <th>반 이름</th>
-                        <th>담당 교사</th>
+                        <th>담임 교사</th>
                     </tr>
                     </thead>
                     <tbody id="class_name">
@@ -131,6 +131,18 @@ include_once ('head.php');
                             <input type="text" placeholder="기준점수" name="standard_score" value="100" id="standard_score" style="width: 100px;">
                             <span> 점</span>
                         </div>
+                        <div class="division">
+                            <p class="l_div_title">학년</p>
+                            <select name="grade">
+                                <option value="3">초3</option>
+                                <option value="4">초4</option>
+                                <option value="5">초5</option>
+                                <option value="6">초6</option>
+                                <option value="7">중1</option>
+                                <option value="8">중2</option>
+                                <option value="9">중3</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="r_right_box">
                         <div class="division">
@@ -143,6 +155,7 @@ include_once ('head.php');
                             <p class="l_div_title">영역별 점수</p>
                             <div class="score_input"><input type="text" placeholder="점수" name="sub_score1" value="100" id="sub_score1"><span> 점</span></div>
                             <div class="score_input"><input type="text" placeholder="점수" name="sub_score2" value="100" id="sub_score2"><span> 점</span></div>
+                            <div class="score_input"><input type="hidden" placeholder="점수" name="sub_score3" value="0" id="sub_score3"><span id="score3_text"> 점</span></div>
                         </div>
                     </div>
                 </div>
@@ -157,7 +170,7 @@ include_once ('head.php');
                     <div class="print_btn"><a href="#none">출력</a></div>
                 </div>
                 <div class="r_btn_wrap">
-                    <div class="complete_btn" onclick="submit()"><a>평가완료</a></div>
+                    <div class="complete_btn" onclick="submit()" style="cursor: pointer;"><a>평가완료</a></div>
                 </div>
             </div>
         </div>
@@ -169,7 +182,7 @@ include_once ('head.php');
     $(document).ready(function () {
         $('.grade_select_box table tbody tr').click(function () {
             if ($(this).hasClass('on') === true) {
-                $(this).removeClass('on')
+                // $(this).removeClass('on')
             } else {
                 $(this).addClass('on');
                 $('.grade_select_box table tbody tr').not(this).removeClass('on');
@@ -178,7 +191,7 @@ include_once ('head.php');
 
         $('.class_select_box table tbody tr').click(function () {
             if ($(this).hasClass('on') === true) {
-                $(this).removeClass('on')
+                // $(this).removeClass('on')
             } else {
                 $(this).addClass('on');
                 $('.class_select_box table tbody tr').not(this).removeClass('on');
@@ -187,7 +200,7 @@ include_once ('head.php');
 
         $('.student_list_box table tbody tr').click(function () {
             if ($(this).hasClass('on') === true) {
-                $(this).removeClass('on')
+                // $(this).removeClass('on')
             } else {
                 $(this).addClass('on');
                 $('.student_list_box table tbody tr').not(this).removeClass('on');
@@ -207,7 +220,7 @@ include_once ('head.php');
             }
         });
     }
-
+    $('#score3_text').hide();
     function chk_test_genre(e) {
         var d = $('#d_id').val();
         var c = $('#c_id').val();
@@ -222,6 +235,9 @@ include_once ('head.php');
             });
             $('#text_genre').text("중간평가");
             $('#test_genre').val("중간평가");
+            $('#sub_score3').attr('type', 'hidden');
+            $('#sub_score3').attr('value', '0');
+            $('#score3_text').hide();
         }
         if(e==2) {
             $.ajax({
@@ -233,6 +249,9 @@ include_once ('head.php');
             });
             $('#text_genre').text("기말평가");
             $('#test_genre').val("기말평가");
+            $('#sub_score3').attr('type', 'hidden');
+            $('#sub_score3').attr('value', '0');
+            $('#score3_text').hide();
         }
         if(e==3) {
             $.ajax({
@@ -244,6 +263,9 @@ include_once ('head.php');
             });
             $('#text_genre').text("분기테스트");
             $('#test_genre').val("분기테스트");
+            $('#sub_score3').attr('type', 'text');
+            $('#sub_score3').attr('value', '100');
+            $('#score3_text').show();
         }
         if(e==4) {
             $.ajax({
@@ -255,6 +277,9 @@ include_once ('head.php');
             });
             $('#text_genre').text("입반테스트");
             $('#test_genre').val("입반테스트");
+            $('#sub_score3').attr('type', 'text');
+            $('#sub_score3').attr('value', '100');
+            $('#score3_text').show();
         }
     }
 

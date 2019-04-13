@@ -160,8 +160,8 @@ if($result) {
             <textarea class="smart_edit_input" id="content" name="content"><?=$res['content']?></textarea>
             <div class="btn_section">
                 <div class="btn_wrap">
-                    <div class="save_btn"><a>등록</a></div>
-                    <div class="cancel_btn"><a>취소</a></div>
+                    <div class="save_btn" style="cursor: pointer;"><a>등록</a></div>
+                    <div class="cancel_btn" style="cursor: pointer;"><a>취소</a></div>
                 </div>
             </div>
         </div>

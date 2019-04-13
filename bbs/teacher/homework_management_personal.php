@@ -1,6 +1,16 @@
 <?php
 include_once ('_common.php');
 include_once ('head.php');
+
+$link = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$_GET['d_uid']."&c_uid=".$_GET['c_uid'];
+$r = api_calls_get($link);
+
+for($i=0; $i<count($d_name); $i++) {
+    if($d_uid[$i] == $_GET['d_uid'] && $c_uid[$i] == $_GET['c_uid']) {
+        $class_name = $d_name[$i];
+        $class_type = $d_yoie[$i];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -74,7 +84,7 @@ include_once ('head.php');
             <div class="head_left">
 
                 <p class="left_text">
-                    <span><?=$_GET['class_name']?></span>
+                    <span><?=$_GET['class_name']?>(<?=$class_type?>)</span>
                 </p>
                <!-- <p>
                     <span>(</span>
@@ -215,7 +225,7 @@ include_once ('head.php');
                 </td>
                 <td>
                     <div class="td_blank"></div>
-                    <div class="detail_show_btn" id="<?=$i?>"><a>상세보기</a>
+                    <div class="detail_show_btn" id="<?=$i?>" style="cursor: pointer;"><a>상세보기</a>
                         <? if($res2['apply_status_1'] == 'N') {?>
                           <a href="./submit_test.php?no=<?=$res2['seq']?>&<?=$_SERVER['QUERY_STRING']?>&s=1">1차 제출</a>
                         <? }else if($res2['apply_status_2'] == 'N' and $res2['current_status'] == 's1'){ ?>
@@ -232,7 +242,7 @@ include_once ('head.php');
     <div class="modal_box">
         <div class="modal_head">
             <p>
-                <span><?=$_GET['class_name']?></span>
+                <span><?=$_GET['class_name']?>(<?=$class_type?>)</span>
             </p>
             <!--<p>
                 <span>(</span>

@@ -21,9 +21,9 @@ for($i=0; $i<$cnt; $i++) {
     $k = $i+1;
     ?>
     <tr onclick="call_student_form(<?=$d_uid[$i]?>, <?=$c_uid[$i]?>, <?=$s_uid[$i]?>, '<?=$d_n[$i]?>')">
-        <td><?=$k?></td>
-        <td><?=$d_n[$i]?></td>
-        <td><?=$_SESSION['t_name']?></td>
+        <td style="text-align: center;"><?=$k?></td>
+        <td style="text-align: center;"><?=$d_n[$i]?></td>
+        <td style="text-align: center;"><?=$_SESSION['t_name']?></td>
     </tr>
     <?php
 }

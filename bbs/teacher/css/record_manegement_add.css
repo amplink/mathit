@@ -117,7 +117,7 @@
 
 .student_list_box {
     width: calc(100% - 2px);
-    height: 200px;
+    height: 135px;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: rgb(235, 235, 235);

@@ -11,26 +11,36 @@ $search_title = "%".$title."%";
 $search_writer = "%".$writer."%";
 
 
-if($type && $title && $writer) $sql = "select * from `teacher_schedule` where `type` like '$search_type' and `title` like '$search_title' and `writer` like '$search_writer';";
-else if($type && $title) $sql = "select * from `teacher_schedule` where `type` like '$search_type' and `title` like '$search_title';";
-else if($type && $writer) $sql = "select * from `teacher_schedule` where `type` like '$search_type' and `writer` like '$search_writer';";
-else if($title && $writer) $sql = "select * from `teacher_schedule` where  `writer` like '$search_writer' and `title` like '$search_title';";
-else if($type) $sql = "select * from `teacher_schedule` where `type` like '$search_type';";
-else if($title) $sql = "select * from `teacher_schedule` where `title` like '$search_title';";
-else if($writer) $sql = "select * from `teacher_schedule` where `writer` like '$writer';";
-else $sql = "select * from `teacher_schedule`;";
+if($type && $title && $writer) $sql = "select * from `teacher_schedule` where `type` like '$search_type' and `title` like '$search_title' and `writer` like '$search_writer' order by `event_time` desc;";
+else if($type && $title) $sql = "select * from `teacher_schedule` where `type` like '$search_type' and `title` like '$search_title' order by `event_time` desc;";
+else if($type && $writer) $sql = "select * from `teacher_schedule` where `type` like '$search_type' and `writer` like '$search_writer' order by `event_time` desc;";
+else if($title && $writer) $sql = "select * from `teacher_schedule` where  `writer` like '$search_writer' and `title` like '$search_title' order by `event_time` desc;";
+else if($type) $sql = "select * from `teacher_schedule` where `type` like '$search_type' order by `event_time` desc;";
+else if($title) $sql = "select * from `teacher_schedule` where `title` like '$search_title' order by `event_time` desc;";
+else if($writer) $sql = "select * from `teacher_schedule` where `writer` like '$writer' order by `event_time` desc;";
+else $sql = "select * from `teacher_schedule` order by `event_time` desc;";
 
 $result = mysqli_query($connect_db, $sql);
 $i=1;
+$thisTime=date("Y-m-d H:i:s");
 if($result) {
     while($res = mysqli_fetch_array($result)) {
         ?>
         <tr onclick="call_content(<?=$res['seq']?>)">
             <td><span><?=$i?></span></td>
             <td><span><?=$res['title']?></span>
-                <div class="new">
-                    <p>new</p>
-                </div>
+                <?php
+                $signdate = $res['event_time'];
+                $someTime=strtotime($thisTime)-strtotime("$signdate GMT");
+                $cha = ceil($someTime/(60*60*24));
+//                echo $cha;
+                if($cha <= 2) {
+                    ?>
+                    <div class="new"><p>new</p></div>
+                    <?php
+                    $cnt++;
+                }
+                ?>
             </td>
             <td>
                 <?php if($res['file_url']) {

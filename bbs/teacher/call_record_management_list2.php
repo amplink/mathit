@@ -42,6 +42,10 @@ while($res = mysqli_fetch_array($result)) {
     $a_score_list1[$cnt] = $res['score1']+$res['score2']+$res['score3'];
     $a_cnt1++;
 }
+
+$sql = "select * from `teacher_score` where `class` = '$class' and `d_order`='$d_order' and `test_genre` = '$test_genre' and `title` = '$title';";
+$result = mysqli_query($connect_db, $sql);
+$res = mysqli_fetch_array($result);
 ?>
 <form method="post" id="score_form">
     <input type="hidden" value="record_management_del.php?class=<?=$class?>&test_genre=<?=$test_genre?>&title=<?=$title?>" id="url">
@@ -63,11 +67,11 @@ while($res = mysqli_fetch_array($result)) {
                     <div class="score_average">
                         <div class="up_average">
                             <p class="lt">100점 만점</p>
-                            <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", ($tot/$cnt/2))?></span><span>점</span></p>
+                            <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", ($tot/$cnt/3))?></span><span>점</span></p>
                         </div>
                         <div class="down_average">
                             <p class="lt">최고 점수</p>
-                            <p class="rt"><span style="color: red;"><?=sprintf("%.1f", max($score_list)/$cnt/2)?></span><span>점</span></p>
+                            <p class="rt"><span style="color: red;"><?=sprintf("%.1f", max($score_list)/$cnt/3)?></span><span>점</span></p>
                         </div>
                     </div>
                 </div>
@@ -76,11 +80,11 @@ while($res = mysqli_fetch_array($result)) {
                     <div class="score_average">
                         <div class="up_average">
                             <p class="lt">동일레벨</p>
-                            <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", $a_tot1/$a_cnt1/2)?></span><span>점</span></p>
+                            <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", $a_tot1/$a_cnt1/3)?></span><span>점</span></p>
                         </div>
                         <div class="down_average">
                             <p class="lt">동일학년</p>
-                            <p class="rt"><span style="color: red;"><?=sprintf("%.1f", $a_tot/$a_cnt/2)?></span><span>점</span></p>
+                            <p class="rt"><span style="color: red;"><?=sprintf("%.1f", $a_tot/$a_cnt/3)?></span><span>점</span></p>
                         </div>
                     </div>
                 </div>
@@ -109,7 +113,8 @@ while($res = mysqli_fetch_array($result)) {
                         <th>학생명</th>
                         <th>1회</th>
                         <th>2회</th>
-                        <th>평균 점수</th>
+                        <th>3회</th>
+                        <th>총점</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -117,20 +122,20 @@ while($res = mysqli_fetch_array($result)) {
                     $sql = "select * from `teacher_score` where `class` = '$class' and `test_genre` = '$test_genre' and `title` = '$title' order by `seq`;";
                     $result = mysqli_query($connect_db, $sql);
                     $i=1;
-                    $cnt=1;
+                    $cnt=0;
+                    $k = 1;
                     while($res = mysqli_fetch_array($result)) {
                         ?>
                         <tr>
                             <td><input type="checkbox" name="chk_list[]" value="<?=$res['seq']?>"></td>
                             <td><span><input type="hidden" name="student[]" value="<?=$res['student']?>"><?=$res['student']?></span></td>
-                            <td><span><input type="text" name="score1[]" value="<?=$res['score1']?>" onchange="set_avg1(<?=$cnt?>)" id="score_add<?=$cnt?>"> 점</span></td>
-                            <?php $cnt++;?>
-                            <td><span><input type="text" name="score2[]" value="<?=$res['score2']?>" onchange="set_avg(<?=$cnt?>)" id="score_add<?=$cnt?>"> 점</span></td>
-                            <td><span id="avg<?=$i?>"><?=sprintf("%.1f", ($res['score1']+$res['score2'])/2)?> 점</span></td>
+                            <td><span><input type="text" name="score1[]" value="<?=$res['score1']?>" onchange="set_plus(<?=$k?>)" id="score_add<?=++$cnt?>"> 점</span></td>
+                            <td><span><input type="text" name="score2[]" value="<?=$res['score2']?>" onchange="set_plus(<?=$k?>)" id="score_add<?=++$cnt?>"> 점</span></td>
+                            <td><span><input type="text" name="score3[]" value="<?=$res['score3']?>" onchange="set_plus(<?=$k?>)" id="score_add<?=++$cnt?>"> 점</span></td>
+                            <td><span id="plus<?=$k?>"><?=$res['score1']+$res['score2']+$res['score3']?> 점</span></td>
                         </tr>
                         <?
-                        $i++;
-                        $cnt++;
+                        $k = $i+3;
                     }
                     ?>
                     </tbody>
