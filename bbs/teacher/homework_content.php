@@ -11,6 +11,10 @@ $sql = "select * from `homework`
 		and `s_uid`='$_GET[s_uid]'
 		and `d_order`='$_GET[d_order]'";
 
+if($_GET['st_id']) $sql .="and  match(student_id) against('*$_GET[st_id]*' in boolean mode) ";
+
+$sql .="order by seq desc ";
+
 $result = sql_query($sql);
 $i=0;
 while($res = mysqli_fetch_array($result)) {
