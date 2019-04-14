@@ -331,7 +331,7 @@ include_once ('head.php');
             dataType: "html",
             success: function(response) {
                 $("#homework_content").html("");
-                console.log(response);
+               // console.log(response);
                 $("#homework_content").html(response);
                 $('.custumdropdown').homework_manegement_add();
             }

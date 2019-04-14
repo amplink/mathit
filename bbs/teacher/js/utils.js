@@ -85,7 +85,7 @@ window.chartColors = {
 
 		months: function(config) {
 			var cfg = config || {};
-			var count = cfg.count || 12;
+			var count = cfg.count || 0;
 			var section = cfg.section;
 			var values = [];
 			var i, value;
