@@ -58,13 +58,13 @@ $res = mysqli_fetch_array($result);
         <div class="r_btn_wrap">
             <?php if($res['file_url']) {
                 ?>
-                <div class="modify_btn" style="">
+                <div class="modify_btn">
                     <a href="<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기</a>
                 </div>
                 <?php
                 if($res['writer']==$_SESSION['t_name']) {
                     ?>
-                    <div class="delete_btn" onclick="attach_file_del(<?=$res['seq']?>)">
+                    <div class="delete_btn" onclick="attach_file_del(<?=$res['seq']?>)" style="cursor: pointer;">
                         <a>첨부파일 삭제</a>
                     </div>
                     <?php
