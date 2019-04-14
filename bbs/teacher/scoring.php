@@ -220,7 +220,7 @@ include_once ('head.php');
                             <tr class="group_<?=$i?>">
                                 <td width="70"><span><?=$group[$res2['corner'.$i]][$j]['item_number']?></span></td>
                                 <td width="390">
-                                    <div class="img_input_place"><img src="<?=$group[$res2['corner'.$i]][$j]['answer_image']?>" height="30"></div>
+                                    <div class="img_input_place"><img src="<?=$group[$res2['corner'.$i]][$j]['answer_image']?>" height="60%"></div>
                                 </td>
                                 <td><input type="checkbox" name="marking<?=$i?>[]" value="<?=$group[$res2['corner'.$i]][$j]['item_number']?>" id="marking" class="marking<?=$i?>" <? if(in_array($group[$res2['corner'.$i]][$j]['item_number'], $wrongArr)) echo "checked"; ?>></td>
                             </tr>
