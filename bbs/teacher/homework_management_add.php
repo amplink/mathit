@@ -304,7 +304,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 </div>
             </form>
             <div class="add_btn_wrap">
-                <div class="add_btn" onclick="submit();"><a>등록</a></div>
+                <div class="add_btn" onclick="submit();" style="cursor: pointer;"><a>등록</a></div>
             </div>
         </div> <!-- end <div class="right_wrap"> -->
     </div> <!-- end <div class="wrapper"> -->

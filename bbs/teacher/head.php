@@ -283,9 +283,14 @@
         <div class="hamnav_menu"><a href="notice_list.php"><span>공지사항</span></a></div>
     </div>
     <?php
-    $t_uid = $_SESSION['t_uid'];
-    $sql = "select * from `alarm` where `uid`='$t_uid' order by `seq` desc;";
-    $a_result = sql_query($sql);
+    if($_SESSION['admin']) {
+        $sql = "select * from `alarm` where `target`='관리자';";
+        $a_result = sql_query($sql);
+    }else {
+        $t_uid = $_SESSION['t_uid'];
+        $sql = "select * from `alarm` where `uid`='$t_uid' order by `seq` desc;";
+        $a_result = sql_query($sql);
+    }
     $a_cnt = 0;
     $thisTime=date("Y-m-d H:i:s");
     ?>
