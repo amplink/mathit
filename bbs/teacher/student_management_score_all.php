@@ -48,9 +48,9 @@ include_once ('head.php');
             </tr>
             </thead>
             <tbody>
-            <?php
+<?php
 
-            $sql = "SELECT 
+	$sql = "SELECT 
 	           A.*,
 			   B._from, B._to, B.name, B.grade, B.semester, B.unit,
 			   B.Q_number1, B.Q_number2, B.Q_number3, B.d_order
@@ -64,40 +64,40 @@ include_once ('head.php');
 			AND (A.current_status != 's2' OR A.current_status != 's3')
 			AND A.client_id='$ac'";
 
-            $result = mysqli_query($connect_db, $sql);
-            while($res = mysqli_fetch_array($result)) {
+	$result = mysqli_query($connect_db, $sql);
+	while($res = mysqli_fetch_array($result)) {
 //	    $d_uid = $res['d_uid'];
 //	    $c_uid = $res['c_uid'];
 //	    $s_uid = $res['s_uid'];
 //	    $ssql = "select * from `homework` where `d_uid`='$d_uid' and `c_uid`='$c_uid' and `s_uid`='$s_uid';";
 //	    $rresult = sql_query($ssql);
 //	    $rr = mysqli_fetch_array($rresult);
-                ?>
-                <tr>
-                    <td><span><?=$res['class_name']?>(<?=$res['d_order']?>)</span></td>
-                    <td><span><?=$res['student_name']?></span></td>
-                    <td><span><?=$res['name']?></span><br><?=$res['grade']."-".$res['semester']."-".$res['unit']?></td>
-                    <td><span><?=substr($res['_from'],6,4)?>-<?=substr($res['_from'],0,2)?>-<?=substr($res['_from'],3,2)?> ~ <?=substr($res['_to'],6,4)?>-<?=substr($res['_to'],0,2)?>-<?=substr($res['_to'],3,2)?></span></td>
-                    <td>
-                        <?
-                        $chk1 = ($res['apply_status_1'] == 'Y')?"on":"";
-                        $chk2 = ($res['apply_status_2'] == 'Y')?"on":"";
-                        ?>
-                        <!-- 나중에 처리 -->
-                        <div class="chk_box <?=$chk1?>"></div>
-                        <div class="chk_box <?=$chk2?>"></div>
-                    </td>
-                    <td>
-                        <?php
-                        $addStyle = ($res['current_status'] == 'a1' or $res['current_status'] == 'a2') ? "" : "disabledbutton";
-                        ?>
+?>
+			<tr>
+				<td><span><?=$res['class_name']?>(<?=$res['d_order']?>)</span></td>
+				<td><span><?=$res['student_name']?></span></td>
+				<td><span><?=$res['name']?></span><br><?=$res['grade']."-".$res['semester']."-".$res['unit']?></td>
+				<td><span><?=substr($res['_from'],6,4)?>-<?=substr($res['_from'],0,2)?>-<?=substr($res['_from'],3,2)?> ~ <?=substr($res['_to'],6,4)?>-<?=substr($res['_to'],0,2)?>-<?=substr($res['_to'],3,2)?></span></td>
+				<td>
+<?
+	$chk1 = ($res['apply_status_1'] == 'Y')?"on":"";
+	$chk2 = ($res['apply_status_2'] == 'Y')?"on":"";
+?>
+					<!-- 나중에 처리 -->
+					<div class="chk_box <?=$chk1?>"></div>
+					<div class="chk_box <?=$chk2?>"></div>
+				</td>
+				<td>
+                    <?php
+                      $addStyle = ($res['current_status'] == 'a1' or $res['current_status'] == 'a2') ? "" : "disabledbutton";
+                    ?>
                         <div class="scoring_btn <?=$addStyle?>"><a href="scoring.php?id=<?= $res['id'] ?>">채점하기 </a></div>
 
-                    </td>
-                </tr>
-                <?php
-            }
-            ?>
+                </td>
+			</tr>
+<?php
+	}
+?>
             </tbody>
         </table>
     </div>

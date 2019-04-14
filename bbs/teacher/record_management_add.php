@@ -21,160 +21,160 @@ include_once ('head.php');
 <body>
 <section>
     <form action="record_management_add_chk.php" method="post" id="record_form">
-        <input type="hidden" name="d_id" id="d_id">
-        <input type="hidden" name="c_id" id="c_id">
-        <input type="hidden" name="s_id" id="s_id">
-        <div class="head_section">
-            <div class="head_section_1400">
-                <div class="head_left">
-                    <p class="left_text">성적입력</p>
-                </div>
-                <div class="head_right">
-                    <div class="homework_menu"><a href="record_management_list.php">성적조회</a></div>
-                    <div class="homework_menu on"><a href="record_management_add.php" class="on">성적입력</a></div>
-                </div>
+	<input type="hidden" name="d_id" id="d_id">
+	<input type="hidden" name="c_id" id="c_id">
+	<input type="hidden" name="s_id" id="s_id">
+    <div class="head_section">
+        <div class="head_section_1400">
+            <div class="head_left">
+                <p class="left_text">성적입력</p>
+            </div>
+            <div class="head_right">
+                <div class="homework_menu"><a href="record_management_list.php">성적조회</a></div>
+                <div class="homework_menu on"><a href="record_management_add.php" class="on">성적입력</a></div>
             </div>
         </div>
-        <div class="wrapper">
-            <div class="left_box" style="overflow: scroll; height: 633px;">
-                <p class="box_title">출제 대상 선택</p>
-                <div class="box_menu_wrap">
-                    <p>학기</p>
-                    <select name="year_select" id="year_select" onchange="move_page()">
-                        <?php
-                        for($i=2018; $i<2030; $i++) {
-                            echo "<option value='$i'>$i"."년"."</option>";
-                        }
+    </div>
+    <div class="wrapper">
+        <div class="left_box" style="overflow: scroll; height: 633px;">
+            <p class="box_title">출제 대상 선택</p>
+            <div class="box_menu_wrap">
+                <p>학기</p>
+                <select name="year_select" id="year_select" onchange="move_page()">
+                    <?php
+                    for($i=2018; $i<2030; $i++) {
+                        echo "<option value='$i'>$i"."년"."</option>";
+                    }
+                    ?>
+                </select>
+				<input type="hidden" name="d_yoie" id="d_yoie">
+                <select name="quarter_select" id="quarter_select" onchange="move_page()">
+                    <option value="1">1분기</option>
+                    <option value="2">2분기</option>
+                    <option value="3">3분기</option>
+                    <option value="4">4분기</option>
+                </select>
+            </div>
+            <div class="grade_select_box select_table content">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>수업 목록</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    for($i=0; $i<count($d_name); $i++) {
                         ?>
-                    </select>
-                    <input type="hidden" name="d_yoie" id="d_yoie">
-                    <select name="quarter_select" id="quarter_select" onchange="move_page()">
-                        <option value="1">1분기</option>
-                        <option value="2">2분기</option>
-                        <option value="3">3분기</option>
-                        <option value="4">4분기</option>
-                    </select>
-                </div>
-                <div class="grade_select_box select_table content">
-                    <table>
-                        <thead>
                         <tr>
-                            <th>수업 목록</th>
+                            <td onclick="lecture('<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        for($i=0; $i<count($d_name); $i++) {
-                            ?>
-                            <tr>
-                                <td onclick="lecture('<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
-                            </tr>
-                            <?
-                        }
-                        ?>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="class_select_box select_table">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>번호</th>
-                            <th>반 이름</th>
-                            <th>담임 교사</th>
-                        </tr>
-                        </thead>
-                        <tbody id="class_name">
+                        <?
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="class_select_box select_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>반 이름</th>
+                        <th>담임 교사</th>
+                    </tr>
+                    </thead>
+                    <tbody id="class_name">
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
+            </div>
+            <div class="student_list_box select_table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>시험 유형</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td onclick="chk_test_genre(1)"><span>중간평가</span></td>
+                    </tr>
+                    <tr>
+                        <td onclick="chk_test_genre(2)"><span>기말평가</span></td>
+                    </tr>
+                    <tr>
+                        <td onclick="chk_test_genre(3)"><span>분기테스트</span></td>
+                    </tr>
+                    <tr>
+                        <td onclick="chk_test_genre(4)"><span>입반테스트</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="right_wrap">
+            <div class="right_box" style="height: 660px;">
+                <div class="right_box_1">
+                    <div class="r_left_box">
+                        <div class="division">
+                            <p class="l_div_title">대상반</p>
+                            <a id="text_class"></a>
+                            <input type="hidden" name="class" id="class">
+                        </div>
+                        <div class="division" style="padding-top:5px">
+                            <p class="l_div_title">시험일</p>
+                            <input type="text" name="date" id="datepicker">
+                        </div>
+                        <div class="division">
+                            <p class="l_div_title">기준 만점</p>
+                            <input type="text" placeholder="기준점수" name="standard_score" value="100" id="standard_score" style="width: 100px;">
+                            <span> 점</span>
+                        </div>
+                        <div class="division">
+                            <p class="l_div_title">학년</p>
+                            <select name="grade">
+                                <option value="3">초3</option>
+                                <option value="4">초4</option>
+                                <option value="5">초5</option>
+                                <option value="6">초6</option>
+                                <option value="7">중1</option>
+                                <option value="8">중2</option>
+                                <option value="9">중3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="r_right_box">
+                        <div class="division">
+                            <p class="l_div_title">시험유형</p><a id="text_genre"></a><input type="hidden" name="test_genre" id="test_genre">
+                        </div>
+                        <div class="division">
+                            <p class="l_div_title">시험명</p><input type="text" placeholder="시험명을 입력해주세요" name="title" id="title">
+                        </div>
+                        <div class="division">
+                            <p class="l_div_title">영역별 점수</p>
+                            <div class="score_input"><input type="text" placeholder="점수" name="sub_score1" value="100" id="sub_score1"><span> 점</span></div>
+                            <div class="score_input"><input type="text" placeholder="점수" name="sub_score2" value="100" id="sub_score2"><span> 점</span></div>
+                            <div class="score_input"><input type="hidden" placeholder="점수" name="sub_score3" value="0" id="sub_score3"><span id="score3_text"> 점</span></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="student_list_box select_table">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>시험 유형</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td onclick="chk_test_genre(1)"><span>중간평가</span></td>
-                        </tr>
-                        <tr>
-                            <td onclick="chk_test_genre(2)"><span>기말평가</span></td>
-                        </tr>
-                        <tr>
-                            <td onclick="chk_test_genre(3)"><span>분기테스트</span></td>
-                        </tr>
-                        <tr>
-                            <td onclick="chk_test_genre(4)"><span>입반테스트</span></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="right_box_2">
+                    <div class="student_each_score_table" id="student_list" style="height: 420px;">
+                    </div>
                 </div>
             </div>
-            <div class="right_wrap">
-                <div class="right_box" style="height: 660px;">
-                    <div class="right_box_1">
-                        <div class="r_left_box">
-                            <div class="division">
-                                <p class="l_div_title">대상반</p>
-                                <a id="text_class"></a>
-                                <input type="hidden" name="class" id="class">
-                            </div>
-                            <div class="division" style="padding-top:5px">
-                                <p class="l_div_title">시험일</p>
-                                <input type="text" name="date" id="datepicker">
-                            </div>
-                            <div class="division">
-                                <p class="l_div_title">기준 만점</p>
-                                <input type="text" placeholder="기준점수" name="standard_score" value="100" id="standard_score" style="width: 100px;">
-                                <span> 점</span>
-                            </div>
-                            <div class="division">
-                                <p class="l_div_title">학년</p>
-                                <select name="grade">
-                                    <option value="3">초3</option>
-                                    <option value="4">초4</option>
-                                    <option value="5">초5</option>
-                                    <option value="6">초6</option>
-                                    <option value="7">중1</option>
-                                    <option value="8">중2</option>
-                                    <option value="9">중3</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="r_right_box">
-                            <div class="division">
-                                <p class="l_div_title">시험유형</p><a id="text_genre"></a><input type="hidden" name="test_genre" id="test_genre">
-                            </div>
-                            <div class="division">
-                                <p class="l_div_title">시험명</p><input type="text" placeholder="시험명을 입력해주세요" name="title" id="title">
-                            </div>
-                            <div class="division">
-                                <p class="l_div_title">영역별 점수</p>
-                                <div class="score_input"><input type="text" placeholder="점수" name="sub_score1" value="100" id="sub_score1"><span> 점</span></div>
-                                <div class="score_input"><input type="text" placeholder="점수" name="sub_score2" value="100" id="sub_score2"><span> 점</span></div>
-                                <div class="score_input"><input type="hidden" placeholder="점수" name="sub_score3" value="0" id="sub_score3"><span id="score3_text"> 점</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right_box_2">
-                        <div class="student_each_score_table" id="student_list" style="height: 420px;">
-                        </div>
-                    </div>
+            <div class="add_btn_wrap">
+                <div class="l_btn_wrap">
+<!--                    <div class="sms_btn"><a href="#none">SMS발송</a></div>-->
+                    <div class="print_btn"><a href="#none">출력</a></div>
                 </div>
-                <div class="add_btn_wrap">
-                    <div class="l_btn_wrap">
-                        <!--                    <div class="sms_btn"><a href="#none">SMS발송</a></div>-->
-                        <div class="print_btn"><a href="#none">출력</a></div>
-                    </div>
-                    <div class="r_btn_wrap">
-                        <div class="complete_btn" onclick="submit()" style="cursor: pointer;"><a>평가완료</a></div>
-                    </div>
+                <div class="r_btn_wrap">
+                    <div class="complete_btn" onclick="submit()" style="cursor: pointer;"><a>평가완료</a></div>
                 </div>
             </div>
         </div>
+    </div>
     </form>
 </section>
 </body>
@@ -207,7 +207,7 @@ include_once ('head.php');
             }
         })
     })
-
+    
     function lecture(e) {
         $('#text_class').text(e);
         $('#class').val(e);
