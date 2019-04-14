@@ -45,7 +45,7 @@ if(!$_GET['page']) {
                     </tr>
                 </thead>
                 <tbody>
-                <form action="answer_del.php" method="post" id="answer_form">
+                <form action="answer_del.php?page=<?=($page+1)?>" method="post" id="answer_form">
                     <?php
                     $sql = "select * from `answer_master` where `level` in ('루트', '파이', '시그마') order by `grade` asc, `semester` asc, `unit` asc, field(`level`, '루트', '파이', '시그마'),`book_type` desc";
                     $result = mysqli_query($connect_db, $sql);
@@ -76,7 +76,7 @@ if(!$_GET['page']) {
                                echo '     <td><span>' . $ac_data["unit"] . '</span></td>';
                                echo '     <td><span>' . $ac_data["level"] . '</span></td>';
                                echo '     <td><span>' . $ac_data["book_type"] . '</span></td>';
-                               echo "     <td><a href='./update_answer_add.php?grade=".$ac_data['grade']."&semester=".$ac_data['semester']."&unit=".$ac_data['unit']."&level=".$ac_data['level']."&book_type=".$ac_data['book_type']."' style=''>수정</a></td>";
+                               echo "     <td><a href='./update_answer_add.php?grade=".$ac_data['grade']."&semester=".$ac_data['semester']."&unit=".$ac_data['unit']."&level=".$ac_data['level']."&book_type=".$ac_data['book_type']."&page=".($page+1)."' style=''>수정</a></td>";
                                echo '</tr>';
                                $t++;
                            }
@@ -100,7 +100,7 @@ if(!$_GET['page']) {
                 <ul>
                     <?
                     $count = $j;
-                    for($i=0; $i<$count/10; $i++) {
+                    for($i=0; $i<$count/15; $i++) {
                         $cnt = $i+1;
                         if($cnt==$_GET['page']) echo '<li><a href="./answer_manegement.php?page='.$cnt.'" class="on">'.$cnt.'</a></li>';
                         else echo '<li><a href="./answer_manegement.php?page='.$cnt.'">'.$cnt.'</a></li>';
@@ -110,7 +110,7 @@ if(!$_GET['page']) {
                 <div class="next_btn"><a href="./answer_manegement.php?page=<?=$page+2;?>"><img src="img/next.png" alt=""></a></div>
             </div>
             <div class="button_wrap">
-                <div class="add_btn"><a href="answer_add.php">정답지추가</a></div>
+                <div class="add_btn"><a href="answer_add.php?page=<?=$page+1?>">정답지추가</a></div>
                  <div class="modify_btn" onclick="del_answer();"><a href="#">삭제</a></div>
             </div>
         </div>

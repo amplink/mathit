@@ -1,5 +1,6 @@
 <?
 include_once('_common.php');
+$page = $_GET['page'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,7 @@ include_once('_common.php');
 </head>
 
 <body>
-<form enctype='multipart/form-data' action="answer_add_chk.php" method="POST" id="answer_add_form">
+<form enctype='multipart/form-data' action="answer_add_chk.php?page=<?=$page?>" method="POST" id="answer_add_form">
 <div class="header" style="width:calc(100% - 40px)">
     <div class="logo_wrap">
         <div class="logo"><img src="img/logo.png" alt="logo"></div>
@@ -389,6 +390,7 @@ include_once('_common.php');
     }
 
     function myFunction() {
+        var page = <?php echo $page;?>;
         var str = $("#answer_add_form").serialize();
         $.ajax({
             type : 'post',
@@ -402,7 +404,7 @@ include_once('_common.php');
                     alert('중복된 교재정보입니다.');
                 }else {
                     $(window).unbind('beforeunload');
-                    $("#answer_add_form").attr("action", "./answer_add_chk.php");
+                    $("#answer_add_form").attr("action", "./answer_add_chk.php?page="+page);
                     $("#answer_add_form").submit();
                 }
             }

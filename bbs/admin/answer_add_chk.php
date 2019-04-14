@@ -1,6 +1,7 @@
 <?php
 
 include_once ('_common.php');
+$page = $_GET['page'];
 
 $book_type = $_POST['book_type'];
 $grade = $_POST['grade'];
@@ -130,6 +131,9 @@ if($section_4[0][0]) {
 }
 
 echo "<script>alert('등록이 완료되었습니다.');</script>";
-echo "<script>location.href='./answer_manegement.php';</script>";
 
 ?>
+<script>
+    var page = <?php echo $page;?>;
+    location.href='./answer_manegement.php?page='+page;
+</script>
