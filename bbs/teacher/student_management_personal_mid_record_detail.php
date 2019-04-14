@@ -22,32 +22,66 @@ $today_date = date("Y-m-d");
 <body>
 <section>
 
-<?
-	//$student_name = $r[3];
+    <?
+    //$student_name = $r[3];
 
-/*
-	$sql = "SELECT * FROM 
-             `teacher_score` 
-            WHERE 
-                `d_uid` = '$_GET[d_uid]'
-                AND `c_uid` = '$_GET[c_uid]'
-                AND `s_uid` = '$_GET[s_uid]'
-                AND `student_id` = '$_GET[s_id]'";
-	*/
+    /*
+        $sql = "SELECT * FROM
+                 `teacher_score`
+                WHERE
+                    `d_uid` = '$_GET[d_uid]'
+                    AND `c_uid` = '$_GET[c_uid]'
+                    AND `s_uid` = '$_GET[s_uid]'
+                    AND `student_id` = '$_GET[s_id]'";
+        */
 
     $sql = "SELECT * FROM 
              `teacher_score` 
             WHERE 
                 `seq` = '$_GET[no]'";
 
-	$result = mysqli_query($connect_db, $sql);
-	$res = mysqli_fetch_array($result);
-
-    //$link = "/api/math/student_att?client_no=".$_SESSION['client_no']."&stu_id=".$res['s_uid']."&d_id=".$res['d_uid']."&c_id=".$res['c_uid']."&from=".$res['d_uid']."&to=".$res['d_uid'];
-    //$r = api_calls_get($link);
+    $result = mysqli_query($connect_db, $sql);
+    $res = mysqli_fetch_array($result);
 
 
-?>
+
+    //분기시작일 정보
+    if($res['test_genre'] == '중간평가') {
+        $date = (date("Y") - 1) . "-12-01";
+        $link = "/api/math/class?client_no=" . $_SESSION['client_no'] . "&date=" . $date;
+        $r = api_calls_get($link);
+
+        $month = explode("/", $res['date']);
+
+        $flag = getQuarter($r[1][3]);
+        $start_day = getPeriod($flag, $month[0]);
+    }else{ //기말평가
+
+        $sql6 = "SELECT  date
+				 FROM
+				  `teacher_score`
+				 WHERE 
+					d_uid='$res[d_uid]'
+				AND c_uid='$res[c_uid]'
+				AND s_uid='$res[s_uid]'
+				AND d_order='$res[d_order]'
+				AND test_genre='중간평가'
+				AND client_id='$ac'
+		";
+
+        $result6 = mysqli_query($connect_db, $sql6);
+        $res6 = mysqli_fetch_array($result6);
+        $start_day = date("m/d/Y",strtotime ("+1 days", strtotime($res6('date'))));
+    }
+
+    $api_start_date = substr($start_day,6,10)."-".substr($start_day,0,2)."-".substr($start_day,3,2);
+    $api_end_date = substr($res['date'],6,10)."-".substr($res['date'],0,2)."-".substr($res['date'],3,2);
+
+    $link = "/api/math/student_att?client_no=".$_SESSION['client_no']."&stu_id=".$res['s_uid']."&d_id=".$res['d_uid']."&c_id=".$res['c_uid']."&from=".$api_start_date."&to=".$api_end_date;
+
+    $r = api_calls_get($link);
+
+    ?>
 
     <div class="head_section">
         <div class="head_section_1400">
@@ -107,8 +141,8 @@ $today_date = date("Y-m-d");
                     </div>
 
 
-<?
-	$sql2 = "
+                    <?
+                    $sql2 = "
 	
 	SELECT  COUNT(C.seq) N1, SUM(C.tot2) N2 FROM (
 		    SELECT 
@@ -128,12 +162,12 @@ $today_date = date("Y-m-d");
 		
 			 ) C
 			";
-	//ECHO $sql2;
-	$result2 = mysqli_query($connect_db, $sql2);
-    $res2 = mysqli_fetch_array($result2);
-    if($res2['N1'] > 0) $h_avg = floor(($res2['N2'] / $res2['N1'])*100);
-    else                $h_avg = 0 ;
-?>
+                    //ECHO $sql2;
+                    $result2 = mysqli_query($connect_db, $sql2);
+                    $res2 = mysqli_fetch_array($result2);
+                    if($res2['N1'] > 0) $h_avg = floor(($res2['N2'] / $res2['N1'])*100);
+                    else                $h_avg = 0 ;
+                    ?>
 
                     <div class="s_info_div">
                         <p class="l_div_text">숙제</p>
@@ -146,10 +180,10 @@ $today_date = date("Y-m-d");
                     </div>
                 </div>
             </div>
-<? 
-   $avg =round(($res['score1'] + $res['score2']) / 2);
+            <?
+            $avg =round(($res['score1'] + $res['score2']) / 2);
 
-	$sql3 = "SELECT 
+            $sql3 = "SELECT 
 	          SUM(A.score1 + A.score2) / (COUNT(A.seq)*2) avg,
 			  MAX((A.score1 + A.score2) / 2) max,
 			  (SELECT SUM(score1 + score2) / (COUNT(seq)*2) 
@@ -162,11 +196,11 @@ $today_date = date("Y-m-d");
 			
 			";
 
-			//echo $sql3;
-	$result3 = mysqli_query($connect_db, $sql3);
-    $res3 = mysqli_fetch_array($result3);
+            //echo $sql3;
+            $result3 = mysqli_query($connect_db, $sql3);
+            $res3 = mysqli_fetch_array($result3);
 
-?>
+            ?>
             <div class="record_detail_table_section">
                 <p class="l_div_text"><?=$res['test_genre']?></p><span>평균 - <?=$avg?>점</span>
                 <div class="record_detail_table">
@@ -194,8 +228,8 @@ $today_date = date("Y-m-d");
             </div>
             <br>
 
-<?
-	$sql4 = "SELECT 
+            <?
+            $sql4 = "SELECT 
                IF (B.wrong_anwer_2 = '', B.wrong_anwer_1, B.wrong_anwer_2) wrong_answer,  
 	           B.apply_status_1, B.apply_status_2,
 	           B.score_status_1, B.score_status_2, 
@@ -216,11 +250,11 @@ $today_date = date("Y-m-d");
 			AND B.apply_status_1 IS NOT NULL
 			ORDER BY A.seq asc";
 
-	$result4 = mysqli_query($connect_db, $sql4);
-?>
+            $result4 = mysqli_query($connect_db, $sql4);
+            ?>
 
             <p class="l_div_text" style="width:200px;">숙제제출 현황</p>
-			<p style="height:10px"></p>
+            <p style="height:10px"></p>
             <div class="student_record_table_section">
                 <table>
                     <thead>
@@ -233,66 +267,66 @@ $today_date = date("Y-m-d");
                     </tr>
                     </thead>
                     <tbody>
-<?
-    $j = 0;
-    $score_arr = array();
-    $from_date = array();
-	while($res4 = mysqli_fetch_array($result4)) {
-	   $wrong_tot1 = 0;
-       $q_tot1 = 0;
-       for($i=1; $i<4; $i++){
-           if($res4['Q_number'.$i]) $q_tot1 += count(explode(",",$res4['Q_number'.$i]));
-	   }
+                    <?
+                    $j = 0;
+                    $score_arr = array();
+                    $from_date = array();
+                    while($res4 = mysqli_fetch_array($result4)) {
+                        $wrong_tot1 = 0;
+                        $q_tot1 = 0;
+                        for($i=1; $i<4; $i++){
+                            if($res4['Q_number'.$i]) $q_tot1 += count(explode(",",$res4['Q_number'.$i]));
+                        }
 
-	   $wrong1 = json_decode($res4['wrong_anwer_1'],true);
-	   if($wrong1){
-		   foreach ($wrong1 as $value) {
-			 $wrong_tot1 += count(explode(",",$value));
-		   }
-	   }
-       $score1 = round((($q_tot1-$wrong_tot1)/$q_tot1) * 100);
+                        $wrong1 = json_decode($res4['wrong_anwer_1'],true);
+                        if($wrong1){
+                            foreach ($wrong1 as $value) {
+                                $wrong_tot1 += count(explode(",",$value));
+                            }
+                        }
+                        $score1 = round((($q_tot1-$wrong_tot1)/$q_tot1) * 100);
 
-	   $wrong_tot2 = 0;
-       $q_tot2 = 0;
-       for($i=1; $i<4; $i++){
-           if($res4['Q_number'.$i]) $q_tot2 += count(explode(",",$res4['Q_number'.$i]));
-	   }
-	   $wrong2 = json_decode($res4['wrong_anwer_2'],true);
-	   if($wrong2){
-		   foreach ($wrong2 as $value) {
-			 $wrong_tot2 += count(explode(",",$value));
-		   }
-	   }
-       //$score2 = round((($wrong_tot1-$wrong_tot2)/$wrong_tot1) * 100);
-        $from_date[$j] = $res4['_from'];
+                        $wrong_tot2 = 0;
+                        $q_tot2 = 0;
+                        for($i=1; $i<4; $i++){
+                            if($res4['Q_number'.$i]) $q_tot2 += count(explode(",",$res4['Q_number'.$i]));
+                        }
+                        $wrong2 = json_decode($res4['wrong_anwer_2'],true);
+                        if($wrong2){
+                            foreach ($wrong2 as $value) {
+                                $wrong_tot2 += count(explode(",",$value));
+                            }
+                        }
+                        //$score2 = round((($wrong_tot1-$wrong_tot2)/$wrong_tot1) * 100);
+                        $from_date[$j] = $res4['_from'];
 
-?>
+                        ?>
 
-                    <tr>
-                        <td>
-                            <span><?=substr($res4['_from'],6,10)?>-<?=substr($res4['_from'],0,2)?>-<?=substr($res4['_from'],3,2)?></span>
-                        </td>
-                        <td>
-                            <span><?=$res4['name']?></span>
-                        </td>
-                        <td>
-                            <span><? echo ($res4['submit_date2'])?substr($res4['submit_date2'],0,10):substr($res4['submit_date1'],0,10);?></span>
-                        </td>
-                        <td>
-                            <span><?=$wrong_tot1?> / <?=$q_tot1?></span>
-                        </td>
-                        <td>
-                            <span><?=$wrong_tot2?> / <?=$wrong_tot1?></span>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <span><?=substr($res4['_from'],6,10)?>-<?=substr($res4['_from'],0,2)?>-<?=substr($res4['_from'],3,2)?></span>
+                            </td>
+                            <td>
+                                <span><?=$res4['name']?></span>
+                            </td>
+                            <td>
+                                <span><? echo ($res4['submit_date2'])?substr($res4['submit_date2'],0,10):substr($res4['submit_date1'],0,10);?></span>
+                            </td>
+                            <td>
+                                <span><?=$wrong_tot1?> / <?=$q_tot1?></span>
+                            </td>
+                            <td>
+                                <span><?=$wrong_tot2?> / <?=$wrong_tot1?></span>
+                            </td>
+                        </tr>
 
-<?
+                        <?
 
-        $wrong_tot = count(explode(",",$res4['wrong_answer']));
-        $score_arr[$j] = round((($q_tot1-$wrong_tot) / $q_tot1) * 100);
-        $j++;
-	}
-?>
+                        $wrong_tot = count(explode(",",$res4['wrong_answer']));
+                        $score_arr[$j] = round((($q_tot1-$wrong_tot) / $q_tot1) * 100);
+                        $j++;
+                    }
+                    ?>
 
 
                     </tbody>
@@ -300,34 +334,6 @@ $today_date = date("Y-m-d");
             </div>
         </div>
         <?
-        //분기시작일 정보
-        if($res['test_genre'] == '중간평가') {
-            $date = (date("Y") - 1) . "-12-01";
-            $link = "/api/math/class?client_no=" . $_SESSION['client_no'] . "&date=" . $date;
-            $r = api_calls_get($link);
-
-            $month = explode("/", $res['date']);
-
-            $flag = getQuarter($r[1][3]);
-            $start_day = getPeriod($flag, $month[0]);
-        }else{ //기말평가
-
-            $sql6 = "SELECT  date
-                     FROM
-                      `teacher_score`
-                     WHERE 
-                        d_uid='$res[d_uid]'
-                    AND c_uid='$res[c_uid]'
-                    AND s_uid='$res[s_uid]'
-                    AND d_order='$res[d_order]'
-                    AND test_genre='중간평가'
-                    AND client_id='$ac'
-			";
-
-            $result6 = mysqli_query($connect_db, $sql6);
-            $res6 = mysqli_fetch_array($result6);
-            $start_day = $res6('date');
-        }
 
         //해당분기의 마지막날 구함
         //$timestamp = strtotime("+4 months", strtotime($start_day));
@@ -364,7 +370,7 @@ $today_date = date("Y-m-d");
 
             $wrong_tot = count(explode(",",$res5['wrong_answer']));
             $score_arr2[$res5['seq']][] = round((($all-$wrong_tot) / $all) * 100);
-           // $score_arr2[$j] =
+            // $score_arr2[$j] =
 
             $j++;
         }
