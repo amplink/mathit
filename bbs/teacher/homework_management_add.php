@@ -95,73 +95,73 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         </div>
     </div>
     <form method='post' action='homework_saved_at_db.php' id="all">
-    <div class="wrapper">
-        <div class="left_box">
-            <p class="box_title">출제 대상 선택</p>
-            <div class="box_menu_wrap">
-                <p>학기</p>
-                <select name="year_select" id="year_select" onchange="move_page()">
-                    <?php
-                    for($i=2018; $i<2030; $i++) {
-                        echo "<option value='$i'>$i"."년"."</option>";
-                    }
-                    ?>
-                </select>
-				<input type="hidden" name="d_yoie" id="d_yoie">
-                <select name="quarter_select" id="quarter_select" onchange="move_page()">
-                    <option value="1">1분기</option>
-                    <option value="2">2분기</option>
-                    <option value="3">3분기</option>
-                    <option value="4">4분기</option>
-                </select>
-            </div>
-            <div class="grade_select_box select_table content">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>수업 목록</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    for($i=0; $i<count($d_name); $i++) {
+        <div class="wrapper">
+            <div class="left_box">
+                <p class="box_title">출제 대상 선택</p>
+                <div class="box_menu_wrap">
+                    <p>학기</p>
+                    <select name="year_select" id="year_select" onchange="move_page()">
+                        <?php
+                        for($i=2018; $i<2030; $i++) {
+                            echo "<option value='$i'>$i"."년"."</option>";
+                        }
                         ?>
+                    </select>
+                    <input type="hidden" name="d_yoie" id="d_yoie">
+                    <select name="quarter_select" id="quarter_select" onchange="move_page()">
+                        <option value="1">1분기</option>
+                        <option value="2">2분기</option>
+                        <option value="3">3분기</option>
+                        <option value="4">4분기</option>
+                    </select>
+                </div>
+                <div class="grade_select_box select_table content">
+                    <table>
+                        <thead>
                         <tr>
-                            <td onclick="lecture('<?=$d_name    [$i]?>')"><span><?=$d_name[$i]?></span></td>
+                            <th>수업 목록</th>
                         </tr>
-                        <?
-                    }
-                    ?>
-                    </tbody>
-                </table>
-            </div>
-            <div class="class_select_box select_table">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>반 이름</th>
-                        <th>담임 교사</th>
-                    </tr>
-                    </thead>
-                    <tbody id="class_name">
+                        </thead>
+                        <tbody>
+                        <?php
+                        for($i=0; $i<count($d_name); $i++) {
+                            ?>
+                            <tr>
+                                <td onclick="lecture('<?=$d_name    [$i]?>')"><span><?=$d_name[$i]?></span></td>
+                            </tr>
+                            <?
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="class_select_box select_table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>반 이름</th>
+                            <th>담임 교사</th>
+                        </tr>
+                        </thead>
+                        <tbody id="class_name">
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="student_list_box select_table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>학생 목록</th>
+                        </tr>
+                        </thead>
+                        <tbody id="students">
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="student_list_box select_table">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>학생 목록</th>
-                    </tr>
-                    </thead>
-                    <tbody id="students">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="right_wrap">
+            <div class="right_wrap">
                 <div class="right_box">
                     <div class="right_box_1">
                         <p class="box_title">숙제 정보 입력</p>
@@ -169,10 +169,10 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                             <p class="l_text">숙제명</p>
                             <input type="text" placeholder="숙제명을 입력해주세요" name ="name" id="name">
                             <input type="hidden" name="class_name" id="class_name1">
-							<input type="hidden" name="corner_no" id="corner_no" value="corner1">
-							<input type="hidden" name="d_id" id="d_id">
-							<input type="hidden" name="c_id" id="c_id">
-							<input type="hidden" name="s_id" id="s_id">
+                            <input type="hidden" name="corner_no" id="corner_no" value="corner1">
+                            <input type="hidden" name="d_id" id="d_id">
+                            <input type="hidden" name="c_id" id="c_id">
+                            <input type="hidden" name="s_id" id="s_id">
                         </div>
                         <div class="homework_deadline_wrap">
                             <div class="date_range">
@@ -201,112 +201,112 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                                         <th>문항번호</th>
                                     </tr>
                                     </thead>
-                                        <tr>
-                                            <td><select name="textbook" id="textbook" onchange="chk_type()">
-                                                    <option value="알파">알파</option>
-                                                    <option value="베타">베타</option>
-                                                </select></td>
-                                            <td><select name="grade" id="grade" onchange="book_info()">
-                                                    <option value="초3">초3</option>
-                                                    <option value="초4">초4</option>
-                                                    <option value="초5">초5</option>
-                                                    <option value="초6">초6</option>
-                                                    <option value="중1">중1</option>
-                                                    <option value="중2">중2</option>
-                                                    <option value="중3">중3</option>
-                                                </select></td>
-                                            <td><select name="semester" id="semester" onchange="book_info()">
-                                                    <option value="1학기">1학기</option>
-                                                    <option value="2학기">2학기</option>
-                                                </select></td>
-                                            <td><select name="level" id="level" onchange="chk_type()">
-                                                    <option value="루트">루트</option>
-                                                    <option value="파이">파이</option>
-                                                    <option value="시그마">시그마</option>
-                                                </select></td>
-                                            <td>
-                                                <select name="unit" id="unit" onchange="chk_type()">
+                                    <tr>
+                                        <td><select name="textbook" id="textbook" onchange="chk_type()">
+                                                <option value="알파">알파</option>
+                                                <option value="베타">베타</option>
+                                            </select></td>
+                                        <td><select name="grade" id="grade" onchange="book_info()">
+                                                <option value="초3">초3</option>
+                                                <option value="초4">초4</option>
+                                                <option value="초5">초5</option>
+                                                <option value="초6">초6</option>
+                                                <option value="중1">중1</option>
+                                                <option value="중2">중2</option>
+                                                <option value="중3">중3</option>
+                                            </select></td>
+                                        <td><select name="semester" id="semester" onchange="book_info()">
+                                                <option value="1학기">1학기</option>
+                                                <option value="2학기">2학기</option>
+                                            </select></td>
+                                        <td><select name="level" id="level" onchange="chk_type()">
+                                                <option value="루트">루트</option>
+                                                <option value="파이">파이</option>
+                                                <option value="시그마">시그마</option>
+                                            </select></td>
+                                        <td>
+                                            <select name="unit" id="unit" onchange="chk_type()">
 
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select name="corner1" id="corner1" class="corner" onclick="cornerSel('1');" data-key="1">
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="corner1" id="corner1" class="corner" onclick="cornerSel('1');" data-key="1">
 
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select name="Q_number1[]" id="Q_number1" class="custumdropdown1" id="custumdropdown1" custumdrop="question" multiple="multiple">
-                                                    <?php
-                                                    for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
-                                                    ?>
-                                                </select>
-                                                <script src="js/homework_manegement_add.js?v=201904051"></script>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="Q_number1[]" id="Q_number1" class="custumdropdown1" id="custumdropdown1" custumdrop="question" multiple="multiple">
+                                                <?php
+                                                for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
+                                                ?>
+                                            </select>
+                                            <script src="js/homework_manegement_add.js?v=201904051"></script>
 
-                                                <script>
-                                                    $(function() {
-														$('[id^=Q_number]').empty();
-                                                        //$('.custumdropdown').homework_manegement_add();
+                                            <script>
+                                                $(function() {
+                                                    $('[id^=Q_number]').empty();
+                                                    //$('.custumdropdown').homework_manegement_add();
 
-                                                    });
-                                                </script>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td><td></td><td></td><td></td><td></td>
-                                            <td>
-                                                <select name="corner2" id="corner2" class="corner" onclick="cornerSel('2');" data-key="2">
+                                                });
+                                            </script>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td><td></td><td></td><td></td><td></td>
+                                        <td>
+                                            <select name="corner2" id="corner2" class="corner" onclick="cornerSel('2');" data-key="2">
 
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select name="Q_number2[]" id="Q_number2" class="custumdropdown2" id="custumdropdown2" custumdrop="question" multiple="multiple">
-                                                    <?php
-                                                    for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
-                                                    ?>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td><td></td><td></td><td></td><td></td>
-                                            <td>
-                                                <select name="corner3" id="corner3" class="corner" onclick="cornerSel('3');" data-key="3">
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="Q_number2[]" id="Q_number2" class="custumdropdown2" id="custumdropdown2" custumdrop="question" multiple="multiple">
+                                                <?php
+                                                for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
+                                                ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td><td></td><td></td><td></td><td></td>
+                                        <td>
+                                            <select name="corner3" id="corner3" class="corner" onclick="cornerSel('3');" data-key="3">
 
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select name="Q_number3[]" id="Q_number3" class="custumdropdown3" id="custumdropdown3" custumdrop="question" multiple="multiple">
-                                                    <?php
-                                                    for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
-                                                    ?>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td><td></td><td></td><td></td><td></td>
-                                            <td>
-                                                <select name="corner4" id="corner4" class="corner" onclick="cornerSel('4');" data-key="4">
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="Q_number3[]" id="Q_number3" class="custumdropdown3" id="custumdropdown3" custumdrop="question" multiple="multiple">
+                                                <?php
+                                                for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
+                                                ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td><td></td><td></td><td></td><td></td>
+                                        <td>
+                                            <select name="corner4" id="corner4" class="corner" onclick="cornerSel('4');" data-key="4">
 
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select name="Q_number4[]" id="Q_number4" class="custumdropdown4" id="custumdropdown4" custumdrop="question" multiple="multiple">
-                                                    <?php
-                                                    for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
-                                                    ?>
-                                                </select>
-                                            </td>
-                                        </tr>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="Q_number4[]" id="Q_number4" class="custumdropdown4" id="custumdropdown4" custumdrop="question" multiple="multiple">
+                                                <?php
+                                                for($i=1; $i<=30; $i++) echo "<option class='checkbox' value='$i'>$i</option>";
+                                                ?>
+                                            </select>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
-            <div class="add_btn_wrap">
-                <div class="add_btn" onclick="submit();"><a>등록</a></div>
-            </div>
-        </div> <!-- end <div class="right_wrap"> -->
+    </form>
+    <div class="add_btn_wrap">
+        <div class="add_btn" onclick="submit();" style="cursor: pointer;"><a>등록</a></div>
+    </div>
+    </div> <!-- end <div class="right_wrap"> -->
     </div> <!-- end <div class="wrapper"> -->
 </section>
 <script>
@@ -341,39 +341,39 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 
         $('.corner').change(function () {
 
-		  if($(this).val() != '선택'){
+            if($(this).val() != '선택'){
 
-			 var params = $("#all").serialize();
-             var no = $(this).data("key");
-			 var n = no -1;
-			 $("#corner_no").val($(this).val());
-             // alert(no);
-              //alert(n);
-			 //alert($("#corner_no").val());
-			 $.ajax({
-				type: "POST",
-				url: "call_corner_content.php?no="+no+"&val="+$(this).val(),
-				data:params,
-				dataType: "json",
-				success: function(response){
-				   // console.log(response.str2);
-				   //if(response) console.log(response.str1);
-                   //$('.identifier').eq(n).html('선택');
-                   //$("input:checkbox[name='allChk']").eq(n).prop("checked", false);
+                var params = $("#all").serialize();
+                var no = $(this).data("key");
+                var n = no -1;
+                $("#corner_no").val($(this).val());
+                // alert(no);
+                //alert(n);
+                //alert($("#corner_no").val());
+                $.ajax({
+                    type: "POST",
+                    url: "call_corner_content.php?no="+no+"&val="+$(this).val(),
+                    data:params,
+                    dataType: "json",
+                    success: function(response){
+                        // console.log(response.str2);
+                        //if(response) console.log(response.str1);
+                        //$('.identifier').eq(n).html('선택');
+                        //$("input:checkbox[name='allChk']").eq(n).prop("checked", false);
 
-                    if(!response.str1) alert('해당코너의 항목이 없습니다.');
+                        if(!response.str1) alert('해당코너의 항목이 없습니다.');
 
-                   $("#Q_number"+no).parent().parent().find('.identifier').html('선택');
-                   $("#Q_number"+no).parent().parent().find("input:checkbox[name='allChk']").prop("checked", false);
+                        $("#Q_number"+no).parent().parent().find('.identifier').html('선택');
+                        $("#Q_number"+no).parent().parent().find("input:checkbox[name='allChk']").prop("checked", false);
 
-				   //$('.combobox:eq('+n+')').html(response.str1);
-			       $("#Q_number"+no).parent().parent().find('.combobox').html(response.str1);
-				   $("#Q_number"+no).append(response.str2);
-				   $('.custumdropdown'+no).homework_manegement_add();
+                        //$('.combobox:eq('+n+')').html(response.str1);
+                        $("#Q_number"+no).parent().parent().find('.combobox').html(response.str1);
+                        $("#Q_number"+no).append(response.str2);
+                        $('.custumdropdown'+no).homework_manegement_add();
 
-				}
-			 });
-		  }
+                    }
+                });
+            }
 
 
         });
@@ -382,7 +382,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         select_year();
         book_info();
         chk_type();
-       // $('.allChk').click();
+        // $('.allChk').click();
         //$('.allChk').prop('checked', true);
     })
     function submit() {
@@ -424,7 +424,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
     }
 
     // function lecture() {
-	// 	$("#d_yoie").val(d);
+    // 	$("#d_yoie").val(d);
     //     $.ajax({
     //         type: "GET",
     //         url: "call_student_homework.php?d_uid="+a+"&c_uid="+b,
@@ -434,9 +434,9 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
     //             $("#class_name").val(c);
     //         }
     //     });
-	// 			$("#d_id").val(a);
-	// 			$("#c_id").val(b);
-	// 			$("#s_id").val(e);
+    // 			$("#d_id").val(a);
+    // 			$("#c_id").val(b);
+    // 			$("#s_id").val(e);
     // }
     function lecture(e) {
         $.ajax({
@@ -573,32 +573,32 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 
     function cornerSel(no){
 
-	 /* if($("#corner"+no).val() != '선택'){
-		 var n = no - 1;
-         var params = $("#all").serialize();
+        /* if($("#corner"+no).val() != '선택'){
+            var n = no - 1;
+            var params = $("#all").serialize();
 
-		 $("#corner_no").val("corner"+no);
-		 //alert($("#corner_no").val());
-         $.ajax({
-            type: "POST",
-            url: "call_corner_content.php",
-			data:params,
-            dataType: "json",
-            success: function(response){
-              // console.log(response);
-			  if(response) console.log(response.str1);
-			  alert(response.str2);
-			  //$("#Q_number"+no).empty();
-			  //$('.combobox').children().empty();
-			  //$('.combobox').eq(n).html(response.str1);
-			  
-			 // $('.combobox:eq('+n+')').html(response.str1);
-			 $("#Q_number"+no).append(response.str2);			  
-			  $('.custumdropdown'+no).homework_manegement_add(response.str1);
-            }
-         });
-	  }*/
-	}
+            $("#corner_no").val("corner"+no);
+            //alert($("#corner_no").val());
+            $.ajax({
+               type: "POST",
+               url: "call_corner_content.php",
+               data:params,
+               dataType: "json",
+               success: function(response){
+                 // console.log(response);
+                 if(response) console.log(response.str1);
+                 alert(response.str2);
+                 //$("#Q_number"+no).empty();
+                 //$('.combobox').children().empty();
+                 //$('.combobox').eq(n).html(response.str1);
+
+                // $('.combobox:eq('+n+')').html(response.str1);
+                $("#Q_number"+no).append(response.str2);
+                 $('.custumdropdown'+no).homework_manegement_add(response.str1);
+               }
+            });
+         }*/
+    }
 
 
     $(window).bind('beforeunload', function () {
