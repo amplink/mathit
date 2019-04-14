@@ -94,7 +94,7 @@ while($res = mysqli_fetch_array($result)) {
                         ?>
                     </select></td>
                 <td>
-                    <select name="unit" id="unit<?=$i?>" onchange="chk_type(<?=$i?>)">
+                    <select name="unit" id="unit<?=$i?>" onclick="chk_type(<?=$i?>)">
                         <?
                         $semester = $semester_arr[$res['semester']];
                         $grade = $grade_arr[$res['grade']];
@@ -112,7 +112,7 @@ while($res = mysqli_fetch_array($result)) {
                     </select>
                 </td>
                 <td>
-                    <select name="corner1" id="corner1<?=$i?>" onclick="chk_type(<?=$i?>)" data-key="<?=$i?>" data-num="1" class="corner">
+                    <select name="corner1" id="corner1<?=$i?>" data-key="<?=$i?>" data-num="1" class="corner">
                         <option value="<?=$res['corner1']?>"><?=$res['corner1']?></option>
                     </select>
                 </td>
@@ -158,7 +158,7 @@ while($res = mysqli_fetch_array($result)) {
                     </select>
                 </td>
                 <td>
-                    <select name="corner2" id="corner2<?=$i?>" onclick="chk_type(<?=$i?>)" data-key="<?=$i?>" data-num="2" class="corner">
+                    <select name="corner2" id="corner2<?=$i?>" data-key="<?=$i?>" data-num="2" class="corner">
                         <option value="<?=$res['corner2']?>"><?=$res['corner2']?></option>
                     </select>
                 </td>
@@ -196,7 +196,7 @@ while($res = mysqli_fetch_array($result)) {
                 </td>
 
                 <td>
-                    <select name="corner3" id="corner3<?=$i?>"  onclick="chk_type(<?=$i?>)" data-key="<?=$i?>" data-num="3" class="corner">
+                    <select name="corner3" id="corner3<?=$i?>" data-key="<?=$i?>" data-num="3" class="corner">
                         <option value="<?=$res['corner3']?>"><?=$res['corner3']?></option>
                     </select>
                 </td>
@@ -234,7 +234,7 @@ while($res = mysqli_fetch_array($result)) {
                 </td>
 
                 <td>
-                    <select name="corner4" id="corner4<?=$i?>"  onclick="chk_type(<?=$i?>)" data-key="<?=$i?>" data-num="4" class="corner">
+                    <select name="corner4" id="corner4<?=$i?>" data-key="<?=$i?>" data-num="4" class="corner">
                         <option value="<?=$res['corner4']?>"><?=$res['corner4']?></option>
                     </select>
                 </td>
@@ -284,7 +284,7 @@ while($res = mysqli_fetch_array($result)) {
                 </td>
                 <td>
                     <?php
-                    if($sd < 0 && $ed > 0) {
+                    if($sd <= 0 && $ed >= 0) {
                         ?>
                         <p class="ing_text" id="status_complete<?=$i?>" style="color: blue;cursor: pointer;" onclick="show_box(<?=$i?>)">진행중</p>
                         <div class="students_checks<?=$i?>" style="background:rgb(255, 228, 73);
@@ -305,37 +305,14 @@ while($res = mysqli_fetch_array($result)) {
                                 <?php
                             }
                             ?>
-                            <!--                            <div class="checks_names_wrap">-->
-                            <!--                                <div class="checks_names" style="float:left;display:block;">고이즈미</div>-->
-                            <!--                                <div class="checks_names_values" ><span id="chkNameVal1" class="checkNames_span green_color_on">완료</span></div>-->
-                            <!--                            </div>-->
-                            <!--                            <div class="checks_names_wrap">-->
-                            <!--                                <div class="checks_names" style="float:left;display:block;">킹목사</div>-->
-                            <!--                                <div class="checks_names_values" ><span id="chkNameVal2" class="checkNames_span orange_color_on">1차</span></div>-->
-                            <!--                            </div>-->
-                            <!--                            <div class="checks_names_wrap">-->
-                            <!--                                <div class="checks_names" style="float:left;display:block;">조지부시</div>-->
-                            <!--                                <div class="checks_names_values" ><span id="chkNameVal3" class="checkNames_span red_color_on">2차</span></div>-->
-                            <!--                            </div>-->
-                            <!--                            <div class="checks_names_wrap">-->
-                            <!--                                <div class="checks_names" style="float:left;display:block;">홍길동</div>-->
-                            <!--                                <div class="checks_names_values" ><span id="chkNameVal4" class="checkNames_span green_color_on">완료</span></div>-->
-                            <!--                            </div>-->
                         </div>
                         <?php
 
                     }else if($sd > 0 && $ed > 0) {
-                        echo '<div class="resend_btn" onclick="resend('.$i.')"><a>재전송</a></div>';
+                        echo '<div class="resend_btn" onclick="resend('.$i.')" style="cursor: pointer;"><a>재전송</a></div>';
                     }else if($sd < 0 && $ed < 0) {
                         echo '<p class="complete_text">완료</p>';
                     }
-                    //            if($sd < 0) {
-                    //                if($res['checked']==0) {
-                    //                    echo '<p class="ing_text" style=" color: blue;">진행중</p>';
-                    //                }else echo '<p class="complete_text">완료</p>';
-                    //            }else {
-                    //                echo '<div class="resend_btn"><a>재전송</a></div>';
-                    //            }
                     ?>
                 </td>
             </table>
@@ -483,10 +460,12 @@ while($res = mysqli_fetch_array($result)) {
 
         if(textbook == "알파" && (level == "루트" || level == "파이")) {
             if(book == "총정리(1)" || book == "총정리(2)") {
-                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="개념마스터">개념마스터</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option>선택</option>' +
+                    '<option value="개념마스터">개념마스터</option>' +
                     '<option value="개념확인">개념확인</option>');
             }else {
-                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="개념마스터">개념마스터</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option>선택</option>' +
+                    '<option value="개념마스터">개념마스터</option>' +
                     '                                                    <option value="개념확인">개념확인</option>' +
                     '                                                    <option value="서술과코칭">서술과코칭</option>' +
                     '                                                    <option value="이야기수학">이야기수학</option>');
@@ -494,36 +473,44 @@ while($res = mysqli_fetch_array($result)) {
         }
         if(textbook == "알파" && level == "시그마") {
             if(book == "총정리(1)" || book == "총정리(2)") {
-                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="유형마스터">유형마스터</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option>선택</option>' +
+                    '<option value="유형마스터">유형마스터</option>' +
                     '<option value="유형확인">유형확인</option>');
             }
-            for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="유형마스터">유형마스터</option>' +
+            for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option>선택</option>' +
+                '<option value="유형마스터">유형마스터</option>' +
                 '<option value="유형확인">유형확인</option>' +
                 '<option value="서술과코칭">서술과코칭</option>' +
                 '<option value="이야기수학">이야기수학</option>');
         }
         if(textbook == "베타" && (level == "루트" || level == "파이")) {
             if(book == "중간평가") {
-                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="중간평가1회">중간평가1회</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option>선택</option>' +
+                    '<option value="중간평가1회">중간평가1회</option>' +
                     '<option value="중간평가2회">중간평가2회</option>');
             }else if(book == "기말평가"){
-                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="기말평가1회">기말평가1회</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option>선택</option>' +
+                    '<option value="기말평가1회">기말평가1회</option>' +
                     '<option value="기말평가2회">기말평가2회</option>');
             }else {
-                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="개념다지기">개념다지기</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option>선택</option>' +
+                    '<option value="개념다지기">개념다지기</option>' +
                     '<option value="단원마무리">단원마무리</option>' +
                     '<option value="도전문제">도전문제</option>');
             }
         }
         if(textbook == "베타" && level == "시그마") {
             if(book == "중간평가") {
-                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="중간평가1회">중간평가1회</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option>선택</option>' +
+                    '<option value="중간평가1회">중간평가1회</option>' +
                     '<option value="중간평가2회">중간평가2회</option>');
             }else if(book == "기말평가"){
-                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="기말평가1회">기말평가1회</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option>선택</option>' +
+                    '<option value="기말평가1회">기말평가1회</option>' +
                     '<option value="기말평가2회">기말평가2회</option>');
             }else {
-                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option value="실력확인">실력확인</option>' +
+                for(var i=1; i<=4; i++) $('#corner'+i+e).html('<option>선택</option>' +
+                    '<option value="실력확인">실력확인</option>' +
                     '<option value="단원마무리">단원마무리</option>' +
                     '<option value="도전문제">도전문제</option>');
             }

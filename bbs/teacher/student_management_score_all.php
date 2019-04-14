@@ -53,7 +53,7 @@ include_once ('head.php');
 	$sql = "SELECT 
 	           A.*,
 			   B._from, B._to, B.name, B.grade, B.semester, B.unit,
-			   B.Q_number1, B.Q_number2, B.Q_number3 
+			   B.Q_number1, B.Q_number2, B.Q_number3, B.d_order
 			FROM 
 	          `homework_assign_list` A 
 			INNER JOIN 
@@ -66,9 +66,15 @@ include_once ('head.php');
 
 	$result = mysqli_query($connect_db, $sql);
 	while($res = mysqli_fetch_array($result)) {
+//	    $d_uid = $res['d_uid'];
+//	    $c_uid = $res['c_uid'];
+//	    $s_uid = $res['s_uid'];
+//	    $ssql = "select * from `homework` where `d_uid`='$d_uid' and `c_uid`='$c_uid' and `s_uid`='$s_uid';";
+//	    $rresult = sql_query($ssql);
+//	    $rr = mysqli_fetch_array($rresult);
 ?>
 			<tr>
-				<td><span><?=$res['class_name']?></span></td>
+				<td><span><?=$res['class_name']?>(<?=$res['d_order']?>)</span></td>
 				<td><span><?=$res['student_name']?></span></td>
 				<td><span><?=$res['name']?></span><br><?=$res['grade']."-".$res['semester']."-".$res['unit']?></td>
 				<td><span><?=substr($res['_from'],6,4)?>-<?=substr($res['_from'],0,2)?>-<?=substr($res['_from'],3,2)?> ~ <?=substr($res['_to'],6,4)?>-<?=substr($res['_to'],0,2)?>-<?=substr($res['_to'],3,2)?></span></td>

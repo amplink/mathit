@@ -214,7 +214,12 @@
         <div class="member_img"><a href="setting_individual.php"><img src="img/user.png" alt="member_img"></a></div>
         <div class="member_info">
             <a href="setting_individual.php"><p class="member_name"><?=$_SESSION['t_name']?></p></a>
-            <a href="setting_individual.php"><p class="member_grade"><?=$res['type']?></p></a>
+            <a href="setting_individual.php"><p class="member_grade">
+                    <?php
+                    if($_SESSION['admin']) echo "관리자";
+                    else echo $res['type'];
+                    ?>
+                </p></a>
         </div>
         <div class="logout_btn"><a href="./logout.php">로그아웃</a></div>
     </div>
@@ -229,7 +234,12 @@
             <div class="ham_member_img"><a href="setting_individual.php"><img src="img/user.png" alt="member_img"></a></div>
             <div class="ham_member_info">
                 <a href="setting_individual.php"><p class="ham_member_name"><?=$_SESSION['t_name']?></p></a>
-                <a href="setting_individual.php"><p class="ham_member_grade"><?=$res['type']?></p></a>
+                <a href="setting_individual.php"><p class="ham_member_grade">
+                        <?php
+                        if($_SESSION['admin']) echo "관리자";
+                        else echo $res['type'];
+                        ?>
+                    </p></a>
             </div>
         </div>
         <div class="ham_other_btn_line">

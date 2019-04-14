@@ -36,7 +36,7 @@ include_once ('head.php');
         </div>
     </div>
     <div class="wrapper">
-        <div class="left_box" style="overflow: scroll;">
+        <div class="left_box" style="overflow: scroll; height: 633px;">
             <p class="box_title">출제 대상 선택</p>
             <div class="box_menu_wrap">
                 <p>학기</p>
@@ -114,7 +114,7 @@ include_once ('head.php');
             </div>
         </div>
         <div class="right_wrap">
-            <div class="right_box">
+            <div class="right_box" style="height: 660px;">
                 <div class="right_box_1">
                     <div class="r_left_box">
                         <div class="division">
@@ -160,13 +160,13 @@ include_once ('head.php');
                     </div>
                 </div>
                 <div class="right_box_2">
-                    <div class="student_each_score_table" id="student_list">
+                    <div class="student_each_score_table" id="student_list" style="height: 420px;">
                     </div>
                 </div>
             </div>
             <div class="add_btn_wrap">
                 <div class="l_btn_wrap">
-                    <div class="sms_btn"><a href="#none">SMS발송</a></div>
+<!--                    <div class="sms_btn"><a href="#none">SMS발송</a></div>-->
                     <div class="print_btn"><a href="#none">출력</a></div>
                 </div>
                 <div class="r_btn_wrap">
