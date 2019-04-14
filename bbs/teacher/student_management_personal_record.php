@@ -67,8 +67,8 @@ $result = mysqli_query($connect_db, $sql);
             <?php
                 $cnt = 1;
                 while($res = mysqli_fetch_array($result)) {
-                    if($res['test_genre'] == '분기테스트')  $type= "quarter";
-                    else                                    $type= "mid";
+                    if($res['test_genre'] == '분기테스트' or $res['test_genre'] == '입반테스트')  $type= "quarter";
+                    else                                                                          $type= "mid";
             ?>
                 <tr>
                     <td><?=$cnt?></td>

@@ -30,7 +30,7 @@ $today_date = date("Y-m-d");
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
-                <p class="left_text">분기성적표</p>
+                <p class="left_text"><?=$res['test_genre']?></p>
                 <p class="quarter_date">
                     <span><?=$res['year']?></span>
                     <span>년도 </span>
@@ -120,19 +120,38 @@ $today_date = date("Y-m-d");
                                 <span><?=$res['sub_score1']+$res['sub_score2']+$res['sub_score3']?>점</span>
                             </td>
                         </tr>
+                        <?php
+                        $sql2 = "SELECT 
+                                  SUM(score1) / COUNT(seq) avg1,
+                                  SUM(score2) / COUNT(seq) avg2,
+                                  SUM(score3) / COUNT(seq) avg3
+                                FROM
+                                  `teacher_score`
+                                WHERE 
+                                    grade = '$res[grade]'
+                                    AND d_uid='$res[d_uid]'
+                                    AND c_uid='$res[c_uid]'
+                                    AND s_uid='$res[s_uid]'
+                                    AND d_order='$res[d_order]'
+                                    AND test_genre='$res[test_genre]'
+                                    AND client_id='$ac'
+			                     ";
+                        $result2 = mysqli_query($connect_db, $sql2);
+                        $res2 = mysqli_fetch_array($result2);
+                        ?>
                         <tr>
                             <td>학년 평균</td>
                             <td>
-                                <span>35점</span>
+                                <span><?=round($res2[avg1])?>점</span>
                             </td>
                             <td>
-                                <span>35점</span>
+                                <span><?=round($res2[avg2])?>점</span>
                             </td>
                             <td>
-                                <span>35점</span>
+                                <span><?=round($res2[avg3])?>점</span>
                             </td>
                             <td>
-                                <span>35점</span>
+                                <span><?=round($res2[avg1])+round($res2[avg2])+round($res2[avg3])?>점</span>
                             </td>
                         </tr>
                         </tbody>

@@ -125,13 +125,14 @@ $today_date = date("Y-m-d");
 			AND A.s_uid='$res[s_uid]'
 			AND B.student_id='$res[student_id]'
 			AND A.client_id='$ac'
-			-- AND match(A.student_id) against('*$res[student_id]*' in boolean mode) 
+		
 			 ) C
 			";
 	//ECHO $sql2;
 	$result2 = mysqli_query($connect_db, $sql2);
     $res2 = mysqli_fetch_array($result2);
-	$h_avg = floor(($res2['N2'] / $res2['N1'])*100);
+    if($res2['N1'] > 0) $h_avg = floor(($res2['N2'] / $res2['N1'])*100);
+    else                $h_avg = 0 ;
 ?>
 
                     <div class="s_info_div">

@@ -209,7 +209,7 @@ include_once ('head.php');
 
                                     <?php
                                     for($i=1; $i<=$tot; $i++) {
-                                        if($res['corner'.$i] == '선택') continue;
+                                        if($res['corner'.$i] == '선택' or $res['wrong_anwer_2'] =="") continue;
 
                                         $chk_wrong_answer = explode(",", $wrong2[$i]);
                                         echo " <br><br><b>".$i.". ".$res['corner'.$i]."</b><br><br>";
