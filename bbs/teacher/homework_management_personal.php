@@ -366,7 +366,7 @@ foreach ($wrong1 as $key => $v) {
 $j = 1;
 foreach ($wrong2 as $key => $v) {
     if($wrong2[$j]){
-        echo "<b>(".$res2['corner'.$j].")</b><br> ".$wrong2[$j]."<br>";
+        echo "<b>(".$res2['corner'.$j].")</b><br> ".$wrong2[$j]."<br><br>";
     }
     $j++;
 }
