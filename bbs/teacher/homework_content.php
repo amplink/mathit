@@ -270,7 +270,21 @@ while($res = mysqli_fetch_array($result)) {
                 </td>
                 <td>
                     <?php
-                    if($sd <= 0 && $ed > 0) {
+
+                    $sql5 = "SELECT 
+							  count(id) tot
+							FROM 
+							 `homework_assign_list`
+							WHERE
+							 h_id = '$res[seq]'
+							AND
+							 current_status IN('','a1','a2','s1')
+					  ";
+                    $result5 = mysqli_query($connect_db, $sql5);
+                    $res5 = mysqli_fetch_array($result5);
+
+                    $today = date("m/d/Y");
+                    if($res['_from'] <= $today && $res['_to'] >= $today && $res5[tot] > 0) {
                         ?>
                         <p class="ing_text" id="status_complete<?=$i?>" style="color: blue;cursor: pointer;" onclick="show_box(<?=$i?>)">진행중</p>
                         <div class="students_checks<?=$i?>" style="background:rgb(255, 228, 73);
@@ -281,12 +295,27 @@ while($res = mysqli_fetch_array($result)) {
                             </div>
                             <?php
                             $students = $res['student'];
+                            $students_id = $res['student_id'];
                             $students = explode(',', $students);
+                            $students_id = explode(',', $students_id);
                             for($k=0; $k<count($students); $k++) {
+                                $sql6 = "SELECT 
+							               current_status
+                                         FROM 
+                                          `homework_assign_list`
+                                         WHERE
+                                           h_id = '$res[seq]'
+                                         AND
+                                           student_id = '$students_id[$k]'
+                                  ";
+                                $result6 = mysqli_query($connect_db, $sql6);
+                                $res6 = mysqli_fetch_array($result6);
+                                $status = ($res6['current_status'] == 's2' or $res6['current_status'] == 's3' )?"green|완료":"red|미완료";
+                                $status = explode("|",$status);
                                 ?>
                                 <div class="checks_names_wrap">
                                     <div class="checks_names" style="float:left;display:block;"><?=$students[$k]?></div>
-                                    <div class="checks_names_values" ><span id="chkNameVal1" class="checkNames_span red_color_on">미완료</span></div>
+                                    <div class="checks_names_values" ><span id="chkNameVal1" class="checkNames_span <?=$status[0]?>_color_on"><?=$status[1]?></span></div>
                                 </div>
                                 <?php
                             }
@@ -310,9 +339,10 @@ while($res = mysqli_fetch_array($result)) {
                         </div>
                         <?php
 
-                    }else if($sd > 0 && $ed > 0) {
+                    }else if($res['_from'] > $today) {
                         echo '<div class="resend_btn" onclick="resend('.$i.')" style="cursor:pointer"><a>재전송</a></div>';
-                    }else if($sd < 0 && $ed < 0) {
+                        //}else if($sd < 0 && $ed < 0 && $res5[tot] == 0) {
+                    }else if($res5[tot] == 0) {
                         echo '<p class="complete_text">완료</p>';
                     }
                     //            if($sd < 0) {
@@ -388,42 +418,6 @@ while($res = mysqli_fetch_array($result)) {
 
 
 
-
-        $('.corner').click(function () {
-            var idx = $(this).data("num");
-            if($(this).val() != '선택'){
-                var no = $(this).data("key");
-                var params = $("#resend_form"+no).serialize();
-
-                var n = no -1;
-                $("#corner_no").val($(this).val());
-
-                //alert($("#corner_no").val());
-                $.ajax({
-                    type: "POST",
-                    url: "call_corner_content.php?no="+no+"&val="+$(this).val(),
-                    data:params,
-                    dataType: "json",
-                    success: function(response){
-                        console.log(response.str1);
-
-                        //$('.custumdropdown').eq(0).empty();
-                        //$('.combobox').eq(0).html("");
-
-                        $("#Q_number"+idx+"_"+no).parent().parent().find('.identifier').html('선택');
-                        $("#Q_number"+idx+"_"+no).parent().parent().find("input:checkbox[name='allChk']").prop("checked", false);
-                        $("#Q_number"+idx+"_"+no).parent().parent().find('.combobox').html(response.str1);
-                        $("#Q_number"+idx+"_"+no).append(response.str2);
-
-
-                        //$("#Q_number"+no).append(response.str2);
-                        $('.custumdropdown').eq(0).homework_manegement_add();
-                    }
-                });
-            }
-
-
-        });
 
         $('.corner').change(function () {
             var idx = $(this).data("num");
