@@ -74,7 +74,7 @@ include_once ('head.php');
 
     $sql = "SELECT 
 	           textbook, grade, semester, level, unit, corner1,
-			   Q_number1, corner2, Q_number2,corner3, Q_number3
+			   Q_number1, corner2, Q_number2, corner3, Q_number3, corner4, Q_number4
 			FROM 
 	          `homework`  
 	        WHERE 
@@ -83,7 +83,7 @@ include_once ('head.php');
     $result2 = mysqli_query($connect_db, $sql);
     $res2 = mysqli_fetch_array($result2);
 
-    for($i=1,$tot=0; $i<5; $i++){
+    for($i=1; $i<5; $i++){
         if($res2['Q_number'.$i]) {
             $corner_arr[$i] =  $res2['corner'.$i];
             $Q_number_arr[$i] =  $res2['Q_number'.$i];
@@ -91,6 +91,7 @@ include_once ('head.php');
     }
 
     $tot = count($corner_arr);
+
     ?>
 
     <div class="head_section">
@@ -189,7 +190,7 @@ include_once ('head.php');
 				   AND unit = '".$res2[unit]."'
 				   AND level = '".$res2[level]."'
 				   -- AND c_name = '".$corner_arr[$corner]."'
-				ORDER BY c_name, item_number ASC";
+				ORDER BY c_name, seq ASC";
 
                     $wrongData =  json_decode($wrong_anwer,true);
                     //print_r($wrongData);
@@ -237,13 +238,13 @@ include_once ('head.php');
                 <div class="paper_input swiper-container">
                     <ul class="swiper-wrapper">
                         <li class="swiper-slide">
-                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/1.png"></div>
+                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/1.jpg"></div>
                         </li>
                         <li class="swiper-slide">
                             <div class="paper_img_input" style="overflow:auto;"><img src="./img/2.jpg"></div>
                         </li>
                         <li class="swiper-slide">
-                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/2.jpg"></div>
+                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/3.jpg"></div>
                         </li>
                     </ul>
                     <div class="swiper-pagination"></div>
@@ -304,7 +305,7 @@ include_once ('head.php');
         });
 
         if(chk == 0){
-            if(!confirm('채점결과 만점 입니다. \n완료 할까요?')) return false;
+            if(!confirm('채점결과 만점 입니다. \n완료 할까요?')) $("#scoreForm").submit();
         }
 
         $("#scoreForm").submit();

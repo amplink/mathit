@@ -131,11 +131,14 @@ $today_date = date("Y-m-d");
                         <div class="r_div_content">
                             <p>
                                 <span>출석율 : </span>
-                                <span>90%</span>
+                                <span>
+							<?
+                            echo (int)(round(($r[1][0]+$r[1][2] / $r[1][1]) * 100));
+                            ?>%</span>
                             </p>
 
                             <p>
-                                <span>(지각 : 1, 결석 : 1)</span>
+                                <span>(지각 : <? echo ($r[1][2])?$r[1][2]:"0"?>, 결석 : <? echo ($r[1][0])?$r[1][0]:"0"?>)</span>
                             </p>
                         </div>
                     </div>

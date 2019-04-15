@@ -188,12 +188,12 @@ while($res = mysqli_fetch_array($result)) {
                 <td>
                     <select name="corner2" id="corner2<?=$i?>" data-key="<?=$i?>" data-num="2" class="corner">
                         <?php
-                          foreach($corner_arr as $v){
-                              $sel = ($res['corner2'] == $v)?"selected":"";
-                        ?>
-                             <option value="<?=$v?>" <?=$sel?>><?=$v?></option>
-                        <?
-                          }
+                        foreach($corner_arr as $v){
+                            $sel = ($res['corner2'] == $v)?"selected":"";
+                            ?>
+                            <option value="<?=$v?>" <?=$sel?>><?=$v?></option>
+                            <?
+                        }
                         ?>
                     </select>
                 </td>
@@ -270,7 +270,7 @@ while($res = mysqli_fetch_array($result)) {
                 </td>
                 <td>
                     <?php
-                    if($sd < 0 && $ed > 0) {
+                    if($sd <= 0 && $ed > 0) {
                         ?>
                         <p class="ing_text" id="status_complete<?=$i?>" style="color: blue;cursor: pointer;" onclick="show_box(<?=$i?>)">진행중</p>
                         <div class="students_checks<?=$i?>" style="background:rgb(255, 228, 73);
@@ -311,7 +311,7 @@ while($res = mysqli_fetch_array($result)) {
                         <?php
 
                     }else if($sd > 0 && $ed > 0) {
-                        echo '<div class="resend_btn" onclick="resend('.$i.')"><a>재전송</a></div>';
+                        echo '<div class="resend_btn" onclick="resend('.$i.')" style="cursor:pointer"><a>재전송</a></div>';
                     }else if($sd < 0 && $ed < 0) {
                         echo '<p class="complete_text">완료</p>';
                     }

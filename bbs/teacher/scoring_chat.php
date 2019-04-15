@@ -112,7 +112,7 @@ $res = mysqli_fetch_array($result);
                             $j=1;
                             foreach ($wrong1 as $key => $v) {
                                 if($wrong1[$j]){
-                                    $str .= $res['corner'.$j]." : ".str_replace(",",", ",$wrong1[$j])."<br>";
+                                    $str .= "(".$res['corner'.$j].")<br> ".str_replace(",",", ",$wrong1[$j])."<br><br>";
                                     $wrong_tot1 += count(explode(",",$v));
                                 }
                                 $j++;
@@ -141,7 +141,7 @@ $res = mysqli_fetch_array($result);
                                            AND unit = '".$res[unit]."'
                                            AND level = '".$res[level]."'
                                           -- AND c_name = '".$corner_arr[$corner]."'
-                                        ORDER BY c_name, item_number ASC";
+                                        ORDER BY c_name, seq ASC";
                             $result2 = mysqli_query($connect_db, $sql2);
                             $group = array();
 
@@ -157,12 +157,12 @@ $res = mysqli_fetch_array($result);
                                 <div id="hide_wrong_answer1"  style="position:absolute;padding:10px;width:100%;background-color: #FFFFFF;z-index:999;display: none;">
                                     <div class="sub_close_btn" style="padding-right:15px;float:right"><img src="img/close.png" alt="close_icon"></a></div>
                                     <div style="text-align: center;font-size:17px"><b>-오답문항-</b></div>
-                                    <div style="text-align: left"><?=$str?></div>
+                                    <div style="text-align: left;overflow:auto"><?=$str?></div>
                                 </div>
                                 <div class="time">
-                                    <span><?=substr($res['submit_date1'],5,2)?>월</span>
-                                    <span><?=substr($res['submit_date1'],8,2)?>일</span>
-                                    <span><?=substr($res['submit_date1'],11,5)?></span>
+                                    <span><?=substr($res['marking_date1'],5,2)?>월</span>
+                                    <span><?=substr($res['marking_date1'],8,2)?>일</span>
+                                    <span><?=substr($res['marking_date1'],11,5)?></span>
                                 </div>
                                 <div class="r_speech_bubble">
                                     <p><?=$res['student_name']?> 학생의 채점 결과,<br>
@@ -172,7 +172,7 @@ $res = mysqli_fetch_array($result);
                                         <?php
                                         if($score1 == 100){
                                             ?>
-                                            만점입니다. 축하합니다.<br>
+                                            <font color='red'>만점입니다. 축하합니다.</font><br>
                                             <?
                                         }else{
                                             ?>
@@ -255,9 +255,9 @@ $res = mysqli_fetch_array($result);
                             <div class="blank"></div>
                             <div class="right_speech_wrap">
                                 <div class="time">
-                                    <span><?=substr($res['submit_date1'],5,2)?>월</span>
-                                    <span><?=substr($res['submit_date1'],8,2)?>일</span>
-                                    <span><?=substr($res['submit_date1'],11,5)?></span>
+                                    <span><?=substr($res['marking_date2'],5,2)?>월</span>
+                                    <span><?=substr($res['marking_date2'],8,2)?>일</span>
+                                    <span><?=substr($res['marking_date2'],11,5)?></span>
                                 </div>
                                 <div class="r_speech_bubble">
                                     <p><?=$res['student_name']?> 학생의 채점결과, 오답문항<br>
@@ -268,7 +268,7 @@ $res = mysqli_fetch_array($result);
                                         <?php
                                         if($wrong_tot1-($wrong_tot1-$wrong_tot2) == 0){
                                             ?>
-                                            만점입니다.<br>
+                                            <font color='red'>만점입니다.</font><br>
                                             <?
                                         }else{
                                             ?>
