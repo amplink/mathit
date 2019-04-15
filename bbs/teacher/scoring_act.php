@@ -20,7 +20,7 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
 
 
     $sql = "SELECT 
-			   wrong_anwer_1, wrong_anwer_2
+			   wrong_anwer_1, wrong_anwer_2, h_id, class_name
 			FROM 
 			  `homework_assign_list`  
 			WHERE 
@@ -74,9 +74,23 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
 
     }
 
-    $sql = "insert into `alarm` set `content`='새로운 공지가 등록되었습니다.', `table_name`='homework', `target`='학생', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-    sql_query($sql);
+    $sql3 = "SELECT 
+			  count(id) tot
+			FROM 
+			 `homework_assign_list`
+		    WHERE
+	         h_id = '$res[h_id]'
+			AND
+             current_status IN('','a1','a2','s1')
+	  ";
 
+    $result3 = mysqli_query($connect_db, $sql3);
+    $res3 = mysqli_fetch_array($result3);
+
+    if($res3[tot] == 0){
+        $sql = "insert into `alarm` set `content`='".$res[class_name]."반 숙제채점이 완료 되었습니다.', `table_name`='homework', `target`='전임강사', `chk`='0', `uid`='$_SESSION[t_uid]', `datetime`=CURRENT_TIMESTAMP";
+        sql_query($sql);
+    }
 
     alert_msg("채점이 완료되었습니다.");
 }else{
