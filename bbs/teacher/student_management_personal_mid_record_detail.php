@@ -133,7 +133,8 @@ $today_date = date("Y-m-d");
                                 <span>출석율 : </span>
                                 <span>
 							<?
-                            echo (int)(round(($r[1][0]+$r[1][2] / $r[1][1]) * 100));
+                                $result = @(int)(round(($r[1][0] + $r[1][2] / $r[1][1]) * 100));
+                                echo $result;
                             ?>%</span>
                             </p>
 
