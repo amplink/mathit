@@ -389,6 +389,42 @@ while($res = mysqli_fetch_array($result)) {
 
 
 
+        $('.corner').click(function () {
+            var idx = $(this).data("num");
+            if($(this).val() != '선택'){
+                var no = $(this).data("key");
+                var params = $("#resend_form"+no).serialize();
+
+                var n = no -1;
+                $("#corner_no").val($(this).val());
+
+                //alert($("#corner_no").val());
+                $.ajax({
+                    type: "POST",
+                    url: "call_corner_content.php?no="+no+"&val="+$(this).val(),
+                    data:params,
+                    dataType: "json",
+                    success: function(response){
+                        console.log(response.str1);
+
+                        //$('.custumdropdown').eq(0).empty();
+                        //$('.combobox').eq(0).html("");
+
+                        $("#Q_number"+idx+"_"+no).parent().parent().find('.identifier').html('선택');
+                        $("#Q_number"+idx+"_"+no).parent().parent().find("input:checkbox[name='allChk']").prop("checked", false);
+                        $("#Q_number"+idx+"_"+no).parent().parent().find('.combobox').html(response.str1);
+                        $("#Q_number"+idx+"_"+no).append(response.str2);
+
+
+                        //$("#Q_number"+no).append(response.str2);
+                        $('.custumdropdown').eq(0).homework_manegement_add();
+                    }
+                });
+            }
+
+
+        });
+
         $('.corner').change(function () {
             var idx = $(this).data("num");
             if($(this).val() != '선택'){
