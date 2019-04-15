@@ -286,7 +286,7 @@ while($res = mysqli_fetch_array($result)) {
                                 ?>
                                 <div class="checks_names_wrap">
                                     <div class="checks_names" style="float:left;display:block;"><?=$students[$k]?></div>
-                                    <div class="checks_names_values" ><span id="chkNameVal1" class="checkNames_span green_color_on">완료</span></div>
+                                    <div class="checks_names_values" ><span id="chkNameVal1" class="checkNames_span red_color_on">미완료</span></div>
                                 </div>
                                 <?php
                             }
