@@ -65,7 +65,7 @@ if(!$_GET['page']) {
                             }
                         }
                        if($n != 1) {
-                           if($j >= $page*15 && $j <= ($page*15+15)) {
+                           if($j >= $page*15 && $j < ($page*15+15)) {
                                if($ac_data['grade'] <= 6) $r_grade = "초등 ".$ac_data['grade'];
                                else $r_grade = "중등 ".($ac_data['grade']-6);
                                $del_value = $ac_data['book_type']."|".$ac_data['unit']."|".$ac_data['grade']."|".$ac_data['semester']."|".$ac_data['level'];
