@@ -89,6 +89,7 @@ if(!$_GET['page']) {
                        }
 
                     }
+                    if(!$t) echo location_href("./answer_manegement.php?page=".$page);
                     ?>
                 </form>
                 </tbody>
@@ -96,7 +97,7 @@ if(!$_GET['page']) {
         </div>
         <div class="section_footer">
             <div class="list_btn_wrap">
-                <div class="prev_btn"><a href="./answer_manegement.php?page=<?=$page;?>"><img src="img/prev.png" alt=""></a></div>
+                    <div class="prev_btn"><a href="./answer_manegement.php?page=<?=$page;?>"><img src="img/prev.png" alt=""></a></div>
                 <ul>
                     <?
                     $count = $j;
@@ -117,6 +118,9 @@ if(!$_GET['page']) {
     </div>
     <?php
     include_once('tail.php');
+    if($t != 15) echo "<script>$('.next_btn').hide();</script>";
+    $page++;
+    if($page == 1) echo "<script>$('.prev_btn').hide();</script>";
     ?>
 </body>
 </html>
