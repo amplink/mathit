@@ -58,7 +58,7 @@ $page = $_GET['page'];
                 <p>교재정보 등록</p>
                 <div class="btn_wrap">
                     <div class="complete_btn" onclick="myFunction()"><a href="#">완료</a></div>
-                    <div class="cancel_btn"><a href="answer_manegement.php">취소</a></div>
+                    <div class="cancel_btn"><a href="answer_manegement.php?page=<?=$page?>">취소</a></div>
                 </div>
             </div>
             <div class="downside">

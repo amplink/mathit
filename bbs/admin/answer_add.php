@@ -44,7 +44,7 @@ $page = $_GET['page'];
                 <div class="btn_wrap">
                     <div class="complete_btn" onclick="myFunction()"><a href="#">완료</a></div>
                     <div class="complete_btn" onclick="myFunction1()"><a href="#">중간저장</a></div>
-                    <div class="cancel_btn" onclick="button_can()"><a href="./answer_manegement.php">취소</a></div>
+                    <div class="cancel_btn" onclick="button_can()"><a href="./answer_manegement.php?page=<?=$page?>">취소</a></div>
                 </div>
             </div>
             <div class="downside">
