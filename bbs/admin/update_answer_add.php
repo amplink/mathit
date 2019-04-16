@@ -6,9 +6,10 @@ $semester = $_GET['semester'];
 $unit = $_GET['unit'];
 $level = $_GET['level'];
 $book_type = $_GET['book_type'];
+$page = $_GET['page'];
 
 if($book_type == "베타") {
-    echo "<script>location.href='./update_answer_add_beta.php?grade=".$grade."&semester=".$semester."&unit=".$unit."&level=".$level."&book_type=".$book_type."';</script>";
+    echo "<script>location.href='./update_answer_add_beta.php?grade=".$grade."&semester=".$semester."&unit=".$unit."&level=".$level."&book_type=".$book_type."&page=".$page."';</script>";
 }
 
 ?>
@@ -37,7 +38,7 @@ if($book_type == "베타") {
 </head>
 
 <body>
-<form action="update_answer_add_chk.php" method="POST" id="answer_add_form">
+<form action="update_answer_add_chk.php?page=<?=$page?>" method="POST" id="answer_add_form">
     <div class="header" style="width:calc(100% - 40px)">
         <div class="logo_wrap">
             <div class="logo"><img src="img/logo.png" alt="logo"></div>

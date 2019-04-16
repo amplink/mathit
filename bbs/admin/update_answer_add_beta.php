@@ -6,6 +6,7 @@ $semester = $_GET['semester'];
 $unit = $_GET['unit'];
 $level = $_GET['level'];
 $book_type = $_GET['book_type'];
+$page = $_GET['page'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,7 +33,7 @@ $book_type = $_GET['book_type'];
 </head>
 
 <body>
-<form action="update_answer_add_beta_chk.php" method="POST" id="answer_add_form">
+<form action="update_answer_add_beta_chk.php?page=<?=$page?>" method="POST" id="answer_add_form">
     <div class="header" style="width:calc(100% - 40px)">
         <div class="logo_wrap">
             <div class="logo"><img src="img/logo.png" alt="logo"></div>
