@@ -31,8 +31,8 @@
     top: 20px;
     width: 100%;
     max-width: 1400px;
-    height: 400px;
-    max-height: 400px;
+    /*height: 400px;*/
+    /*max-height: 400px;*/
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
     overflow: hidden;
@@ -42,7 +42,7 @@
 .l_box {
     display: inline-block;
     width: calc(55% - 43px);
-    height: 360px;
+    /*height: 360px;*/
     border-right: solid 1px rgb(220, 220, 220);
     vertical-align: top;
     padding: 20px;
