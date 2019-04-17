@@ -4,6 +4,9 @@ $class = $_GET['class'];
 $test_genre = $_GET['genre'];
 $title = $_GET['title'];
 $d_order = $_GET['d_order'];
+$d_uid = $_GET['d_uid'];
+$c_uid = $_GET['c_uid'];
+$s_uid = $_GET['s_uid'];
 
 $sql = "select * from `teacher_score` where `class` = '$class' and `d_order`='$d_order' and `test_genre` = '$test_genre' and `title` = '$title';";
 $result = mysqli_query($connect_db, $sql);
@@ -192,5 +195,9 @@ $res = mysqli_fetch_array($result);
         else val = t;
 
         $('#avg'+k/2).text(val+"점");
+    }
+
+    function excel_down() {
+        location.href="./excel_down2.php?d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_uid=<?=$_GET['s_uid']?>&class=<?=$_GET['class']?>&genre=<?=$_GET['genre']?>&title=<?=$_GET['title']?>&d_order=<?=$_GET['d_order']?>";
     }
 </script>

@@ -4,6 +4,9 @@ $class = $_GET['class'];
 $test_genre = $_GET['genre'];
 $title = $_GET['title'];
 $d_order = $_GET['d_order'];
+$d_uid = $_GET['d_uid'];
+$c_uid = $_GET['c_uid'];
+$s_uid = $_GET['s_uid'];
 
 $sql = "select * from `teacher_score` where `class` = '$class' and `d_order`='$d_order' and `test_genre` = '$test_genre' and `title` = '$title';";
 $result = mysqli_query($connect_db, $sql);
@@ -144,7 +147,7 @@ while($res = mysqli_fetch_array($result)) {
             <div class="student_delete_btn w_b" onclick="del_score()" style="cursor: pointer;"><a>선택삭제</a></div>
         </div>
         <div class="r_btn_wrap">
-            <div class="excel_btn f_b" style="cursor: pointer;"><a>EXCEL</a></div>
+            <div class="excel_btn f_b" onclick="excel_down()" style="cursor: pointer;"><a>EXCEL</a></div>
             <div class="print_btn f_b" onclick="print_data()" style="cursor: pointer;"><a>출력</a></div>
             <div class="complete_btn f_b" onclick='save()' onmouseover="cursor()"><a>저장</a></div>
         </div>
@@ -188,4 +191,9 @@ while($res = mysqli_fetch_array($result)) {
 
         $('#avg'+k/2).text(val+"점");
     }
+
+    function excel_down() {
+        location.href="./excel_down.php?d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_uid=<?=$_GET['s_uid']?>&class=<?=$_GET['class']?>&genre=<?=$_GET['genre']?>&title=<?=$_GET['title']?>&d_order=<?=$_GET['d_order']?>";
+    }
+
 </script>

@@ -201,7 +201,7 @@ $title = $_GET['title'];
         if(test_genre == "입반테스트" || test_genre == "분기테스트") {
             $.ajax({
                 type: "GET",
-                url: "call_record_management_list2.php?class="+class_name+"&genre="+test_genre+"&title="+e+"&d_order="+d_order,
+                url: "call_record_management_list2.php?d_uid="+d_uid+"&c_uid="+c_uid+"&s_uid="+s_uid+"&class="+class_name+"&genre="+test_genre+"&title="+e+"&d_order="+d_order,
                 dataType: "html",
                 success: function(response){
                     $(".right_wrap").html(response);
@@ -210,7 +210,7 @@ $title = $_GET['title'];
         }else {
             $.ajax({
                 type: "GET",
-                url: "call_record_management_list.php?class="+class_name+"&genre="+test_genre+"&title="+e+"&d_order="+d_order,
+                url: "call_record_management_list.php?d_uid="+d_uid+"&c_uid="+c_uid+"&s_uid="+s_uid+"&class="+class_name+"&genre="+test_genre+"&title="+e+"&d_order="+d_order,
                 dataType: "html",
                 success: function(response){
                     $(".right_wrap").html(response);
