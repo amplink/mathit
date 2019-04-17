@@ -255,7 +255,7 @@
 					$r_4 = api_calls_get($link_4);
 
                 ?>
-                    <div class="hamnav_class"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>&s_uid=<?=$s_uid[$i]?>">
+                    <div class="hamnav_class" style="cursor: pointer;"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>&s_uid=<?=$s_uid[$i]?>">
                             <span class="class_title"><?=$d_name[$i]?> ( <?php echo (count($r_4)-1);?> )( <?=$d_yoie[$i]?> )</span>
                         </a>
                     </div>

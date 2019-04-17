@@ -106,7 +106,7 @@ while($res = mysqli_fetch_array($result)) {
                 </div>
                 <div class="division">
                     <p class="l_div_title">응시인원</p>
-                    <p class="r_div_content"><span><?=$a_cnt?></span></p>
+                    <p class="r_div_content"><span><?=$cnt?></span></p>
                 </div>
             </div>
         </div>

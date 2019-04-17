@@ -23,7 +23,7 @@ include_once ('head.php');
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
-                <p class="left_text">수업계획표/일지</p>
+                <p class="left_text">수업관리</p>
             </div>
             <div class="head_right">
                 <div class="class_menu"><a href="class_schedule_list.php">조회</a></div>

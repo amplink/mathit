@@ -38,6 +38,7 @@
 
 	.multiselect-wrapper .multiselect-list .multiselect-checkbox {
 		margin-right: 2px;
+		height: auto !important;
 	}
 
 	.multiselect-wrapper .multiselect-list > span,

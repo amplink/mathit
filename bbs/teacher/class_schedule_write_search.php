@@ -25,34 +25,38 @@ $i=1;
 $thisTime=date("Y-m-d H:i:s");
 if($result) {
     while($res = mysqli_fetch_array($result)) {
-        ?>
-        <tr onclick="call_content(<?=$res['seq']?>)">
-            <td><span><?=$i?></span></td>
-            <td><span><?=$res['title']?></span>
-                <?php
-                $signdate = $res['event_time'];
-                $someTime=strtotime($thisTime)-strtotime("$signdate GMT");
-                $cha = ceil($someTime/(60*60*24));
-//                echo $cha;
-                if($cha <= 2) {
-                    ?>
-                    <div class="new"><p>new</p></div>
+        if($res['s_range']=="비공개" && $res['writer'] != $_SESSION['t_name']) {
+            continue;
+        }else {
+            ?>
+            <tr onclick="call_content(<?=$res['seq']?>)">
+                <td><span><?=$i?></span></td>
+                <td><span><?=$res['title']?></span>
                     <?php
-                    $cnt++;
-                }
-                ?>
-            </td>
-            <td>
-                <?php if($res['file_url']) {
+                    $signdate = $res['event_time'];
+                    $someTime=strtotime($thisTime)-strtotime("$signdate GMT");
+                    $cha = ceil($someTime/(60*60*24));
+                    //                echo $cha;
+                    if($cha <= 2) {
+                        ?>
+                        <div class="new"><p>new</p></div>
+                        <?php
+                        $cnt++;
+                    }
                     ?>
-                    <div class="have_sign"></div>
-                    <?php
-                }
-                ?>
-            </td>
-        </tr>
-        <?
-        $i++;
+                </td>
+                <td>
+                    <?php if($res['file_url']) {
+                        ?>
+                        <div class="have_sign"></div>
+                        <?php
+                    }
+                    ?>
+                </td>
+            </tr>
+            <?
+            $i++;
+        }
     }
 }
 ?>

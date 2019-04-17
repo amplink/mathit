@@ -130,6 +130,7 @@ if(strpos($seq, ":")) {
                 url:"notice_file_del.php?seq="+seq,
                 success: function (response) {
                     call_content(seq);
+                    search();
                 }
             })
     }
