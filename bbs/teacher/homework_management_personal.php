@@ -127,7 +127,7 @@ for($i=0; $i<count($d_name); $i++) {
              `homework_assign_list` B  
 			ON A.seq = B.h_id
 	        WHERE 
-			   match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
+			 match(A.student_id) against('*$_GET[s_id]*' in boolean mode) 
 			AND A.d_uid='$_GET[d_uid]'
 			AND A.c_uid='$_GET[c_uid]'
 			AND A.s_uid='$_GET[s_uid]'
@@ -238,7 +238,7 @@ for($i=0; $i<count($d_name); $i++) {
 
                 <!--modal-->
                 <div class="modal_wrap" id="modal_wrap<?=$y?>">
-                    <div class="modal_box">
+                    <div class="modal_box" style="width:600px">
                         <div class="modal_head">
                             <p>
                                 <span><?=$_GET['class_name']?>(<?=$class_type?>)</span>
@@ -331,14 +331,14 @@ for($i=0; $i<count($d_name); $i++) {
                                         ?>
                                         <p style="vertical-align: top">1차 :  <span><? if($wrong_tot1 == 0) echo "만점"; ?> (</span>
                                             <?=$q_tot1-$wrong_tot1?> / <?=$q_tot1?></span>
-                                            <span>)</span></p>
-                                        <p><span style="display:inline-block;width:350px">
+                                            <span>)</span></p><br><br>
+                                        <p><span style="display:inline-block;width:550px">
 
 <?
 $j = 1;
 foreach ($wrong1 as $key => $v) {
     if($wrong1[$j]){
-        echo "<b>(".$res2['corner'.$j].")</b><br> ".$wrong1[$j]."<br><br>";
+        echo "<b>(".$res2['corner'.$j].")</b><br>".str_replace(",",",&nbsp;&nbsp;",$wrong1[$j])."<br><br>";
     }
     $j++;
 }
@@ -359,13 +359,13 @@ foreach ($wrong1 as $key => $v) {
                                         <p style="vertical-align: top">2차 :  <span><? if($wrong_tot2 == 0) echo "만점"; ?> (</span>
                                             <span><?=$wrong_tot1-$wrong_tot2?> / <?=$wrong_tot1?></span>
                                             <span>)</span></p>
-                                        <p><span style="display:inline-block;width:350px">
+                                        <p><span style="display:inline-block;width:550px">
 
 <?
 $j = 1;
 foreach ($wrong2 as $key => $v) {
     if($wrong2[$j]){
-        echo "<b>(".$res2['corner'.$j].")</b><br> ".$wrong2[$j]."<br><br>";
+        echo "<b>(".$res2['corner'.$j].")</b><br>".str_replace(",",",&nbsp;&nbsp;",$wrong2[$j])."<br><br>";
     }
     $j++;
 }
