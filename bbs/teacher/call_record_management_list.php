@@ -8,34 +8,39 @@ $d_uid = $_GET['d_uid'];
 $c_uid = $_GET['c_uid'];
 $s_uid = $_GET['s_uid'];
 
-$sql = "select * from `teacher_score` where `class` = '$class' and `d_order`='$d_order' and `test_genre` = '$test_genre' and `title` = '$title';";
+$sql = "select score1, score2, score3, grade, class, date, title 
+from `teacher_score` where `d_uid`='$d_uid' and `c_uid`='$c_uid' and `s_uid`='$s_uid' and `class` = '$class' and `test_genre` = '$test_genre' and `title` = '$title';";
 $result = mysqli_query($connect_db, $sql);
 
 //반 평균
 $cnt = 0;
 $tot = 0;
+$a_cnt = 0;
 $score_list = array();
 while($res = mysqli_fetch_array($result)) {
     $tot += $res['score1']+$res['score2']+$res['score3'];
     $score_list[$cnt] = $res['score1']+$res['score2']+$res['score3'];
     $cnt++;
+    $a_cnt++;
     $grade = $res['grade'];
+    $title = $res['title'];
+    $date = $res['date'];
 }
 
 //동일 학년
-$sql = "select * from `teacher_score` where `test_genre` = '$test_genre' and `grade` = '$grade';";
+$sql = "select score1, score2, score3 from `teacher_score` where `d_uid`='$d_uid' and `test_genre` = '$test_genre' and `grade` = '$grade';";
 $result = mysqli_query($connect_db, $sql);
 $a_score_list = array();
 $a_tot = 0;
-$a_cnt = 0;
+$a_cnt2 = 0;
 while($res = mysqli_fetch_array($result)) {
     $a_tot += $res['score1']+$res['score2']+$res['score3'];
     $a_score_list[$cnt] = $res['score1']+$res['score2']+$res['score3'];
-    $a_cnt++;
+    $a_cnt2++;
 }
 
 //동일 레벨
-$sql = "select * from `teacher_score` where `test_genre` = '$test_genre' and `class`='$class';";
+$sql = "select score1, score2, score3 from `teacher_score` where `d_uid`='$d_uid' and `test_genre` = '$test_genre' and `class`='$class';";
 $result = mysqli_query($connect_db, $sql);
 $a_score_list1 = array();
 $a_tot1 = 0;
@@ -45,6 +50,8 @@ while($res = mysqli_fetch_array($result)) {
     $a_score_list1[$cnt] = $res['score1']+$res['score2']+$res['score3'];
     $a_cnt1++;
 }
+
+
 ?>
 <form method="post" id="score_form">
     <input type="hidden" value="record_management_del.php?class=<?=$class?>&test_genre=<?=$test_genre?>&title=<?=$title?>" id="url">
@@ -54,12 +61,12 @@ while($res = mysqli_fetch_array($result)) {
                 <div class="division">
                     <p class="l_div_title">대상반</p>
                     <p class="r_div_content">
-                        <span><?=$res['class']?></span>
+                        <span><?=$class?></span>
                     </p>
                 </div>
                 <div class="division">
                     <p class="l_div_title">시험일</p>
-                    <p class="r_div_content"><?=$res['date']?></p>
+                    <p class="r_div_content"><? echo substr($date,-4)."-".substr($date,0,2)."-".substr($date,3,2)?></p>
                 </div>
                 <div class="division col2">
                     <p class="l_div_title">반평균</p>
@@ -83,7 +90,7 @@ while($res = mysqli_fetch_array($result)) {
                         </div>
                         <div class="down_average">
                             <p class="lt">동일학년</p>
-                            <p class="rt"><span style="color: red;"><?=sprintf("%.1f", $a_tot/$a_cnt/2)?></span><span>점</span></p>
+                            <p class="rt"><span style="color: red;"><?=sprintf("%.1f", $a_tot/$a_cnt2/2)?></span><span>점</span></p>
                         </div>
                     </div>
                 </div>
@@ -95,7 +102,7 @@ while($res = mysqli_fetch_array($result)) {
                 </div>
                 <div class="division">
                     <p class="l_div_title">시험명</p>
-                    <p class="r_div_content"><?=$res['title']?></p>
+                    <p class="r_div_content"><?=$title?></p>
                 </div>
                 <div class="division">
                     <p class="l_div_title">응시인원</p>
@@ -117,7 +124,8 @@ while($res = mysqli_fetch_array($result)) {
                     </thead>
                     <tbody>
                     <?php
-                    $sql = "select * from `teacher_score` where `class` = '$class' and `test_genre` = '$test_genre' and `title` = '$title' order by `seq`;";
+
+                    $sql = "select * from `teacher_score` where `d_uid`='$d_uid' and `c_uid`='$c_uid' and `s_uid`='$s_uid' and `class` = '$class' and `test_genre` = '$test_genre' and `title` = '$title' order by `seq`;";
                     $result = mysqli_query($connect_db, $sql);
                     $i=1;
                     $cnt=1;

@@ -1,7 +1,7 @@
 <?php
 header("Content-type: application/vnd.ms-excel" );
 header("Content-type: application/vnd.ms-excel; charset=utf-8");
-header("Content-Disposition: attachment; filename =".$_GET['class']."(".$_GET['d_order'].")_".$_GET['genre'].".xls");
+header("Content-Disposition: attachment; filename =".$_GET['class']."(".$_GET['d_order'].")_".$_GET['title'].".xls");
 
 include_once ('_common.php');
 
@@ -13,34 +13,39 @@ $d_uid = $_GET['d_uid'];
 $c_uid = $_GET['c_uid'];
 $s_uid = $_GET['s_uid'];
 
-$sql = "select * from `teacher_score` where `d_uid`='$d_uid' and `c_uid`='$c_uid' and `s_uid`='$s_uid' and `class` = '$class' and `test_genre` = '$test_genre' and `title` = '$title';";
+$sql = "select score1, score2, score3, grade, class, date, title 
+from `teacher_score` where `d_uid`='$d_uid' and `c_uid`='$c_uid' and `s_uid`='$s_uid' and `class` = '$class' and `test_genre` = '$test_genre' and `title` = '$title';";
 $result = mysqli_query($connect_db, $sql);
 
 //반 평균
 $cnt = 0;
 $tot = 0;
+$a_cnt = 0;
 $score_list = array();
 while($res = mysqli_fetch_array($result)) {
     $tot += $res['score1']+$res['score2']+$res['score3'];
     $score_list[$cnt] = $res['score1']+$res['score2']+$res['score3'];
     $cnt++;
+    $a_cnt++;
     $grade = $res['grade'];
+    $title = $res['title'];
+    $date = $res['date'];
 }
 
 //동일 학년
-$sql = "select * from `teacher_score` where `test_genre` = '$test_genre' and `grade` = '$grade';";
+$sql = "select score1, score2, score3 from `teacher_score` where `d_uid`='$d_uid' and `test_genre` = '$test_genre' and `grade` = '$grade';";
 $result = mysqli_query($connect_db, $sql);
 $a_score_list = array();
 $a_tot = 0;
-$a_cnt = 0;
+$a_cnt2 = 0;
 while($res = mysqli_fetch_array($result)) {
     $a_tot += $res['score1']+$res['score2']+$res['score3'];
     $a_score_list[$cnt] = $res['score1']+$res['score2']+$res['score3'];
-    $a_cnt++;
+    $a_cnt2++;
 }
 
 //동일 레벨
-$sql = "select * from `teacher_score` where `test_genre` = '$test_genre' and `class`='$class';";
+$sql = "select score1, score2, score3 from `teacher_score` where `d_uid`='$d_uid' and `test_genre` = '$test_genre' and `class`='$class';";
 $result = mysqli_query($connect_db, $sql);
 $a_score_list1 = array();
 $a_tot1 = 0;
@@ -51,19 +56,20 @@ while($res = mysqli_fetch_array($result)) {
     $a_cnt1++;
 }
 
+
 ?>
 <table border="1">
     <tr>
         <td colspan="3" height="70"  align="center"> 대상반 </td>
-        <td colspan="6" width="1500" align="center"> <?=$res['class']?> </td>
+        <td colspan="6" width="1500" align="center"> <?=$class?> </td>
         <td colspan="3" width="1000" align="center"> 시험유형 </td>
         <td colspan="4" width="1500" align="center"> <?=$test_genre?> </td>
     </tr>
     <tr>
         <td colspan="3" height="70" align="center"> 시험일 </td>
-        <td colspan="6" align="center"> <?=$res['date']?> </td>
+        <td colspan="6" align="center"> <? echo substr($date,-4)."-".substr($date,0,2)."-".substr($date,3,2)?> </td>
         <td colspan="3" align="center"> 시험명 </td>
-        <td colspan="4" align="left"> <?=$res['title']?> </td>
+        <td colspan="4" align="center"> <?=$title?> </td>
     </tr>
     <tr>
         <td colspan="3" height="70" align="center"> 반평균 </td>
@@ -75,7 +81,7 @@ while($res = mysqli_fetch_array($result)) {
     <tr>
         <td colspan="3" height="70" align="center"> 전체평균 </td>
         <td colspan="3" align="center"> 동일레벨 <br> 동일학년</td>
-        <td colspan="3" align="center">  <?=sprintf("%.1f", $a_tot1/$a_cnt1/2)?> 점 <br> <?=sprintf("%.1f", $a_tot/$a_cnt/2)?> 점</td>
+        <td colspan="3" align="center">  <?=sprintf("%.1f", $a_tot1/$a_cnt1/2)?> 점 <br> <?=sprintf("%.1f", $a_tot/$a_cnt2/2)?> 점</td>
         <td colspan="7" align="center">  </td>
     </tr>
 

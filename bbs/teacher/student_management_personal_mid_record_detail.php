@@ -80,7 +80,7 @@ $today_date = date("Y-m-d");
     $r = api_calls_get($link);
 
     ?>
-
+   <div id="list_content">
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
@@ -413,6 +413,7 @@ $today_date = date("Y-m-d");
             </div>
         </form>
     </div>
+   </div>
 </section>
 <script>
 
@@ -440,12 +441,18 @@ $today_date = date("Y-m-d");
     });
 */
 
-function sms_send() {
 
-    //html2canvas(document.getElementById("body"),{
+function sms_send() {
+    var windowWidth = $( window ).width();
+
+    var width_size = windowWidth - 1366;
+    var cut_size = width_size / 2;
+    
+    //html2canvas(document.getElementById("list_content"),{
     html2canvas(document.querySelector("body"), {
         //allowTaint: true,
         //taintTest: false,
+        width:800,
         useCORS: true,
     }).then(function (canvas) {
         var imgageData = canvas.toDataURL("image/png");
