@@ -3624,8 +3624,15 @@ function getPeriod($period, $mon){
     return $s_date;
 }
 
-
-
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
 
 $grade_arr = array("초3"=>"3", "초4"=>"4", "초5"=>"5", "초6"=>"6",  "중1"=>"7", "중2"=>"8", "중3"=>"9");
 $semester_arr = array("1학기"=>"1", "2학기"=>"2");
