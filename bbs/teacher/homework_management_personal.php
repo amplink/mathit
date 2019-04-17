@@ -159,10 +159,9 @@ for($i=0; $i<count($d_name); $i++) {
                 <tr>
                     <td><span><?=substr($res2['_from'],6,4)?>-<?=substr($res2['_from'],0,2)?>-<?=substr($res2['_from'],3,2)?></span>
                     </td>
-                    <td><span><a href="./scoring_chat.php?id=<?=$res2['id']?>"><?=$res2['name']?></a></span>
-                        <br><a href="./scoring_chat.php?id=<?=$res2['id']?>">
+                    <td><span><?=$res2['name']?></span>
+                        <br>
                             <span><?=$res2['grade']?> - </span><span><?=$res2['semester']?> </span><span>(<?=$res2['unit']?>)</span>
-                        </a>
                     </td>
                     <td>
                         <span><?=substr($res2['_to'],6,4)?>-<?=substr($res2['_to'],0,2)?>-<?=substr($res2['_to'],3,2)?></span><br>
