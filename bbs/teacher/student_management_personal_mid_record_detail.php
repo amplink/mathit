@@ -13,13 +13,13 @@ $today_date = date("Y-m-d");
     <title>MathIt - teacher</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-    <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" href="css/student_manegement_personal_mid_record_detail.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/student_manegement_personal_mid_record_detail.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
 </head>
 
-<body>
+<body id="body">
 <section>
 
     <?
@@ -33,7 +33,7 @@ $today_date = date("Y-m-d");
                     AND `c_uid` = '$_GET[c_uid]'
                     AND `s_uid` = '$_GET[s_uid]'
                     AND `student_id` = '$_GET[s_id]'";
-        */
+    */
 
     $sql = "SELECT * FROM 
              `teacher_score` 
@@ -42,8 +42,6 @@ $today_date = date("Y-m-d");
 
     $result = mysqli_query($connect_db, $sql);
     $res = mysqli_fetch_array($result);
-
-
 
     //분기시작일 정보
     if($res['test_genre'] == '중간평가') {
@@ -61,12 +59,12 @@ $today_date = date("Y-m-d");
 				 FROM
 				  `teacher_score`
 				 WHERE 
-					d_uid='$res[d_uid]'
-				AND c_uid='$res[c_uid]'
-				AND s_uid='$res[s_uid]'
-				AND d_order='$res[d_order]'
-				AND test_genre='중간평가'
-				AND client_id='$ac'
+					 d_uid='$res[d_uid]'
+				 AND c_uid='$res[c_uid]'
+				 AND s_uid='$res[s_uid]'
+				 AND d_order='$res[d_order]'
+				 AND test_genre='중간평가'
+				 AND client_id='$ac'
 		";
 
         $result6 = mysqli_query($connect_db, $sql6);
@@ -90,7 +88,7 @@ $today_date = date("Y-m-d");
                 <p class="record_date"><?=$today_date?></p>
             </div>
             <div class="head_right">
-                <div class="print"><img src="img/printer.png" alt="printer_icon"></div>
+                <div class="print" onclick="screenshot()"><img src="img/printer.png" alt="printer_icon"></div>
                 <div class="mail"><img src="img/mail.png" alt="mail_icon"></div>
                 <div class="sub_close_btn"><a href="javascript:history.back()"><img src="img/close.png" alt="close_icon"></a></div>
             </div>
@@ -408,7 +406,7 @@ $today_date = date("Y-m-d");
             <div class="save_btn"><a href="javascript:save()">저장</a></div>
         </div>
         <form name="commentForm" id="commentForm" action="./score_comment_reg.php" method="post">
-            <input type="hidden" name="no" value="<?=$res['seq']?>">
+            <input type="hidden" name="no" id="no" value="<?=$res['seq']?>">
             <input type="hidden" name="flag" value="mid">
             <div class="comment_input_section">
                 <textarea name="comment" id="comment" cols="30" rows="10" style="height:180px;width:100%"><?=$res['comment']?></textarea>
@@ -421,6 +419,56 @@ $today_date = date("Y-m-d");
     function save() {
         $("#commentForm").submit();
     }
+
+</script>
+<script src="./js/html2canvas.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script><script>
+<? if($_GET['step']=='y'){?>
+    screenshot();
+<?  }  ?>
+/*
+    html2canvas(document.querySelector("body"),{
+        //allowTaint: true,
+        //taintTest: false,
+        useCORS: true,
+    }).then(function(canvas) {
+        var imgageData = canvas.toDataURL("image/png");
+        var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+        jQuery("a").attr("download", "screenshot.png").attr("href", newData);
+    });
+*/
+
+function screenshot() {
+
+    //html2canvas(document.getElementById("body"),{
+    html2canvas(document.querySelector("body"), {
+        //allowTaint: true,
+        //taintTest: false,
+        useCORS: true,
+    }).then(function (canvas) {
+        var imgageData = canvas.toDataURL("image/png");
+        var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+        // jQuery("a").attr("download", "screenshot.png").attr("href", newData);
+        // var Canvas = document.querySelector("body");
+        // var canvasData = Canvas.toDataURL("image/png");
+        $.ajax({
+            type: "POST",
+            url: "imgdown.php",
+            data: "canvasData=" + imgageData + "&no=" +  $("#no").val(),
+            dataType: "json",
+            success: function (data) {
+                if (data.res == "success") alert('화면이 정상적으로 캡처 되었습니더');
+                <? if($_GET['step']=='y'){?>
+                window.close();
+                <?  }  ?>
+            },
+            error: function (xhr, status, error) {
+                alert(error);
+            }
+        });
+    });
+
+}
 
 </script>
 </body>

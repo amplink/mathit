@@ -1,9 +1,5 @@
 
-<!doctype html>
-<html>
 
-<head>
-	<title>Line Chart - Cubic interpolation mode</title>
 	<script src="./js/Chart.min.js"></script>
 	<script src="./js/utils.js?v=20190414"></script>
 	<link rel="stylesheet" type="text/css" href="./css/chart_style.css?v=201904011">
@@ -14,9 +10,7 @@
 		-ms-user-select: none;
 	}
 	</style>
-</head>
 
-<body>
 	<div class="content">
 		<div class="wrapper col-2" style="margin-left:-20px"><canvas id="chart-0"></canvas></div>
 	</div>
@@ -120,5 +114,3 @@
 		}
 
 	</script>
-</body>
-</html>

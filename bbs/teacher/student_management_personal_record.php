@@ -81,7 +81,7 @@ $result = mysqli_query($connect_db, $sql);
                                 <img src="img/paper.png" alt="paper_icon">
                             </a>
                         </div>
-                        <div class="print"><a href=""><img src="img/printer.png" alt="printer_icon"></a></div>
+                        <div class="print"><a href="javascript:score_open('<?=$type?>','<?=$res[seq]?>')"><img src="img/printer.png" alt="printer_icon"></a></div>
                         <div class="mail"><a href=""><img src="img/mail.png" alt="mail_icon"></a></div>
                     </td>
                 </tr>
@@ -93,6 +93,15 @@ $result = mysqli_query($connect_db, $sql);
         </table>
     </div>
 </section>
+<script>
+
+
+    function score_open(gubun, no) {
+         var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&step=y";
+         window.open(url,"PopupWin", "top=-200,left=-1200,width=1100,height=800");
+    }
+
+</script>
 </body>
 
 </html>
