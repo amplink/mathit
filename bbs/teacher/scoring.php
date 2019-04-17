@@ -48,6 +48,10 @@ include_once ('head.php');
             -webkit-align-items: center;
             align-items: center;
         }
+        label{vertical-align:-1px}
+        .input_chk{width:13px;height:13px;vertical-align:text-top}
+
+
     </style>
 </head>
 
@@ -147,12 +151,12 @@ include_once ('head.php');
                 </div>
                 <p>
                 <div style="width:500px;height:1px">
-                    <div style="padding-left:10px;text-align:right">
+                    <div style="text-align:left">
                         <?
                         for($i=1; $i<=$tot; $i++){
                             if($i == $corner) $chk = "checked";
                             else              $chk = "";
-                            echo "&nbsp;<input type='radio' name='corner' value='".$i."' ".$chk." onclick='cornerView(".$i.")'><span style='font-size:16px;'>".$res2['corner'.$i]."</span>";
+                            echo "&nbsp;&nbsp;&nbsp;<input type='radio' class='input_chk' name='corner' value='".$i."' ".$chk." onclick='cornerView(".$i.")'><span style='font-size:16px;'><label for=''>".$res2['corner'.$i]."</label></span>";
                         }
 
                         ?>
