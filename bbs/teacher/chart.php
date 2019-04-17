@@ -91,7 +91,7 @@
 						backgroundColor: utils.transparentize(presets.blue),
 						borderColor: presets.blue,
 						data: datapoints2,
-						label: '학년평균',
+						label: '학급평균',
 						fill: boundary
 					}]
 				},
