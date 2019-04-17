@@ -228,7 +228,7 @@ $today_date = date("Y-m-d");
                 dataType: "json",
                 success: function (data) {
                     if (data.res == "success") alert('문자가 정상적으로 발송 되었습니다.');
-                    <? if($_GET['step']=='y'){?>
+                    <? if($_GET['flag']=='2'){?>
                     window.close();
                     <?  }  ?>
                 },
