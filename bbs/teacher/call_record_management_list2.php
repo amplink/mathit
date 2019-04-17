@@ -152,7 +152,7 @@ $res = mysqli_fetch_array($result);
             <div class="student_delete_btn w_b" onclick="del_score()" style="cursor: pointer;"><a>선택삭제</a></div>
         </div>
         <div class="r_btn_wrap">
-            <div class="excel_btn f_b" style="cursor: pointer;"><a>EXCEL</a></div>
+            <div class="excel_btn f_b" onclick="excel_down()" style="cursor: pointer;"><a>EXCEL</a></div>
             <div class="print_btn f_b" onclick="print_data()" style="cursor: pointer;"><a>출력</a></div>
             <div class="complete_btn f_b" onclick='save()' onmouseover="cursor()"><a>저장</a></div>
         </div>

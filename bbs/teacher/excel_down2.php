@@ -1,7 +1,7 @@
 <?php
 header( "Content-type: application/vnd.ms-excel" );
 header( "Content-type: application/vnd.ms-excel; charset=utf-8");
-header( "Content-Disposition: attachment; filename = invoice.xls" );
+header("Content-Disposition: attachment; filename =".$_GET['class']."(".$_GET['d_order'].")_".$_GET['genre'].".xls");
 
 include_once ('_common.php');
 

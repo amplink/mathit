@@ -1,7 +1,7 @@
 <?php
-header( "Content-type: application/vnd.ms-excel" );
-header( "Content-type: application/vnd.ms-excel; charset=utf-8");
-header( "Content-Disposition: attachment; filename = invoice.xls" );
+header("Content-type: application/vnd.ms-excel" );
+header("Content-type: application/vnd.ms-excel; charset=utf-8");
+header("Content-Disposition: attachment; filename =".$_GET['class']."(".$_GET['d_order'].")_".$_GET['genre'].".xls");
 
 include_once ('_common.php');
 
@@ -95,14 +95,14 @@ while($res = mysqli_fetch_array($result)) {
     $i=1;
     $cnt=1;
     while($res = mysqli_fetch_array($result)) {
-    ?>
+        ?>
         <tr>
             <td colspan="3" height="40"  align="center"> <?=$res['student']?> </td>
             <td colspan="5" align="center"> <?=$res['score1']?> 점 </td>
             <td colspan="5" align="center"> <?=$res['score2']?> 점 </td>
             <td colspan="3" align="center"> <?=sprintf("%.1f", ($res['score1']+$res['score2'])/2)?> 점 </td>
         </tr>
-    <?
+        <?
         $i++;
         $cnt++;
     }
