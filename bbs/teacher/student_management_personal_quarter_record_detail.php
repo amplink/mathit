@@ -40,8 +40,8 @@ $today_date = date("Y-m-d");
                 <p class="record_date"><?=$today_date?></p>
             </div>
             <div class="head_right">
-                <div class="print"><img src="img/printer.png" alt="printer_icon"></div>
-                <div class="mail"><img src="img/mail.png" alt="mail_icon"></div>
+                <div class="print" onclick="javascript: window.print();"><img src="img/printer.png" alt="printer_icon"></div>
+                <div class="mail" onclick="javascript: sms_send();"><img src="img/mail.png" alt="mail_icon"></div>
                 <div class="sub_close_btn"><a href="javascript:history.back()"><img src="img/close.png" alt="close_icon"></a></div>
             </div>
         </div>
@@ -185,6 +185,59 @@ $today_date = date("Y-m-d");
 
     function save() {
         $("#commentForm").submit();
+    }
+
+</script>
+
+<script src="./js/html2canvas.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script><script>
+    <? if($_GET['flag']=='2'){?>
+        sms_send();
+    <?  } else if($_GET['flag']=='1'){ ?>
+        window.print();
+    <?  }  ?>
+    /*
+        html2canvas(document.querySelector("body"),{
+            //allowTaint: true,
+            //taintTest: false,
+            useCORS: true,
+        }).then(function(canvas) {
+            var imgageData = canvas.toDataURL("image/png");
+            var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+            jQuery("a").attr("download", "screenshot.png").attr("href", newData);
+        });
+    */
+
+    function sms_send() {
+
+        //html2canvas(document.getElementById("body"),{
+        html2canvas(document.querySelector("body"), {
+            //allowTaint: true,
+            //taintTest: false,
+            useCORS: true,
+        }).then(function (canvas) {
+            var imgageData = canvas.toDataURL("image/png");
+            var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+            // jQuery("a").attr("download", "screenshot.png").attr("href", newData);
+            // var Canvas = document.querySelector("body");
+            // var canvasData = Canvas.toDataURL("image/png");
+            $.ajax({
+                type: "POST",
+                url: "imgdown.php",
+                data: "canvasData=" + imgageData + "&no=" +  $("#no").val(),
+                dataType: "json",
+                success: function (data) {
+                    if (data.res == "success") alert('문자가 정상적으로 발송 되었습니다.');
+                    <? if($_GET['step']=='y'){?>
+                    window.close();
+                    <?  }  ?>
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+        });
+
     }
 
 </script>

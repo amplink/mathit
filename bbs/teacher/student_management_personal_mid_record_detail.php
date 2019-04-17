@@ -13,13 +13,13 @@ $today_date = date("Y-m-d");
     <title>MathIt - teacher</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/student_manegement_personal_mid_record_detail.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/student_manegement_personal_mid_record_detail.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
 </head>
 
-<body id="body">
+<body>
 <section>
 
     <?
@@ -88,8 +88,8 @@ $today_date = date("Y-m-d");
                 <p class="record_date"><?=$today_date?></p>
             </div>
             <div class="head_right">
-                <div class="print" onclick="screenshot()"><img src="img/printer.png" alt="printer_icon"></div>
-                <div class="mail"><img src="img/mail.png" alt="mail_icon"></div>
+                <div class="print" onclick="javascript: window.print();"><img src="img/printer.png" alt="printer_icon"></div>
+                <div class="mail" onclick="javascript: sms_send();"><img src="img/mail.png" alt="mail_icon"></div>
                 <div class="sub_close_btn"><a href="javascript:history.back()"><img src="img/close.png" alt="close_icon"></a></div>
             </div>
         </div>
@@ -423,9 +423,11 @@ $today_date = date("Y-m-d");
 </script>
 <script src="./js/html2canvas.js"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script><script>
-<? if($_GET['step']=='y'){?>
-    screenshot();
-<?  }  ?>
+    <? if($_GET['flag']=='2'){?>
+    sms_send();
+    <?  } else if($_GET['flag']=='1'){ ?>
+    window.print();
+    <?  }  ?>
 /*
     html2canvas(document.querySelector("body"),{
         //allowTaint: true,
@@ -438,7 +440,7 @@ $today_date = date("Y-m-d");
     });
 */
 
-function screenshot() {
+function sms_send() {
 
     //html2canvas(document.getElementById("body"),{
     html2canvas(document.querySelector("body"), {
@@ -457,7 +459,7 @@ function screenshot() {
             data: "canvasData=" + imgageData + "&no=" +  $("#no").val(),
             dataType: "json",
             success: function (data) {
-                if (data.res == "success") alert('화면이 정상적으로 캡처 되었습니더');
+                if (data.res == "success") alert('문자가 정상적으로 발송 되었습니다.');
                 <? if($_GET['step']=='y'){?>
                 window.close();
                 <?  }  ?>

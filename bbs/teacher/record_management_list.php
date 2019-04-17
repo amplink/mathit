@@ -14,8 +14,8 @@ $title = $_GET['title'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MathIt - teacher</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/record_manegement_list.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/record_manegement_list.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
 </head>

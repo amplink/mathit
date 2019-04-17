@@ -30,8 +30,8 @@ $result = mysqli_query($connect_db, $sql);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MathIt - teacher</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/student_manegement_personal_record.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css"  href="css/student_manegement_personal_record.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
 </head>
@@ -81,8 +81,8 @@ $result = mysqli_query($connect_db, $sql);
                                 <img src="img/paper.png" alt="paper_icon">
                             </a>
                         </div>
-                        <div class="print"><a href="javascript:score_open('<?=$type?>','<?=$res[seq]?>')"><img src="img/printer.png" alt="printer_icon"></a></div>
-                        <div class="mail"><a href=""><img src="img/mail.png" alt="mail_icon"></a></div>
+                        <div class="print"><a href="javascript:print_send('<?=$type?>','<?=$res[seq]?>')"><img src="img/printer.png" alt="printer_icon"></a></div>
+                        <div class="mail"><a href="javascript:sms_send('<?=$type?>','<?=$res[seq]?>')"><img src="img/mail.png" alt="mail_icon"></a></div>
                     </td>
                 </tr>
                 <?
@@ -96,11 +96,16 @@ $result = mysqli_query($connect_db, $sql);
 <script>
 
 
-    function score_open(gubun, no) {
-         var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&step=y";
+    function print_send(gubun, no) {
+         var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&flag=1";
          window.open(url,"PopupWin", "top=-200,left=-1200,width=1100,height=800");
     }
 
+
+    function sms_send(gubun, no) {
+        var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&flag=2";
+        window.open(url,"PopupWin", "top=-200,left=-1200,width=1100,height=800");
+    }
 </script>
 </body>
 
