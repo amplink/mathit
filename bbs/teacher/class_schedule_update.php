@@ -6,23 +6,11 @@ $sql = "select * from `teacher_schedule` where `seq`='$seq';";
 $result = sql_query($sql);
 $res = mysqli_fetch_array($result);
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIt - teacher</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/class_schedule_write.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/common.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
-</head>
+<link rel="stylesheet" type="text/css" media="screen" href="css/class_schedule_write.css" />
+<script src="js/common.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
 
-<body>
 <section>
     <div class="head_section">
         <div class="head_section_1400">
@@ -74,14 +62,14 @@ $res = mysqli_fetch_array($result);
                     <p>제목</p>
                 </div>
                 <div class="option_content">
-                    <input type="text" placeholder="제목을 입력하세요" name="title" id="title" value="<?=$res['title']?>">
+                    <input type="text" placeholder="제목을 입력하세요" name="title" id="title" value="<?=$res['title']?>" style="height:4px;padding:0px;top:2px">
                 </div>
             </div>
             <div class="board_option_line">
                 <div class="option_title">
                     <p>첨부파일</p>
                 </div>
-                <div class="option_content">
+                <div class="option_content" style="margin-top:-4px">
                     <input type="file" name="bf_file[]" onchange="$('#f').html('현재파일 : '+this.value)">
                     <span id="f">현재파일 : <?=$res['file_name']?></span>
                     <!--                <div class="file_add_btn"><a href="#none">첨부파일</a></div>-->

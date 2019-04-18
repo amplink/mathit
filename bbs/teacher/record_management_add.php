@@ -2,23 +2,10 @@
 include_once ('_common.php');
 include_once ('head.php');
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIt - teacher</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" href="css/record_manegement_add.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/common.js"></script>
-    <script src="js/jquery-ui.js"></script>
-</head>
 
-<body>
+<script src="js/common.js?v=20190418"></script>
+
 <section>
     <form action="record_management_add_chk.php" method="post" id="record_form">
         <input type="hidden" name="d_id" id="d_id">
@@ -113,8 +100,8 @@ include_once ('head.php');
                     </table>
                 </div>
             </div>
-            <div class="right_wrap">
-                <div class="right_box" style="height: 660px;">
+            <div class="right_wrap" id="right_wrap">
+                <div class="right_box" id="right_box" style="height: 660px;">
                     <div class="right_box_1">
                         <div class="r_left_box">
                             <div class="division">
@@ -167,7 +154,7 @@ include_once ('head.php');
                 <div class="add_btn_wrap">
                     <div class="l_btn_wrap">
                         <!--                    <div class="sms_btn"><a href="#none">SMS발송</a></div>-->
-                        <div class="print_btn"><a href="javascript: window.print();">출력</a></div>
+                        <div class="print_btn"><a href="javascript: info_print();">출력</a></div>
                     </div>
                     <div class="r_btn_wrap">
                         <div class="complete_btn" onclick="submit()" style="cursor: pointer;"><a>평가완료</a></div>
@@ -369,6 +356,18 @@ include_once ('head.php');
             alert('입력값이 빠진것이  없는지 확인해주세요.');
         }
     }
+
+    function info_print() {
+        var initBody = document.body.innerHTML;
+        window.onbeforeprint = function () {
+            document.body.innerHTML = document.getElementById("right_box").innerHTML;
+        }
+        window.onafterprint = function () {
+            document.body.innerHTML = initBody;
+        }
+        window.print();
+    }
+
 </script>
 </body>
 

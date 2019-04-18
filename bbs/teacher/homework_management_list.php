@@ -2,21 +2,10 @@
 include_once ('_common.php');
 include_once ('head.php');
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIt - teacher</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_list.css?v=20190414" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
+
     <script src="js/common.js"></script>
     <script src="js/homework_manegement_add.js"></script>
     <script>
@@ -96,8 +85,7 @@ include_once ('head.php');
             color:green;
         }
     </style>
-</head>
-<body>
+
 <section>
     <div class="head_section">
         <div class="head_section_1400">

@@ -4,22 +4,10 @@ include_once ('head.php');
 
 $today_date = date("Y-m-d");
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIt - teacher</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-    <link rel="stylesheet" type="text/css" href="css/common.css" />
     <link rel="stylesheet" type="text/css" href="css/student_manegement_personal_mid_record_detail.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
-</head>
 
-<body>
 <section>
 
     <?

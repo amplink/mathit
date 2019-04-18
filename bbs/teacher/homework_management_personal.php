@@ -12,20 +12,9 @@ for($i=0; $i<count($d_name); $i++) {
     }
 }
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIt - teacher</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
+
     <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_personal.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
     <script src="js/common.js"></script>
     <script src="js/homework_manegement_personal.js?v=20190415"></script>
     <script>
@@ -68,9 +57,7 @@ for($i=0; $i<count($d_name); $i++) {
             text-align: center;
         }
     </style>
-</head>
 
-<body>
 <section>
     <form action="<?=$_SERVER['PHP_SELF'];?>" id="searchForm" method="get">
         <input type="hidden" name="s_id" value="<?=$_GET['s_id']?>">

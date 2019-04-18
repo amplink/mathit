@@ -22,21 +22,10 @@ $sql = "select * from `teacher_score`
 		and `student_id` = '$_GET[s_id]';";
 $result = mysqli_query($connect_db, $sql);
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIt - teacher</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/common.css" />
     <link rel="stylesheet" type="text/css"  href="css/student_manegement_personal_record.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
-</head>
 
-<body>
 <section>
     <div class="head_section">
         <div class="head_section_1400">

@@ -11,21 +11,10 @@ if($res['admin_menu']==0) {
 }
 include_once ('head.php');
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIt - teacher</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/setting.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/common.js"></script>
-</head>
 
-<body>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/setting.css" />
+    <script src="js/common.js"></script>
+
 <section>
     <form action="setting_chk.php" method="post" id="setting_form">
     <div class="head_section">
@@ -129,8 +118,8 @@ include_once ('head.php');
                 <p class="content_title">앱 버전정보 및<br>업데이트</p>
                 <div class="content_side">
                     <p>
-                        <span>0.12 ver.</span>
-                        <span>2019-01-01 update</span>
+                        <span>0.99 ver.</span>
+                        <span>2019-04-18 update</span>
                     </p>
                 </div>
             </div>

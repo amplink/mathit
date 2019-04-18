@@ -55,7 +55,7 @@ while($res = mysqli_fetch_array($result)) {
 ?>
 <form method="post" id="score_form">
     <input type="hidden" value="record_management_del.php?class=<?=$class?>&test_genre=<?=$test_genre?>&title=<?=$title?>" id="url">
-    <div class="right_box">
+    <div class="right_box" id="right_box">
         <div class="right_box_1">
             <div class="r_left_box">
                 <div class="division">
@@ -156,7 +156,7 @@ while($res = mysqli_fetch_array($result)) {
         </div>
         <div class="r_btn_wrap">
             <div class="excel_btn f_b" onclick="excel_down()" style="cursor: pointer;"><a>EXCEL</a></div>
-            <div class="print_btn f_b" onclick="print_data()" style="cursor: pointer;"><a>출력</a></div>
+            <div class="print_btn f_b" onclick="info_print()" style="cursor: pointer;"><a>출력</a></div>
             <div class="complete_btn f_b" onclick='save()' onmouseover="cursor()"><a>저장</a></div>
         </div>
     </div>
@@ -204,4 +204,14 @@ while($res = mysqli_fetch_array($result)) {
         location.href="./excel_down.php?d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_uid=<?=$_GET['s_uid']?>&class=<?=$_GET['class']?>&genre=<?=$_GET['genre']?>&title=<?=$_GET['title']?>&d_order=<?=$_GET['d_order']?>";
     }
 
+    function info_print() {
+        var initBody = document.body.innerHTML;
+        window.onbeforeprint = function () {
+            document.body.innerHTML = document.getElementById("right_box").innerHTML;
+        }
+        window.onafterprint = function () {
+            document.body.innerHTML = initBody;
+        }
+        window.print();
+    }
 </script>

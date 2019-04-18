@@ -7,23 +7,11 @@ $sql = "select * from `teacher_setting` where `t_name`='$t_name';";
 $result = sql_query($sql);
 $res = mysqli_fetch_array($result);
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIt - teacher</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/notice_list.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
-
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
-</head>
-<body>
+
 <section>
     <div class="head_section">
         <div class="head_section_1400">

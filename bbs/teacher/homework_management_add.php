@@ -6,20 +6,8 @@ $Banlist  = api_calls_get("/api/math/class?client_no=".$ac);
 $studentlist = api_calls_get("/api/math/student_list?client_no=".$ac);
 $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIt - teacher</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css?v=20190407" />
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
     <script src="js/common.js"></script>
     <script>
         $( function() {
@@ -72,15 +60,12 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
             }
         } );
     </script>
-</head>
+
 
 <style>
     .container { margin:110px auto; max-width:640px; text-align: start; }
 </style>
 <!--<script src="js/homework_manegement_add.js"></script>-->
-</head>
-
-<body>
 
 <section>
     <div class="head_section">

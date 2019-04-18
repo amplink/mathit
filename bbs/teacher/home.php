@@ -22,18 +22,7 @@ $result = sql_query($sql);
 $res = mysqli_fetch_array($result);
 ?>
 
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIt - teacher</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/index.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
     <script type="text/javascript" language="javascript">
 
@@ -64,9 +53,6 @@ $res = mysqli_fetch_array($result);
         });
     </script>
 
-</head>
-
-<body>
 <section>
     <div class="head_section">
         <div class="head_section_1400">
