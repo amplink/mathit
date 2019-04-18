@@ -17,7 +17,15 @@ $cnt = 0;
 $tot = 0;
 $a_cnt = 0;
 $score_list = array();
-
+while($res = mysqli_fetch_array($result)) {
+    $tot += $res['score1']+$res['score2']+$res['score3'];
+    $score_list[$cnt] = $res['score1']+$res['score2']+$res['score3'];
+    $cnt++;
+    $a_cnt++;
+    $grade = $res['grade'];
+    $title = $res['title'];
+    $date = $res['date'];
+}
 
 //동일 학년
 $sql = "select score1, score2, score3 from `teacher_score` where `d_uid`='$d_uid' and `test_genre` = '$test_genre' and `grade` = '$grade';";
