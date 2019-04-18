@@ -20,11 +20,11 @@ $today_date = date("Y-m-d");
 
 <body>
 <?php
-    $sql = "select * from `teacher_score` 
+$sql = "select * from `teacher_score` 
              where 
             `seq` = '$_GET[no]'";
-    $result = mysqli_query($connect_db, $sql);
-    $res = mysqli_fetch_array($result);
+$result = mysqli_query($connect_db, $sql);
+$res = mysqli_fetch_array($result);
 ?>
 <section>
     <div class="head_section">
@@ -188,13 +188,13 @@ $today_date = date("Y-m-d");
     }
 
 </script>
-
+<script src="./js/es6-promise.auto.js"></script>
 <script src="./js/html2canvas.js"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script><script>
     <? if($_GET['flag']=='2'){?>
-        sms_send();
+    sms_send();
     <?  } else if($_GET['flag']=='1'){ ?>
-        window.print();
+    window.print();
     <?  }  ?>
     /*
         html2canvas(document.querySelector("body"),{
@@ -210,7 +210,7 @@ $today_date = date("Y-m-d");
 
     function sms_send() {
 
-        //html2canvas(document.getElementById("body"),{
+        //html2canvas(document.getElementById("ttt"),{
         html2canvas(document.querySelector("body"), {
             //allowTaint: true,
             //taintTest: false,
