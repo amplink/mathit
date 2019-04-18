@@ -3,10 +3,22 @@ include_once ('_common.php');
 include_once ('head.php');
 $today_date = date("Y-m-d");
 ?>
+<!DOCTYPE html>
+<html>
 
-<link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css" />
-<script src="js/common.js"></script>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MathIt - teacher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css" />
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/common.js"></script>
+</head>
 
+<body>
 <?php
 $sql = "select * from `teacher_score` 
              where 
@@ -157,13 +169,13 @@ $res = mysqli_fetch_array($result);
                 <div class="save_btn"><a href="javascript:save()">저장</a></div>
             </div>
             <div class="comment_input_section">
-                <textarea name="evaluation" id="evaluation" cols="30" rows="10" style="height:150px;width:97%"><?=$res['evaluation']?></textarea>
+                <textarea name="evaluation" id="evaluation" cols="30" rows="10" style="height:180px;width:100%"><?=$res['evaluation']?></textarea>
             </div>
-            <div class="down_head_section" style="padding-top:5px">
+            <div class="down_head_section">
                 <p class="l_div_text">선생님 코멘트</p>
             </div>
             <div class="comment_input_section">
-                <textarea name="comment" id="comment" cols="30" rows="10" style="height:150px;width:97%"><?=$res['comment']?></textarea>
+                <textarea name="comment" id="comment" cols="30" rows="10" style="height:180px;width:100%"><?=$res['comment']?></textarea>
             </div>
         </form>
 
