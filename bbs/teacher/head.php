@@ -181,11 +181,12 @@
 
 	endif;
 
-	$t_name = $_SESSION['t_name'];
+	$t_uid = $_SESSION['t_uid'];
 	// 권한 체크
-    $sql = "select * from `teacher_setting` where `t_name`='$t_name';";
+    $sql = "select * from `teacher_setting` where `t_id`='$t_uid';";
     $result = sql_query($sql);
     $res = mysqli_fetch_array($result);
+    if($_SESSION['admin']) $res['type'] = "관리자";
 ?>
 <script>
     function show_alarm() {
