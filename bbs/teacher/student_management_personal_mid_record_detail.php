@@ -397,7 +397,7 @@ $today_date = date("Y-m-d");
                 <input type="hidden" name="no" id="no" value="<?=$res['seq']?>">
                 <input type="hidden" name="flag" value="mid">
                 <div class="comment_input_section">
-                    <textarea name="comment" id="comment" cols="30" rows="10" style="height:180px;width:100%"><?=$res['comment']?></textarea>
+                    <textarea name="comment" id="comment" cols="30" rows="10" style="height:160px;width:97%"><?=$res['comment']?></textarea>
                 </div>
             </form>
         </div>
