@@ -23,8 +23,8 @@ $sql = "select * from `teacher_score`
 $result = mysqli_query($connect_db, $sql);
 ?>
 
-    <link rel="stylesheet" type="text/css"  href="css/student_manegement_personal_record.css" />
-    <script src="js/common.js"></script>
+<link rel="stylesheet" type="text/css"  href="css/student_manegement_personal_record.css" />
+<script src="js/common.js"></script>
 
 <section>
     <div class="head_section">
@@ -54,11 +54,11 @@ $result = mysqli_query($connect_db, $sql);
             </thead>
             <tbody>
             <?php
-                $cnt = 1;
-                while($res = mysqli_fetch_array($result)) {
-                    if($res['test_genre'] == '분기테스트' or $res['test_genre'] == '입반테스트')  $type= "quarter";
-                    else                                                                          $type= "mid";
-            ?>
+            $cnt = 1;
+            while($res = mysqli_fetch_array($result)) {
+                if($res['test_genre'] == '분기테스트' or $res['test_genre'] == '입반테스트')  $type= "quarter";
+                else                                                                          $type= "mid";
+                ?>
                 <tr>
                     <td><?=$cnt?></td>
                     <td><span><?=$res['year']?>/<?=$res['quarter']?>분기 <?=$res['test_genre']?></span></td>
@@ -86,14 +86,14 @@ $result = mysqli_query($connect_db, $sql);
 
 
     function print_send(gubun, no) {
-         var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&flag=1";
-         window.open(url,"PopupWin", "top=-200,left=-1200,width=1100,height=800");
+        var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&flag=1";
+        window.open(url,"PopupWin", "top=-200,left=-1200,width=1100,height=850");
     }
 
 
     function sms_send(gubun, no) {
         var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&flag=2";
-        window.open(url,"PopupWin", "top=-200,left=-1200,width=1100,height=800");
+        window.open(url,"PopupWin", "top=-200,left=-1200,width=1100,height=850");
     }
 </script>
 </body>

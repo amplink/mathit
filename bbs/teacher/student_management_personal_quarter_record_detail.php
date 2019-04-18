@@ -4,8 +4,8 @@ include_once ('head.php');
 $today_date = date("Y-m-d");
 ?>
 
-    <link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css" />
-    <script src="js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css" />
+<script src="js/common.js"></script>
 
 <?php
 $sql = "select * from `teacher_score` 
@@ -157,13 +157,13 @@ $res = mysqli_fetch_array($result);
                 <div class="save_btn"><a href="javascript:save()">저장</a></div>
             </div>
             <div class="comment_input_section">
-                <textarea name="evaluation" id="evaluation" cols="30" rows="10" style="height:180px;width:100%"><?=$res['evaluation']?></textarea>
+                <textarea name="evaluation" id="evaluation" cols="30" rows="10" style="height:150px;width:97%"><?=$res['evaluation']?></textarea>
             </div>
-            <div class="down_head_section">
+            <div class="down_head_section" style="padding-top:5px">
                 <p class="l_div_text">선생님 코멘트</p>
             </div>
             <div class="comment_input_section">
-                <textarea name="comment" id="comment" cols="30" rows="10" style="height:180px;width:100%"><?=$res['comment']?></textarea>
+                <textarea name="comment" id="comment" cols="30" rows="10" style="height:150px;width:97%"><?=$res['comment']?></textarea>
             </div>
         </form>
 

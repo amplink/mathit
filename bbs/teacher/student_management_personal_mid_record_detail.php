@@ -5,8 +5,8 @@ include_once ('head.php');
 $today_date = date("Y-m-d");
 ?>
 
-    <link rel="stylesheet" type="text/css" href="css/student_manegement_personal_mid_record_detail.css" />
-    <script src="js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="css/student_manegement_personal_mid_record_detail.css" />
+<script src="js/common.js"></script>
 
 <section>
 
@@ -57,7 +57,7 @@ $today_date = date("Y-m-d");
 
         $result6 = mysqli_query($connect_db, $sql6);
         $res6 = mysqli_fetch_array($result6);
-        $start_day = date("m/d/Y",strtotime ("+1 days", strtotime($res6('date'))));
+        $start_day = date("m/d/Y",strtotime ("+1 days", strtotime($res6['date'])));
     }
 
     $api_start_date = substr($start_day,6,10)."-".substr($start_day,0,2)."-".substr($start_day,3,2);
@@ -113,10 +113,10 @@ $today_date = date("Y-m-d");
                     </div>
                     <div class="s_info_right">
                         <div class="s_info_div">
-                            <p class="l_div_text">출결</p>
+                            <p class="l_div_text">출석율:</p>
                             <div class="r_div_content">
                                 <p>
-                                    <span>출석율 : </span>
+                                    <!--<span>출석율:</span>-->
                                     <span>
 							<?
                             $result = @(int)(round(($r[1][0] + $r[1][2] / $r[1][1]) * 100));
@@ -417,6 +417,7 @@ $today_date = date("Y-m-d");
     sms_send();
     <?  } else if($_GET['flag']=='1'){ ?>
     window.print();
+    $(".sub_close_btn").hide();
     <?  }  ?>
     /*
         html2canvas(document.querySelector("body"),{
@@ -441,7 +442,6 @@ $today_date = date("Y-m-d");
         html2canvas(document.querySelector("section"), {
             //allowTaint: true,
             //taintTest: false,
-            width:800,
             useCORS: true,
         }).then(function (canvas) {
             var imgageData = canvas.toDataURL("image/png");
