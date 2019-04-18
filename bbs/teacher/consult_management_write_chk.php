@@ -24,6 +24,6 @@ $sql = "insert into `alarm` set `seq`='', `content`='새로운 상담이 등록�
 sql_query($sql);
 
 alert_msg("등록이 완료되었습니다.");
-location_href("./consult_management_personal.php?s_id=".$_GET['s_id']."s_name=".$s_name."&d_uid=".$_GET['d_uid']."&c_uid=".$_GET['c_uid']);
+location_href("./consult_management_personal.php?s_id=".$_GET['s_id']."&s_name=".$s_name."&d_uid=".$_GET['d_uid']."&c_uid=".$_GET['c_uid']);
 
 ?>

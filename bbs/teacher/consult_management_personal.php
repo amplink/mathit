@@ -3,7 +3,9 @@ include_once ('_common.php');
 include_once ('head.php');
 $student_name = $_GET['s_name'];
 $s_id = $_GET['s_id'];
-
+$s_name = $_GET['s_name'];
+$d_uid = $_GET['d_uid'];
+$c_uid = $_GET['c_uid'];
 
 if($_GET['month'] == 'all'){
    $start = "";
@@ -148,7 +150,7 @@ if($_GET['month'] == 'all'){
                 </tbody>
             </table>
         </div>
-        <form action="consult_management_personal_chk.php" method="post" id="consult_form">
+        <form action="consult_management_personal_chk.php?s_id=<?=$s_id?>&s_name=<?=$s_name?>&d_uid=<?=$d_uid?>&c_uid=<?=$c_uid?>" method="post" id="consult_form">
         <div id="content_c"></div>
         <div class="textarea_input_section">
             <p>상담내용</p><br>
@@ -180,7 +182,7 @@ if($_GET['month'] == 'all'){
     }
 
     function del_val() {
-        $("#consult_form").attr('action', "consult_management_personal_del.php");
+        $("#consult_form").attr('action', "consult_management_personal_del.php?s_id=<?php echo $s_id;?>&s_name=<?php echo $s_name;?>&d_uid=<?php echo $d_uid;?>&c_uid=<?php echo $c_uid;?>");
         $("#consult_form").submit();
     }
 

@@ -4,7 +4,7 @@ include_once ('_common.php');
 $search = "%".$_GET['search']."%";
 $i=1;
 $cnt = 0;
-$sql = "select * from `teacher_notice` where `title` like '$search' order by `event_time` desc;";
+$sql = "select * from `teacher_notice` where `title` like '$search' order by `type` desc, `event_time` desc";
 $result = mysqli_query($connect_db, $sql);
 $thisTime=date("Y-m-d H:i:s");
 while($res = mysqli_fetch_array($result)) {
@@ -16,7 +16,7 @@ while($res = mysqli_fetch_array($result)) {
         ?>
         <tr onclick="call_content('<?=$ad_res['id']?>')">
             <td><span><?=$i?></span></td>
-            <td><span><?=$ad_res['title']?></span>
+            <td><span><?php if($ad_res['type']=="중요공지") echo "[공지]";?><?=$ad_res['title']?></span>
                 <?php
                 $signdate = $res['event_time'];
                 $someTime=strtotime($thisTime)-strtotime("$signdate GMT");
@@ -41,7 +41,7 @@ while($res = mysqli_fetch_array($result)) {
     ?>
     <tr onclick="call_content(<?=$res['seq']?>)">
         <td><span><?=$i?></span></td>
-        <td><span><?=$res['title']?></span>
+        <td><span><?php if($res['type']=="중요공지") echo "[공지]";?><?=$res['title']?></span>
             <?php
             $signdate = $res['event_time'];
             $someTime=strtotime($thisTime)-strtotime("$signdate GMT");
