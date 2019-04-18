@@ -1,7 +1,7 @@
 <?php
 include_once ('_common.php');
-$t_name = $_SESSION['t_name'];
-$sql = "select * from `teacher_setting` where `t_name`='$t_name';";
+$t_uid = $_SESSION['t_uid'];
+$sql = "select * from `teacher_setting` where `t_id`='$t_uid';";
 $result = mysqli_query($connect_db, $sql);
 $res = mysqli_fetch_array($result);
 
