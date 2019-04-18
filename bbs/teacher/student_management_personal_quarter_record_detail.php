@@ -16,6 +16,25 @@ $today_date = date("Y-m-d");
     <link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
+    <style>
+        #my-dialog {
+            display: none;
+            position: fixed;
+            left: calc( 50% - 160px );
+            top: 150px;
+            width: 300px; height: 155px;
+            background: #fff;
+            z-index: 9999;
+        }
+        #my-dialog-background {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,.3);
+            z-index: 999;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,6 +44,7 @@ $sql = "select * from `teacher_score`
             `seq` = '$_GET[no]'";
 $result = mysqli_query($connect_db, $sql);
 $res = mysqli_fetch_array($result);
+$student_id = $res['student_id'];
 ?>
 <section>
     <div class="head_section">
@@ -41,7 +61,7 @@ $res = mysqli_fetch_array($result);
             </div>
             <div class="head_right">
                 <div class="print" onclick="javascript: window.print();"><img src="img/printer.png" alt="printer_icon"></div>
-                <div class="mail" onclick="javascript: sms_send();"><img src="img/mail.png" alt="mail_icon"></div>
+                <div class="mail" onclick=""><img src="img/mail.png" alt="mail_icon"></div>
                 <div class="sub_close_btn"><a href="javascript:history.back()"><img src="img/close.png" alt="close_icon"></a></div>
             </div>
         </div>
@@ -181,6 +201,26 @@ $res = mysqli_fetch_array($result);
 
     </div>
 </section>
+<?php
+$ac = $_SESSION['client_no'];
+$link = "/api/math/student?client_no=".$ac."&id=".$student_id;
+$api_res = api_calls_get($link);
+?>
+<div id="my-dialog">
+    <div style="background-color: rgb(41, 124, 62); width: 100%; height: 30px; text-align: center; padding-top: 5px;">
+        <p style="color: white; font-size: 20px; font-weight: bold;">SMS 전송</p>
+    </div>
+    <div style="padding: 20px;">
+        <input type="checkbox" value="<?=$api_res[16]?>" id="parent_phone" name="parent_phone" style="height: auto !important;" checked><span> 학부모 : <?=$api_res[16]?></span>
+        <br>
+        <input type="checkbox" id="add_phone" name="add_phone" style="height: auto !important;"><span> 추가 : </span><input type="text" placeholder="010-0000-0000" name="add_phone_number" id="add_phone_number">
+        <br>
+        <div style="text-align: center; padding: 10px;">
+            <input type="button" style="width: 100px; background-color: rgb(41, 124, 62); color: white; -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; border: 0px; font-size: 15px;" value="전송" onclick="sms_send();">
+        </div>
+    </div>
+</div>
+<div id="my-dialog-background"></div>
 <script>
 
     function save() {
@@ -207,27 +247,39 @@ $res = mysqli_fetch_array($result);
             jQuery("a").attr("download", "screenshot.png").attr("href", newData);
         });
     */
+    $('#my-dialog-background, .mail').click(function () {
+        $('#my-dialog, #my-dialog-background').toggle();
+    });
 
     function sms_send() {
+        var windowWidth = $( window ).width();
 
-        //html2canvas(document.getElementById("ttt"),{
-        html2canvas(document.querySelector("body"), {
+        var width_size = windowWidth - 1366;
+        var cut_size = width_size / 2;
+
+        html2canvas(document.querySelector("section"), {
             //allowTaint: true,
             //taintTest: false,
+            width:800,
             useCORS: true,
         }).then(function (canvas) {
             var imgageData = canvas.toDataURL("image/png");
             var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
-            // jQuery("a").attr("download", "screenshot.png").attr("href", newData);
-            // var Canvas = document.querySelector("body");
-            // var canvasData = Canvas.toDataURL("image/png");
+            var parent = "";
+            var add_phone = "";
+
+            if($('#parent_phone').attr('checked', true)) parent = $('#parent_phone').val();
+            if($('#add_phone').attr('checked', true)) add_phone = $('#add_phone_number').val();
+
             $.ajax({
                 type: "POST",
                 url: "imgdown.php",
-                data: "canvasData=" + imgageData + "&no=" +  $("#no").val(),
+                data: "canvasData=" + imgageData + "&no=" +  $("#no").val() + "&parent=" + parent + "&add_phone=" + add_phone,
                 dataType: "json",
                 success: function (data) {
                     if (data.res == "success") alert('문자가 정상적으로 발송 되었습니다.');
+                    else alert('문자 발송에 실패하였습니다.');
+                    // alert(data.res);
                     <? if($_GET['flag']=='2'){?>
                     window.close();
                     <?  }  ?>
