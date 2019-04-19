@@ -4,11 +4,6 @@ $t_uid = $_SESSION['t_uid'];
 $sql = "select * from `teacher_setting` where `t_id`='$t_uid';";
 $result = mysqli_query($connect_db, $sql);
 $res = mysqli_fetch_array($result);
-
-if($res['admin_menu']==0) {
-    alert_msg("관리자 권한이 없습니다.");
-    location_href("./home.php");
-}
 include_once ('head.php');
 ?>
 
@@ -30,7 +25,7 @@ include_once ('head.php');
     </div>
     <!-- <div class="setting_btn"><a href="#none" style="font-size: 18px;color: white;">저장</a></div> -->
 
-    <div class="setting_box">
+    <div class="setting_box" style="<?php if(!$res['admin_menu']) echo 'display:none';?>">
         <div class="setting_head">
             <p>메뉴권한 설정</p>
             <div class="save_setting_btn"><a href="javascript:submit();">저장</a></div>
@@ -86,7 +81,7 @@ include_once ('head.php');
                     <tr>
 					    <input type="hidden" name="tid[]" value="<?=$r[$i][0]?>">
                         <td><span><?=$r[$i][3]?></span></td>
-                        <td><select name="type[]" id="type_<?=$r[$i][0]?>">
+                        <td><select name="type[]" id="type_<?=$r[$i][0]?>" onchange="chk_type(<?=$r[$i][0]?>)">
                                 <option value="전임강사" <?echo ($res2['type']=='전임강사')?"selected":"";?>>전임강사</option>
                                 <option value="채점강사" <?echo ($res2['type']=='채점강사')?"selected":"";?>>채점강사</option>
                             </select></td>
@@ -180,6 +175,34 @@ while($res = mysqli_fetch_array($result)) {
 }
 ?>
 <script>
+    function chk_type(e) {
+        if($('#type_'+e).val() == "전임강사") {
+            $('#hm_create_'+e).prop('checked', false);
+            $('#hm_mg_'+e).prop('checked', false);
+            $('#score_mg_'+e).prop('checked', false);
+            $('#consult_mg_'+e).prop('checked', false);
+            $('#grade_card_'+e).prop('checked', false);
+            $('#notice_'+e).prop('checked', false);
+            $('#admin_menu_'+e).prop('checked', false);
+
+            $('#hm_create_'+e).prop('checked', true);
+            $('#hm_mg_'+e).prop('checked', true);
+            $('#score_mg_'+e).prop('checked', true);
+            $('#consult_mg_'+e).prop('checked', true);
+            $('#grade_card_'+e).prop('checked', true);
+            $('#notice_'+e).prop('checked', true);
+        }else {
+            $('#hm_create_'+e).prop('checked', false);
+            $('#hm_mg_'+e).prop('checked', false);
+            $('#score_mg_'+e).prop('checked', false);
+            $('#consult_mg_'+e).prop('checked', false);
+            $('#grade_card_'+e).prop('checked', false);
+            $('#notice_'+e).prop('checked', false);
+            $('#admin_menu_'+e).prop('checked', false);
+            
+            $('#notice_'+e).prop('checked', true);
+        }
+    }
     function submit() {
         $('#setting_form').submit();
     }

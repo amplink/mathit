@@ -188,6 +188,8 @@ $t_uid = $_SESSION['t_uid'];
 $sql = "select * from `teacher_setting` where `t_id`='$t_uid';";
 $result = sql_query($sql);
 $res = mysqli_fetch_array($result);
+
+if($_SESSION['admin']) $res['type'] = "관리자";
 ?>
 
     <!DOCTYPE html>
@@ -298,6 +300,7 @@ $res = mysqli_fetch_array($result);
         <?php
         $t_uid = $_SESSION['t_uid'];
         $sql = "select * from `alarm` where `uid`='$t_uid' order by `seq` desc;";
+        if($_SESSION['admin']) $sql = "select * from `alarm` where `target`='관리자';";
         $a_result = sql_query($sql);
         $a_cnt = 0;
         $thisTime=date("Y-m-d H:i:s");
