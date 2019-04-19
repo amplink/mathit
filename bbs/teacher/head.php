@@ -351,7 +351,8 @@ $res = mysqli_fetch_array($result);
             chk_class = 0;
         }
     }
-
+    $('.alarm_box_wrap_wrap').hide();
+    var chk_alarm = 0;
     function alarm_chk() {
         $.ajax({
             url: 'alarm_chk.php',
@@ -360,6 +361,13 @@ $res = mysqli_fetch_array($result);
                 $('#new_span1').css('background-color', 'transparent');
             }
         });
+        if(chk_alarm == 0) {
+            $('.alarm_box_wrap_wrap').show();
+            chk_alarm = 1;
+        }else {
+            $('.alarm_box_wrap_wrap').hide();
+            chk_alarm = 0;
+        }
     }
 </script>
 <?php
