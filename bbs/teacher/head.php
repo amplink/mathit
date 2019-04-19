@@ -218,128 +218,132 @@ $res = mysqli_fetch_array($result);
         $('#new_span1').css('background-color', 'red');
     }
 </script>
-<header>
-    <div class="hamburger_btn">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <span style="border-radius: 50%; width: 10px; height: 10px; position: absolute; top: 10px; left: 35px;" id="new_span1"></span>
 
-    <div class="home_btn"><a href="home.php" id="home_a1"><img src="img/home.png" alt="home_icon"></a></div>
-    <div class="logo_section">
-        <div class="logo"><a href="home.php" id="home_a2"><img src="img/main_logo.png" alt="header_logo"></a></div>
-        <!--        <p class="navigation_text">--><?php //echo $nav_text;?><!--</p>-->
-    </div>
-    <div class="member_info_wrap">
-        <div class="member_img" style="margin-top:-6px"><a href="setting_individual.php"><img src="<?=$_SESSION['t_img']?>" alt="member_img"></a></div>
-        <div class="member_info">
-            <a href="setting_individual.php"><p class="member_name"><?=$_SESSION['t_name']?></p></a>
-            <a href="setting_individual.php"><p class="member_grade"><?=$res['type']?></p></a>
+<?  if($_GET['flag']!='1'){ ?>
+    <header>
+        <div class="hamburger_btn">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-        <div class="logout_btn"><a href="./logout.php">로그아웃</a></div>
-    </div>
-</header>
+        <span style="border-radius: 50%; width: 10px; height: 10px; position: absolute; top: 10px; left: 35px;" id="new_span1"></span>
 
-<div class="hamburder_nav" style="z-index: 99;">
-    <div class="ham_member_info_wrap">
-        <div class="close_btn_line">
-            <div class="close_btn"><img src="img/close.png" alt="close_icon"></div>
+        <div class="home_btn"><a href="home.php" id="home_a1"><img src="img/home.png" alt="home_icon"></a></div>
+        <div class="logo_section">
+            <div class="logo"><a href="home.php" id="home_a2"><img src="img/main_logo.png" alt="header_logo"></a></div>
+            <!--        <p class="navigation_text">--><?php //echo $nav_text;?><!--</p>-->
         </div>
-        <div class="ham_member_info_line">
-            <div class="ham_member_img" style="margin-top:-9px"><a href="setting_individual.php"><img src="<?=$_SESSION['t_img']?>" alt="member_img"></a></div>
-            <div class="ham_member_info">
-                <a href="setting_individual.php"><p class="ham_member_name"><?=$_SESSION['t_name']?></p></a>
-                <a href="setting_individual.php"><p class="ham_member_grade"><?=$res['type']?></p></a>
+        <div class="member_info_wrap">
+            <div class="member_img" style="margin-top:-6px"><a href="setting_individual.php"><img src="<?=$_SESSION['t_img']?>" alt="member_img"></a></div>
+            <div class="member_info">
+                <a href="setting_individual.php"><p class="member_name"><?=$_SESSION['t_name']?></p></a>
+                <a href="setting_individual.php"><p class="member_grade"><?=$res['type']?></p></a>
+            </div>
+            <div class="logout_btn"><a href="./logout.php">로그아웃</a></div>
+        </div>
+    </header>
+
+    <div class="hamburder_nav" style="z-index: 99;">
+        <div class="ham_member_info_wrap">
+            <div class="close_btn_line">
+                <div class="close_btn"><img src="img/close.png" alt="close_icon"></div>
+            </div>
+            <div class="ham_member_info_line">
+                <div class="ham_member_img" style="margin-top:-9px"><a href="setting_individual.php"><img src="<?=$_SESSION['t_img']?>" alt="member_img"></a></div>
+                <div class="ham_member_info">
+                    <a href="setting_individual.php"><p class="ham_member_name"><?=$_SESSION['t_name']?></p></a>
+                    <a href="setting_individual.php"><p class="ham_member_grade"><?=$res['type']?></p></a>
+                </div>
+            </div>
+            <div class="ham_other_btn_line">
+                <div class="setting_btn"><a href="setting.php"><img src="img/setting.png" alt="setting_icon"></a></div>
+                <div class="alarm_btn" onclick="alarm_chk()">
+                    <a href="#none"><img class="test11" src="img/alarm.png" alt="alarm_icon">
+                        <span style="border-radius: 50%; width: 10px; height: 10px; position: absolute; top: 15px; left: 65px;" id="new_span"></span>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="ham_other_btn_line">
-            <div class="setting_btn"><a href="setting.php"><img src="img/setting.png" alt="setting_icon"></a></div>
-            <div class="alarm_btn" onclick="alarm_chk()">
-                <a href="#none"><img class="test11" src="img/alarm.png" alt="alarm_icon">
-                    <span style="border-radius: 50%; width: 10px; height: 10px; position: absolute; top: 15px; left: 65px;" id="new_span"></span>
-                </a>
-            </div>
-        </div>
-    </div>
 
-    <div class="hamnav_menu_wrap">
-        <div class="hamnav_menu" onclick="class_show()" style="cursor:pointer"><a><span>학급목록</span></a>
-            <div class="hamnav_class_list">
-                <!--                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">루트</span><span-->
-                <!--                            class="class_grade_">초6</span></a></div>-->
-                <?php
-                for($i=0; $i<count($d_name); $i++) {
-
-                    //해당 수업에 학생 정보
-                    $link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$i]."&c_uid=".$c_uid[$i];
-                    $r_4 = api_calls_get($link_4);
-
-                    ?>
-                    <div class="hamnav_class" style="cursor: pointer;"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>&s_uid=<?=$s_uid[$i]?>">
-                            <span class="class_title"><?=$d_name[$i]?> ( <?php echo (count($r_4)-1);?> )( <?=$d_yoie[$i]?> )</span>
-                        </a>
-                    </div>
+        <div class="hamnav_menu_wrap">
+            <div class="hamnav_menu" onclick="class_show()" style="cursor:pointer"><a><span>학급목록</span></a>
+                <div class="hamnav_class_list">
+                    <!--                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">루트</span><span-->
+                    <!--                            class="class_grade_">초6</span></a></div>-->
                     <?php
-                }
-                ?>
+                    for($i=0; $i<count($d_name); $i++) {
 
+                        //해당 수업에 학생 정보
+                        $link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$i]."&c_uid=".$c_uid[$i];
+                        $r_4 = api_calls_get($link_4);
+
+                        ?>
+                        <div class="hamnav_class" style="cursor: pointer;"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>&s_uid=<?=$s_uid[$i]?>">
+                                <span class="class_title"><?=$d_name[$i]?> ( <?php echo (count($r_4)-1);?> )( <?=$d_yoie[$i]?> )</span>
+                            </a>
+                        </div>
+                        <?php
+                    }
+                    ?>
+
+                </div>
             </div>
-        </div>
 
-        <div class="hamnav_menu <?php if(!$res['hm_create']) echo "dis";?>"><a href="homework_management_add.php"><span>숙제관리</span></a></div>
-        <div class="hamnav_menu <?php if(!$res['score_mg']) echo "dis";?>"><a href="record_management_add.php"><span>성적관리</span></a></div>
-        <div class="hamnav_menu"><a href="student_management_score_all.php"><span>채점관리</span></a></div>
-        <div class="hamnav_menu"><a href="class_schedule_write.php"><span>수업관리</span></a></div>
-        <div class="hamnav_menu"><a href="notice_list.php"><span>공지사항</span></a></div>
-    </div>
-    <?php
-    $t_uid = $_SESSION['t_uid'];
-    $sql = "select * from `alarm` where `uid`='$t_uid' order by `seq` desc;";
-    $a_result = sql_query($sql);
-    $a_cnt = 0;
-    $thisTime=date("Y-m-d H:i:s");
-    ?>
-    <div class="alarm_box_wrap_wrap">
-        <div class="alarm_box_wrap">
-            <div class="alarm_tri"><img src="img/alarm_tri.png" alt="alarm_tri_icon"></div>
-            <div class="alarm_box" style="overflow: scroll;">
-                <div>
-                    <p id="x_alarm_btn" style="cursor:pointer;font-size:20px;font-weight: bold;text-align: right;">X</p>
+            <div class="hamnav_menu <?php if(!$res['hm_create']) echo "dis";?>"><a href="homework_management_add.php"><span>숙제관리</span></a></div>
+            <div class="hamnav_menu <?php if(!$res['score_mg']) echo "dis";?>"><a href="record_management_add.php"><span>성적관리</span></a></div>
+            <div class="hamnav_menu"><a href="student_management_score_all.php"><span>채점관리</span></a></div>
+            <div class="hamnav_menu"><a href="class_schedule_write.php"><span>수업관리</span></a></div>
+            <div class="hamnav_menu"><a href="notice_list.php"><span>공지사항</span></a></div>
+        </div>
+        <?php
+        $t_uid = $_SESSION['t_uid'];
+        $sql = "select * from `alarm` where `uid`='$t_uid' order by `seq` desc;";
+        $a_result = sql_query($sql);
+        $a_cnt = 0;
+        $thisTime=date("Y-m-d H:i:s");
+        ?>
+        <div class="alarm_box_wrap_wrap">
+            <div class="alarm_box_wrap">
+                <div class="alarm_tri"><img src="img/alarm_tri.png" alt="alarm_tri_icon"></div>
+                <div class="alarm_box" style="overflow: scroll;">
                     <div>
-                        <ul>
-                            <?php
-                            while($a_res = mysqli_fetch_array($a_result)) {
-                                $signdate = $a_res['datetime'];
-                                $someTime=strtotime($thisTime)-strtotime("$signdate GMT");
-                                ?>
-                                <li>
-                                    <div class="alarm_content">
-                                        <p><?=$a_res['content']?></p>
-                                    </div>
-                                    <div class="alarm_time">
-                                        <p><span>
+                        <p id="x_alarm_btn" style="cursor:pointer;font-size:20px;font-weight: bold;text-align: right;">X</p>
+                        <div>
+                            <ul>
+                                <?php
+                                while($a_res = mysqli_fetch_array($a_result)) {
+                                    $signdate = $a_res['datetime'];
+                                    $someTime=strtotime($thisTime)-strtotime("$signdate GMT");
+                                    ?>
+                                    <li>
+                                        <div class="alarm_content">
+                                            <p><?=$a_res['content']?></p>
+                                        </div>
+                                        <div class="alarm_time">
+                                            <p><span>
                                                 <?php
                                                 $cha = ceil($someTime/(60*60*24));
                                                 if($cha <= 0) echo "오늘";
                                                 else echo $cha."일 전";
                                                 ?></span></p>
-                                    </div>
-                                </li>
-                                <?php
-                                if($a_res['chk']==0) {
-                                    $a_cnt++;
+                                        </div>
+                                    </li>
+                                    <?php
+                                    if($a_res['chk']==0) {
+                                        $a_cnt++;
+                                    }
                                 }
-                            }
-                            if($a_cnt > 0) echo "<script>show_alarm();</script>";
-                            ?>
-                        </ul>
+                                if($a_cnt > 0) echo "<script>show_alarm();</script>";
+                                ?>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+<?  } ?>
 <script>
     $('.dis a').prop('href','#');
     $('.hamnav_class_list').hide();

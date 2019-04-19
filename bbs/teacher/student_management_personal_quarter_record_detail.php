@@ -1,6 +1,7 @@
 <?php
 include_once ('_common.php');
 include_once ('head.php');
+
 $today_date = date("Y-m-d");
 ?>
 <link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css" />
@@ -12,6 +13,8 @@ $sql = "select * from `teacher_score`
 $result = mysqli_query($connect_db, $sql);
 $res = mysqli_fetch_array($result);
 $student_id = $res['student_id'];
+
+
 ?>
 <section>
     <div class="head_section">
@@ -27,14 +30,17 @@ $student_id = $res['student_id'];
                 <p class="record_date"><?=$today_date?></p>
             </div>
             <div class="head_right">
-                <div class="print" onclick="javascript: window.print();"><img src="img/printer.png" alt="printer_icon"></div>
-                <div class="mail" onclick=""><img src="img/mail.png" alt="mail_icon"></div>
+                <?  if($_GET['flag']!='1'){ ?>
+                    <div class="print" onclick="javascript: print_send('quarter','<?=$res[seq]?>')"><img src="img/printer.png" alt="printer_icon"></div>
+                    <div class="mail" onclick=""><img src="img/mail.png" alt="mail_icon"></div>
+                <?  } ?>
+
                 <div class="sub_close_btn">
                     <?  if($_GET['flag']=='1'){ ?>
                     <a href="javascript:window.close()"><img src="img/close.png" alt="close_icon"></a></div>
-                <?  } else {  ?>
-                    <a href="./student_management_personal_record.php?s_id=<?=$_GET['s_id']?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_uid=<?=$_GET['s_uid']?>"><img src="img/close.png" alt="close_icon"></a>
-                <?  } ?>
+            <?  } else {  ?>
+                <a href="./student_management_personal_record.php?s_id=<?=$_GET['s_id']?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_uid=<?=$_GET['s_uid']?>"><img src="img/close.png" alt="close_icon"></a>
+            <?  } ?>
             </div>
         </div>
     </div>
@@ -269,6 +275,10 @@ $api_res = api_calls_get($link);
 
     }
 
+    function print_send(gubun, no) {
+        var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&flag=1";
+        window.open(url,"PopupWin", "width=1100,height=850");
+    }
 </script>
 </body>
 

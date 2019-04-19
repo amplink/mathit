@@ -140,9 +140,9 @@ include_once ('head.php');
                             </div>
                             <div class="division">
                                 <p class="l_div_title">영역별 점수</p>
-                                <div class="score_input"><input type="text" placeholder="점수" name="sub_score1" value="100" id="sub_score1"><span> 점</span></div>
-                                <div class="score_input"><input type="text" placeholder="점수" name="sub_score2" value="100" id="sub_score2"><span> 점</span></div>
-                                <div class="score_input"><input type="hidden" placeholder="점수" name="sub_score3" value="0" id="sub_score3"><span id="score3_text"> 점</span></div>
+                                <div class="score_input"><input type="text" placeholder="점수" name="sub_score1" value="100" id="sub_score1" style="width:70px"><span> 점</span></div>
+                                <div class="score_input"><input type="text" placeholder="점수" name="sub_score2" value="100" id="sub_score2" style="width:70px"><span> 점</span></div>
+                                <div class="score_input"><input type="hidden" placeholder="점수" name="sub_score3" value="0" id="sub_score3" style="width:70px"><span id="score3_text"> 점</span></div>
                             </div>
                         </div>
                     </div>
