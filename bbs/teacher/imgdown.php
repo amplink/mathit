@@ -12,7 +12,7 @@ if (isset($_POST["canvasData"]))
     $filteredData = substr($imageData, strpos($imageData, ",")+1);
     $unencodedData = base64_decode($filteredData);
 
-    $upload_dir = "./img_data/".date("Ym");
+    $upload_dir = "/img_data/".date("Ym");
 
     if(!is_dir($upload_dir)){
         mkdir($upload_dir, 0755);
@@ -27,11 +27,11 @@ if (isset($_POST["canvasData"]))
     $sql = "update `teacher_score` set `img_path`='$filename' where `seq`='$_POST[no]';";
     $result = sql_query($sql);
 
-    $file_path = array($filename);
+    $link = "http://teacher.mathitlms.co.kr".$filename;
 
     if($result==1) {
         if($_POST['parent']) {
-            if ($api->mms_send($_POST['parent'], "02-2282-0331", $file_path,"귀하 자녀의 MATH IT 학원 성적입니다.", "MATH IT" ,0) == gabiaSmsApi::$RESULT_OK) {
+            if ($api->sms_send($_POST['parent'], "02-2282-0331","성적 확인하기 : $link", "MATH IT" ,0) == gabiaSmsApi::$RESULT_OK) {
                 $chk1 = 1;
             }
             else {
@@ -40,7 +40,7 @@ if (isset($_POST["canvasData"]))
         }
 
         if($_POST['add_phone']) {
-            if ($api->mms_send($_POST['add_phone'], "02-2282-0331", $file_path,"귀하 자녀의 MATH IT 학원 성적입니다.", "MATH IT" ,0) == gabiaSmsApi::$RESULT_OK) {
+            if ($api->sms_send($_POST['add_phone'], "02-2282-0331","성적 확인하기 : $link", "MATH IT" ,0) == gabiaSmsApi::$RESULT_OK) {
                 $chk2 = 1;
             }
             else {
