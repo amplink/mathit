@@ -121,11 +121,10 @@ $today_date = date("Y-m-d");
                 </div>
                 <div class="s_info_right">
                     <div class="s_info_div">
-                        <p class="l_div_text">출결</p>
+                        <p class="l_div_text">출석율</p>
                         <div class="r_div_content">
                             <p>
-                                <span>출석율 : </span>
-                                <span>
+                                    <span>
 							<?
                             $result = @(int)(round(($r[1][0] + $r[1][2] / $r[1][1]) * 100));
                             echo $result;
@@ -133,7 +132,7 @@ $today_date = date("Y-m-d");
                             </p>
 
                             <p>
-                                <span>(지각 : <? echo ($r[1][2])?$r[1][2]:"0"?>, 결석 : <? echo ($r[1][0])?$r[1][0]:"0"?>)</span>
+                                <span>(지각: <? echo ($r[1][2])?$r[1][2]:"0"?>, 결석: <? echo ($r[1][0])?$r[1][0]:"0"?>)</span>
                             </p>
                         </div>
                     </div>
@@ -444,7 +443,8 @@ $api_res = api_calls_get($link);
 </script>
 <script src="./js/es6-promise.auto.js"></script>
 <script src="./js/html2canvas.js"></script>
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script><script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
     <? if($_GET['flag']=='2'){?>
     sms_send();
     <?  } else if($_GET['flag']=='1'){ ?>
