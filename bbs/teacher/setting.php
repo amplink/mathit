@@ -184,7 +184,7 @@ while($res = mysqli_fetch_array($result)) {
             $('#grade_card_'+e).prop('checked', false);
             $('#notice_'+e).prop('checked', false);
             $('#admin_menu_'+e).prop('checked', false);
-
+            
             $('#hm_create_'+e).prop('checked', true);
             $('#hm_mg_'+e).prop('checked', true);
             $('#score_mg_'+e).prop('checked', true);
