@@ -4,6 +4,25 @@ include_once ('head.php');
 
 $today_date = date("Y-m-d");
 ?>
+<style>
+    #my-dialog {
+        display: none;
+        position: fixed;
+        left: calc( 50% - 160px );
+        top: 150px;
+        width: 300px; height: 155px;
+        background: #fff;
+        z-index: 9999;
+    }
+    #my-dialog-background {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,.3);
+        z-index: 999;
+    }
+</style>
 <link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css" />
 <script src="js/common.js"></script>
 <?php

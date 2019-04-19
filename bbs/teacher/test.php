@@ -4,23 +4,32 @@ include_once ('api.class.php');
 
 $api = new gabiaSmsApi('psemathit','e7e280b259a8b08dd95e605e89637bc1');
 
-//$file_path = array("/img_data/201904/CL2QZ2wS7gjvdJh18g4I.png");
-$file_path = array("./img_data/201904/yRGuucbuO1Li4DzUBtLc.png");
-$phone = array("010-5396-7566");
-//$fp = fopen($file_path[0],"r");
-//$fr = fread($fp,filesize($file_path[0]));
-//fclose($fp);
-//$file_code = base64_encode($fr);
-//echo $file_code;
-if ($api->multi_mms_send($phone, "02-2282-0331", $file_path,"테스트1", "homework" , "homework", 0) == gabiaSmsApi::$RESULT_OK)
-{
-    echo("send ok");
-    echo("이전 : " . $api->getBefore());
-    echo("이후 : " . $api->getAfter());
-}
-else
-{
-    echo("SEND FAIL – " . $api->getResultCode() . " : " . $api->getResultMessage());
-}
+$filename = "./img_data/201904/uswJowXQJFhnINqM1lOd.png";
+$file_name = substr($filename, 1);
+$link = "http://teacher.mathitlms.co.kr".$file_name;
 
+if($result==1) {
+    if($_POST['parent']) {
+        if ($api->sms_send($_POST['parent'], "02-2282-0331","성적 확인하기 : $link", "MATH IT" ,0) == gabiaSmsApi::$RESULT_OK) {
+            $chk1 = 1;
+        }
+        else {
+            $chk1 = 0;
+        }
+    }
+
+    if($_POST['add_phone']) {
+        if ($api->sms_send($_POST['add_phone'], "02-2282-0331","성적 확인하기 : $link", "MATH IT" ,0) == gabiaSmsApi::$RESULT_OK) {
+            $chk2 = 1;
+        }
+        else {
+            $chk2 = 0;
+        }
+    }
+
+    if($chk1 == 1 || $chk2 == 1) {
+        echo  json_encode(array("res" => "success"));
+    }else echo  json_encode(array("res" => "fail"));
+
+}
 ?>

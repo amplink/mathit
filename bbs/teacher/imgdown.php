@@ -27,6 +27,7 @@ if (isset($_POST["canvasData"]))
     $sql = "update `teacher_score` set `img_path`='$filename' where `seq`='$_POST[no]';";
     $result = sql_query($sql);
 
+    $filename = substr($filename, 1);
     $link = "http://teacher.mathitlms.co.kr".$filename;
     if($result==1) {
         if($_POST['parent']) {
