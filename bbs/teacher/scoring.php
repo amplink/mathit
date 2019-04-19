@@ -230,13 +230,13 @@ include_once ('head.php');
                 <div class="paper_input swiper-container">
                     <ul class="swiper-wrapper">
                         <li class="swiper-slide">
-                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/1.jpg"></div>
+                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/1.jpg" style="height: 100%;"></div>
                         </li>
                         <li class="swiper-slide">
-                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/2.jpg"></div>
+                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/2.jpg" style="height: 100%;"></div>
                         </li>
                         <li class="swiper-slide">
-                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/3.jpg"></div>
+                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/3.jpg" style="height: 100%;"></div>
                         </li>
                     </ul>
                     <div class="swiper-pagination"></div>
@@ -271,19 +271,6 @@ include_once ('head.php');
     });
 
     function chCorner(obj){
-        /*var chk = 0;
-        $('.marking').each(function() {
-             if($(this).is(':checked')){
-                chk++;
-             }
-        });
-
-        if(chk == 0){
-           location.href = "./scoring.php?h_id=<?=$_GET['h_id']?>&id=<?=$_GET['id']?>&corner="+obj;
-		}else{
-	  	  $("#tempSave").val("1");
-          $("#scoreForm").submit();
-		}*/
         location.href = "./scoring.php?h_id=<?=$_GET['h_id']?>&id=<?=$_GET['id']?>&corner="+obj;
     }
 
