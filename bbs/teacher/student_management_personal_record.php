@@ -66,7 +66,7 @@ $result = mysqli_query($connect_db, $sql);
                     <td>
                         <div class="paper">
                             <!--<a href="student_management_personal_mid_record_detail.php?d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_uid=<?=$_GET['s_uid']?>&s_name=<?=$student_name?>&title=<?=$res['title']?>&s_id=<?=$res['student_id']?>">-->
-                            <a href="student_management_personal_<?=$type?>_record_detail.php?no=<?=$res['seq']?>">
+                            <a href="student_management_personal_<?=$type?>_record_detail.php?no=<?=$res['seq']?>&s_id=<?=$_GET['s_id']?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_uid=<?=$_GET['s_uid']?>">
                                 <img src="img/paper.png" alt="paper_icon">
                             </a>
                         </div>

@@ -2,10 +2,10 @@
 if (!defined('_GNUBOARD_')) exit;
 
 /*************************************************************************
-**
-**  일반 함수 모음
-**
-*************************************************************************/
+ **
+ **  일반 함수 모음
+ **
+ *************************************************************************/
 
 // 마이크로 타임을 얻어 계산 형식으로 만듦
 function get_microtime()
@@ -168,7 +168,7 @@ function alert($msg='', $url='', $error=true, $post=false)
 function alert_close($msg, $error=true)
 {
     global $g5;
-    
+
     $msg = strip_tags($msg, '<br>');
 
     $header = '';
@@ -326,10 +326,10 @@ function get_dirsize($dir)
 
 
 /*************************************************************************
-**
-**  그누보드 관련 함수 모음
-**
-*************************************************************************/
+ **
+ **  그누보드 관련 함수 모음
+ **
+ *************************************************************************/
 
 
 // 게시물 정보($write_row)를 출력하기 위하여 $list로 가공된 정보를 복사 및 가공
@@ -354,15 +354,15 @@ function get_list($write_row, $board, $skin_url, $subject_len=40)
 
     // 목록에서 내용 미리보기 사용한 게시판만 내용을 변환함 (속도 향상) : kkal3(커피)님께서 알려주셨습니다.
     if ($board['bo_use_list_content'])
-	{
-		$html = 0;
-		if (strstr($list['wr_option'], 'html1'))
-			$html = 1;
-		else if (strstr($list['wr_option'], 'html2'))
-			$html = 2;
+    {
+        $html = 0;
+        if (strstr($list['wr_option'], 'html1'))
+            $html = 1;
+        else if (strstr($list['wr_option'], 'html2'))
+            $html = 2;
 
         $list['content'] = conv_content($list['wr_content'], $html);
-	}
+    }
 
     $list['comment_cnt'] = '';
     if ($list['wr_comment'])
@@ -528,9 +528,9 @@ function conv_content($content, $html, $filter=true)
         $content = html_symbol($content);
 
         // 공백 처리
-		//$content = preg_replace("/  /", "&nbsp; ", $content);
-		$content = str_replace("  ", "&nbsp; ", $content);
-		$content = str_replace("\n ", "\n&nbsp;", $content);
+        //$content = preg_replace("/  /", "&nbsp; ", $content);
+        $content = str_replace("  ", "&nbsp; ", $content);
+        $content = str_replace("\n ", "\n&nbsp;", $content);
 
         $content = get_text($content, 1);
         $content = url_auto_link($content);
@@ -714,7 +714,7 @@ function get_group($gr_id)
 function get_member($mb_id, $fields='*')
 {
     global $g5;
-    
+
     $mb_id = preg_replace("/[^0-9a-z_]+/i", "", $mb_id);
 
     return sql_fetch(" select $fields from {$g5['member_table']} where mb_id = TRIM('$mb_id') ");
@@ -1429,10 +1429,10 @@ function html_symbol($str)
 
 
 /*************************************************************************
-**
-**  SQL 관련 함수 모음
-**
-*************************************************************************/
+ **
+ **  SQL 관련 함수 모음
+ **
+ *************************************************************************/
 
 // DB 연결
 function sql_connect($host, $user, $pass, $db=G5_MYSQL_DB)
@@ -1933,8 +1933,8 @@ function bad_tag_convert($code)
         //$code = preg_replace_callback("#(\<(embed|object)[^\>]*)\>(\<\/(embed|object)\>)?#i",
         // embed 또는 object 태그를 막지 않는 경우 필터링이 되도록 수정
         $code = preg_replace_callback("#(\<(embed|object)[^\>]*)\>?(\<\/(embed|object)\>)?#i",
-                    create_function('$matches', 'return "<div class=\"embedx\">보안문제로 인하여 관리자 아이디로는 embed 또는 object 태그를 볼 수 없습니다. 확인하시려면 관리권한이 없는 다른 아이디로 접속하세요.</div>";'),
-                    $code);
+            create_function('$matches', 'return "<div class=\"embedx\">보안문제로 인하여 관리자 아이디로는 embed 또는 object 태그를 볼 수 없습니다. 확인하시려면 관리권한이 없는 다른 아이디로 접속하세요.</div>";'),
+            $code);
     }
 
     return preg_replace("/\<([\/]?)(script|iframe|form)([^\>]*)\>?/i", "&lt;$1$2$3&gt;", $code);
@@ -1996,19 +1996,19 @@ function is_utf8($str)
 // 출처 : https://www.google.co.kr/search?q=utf8_strcut&aq=f&oq=utf8_strcut&aqs=chrome.0.57j0l3.826j0&sourceid=chrome&ie=UTF-8
 function utf8_strcut( $str, $size, $suffix='...' )
 {
-        $substr = substr( $str, 0, $size * 2 );
-        $multi_size = preg_match_all( '/[\x80-\xff]/', $substr, $multi_chars );
+    $substr = substr( $str, 0, $size * 2 );
+    $multi_size = preg_match_all( '/[\x80-\xff]/', $substr, $multi_chars );
 
-        if ( $multi_size > 0 )
-            $size = $size + intval( $multi_size / 3 ) - 1;
+    if ( $multi_size > 0 )
+        $size = $size + intval( $multi_size / 3 ) - 1;
 
-        if ( strlen( $str ) > $size ) {
-            $str = substr( $str, 0, $size );
-            $str = preg_replace( '/(([\x80-\xff]{3})*?)([\x80-\xff]{0,2})$/', '$1', $str );
-            $str .= $suffix;
-        }
+    if ( strlen( $str ) > $size ) {
+        $str = substr( $str, 0, $size );
+        $str = preg_replace( '/(([\x80-\xff]{3})*?)([\x80-\xff]{0,2})$/', '$1', $str );
+        $str .= $suffix;
+    }
 
-        return $str;
+    return $str;
 }
 
 
@@ -2039,7 +2039,7 @@ function sql_real_escape_string($str, $link=null)
 
     if(!$link)
         $link = $g5['connect_db'];
-    
+
     if(function_exists('mysqli_connect') && G5_MYSQLI_USE) {
         return mysqli_real_escape_string($link, $str);
     }
@@ -2095,20 +2095,20 @@ function is_mobile()
 
 
 /*******************************************************************************
-    유일한 키를 얻는다.
+유일한 키를 얻는다.
 
-    결과 :
+결과 :
 
-        년월일시분초00 ~ 년월일시분초99
-        년(4) 월(2) 일(2) 시(2) 분(2) 초(2) 100분의1초(2)
-        총 16자리이며 년도는 2자리로 끊어서 사용해도 됩니다.
-        예) 2008062611570199 또는 08062611570199 (2100년까지만 유일키)
+년월일시분초00 ~ 년월일시분초99
+년(4) 월(2) 일(2) 시(2) 분(2) 초(2) 100분의1초(2)
+총 16자리이며 년도는 2자리로 끊어서 사용해도 됩니다.
+예) 2008062611570199 또는 08062611570199 (2100년까지만 유일키)
 
-    사용하는 곳 :
-    1. 게시판 글쓰기시 미리 유일키를 얻어 파일 업로드 필드에 넣는다.
-    2. 주문번호 생성시에 사용한다.
-    3. 기타 유일키가 필요한 곳에서 사용한다.
-*******************************************************************************/
+사용하는 곳 :
+1. 게시판 글쓰기시 미리 유일키를 얻어 파일 업로드 필드에 넣는다.
+2. 주문번호 생성시에 사용한다.
+3. 기타 유일키가 필요한 곳에서 사용한다.
+ *******************************************************************************/
 // 기존의 get_unique_id() 함수를 사용하지 않고 get_uniqid() 를 사용한다.
 function get_uniqid()
 {
@@ -2884,7 +2884,7 @@ function get_search_string($stx)
 function clean_xss_tags($str)
 {
     $str_len = strlen($str);
-    
+
     $i = 0;
     while($i <= $str_len){
         $result = preg_replace('#</*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|i(?:frame|layer)|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|title|xml)[^>]*+>#i', '', $str);
@@ -2993,7 +2993,7 @@ function replace_filename($name)
     $usec = get_microtime();
     $file_path = pathinfo($name);
     $ext = $file_path['extension'];
-    $return_filename = sha1($ss_id.$_SERVER['REMOTE_ADDR'].$usec); 
+    $return_filename = sha1($ss_id.$_SERVER['REMOTE_ADDR'].$usec);
     if( $ext )
         $return_filename .= '.'.$ext;
 
@@ -3055,7 +3055,7 @@ function check_url_host($url, $msg='', $return_url=G5_URL, $is_redirect=false)
     $p = @parse_url($url);
     $host = preg_replace('/:[0-9]+$/', '', $_SERVER['HTTP_HOST']);
     $is_host_check = false;
-    
+
     // url을 urlencode 를 2번이상하면 parse_url 에서 scheme와 host 값을 가져올수 없는 취약점이 존재함
     if ( $is_redirect && !isset($p['host']) && urldecode($url) != $url ){
         $i = 0;
@@ -3265,27 +3265,27 @@ function get_skin_url($dir, $skin)
 
 // 발신번호 유효성 체크
 function check_vaild_callback($callback){
-   $_callback = preg_replace('/[^0-9]/','', $callback);
+    $_callback = preg_replace('/[^0-9]/','', $callback);
 
-   /**
-   * 1588 로시작하면 총8자리인데 7자리라 차단
-   * 02 로시작하면 총9자리 또는 10자리인데 11자리라차단
-   * 1366은 그자체가 원번호이기에 다른게 붙으면 차단
-   * 030으로 시작하면 총10자리 또는 11자리인데 9자리라차단
-   */
+    /**
+     * 1588 로시작하면 총8자리인데 7자리라 차단
+     * 02 로시작하면 총9자리 또는 10자리인데 11자리라차단
+     * 1366은 그자체가 원번호이기에 다른게 붙으면 차단
+     * 030으로 시작하면 총10자리 또는 11자리인데 9자리라차단
+     */
 
-   if( substr($_callback,0,4) == '1588') if( strlen($_callback) != 8) return false;
-   if( substr($_callback,0,2) == '02')   if( strlen($_callback) != 9  && strlen($_callback) != 10 ) return false;
-   if( substr($_callback,0,3) == '030')  if( strlen($_callback) != 10 && strlen($_callback) != 11 ) return false;
+    if( substr($_callback,0,4) == '1588') if( strlen($_callback) != 8) return false;
+    if( substr($_callback,0,2) == '02')   if( strlen($_callback) != 9  && strlen($_callback) != 10 ) return false;
+    if( substr($_callback,0,3) == '030')  if( strlen($_callback) != 10 && strlen($_callback) != 11 ) return false;
 
-   if( !preg_match("/^(02|0[3-6]\d|01(0|1|3|5|6|7|8|9)|070|080|007)\-?\d{3,4}\-?\d{4,5}$/",$_callback) &&
-       !preg_match("/^(15|16|18)\d{2}\-?\d{4,5}$/",$_callback) ){
-             return false;
-   } else if( preg_match("/^(02|0[3-6]\d|01(0|1|3|5|6|7|8|9)|070|080)\-?0{3,4}\-?\d{4}$/",$_callback )) {
-             return false;
-   } else {
-             return true;
-   }
+    if( !preg_match("/^(02|0[3-6]\d|01(0|1|3|5|6|7|8|9)|070|080|007)\-?\d{3,4}\-?\d{4,5}$/",$_callback) &&
+        !preg_match("/^(15|16|18)\d{2}\-?\d{4,5}$/",$_callback) ){
+        return false;
+    } else if( preg_match("/^(02|0[3-6]\d|01(0|1|3|5|6|7|8|9)|070|080)\-?0{3,4}\-?\d{4}$/",$_callback )) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 // 문자열 암복호화
@@ -3365,7 +3365,7 @@ function get_member_profile_img($mb_id='', $width='', $height='', $alt='profile_
 
     static $no_profile_cache = '';
     static $member_cache = array();
-    
+
     $src = '';
 
     if( $mb_id ){
@@ -3447,7 +3447,7 @@ function check_mail_bot($ip=''){
     //아이피를 체크하여 메일 크롤링을 방지합니다.
     $check_ips = array('211.249.40.');
     $bot_message = 'bot 으로 판단되어 중지합니다.';
-    
+
     if($ip){
         foreach( $check_ips as $c_ip ){
             if( preg_match('/^'.preg_quote($c_ip).'/', $ip) ) {
@@ -3458,13 +3458,13 @@ function check_mail_bot($ip=''){
 
     // user agent를 체크하여 메일 크롤링을 방지합니다.
     $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
-    if ($user_agent === 'Carbon' || strpos($user_agent, 'BingPreview') !== false || strpos($user_agent, 'Slackbot') !== false) { 
+    if ($user_agent === 'Carbon' || strpos($user_agent, 'BingPreview') !== false || strpos($user_agent, 'Slackbot') !== false) {
         die($bot_message);
-    } 
+    }
 }
 
 function get_call_func_cache($func, $args=array()){
-    
+
     static $cache = array();
 
     $key = md5(serialize($args));
@@ -3480,7 +3480,7 @@ function get_call_func_cache($func, $args=array()){
     } catch (Exception $e) {
         return null;
     }
-    
+
     return $result;
 }
 
@@ -3538,7 +3538,7 @@ function is_include_path_check($path='', $is_input='')
         }
 
         $extension = pathinfo($path, PATHINFO_EXTENSION);
-        
+
         if($extension && preg_match('/(jpg|jpeg|png|gif|bmp|conf)$/i', $extension)) {
             return false;
         }
@@ -3563,33 +3563,33 @@ function option_array_checked($option, $arr=array()){
 
 function status_view($state){
 
-	switch($state){
+    switch($state){
         case "a1" :
-			$str = '<font color="green">1차 제출</p>';
-			break;
+            $str = '<font color="green">1차 제출</p>';
+            break;
         case "a2" :
-			$str = '<font color="blue">2차 제출</p>';
-			break;
+            $str = '<font color="blue">2차 제출</p>';
+            break;
         case "s1" :
-			$str = '<font color="green">1차 채점 완료</p>';
-			break;
+            $str = '<font color="green">1차 채점 완료</p>';
+            break;
         case "s2" :
-			$str = '<font color="blue">숙제 완료</p>';
-			break;	
+            $str = '<font color="blue">숙제 완료</p>';
+            break;
         case "s3" :
-			$str = '<font color="blue">숙제 완료</p>';
-			break;	
+            $str = '<font color="blue">숙제 완료</p>';
+            break;
         case "s0" :
-			$str = '<font color="red">미제출</p>';
-			break;			
+            $str = '<font color="red">미제출</p>';
+            break;
         case "s0" :
-			$str = '<font color="red">지각 제출</p>';
-			break;
+            $str = '<font color="red">지각 제출</p>';
+            break;
         default:
             $str = '<font color="red">미제출</p>';
             break;
-	}
-	return $str;
+    }
+    return $str;
 
 }
 
@@ -3633,6 +3633,27 @@ function generateRandomString($length = 10) {
     }
     return $randomString;
 }
+
+
+function arr_sort($array, $key) {
+
+    $keys = array();
+    $vals = array();
+
+    foreach ($array as $k=>$v){
+        $class = str_replace("초등 ","A",$v[$key]);
+        $class = str_replace("중등 ","B",$class);
+        $i = $class.'.'.$k;
+        $vals[$i] = $v;
+        array_push($keys, $k);
+    }
+
+    ksort($vals);
+    $ret = array_combine($keys, $vals);
+
+    return $ret;
+}
+
 
 $grade_arr = array("초3"=>"3", "초4"=>"4", "초5"=>"5", "초6"=>"6",  "중1"=>"7", "중2"=>"8", "중3"=>"9");
 $semester_arr = array("1학기"=>"1", "2학기"=>"2");

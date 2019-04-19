@@ -14,49 +14,49 @@ for($i=0; $i<count($d_name); $i++) {
 ?>
 
 
-    <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_personal.css" />
-    <script src="js/common.js"></script>
-    <script src="js/homework_manegement_personal.js?v=20190415"></script>
-    <script>
-        $( function() {
-            $( "#datepicker" ).datepicker({
-                //dateFormat: "yy-mm-dd",
-                showOn: "button",
-                buttonImage: "img/calendar.png",
-                buttonImageOnly: true,
-                buttonText: "Select date",
-                nextText: "다음달",
-                prevText: "이전달",
-                changeMonth: true,
-                dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-                dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-                monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-                monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                numberOfMonths: 1
-            });
-        } );
-    </script>
-    <style>
-        .search_btn {
-            display: inline-block;
-            width: 80px;
-            height: 25px;
-            line-height: 25px;
-            border-radius: 20px;
-            background-color: rgb(32, 175, 68);
-            margin-left: 10px;
-            cursor: pointer;
-        }
-        .search_btn a {
-            display: block;
-            width: 100%;
-            height: 100%;
-            font-size: 14px;
-            font-weight: 600;
-            color: rgb(255, 255, 255);
-            text-align: center;
-        }
-    </style>
+<link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_personal.css" />
+<script src="js/common.js"></script>
+<script src="js/homework_manegement_personal.js?v=20190415"></script>
+<script>
+    $( function() {
+        $( "#datepicker" ).datepicker({
+            //dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImage: "img/calendar.png",
+            buttonImageOnly: true,
+            buttonText: "Select date",
+            nextText: "다음달",
+            prevText: "이전달",
+            changeMonth: true,
+            dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+            dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+            monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            numberOfMonths: 1
+        });
+    } );
+</script>
+<style>
+    .search_btn {
+        display: inline-block;
+        width: 80px;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 20px;
+        background-color: rgb(32, 175, 68);
+        margin-left: 10px;
+        cursor: pointer;
+    }
+    .search_btn a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        font-size: 14px;
+        font-weight: 600;
+        color: rgb(255, 255, 255);
+        text-align: center;
+    }
+</style>
 
 <section>
     <form action="<?=$_SERVER['PHP_SELF'];?>" id="searchForm" method="get">
@@ -85,13 +85,13 @@ for($i=0; $i<count($d_name); $i++) {
                         <span> 학생</span>
                     </p>
                 </div>
-                <div class="head_right">
+                <div class="head_right" style="margin-top:-5px">
                     <p>시작일 조회</p>
                     <?
                     if($_GET['beginDate']) $beginDate = $_GET['beginDate'];
                     else					$beginDate = date('m')."/01/".date('Y');
                     ?>
-                    <input type="text" name="beginDate" id="datepicker" value="<?=$beginDate?>">
+                    <input type="text" name="beginDate" id="datepicker" class="datepicker2" value="<?=$beginDate?>">
                     <p><div class="search_btn" onclick="search();"><a>검색</a></div></p>
                 </div>
             </div>
@@ -148,7 +148,7 @@ for($i=0; $i<count($d_name); $i++) {
                     </td>
                     <td><span><?=$res2['name']?></span>
                         <br>
-                            <span><?=$res2['grade']?> - </span><span><?=$res2['semester']?> </span><span>(<?=$res2['unit']?>)</span>
+                        <span><?=$res2['grade']?> - </span><span><?=$res2['semester']?> </span><span>(<?=$res2['unit']?>)</span>
                     </td>
                     <td>
                         <span><?=substr($res2['_to'],6,4)?>-<?=substr($res2['_to'],0,2)?>-<?=substr($res2['_to'],3,2)?></span><br>
@@ -212,11 +212,11 @@ for($i=0; $i<count($d_name); $i++) {
                     <td>
                         <div class="td_blank"></div>
                         <div class="detail_show_btn" id="<?=$y?>" style="cursor: pointer;"><a>상세보기</a>
-                            <? if($res2['apply_status_1'] == 'N') {?>
+                            <!--<? if($res2['apply_status_1'] == 'N') {?>
                                 <a href="./submit_test.php?no=<?=$res2['seq']?>&<?=$_SERVER['QUERY_STRING']?>&s=1">1차 제출</a>
                             <? }else if($res2['apply_status_2'] == 'N' and $res2['current_status'] == 's1'){ ?>
                                 <a href="./submit_test.php?no=<?=$res2['seq']?>&<?=$_SERVER['QUERY_STRING']?>&s=2">2차 제출</a>
-                            <? } ?>
+                            <? } ?>-->
                         </div>
                         <!--<div class="detail_show_disable_btn"><a>상세보기</a></div>-->
                     </td>

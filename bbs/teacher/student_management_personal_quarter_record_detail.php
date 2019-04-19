@@ -3,41 +3,8 @@ include_once ('_common.php');
 include_once ('head.php');
 $today_date = date("Y-m-d");
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIt - teacher</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-    <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/common.js"></script>
-    <style>
-        #my-dialog {
-            display: none;
-            position: fixed;
-            left: calc( 50% - 160px );
-            top: 150px;
-            width: 300px; height: 155px;
-            background: #fff;
-            z-index: 9999;
-        }
-        #my-dialog-background {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,.3);
-            z-index: 999;
-        }
-    </style>
-</head>
-
-<body>
+<link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css" />
+<script src="js/common.js"></script>
 <?php
 $sql = "select * from `teacher_score` 
              where 
@@ -62,9 +29,15 @@ $student_id = $res['student_id'];
             <div class="head_right">
                 <div class="print" onclick="javascript: window.print();"><img src="img/printer.png" alt="printer_icon"></div>
                 <div class="mail" onclick=""><img src="img/mail.png" alt="mail_icon"></div>
-                <div class="sub_close_btn"><a href="javascript:history.back()"><img src="img/close.png" alt="close_icon"></a></div>
+                <div class="sub_close_btn">
+                    <?  if($_GET['flag']=='1'){ ?>
+                    <a href="javascript:window.close()"><img src="img/close.png" alt="close_icon"></a></div>
+                <?  } else {  ?>
+                    <a href="./student_management_personal_record.php?s_id=<?=$_GET['s_id']?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_uid=<?=$_GET['s_uid']?>"><img src="img/close.png" alt="close_icon"></a>
+                <?  } ?>
             </div>
         </div>
+    </div>
     </div>
     <div class="up_box">
         <div class="l_box">
@@ -184,18 +157,22 @@ $student_id = $res['student_id'];
         <form name="commentForm" id="commentForm" action="./score_comment_reg.php" method="post">
             <input type="hidden" name="no" value="<?=$res['seq']?>">
             <input type="hidden" name="flag" value="quarter">
+            <input type="hidden" name="s_id" value="<?=$_GET['s_id']?>">
+            <input type="hidden" name="d_uid" value="<?=$_GET['d_uid']?>">
+            <input type="hidden" name="c_uid" value="<?=$_GET['c_uid']?>">
+            <input type="hidden" name="s_uid" value="<?=$_GET['s_uid']?>">
             <div class="down_head_section">
                 <p class="l_div_text">학생 수준 진단</p>
                 <div class="save_btn"><a href="javascript:save()">저장</a></div>
             </div>
             <div class="comment_input_section">
-                <textarea name="evaluation" id="evaluation" cols="30" rows="10" style="height:180px;width:100%"><?=$res['evaluation']?></textarea>
+                <textarea name="evaluation" id="evaluation" cols="30" rows="10" style="height:150px;width:97%"><?=$res['evaluation']?></textarea>
             </div>
-            <div class="down_head_section">
+            <div class="down_head_section" style="padding-top:5px">
                 <p class="l_div_text">선생님 코멘트</p>
             </div>
             <div class="comment_input_section">
-                <textarea name="comment" id="comment" cols="30" rows="10" style="height:180px;width:100%"><?=$res['comment']?></textarea>
+                <textarea name="comment" id="comment" cols="30" rows="10" style="height:150px;width:97%"><?=$res['comment']?></textarea>
             </div>
         </form>
 

@@ -103,39 +103,23 @@ $week2_time[4] = hour_24to12 ("14:30")." ~ ".hour_24to12 ("16:00");
                     <td><?php echo $s ?>교시</td>
                     <td><?php echo str_replace('~',"<br>~<br>",$week1_time[$s]);?></td>
                     <?php
-                    for($i=0; $i<5; $i++) :
-                        ?>
-
-                        <? if($day[0][$i]) : ?>
-
-                        <td>
-                            <div class="class_info">
-                                <?php
-                                for($j=0; $j<count($time); $j++) {
-
-                                    if($time[$j] == $s) { //교시 표시
-
-                                        //해당 수업에 학생 정보
-                                        $link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j];
-                                        $r_4 = api_calls_get($link_4);
-
-
-                                        echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
-                                    }
+                    for($i=0; $i<5; $i++) {
+                        $kk = $i+1;
+                        if($kk == 7) $kk = 0;
+                        if($kk == date(w)) echo "<td style='background-color:#9DF0E1;'><div class='class_info'>";
+                        else echo "<td><div class='class_info'>";
+                        for($j=0; $j<count($day); $j++) {
+                            for($k = 0; $k<7; $k++) {
+                                if($day[$j][$i] && ($time1[$j][$i][$k] == $s)) {
+                                    $link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."&s_uid=".$s_uid[$j];
+                                    $r_4 = api_calls_get($link_4);
+                                    echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."&s_uid=".$s_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
+                                    $class_array[count($class_array)] = $time1[$j][$k];
                                 }
-                                ?>
-                            </div>
-                        </td>
-                    <?php
-                    else :
-
-                        echo "<td></td>";
-
-                    endif;
-                        ?>
-
-                    <?php
-                    endfor;
+                            }
+                        }
+                        echo "</div></td>";
+                    }
                     ?>
                     <td><?php echo str_replace('~',"<br>~<br>",$week2_time[$s]);?></td>
 
@@ -184,34 +168,46 @@ $week2_time[4] = hour_24to12 ("14:30")." ~ ".hour_24to12 ("16:00");
 
 
 
-    <div class="notice_list_wrap">
-        <div class="notice_title">
+    <div style="width: 100%; max-width: 1400px; margin: auto; margin-top: 30px;">
+        <div class="notice_title" style="margin: auto;">
             <p>공지사항</p>
         </div>
-        <div class="notice_contents_wrap" style="padding-top:30px">
-
+    </div>
+    <div class="notice_list_wrap" style="overflow: scroll;">
+        <div class="notice_contents_wrap">
             <?php
-            $sql = "select seq, title from `teacher_notice` order by `seq` desc limit 0,5";
+            $ac = $_SESSION['client_no'];
+            $task = $_SESSION['t_task'];
+            $sql = "select * from `teacher_notice` order by `event_time` desc;";
             $result = sql_query($sql);
-            $i=1;
-            while($res = sql_fetch_array($result)) {
-                ?>
-                <div class="notice_content">
-                    <a href="./notice_list.php?seq=<?=$res['seq']?>"><span>&#149;</span><?=$res['title']?></a>
-                </div>
-                <?
-                if($i==5) break;
+            while($res = mysqli_fetch_array($result)) {
+                if($res['writer'] == "관리자") {
+                    $id = $res['title'];
+                    $sql = "select * from `notify` where `id`='$id';";
+                    $admin_res = sql_query($sql);
+                    $ad_res = mysqli_fetch_array($admin_res);
+                    ?>
+                    <div class="notice_content">
+                        <a href="./notice_list.php?seq=<?=$res['title']?>&chk=1"><span>&#149;</span><?=$ad_res['title']?></a>
+                    </div>
+                    <?php
+                }else {
+                    ?>
+                    <div class="notice_content">
+                        <a href="./notice_list.php?seq=<?=$res['seq']?>&chk=1"><span>&#149;</span><?=$res['title']?></a>
+                    </div>
+                    <?
+                }
                 $i++;
             }
 
             ?>
         </div>
     </div>
-
-
-
 </section>
-
+<script>
+    $('.dis a').prop('href', '#');
+</script>
 </body>
 
 </html>

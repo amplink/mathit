@@ -75,7 +75,9 @@ $c_uid = array();
 $s_uid = array();
 $chk = 0;
 $cnt = 0;
-for($i=1; $i<count($r); $i++) {
+$r = arr_sort($r,4);
+
+for($i=0; $i<count($r)-1; $i++) {
     $chk = 0;
     for($j=0; $j<count($d_uid); $j++) {
         if($d_uid[$j] == $r[$i][0]) $chk = 1;
@@ -197,7 +199,7 @@ $res = mysqli_fetch_array($result);
         <title>MathIt - teacher</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-        <link rel="stylesheet" type="text/css" href="css/common.css" />
+        <link rel="stylesheet" type="text/css" href="css/common.css?v=20190419" />
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/jquery-ui.js"></script>
@@ -230,7 +232,7 @@ $res = mysqli_fetch_array($result);
         <!--        <p class="navigation_text">--><?php //echo $nav_text;?><!--</p>-->
     </div>
     <div class="member_info_wrap">
-        <div class="member_img"><a href="setting_individual.php"><img src="img/user.png" alt="member_img"></a></div>
+        <div class="member_img" style="margin-top:-6px"><a href="setting_individual.php"><img src="<?=$_SESSION['t_img']?>" alt="member_img"></a></div>
         <div class="member_info">
             <a href="setting_individual.php"><p class="member_name"><?=$_SESSION['t_name']?></p></a>
             <a href="setting_individual.php"><p class="member_grade"><?=$res['type']?></p></a>
@@ -245,7 +247,7 @@ $res = mysqli_fetch_array($result);
             <div class="close_btn"><img src="img/close.png" alt="close_icon"></div>
         </div>
         <div class="ham_member_info_line">
-            <div class="ham_member_img"><a href="setting_individual.php"><img src="img/user.png" alt="member_img"></a></div>
+            <div class="ham_member_img" style="margin-top:-9px"><a href="setting_individual.php"><img src="<?=$_SESSION['t_img']?>" alt="member_img"></a></div>
             <div class="ham_member_info">
                 <a href="setting_individual.php"><p class="ham_member_name"><?=$_SESSION['t_name']?></p></a>
                 <a href="setting_individual.php"><p class="ham_member_grade"><?=$res['type']?></p></a>
@@ -262,7 +264,7 @@ $res = mysqli_fetch_array($result);
     </div>
 
     <div class="hamnav_menu_wrap">
-        <div class="hamnav_menu" onclick="class_show()"><a href="#"><span>학급목록</span></a>
+        <div class="hamnav_menu" onclick="class_show()" style="cursor:pointer"><a><span>학급목록</span></a>
             <div class="hamnav_class_list">
                 <!--                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">루트</span><span-->
                 <!--                            class="class_grade_">초6</span></a></div>-->

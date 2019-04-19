@@ -22,36 +22,36 @@ $result = sql_query($sql);
 $res = mysqli_fetch_array($result);
 ?>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="css/index.css" />
-    <script src="js/common.js"></script>
-    <script type="text/javascript" language="javascript">
+<link rel="stylesheet" type="text/css" media="screen" href="css/index.css" />
+<script src="js/common.js"></script>
+<script type="text/javascript" language="javascript">
 
-        $( document ).ready(function() {
+    $( document ).ready(function() {
 
-            $("#quarter_select").val('<?php echo $s_quarter;?>');
-            $("#year_select").val('<?php echo $s_year;?>');
+        $("#quarter_select").val('<?php echo $s_quarter;?>');
+        $("#year_select").val('<?php echo $s_year;?>');
 
-            $('#quarter_select').change(function () {
+        $('#quarter_select').change(function () {
 
-                var a = $('#quarter_select').val();
-                var b = $('#year_select').val();
+            var a = $('#quarter_select').val();
+            var b = $('#year_select').val();
 
-                location.replace('./home_sub.php?s_year='+b+'&s_quarter='+a);
-
-            });
-
-            $('#year_select').change(function () {
-
-                var a = $('#quarter_select').val();
-                var b = $('#year_select').val();
-
-                location.replace('./home_sub.php?s_year='+b+'&s_quarter='+a);
-
-            });
-
+            location.replace('./home_sub.php?s_year='+b+'&s_quarter='+a);
 
         });
-    </script>
+
+        $('#year_select').change(function () {
+
+            var a = $('#quarter_select').val();
+            var b = $('#year_select').val();
+
+            location.replace('./home_sub.php?s_year='+b+'&s_quarter='+a);
+
+        });
+
+
+    });
+</script>
 
 <section>
     <div class="head_section">
@@ -189,10 +189,9 @@ $res = mysqli_fetch_array($result);
         </div>
     </div>
 </section>
-
-</body>
-
-</html>
 <script>
     $('.dis a').prop('href', '#');
 </script>
+</body>
+
+</html>
