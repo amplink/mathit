@@ -183,8 +183,13 @@ while($res = mysqli_fetch_array($result)) {
         var t = parseInt($('#score_add'+e).val(), 10);
         var p = parseInt($('#score_add'+k).val(), 10);
         var val;
-        if(p) val = (t+p)/2;
-        else val = t;
+        if(t && p) {
+            val = (t+p)/2;
+        }else if(t) {
+            val = t;
+        }else {
+            val = p;
+        }
 
         $('#avg'+e/2).text(val+"점");
     }
@@ -194,8 +199,13 @@ while($res = mysqli_fetch_array($result)) {
         var t = parseInt($('#score_add'+e).val(), 10);
         var p = parseInt($('#score_add'+k).val(), 10);
         var val;
-        if(p) val = (t+p)/2;
-        else val = t;
+        if(t && p) {
+            val = (t+p)/2;
+        }else if(t) {
+            val = t;
+        }else {
+            val = p;
+        }
 
         $('#avg'+k/2).text(val+"점");
     }

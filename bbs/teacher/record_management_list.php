@@ -215,11 +215,32 @@ $title = $_GET['title'];
             var b = parseInt($('#score_add'+k).val());
             var c = parseInt($('#score_add'+kk).val());
             var val;
-            val = a;
-            if(b) val = a+b;
-            if(c) val = a+b+c;
+
+            if(a && b && c) val = a+b+c;
+            else if(a && b) val = a+b;
+            else if(a && c) val = a+c;
+            else if(b && c) val = b+c;
+            else if(a) val = a;
+            else if(b) val = b;
+            else if(c) val = c;
 
             $('#plus'+e).text(val+" 점");
+        }
+        
+        function set_avg1(e) {
+            var k = e+1;
+            var t = parseInt($('#score_add'+e).val(), 10);
+            var p = parseInt($('#score_add'+k).val(), 10);
+            var val;
+            if(t && p) {
+                val = (t+p)/2;
+            }else if(t) {
+                val = t;
+            }else {
+                val = p;
+            }
+
+            $('#avg'+k/2).text(val+"점");
         }
 
         function call_student_form(d, c, s, n) {

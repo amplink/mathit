@@ -78,12 +78,9 @@
 /**/
 
 .scoring_box {
-    position: relative;
-    top: 20px;
     width: 100%;
     max-width: 1400px;
-    height: 700px;
-    max-height: 700px;
+    max-height: 800px;
     background-color: rgb(255, 255, 255);
     border: solid 1px rgb(220, 220, 220);
     margin: auto;

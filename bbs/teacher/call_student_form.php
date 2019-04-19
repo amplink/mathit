@@ -26,7 +26,7 @@ for($i=1; $i<count($r); $i++) {
                 <input type="hidden" name="student_name[]" value="<?=$r[$i][2]?>">
                 <input type="hidden" name="student_id[]" value="<?=$r[$i][1]?>">
             </td>
-            <td><input type="text" name="score_add1[]" onchange="set_avg1(<?=$cnt?>)" id="score_add<?=$cnt?>"><span>점</span></td>
+            <td><input type="text" name="score_add1[]" onchange="set_avg1(<?=$k?>)" id="score_add<?=$cnt?>"><span>점</span></td>
             <?php
             $cnt++;
             ?>
