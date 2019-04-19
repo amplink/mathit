@@ -17,6 +17,7 @@ $week2_time[2] = hour_24to12 ("11:30")." ~ ".hour_24to12 ("13:00");
 $week2_time[3] = hour_24to12 ("13:00")." ~ ".hour_24to12 ("14:30");
 $week2_time[4] = hour_24to12 ("14:30")." ~ ".hour_24to12 ("16:00");
 
+$t_name = $_SESSION['t_name'];
 $sql = "select * from `teacher_setting` where `t_name`='$t_name';";
 $result = sql_query($sql);
 $res = mysqli_fetch_array($result);
@@ -61,7 +62,7 @@ $res = mysqli_fetch_array($result);
                 <div class="day_select">
                     <select name="year_select" id="year_select">
                         <?php
-                        for($i=2018; $i< ( date(Y)+10 ); $i++) {
+                        for($i=2018; $i<= ( date(Y) ); $i++) {
                             echo "<option value='{$i}'>{$i}"."년"."</option>";
                         }
                         ?>

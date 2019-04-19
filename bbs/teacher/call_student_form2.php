@@ -21,6 +21,7 @@ $r = api_calls_get($link);
 $cnt = 0;
 $k = 1;
 for($i=1; $i<count($r); $i++) {
+    $k = $cnt+1;
     ?>
         <tr>
             <td><span><?=$r[$i][2]?></span>
@@ -33,7 +34,6 @@ for($i=1; $i<count($r); $i++) {
             <td><span id="plus<?=$k?>"></span></td>
         </tr>
     <?php
-    $k = $i+3;
 }
 ?>
     </tbody>
