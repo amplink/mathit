@@ -204,25 +204,29 @@ $student_id = $res['student_id'];
     </div>
 </section>
 <?php
-$ac = $_SESSION['client_no'];
-$link = "/api/math/student?client_no=".$ac."&id=".$student_id;
-$api_res = api_calls_get($link);
-?>
-<div id="my-dialog">
-    <div style="background-color: rgb(41, 124, 62); width: 100%; height: 30px; text-align: center; padding-top: 5px;">
-        <p style="color: white; font-size: 20px; font-weight: bold;">SMS 전송</p>
-    </div>
-    <div style="padding: 20px;">
-        <input type="checkbox" value="<?=$api_res[16]?>" id="parent_phone" name="parent_phone" style="height: auto !important;" checked><span> 학부모 : <?=$api_res[16]?></span>
-        <br>
-        <input type="checkbox" id="add_phone" name="add_phone" style="height: auto !important;"><span> 추가 : </span><input type="text" placeholder="010-0000-0000" name="add_phone_number" id="add_phone_number">
-        <br>
-        <div style="text-align: center; padding: 10px;">
-            <input type="button" style="width: 100px; background-color: rgb(41, 124, 62); color: white; -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; border: 0px; font-size: 15px;" value="전송" onclick="sms_send();">
+if(!$_GET['flag']){
+    $ac = $_SESSION['client_no'];
+    $link = "/api/math/student?client_no=".$ac."&id=".$student_id;
+    $api_res = api_calls_get($link);
+    ?>
+    <div id="my-dialog">
+        <div style="background-color: rgb(41, 124, 62); width: 100%; height: 30px; text-align: center; padding-top: 5px;">
+            <p style="color: white; font-size: 20px; font-weight: bold;">SMS 전송</p>
+        </div>
+        <div style="padding: 20px;">
+            <input type="checkbox" value="<?=$api_res[16]?>" id="parent_phone" name="parent_phone" style="height: auto !important;" checked><span> 학부모 : <?=$api_res[16]?></span>
+            <br>
+            <input type="checkbox" id="add_phone" name="add_phone" style="height: auto !important;"><span> 추가 : </span><input type="text" placeholder="010-0000-0000" name="add_phone_number" id="add_phone_number">
+            <br>
+            <div style="text-align: center; padding: 10px;">
+                <input type="button" style="width: 100px; background-color: rgb(41, 124, 62); color: white; -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; border: 0px; font-size: 15px;" value="전송" onclick="sms_send();">
+            </div>
         </div>
     </div>
-</div>
-<div id="my-dialog-background"></div>
+    <div id="my-dialog-background"></div>
+    <?
+}
+?>
 <script>
 
     function save() {
@@ -262,7 +266,7 @@ $api_res = api_calls_get($link);
         html2canvas(document.querySelector("section"), {
             //allowTaint: true,
             //taintTest: false,
-            width:800,
+            //width:800,
             useCORS: true,
         }).then(function (canvas) {
             var imgageData = canvas.toDataURL("image/png");

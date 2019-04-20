@@ -74,7 +74,7 @@ $today_date = date("Y-m-d");
 
         $result6 = mysqli_query($connect_db, $sql6);
         $res6 = mysqli_fetch_array($result6);
-        $start_day = date("m/d/Y",strtotime ("+1 days", strtotime($res6('date'))));
+        $start_day = date("m/d/Y",strtotime ("+1 days", strtotime($res6['date'])));
     }
 
     $api_start_date = substr($start_day,6,10)."-".substr($start_day,0,2)."-".substr($start_day,3,2);
@@ -165,7 +165,7 @@ $today_date = date("Y-m-d");
 	SELECT  COUNT(C.seq) N1, SUM(C.tot2) N2 FROM (
 		    SELECT 
 	            A.seq,
-			   (SELECT COUNT(h_id) FROM `homework_assign_list` WHERE h_id = A.seq AND student_id = A.student_id AND current_status IN ('s2','s3')) tot2
+			   (SELECT COUNT(h_id) FROM `homework_assign_list` WHERE h_id = A.seq AND student_id = '$res[student_id]' AND current_status IN ('s2','s3')) tot2
 			FROM 
               `homework` A
 			LEFT JOIN 
@@ -177,7 +177,7 @@ $today_date = date("Y-m-d");
 			AND A.s_uid='$res[s_uid]'
 			AND B.student_id='$res[student_id]'
 			AND A.client_id='$ac'
-		
+		    AND (A._from >= '$start_day' AND A._to < '$res[date]')
 			 ) C
 			";
                     //ECHO $sql2;
@@ -262,10 +262,12 @@ $today_date = date("Y-m-d");
 			ON A.seq = B.h_id 
 	        WHERE 
 			   match(A.student_id) against('*$res[student_id]*' in boolean mode) 
+			 -- A.student_id like '%$res[student_id]%'
 			AND A.c_uid='$res[c_uid]' 
 			AND A.client_id='$ac' 
 			AND B.student_id='$res[student_id]'
 			AND B.apply_status_1 IS NOT NULL
+			AND (A._from >= '$start_day' AND A._to < '$res[date]')
 			ORDER BY A.seq asc";
 
             $result4 = mysqli_query($connect_db, $sql4);
@@ -361,59 +363,65 @@ $today_date = date("Y-m-d");
         $sql5 = "SELECT 
                 A.seq, B.student_id, A._from,
 	           	IF (B.wrong_anwer_2 = '', B.wrong_anwer_1, B.wrong_anwer_2) wrong_answer,  
-			    A.Q_number1, A.Q_number2, A.Q_number3, A.Q_number4 
+			    A.Q_number1, A.Q_number2, A.Q_number3, A.Q_number4
 			FROM 
               `homework` A
 			LEFT JOIN 
              `homework_assign_list` B  
 			ON A.seq = B.h_id 
 	        WHERE 
-			   match(A.student_id) against('*$res[student_id]*' in boolean mode) 
+			    match(A.student_id) against('*$res[student_id]*' in boolean mode) 
+			 -- A.student_id like '%$res[student_id]%'
+			AND A.d_uid='$res[d_uid]' 
 			AND A.c_uid='$res[c_uid]' 
+			AND A.s_uid='$res[s_uid]' 
 			AND A.client_id='$ac' 
 			AND B.apply_status_1 IS NOT NULL
             AND (A._from >= '$start_day' AND A._to < '$res[date]')
             ORDER BY A.seq asc" ;
 
-
-
         $result5 = mysqli_query($connect_db, $sql5);
         $j = 0;
+
         $score_arr2 = array();
         while($res5 = mysqli_fetch_array($result5)) {
             $all = 0;
-            for($i=1; $i<4; $i++){
+            for($i=1; $i<=4; $i++){
                 if($res5['Q_number'.$i]) $all += count(explode(",",$res5['Q_number'.$i]));
             }
 
             $wrong_tot = count(explode(",",$res5['wrong_answer']));
             $score_arr2[$res5['seq']][] = round((($all-$wrong_tot) / $all) * 100);
             // $score_arr2[$j] =
-
+            $student_arr[$j] = $res5['student_id'];
             $j++;
+
         }
-
-
+        $n = count(array_unique($student_arr));
         $i = 0;
         $avg = array();
+
         foreach ($score_arr2 as $key => $v) {
             $sum = 0;
             foreach ($score_arr2[$key] as $v2) {
                 $sum += $v2;
             }
-            $avg[$i] = round($sum / 4);
+            $avg[$i] = round($sum / $n);
             $i++;
         }
 
         $me_score = implode(",",$score_arr);
         $tot_score = implode(",",$avg);
+
         // $from_date = implode(",",$from_date);
         $max = count($from_date);
 
+        if($_GET['flag']=='1') $w_size = "700px";
+        else                   $w_size = "950px";
         ?>
 
-
-        <div class="r_box" style="position:absolute;z-index:999;width:900px;height:600px"><? include "./chart.php";?>
+        <div class="r_box" style="position:absolute;z-index:999;width:<?=$w_size?>;height:600px">
+            <? include "./chart.php";?>
         </div>
     </div>
     <div class="down_box">
@@ -436,25 +444,30 @@ $today_date = date("Y-m-d");
     </div>
 </section>
 <?php
-$ac = $_SESSION['client_no'];
-$link = "/api/math/student?client_no=".$ac."&id=".$student_id;
-$api_res = api_calls_get($link);
-?>
-<div id="my-dialog">
-    <div style="background-color: rgb(41, 124, 62); width: 100%; height: 30px; text-align: center; padding-top: 5px;">
-        <p style="color: white; font-size: 20px; font-weight: bold;">SMS 전송</p>
-    </div>
-    <div style="padding: 20px;">
-        <input type="checkbox" value="<?=$api_res[16]?>" id="parent_phone" name="parent_phone" style="height: auto !important;" checked><span> 학부모 : <?=$api_res[16]?></span>
-        <br>
-        <input type="checkbox" id="add_phone" name="add_phone" style="height: auto !important;"><span> 추가 : </span><input type="text" placeholder="010-0000-0000" name="add_phone_number" id="add_phone_number">
-        <br>
-        <div style="text-align: center; padding: 10px;">
-            <input type="button" style="width: 100px; background-color: rgb(41, 124, 62); color: white; -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; border: 0px; font-size: 15px;" value="전송" onclick="sms_send();">
+if(!$_GET['flag']){
+    $ac = $_SESSION['client_no'];
+    $link = "/api/math/student?client_no=".$ac."&id=".$student_id;
+    $api_res = api_calls_get($link);
+    ?>
+    <div id="my-dialog">
+        <div style="background-color: rgb(41, 124, 62); width: 100%; height: 30px; text-align: center; padding-top: 5px;">
+            <p style="color: white; font-size: 20px; font-weight: bold;">SMS 전송</p>
+        </div>
+        <div style="padding: 20px;">
+            <input type="checkbox" value="<?=$api_res[16]?>" id="parent_phone" name="parent_phone" style="height: auto !important;" checked><span> 학부모 : <?=$api_res[16]?></span>
+            <br>
+            <input type="checkbox" id="add_phone" name="add_phone" style="height: auto !important;"><span> 추가 : </span><input type="text" placeholder="010-0000-0000" name="add_phone_number" id="add_phone_number">
+            <br>
+            <div style="text-align: center; padding: 10px;">
+                <input type="button" style="width: 100px; background-color: rgb(41, 124, 62); color: white; -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; border: 0px; font-size: 15px;" value="전송" onclick="sms_send();">
+            </div>
         </div>
     </div>
-</div>
-<div id="my-dialog-background"></div>
+    <div id="my-dialog-background"></div>
+    <?
+}
+?>
+
 <script>
 
     function save() {
@@ -495,7 +508,7 @@ $api_res = api_calls_get($link);
         html2canvas(document.querySelector("section"), {
             //allowTaint: true,
             //taintTest: false,
-            width:800,
+            //width:800,
             useCORS: true,
         }).then(function (canvas) {
             var imgageData = canvas.toDataURL("image/png");
