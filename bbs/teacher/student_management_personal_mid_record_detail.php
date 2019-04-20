@@ -416,8 +416,8 @@ $today_date = date("Y-m-d");
         // $from_date = implode(",",$from_date);
         $max = count($from_date);
 
-        if($_GET['flag']=='1') $w_size = "700px";
-        else                   $w_size = "950px";
+        if($_GET['flag']) $w_size = "700px";
+        else              $w_size = "950px";
         ?>
 
         <div class="r_box" style="position:absolute;z-index:999;width:<?=$w_size?>;height:600px">
@@ -479,11 +479,13 @@ if(!$_GET['flag']){
 <script src="./js/html2canvas.js"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
-    <? if($_GET['flag']=='2'){?>
-    sms_send();
-    <?  } else if($_GET['flag']=='1'){ ?>
-    window.print();
-    <?  }  ?>
+    window.onload = function() {
+        <? if($_GET['flag']=='2'){?>
+        sms_send();
+        <?  } else if($_GET['flag']=='1'){ ?>
+        window.print();
+        <?  }  ?>
+    }
     /*
         html2canvas(document.querySelector("body"),{
             //allowTaint: true,
