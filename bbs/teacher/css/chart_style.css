@@ -13,11 +13,6 @@ a {
 	text-decoration: none;
 }
 
-a:hover {
-	color: #e25f5f;
-	text-decoration: underline;
-}
-
 .content {
 	max-width: 800px;
 	margin: auto;
