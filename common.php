@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
-** 공통 변수, 상수, 코드
-*******************************************************************************/
+ ** 공통 변수, 상수, 코드
+ *******************************************************************************/
 error_reporting( E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR | E_USER_WARNING );
 
 // 보안설정이나 프레임이 달라도 쿠키가 통하도록 설정
@@ -16,8 +16,8 @@ if (!defined('G5_SET_TIME_LIMIT')) define('G5_SET_TIME_LIMIT', 0);
 // 081029 : letsgolee 님께서 도움 주셨습니다.
 //--------------------------------------------------------------------------------------------------------------------------
 $ext_arr = array ('PHP_SELF', '_ENV', '_GET', '_POST', '_FILES', '_SERVER', '_COOKIE', '_SESSION', '_REQUEST',
-                  'HTTP_ENV_VARS', 'HTTP_GET_VARS', 'HTTP_POST_VARS', 'HTTP_POST_FILES', 'HTTP_SERVER_VARS',
-                  'HTTP_COOKIE_VARS', 'HTTP_SESSION_VARS', 'GLOBALS');
+    'HTTP_ENV_VARS', 'HTTP_GET_VARS', 'HTTP_POST_VARS', 'HTTP_POST_FILES', 'HTTP_SERVER_VARS',
+    'HTTP_COOKIE_VARS', 'HTTP_SESSION_VARS', 'GLOBALS');
 $ext_cnt = count($ext_arr);
 for ($i=0; $i<$ext_cnt; $i++) {
     // POST, GET 으로 선언된 전역변수가 있다면 unset() 시킴
@@ -142,41 +142,41 @@ if (file_exists($dbconfig_file)) {
     if(defined('G5_MYSQL_SET_MODE') && G5_MYSQL_SET_MODE) sql_query("SET SESSION sql_mode = ''");
     if (defined('G5_TIMEZONE')) sql_query(" set time_zone = '".G5_TIMEZONE."'");
 } else {
-?>
+    ?>
 
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<title>오류! <?php echo G5_VERSION ?> 설치하기</title>
-<link rel="stylesheet" href="install/install.css">
-</head>
-<body>
+    <!doctype html>
+    <html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>오류! <?php echo G5_VERSION ?> 설치하기</title>
+        <link rel="stylesheet" href="install/install.css">
+    </head>
+    <body>
 
-<div id="ins_bar">
-    <span id="bar_img">GNUBOARD5</span>
-    <span id="bar_txt">Message</span>
-</div>
-<h1>그누보드5를 먼저 설치해주십시오.</h1>
-<div class="ins_inner">
-    <p>다음 파일을 찾을 수 없습니다.</p>
-    <ul>
-        <li><strong><?php echo G5_DATA_DIR.'/'.G5_DBCONFIG_FILE ?></strong></li>
-    </ul>
-    <p>그누보드 설치 후 다시 실행하시기 바랍니다.</p>
-    <div class="inner_btn">
-        <a href="<?php echo G5_URL; ?>/install/"><?php echo G5_VERSION ?> 설치하기</a>
+    <div id="ins_bar">
+        <span id="bar_img">GNUBOARD5</span>
+        <span id="bar_txt">Message</span>
     </div>
-</div>
-<div id="ins_ft">
-    <strong>GNUBOARD5</strong>
-    <p>GPL! OPEN SOURCE GNUBOARD</p>
-</div>
+    <h1>그누보드5를 먼저 설치해주십시오.</h1>
+    <div class="ins_inner">
+        <p>다음 파일을 찾을 수 없습니다.</p>
+        <ul>
+            <li><strong><?php echo G5_DATA_DIR.'/'.G5_DBCONFIG_FILE ?></strong></li>
+        </ul>
+        <p>그누보드 설치 후 다시 실행하시기 바랍니다.</p>
+        <div class="inner_btn">
+            <a href="<?php echo G5_URL; ?>/install/"><?php echo G5_VERSION ?> 설치하기</a>
+        </div>
+    </div>
+    <div id="ins_ft">
+        <strong>GNUBOARD5</strong>
+        <p>GPL! OPEN SOURCE GNUBOARD</p>
+    </div>
 
-</body>
-</html>
+    </body>
+    </html>
 
-<?php
+    <?php
     exit;
 }
 //==============================================================================
@@ -189,12 +189,12 @@ if (file_exists($dbconfig_file)) {
 @ini_set("url_rewriter.tags",""); // 링크에 PHPSESSID가 따라다니는것을 무력화함 (해뜰녘님께서 알려주셨습니다.)
 
 session_save_path(G5_SESSION_PATH);
-
+/*
 if (isset($SESSION_CACHE_LIMITER))
     @session_cache_limiter($SESSION_CACHE_LIMITER);
 else
     @session_cache_limiter("no-cache, must-revalidate");
-
+*/
 ini_set("session.cache_expire", 180); // 세션 캐쉬 보관시간 (분)
 ini_set("session.gc_maxlifetime", 10800); // session data의 garbage collection 존재 기간을 지정 (초)
 ini_set("session.gc_probability", 1); // session.gc_probability는 session.gc_divisor와 연계하여 gc(쓰레기 수거) 루틴의 시작 확률을 관리합니다. 기본값은 1입니다. 자세한 내용은 session.gc_divisor를 참고하십시오.
@@ -680,9 +680,9 @@ header('Content-Type: text/html; charset=utf-8');
 $gmnow = gmdate('D, d M Y H:i:s') . ' GMT';
 header('Expires: 0'); // rfc2616 - Section 14.21
 header('Last-Modified: ' . $gmnow);
-header('Cache-Control: no-store, no-cache, must-revalidate'); // HTTP/1.1
-header('Cache-Control: pre-check=0, post-check=0, max-age=0'); // HTTP/1.1
-header('Pragma: no-cache'); // HTTP/1.0
+//header('Cache-Control: no-store, no-cache, must-revalidate'); // HTTP/1.1
+//header('Cache-Control: pre-check=0, post-check=0, max-age=0'); // HTTP/1.1
+//header('Pragma: no-cache'); // HTTP/1.0
 
 $html_process = new html_process();
 ?>
