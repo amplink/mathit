@@ -110,6 +110,23 @@ VALUES (NULL, '$title', '$writer', '$type', '$r_range', '$target', '$name_url', 
 sql_query($sql);
 
 if($seqq > 0) {
+    $sql = "select * from `teacher_setting`;";
+    $result = sql_query($sql);
+    while($res = mysqli_fetch_array($result)) {
+        for($kk=0; $kk<count($range); $kk++) {
+            if($range[$kk]=="전임강사" && $res['type'] == "전임강사") {
+                $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                sql_query($sql);
+            }else if($range[$kk]=="채점강사" && $res['type'] == "채점강사") {
+                $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                sql_query($sql);
+            }
+        }
+    }
+
+    $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+    sql_query($sql);
+
     alert_msg("공지수정이 완료되었습니다.");
     location_href("./notice_list.php");
 }else {

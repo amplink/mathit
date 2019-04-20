@@ -35,6 +35,19 @@ VALUES (NULL, '$type', '$range', '$title', '$writer', '$name_url', '$name_name',
 sql_query($sql);
 //echo $sql;
 
+$sql = "select * from `teacher_setting`;";
+$result = sql_query($sql);
+while($res = mysqli_fetch_array($result)) {
+    if(($range == "전임강사" || $range == "전체") && $res['type']=="전임강사") {
+        $t_uid = $res['t_id'];
+        $sql = "insert into `alarm` set `seq`='', `content`='수업계획표/일지가 수정되었습니다.', `table_name`='schedule', `target`='$range', `uid`='$t_uid',`chk`='0', `datetime`=CURRENT_TIMESTAMP";
+        sql_query($sql);
+    }
+}
+
+$sql = "insert into `alarm` set `seq`='', `content`='수업계획표/일지가 수정되었습니다.', `table_name`='schedule', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+sql_query($sql);
+
 
 alert_msg("수정이 완료되었습니다.");
 location_href("./class_schedule_list.php");
