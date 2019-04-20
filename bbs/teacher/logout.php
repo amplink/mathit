@@ -1,4 +1,6 @@
 <?php
+header("Progma:no-cache");
+header("Cache-Control:no-cache,must-revalidate");
 include_once ('_common.php');
 // 이호경님 제안 코드
 session_unset(); // 모든 세션변수를 언레지스터 시켜줌
@@ -10,5 +12,6 @@ set_cookie('ck_auto', '', 0);
 // 자동로그인 해제 end --------------------------------
 
 alert_msg("로그아웃 되었습니다.");
-location_href("login.php");
+goto_url("login.php");
+
 ?>

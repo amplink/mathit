@@ -199,6 +199,10 @@ if($_SESSION['admin']) $res['type'] = "관리자";
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>MathIt - teacher</title>
+        <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+        <meta http-equiv="Expires" content="-1">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Cache-Control" content="no-cache">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
         <link rel="stylesheet" type="text/css" href="css/common.css?v=20190419" />

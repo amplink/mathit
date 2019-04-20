@@ -87,13 +87,13 @@ $result = mysqli_query($connect_db, $sql);
 
     function print_send(gubun, no) {
         var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&flag=1";
-        window.open(url,"PopupWin", "top=-200,left=-1200,width=1100,height=850");
+        window.open(url,"PopupWin", "top=-200,width=1300,height=900");
     }
 
 
     function sms_send(gubun, no) {
-        var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&flag=2";
-        window.open(url,"PopupWin", "top=-200,left=-1200,width=1100,height=850");
+        var url = "student_management_personal_"+gubun+"_record_detail_print.php?no="+no+"&flag=2";
+        window.open(url,"PopupWin", "top=-200,width=1500,height=1000");
     }
 </script>
 </body>

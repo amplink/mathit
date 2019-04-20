@@ -2,7 +2,7 @@
 
 <script src="./js/Chart.min.js"></script>
 <script src="./js/utils.js?v=20190414"></script>
-<link rel="stylesheet" type="text/css" href="./css/chart_style.css?v=201904020">
+<link rel="stylesheet" type="text/css" href="./css/chart_style.css?v=201904021">
 <style>
     canvas{
         -moz-user-select: none;
@@ -12,7 +12,7 @@
 </style>
 
 <div class="content">
-    <div class="wrapper col-2" style="margin-left:-20px"><canvas id="chart-0"></canvas></div>
+    <div class="wrapper col-2"><canvas id="chart-0"></canvas></div>
 </div>
 
 <script>

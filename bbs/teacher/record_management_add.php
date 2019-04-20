@@ -153,8 +153,8 @@ include_once ('head.php');
                 </div>
                 <div class="add_btn_wrap">
                     <div class="l_btn_wrap">
-                        <!--                    <div class="sms_btn"><a href="#none">SMS발송</a></div>-->
-                        <div class="print_btn"><a href="javascript: info_print();">출력</a></div>
+                        <!--                    <div class="sms_btn"><a href="#none">SMS발송</a></div>
+                        <div class="print_btn"><a href="javascript: info_print();">출력</a></div>-->
                     </div>
                     <div class="r_btn_wrap">
                         <div class="complete_btn" onclick="submit()" style="cursor: pointer;"><a>평가완료</a></div>

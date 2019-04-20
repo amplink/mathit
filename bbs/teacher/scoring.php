@@ -3,46 +3,45 @@ include_once ('_common.php');
 include_once ('head.php');
 ?>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="css/scoring.css?v=20190403" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/swiper.min.css" />
-    <script src="js/common.js"></script>
-    <script src="js/swiper.min.js"></script>
-    <style>
-        html, body {
-            position: relative;
-            height: 100%;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        .swiper-container {
-            width: 100%;
-            height: 100%;
-        }
-        .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #fff;
-            /* Center slide text vertically */
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            -webkit-justify-content: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            -webkit-align-items: center;
-            align-items: center;
-        }
-        label{vertical-align:-1px}
-        .input_chk{width:13px;height:13px;vertical-align:text-top}
+<link rel="stylesheet" type="text/css" media="screen" href="css/scoring.css?v=20190403" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/swiper.min.css" />
+<script src="js/common.js"></script>
+<script src="js/swiper.min.js"></script>
+<style>
+    html, body {
+        position: relative;
+        height: 100%;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    label{vertical-align:-1px}
+    .input_chk{width:13px;height:13px;vertical-align:text-top}
 
-
-    </style>
+</style>
 
 <section>
 
@@ -166,7 +165,7 @@ include_once ('head.php');
                         </thead>
                     </table>
                 </div>
-                <div class="score_board_table" style="height:500px;overflow:auto;margin-top:-1px">
+                <div class="score_board_table" style="height:610px;overflow:auto;margin-top:-1px">
 
 
 
@@ -213,7 +212,7 @@ include_once ('head.php');
                             <tr class="group_<?=$i?>">
                                 <td width="70"><span><?=$group[$res2['corner'.$i]][$j]['item_number']?></span></td>
                                 <td width="390">
-                                    <div class="img_input_place"><img src="<?=$group[$res2['corner'.$i]][$j]['answer_image']?>" height="60%"></div>
+                                    <div class="img_input_place"><img src="<?=$group[$res2['corner'.$i]][$j]['answer_image']?>"></div>
                                 </td>
                                 <td><input type="checkbox" name="marking<?=$i?>[]" value="<?=$group[$res2['corner'.$i]][$j]['item_number']?>" id="marking" class="marking<?=$i?>" <? if(in_array($group[$res2['corner'.$i]][$j]['item_number'], $wrongArr)) echo "checked"; ?>></td>
                             </tr>
@@ -324,6 +323,55 @@ include_once ('head.php');
         else                               $("#allCheck").prop("checked",true);
 
     }
+
+
+    $('.img_input_place img').each(function() {
+        var maxWidth = 350;
+        var maxHeight = 350;
+        var ratio = 0;
+        var width = $(this).width();
+        var height = $(this).height();
+        if(width > maxWidth){
+            ratio = maxWidth / width;
+            $(this).css("width", maxWidth);
+            $(this).css("height", height * ratio);
+            height = height * ratio;
+        }
+        var width = $(this).width();
+        var height = $(this).height();
+
+        if(height > maxHeight){
+            ratio = maxHeight / height;
+            $(this).css("height", maxHeight);
+            $(this).css("width", width * ratio);
+            width = width * ratio;
+        }
+    });
+
+
+
+    $('.paper_img_input img').each(function() {
+        var maxWidth = 700;
+        var maxHeight = 750;
+        var ratio = 0;
+        var width = $(this).width();
+        var height = $(this).height();
+        if(width > maxWidth){
+            ratio = maxWidth / width;
+            $(this).css("width", maxWidth);
+            $(this).css("height", height * ratio);
+            height = height * ratio;
+        }
+        var width = $(this).width();
+        var height = $(this).height();
+
+        if(height > maxHeight){
+            ratio = maxHeight / height;
+            $(this).css("height", maxHeight);
+            $(this).css("width", width * ratio);
+            width = width * ratio;
+        }
+    });
 
 </script>
 
