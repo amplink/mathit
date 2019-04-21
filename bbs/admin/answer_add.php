@@ -10,6 +10,10 @@ $page = $_GET['page'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MathIT Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/answer_add_2.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -19,24 +23,24 @@ $page = $_GET['page'];
 
 <body>
 <form enctype='multipart/form-data' action="answer_add_chk.php?page=<?=$page?>" method="POST" id="answer_add_form">
-<div class="header" style="width:calc(100% - 40px)">
-    <div class="logo_wrap">
-        <div class="logo"><img src="img/logo.png" alt="logo"></div>
-        <p>ADMIN</p>
+    <div class="header" style="width:calc(100% - 40px)">
+        <div class="logo_wrap">
+            <div class="logo"><img src="img/logo.png" alt="logo"></div>
+            <p>ADMIN</p>
+        </div>
+        <nav>
+            <div class="nav_menu"><a href="index.php">홈</a></div>
+            <div class="nav_menu"><a href="notice_home.php">공지사항관리</a></div>
+            <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>
+            <div class="nav_menu"><a href="answer_manegement.php" class="on">정답지관리</a></div>
+        </nav>
+        <div class="header_right">
+            <div class="user_img"><img src="img/user.png" alt="user_img"></div>
+            <p class="user_id">admin</p>
+            <div class="logout_btn"><a href="login.php">로그아웃</a></div>
+            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>
+        </div>
     </div>
-    <nav>
-        <div class="nav_menu"><a href="index.php">홈</a></div>
-        <div class="nav_menu"><a href="notice_home.php">공지사항관리</a></div>
-        <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>
-        <div class="nav_menu"><a href="answer_manegement.php" class="on">정답지관리</a></div>
-    </nav>
-    <div class="header_right">
-        <div class="user_img"><img src="img/user.png" alt="user_img"></div>
-        <p class="user_id">admin</p>
-        <div class="logout_btn"><a href="login.php">로그아웃</a></div>
-        <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>
-    </div>
-</div>
     <div class="section" style="width:100%">
         <div class="head_section"  style="width:calc(100% - 100px)">
             <div class="upside">
@@ -50,42 +54,42 @@ $page = $_GET['page'];
             <div class="downside">
                 <table>
                     <thead>
-                        <tr>
-                            <th>교재구분</th>
-                            <th>학년</th>
-                            <th>학기</th>
-                            <th>단원</th>
-                            <th>레벨</th>
-                        </tr>
+                    <tr>
+                        <th>교재구분</th>
+                        <th>학년</th>
+                        <th>학기</th>
+                        <th>단원</th>
+                        <th>레벨</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><select name="book_type" id="book_type" onchange="chk_sigma(this)">
-                                    <option value="알파">알파</option>
-                                    <option value="베타">베타</option>
-                                </select></td>
-                            <td><select name="grade" id="grade" onchange="book_info()">
-                                    <option value="3">초등 3</option>
-                                    <option value="4">초등 4</option>
-                                    <option value="5">초등 5</option>
-                                    <option value="6">초등 6</option>
-                                    <option value="7">중등 1</option>
-                                    <option value="8">중등 2</option>
-                                    <option value="9">중등 3</option>
-                                </select></td>
-                            <td><select name="semester" id="semester" onchange="book_info()">
-                                    <option value="1">1학기</option>
-                                    <option value="2">2학기</option>
-                                </select></td>
-                            <td><select name="unit" id="unit" onchange="chk_unit(this);">
-                                    <div id="unit_data"></div>
-                                </select></td>
-                            <td><select name="level" id="level" onchange="chk_sigma(this);">
-                                    <option value="루트">루트</option>
-                                    <option value="파이">파이</option>
-                                    <option value="시그마">시그마</option>
-                                </select></td>
-                        </tr>
+                    <tr>
+                        <td><select name="book_type" id="book_type" onchange="chk_sigma(this)">
+                                <option value="알파">알파</option>
+                                <option value="베타">베타</option>
+                            </select></td>
+                        <td><select name="grade" id="grade" onchange="book_info()">
+                                <option value="3">초등 3</option>
+                                <option value="4">초등 4</option>
+                                <option value="5">초등 5</option>
+                                <option value="6">초등 6</option>
+                                <option value="7">중등 1</option>
+                                <option value="8">중등 2</option>
+                                <option value="9">중등 3</option>
+                            </select></td>
+                        <td><select name="semester" id="semester" onchange="book_info()">
+                                <option value="1">1학기</option>
+                                <option value="2">2학기</option>
+                            </select></td>
+                        <td><select name="unit" id="unit" onchange="chk_unit(this);">
+                                <div id="unit_data"></div>
+                            </select></td>
+                        <td><select name="level" id="level" onchange="chk_sigma(this);">
+                                <option value="루트">루트</option>
+                                <option value="파이">파이</option>
+                                <option value="시그마">시그마</option>
+                            </select></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -112,19 +116,19 @@ $page = $_GET['page'];
             <div class="downside_2" id="section_1">
                 <table>
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th>문항번호</th>
-                            <th colspan="2">정답이미지</th>
-                            <th colspan="2">풀이이미지</th>
-                            <th></th>
-                        </tr>
+                    <tr>
+                        <th></th>
+                        <th>문항번호</th>
+                        <th colspan="2">정답이미지</th>
+                        <th colspan="2">풀이이미지</th>
+                        <th></th>
+                    </tr>
                     </thead>
                     <tbody>
                     <?
                     for($i=0; $i<10; $i++) {
 
-                    ?>
+                        ?>
                         <tr id="item_section_1">
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
@@ -152,7 +156,7 @@ $page = $_GET['page'];
                                 ?>
                             </td>
                         </tr>
-                    <?
+                        <?
                     }
                     ?>
                     </tbody>
@@ -174,7 +178,7 @@ $page = $_GET['page'];
                     <?
                     for($i=0; $i<10; $i++) {
 
-                    ?>
+                        ?>
                         <tr id="item_section_2">
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
@@ -202,7 +206,7 @@ $page = $_GET['page'];
                                 ?>
                             </td>
                         </tr>
-                    <?
+                        <?
                     }
                     ?>
                     </tbody>
@@ -224,7 +228,7 @@ $page = $_GET['page'];
                     <?
                     for($i=0; $i<10; $i++) {
 
-                    ?>
+                        ?>
                         <tr id="item_section_3">
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
@@ -252,7 +256,7 @@ $page = $_GET['page'];
                                 ?>
                             </td>
                         </tr>
-                    <?
+                        <?
                     }
                     ?>
                     </tbody>
@@ -274,7 +278,7 @@ $page = $_GET['page'];
                     <?
                     for($i=0; $i<10; $i++) {
 
-                    ?>
+                        ?>
                         <tr id="item_section_4">
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
@@ -302,7 +306,7 @@ $page = $_GET['page'];
                                 ?>
                             </td>
                         </tr>
-                    <?
+                        <?
                     }
                     ?>
                     </tbody>
@@ -397,7 +401,7 @@ $page = $_GET['page'];
             url : './answer_add_double_chk.php',
             data : str,
             error: function(xhr, status, error){
-            alert(error);
+                alert(error);
             },
             success : function(e) {
                 if(e==1 && isCnt == 0) {

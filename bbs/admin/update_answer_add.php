@@ -29,6 +29,10 @@ if($book_type == "베타") {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MathIT Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/answer_add_2.css" />
@@ -80,11 +84,11 @@ if($book_type == "베타") {
                     <tbody>
                     <tr>
                         <?
-//                        $sql = "select * from `answer_master` where `grade` = '$grade' and `semester` = '$semester' and `unit` = '$unit' and `level` = '$level' and `book_type` = '$book_type';";
-//                        $g = mysqli_query($connect_db, $sql);
-//
-//                        $a = mysqli_fetch_array($g);
-//
+                        //                        $sql = "select * from `answer_master` where `grade` = '$grade' and `semester` = '$semester' and `unit` = '$unit' and `level` = '$level' and `book_type` = '$book_type';";
+                        //                        $g = mysqli_query($connect_db, $sql);
+                        //
+                        //                        $a = mysqli_fetch_array($g);
+                        //
 
                         ?>
                         <td><select name="book_type" id="textbook" disabled>
@@ -168,36 +172,36 @@ if($book_type == "베타") {
                     $i=0;
                     while($r = mysqli_fetch_array($res)) {
                         $event_time = $r['event_time'];
-                    ?>
-                    <tr id="item_section_1">
-                        <td>
-                            <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
-                        </td>
-                        <td class="pt-17"><input type="text" name="a_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>" onkeydown="tab_next('a', <?=$i?>)"></td>
-                        <td>
-                            <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_answer_img_<?=$i;?>">
-                        </td>
-                        <td style="border-left: none;">
-                            <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')">
-                            <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
-                        </td>
-                        <td>
-                            <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_explain_img_<?=$i;?>">
-                        </td>
-                        <td style="border-left: none;">
-                            <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
-                            <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
-                        </td>
-                        <td>
-                            <?
-                            if ($i > 0) {
-                                echo '<div class="minus_icon" onclick = "delete_div(this)" ><img src = "img/minus.png" alt = "minus" ></div >';
-                            }
-                            ?>
-                        </td>
-                    </tr>
-                    <?
-                    $i++;
+                        ?>
+                        <tr id="item_section_1">
+                            <td>
+                                <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
+                            </td>
+                            <td class="pt-17"><input type="text" name="a_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>" onkeydown="tab_next('a', <?=$i?>)"></td>
+                            <td>
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_answer_img_<?=$i;?>">
+                            </td>
+                            <td style="border-left: none;">
+                                <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')">
+                                <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>" value="<?=$r['answer_image']?>">
+                            </td>
+                            <td>
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_explain_img_<?=$i;?>">
+                            </td>
+                            <td style="border-left: none;">
+                                <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
+                                <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>" value="<?=$r['explain_image']?>">
+                            </td>
+                            <td>
+                                <?
+                                if ($i > 0) {
+                                    echo '<div class="minus_icon" onclick = "delete_div(this)" ><img src = "img/minus.png" alt = "minus" ></div >';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <?
+                        $i++;
                     }
                     if($i==0) {
                         ?>

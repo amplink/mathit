@@ -35,6 +35,10 @@ $manager_get_chk = $_GET['manager_get_chk'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MathIT Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/academy_option_staff.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -59,139 +63,139 @@ $manager_get_chk = $_GET['manager_get_chk'];
 <!--            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>-->
 <!--        </div>-->
 <!--    </div>-->
-    <div class="section">
-        <div class="head_section">
-            <div class="l_nav">
-                <div class="l_nav_menu"><a href="academy_option_add.php">학원등록</a></div>
-                <div class="l_nav_menu"><a href="academy_option_staff.php" class="on">관리자 지정</a></div>
-            </div>
-            <div class="search_box_wrap">
-                <div class="search_input_box"><input type="text" id="search_val"></div>
-                <div class="search_btn" onclick="search();"><a href="#none">검색</a></div>
-            </div>
+<div class="section">
+    <div class="head_section">
+        <div class="l_nav">
+            <div class="l_nav_menu"><a href="academy_option_add.php">학원등록</a></div>
+            <div class="l_nav_menu"><a href="academy_option_staff.php" class="on">관리자 지정</a></div>
         </div>
-        <form action="academy_option_staff_del.php" method="post" id="staff_form">
+        <div class="search_box_wrap">
+            <div class="search_input_box"><input type="text" id="search_val"></div>
+            <div class="search_btn" onclick="search();"><a href="#none">검색</a></div>
+        </div>
+    </div>
+    <form action="academy_option_staff_del.php" method="post" id="staff_form">
         <div class="view_section">
             <table>
                 <thead>
-                    <tr style="text-align:center">
-                        <th><input type="checkbox" id="all_select"></th>
-                        <th>학원명</th>
-                        <th>관리자 아이디</th>
-                        <th>관리자 이름</th>
-                    </tr>
+                <tr style="text-align:center">
+                    <th><input type="checkbox" id="all_select"></th>
+                    <th>학원명</th>
+                    <th>관리자 아이디</th>
+                    <th>관리자 이름</th>
+                </tr>
                 </thead>
                 <tbody>
-                        <?php
-                        $sql = "select * from `academy`";
-                        $result = mysqli_query($connect_db, $sql);
-                        $i=0;
-                        $t = 0;
-                        while($res = mysqli_fetch_array($result)) {
-                            if($t >= $page*10 && $t <= ($page*10+10)) {
-                                if($manager_get_chk == $res['client_name']) {
-                                    echo '<tr style="text-align:center">';
-                                    echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name(this);" id="'.$i.'" checked="true"></td>';
-                                    echo '<td><span>'.$res['client_name'].'</span></td>';
-                                    echo '<td><span>'.$res['manager_id'].'</span></td>';
-                                    echo '<td>'.$res['manager_name'].'</td>';
-                                    echo '</tr>';
-                                }else {
-                                    echo '<tr style="text-align:center">';
-                                    echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name(this);" id="'.$i.'"></td>';
-                                    echo '<td><span>'.$res['client_name'].'</span></td>';
-                                    echo '<td><span>'.$res['manager_id'].'</span></td>';
-                                    echo '<td>'.$res['manager_name'].'</td>';
-                                    echo '</tr>';
-                                }
-                                $i++;
-                            }
-                            $t++;
+                <?php
+                $sql = "select * from `academy`";
+                $result = mysqli_query($connect_db, $sql);
+                $i=0;
+                $t = 0;
+                while($res = mysqli_fetch_array($result)) {
+                    if($t >= $page*10 && $t <= ($page*10+10)) {
+                        if($manager_get_chk == $res['client_name']) {
+                            echo '<tr style="text-align:center">';
+                            echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name(this);" id="'.$i.'" checked="true"></td>';
+                            echo '<td><span>'.$res['client_name'].'</span></td>';
+                            echo '<td><span>'.$res['manager_id'].'</span></td>';
+                            echo '<td>'.$res['manager_name'].'</td>';
+                            echo '</tr>';
+                        }else {
+                            echo '<tr style="text-align:center">';
+                            echo '<td style="width:20px" ><input type="checkbox" name="chk_list[]" value="'.$res['client_name'].'" onclick="get_ac_name(this);" id="'.$i.'"></td>';
+                            echo '<td><span>'.$res['client_name'].'</span></td>';
+                            echo '<td><span>'.$res['manager_id'].'</span></td>';
+                            echo '<td>'.$res['manager_name'].'</td>';
+                            echo '</tr>';
                         }
+                        $i++;
+                    }
+                    $t++;
+                }
 
-                        ?>
+                ?>
                 </tbody>
             </table>
-        </form>
-        </div>
-        <div class="section_footer">
-            <div class="list_btn_wrap">
-                <div class="prev_btn"><a href="./academy_option_staff.php?page=<?=$page;?>"><img src="img/prev.png" alt=""></a></div>
-                <ul>
-                    <?
-                    $count = $t;
-                    for($i=0; $i<$count/10; $i++) {
-                        $cnt = $i+1;
-                        echo '<li><a href="./academy_option_staff.php?page='.$cnt.'">'.$cnt.'</a></li>';
-                    }
-                    ?>
-                </ul>
-                <div class="next_btn"><a href="./academy_option_staff.php?page=<?=$page+1;?>"><img src="img/next.png" alt=""></a></div>
-            </div>
-            <div class="button_wrap">
-                <div class="delete_btn" onclick="del_academy()"><a href="#">선택삭제</a></div>
-            </div>
-        </div>
-        <form action="ac_manager_chk.php" id="manager_form" method="POST">
-        <div class="add_section">
-            <div class="line">
-                <div class="name">
-                    <div class="lside">
-                        <p>관리자 아이디</p>
-                    </div>
-
-                    <div class="rside">
-                        <input type="text" placeholder="관리자 아이디를 입력해주세요" name="manager_id" value="none" id="manager_id">
-                        <div class="confirm_btn" onclick="outh_manager();"><a>확인</a></div>
-                    </div>
-
+    </form>
+</div>
+<div class="section_footer">
+    <div class="list_btn_wrap">
+        <div class="prev_btn"><a href="./academy_option_staff.php?page=<?=$page;?>"><img src="img/prev.png" alt=""></a></div>
+        <ul>
+            <?
+            $count = $t;
+            for($i=0; $i<$count/10; $i++) {
+                $cnt = $i+1;
+                echo '<li><a href="./academy_option_staff.php?page='.$cnt.'">'.$cnt.'</a></li>';
+            }
+            ?>
+        </ul>
+        <div class="next_btn"><a href="./academy_option_staff.php?page=<?=$page+1;?>"><img src="img/next.png" alt=""></a></div>
+    </div>
+    <div class="button_wrap">
+        <div class="delete_btn" onclick="del_academy()"><a href="#">선택삭제</a></div>
+    </div>
+</div>
+<form action="ac_manager_chk.php" id="manager_form" method="POST">
+    <div class="add_section">
+        <div class="line">
+            <div class="name">
+                <div class="lside">
+                    <p>관리자 아이디</p>
                 </div>
-                <div class="pass">
-                    <div class="lside">
-                        <p>관리자 이름</p>
-                    </div>
-                    <div class="rside">
-                        <input type="text" disabled name="manager_name" id="manager_name"/>
-                    </div>
+
+                <div class="rside">
+                    <input type="text" placeholder="관리자 아이디를 입력해주세요" name="manager_id" value="none" id="manager_id">
+                    <div class="confirm_btn" onclick="outh_manager();"><a>확인</a></div>
                 </div>
-<!--                <div class="pass">-->
-<!--                    <div class="lside">-->
-<!--                        <p>학원명</p>-->
-<!--                    </div>-->
-<!--                    <div class="rside">-->
-                        <input type="hidden" name="ac_name" id="ac_name"/>
-<!--                    </div>-->
-<!--                </div>-->
+
             </div>
-<!--            <div class="line">-->
-<!--                <div class="name">-->
-<!--                    <div class="lside">-->
-<!--                        <p></p>-->
-<!--                    </div>-->
-<!--                    <div class="rside">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="pass">-->
-<!--                    <div class="lside">-->
-<!--                        <p>관리자 이름</p>-->
-<!--                    </div>-->
-<!--                    <div class="rside">-->
-<!--                        <input type="text" disabled />-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="pass">
+                <div class="lside">
+                    <p>관리자 이름</p>
+                </div>
+                <div class="rside">
+                    <input type="text" disabled name="manager_name" id="manager_name"/>
+                </div>
+            </div>
+            <!--                <div class="pass">-->
+            <!--                    <div class="lside">-->
+            <!--                        <p>학원명</p>-->
+            <!--                    </div>-->
+            <!--                    <div class="rside">-->
+            <input type="hidden" name="ac_name" id="ac_name"/>
+            <!--                    </div>-->
+            <!--                </div>-->
         </div>
-        <div class="section_footer">
-            <div class="button_wrap">
-                <div class="add_btn" onclick="sul3mit();"><a href="#none">지정</a></div>
-            </div>
+        <!--            <div class="line">-->
+        <!--                <div class="name">-->
+        <!--                    <div class="lside">-->
+        <!--                        <p></p>-->
+        <!--                    </div>-->
+        <!--                    <div class="rside">-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--                <div class="pass">-->
+        <!--                    <div class="lside">-->
+        <!--                        <p>관리자 이름</p>-->
+        <!--                    </div>-->
+        <!--                    <div class="rside">-->
+        <!--                        <input type="text" disabled />-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+    </div>
+    <div class="section_footer">
+        <div class="button_wrap">
+            <div class="add_btn" onclick="sul3mit();"><a href="#none">지정</a></div>
         </div>
     </div>
-    </form>
-    <form action="./outh_manager.php" method="get" id="manager_post_form">
-        <input type="hidden" name="manager_get_id" id="manager_get_id">
-        <input type="hidden" name="manager_get_chk" id="manager_get_chk">
-    </form>
+    </div>
+</form>
+<form action="./outh_manager.php" method="get" id="manager_post_form">
+    <input type="hidden" name="manager_get_id" id="manager_get_id">
+    <input type="hidden" name="manager_get_chk" id="manager_get_chk">
+</form>
 <?php
 include_once('tail.php');
 ?>
@@ -207,7 +211,7 @@ include_once('tail.php');
     $('#manager_id').val('<? echo $manager_get_id;?>');
     $('#manager_name').val('<? echo $manager_get_name;?>');
     $('input[type=checkbox]').on('change', function () {
-       $('#manager_get_chk').val(this.value);
+        $('#manager_get_chk').val(this.value);
     });
     $('#ac_name').val('<? echo $manager_get_chk; ?>');
     function del_academy() {
