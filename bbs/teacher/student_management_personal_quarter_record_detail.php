@@ -23,7 +23,7 @@ $today_date = date("Y-m-d");
         z-index: 999;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css" />
+<link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css?v=20190422" />
 <script src="js/common.js"></script>
 <?php
 $sql = "select * from `teacher_score` 
@@ -50,8 +50,8 @@ $student_id = $res['student_id'];
             </div>
             <div class="head_right">
                 <?  if($_GET['flag']!='1'){ ?>
-                    <div class="print" onclick="javascript: print_send('quarter','<?=$res[seq]?>')"><img src="img/printer.png" alt="printer_icon"></div>
-                    <div class="mail" onclick=""><img src="img/mail.png" alt="mail_icon"></div>
+                    <div class="print" onclick="javascript: print_send('<?=$res[seq]?>')"><img src="img/printer.png" alt="printer_icon"></div>
+                    <div class="mail" onclick="sms_send('<?=$res[seq]?>')"><img src="img/mail.png" alt="mail_icon"></div>
                 <?  } ?>
 
                 <div class="sub_close_btn">
@@ -178,7 +178,7 @@ $student_id = $res['student_id'];
             </div>
         </div>
     </div>
-    <div class="down_box">
+    <div class="down_box" style="height:480px">
         <form name="commentForm" id="commentForm" action="./score_comment_reg.php" method="post">
             <input type="hidden" name="no" value="<?=$res['seq']?>">
             <input type="hidden" name="flag" value="quarter">
@@ -196,25 +196,25 @@ $student_id = $res['student_id'];
                 }
                 ?>
             </div>
-            <div class="comment_input_section">
-                <textarea name="evaluation" id="evaluation" cols="30" rows="10" style="height:150px;width:97%"><?=$res['evaluation']?></textarea>
+            <div class="comment_input_section" id="comment_input_section1">
+                <textarea name="evaluation" id="evaluation" cols="30" rows="10" style="height:150px;width:97%;overflow-x:hidden;overflow-y:auto"><?=$res['evaluation']?></textarea>
             </div>
-            <div class="down_head_section" style="padding-top:5px">
+            <div class="down_head_section" style="padding-top:15px;">
                 <p class="l_div_text">선생님 코멘트</p>
             </div>
-            <div class="comment_input_section">
-                <textarea name="comment" id="comment" cols="30" rows="10" style="height:150px;width:97%"><?=$res['comment']?></textarea>
+            <div class="comment_input_section" id="comment_input_section2">
+                <textarea name="comment" id="comment" cols="30" rows="10" style="height:150px;width:97%;overflow-x:hidden;overflow-y:auto"><?=$res['comment']?></textarea>
             </div>
         </form>
 
     </div>
 </section>
-<?php
-if(!$_GET['flag']){
-    $ac = $_SESSION['client_no'];
-    $link = "/api/math/student?client_no=".$ac."&id=".$student_id;
-    $api_res = api_calls_get($link);
-    ?>
+<!--<?php
+
+$ac = $_SESSION['client_no'];
+$link = "/api/math/student?client_no=".$ac."&id=".$student_id;
+$api_res = api_calls_get($link);
+?>
     <div id="my-dialog">
         <div style="background-color: rgb(41, 124, 62); width: 100%; height: 30px; text-align: center; padding-top: 5px;">
             <p style="color: white; font-size: 20px; font-weight: bold;">SMS 전송</p>
@@ -230,9 +230,7 @@ if(!$_GET['flag']){
         </div>
     </div>
     <div id="my-dialog-background"></div>
-    <?
-}
-?>
+-->
 <script>
 
     function save() {
@@ -261,50 +259,26 @@ if(!$_GET['flag']){
     $('#my-dialog-background, .mail').click(function () {
         $('#my-dialog, #my-dialog-background').toggle();
     });
+    var windowHeight = $( window ).height();
 
-    function sms_send() {
-        var windowWidth = $( window ).width();
+    <? if($_GET['flag']){?>
+    var scHeight1 = $('#evaluation').prop('scrollHeight');
+    var scHeight2 = $('#comment').prop('scrollHeight');
+    var scHeight3 = scHeight1 + scHeight2 + 150;
 
-        var width_size = windowWidth - 1366;
-        var cut_size = width_size / 2;
+    $('#evaluation, #comment_input_section1').css("height",scHeight1+"px");
+    $('#comment, #comment_input_section1').css("height",scHeight2+"px");
+    $('.down_box').css("height",scHeight3+"px");
+    <? } ?>
 
-        html2canvas(document.querySelector("section"), {
-            //allowTaint: true,
-            //taintTest: false,
-            height:800,
-            useCORS: true,
-        }).then(function (canvas) {
-            var imgageData = canvas.toDataURL("image/png");
-            var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
-            var parent = "";
-            var add_phone = "";
 
-            if($('#parent_phone').attr('checked', true)) parent = $('#parent_phone').val();
-            if($('#add_phone').attr('checked', true)) add_phone = $('#add_phone_number').val();
-
-            $.ajax({
-                type: "POST",
-                url: "imgdown.php",
-                data: "canvasData=" + imgageData + "&no=" +  $("#no").val() + "&parent=" + parent + "&add_phone=" + add_phone,
-                dataType: "json",
-                success: function (data) {
-                    if (data.res == "success") alert('문자가 정상적으로 발송 되었습니다.');
-                    else alert('문자 발송에 실패하였습니다.');
-                    // alert(data.res);
-                    <? if($_GET['flag']=='2'){?>
-                    window.close();
-                    <?  }  ?>
-                },
-                error: function (xhr, status, error) {
-                    alert(error);
-                }
-            });
-        });
-
+    function sms_send(no) {
+        var url = "student_management_personal_quarter_record_detail_print.php?no="+no+"&flag=2";
+        window.open(url,"PopupWin", "top=-200,width=1500,height=800");
     }
 
     function print_send(gubun, no) {
-        var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&flag=1";
+        var url = "student_management_personal_quarter_record_detail.php?no="+no+"&flag=1";
         window.open(url,"PopupWin", "width=1100,height=850");
     }
 </script>

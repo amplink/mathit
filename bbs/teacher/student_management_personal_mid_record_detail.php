@@ -23,7 +23,7 @@ $today_date = date("Y-m-d");
         z-index: 999;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="css/student_manegement_personal_mid_record_detail.css" />
+<link rel="stylesheet" type="text/css" href="css/student_manegement_personal_mid_record_detail.css?v=20190422" />
 <script src="js/common.js"></script>
 <section>
 
@@ -94,8 +94,8 @@ $today_date = date("Y-m-d");
                 </div>
                 <div class="head_right">
                     <?  if($_GET['flag']!='1'){ ?>
-                        <div class="print" onclick="javascript: print_send('mid','<?=$res[seq]?>')"><img src="img/printer.png" alt="printer_icon"></div>
-                        <div class="mail" onclick=""><img src="img/mail.png" alt="mail_icon"></div>
+                        <div class="print" onclick="javascript: print_send('<?=$res[seq]?>')"><img src="img/printer.png" alt="printer_icon"></div>
+                        <div class="mail" onclick="sms_send('<?=$res[seq]?>')"><img src="img/mail.png" alt="mail_icon"></div>
                     <?  } ?>
                     <div class="sub_close_btn">
                         <?  if($_GET['flag']=='1'){ ?>
@@ -423,7 +423,7 @@ $today_date = date("Y-m-d");
                 <? include "./chart.php";?>
             </div>
         </div>
-        <div class="down_box">
+        <div class="down_box" style="height:250px">
             <div class="down_head_section">
                 <p class="l_div_text">선생님 코멘트</p>
                 <?php
@@ -452,6 +452,7 @@ $today_date = date("Y-m-d");
 
 
 </section>
+<!--
 <?php
 if(!$_GET['flag']){
     $ac = $_SESSION['client_no'];
@@ -475,7 +476,7 @@ if(!$_GET['flag']){
     <div id="my-dialog-background"></div>
     <?
 }
-?>
+?>-->
 
 <script>
 
@@ -500,52 +501,18 @@ if(!$_GET['flag']){
             jQuery("a").attr("download", "screenshot.png").attr("href", newData);
         });
     */
+    var windowHeight = $( window ).height();
     $('#my-dialog-background, .mail').click(function () {
         $('#my-dialog, #my-dialog-background').toggle();
     });
 
-    function sms_send() {
-        var windowWidth = $( window ).width();
+    <? if($_GET['flag']){?>
+    var scHeight = $('#comment').prop('scrollHeight');
+    scHeight2 = scHeight + 100;
 
-        var width_size = windowWidth - 1366;
-        var cut_size = width_size / 2;
-
-        html2canvas(document.getElementById("contents"),{
-            //html2canvas(document.querySelector("section"), {
-            //allowTaint: true,
-            //taintTest: false,
-            //width:800,
-            useCORS: true,
-        }).then(function (canvas) {
-            var imgageData = canvas.toDataURL("image/png");
-            var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
-            var parent = "";
-            var add_phone = "";
-            var no = $("#no").val();
-
-            if($('#parent_phone').prop('checked')==true) parent = $('#parent_phone').val();
-            if($('#add_phone').prop('checked')==true) add_phone = $('#add_phone_number').val();
-
-            $.ajax({
-                type: "POST",
-                url: "imgdown.php",
-                data: "canvasData=" + imgageData + "&no=" +  no + "&parent=" + parent + "&add_phone=" + add_phone,
-                dataType: "json",
-                success: function (data) {
-                    if (data.res == "success") alert('문자가 정상적으로 발송 되었습니다.');
-                    else alert('문자 발송에 실패하였습니다.');
-                    $('#my-dialog, #my-dialog-background').hide();
-                    <? if($_GET['flag']=='2'){?>
-                    window.close();
-                    <?  }  ?>
-                },
-                error: function (xhr, status, error) {
-                    alert(error);
-                }
-            });
-        });
-
-    }
+    $('#comment').css("height",scHeight+"px");
+    $('.down_box').css("height",scHeight2+"px");
+    <? } ?>
 
     //function sms_send_from() {
     //    var windowWidth = $( window ).width();
@@ -586,10 +553,16 @@ if(!$_GET['flag']){
     //    });
     //}
 
-    function print_send(gubun, no) {
-        var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&flag=1";
+    function print_send(no) {
+        var url = "student_management_personal_mid_record_detail.php?no="+no+"&flag=1";
         window.open(url,"PopupWin", "width=1100,height=850");
     }
+
+    function sms_send(no) {
+        var url = "student_management_personal_mid_record_detail_print.php?no="+no+"&flag=2";
+        window.open(url,"PopupWin", "top=-200,width=1500,height=800");
+    }
+
 </script>
 </body>
 

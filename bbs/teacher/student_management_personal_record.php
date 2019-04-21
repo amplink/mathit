@@ -93,7 +93,7 @@ $result = mysqli_query($connect_db, $sql);
 
     function sms_send(gubun, no) {
         var url = "student_management_personal_"+gubun+"_record_detail_print.php?no="+no+"&flag=2";
-        window.open(url,"PopupWin", "top=-200,width=1500,height=1000");
+        window.open(url,"PopupWin", "top=-200,width=1500,height=800");
     }
 </script>
 </body>

@@ -475,7 +475,24 @@ $api_res = api_calls_get($link);
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
 
-    var windowHeight = $( window ).height();
+    $(document).ready(function () {
+        window.moveTo(0, 0);
+
+        var w = $(document).width();
+        var h = $(document).height();
+        window.resizeTo(w, h);
+
+        var mw = window.outerWidth - window.innerWidth;
+        var mh = window.outerHeight - window.innerHeight;
+        window.resizeBy(mw, mh);
+
+        if (isIEVer() < 9) {
+            mw = $(document).outerWidth() - $(window).width();
+            mh = $(document).outerHeight() - $(window).height();
+            window.resizeBy(mw, mh);
+        }
+    });
+
     $('#my-dialog-background, .mail').click(function () {
         $('#my-dialog, #my-dialog-background').toggle();
     });
@@ -487,7 +504,7 @@ $api_res = api_calls_get($link);
     $('.down_box').css("height",scHeight2+"px");
 
     function sms_send() {
-
+        var windowHeight = $( window ).height();
         html2canvas(document.getElementById("contents"),{
             //html2canvas(document.querySelector("section"), {
             //allowTaint: true,
@@ -513,6 +530,7 @@ $api_res = api_calls_get($link);
                 success: function (data) {
                     if (data.res == "success") alert('문자가 정상적으로 발송 되었습니다.');
                     else alert('문자 발송에 실패하였습니다.');
+                    $('#my-dialog, #my-dialog-background').hide();
                     <? if($_GET['flag']=='2'){?>
                     window.close();
                     <?  }  ?>
@@ -529,6 +547,9 @@ $api_res = api_calls_get($link);
         var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&flag=1";
         window.open(url,"PopupWin", "width=1100,height=850");
     }
+
+
+
 </script>
 </body>
 

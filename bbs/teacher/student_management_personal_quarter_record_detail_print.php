@@ -23,7 +23,7 @@ $today_date = date("Y-m-d");
         z-index: 999;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css" />
+<link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css?v=20190422" />
 <script src="js/common.js"></script>
 <?php
 $sql = "select * from `teacher_score` 
@@ -189,7 +189,7 @@ $student_id = $res['student_id'];
             <div class="comment_input_section">
                 <textarea name="evaluation" id="evaluation" cols="30" rows="10" style="height:150px;width:97%"><?=$res['evaluation']?></textarea>
             </div>
-            <div class="down_head_section" style="padding-top:5px">
+            <div class="down_head_section" style="padding-top:60px">
                 <p class="l_div_text">선생님 코멘트</p>
             </div>
             <div class="comment_input_section">
@@ -231,31 +231,43 @@ $api_res = api_calls_get($link);
 <script src="./js/html2canvas.js"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script><script>
 
-    /*
-        html2canvas(document.querySelector("body"),{
-            //allowTaint: true,
-            //taintTest: false,
-            useCORS: true,
-        }).then(function(canvas) {
-            var imgageData = canvas.toDataURL("image/png");
-            var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
-            jQuery("a").attr("download", "screenshot.png").attr("href", newData);
-        });
-    */
+    $(document).ready(function () {
+        window.moveTo(0, 0);
+
+        var w = $(document).width();
+        var h = $(document).height();
+        window.resizeTo(w, h);
+
+        var mw = window.outerWidth - window.innerWidth;
+        var mh = window.outerHeight - window.innerHeight;
+        window.resizeBy(mw, mh);
+
+        if (isIEVer() < 9) {
+            mw = $(document).outerWidth() - $(window).width();
+            mh = $(document).outerHeight() - $(window).height();
+            window.resizeBy(mw, mh);
+        }
+    });
+
     $('#my-dialog-background, .mail').click(function () {
         $('#my-dialog, #my-dialog-background').toggle();
     });
 
+    var scHeight1 = $('#evaluation').prop('scrollHeight');
+    var scHeight2 = $('#comment').prop('scrollHeight');
+    var scHeight3 = scHeight1 + scHeight2 + 150;
+
+    $('#evaluation, #comment_input_section1').css("height",scHeight1+"px");
+    $('#comment, #comment_input_section1').css("height",scHeight2+"px");
+    $('.down_box').css("height",scHeight3+"px");
+
     function sms_send() {
-        var windowWidth = $( window ).width();
-
-        var width_size = windowWidth - 1366;
-        var cut_size = width_size / 2;
-
+        var windowHeight = $( window ).height();
         html2canvas(document.querySelector("section"), {
             //allowTaint: true,
             //taintTest: false,
             //width:800,
+            height:windowHeight,
             useCORS: true,
         }).then(function (canvas) {
             var imgageData = canvas.toDataURL("image/png");
