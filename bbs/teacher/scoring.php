@@ -158,9 +158,9 @@ include_once ('head.php');
                     <table>
                         <thead>
                         <tr>
-                            <th style="text-align:left;padding-left:40px">문항&nbsp;&nbsp;</th>
-                            <th style="text-align:center;padding-right:80px">정답</th>
-                            <th style="text-align:right;padding-right:13px"><input type="checkbox" id="allCheck"></th>
+                            <th style="width: 70px;">문항</th>
+                            <th style="width: 390px;">정답</th>
+                            <th><input type="checkbox" id="allCheck"></th>
                         </tr>
                         </thead>
                     </table>

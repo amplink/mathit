@@ -546,6 +546,45 @@ if(!$_GET['flag']){
 
     }
 
+    //function sms_send_from() {
+    //    var windowWidth = $( window ).width();
+    //
+    //    var width_size = windowWidth - 1366;
+    //    var cut_size = width_size / 2;
+    //
+    //    var no = <?php //echo $_GET['no'];?>//;
+    //    var parent = <?php //echo $_GET['parent'];?>//;
+    //    var add_phone = <?php //echo $_GET['add_phone'];?>//;
+    //
+    //    html2canvas(document.getElementById("contents"),{
+    //        //html2canvas(document.querySelector("section"), {
+    //        //allowTaint: true,
+    //        //taintTest: false,
+    //        //width:800,
+    //        useCORS: true,
+    //    }).then(function (canvas) {
+    //        var imgageData = canvas.toDataURL("image/png");
+    //        var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+    //
+    //        $.ajax({
+    //            type: "POST",
+    //            url: "imgdown.php",
+    //            data: "canvasData=" + imgageData + "&no=" +  no + "&parent=" + parent + "&add_phone=" + add_phone,
+    //            dataType: "json",
+    //            success: function (data) {
+    //                if (data.res == "success") alert('문자가 정상적으로 발송 되었습니다.');
+    //                else alert('문자 발송에 실패하였습니다.');
+    //                <?// if($_GET['flag']=='2'){?>
+    //                window.close();
+    //                <?//  }  ?>
+    //            },
+    //            error: function (xhr, status, error) {
+    //                alert(error);
+    //            }
+    //        });
+    //    });
+    //}
+
     function print_send(gubun, no) {
         var url = "student_management_personal_"+gubun+"_record_detail.php?no="+no+"&flag=1";
         window.open(url,"PopupWin", "width=1100,height=850");
