@@ -27,24 +27,20 @@ $manager_get_name = $_GET['manager_get_name'];
 $manager_get_chk = $_GET['manager_get_chk'];
 ?>
 
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MathIT Admin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
-    <meta http-equiv="Expires" content="-1">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/academy_option_staff.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/academy_option_staff.css" />
+<script src="js/jquery-3.3.1.min.js"></script>
+<!--</head>
 
-<body>
+<body>-->
 <!--    <div class="header">-->
 <!--        <div class="logo_wrap">-->
 <!--            <div class="logo"><img src="img/logo.png" alt="logo"></div>-->

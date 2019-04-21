@@ -19,19 +19,9 @@ if(!$_GET['page']) {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
 
-<head>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/answer_manegement.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
-    <meta http-equiv="Expires" content="-1">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache">
-</head>
+<link rel="stylesheet" type="text/css" media="screen" href="css/answer_manegement.css" />
 
-<body>
 <div class="section">
     <div class="head_section">
         <p>정답지 목록</p>

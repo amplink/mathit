@@ -37,78 +37,86 @@ header("Pragma: no-cache"); // HTTP/1.0
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<?php
-if (G5_IS_MOBILE) {
-    echo '<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes">'.PHP_EOL;
-    echo '<meta name="HandheldFriendly" content="true">'.PHP_EOL;
-    echo '<meta name="format-detection" content="telephone=no">'.PHP_EOL;
-} else {
-    echo '<meta http-equiv="imagetoolbar" content="no">'.PHP_EOL;
-    echo '<link rel="icon" type="image/png" sizes="96x96" href="img/f.png">' .PHP_EOL;
-    echo '<meta http-equiv="X-UA-Compatible" content="IE=Edge">'.PHP_EOL;
-}
+    <meta charset="utf-8">
+    <?php
+    if (G5_IS_MOBILE) {
+        echo '<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes">'.PHP_EOL;
+        echo '<meta name="HandheldFriendly" content="true">'.PHP_EOL;
+        echo '<meta name="format-detection" content="telephone=no">'.PHP_EOL;
+    } else {
+        echo '<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">'.PHP_EOL;
+        echo '<meta http-equiv="Expires" content="-1">'.PHP_EOL;
+        echo '<meta http-equiv="Pragma" content="no-cache">'.PHP_EOL;
+        echo '<meta http-equiv="Cache-Control" content="no-cache">'.PHP_EOL;
+        echo '<meta http-equiv="imagetoolbar" content="no">'.PHP_EOL;
+        echo '<link rel="icon" type="image/png" sizes="96x96" href="img/f.png">' .PHP_EOL;
+        echo '<meta http-equiv="X-UA-Compatible" content="IE=Edge">'.PHP_EOL;
+    }
 
-if($config['cf_add_meta'])
-    echo $config['cf_add_meta'].PHP_EOL;
-?>
-<title><?php echo $g5_head_title; ?></title>
-<!--< ?php-->
-<!--if (defined('G5_IS_ADMIN')) {-->
-<!--    if(!defined('_THEME_PREVIEW_'))-->
-<!--        echo '<link rel="stylesheet" href="'.G5_ADMIN_URL.'/css/admin.css?ver='.G5_CSS_VER.'">'.PHP_EOL;-->
-<!--} else {-->
-<!--    echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'default').'.css?ver='.G5_CSS_VER.'">'.PHP_EOL;-->
-<!--}-->
-<!--?>-->
-<!--[if lte IE 8]>
-<script src="<?php echo G5_JS_URL ?>/html5.js"></script>
-<![endif]-->
-<script>
-// 자바스크립트에서 사용하는 전역변수 선언
-var g5_url       = "<?php echo G5_URL ?>";
-var g5_bbs_url   = "<?php echo G5_BBS_URL ?>";
-var g5_is_member = "<?php echo isset($is_member)?$is_member:''; ?>";
-var g5_is_admin  = "<?php echo isset($is_admin)?$is_admin:''; ?>";
-var g5_is_mobile = "<?php echo G5_IS_MOBILE ?>";
-var g5_bo_table  = "<?php echo isset($bo_table)?$bo_table:''; ?>";
-var g5_sca       = "<?php echo isset($sca)?$sca:''; ?>";
-var g5_editor    = "<?php echo ($config['cf_editor'] && $board['bo_use_dhtml_editor'])?$config['cf_editor']:''; ?>";
-var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
-<?php if(defined('G5_IS_ADMIN')) { ?>
-var g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";
-<?php } ?>
-</script>
-<!--<script src="< ?php echo G5_JS_URL ?>/jquery-1.8.3.min.js"></script>-->
-<script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="<?php echo G5_JS_URL ?>/jquery.menu.js?ver=<?php echo G5_JS_VER; ?>"></script>
-<script src="<?php echo G5_JS_URL ?>/common.js?ver=<?php echo G5_JS_VER; ?>"></script>
-<script src="<?php echo G5_JS_URL ?>/wrest.js?ver=<?php echo G5_JS_VER; ?>"></script>
-<script src="<?php echo G5_JS_URL ?>/placeholders.min.js"></script>
-<link rel="stylesheet" href="<?php echo G5_JS_URL ?>/font-awesome/css/font-awesome.min.css">
-<?php
-if(G5_IS_MOBILE) {
-    echo '<script src="'.G5_JS_URL.'/modernizr.custom.70111.js"></script>'.PHP_EOL; // overflow scroll 감지
-}
-if(!defined('G5_IS_ADMIN'))
-    echo $config['cf_add_script'];
-?>
-<!-- 민석 추가 css -->
-    <link rel="stylesheet" type="text/css" media="screen" href="css/nanumsquare.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="css/home.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="css/notice_home.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="css/notice_add.css" />
+    if($config['cf_add_meta'])
+        echo $config['cf_add_meta'].PHP_EOL;
+    ?>
+    <title><?php echo $g5_head_title; ?></title>
+    <!--< ?php-->
+    <!--if (defined('G5_IS_ADMIN')) {-->
+    <!--    if(!defined('_THEME_PREVIEW_'))-->
+    <!--        echo '<link rel="stylesheet" href="'.G5_ADMIN_URL.'/css/admin.css?ver='.G5_CSS_VER.'">'.PHP_EOL;-->
+    <!--} else {-->
+    <!--    echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'default').'.css?ver='.G5_CSS_VER.'">'.PHP_EOL;-->
+    <!--}-->
+    <!--?>-->
+    <!--[if lte IE 8]>
+    <script src="<?php echo G5_JS_URL ?>/html5.js"></script>
+    <![endif]-->
+    <script>
+        // 자바스크립트에서 사용하는 전역변수 선언
+        var g5_url       = "<?php echo G5_URL ?>";
+        var g5_bbs_url   = "<?php echo G5_BBS_URL ?>";
+        var g5_is_member = "<?php echo isset($is_member)?$is_member:''; ?>";
+        var g5_is_admin  = "<?php echo isset($is_admin)?$is_admin:''; ?>";
+        var g5_is_mobile = "<?php echo G5_IS_MOBILE ?>";
+        var g5_bo_table  = "<?php echo isset($bo_table)?$bo_table:''; ?>";
+        var g5_sca       = "<?php echo isset($sca)?$sca:''; ?>";
+        var g5_editor    = "<?php echo ($config['cf_editor'] && $board['bo_use_dhtml_editor'])?$config['cf_editor']:''; ?>";
+        var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
+        <?php if(defined('G5_IS_ADMIN')) { ?>
+        var g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";
+        <?php } ?>
+    </script>
+    <!--<script src="< ?php echo G5_JS_URL ?>/jquery-1.8.3.min.js"></script>-->
+    <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="<?php echo G5_JS_URL ?>/jquery.menu.js?ver=<?php echo G5_JS_VER; ?>"></script>
+    <script src="<?php echo G5_JS_URL ?>/common.js?ver=<?php echo G5_JS_VER; ?>"></script>
+    <script src="<?php echo G5_JS_URL ?>/wrest.js?ver=<?php echo G5_JS_VER; ?>"></script>
+    <script src="<?php echo G5_JS_URL ?>/placeholders.min.js"></script>
+    <link rel="stylesheet" href="<?php echo G5_JS_URL ?>/font-awesome/css/font-awesome.min.css">
+    <?php
+    if(G5_IS_MOBILE) {
+        echo '<script src="'.G5_JS_URL.'/modernizr.custom.70111.js"></script>'.PHP_EOL; // overflow scroll 감지
+    }
+    if(!defined('G5_IS_ADMIN'))
+        echo $config['cf_add_script'];
+    ?>
+    <?
+    if(strpos($_SERVER["PHP_SELF"], "answer_add") !== false || strpos($_SERVER["PHP_SELF"], "update_answer_add") !== false){}else {?>
+        <!-- 민석 추가 css -->
+        <link rel="stylesheet" type="text/css" media="screen" href="css/nanumsquare.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="css/home.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="css/notice_home.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="css/notice_add.css" />
 
 
 
-<!--    선택적으로 CSS를 사용하면 될것 같습니다. Multi Select CSS 가 된다면 구지 bootstrap css를 사용할 필요가 없습니다-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap-multiselect.css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-<script src="js/bootstrap-multiselect.js"></script>
+        <!--    선택적으로 CSS를 사용하면 될것 같습니다. Multi Select CSS 가 된다면 구지 bootstrap css를 사용할 필요가 없습니다-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap-multiselect.css" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <?
+    }
+    ?>
+    <script src="js/bootstrap-multiselect.js"></script>
 
 
 </head>

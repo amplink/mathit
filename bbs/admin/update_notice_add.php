@@ -34,10 +34,6 @@ $ac_r_size = count($ac_range);
     <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
     <!--    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />-->
     <!--    <link rel="stylesheet" type="text/css" media="screen" href="css/notice_add.css" />-->
-    <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
-    <meta http-equiv="Expires" content="-1">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache">
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap-multiselect.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>

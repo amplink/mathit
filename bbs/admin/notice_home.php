@@ -20,10 +20,7 @@ if(!$_GET['page']) {
     $page = $_GET['page']-1;
 }
 ?>
-<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
-<meta http-equiv="Expires" content="-1">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Cache-Control" content="no-cache">
+
 <script src="js/jquery-3.3.1.min.js"></script>
 <div class="section">
     <div class="head_section">

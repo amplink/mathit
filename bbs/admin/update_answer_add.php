@@ -1,5 +1,6 @@
 <?
 include_once('_common.php');
+include_once('head.php');
 //"./update_answer_add.php?grade='.$ac_data['grade'].'&semester='.$ac_data['semester'].'&unit='.$ac_data['unit'].'&level='.$ac_data['level'].'&book_type='.$ac_data['book_type'].'"
 $grade = $_GET['grade'];
 $semester = $_GET['semester'];
@@ -13,54 +14,23 @@ if($book_type == "베타") {
 }
 
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <style>
-        .pt-17 {
-            padding-top: 17px;
-        }
-        .pt-7 {
-            vertical-align: middle;
-        }
-    </style>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MathIT Admin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
-    <meta http-equiv="Expires" content="-1">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/answer_add_2.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/answer_add.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/nanumsquare.css" />
-</head>
+<link rel="stylesheet" type="text/css" media="screen" href="css/common.css?v=20190423" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/answer_add_2.css" />
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/answer_add.js"></script>
+<style>
+    .pt-17 {
+        padding-top: 17px;
+    }
+    .pt-7 {
+        vertical-align: middle;
+    }
+</style>
+<link rel="stylesheet" type="text/css" media="screen" href="css/nanumsquare.css" />
 
-<body>
 <form action="update_answer_add_chk.php?page=<?=$page?>" method="POST" id="answer_add_form">
-    <div class="header" style="width:calc(100% - 40px)">
-        <div class="logo_wrap">
-            <div class="logo"><img src="img/logo.png" alt="logo"></div>
-            <p>ADMIN</p>
-        </div>
-        <nav>
-            <div class="nav_menu"><a href="index.php">홈</a></div>
-            <div class="nav_menu"><a href="notice_home.php">공지사항관리</a></div>
-            <div class="nav_menu"><a href="academy_option_staff.php">학원별관리</a></div>
-            <div class="nav_menu"><a href="answer_manegement.php" class="on">정답지관리</a></div>
-        </nav>
-        <div class="header_right">
-            <div class="user_img"><img src="img/user.png" alt="user_img"></div>
-            <p class="user_id">admin</p>
-            <div class="logout_btn"><a href="login.php">로그아웃</a></div>
-            <div class="pass_change_btn"><a href="home_pass_change.php">비밀번호변경</a></div>
-        </div>
-    </div>
+
     <div class="section" style="width:100%">
         <div class="head_section"  style="width:calc(100% - 100px)">
             <div class="upside">

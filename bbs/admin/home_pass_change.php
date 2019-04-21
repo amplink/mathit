@@ -13,15 +13,9 @@ include_once('head.php');
 
 ?>
 
+<link rel="stylesheet" type="text/css" media="screen" href="css/home_pass_change.css" />
+<script src="js/jquery-3.3.1.min.js"></script>
 
-<head>
-    <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
-    <meta http-equiv="Expires" content="-1">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/home_pass_change.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
-</head>
 <form action="home_pass_chk.php" method="post" id="login_form">
     <div class="section">
         <div class="member_login_box">
