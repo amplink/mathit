@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>mathit_mobile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/login.css" />
-    <script src="js/jquery-3.3.1.min.js"></script>
-</head>
+<?php
+include_once ('_common.php');
+include_once ('head.php');
+?>
+<link rel="stylesheet" type="text/css" media="screen" href="css/login.css" />
 <body>
     <div class="back_img"></div>
     <div class="page_wrap">
