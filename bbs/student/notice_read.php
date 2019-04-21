@@ -12,26 +12,14 @@ include_once ('head.php');
         <div class="content_p">
             <p class="notice_title"><span>뉴 스터디 웹서버 하드디스크 증설 작업 안내</span></p>
             <div class="other_info">
-                <p class="writer"><span>마스터</span></p>
-                <p class="academy"><span>수학학원</span></p>
+                <p class="writer"><span>작성자: 마스터</span></p>
+                <p class="academy"><span>캠퍼스 명: 수학학원</span></p>
                 <p class="date"><span>2019.01.05</span></p>
             </div>
         </div>
         <div class="content_detail_p">
             <div class="text_input_wrap">
                 <div class="text_input"></div>
-            </div>
-            <div class="decoration">
-                <span class="deco_circle"></span>
-                <span class="deco_circle"></span>
-                <span class="deco_circle"></span>
-                <span class="deco_circle"></span>
-                <span class="deco_circle"></span>
-                <span class="deco_circle"></span>
-                <span class="deco_circle"></span>
-                <span class="deco_circle"></span>
-                <span class="deco_circle"></span>
-                <span class="deco_circle"></span>
             </div>
         </div>
     </section>

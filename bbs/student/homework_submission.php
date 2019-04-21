@@ -17,7 +17,7 @@ include_once ('head.php');
                <span>10~11</span></p>
            </div>
            <div class="homework_limit_wrap">
-               <p class="sub_title">마감시간</p>
+               <p class="sub_title">마감 시간</p>
                <p class="sub_section_info"><span>~</span>
                <span>9/22</span>
                <span> AM </span>
@@ -26,7 +26,7 @@ include_once ('head.php');
         </div>
         <div class="content_detail_p">
             <div class="detail_head">
-                <p><span>카메라 버튼을 눌러 숙제이미지를 추가한 후</span><span>체크 버튼을 눌러 저장해주세요</span></p>
+                <p><span>카메라 버튼을 눌러 숙제 이미지를 추가한 후</span><span>체크 버튼을 눌러 저장해 주세요</span></p>
             </div>
             <div class="photo_section">
                 <div class="photo_box">
@@ -37,7 +37,7 @@ include_once ('head.php');
                 </div>
             </div>
             <div class="detail_footer">
-                <p><span>현재 등록된 이미지 갯수 : </span><span>1</span><span>장</span></p>
+                <p><span>현재 등록된 이미지 개수 : </span><span>1</span><span>장</span></p>
                 <div class="check_btn"><a href="#none"><img src="img/check_btn.png" alt="check_btn_icon"></a></div>
             </div>
             <div class="decoration">

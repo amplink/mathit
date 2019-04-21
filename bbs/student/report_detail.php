@@ -11,13 +11,13 @@ include_once ('head.php');
             <div class="back_btn"><a href="report.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
         </div>
         <div class="content_p">
-            <p class="student_name"><span>김태연</span></p>
             <p class="record_class_name">
                 <span>초6</span>
                 <span>이산수학</span>
                 <span> - </span>
                 <span>월수금</span>
             </p>
+            <p class="student_name"><span>김태연</span></p>
         </div>
         <div class="content_detail_p">
             <div class="report_detail_section">
@@ -27,9 +27,9 @@ include_once ('head.php');
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>A</th>
-                                <th>B</th>
-                                <th>C</th>
+                                <th>1단계</th>
+                                <th>2단계</th>
+                                <th>3단계</th>
                                 <th>총점</th>
                             </tr>
                         </thead>
@@ -39,30 +39,30 @@ include_once ('head.php');
                                 <td>
                                     <span>35</span>
                                     <span>/</span>
-                                    <span>40</span>
+                                    <span>40점</span>
                                 </td>
                                 <td>
                                     <span>35</span>
                                     <span>/</span>
-                                    <span>40</span>
+                                    <span>40점</span>
                                 </td>
                                 <td>
                                     <span>20</span>
                                     <span>/</span>
-                                    <span>20</span>
+                                    <span>20점</span>
                                 </td>
                                 <td>
                                     <span>95</span>
                                     <span>/</span>
-                                    <span>100</span>
+                                    <span>100점</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td><span>학년평균</span></td>
-                                <td><span>30</span></td>
-                                <td><span>30</span></td>
-                                <td><span>15</span></td>
-                                <td><span>75</span></td>
+                                <td><span>30점</span></td>
+                                <td><span>30점</span></td>
+                                <td><span>15점</span></td>
+                                <td><span>75점</span></td>
                             </tr>
                         </tbody>
                     </table>

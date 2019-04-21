@@ -13,7 +13,7 @@ include_once ('head.php');
                     <span class="deco_line"></span>
                 </div>
                 <div class="more_btn_wrap">
-                    <a href="homework_ing.php"><img src="img/more.png" alt="more_btn_icon"></a>
+                    <a href="homework_ing.php"><img src="img/green_plus.png" alt="more_btn_icon" style="width: 25px; height: 25px;"></a>
                 </div>
             </div>
             <div class="homework_content_wrap">
@@ -26,7 +26,7 @@ include_once ('head.php');
                             </div>
                         </div>
                         <div class="range_view">
-                            <div class="homework_content_img"><img src="img/range.png" alt="homework_icon"></div>
+                            <div class="homework_content_img"><img src="img/nav/book_img.png" alt="homework_icon"></div>
                             <div class="homework_content_text">
                                 <p><span>주교제</span></p>
                                 <p><span>p. </span><span>10~11</span></p>
@@ -43,7 +43,7 @@ include_once ('head.php');
                             </div>
                         </div>
                         <div class="range_view">
-                            <div class="homework_content_img"><img src="img/range.png" alt="homework_icon"></div>
+                            <div class="homework_content_img"><img src="img/nav/book_img.png" alt="homework_icon"></div>
                             <div class="homework_content_text">
                                 <p><span>주교제</span></p>
                                 <p><span>p. </span><span>10~11</span></p>
@@ -60,7 +60,7 @@ include_once ('head.php');
                             </div>
                         </div>
                         <div class="range_view">
-                            <div class="homework_content_img"><img src="img/range.png" alt="homework_icon"></div>
+                            <div class="homework_content_img"><img src="img/nav/book_img.png" alt="homework_icon"></div>
                             <div class="homework_content_text">
                                 <p><span>주교제</span></p>
                                 <p><span>p. </span><span>10~11</span></p>
@@ -77,7 +77,7 @@ include_once ('head.php');
                     <span class="deco_line"></span>
                 </div>
                 <div class="more_btn_wrap">
-                    <a href="report.php"><img src="img/more.png" alt="more_btn_icon"></a>
+                    <a href="report.php"><img src="img/green_plus.png" alt="more_btn_icon" style="width: 25px; height: 25px;"></a>
                 </div>
             </div>
             <div class="report_content_wrap">
@@ -126,7 +126,7 @@ include_once ('head.php');
                     <span class="deco_line"></span>
                 </div>
                 <div class="more_btn_wrap">
-                    <a href="notice.php"><img src="img/more.png" alt="more_btn_icon"></a>
+                    <a href="notice.php"><img src="img/green_plus.png" alt="more_btn_icon" style="width: 25px; height: 25px;"></a>
                 </div>
             </div>
             <div class="notice_content_wrap">
@@ -186,7 +186,7 @@ include_once ('head.php');
         </div>
     </section>
     <footer>
-        <p class="copyright"><span>ⓒ MathIt Corp. All rights reserved.</span></p>
+        <p class="copyright"><span>copyright ⓒ 2019 PSE corp. All Rights Reserved.</span></p>
     </footer>
 </body>
 </html>

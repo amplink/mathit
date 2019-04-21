@@ -11,7 +11,7 @@ include_once ('head.php');
         </div>
         <div class="content_p">
             <div class="content_menu_wrap">
-                <div class="content_menu on"><a href="homework_ing.php" class="on">진행중인 숙제</a></div>
+                <div class="content_menu on"><a href="homework_ing.php" class="on">진행 중인 숙제</a></div>
                 <div class="content_menu"><a href="homework_all.php">전체 목록</a></div>
             </div>
             <div class="content_list_wrap">
@@ -43,7 +43,7 @@ include_once ('head.php');
                                 <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
                                 <div class="section_text">
                                     <p>9/20~9/22</p>
-                                    <p><span>AM</span><span>00:00</span></p>
+                                    <p><span>AM</span> <span>00:00</span></p>
                                 </div>
                             </div>
                         </a>
@@ -75,7 +75,7 @@ include_once ('head.php');
                                 <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
                                 <div class="section_text">
                                     <p>9/20~9/22</p>
-                                    <p><span>AM</span><span>00:00</span></p>
+                                    <p><span>AM</span> <span>00:00</span></p>
                                 </div>
                             </div>
                         </a>
@@ -107,7 +107,7 @@ include_once ('head.php');
                                 <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
                                 <div class="section_text">
                                     <p>9/20~9/22</p>
-                                    <p><span>AM</span><span>00:00</span></p>
+                                    <p><span>AM</span> <span>00:00</span></p>
                                 </div>
                             </div>
                         </a>
@@ -139,7 +139,7 @@ include_once ('head.php');
                                 <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
                                 <div class="section_text">
                                     <p>9/20~9/22</p>
-                                    <p><span>AM</span><span>00:00</span></p>
+                                    <p><span>AM</span> <span>00:00</span></p>
                                 </div>
                             </div>
                         </a>
@@ -171,7 +171,7 @@ include_once ('head.php');
                                 <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
                                 <div class="section_text">
                                     <p>9/20~9/22</p>
-                                    <p><span>AM</span><span>00:00</span></p>
+                                    <p><span>AM</span> <span>00:00</span></p>
                                 </div>
                             </div>
                         </a>
@@ -203,7 +203,7 @@ include_once ('head.php');
                                 <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
                                 <div class="section_text">
                                     <p>9/20~9/22</p>
-                                    <p><span>AM</span><span>00:00</span></p>
+                                    <p><span>AM</span> <span>00:00</span></p>
                                 </div>
                             </div>
                         </a>
@@ -235,7 +235,7 @@ include_once ('head.php');
                                 <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
                                 <div class="section_text">
                                     <p>9/20~9/22</p>
-                                    <p><span>AM</span><span>00:00</span></p>
+                                    <p><span>AM</span> <span>00:00</span></p>
                                 </div>
                             </div>
                         </a>
@@ -267,7 +267,7 @@ include_once ('head.php');
                                 <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
                                 <div class="section_text">
                                     <p>9/20~9/22</p>
-                                    <p><span>AM</span><span>00:00</span></p>
+                                    <p><span>AM</span> <span>00:00</span></p>
                                 </div>
                             </div>
                         </a>
@@ -299,7 +299,7 @@ include_once ('head.php');
                                 <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
                                 <div class="section_text">
                                     <p>9/20~9/22</p>
-                                    <p><span>AM</span><span>00:00</span></p>
+                                    <p><span>AM</span> <span>00:00</span></p>
                                 </div>
                             </div>
                         </a>
@@ -331,7 +331,7 @@ include_once ('head.php');
                                 <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
                                 <div class="section_text">
                                     <p>9/20~9/22</p>
-                                    <p><span>AM</span><span>00:00</span></p>
+                                    <p><span>AM</span> <span>00:00</span></p>
                                 </div>
                             </div>
                         </a>

@@ -23,12 +23,24 @@ include_once ('head.php');
                     <a href="notice_read.php">
                         <div class="up_section">
                             <div class="number"><span class="emphasis">공지</span></div>
-                            <div class="writer"><span>마스터</span></div>
-                            <div class="academy"><span>수학학원</span></div>
+                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크</span></div>
                             <div class="date"><span>2019.01.05</span></div>
                         </div>
                         <div class="down_section">
-                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크 증설 작업 안내</span></div>
+                            <div class="writer"><span>작성자 : 마스터</span><span style="margin-left: 20px;">캠퍼스 명 : 수학학원</span></div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="notice_list">
+                    <a href="notice_read.php">
+                        <div class="up_section">
+                            <div class="number"><span class="emphasis">공지</span></div>
+                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크</span></div>
+                            <div class="date"><span>2019.01.05</span></div>
+                        </div>
+                        <div class="down_section">
+                            <div class="writer"><span>작성자 : 마스터</span><span style="margin-left: 20px;">캠퍼스 명 : 수학학원</span></div>
                         </div>
                     </a>
                 </div>
@@ -36,12 +48,11 @@ include_once ('head.php');
                     <a href="notice_read.php">
                         <div class="up_section">
                             <div class="number"><span class="emphasis">공지</span></div>
-                            <div class="writer"><span>마스터</span></div>
-                            <div class="academy"><span>수학학원</span></div>
+                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크</span></div>
                             <div class="date"><span>2019.01.05</span></div>
                         </div>
                         <div class="down_section">
-                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크 증설 작업 안내</span></div>
+                            <div class="writer"><span>작성자 : 마스터</span><span style="margin-left: 20px;">캠퍼스 명 : 수학학원</span></div>
                         </div>
                     </a>
                 </div>
@@ -49,12 +60,11 @@ include_once ('head.php');
                     <a href="notice_read.php">
                         <div class="up_section">
                             <div class="number"><span class="emphasis">공지</span></div>
-                            <div class="writer"><span>마스터</span></div>
-                            <div class="academy"><span>수학학원</span></div>
+                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크</span></div>
                             <div class="date"><span>2019.01.05</span></div>
                         </div>
                         <div class="down_section">
-                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크 증설 작업 안내</span></div>
+                            <div class="writer"><span>작성자 : 마스터</span><span style="margin-left: 20px;">캠퍼스 명 : 수학학원</span></div>
                         </div>
                     </a>
                 </div>
@@ -62,90 +72,95 @@ include_once ('head.php');
                     <a href="notice_read.php">
                         <div class="up_section">
                             <div class="number"><span class="emphasis">공지</span></div>
-                            <div class="writer"><span>마스터</span></div>
-                            <div class="academy"><span>수학학원</span></div>
+                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크</span></div>
                             <div class="date"><span>2019.01.05</span></div>
                         </div>
                         <div class="down_section">
-                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크 증설 작업 안내</span></div>
+                            <div class="writer"><span>작성자 : 마스터</span><span style="margin-left: 20px;">캠퍼스 명 : 수학학원</span></div>
                         </div>
                     </a>
                 </div>
                 <div class="notice_list">
                     <a href="notice_read.php">
                         <div class="up_section">
-                            <div class="number"><span>14</span></div>
-                            <div class="writer"><span>디자이너</span></div>
-                            <div class="academy"><span>수학학원</span></div>
+                            <div class="number"><span class="emphasis">공지</span></div>
+                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크</span></div>
                             <div class="date"><span>2019.01.05</span></div>
                         </div>
                         <div class="down_section">
-                            <div class="notice_title"><span>메스잇 좋네요</span></div>
+                            <div class="writer"><span>작성자 : 마스터</span><span style="margin-left: 20px;">캠퍼스 명 : 수학학원</span></div>
                         </div>
                     </a>
                 </div>
                 <div class="notice_list">
                     <a href="notice_read.php">
                         <div class="up_section">
-                            <div class="number"><span>14</span></div>
-                            <div class="writer"><span>디자이너</span></div>
-                            <div class="academy"><span>수학학원</span></div>
+                            <div class="number"><span class="emphasis">공지</span></div>
+                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크</span></div>
                             <div class="date"><span>2019.01.05</span></div>
                         </div>
                         <div class="down_section">
-                            <div class="notice_title"><span>메스잇 좋네요</span></div>
+                            <div class="writer"><span>작성자 : 마스터</span><span style="margin-left: 20px;">캠퍼스 명 : 수학학원</span></div>
                         </div>
                     </a>
                 </div>
                 <div class="notice_list">
                     <a href="notice_read.php">
                         <div class="up_section">
-                            <div class="number"><span>14</span></div>
-                            <div class="writer"><span>디자이너</span></div>
-                            <div class="academy"><span>수학학원</span></div>
+                            <div class="number"><span class="emphasis">공지</span></div>
+                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크</span></div>
                             <div class="date"><span>2019.01.05</span></div>
                         </div>
                         <div class="down_section">
-                            <div class="notice_title"><span>메스잇 좋네요</span></div>
+                            <div class="writer"><span>작성자 : 마스터</span><span style="margin-left: 20px;">캠퍼스 명 : 수학학원</span></div>
                         </div>
                     </a>
                 </div>
                 <div class="notice_list">
                     <a href="notice_read.php">
                         <div class="up_section">
-                            <div class="number"><span>14</span></div>
-                            <div class="writer"><span>디자이너</span></div>
-                            <div class="academy"><span>수학학원</span></div>
+                            <div class="number"><span class="emphasis">공지</span></div>
+                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크</span></div>
                             <div class="date"><span>2019.01.05</span></div>
                         </div>
                         <div class="down_section">
-                            <div class="notice_title"><span>메스잇 좋네요</span></div>
+                            <div class="writer"><span>작성자 : 마스터</span><span style="margin-left: 20px;">캠퍼스 명 : 수학학원</span></div>
                         </div>
                     </a>
                 </div>
                 <div class="notice_list">
                     <a href="notice_read.php">
                         <div class="up_section">
-                            <div class="number"><span>14</span></div>
-                            <div class="writer"><span>디자이너</span></div>
-                            <div class="academy"><span>수학학원</span></div>
+                            <div class="number"><span class="emphasis">공지</span></div>
+                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크</span></div>
                             <div class="date"><span>2019.01.05</span></div>
                         </div>
                         <div class="down_section">
-                            <div class="notice_title"><span>메스잇 좋네요</span></div>
+                            <div class="writer"><span>작성자 : 마스터</span><span style="margin-left: 20px;">캠퍼스 명 : 수학학원</span></div>
                         </div>
                     </a>
                 </div>
                 <div class="notice_list">
                     <a href="notice_read.php">
                         <div class="up_section">
-                            <div class="number"><span>14</span></div>
-                            <div class="writer"><span>디자이너</span></div>
-                            <div class="academy"><span>수학학원</span></div>
+                            <div class="number"><span class="emphasis">공지</span></div>
+                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크</span></div>
                             <div class="date"><span>2019.01.05</span></div>
                         </div>
                         <div class="down_section">
-                            <div class="notice_title"><span>메스잇 좋네요</span></div>
+                            <div class="writer"><span>작성자 : 마스터</span><span style="margin-left: 20px;">캠퍼스 명 : 수학학원</span></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="notice_list">
+                    <a href="notice_read.php">
+                        <div class="up_section">
+                            <div class="number"><span class="emphasis">공지</span></div>
+                            <div class="notice_title"><span class="emphasis">뉴스터디 웹서버 하드디스크</span></div>
+                            <div class="date"><span>2019.01.05</span></div>
+                        </div>
+                        <div class="down_section">
+                            <div class="writer"><span>작성자 : 마스터</span><span style="margin-left: 20px;">캠퍼스 명 : 수학학원</span></div>
                         </div>
                     </a>
                 </div>

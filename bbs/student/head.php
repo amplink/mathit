@@ -40,12 +40,23 @@ include_once('_common.php');
     <!-- 네비게이션 -->
     <div class="hamburger_wrap">
         <div class="user_wrap">
+            <a href="mypage.php">
             <div class="user_side">
                 <div class="user_img"><img src="img/nav/user.png" alt="user_img"></div>
                 <div class="user_info">
                     <p class="user_name">김태연</p>
                     <p class="academy_name">수학학원</p>
                 </div>
+            </div>
+            </a>
+            <div class="add_btn_wrap">
+                <a href="login.php"><div class="close_btn"><img src="img/nav/logout.png" alt="logout_btn_icon"></div></a>
+            </div>
+            <div class="add_btn_wrap">
+                <a href="#"><div class="close_btn"><img src="img/nav/alarm.png" alt="alarm_btn_icon"></div></a>
+            </div>
+            <div class="add_btn_wrap">
+                <a href="setting.php"><div class="close_btn"><img src="img/nav/setting.png" alt="setting_btn_icon"></div></a>
             </div>
             <div class="close_btn_wrap">
                 <div class="close_btn"><img src="img/close_btn.png" alt="close_btn_icon"></div>
@@ -88,53 +99,6 @@ include_once('_common.php');
                     </div>
                 </a>
             </div>
-            <div class="ham_nav_menu">
-                <div class="ham_nav_menu_icon_wrap">
-                    <div class="ham_nav_menu_icon">
-                        <img src="img/nav/alarm.png" alt="setting_icon">
-                    </div>
-                </div>
-                <div class="ham_nav_menu_title_wrap">
-                    <p class="ham_nav_menu_title">알림</p>
-                </div>
-                <div class="push_circle"><p>2</p></div>
-            </div>
-            <div class="ham_nav_menu">
-                <a href="mypage.php">
-                    <div class="ham_nav_menu_icon_wrap">
-                        <div class="ham_nav_menu_icon">
-                            <img src="img/nav/mypage.png" alt="mypage_icon">
-                        </div>
-                    </div>
-                    <div class="ham_nav_menu_title_wrap">
-                        <p class="ham_nav_menu_title">마이페이지</p>
-                    </div>
-                </a>
-            </div>
-            <div class="ham_nav_menu">
-                <a href="setting.php">
-                    <div class="ham_nav_menu_icon_wrap">
-                        <div class="ham_nav_menu_icon">
-                            <img src="img/nav/setting.png" alt="setting_icon">
-                        </div>
-                    </div>
-                    <div class="ham_nav_menu_title_wrap">
-                        <p class="ham_nav_menu_title">설정</p>
-                    </div>
-                </a>
-            </div>
-            <div class="ham_nav_menu">
-                <a href="login.php">
-                    <div class="ham_nav_menu_icon_wrap">
-                        <div class="ham_nav_menu_icon">
-                            <img src="img/nav/logout.png" alt="logout_icon">
-                        </div>
-                    </div>
-                    <div class="ham_nav_menu_title_wrap">
-                        <p class="ham_nav_menu_title">로그아웃</p>
-                    </div>
-                </a>
-            </div>
         </div>
     </div>
 
@@ -165,8 +129,6 @@ include_once('_common.php');
                             <p class="class_name">
                                 <span>시그마</span>
                                 <span>초등6학년</span>
-                                <span> - </span>
-                                <span>7</span>
                             </p>
                         </div>
                         <div class="class_time_info">
@@ -177,8 +139,6 @@ include_once('_common.php');
                             <p class="class_name">
                                 <span>시그마</span>
                                 <span>초등6학년</span>
-                                <span> - </span>
-                                <span>7</span>
                             </p>
                         </div>
                     </div>
@@ -197,8 +157,6 @@ include_once('_common.php');
                             <p class="class_name">
                                 <span>시그마</span>
                                 <span>초등6학년</span>
-                                <span> - </span>
-                                <span>7</span>
                             </p>
                         </div>
                     </div>
@@ -217,8 +175,6 @@ include_once('_common.php');
                             <p class="class_name">
                                 <span>시그마</span>
                                 <span>초등6학년</span>
-                                <span> - </span>
-                                <span>7</span>
                             </p>
                         </div>
                     </div>
@@ -237,8 +193,6 @@ include_once('_common.php');
                             <p class="class_name">
                                 <span>시그마</span>
                                 <span>초등6학년</span>
-                                <span> - </span>
-                                <span>7</span>
                             </p>
                         </div>
                     </div>
@@ -257,8 +211,6 @@ include_once('_common.php');
                             <p class="class_name">
                                 <span>시그마</span>
                                 <span>초등6학년</span>
-                                <span> - </span>
-                                <span>7</span>
                             </p>
                         </div>
                     </div>
@@ -277,8 +229,6 @@ include_once('_common.php');
                             <p class="class_name">
                                 <span>시그마</span>
                                 <span>초등6학년</span>
-                                <span> - </span>
-                                <span>7</span>
                             </p>
                         </div>
                     </div>
@@ -300,7 +250,7 @@ include_once('_common.php');
                         <p class="bus_time">
                             <span>PM</span>
                             <span>05:00</span>
-                            <span> 탑승예정입니다.</span>
+                            <span> 탑승 예정입니다.</span>
                         </p>
                     </div>
                 </div>
@@ -310,10 +260,11 @@ include_once('_common.php');
 
     <!--bus_alarm-->
     <div class="bus_box">
-        <p class="bus_box_title">셔틀버스 탑승취소</p>
+        <p class="bus_box_title">셔틀버스 탑승 취소</p>
         <div class="bus_box_content">
+            <p><span>서울고 정류장<br>(PM 5:00 탑승 예정)</span></p>
             <p><span>10/18</span><span>(오늘)</span></p>
-            <p><span>셔틀버스를</span><span>이용하지 않으시겠습니까?</span></p>
+            <p><span>금일 셔틀버스를</span><span>이용하지 않으시겠습니까?</span></p>
             <p><span>담당 기사님께</span><span>문자가 전송됩니다.</span></p>
         </div>
         <div class="bus_box_btn_wrap">
@@ -358,6 +309,14 @@ include_once('_common.php');
                     <img src="img/nav/notice.png" alt="notice_icon">
                 </div>
                 <p class="nav_menu_title">NOTICE</p>
+            </a>
+        </div>
+        <div class="nav_menu">
+            <a href="mypage.php">
+                <div class="nav_menu_icon">
+                    <img src="img/nav/mypage.png" alt="notice_icon">
+                </div>
+                <p class="nav_menu_title">MYPAGE</p>
             </a>
         </div>
     </div>

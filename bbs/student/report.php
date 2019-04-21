@@ -13,6 +13,115 @@ include_once ('head.php');
         </div>
         <div class="content_detail_p">
             <div class="report_list_wrap">
+                <a href="report_detail.php">
+                    <div class="report_list">
+                        <div class="report_info">
+                            <p class="date"><span>2017.09.30</span></p>
+                            <p class="p report_title"><span>2018</span>
+                                <span> - </span>
+                                <span>1분기</span>
+                                <span>월말평가</span></p>
+                        </div>
+                        <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
+                    </div>
+                </a>
+                <a href="report_detail.php">
+                    <div class="report_list" style="background-color: rgb(255, 200, 150)">
+                        <div class="report_info">
+                            <p class="date"><span>2017.09.30</span></p>
+                            <p class="p report_title"><span>2018</span>
+                                <span> - </span>
+                                <span>1분기</span>
+                                <span>분기테스트</span></p>
+                        </div>
+                        <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
+                    </div>
+                </a>
+                <a href="report_detail.php">
+                    <div class="report_list" style="background-color: rgb(180, 255, 150)">
+                        <div class="report_info">
+                            <p class="date"><span>2017.09.30</span></p>
+                            <p class="p report_title"><span>2018</span>
+                                <span> - </span>
+                                <span>1분기</span>
+                                <span>기말평가</span></p>
+                        </div>
+                        <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
+                    </div>
+                </a>
+                <a href="report_detail.php">
+                    <div class="report_list">
+                        <div class="report_info">
+                            <p class="date"><span>2017.09.30</span></p>
+                            <p class="p report_title"><span>2018</span>
+                                <span> - </span>
+                                <span>1분기</span>
+                                <span>월말평가</span></p>
+                        </div>
+                        <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
+                    </div>
+                </a>
+                <a href="report_detail.php">
+                    <div class="report_list" style="background-color: rgb(255, 200, 150)">
+                        <div class="report_info">
+                            <p class="date"><span>2017.09.30</span></p>
+                            <p class="p report_title"><span>2018</span>
+                                <span> - </span>
+                                <span>1분기</span>
+                                <span>분기테스트</span></p>
+                        </div>
+                        <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
+                    </div>
+                </a>
+                <a href="report_detail.php">
+                    <div class="report_list" style="background-color: rgb(180, 255, 150)">
+                        <div class="report_info">
+                            <p class="date"><span>2017.09.30</span></p>
+                            <p class="p report_title"><span>2018</span>
+                                <span> - </span>
+                                <span>1분기</span>
+                                <span>기말평가</span></p>
+                        </div>
+                        <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
+                    </div>
+                </a>
+                <a href="report_detail.php">
+                    <div class="report_list">
+                        <div class="report_info">
+                            <p class="date"><span>2017.09.30</span></p>
+                            <p class="p report_title"><span>2018</span>
+                                <span> - </span>
+                                <span>1분기</span>
+                                <span>월말평가</span></p>
+                        </div>
+                        <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
+                    </div>
+                </a>
+                <a href="report_detail.php">
+                    <div class="report_list" style="background-color: rgb(255, 200, 150)">
+                        <div class="report_info">
+                            <p class="date"><span>2017.09.30</span></p>
+                            <p class="p report_title"><span>2018</span>
+                                <span> - </span>
+                                <span>1분기</span>
+                                <span>분기테스트</span></p>
+                        </div>
+                        <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
+                    </div>
+                </a>
+                <a href="report_detail.php">
+                    <div class="report_list" style="background-color: rgb(180, 255, 150)">
+                        <div class="report_info">
+                            <p class="date"><span>2017.09.30</span></p>
+                            <p class="p report_title"><span>2018</span>
+                                <span> - </span>
+                                <span>1분기</span>
+                                <span>기말평가</span></p>
+                        </div>
+                        <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
+                    </div>
+                </a>
+                <a href="report_detail.php">
                 <div class="report_list">
                     <div class="report_info">
                         <p class="date"><span>2017.09.30</span></p>
@@ -21,98 +130,9 @@ include_once ('head.php');
                             <span>1분기</span>
                             <span>월말평가</span></p>
                     </div>
-                    <div class="report_view_btn"><a href="report_detail.php"><img src="img/report.png" alt="report_view_icon"></a></div>
+                    <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
                 </div>
-                <div class="report_list">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>월말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><a href="report_detail.php"><img src="img/report.png" alt="report_view_icon"></a></div>
-                </div>
-                <div class="report_list">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>월말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><a href="report_detail.php"><img src="img/report.png" alt="report_view_icon"></a></div>
-                </div>
-                <div class="report_list">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>월말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><a href="report_detail.php"><img src="img/report.png" alt="report_view_icon"></a></div>
-                </div>
-                <div class="report_list">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>월말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><a href="report_detail.php"><img src="img/report.png" alt="report_view_icon"></a></div>
-                </div>
-                <div class="report_list">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>월말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><a href="report_detail.php"><img src="img/report.png" alt="report_view_icon"></a></div>
-                </div>
-                <div class="report_list">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>월말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><a href="report_detail.php"><img src="img/report.png" alt="report_view_icon"></a></div>
-                </div>
-                <div class="report_list">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>월말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><a href="report_detail.php"><img src="img/report.png" alt="report_view_icon"></a></div>
-                </div>
-                <div class="report_list">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>월말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><a href="report_detail.php"><img src="img/report.png" alt="report_view_icon"></a></div>
-                </div>
-                <div class="report_list">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>월말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><a href="report_detail.php"><img src="img/report.png" alt="report_view_icon"></a></div>
-                </div>
+                </a>
             </div>
             <div class="page_wrap">
                 <div class="page_wrap_wrap">

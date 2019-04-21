@@ -33,8 +33,8 @@ include_once ('_common.php');
         </div>
         <div class="aca_select">
             <select name="aca_select" id="aca_select">
-                <option value="base" style="background-color: rgba(255, 255, 255, .2);">학원선택</option>
-                <option value="academy_1">수학학원</option>
+                <option value="base" style="background-color: rgba(255, 255, 255, .2);">학원 선택</option>
+                <option value="academy_1">수학 학원</option>
             </select>
         </div>
         <div class="login_btn">

@@ -38,7 +38,7 @@
     position: relative;
     bottom: 10px;
     width: calc(100% - 20px);
-    height: auto;
+    height: 55px;
     background-color: rgb(242, 248, 249);
     border-top-right-radius: 15px;
     border-top-left-radius:  15px;
@@ -52,15 +52,18 @@
     font-size: 18px;
     font-weight: 800;
     padding: 15px 0;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
+    float: right;
+    padding-right: 10px;
 }
 
 .record_class_name {
     font-size: 18px;
     font-weight: 600;
-    float: right;
+    float: left;
     padding: 15px 0;
-    margin-right: 10px;
+    /*margin-right: 10px;*/
+    padding-left: 10px;
 }
 
 .content_detail_p {

@@ -17,8 +17,8 @@ include_once ('head.php');
                     <span>10~11</span></p>
             </div>
             <div class="homework_limit_wrap">
-                <p class="sub_title">마감시간</p>
-                <p class="sub_section_info"><span>~</span>
+                <p class="sub_title">마감 시간</p>
+                <p class="sub_section_info">
                     <span>9/22</span>
                     <span> AM </span>
                     <span>00:00</span></p>

@@ -25,11 +25,11 @@ include_once ('head.php');
             <div class="class_list_wrap">
                 <div class="class_list">
                     <p class="class_title"><span>중1</span><span>루트</span><span>월수금</span></p>
-                    <p class="class_time"><span>PM</span><span>06:00</span><span>~</span><span>07:00</span></p>
+                    <p class="class_time"><span>PM</span> <span>06:00</span><span>~</span> <span>07:00</span></p>
                 </div>
                 <div class="class_list">
                     <p class="class_title"><span>중1</span><span>루트</span><span>월수금</span></p>
-                    <p class="class_time"><span>PM</span><span>06:00</span><span>~</span><span>07:00</span></p>
+                    <p class="class_time"><span>PM</span> <span>06:00</span><span>~</span> <span>07:00</span></p>
                 </div>
             </div>
         </div>
@@ -41,36 +41,24 @@ include_once ('head.php');
                 <div class="my_bus_box">
                     <div class="up_section">
                         <div class="bus_use">
-                            <p><span style="color: rgb(0, 181, 103);">이용중</span><span style="color: rgb(181, 0, 0); display: none">이용안함</span></p>
+                            <p><span style="color: rgb(0, 181, 103);">이용 중</span><span style="color: rgb(181, 0, 0); display: none">이용안함</span></p>
                         </div>
                         <div class="bus_btn_section">
                             <div class="not_use_btn">
                                 <p>버스 미 이용 알림</p>
                             </div>
                             <div class="route_change_btn">
-                                <p>노선변경</p>
+                                <p>노선 변경</p>
                             </div>
                         </div>
                     </div>
                     <div class="down_section">
                         <p class="route_name"><span>노선명이 들어갈자리</span></p>
                         <p class="busstop_name"><span>서울고 사거리</span><span>정류장</span></p>
-                        <p class="bus_time"><span>PM</span><span>05:20</span></p>
+                        <p class="bus_time"><span>PM</span> <span>05:20</span></p>
                     </div>
                 </div>
             </div>
-            <div class="decoration">
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                </div>
         </div>
     </section>
 </body>

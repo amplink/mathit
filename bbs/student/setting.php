@@ -16,6 +16,7 @@ include_once ('head.php');
                 <div class="setting_title">
                     <p>푸시 알람</p>
                 </div>
+                <br>
                 <div class="setting_content">
                     <div class="push_radio">
                         <input type="radio" name="push_alarm">
@@ -31,6 +32,7 @@ include_once ('head.php');
                 <div class="setting_title">
                     <p>효과음</p>
                 </div>
+                <br>
                 <div class="setting_content">
                     <div class="sound_radio">
                         <input type="radio" name="sound">
@@ -42,18 +44,6 @@ include_once ('head.php');
                     </div>
                 </div>
             </div>
-            <div class="decoration">
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                    <span class="deco_circle"></span>
-                </div>
         </div>
     </section>
 </body>
