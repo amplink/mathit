@@ -188,7 +188,13 @@ $student_id = $res['student_id'];
             <input type="hidden" name="s_uid" value="<?=$_GET['s_uid']?>">
             <div class="down_head_section">
                 <p class="l_div_text">학생 수준 진단</p>
-                <div class="save_btn"><a href="javascript:save()">저장</a></div>
+                <?php
+                if(!$_GET['flag']){
+                    ?>
+                    <div class="save_btn"><a href="javascript:save()">저장</a></div>
+                    <?
+                }
+                ?>
             </div>
             <div class="comment_input_section">
                 <textarea name="evaluation" id="evaluation" cols="30" rows="10" style="height:150px;width:97%"><?=$res['evaluation']?></textarea>
