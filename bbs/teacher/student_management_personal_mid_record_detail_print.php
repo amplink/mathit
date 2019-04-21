@@ -421,7 +421,7 @@ $today_date = date("Y-m-d");
         <div class="down_box">
             <div class="down_head_section">
                 <p class="l_div_text">선생님 코멘트</p>
-                <div class="save_btn"><a href="javascript:save()">저장</a></div>
+                <div class="save_btn"></div>
             </div>
             <form name="commentForm" id="commentForm" action="./score_comment_reg.php" method="post">
                 <input type="hidden" name="no" id="no" value="<?=$res['seq']?>">
