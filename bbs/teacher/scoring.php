@@ -127,7 +127,7 @@ include_once ('head.php');
         <input type="hidden" name="tempSave" id="tempSave">
         <input type="hidden" name="cornerType" id="cornerType" value="1">
         <input type="hidden" name="cornerTot" id="cornerTot" value="<?=$tot?>">
-        <div class="scoring_box">
+        <div class="scoring_box" style="padding-bottom: 20px;">
 
 
             <div class="l_section">
@@ -165,7 +165,7 @@ include_once ('head.php');
                         </thead>
                     </table>
                 </div>
-                <div class="score_board_table" style="height:610px;overflow:auto;margin-top:-1px">
+                <div class="score_board_table" style="height:597px;overflow:auto;margin-top:-1px">
 
 
 
