@@ -107,7 +107,7 @@
                 $sql = "select * from `academy` where `client_id`='$ac';";
 			    $result = sql_query($sql);
 			    $res = mysqli_fetch_array($result);
-			    if($res['manager_id']==$id) {
+			    if($res['manager_uid']==$uid) {
 			        alert_msg("관리자님 환영합니다.");
                     set_session('admin', 1);
 			        location_href('./setting.php');

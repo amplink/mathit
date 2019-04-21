@@ -11,5 +11,5 @@ if(count($res) == 0) {
     echo "<script>alert('관리자 아이디를 확인해주세요.');</script>";
 }else echo "<script>alert('관리자 아이디 확인되었습니다.');</script>";
 
-echo "<script>location.href='./academy_option_staff.php?manager_get_id=".$res[1]."&manager_get_name=".$res[3]."&manager_get_chk=".$manager_get_chk."';</script>";
+echo "<script>location.href='./academy_option_staff.php?manager_get_uid=".$res[0]."&manager_get_id=".$res[1]."&manager_get_name=".$res[3]."&manager_get_chk=".$manager_get_chk."';</script>";
 ?>

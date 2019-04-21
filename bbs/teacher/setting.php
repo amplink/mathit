@@ -57,41 +57,52 @@ include_once ('head.php');
             $manager = array();
             $t = 0;
             while($res = mysqli_fetch_array($result)) {
-                $manager[$t] = $res['manager_id'];
+                $manager[$t] = $res['manager_uid'];
             }
             $chk = 0;
             for($i=1; $i<count($r); $i++) {
                 for($j=0; $j<count($manager); $j++) {
-                    if($manager[$j] == $r[$i][1]) $chk = 1;
+                    if($manager[$j] == $r[$i][0]) $chk = 1;
                 }
                 if(!$chk) {
-					$sql2 = "select * from `teacher_setting` where `t_id`='".$r[$i][0]."';";
-					$result2 = mysqli_query($connect_db, $sql2);
-					$res2 = mysqli_fetch_array($result2);
+                    $sql2 = "select * from `teacher_setting` where `t_id`='" . $r[$i][0] . "';";
+                    $result2 = mysqli_query($connect_db, $sql2);
+                    $res2 = mysqli_fetch_array($result2);
 
-					$checked1 = ($res2['hm_create']==1)?"checked":"";
-					$checked2 = ($res2['hm_mg']==1)?"checked":"";
-					$checked3 = ($res2['score_mg']==1)?"checked":"";
-					$checked4 = ($res2['consult_mg']==1)?"checked":"";
-					$checked5 = ($res2['grade_card']==1)?"checked":"";
-					$checked6 = ($res2['notice']==1)?"checked":"";
-					$checked7 = ($res2['admin_menu']==1)?"checked":"";
+                    $checked1 = ($res2['hm_create'] == 1) ? "checked" : "";
+                    $checked2 = ($res2['hm_mg'] == 1) ? "checked" : "";
+                    $checked3 = ($res2['score_mg'] == 1) ? "checked" : "";
+                    $checked4 = ($res2['consult_mg'] == 1) ? "checked" : "";
+                    $checked5 = ($res2['grade_card'] == 1) ? "checked" : "";
+                    $checked6 = ($res2['notice'] == 1) ? "checked" : "";
+                    $checked7 = ($res2['admin_menu'] == 1) ? "checked" : "";
 
-             ?>
+                    ?>
                     <tr>
-					    <input type="hidden" name="tid[]" value="<?=$r[$i][0]?>">
-                        <td><span><?=$r[$i][3]?></span></td>
-                        <td><select name="type[]" id="type_<?=$r[$i][0]?>" onchange="chk_type(<?=$r[$i][0]?>)">
-                                <option value="전임강사" <?echo ($res2['type']=='전임강사')?"selected":"";?>>전임강사</option>
-                                <option value="채점강사" <?echo ($res2['type']=='채점강사')?"selected":"";?>>채점강사</option>
+                        <input type="hidden" name="tid[]" value="<?= $r[$i][0] ?>">
+                        <td><span><?= $r[$i][3] ?><input type="hidden" name="t_name[]" value="<?=$r[$i][3]?>"> </span></td>
+                        <td><select name="type[]" id="type_<?= $r[$i][0] ?>" onchange="chk_type(<?= $r[$i][0] ?>)">
+                                <option value="전임강사" <?
+                                echo ($res2['type'] == '전임강사') ? "selected" : ""; ?>>전임강사
+                                </option>
+                                <option value="채점강사" <?
+                                echo ($res2['type'] == '채점강사') ? "selected" : ""; ?>>채점강사
+                                </option>
                             </select></td>
-                        <td><input type="checkbox" name="hm_create[]" value="<?=$r[$i][0]?>" id="hm_create_<?=$r[$i][0]?>" <?=$checked1?>></td>
-                        <td><input type="checkbox" name="hm_mg[]" value="<?=$r[$i][0]?>" id="hm_mg_<?=$r[$i][0]?>" <?=$checked2?>></td>
-                        <td><input type="checkbox" name="score_mg[]" value="<?=$r[$i][0]?>" id="score_mg_<?=$r[$i][0]?>" <?=$checked3?>></td>
-                        <td><input type="checkbox" name="consult_mg[]" value="<?=$r[$i][0]?>" id="consult_mg_<?=$r[$i][0]?>" <?=$checked4?>></td>
-                        <td><input type="checkbox" name="grade_card[]" value="<?=$r[$i][0]?>" id="grade_card_<?=$r[$i][0]?>" <?=$checked5?>></td>
-                        <td><input type="checkbox" name="notice[]" value="<?=$r[$i][0]?>" id="notice_<?=$r[$i][0]?>" <?=$checked6?>></td>
-                        <td><input type="checkbox" name="admin_menu[]" value="<?=$r[$i][0]?>"  id="admin_menu_<?=$r[$i][0]?>" <?=$checked7?>></td>
+                        <td><input type="checkbox" name="hm_create[]" value="<?= $r[$i][0] ?>"
+                                   id="hm_create_<?= $r[$i][0] ?>" <?= $checked1 ?>></td>
+                        <td><input type="checkbox" name="hm_mg[]" value="<?= $r[$i][0] ?>"
+                                   id="hm_mg_<?= $r[$i][0] ?>" <?= $checked2 ?>></td>
+                        <td><input type="checkbox" name="score_mg[]" value="<?= $r[$i][0] ?>"
+                                   id="score_mg_<?= $r[$i][0] ?>" <?= $checked3 ?>></td>
+                        <td><input type="checkbox" name="consult_mg[]" value="<?= $r[$i][0] ?>"
+                                   id="consult_mg_<?= $r[$i][0] ?>" <?= $checked4 ?>></td>
+                        <td><input type="checkbox" name="grade_card[]" value="<?= $r[$i][0] ?>"
+                                   id="grade_card_<?= $r[$i][0] ?>" <?= $checked5 ?>></td>
+                        <td><input type="checkbox" name="notice[]" value="<?= $r[$i][0] ?>"
+                                   id="notice_<?= $r[$i][0] ?>" <?= $checked6 ?>></td>
+                        <td><input type="checkbox" name="admin_menu[]" value="<?= $r[$i][0] ?>"
+                                   id="admin_menu_<?= $r[$i][0] ?>" <?= $checked7 ?>></td>
                     </tr>
                     <?
                 }

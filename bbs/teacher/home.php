@@ -17,8 +17,8 @@ $week2_time[2] = hour_24to12 ("11:30")." ~ ".hour_24to12 ("13:00");
 $week2_time[3] = hour_24to12 ("13:00")." ~ ".hour_24to12 ("14:30");
 $week2_time[4] = hour_24to12 ("14:30")." ~ ".hour_24to12 ("16:00");
 
-$t_name = $_SESSION['t_name'];
-$sql = "select * from `teacher_setting` where `t_name`='$t_name';";
+$t_name = $_SESSION['t_uid'];
+$sql = "select * from `teacher_setting` where `t_id`='$t_uid';";
 $result = sql_query($sql);
 $res = mysqli_fetch_array($result);
 ?>
@@ -158,7 +158,7 @@ $res = mysqli_fetch_array($result);
             <p>공지사항</p>
         </div>
     </div>
-    <div class="notice_list_wrap" style="overflow: scroll;">
+    <div class="notice_list_wrap" style="overflow: scroll; margin-bottom: 40px;">
         <div class="notice_contents_wrap">
             <?php
             $ac = $_SESSION['client_no'];

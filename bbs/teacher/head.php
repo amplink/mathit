@@ -190,6 +190,7 @@ $result = sql_query($sql);
 $res = mysqli_fetch_array($result);
 
 if($_SESSION['admin']) $res['type'] = "관리자";
+//alert_msg($t_uid);
 ?>
 
     <!DOCTYPE html>

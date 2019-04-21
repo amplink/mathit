@@ -25,6 +25,7 @@ if(!$_GET['page']) {
 $manager_get_id = $_GET['manager_get_id'];
 $manager_get_name = $_GET['manager_get_name'];
 $manager_get_chk = $_GET['manager_get_chk'];
+$manager_get_uid = $_GET['manager_get_uid'];
 ?>
 
 <!--<!DOCTYPE html>
@@ -133,6 +134,7 @@ $manager_get_chk = $_GET['manager_get_chk'];
     </div>
 </div>
 <form action="ac_manager_chk.php" id="manager_form" method="POST">
+    <input type="hidden" name="manager_uid" id="manager_uid">
     <div class="add_section">
         <div class="line">
             <div class="name">
@@ -206,6 +208,7 @@ include_once('tail.php');
 <script>
     $('#manager_id').val('<? echo $manager_get_id;?>');
     $('#manager_name').val('<? echo $manager_get_name;?>');
+    $('#manager_uid').val('<? echo $manager_get_uid?>');
     $('input[type=checkbox]').on('change', function () {
         $('#manager_get_chk').val(this.value);
     });
