@@ -436,7 +436,7 @@ $today_date = date("Y-m-d");
                 <input type="hidden" name="c_uid" value="<?=$_GET['c_uid']?>">
                 <input type="hidden" name="s_uid" value="<?=$_GET['s_uid']?>">
                 <div class="comment_input_section">
-                    <textarea name="comment" id="comment" cols="30" rows="10" style="height:160px;width:97%"><?=$res['comment']?></textarea>
+                    <textarea name="comment" id="comment" cols="30" rows="10" style="width:97%;overflow-x:hidden;overflow-y:auto"><?=$res['comment']?></textarea>
                 </div>
             </form>
         </div>
@@ -482,13 +482,7 @@ if(!$_GET['flag']){
 <script src="./js/html2canvas.js"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
-    window.onload = function() {
-        <? if($_GET['flag']=='2'){?>
-        sms_send();
-        <?  } else if($_GET['flag']=='1'){ ?>
-        window.print();
-        <?  }  ?>
-    }
+
     /*
         html2canvas(document.querySelector("body"),{
             //allowTaint: true,
@@ -534,6 +528,7 @@ if(!$_GET['flag']){
                 success: function (data) {
                     if (data.res == "success") alert('문자가 정상적으로 발송 되었습니다.');
                     else alert('문자 발송에 실패하였습니다.');
+                    $('#my-dialog, #my-dialog-background').hide();
                     <? if($_GET['flag']=='2'){?>
                     window.close();
                     <?  }  ?>

@@ -6,7 +6,7 @@ $today_date = date("Y-m-d");
 ?>
 <style>
     #my-dialog {
-        display: none;
+        display: block;
         position: fixed;
         left: calc( 50% - 160px );
         top: 150px;
@@ -15,7 +15,7 @@ $today_date = date("Y-m-d");
         z-index: 9999;
     }
     #my-dialog-background {
-        display: none;
+        display: block;
         position: fixed;
         top: 0; left: 0;
         width: 100%; height: 100%;
@@ -55,11 +55,8 @@ $student_id = $res['student_id'];
                 <?  } ?>
 
                 <div class="sub_close_btn">
-                    <?  if($_GET['flag']=='1'){ ?>
-                    <a href="javascript:window.close()"><img src="img/close.png" alt="close_icon"></a></div>
-            <?  } else {  ?>
-                <a href="./student_management_personal_record.php?s_id=<?=$_GET['s_id']?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>&s_uid=<?=$_GET['s_uid']?>"><img src="img/close.png" alt="close_icon"></a>
-            <?  } ?>
+                    <a href="javascript:window.close()"><img src="img/close.png" alt="close_icon"></a>
+                </div>
             </div>
         </div>
     </div>
@@ -188,7 +185,7 @@ $student_id = $res['student_id'];
             <input type="hidden" name="s_uid" value="<?=$_GET['s_uid']?>">
             <div class="down_head_section">
                 <p class="l_div_text">학생 수준 진단</p>
-                <div class="save_btn"><a href="javascript:save()">저장</a></div>
+                <div class="save_btn"></div>
             </div>
             <div class="comment_input_section">
                 <textarea name="evaluation" id="evaluation" cols="30" rows="10" style="height:150px;width:97%"><?=$res['evaluation']?></textarea>
@@ -204,29 +201,26 @@ $student_id = $res['student_id'];
     </div>
 </section>
 <?php
-if(!$_GET['flag']){
-    $ac = $_SESSION['client_no'];
-    $link = "/api/math/student?client_no=".$ac."&id=".$student_id;
-    $api_res = api_calls_get($link);
-    ?>
-    <div id="my-dialog">
-        <div style="background-color: rgb(41, 124, 62); width: 100%; height: 30px; text-align: center; padding-top: 5px;">
-            <p style="color: white; font-size: 20px; font-weight: bold;">SMS 전송</p>
-        </div>
-        <div style="padding: 20px;">
-            <input type="checkbox" value="<?=$api_res[16]?>" id="parent_phone" name="parent_phone" style="height: auto !important;" checked><span> 학부모 : <?=$api_res[16]?></span>
-            <br>
-            <input type="checkbox" id="add_phone" name="add_phone" style="height: auto !important;"><span> 추가 : </span><input type="text" placeholder="010-0000-0000" name="add_phone_number" id="add_phone_number">
-            <br>
-            <div style="text-align: center; padding: 10px;">
-                <input type="button" style="width: 100px; background-color: rgb(41, 124, 62); color: white; -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; border: 0px; font-size: 15px;" value="전송" onclick="sms_send();">
-            </div>
+$ac = $_SESSION['client_no'];
+$link = "/api/math/student?client_no=".$ac."&id=".$student_id;
+$api_res = api_calls_get($link);
+?>
+<div id="my-dialog">
+    <div style="background-color: rgb(41, 124, 62); width: 100%; height: 30px; text-align: center; padding-top: 5px;">
+        <p style="color: white; font-size: 20px; font-weight: bold;">SMS 전송</p>
+    </div>
+    <div style="padding: 20px;">
+        <input type="checkbox" value="<?=$api_res[16]?>" id="parent_phone" name="parent_phone" style="height: auto !important;" checked><span> 학부모 : <?=$api_res[16]?></span>
+        <br>
+        <input type="checkbox" id="add_phone" name="add_phone" style="height: auto !important;"><span> 추가 : </span><input type="text" placeholder="010-0000-0000" name="add_phone_number" id="add_phone_number">
+        <br>
+        <div style="text-align: center; padding: 10px;">
+            <input type="button" style="width: 100px; background-color: rgb(41, 124, 62); color: white; -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; border: 0px; font-size: 15px;" value="전송" onclick="sms_send();">
         </div>
     </div>
-    <div id="my-dialog-background"></div>
-    <?
-}
-?>
+</div>
+<div id="my-dialog-background"></div>
+
 <script>
 
     function save() {
@@ -238,9 +232,6 @@ if(!$_GET['flag']){
 <script src="./js/html2canvas.js"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script><script>
 
-    <?  if($_GET['flag']=='1'){ ?>
-    window.print();
-    <?  }  ?>
     /*
         html2canvas(document.querySelector("body"),{
             //allowTaint: true,
@@ -265,7 +256,7 @@ if(!$_GET['flag']){
         html2canvas(document.querySelector("section"), {
             //allowTaint: true,
             //taintTest: false,
-            height:800,
+            //width:800,
             useCORS: true,
         }).then(function (canvas) {
             var imgageData = canvas.toDataURL("image/png");

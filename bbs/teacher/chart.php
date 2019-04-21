@@ -103,6 +103,15 @@
                 title: {
                     text: 'fill: ' + boundary,
                     display: false
+                },
+                animation: {
+                    onComplete: function() {
+                        <? if($_GET['flag']=='2'){?>
+                        sms_send();
+                        <?  } else if($_GET['flag']=='1'){ ?>
+                        window.print();
+                        <?  }  ?>
+                    }
                 }
             })
         });
