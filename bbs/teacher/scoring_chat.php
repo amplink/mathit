@@ -3,9 +3,9 @@ include_once ('_common.php');
 include_once ('head.php');
 ?>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="css/scoring_chat.css" />
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-    <script src="js/common.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="css/scoring_chat.css" />
+<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+<script src="js/common.js"></script>
 
 <?php
 $sql = "SELECT 
@@ -24,7 +24,45 @@ $result = mysqli_query($connect_db, $sql);
 $res = mysqli_fetch_array($result);
 ?>
 
+<script>
 
+    function resize(img){
+
+        // 원본 이미지 사이즈 저장
+        var width = img.width;
+        var height = img.height;
+
+        // 가로, 세로 최대 사이즈 설정
+        var maxWidth = width * 0.6;   // 원하는대로 설정. 픽셀로 하려면 maxWidth = 100  이런 식으로 입력
+        var maxHeight = height * 0.6;   // 원래 사이즈 * 0.5 = 50%
+
+        // 가로나 세로의 길이가 최대 사이즈보다 크면 실행
+        if(width > maxWidth || height > maxHeight){
+
+            // 가로가 세로보다 크면 가로는 최대사이즈로, 세로는 비율 맞춰 리사이즈
+            if(width > height){
+                resizeWidth = maxWidth;
+                resizeHeight = Math.round((height * resizeWidth) / width);
+
+                // 세로가 가로보다 크면 세로는 최대사이즈로, 가로는 비율 맞춰 리사이즈
+            }else{
+                resizeHeight = maxHeight;
+                resizeWidth = Math.round((width * resizeHeight) / height);
+            }
+
+            // 최대사이즈보다 작으면 원본 그대로
+        }else{
+            resizeWidth = width;
+            resizeHeight = height;
+        }
+
+        // 리사이즈한 크기로 이미지 크기 다시 지정
+        img.width = resizeWidth;
+        img.height = resizeHeight;
+    }
+
+
+</script>
 <section>
     <div class="head_section">
         <div class="head_section_1400">
@@ -192,7 +230,7 @@ $res = mysqli_fetch_array($result);
                                 <div id="hide_wrong_answer2"  style="position:absolute;top:-230px;padding:10px;width:100%;background-color: #FFFFFF;z-index:999;display: none;">
                                     <div class="sub_close_btn" style="padding-right:15px;float:right"><a><img src="img/close.png" alt="close_icon"></a></div>
                                     <div style="text-align: center;font-size:17px"><b>-오답문항 및 해설-</b></div>
-                                    <div style="height:450px;text-align: left;overflow:auto">
+                                    <div style="height:350px;text-align: left;overflow:auto">
 
                                         <?php
                                         for($i=1; $i<=$tot; $i++) {
@@ -206,12 +244,12 @@ $res = mysqli_fetch_array($result);
                                                 ?>
                                                 <div>
                                                     <span style="display:inline-block;width:55px;height:30px;vertical-align:top;padding-top:5px;"><?=$group[$res['corner'.$i]][$j]['item_number']?>.</span>
-                                                    <span style="display:inline-block;border:1px solid #c3c3c3"><img src="<?=$group[$res['corner'.$i]][$j]['answer_image']?>"></span>
+                                                    <span style="display:inline-block;border:1px solid #c3c3c3"><img src="<?=$group[$res['corner'.$i]][$j]['answer_image']?>" onload="resize(this)"></span>
                                                 </div>
 
                                                 <? if($group[$res['corner'.$i]][$j]['explain_image']){ ?>
                                                     <div style="width:90%;border:1px solid #c3c3c3">
-                                                        <span style="display:inline-block;width:70%;"><img src="<?=$group[$res['corner'.$i]][$j]['explain_image']?>"></span>
+                                                        <span style="display:inline-block;width:70%;"><img src="<?=$group[$res['corner'.$i]][$j]['explain_image']?>" onload="resize(this)"></span>
                                                     </div>
                                                     <br>
                                                 <? } ?>
@@ -283,8 +321,7 @@ $res = mysqli_fetch_array($result);
 
 
 <!-- Google CDN jQuery with fallback to local -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../js/minified/jquery-1.11.0.min.js"></script>')</script>
+
 
 <!-- custom scrollbar plugin -->
 <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -312,7 +349,11 @@ $res = mysqli_fetch_array($result);
             })
 
         });
+
     })(jQuery);
+
+
+
 </script>
 </body>
 
