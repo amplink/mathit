@@ -1,6 +1,11 @@
 <?php
 include_once ('head.php');
 
+if(!$_SESSION['s_uid']) {
+
+    alert_msg('로그인을 먼저 해주세요.');
+    location_href("login.php");
+}
 
 $grade = substr($_SESSION[s_level],0,3).$_SESSION[s_grade];
 
@@ -152,7 +157,7 @@ $num = mysqli_num_rows($result);
                                -- `client_id`='$_SESSION[client_id]'
                              ORDER BY seq DESC LIMIT 5";
                     $result3 = sql_query($sql3);
-                    $num3 = mysqli_num_rows($result3);
+                    $num3 = @mysqli_num_rows($result3);
 
                     if($num3 > 0) {
                          while ($res3 = mysqli_fetch_array($result3)) {
@@ -170,16 +175,14 @@ $num = mysqli_num_rows($result);
 <?php
                          }
                     }else {
-                        ?>
-                        <div class="report_content_wrap">
-                            <div class="report_box">
-                                <div class="report_content" style="text-align:center">
-                                    <p class="report_title">
-                                        <span> 공지사항이 존재하지 않습니다. </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+?>
+
+                     <div class="report_content" style="text-align:center">
+                             <p class="report_title">
+                                <span> 공지사항이 존재하지 않습니다. </span>
+                             </p>
+                     </div>
+
 <?php
                     }
 ?>

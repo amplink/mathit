@@ -1,5 +1,10 @@
 <?php
 include_once('_common.php');
+if(!$_SESSION['s_uid']) {
+
+    alert_msg('로그인을 먼저 해주세요.');
+    location_href("login.php");
+}
 ?>
 <!DOCTYPE html>
 <html>

@@ -1,13 +1,12 @@
 <?php
 include_once ('_common.php');
-include_once ('head.php');
+//include_once ('head.php');
 //캠퍼스 선택
 $sql = "select client_id, client_name from `academy`";
 $result = sql_query($sql);
 
 //로그인이 되어 있는지 확인 후 첫페이지 이동.
-if( get_session( 't_uid' ) ) {
-
+if( get_session( 's_uid' ) ) {
     location_href("./home.php");
     exit;
 }
@@ -15,7 +14,37 @@ if( get_session( 't_uid' ) ) {
 $re = $_GET['re'];
 ?>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MATH IT - student</title>
+    <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css?v=20190423" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/login.css" />
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/jquery-ui.js"></script>
+</head>
+<body>
+<!-- 배경 -->
+<div class="bg">
+    <div class="bg_div"></div>
+    <div class="bg_div"></div>
+    <div class="bg_div"></div>
+</div>
+
+<!-- 메인 헤더 -->
+<header>
+    <div class="head_logo"><a href="home.php"><img src="img/logo_notext.png" alt="header_logo"></a></div>
+</header>
 
     <div class="back_img"></div>
     <div class="page_wrap">
