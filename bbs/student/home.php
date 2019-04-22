@@ -154,7 +154,7 @@ $num = mysqli_num_rows($result);
                     $sql3 = "SELECT  seq, title, event_time
                              FROM `teacher_notice`  
                              WHERE 
-                               -- `client_id`='$_SESSION[client_id]'
+                               `client_id`='$_SESSION[client_id]'
                              ORDER BY seq DESC LIMIT 5";
                     $result3 = sql_query($sql3);
                     $num3 = @mysqli_num_rows($result3);
