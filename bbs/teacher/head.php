@@ -310,10 +310,10 @@ if($_SESSION['admin']) $res['type'] = "관리자";
         $a_cnt = 0;
         $thisTime=date("Y-m-d H:i:s");
         ?>
-        <div class="alarm_box_wrap_wrap">
+        <div class="alarm_box_wrap_wrap" style="overflow-y: auto;">
             <div class="alarm_box_wrap">
                 <div class="alarm_tri"><img src="img/alarm_tri.png" alt="alarm_tri_icon"></div>
-                <div class="alarm_box" style="overflow-y: scroll;">
+                <div class="alarm_box">
                     <div>
                         <p id="x_alarm_btn" style="cursor:pointer;font-size:20px;font-weight: bold;text-align: right;">X</p>
                         <div>
