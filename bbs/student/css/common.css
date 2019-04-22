@@ -105,7 +105,7 @@ input:focus {
     height: 100%;
     overflow: hidden;
     background-color: rgb(34, 119, 64);
-    background-image: linear-gradient(to bottom, rgb(146, 206, 202), rgb(255, 255, 255));
+    background-image: linear-gradient(to bottom, rgb(40, 140, 190), rgb(255, 255, 255));
     z-index: -1;
 }
 

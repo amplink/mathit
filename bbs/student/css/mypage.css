@@ -11,6 +11,7 @@
 
 .head_p_head {
     padding: 15px 10px;
+    text-align: center;
 }
 
 .head_title {
@@ -19,6 +20,7 @@
     font-size: 18px;
     font-weight: 800;
     color: rgb(17, 90, 55);
+    margin-left: 30px;
 }
 
 .back_btn {

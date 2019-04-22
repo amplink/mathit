@@ -271,7 +271,7 @@ if(!$_SESSION['s_uid']) {
             <p><span>서울고 정류장<br>(PM 5:00 탑승 예정)</span></p>
             <p><span>10/18</span><span>(오늘)</span></p>
             <p><span>금일 셔틀버스를</span><span>이용하지 않으시겠습니까?</span></p>
-            <p><span>담당 기사님께</span><span>문자가 전송됩니다.</span></p>
+            <p><span>담당 기사님께</span> <span>문자가 전송됩니다.</span></p>
         </div>
         <div class="bus_box_btn_wrap">
             <div class="yes_btn">

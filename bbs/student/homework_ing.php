@@ -20,12 +20,12 @@ include_once ('head.php');
                         <a href="homework_submission.php">
                             <!--숙제 제출화면-->
                             <div class="submission">
-                                <div class="submission_sign green"></div>
+                                <div class="submission_sign green"><span>제출</span></div>
                             </div>
                             <div class="scoring">
-                                <div class="scoring_none"><span>-</span></div>
-                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>
-                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>
+                                <div class="scoring_none"><span style="color: white;">미채점</span></div>
+<!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
+<!--                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>-->
                             </div>
                         </a>
                     </div>
@@ -53,12 +53,12 @@ include_once ('head.php');
                     <div class="content_alarm_section">
                         <a href="homework_submission.php">
                             <div class="submission">
-                                <div class="submission_sign green"></div>
+                                <div class="submission_sign green">제출</div>
                             </div>
                             <div class="scoring">
-                                <div class="scoring_none" style="display: none;"><span>-</span></div>
-                                <div class="scoring_ing_sign"><img src="img/doing.png" alt="scoring_icon"></div>
-                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>
+                                <div class="scoring_none"><span style="color: white;">미채점</span></div>
+                                <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
+                                <!--                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>-->
                             </div>
                         </a>
                     </div>
@@ -85,12 +85,12 @@ include_once ('head.php');
                     <div class="content_alarm_section btn_on">
                         <a href="homework_submission.php">
                             <div class="submission">
-                                <div class="submission_sign blue"></div>
+                                <div class="submission_sign blue">완료</div>
                             </div>
                             <div class="scoring">
-                                <div class="scoring_none" style="display: none;"><span>-</span></div>
-                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>
-                                <div class="scoring_ed_sign"><img src="img/check.png" alt="scoring_icon"></div>
+                                <div class="scoring_none"><span style="color: white;">미채점</span></div>
+                                <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
+                                <!--                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>-->
                             </div>
                         </a>
                     </div>
@@ -99,7 +99,7 @@ include_once ('head.php');
                             <div class="book">
                                 <div class="section_icon"><img src="img/range.png" alt="range_icon"></div>
                                 <div class="section_text">
-                                    <p class="book_name">주교재</p>
+                                    <p class="book_name">초3-2학기-유리수</p>
                                     <p class="book_page"><span>p</span><span>10~11</span></p>
                                 </div>
                             </div>
@@ -117,12 +117,12 @@ include_once ('head.php');
                     <div class="content_alarm_section">
                         <a href="homework_submission.php">
                             <div class="submission">
-                                <div class="submission_sign blue"></div>
+                                <div class="submission_sign blue">완료</div>
                             </div>
                             <div class="scoring">
-                                <div class="scoring_none" style="display: none;"><span>-</span></div>
-                                <div class="scoring_ing_sign"><img src="img/doing.png" alt="scoring_icon"></div>
-                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>
+                                <div class="scoring_none"><span style="color: white;">진행중</span></div>
+                                <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
+                                <!--                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>-->
                             </div>
                         </a>
                     </div>
@@ -131,7 +131,7 @@ include_once ('head.php');
                             <div class="book">
                                 <div class="section_icon"><img src="img/range.png" alt="range_icon"></div>
                                 <div class="section_text">
-                                    <p class="book_name">주교재</p>
+                                    <p class="book_name">초3-2학기-유리수</p>
                                     <p class="book_page"><span>p</span><span>10~11</span></p>
                                 </div>
                             </div>
@@ -149,12 +149,12 @@ include_once ('head.php');
                     <div class="content_alarm_section">
                         <a href="homework_submission.php">
                             <div class="submission">
-                                <div class="submission_sign blue"></div>
+                                <div class="submission_sign blue">완료</div>
                             </div>
                             <div class="scoring">
-                                <div class="scoring_none" style="display: none;"><span>-</span></div>
-                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>
-                                <div class="scoring_ed_sign"><img src="img/check.png" alt="scoring_icon"></div>
+                                <div class="scoring_none"><span style="color: white;">미채점</span></div>
+                                <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
+                                <!--                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>-->
                             </div>
                         </a>
                     </div>
@@ -181,12 +181,12 @@ include_once ('head.php');
                     <div class="content_alarm_section">
                         <a href="homework_submission.php">
                             <div class="submission">
-                                <div class="submission_sign red"></div>
+                                <div class="submission_sign red">미제출</div>
                             </div>
                             <div class="scoring">
-                                <div class="scoring_none" style="display: none;"><span>-</span></div>
-                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>
-                                <div class="scoring_ed_sign"><img src="img/check.png" alt="scoring_icon"></div>
+                                <div class="scoring_none"><span style="color: white;">미채점</span></div>
+                                <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
+                                <!--                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>-->
                             </div>
                         </a>
                     </div>
@@ -213,12 +213,12 @@ include_once ('head.php');
                     <div class="content_alarm_section">
                         <a href="homework_submission.php">
                             <div class="submission">
-                                <div class="submission_sign blue"></div>
+                                <div class="submission_sign blue">완료</div>
                             </div>
                             <div class="scoring">
-                                <div class="scoring_none" style="display: none;"><span>-</span></div>
-                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>
-                                <div class="scoring_ed_sign"><img src="img/check.png" alt="scoring_icon"></div>
+                                <div class="scoring_none"><span style="color: white;">미채점</span></div>
+                                <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
+                                <!--                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>-->
                             </div>
                         </a>
                     </div>
@@ -245,12 +245,12 @@ include_once ('head.php');
                     <div class="content_alarm_section">
                         <a href="homework_submission.php">
                             <div class="submission">
-                                <div class="submission_sign blue"></div>
+                                <div class="submission_sign blue">완료</div>
                             </div>
                             <div class="scoring">
-                                <div class="scoring_none" style="display: none;"><span>-</span></div>
-                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>
-                                <div class="scoring_ed_sign"><img src="img/check.png" alt="scoring_icon"></div>
+                                <div class="scoring_none"><span style="color: white;">미채점</span></div>
+                                <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
+                                <!--                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>-->
                             </div>
                         </a>
                     </div>
@@ -277,12 +277,12 @@ include_once ('head.php');
                     <div class="content_alarm_section">
                         <a href="homework_submission.php">
                             <div class="submission">
-                                <div class="submission_sign blue"></div>
+                                <div class="submission_sign blue">완료</div>
                             </div>
                             <div class="scoring">
-                                <div class="scoring_none" style="display: none;"><span>-</span></div>
-                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>
-                                <div class="scoring_ed_sign"><img src="img/check.png" alt="scoring_icon"></div>
+                                <div class="scoring_none"><span style="color: white;">미채점</span></div>
+                                <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
+                                <!--                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>-->
                             </div>
                         </a>
                     </div>
@@ -309,12 +309,12 @@ include_once ('head.php');
                     <div class="content_alarm_section">
                         <a href="homework_submission.php">
                             <div class="submission">
-                                <div class="submission_sign blue"></div>
+                                <div class="submission_sign blue">완료</div>
                             </div>
                             <div class="scoring">
-                                <div class="scoring_none" style="display: none;"><span>-</span></div>
-                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>
-                                <div class="scoring_ed_sign"><img src="img/check.png" alt="scoring_icon"></div>
+                                <div class="scoring_none"><span style="color: white;">미채점</span></div>
+                                <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
+                                <!--                                <div class="scoring_ed_sign" style="display: none;"><img src="img/check.png" alt="scoring_icon"></div>-->
                             </div>
                         </a>
                     </div>
