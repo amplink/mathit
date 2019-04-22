@@ -109,7 +109,7 @@ $num = mysqli_num_rows($result);
                     <div class="report_content_wrap">
                         <div class="report_box">
                             <div class="date">
-                                <p><span><?=$res2['date'] ?></span></p>
+                                <p><span><?=substr($res2['date'],-4) ?>-<?=substr($res2['date'],0,2) ?>-<?=substr($res2['date'],3,2) ?></span></p>
                             </div>
                             <div class="report_content">
                                 <p class="report_title"><span><?=$res2['year'] ?></span>
