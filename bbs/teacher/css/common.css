@@ -512,6 +512,7 @@ section {
     border-radius: 15px;
     background-color: rgb(255, 228, 73);
     padding: 20px;
+    overflow-y: auto;
 }
 
 .alarm_box ul li {
