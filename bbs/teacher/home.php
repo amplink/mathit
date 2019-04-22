@@ -158,8 +158,8 @@ $res = mysqli_fetch_array($result);
             <p>공지사항</p>
         </div>
     </div>
-    <div class="notice_list_wrap" style="overflow: scroll; margin-bottom: 40px;">
-        <div class="notice_contents_wrap">
+    <div class="notice_list_wrap" style="margin-bottom: 40px;">
+        <div class="notice_contents_wrap" style="overflow-y: scroll;">
             <?php
             $ac = $_SESSION['client_no'];
             $task = $_SESSION['t_task'];

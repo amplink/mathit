@@ -473,6 +473,7 @@ section {
     left: 147px;
     top: 33px;
     width: 340px;
+    max-height: 500px;
     /*height: 350px;*/
     /*overflow: hidden;*/
 }

@@ -213,7 +213,7 @@
 
 .notice_contents_wrap {
     /*display: inline-block;*/
-    width: calc(100% - 100px);
+    width: 100%;
     vertical-align: top;
     padding: 0 10px;
 }

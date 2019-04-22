@@ -313,7 +313,7 @@ if($_SESSION['admin']) $res['type'] = "관리자";
         <div class="alarm_box_wrap_wrap">
             <div class="alarm_box_wrap">
                 <div class="alarm_tri"><img src="img/alarm_tri.png" alt="alarm_tri_icon"></div>
-                <div class="alarm_box" style="overflow: scroll;">
+                <div class="alarm_box" style="overflow-y: scroll;">
                     <div>
                         <p id="x_alarm_btn" style="cursor:pointer;font-size:20px;font-weight: bold;text-align: right;">X</p>
                         <div>
@@ -365,8 +365,7 @@ if($_SESSION['admin']) $res['type'] = "관리자";
             chk_class = 0;
         }
     }
-    $('.alarm_box_wrap_wrap').hide();
-    var chk_alarm = 0;
+
     function alarm_chk() {
         $.ajax({
             url: 'alarm_chk.php',
@@ -375,13 +374,6 @@ if($_SESSION['admin']) $res['type'] = "관리자";
                 $('#new_span1').css('background-color', 'transparent');
             }
         });
-        if(chk_alarm == 0) {
-            $('.alarm_box_wrap_wrap').show();
-            chk_alarm = 1;
-        }else {
-            $('.alarm_box_wrap_wrap').hide();
-            chk_alarm = 0;
-        }
     }
 </script>
 <?php
