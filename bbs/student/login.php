@@ -71,7 +71,7 @@ $re = $_GET['re'];
                 </select>
             </div>
             <div class="login_btn" id="login_btn" style="cursor: pointer">
-                <a>Log In</a>
+                <a>LOGIN</a>
             </div>
             <div class="auto_login">
                 <input type="checkbox" name="auto_login" id="auto_login">

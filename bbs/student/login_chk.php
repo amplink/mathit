@@ -103,13 +103,13 @@ if($uid) :
             $result = sql_query($sql);
             $res = mysqli_fetch_array($result);
             if($res['manager_uid']==$uid) {
-                alert_msg("관리자님 환영합니다.");
                 set_session('admin', 1);
-                location_href('./setting.php');
+                echo "success";
             }else {
-                alert_msg($name." 선생(강사)님 (".$task.") 환영합니다.");
+//                alert_msg($name." 선생(강사)님 (".$task.") 환영합니다.");
                 set_session('admin', 0);
-                location_href("./home.php");
+//                location_href("./home.php");
+                echo "success";
             }
             exit;
         endif;
