@@ -1,6 +1,7 @@
 <?php
 include_once('_common.php');
 ?>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,7 +14,7 @@ include_once('_common.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css?v=20190423" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/jquery-ui.js"></script>
