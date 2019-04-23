@@ -28,8 +28,9 @@ $num = mysqli_num_rows($result);
     <section>
         <div class="report_wrap" style="padding-top:20px">
             <div class="section_title_line">
+                <a href="homework_ing.php">
                 <div class="section_title_wrap">
-                    <p class="section_title">REPORT</p>
+                    <p class="section_title">HOMEWORK</p>
                     <span class="deco_line"></span>
                 </div>
                 <div class="more_btn_wrap">
@@ -42,23 +43,24 @@ $num = mysqli_num_rows($result);
 ?>
                     <div class="report_content_wrap">
                         <div class="report_box">
-                            <div class="date">
-                                <div class="homework_content_img"><img src="img/time.png"
-                                                                                                alt="time_icon"></div>
-                                <div class="homework_content_text">
-                                    <p>
-                                        <span><?= substr($res['_from'], 0, 5) ?></span><span> ~ <?= substr($res['_to'], 0, 5) ?></span>
-                                    </p>
+                            <a href="homework_submission.php">
+                                <div class="date">
+                                    <div class="homework_content_img"><img src="img/time.png" alt="time_icon"></div>
+                                    <div class="homework_content_text">
+                                        <p>
+                                            <span><?= substr($res['_from'], 0, 5) ?></span><span> ~ <?= substr($res['_to'], 0, 5) ?></span>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="range_view">
-                                <div class="homework_content_img"><img src="img/nav/book_img.png" alt="homework_icon">
+                                <div class="range_view">
+                                    <div class="homework_content_img"><img src="img/nav/book_img.png" alt="homework_icon">
+                                    </div>
+                                    <div class="homework_content_text">
+                                        <p><span><?= $res['grade'] ?> - <?= $res['semester'] ?></span>
+                                        &nbsp;&nbsp;<span><?= $res['unit'] ?> </span></p>
+                                    </div>
                                 </div>
-                                <div class="homework_content_text">
-                                    <p><span><?= $res['grade'] ?> - <?= $res['semester'] ?></span>
-                                    &nbsp;&nbsp;<span><?= $res['unit'] ?> </span></p>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
 <?php
