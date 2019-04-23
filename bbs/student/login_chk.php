@@ -98,8 +98,8 @@ if($uid) :
         endif;
 
         //세션저장 여부 체크
-        if( get_session('t_uid') ) :
-            $sql = "select * from `academy` where `client_id`='$ac';";
+        if( get_session('s_uid') ) :
+            $sql = "select manager_uid from `academy` where `client_id`='$ac';";
             $result = sql_query($sql);
             $res = mysqli_fetch_array($result);
             if($res['manager_uid']==$uid) {

@@ -26,29 +26,28 @@ $num = mysqli_num_rows($result);
 <body>
     <!--section-->
     <section>
-        <div class="homework_wrap">
+        <div class="report_wrap" style="padding-top:20px">
             <div class="section_title_line">
                 <div class="section_title_wrap">
-                    <p class="section_title">HOMEWORK</p>
+                    <p class="section_title">REPORT</p>
                     <span class="deco_line"></span>
                 </div>
                 <div class="more_btn_wrap">
                     <a href="homework_ing.php"><img src="img/green_plus.png" alt="more_btn_icon" style="width: 25px; height: 25px;"></a>
                 </div>
             </div>
-            <div class="homework_content_wrap">
 <?php
             if($num > 0) {
                 while ($res = mysqli_fetch_array($result)) {
 ?>
-                    <div class="homework_box">
-                        <a href="homework_submission.php">
-                            <div class="time_view">
-                                <div class="homework_content_img" style="margin-left:-2px"><img src="img/time.png"
+                    <div class="report_content_wrap">
+                        <div class="report_box">
+                            <div class="date">
+                                <div class="homework_content_img"><img src="img/time.png"
                                                                                                 alt="time_icon"></div>
-                                <div class="homework_content_text" style="margin-left:-1px">
+                                <div class="homework_content_text">
                                     <p>
-                                        <span><?= substr($res['_from'], 0, 5) ?></span><span>~<?= substr($res['_to'], 0, 5) ?></span>
+                                        <span><?= substr($res['_from'], 0, 5) ?></span><span> ~ <?= substr($res['_to'], 0, 5) ?></span>
                                     </p>
                                 </div>
                             </div>
@@ -56,17 +55,17 @@ $num = mysqli_num_rows($result);
                                 <div class="homework_content_img"><img src="img/nav/book_img.png" alt="homework_icon">
                                 </div>
                                 <div class="homework_content_text">
-                                    <p><span><?= $res['grade'] ?> - <?= $res['semester'] ?></span></p>
-                                    <p><span><?= $res['unit'] ?> </span></p>
+                                    <p><span><?= $res['grade'] ?> - <?= $res['semester'] ?></span>
+                                    &nbsp;&nbsp;<span><?= $res['unit'] ?> </span></p>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
 <?php
                 }
             }else{
 ?>
-                <div class="report_content_wrap" style="width:100%">
+                <div class="report_content_wrap">
                     <div class="report_box">
                         <div class="report_content" style="text-align:center">
                             <p class="report_title">

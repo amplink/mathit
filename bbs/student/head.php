@@ -113,132 +113,89 @@ if(!$_SESSION['s_uid']) {
         <div class="schedule_head">
             <div class="schedule_title_wrap">
                 <p class="schedule_title">MY SCHEDULE</p>
-                <p class="month"><span>2019. </span><span>01</span></p>
+                <p class="month"><span><?=date('Y')?>. </span><span><?=date('m')?></span></p>
             </div>
             <div class="close_btn_wrap">
                 <div class="sc_close_btn"><img src="img/close_btn.png" alt="close_btn_icon"></div>
             </div>
         </div>
+
         <div class="schedule_section">
             <div class="weekly_schedule_wrap">
-                <div class="weekly_scedule_box on">
-                    <div class="date_wrap">
-                        <p class="day">15</p>
-                        <p class="dow">Mon</p>
-                    </div>
-                    <div class="class_time_info_wrap">
-                        <div class="class_time_info">
-                            <p class="time"><span>PM</span>
-                                <span>05:00</span>
-                                <span> ~ </span>
-                                <span>06:00</span></p>
-                            <p class="class_name">
-                                <span>시그마</span>
-                                <span>초등6학년</span>
-                            </p>
+
+<?php
+
+                $link = "/api/math/class?client_no=".$_SESSION['client_id'];
+                $r = api_calls_get($link);
+
+                foreach($r as $k => $v){
+                    if(in_array($_SESSION['d_uid'],$v)) {
+                        $class_name = $v[4];
+                        break;
+                    }
+                }
+
+                 $weekly = array("월"=>"3","화"=>"6","수"=>"9","목"=>"12","금"=>"15","토"=>"18");
+                 $weeks = array_keys($weekly);
+
+                 $link = "/api/math/timetable?client_no=".$_SESSION['client_id']."&d_uid=".$_SESSION['d_uid'];
+                 $r = api_calls_get($link);
+
+                 $today = date("d");
+                 $day_of_the_week = date('w') - 1;
+                 $this_week_ago = date('Y-m-d', strtotime($date." -".$day_of_the_week."days"));
+
+                 for($i=0; $i<6; $i++) {
+                     $this_week_end = date("Y-m-d", strtotime($this_week_ago." +".$i." day"));
+                     $week_day = substr($this_week_end,-2);
+                     $add_css = ($week_day == $today)?"on":"";
+?>
+                    <div class="weekly_scedule_box <?=$add_css?>">
+                        <div class="date_wrap">
+                            <p class="day"><?=$week_day?></p>
+                            <p class="dow"><?=$weeks[$i]?></p>
                         </div>
-                        <div class="class_time_info">
-                            <p class="time"><span>PM</span>
-                                <span>05:00</span>
-                                <span> ~ </span>
-                                <span>06:00</span></p>
-                            <p class="class_name">
-                                <span>시그마</span>
-                                <span>초등6학년</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="weekly_scedule_box">
-                    <div class="date_wrap">
-                        <p class="day">16</p>
-                        <p class="dow">Tue</p>
-                    </div>
-                    <div class="class_time_info_wrap">
-                        <div class="class_time_info">
-                            <p class="time"><span>PM</span>
-                                <span>05:00</span>
-                                <span> ~ </span>
-                                <span>06:00</span></p>
-                            <p class="class_name">
-                                <span>시그마</span>
-                                <span>초등6학년</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="weekly_scedule_box">
-                    <div class="date_wrap">
-                        <p class="day">17</p>
-                        <p class="dow">Wed</p>
-                    </div>
-                    <div class="class_time_info_wrap">
-                        <div class="class_time_info">
-                            <p class="time"><span>PM</span>
-                                <span>05:00</span>
-                                <span> ~ </span>
-                                <span>06:00</span></p>
-                            <p class="class_name">
-                                <span>시그마</span>
-                                <span>초등6학년</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="weekly_scedule_box">
-                    <div class="date_wrap">
-                        <p class="day">18</p>
-                        <p class="dow">Thu</p>
-                    </div>
-                    <div class="class_time_info_wrap">
-                        <div class="class_time_info">
-                            <p class="time"><span>PM</span>
-                                <span>05:00</span>
-                                <span> ~ </span>
-                                <span>06:00</span></p>
-                            <p class="class_name">
-                                <span>시그마</span>
-                                <span>초등6학년</span>
-                            </p>
+                        <div class="class_time_info_wrap">
+
+<?php
+                       $n = 0;
+                       for($j=0; $j<4; $j++) {
+
+                           $count1 = $weekly[$weeks[$i]];
+                           if ($r[$j][$count1] == 1) {
+                               $start = $r[$j][$count1 + 1];
+                               $end = $r[$j][$count1 + 2];
+?>
+                               <div class="class_time_info">
+                                   <p class="time"><?=$r[$j][0]?>교시 - <span>PM</span>
+                                       <span><?= $start ?></span>
+                                       <span> ~ </span>
+                                       <span><?= $end ?></span></p>
+                                   <p class="class_name">
+                                       <span><?=$class_name?></span>
+                                   </p>
+                               </div>
+<?php
+                             $n++;
+                           }
+                       }
+                       if($n == 0){
+?>
+                           <div class="class_time_info" style="text-align:center;padding-top:10px">
+                               수업이 없습니다.
+                           </div>
+
+<?php
+
+                       }
+?>
                         </div>
                     </div>
-                </div>
-                <div class="weekly_scedule_box">
-                    <div class="date_wrap">
-                        <p class="day">19</p>
-                        <p class="dow">Fri</p>
-                    </div>
-                    <div class="class_time_info_wrap">
-                        <div class="class_time_info">
-                            <p class="time"><span>PM</span>
-                                <span>05:00</span>
-                                <span> ~ </span>
-                                <span>06:00</span></p>
-                            <p class="class_name">
-                                <span>시그마</span>
-                                <span>초등6학년</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="weekly_scedule_box">
-                    <div class="date_wrap">
-                        <p class="day">20</p>
-                        <p class="dow">Sat</p>
-                    </div>
-                    <div class="class_time_info_wrap">
-                        <div class="class_time_info">
-                            <p class="time"><span>PM</span>
-                                <span>05:00</span>
-                                <span> ~ </span>
-                                <span>06:00</span></p>
-                            <p class="class_name">
-                                <span>시그마</span>
-                                <span>초등6학년</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+<?php
+
+                 }
+?>
+
             </div>
             <div class="mybus_wrap">
                 <div class="bus_head">
