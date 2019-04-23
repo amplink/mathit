@@ -96,7 +96,7 @@ include_once ('head.php');
                             </a>
                         </div>
                         <div class="content_detail_section" style="width: calc(100% - 95px)">
-                            <a href="homework_chat.php">
+                            <a href="homework_chat.php?id=<?=$res['id']?>">
                                 <!--숙제 확인화면-->
                                 <div class="book">
                                     <div class="section_icon"><img src="img/range.png" alt="range_icon"></div>

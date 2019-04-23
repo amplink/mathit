@@ -109,7 +109,7 @@ include_once ('head.php');
 
             $sql = "SELECT
 				         A.seq, A.name, A.d_order, A.grade, A.unit, 
-						 A._from, A._to, A.semester, B.submit_date1, B.submit_date2,
+						 A._from, A._to, A.semester, B.submit_date1, B.submit_date2, B.id,
 						 (CASE 
 						  WHEN (B.current_status = 's2' OR  B.current_status= 's3') THEN '숙제완료'
 						  WHEN (B.current_status = 'a1' OR  B.current_status= 'a2') THEN '제출'
@@ -164,10 +164,10 @@ include_once ('head.php');
                                 </div>
                             </a>
                         </div>
-                        <div class="content_detail_section final" style="width: calc(100% - 95px)">
-                            <a href="homework_chat.php">
+                        <div class="content_detail_section <?echo ($res['status1']=='숙제완료')?'final':'';?>" style="width: calc(100% - 95px)">
+                            <a href="homework_chat.php?id=<?=$res['id']?>">
                                 <!--숙제 확인화면-->
-                                <div class="book">
+                                <div class="book" style="width:110px">
                                     <div class="section_icon"><img src="img/range.png" alt="range_icon"></div>
                                     <div class="section_text">
                                         <p class="book_name"><?= $res['grade'] ?> - <?= $res['semester'] ?></p>
@@ -176,8 +176,8 @@ include_once ('head.php');
                                 </div>
                                 <div class="limit">
                                     <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
-                                    <div class="section_text" style="vertical-align:top;padding-top:8px">
-                                        <p style="<?=$add_style3?>"><?=substr($res['_from'],0,5)?> ~ <?=substr($res['_to'],0,5)?></p>
+                                    <div class="section_text" style="vertical-align:top;padding-top:8px;padding-left:-20px">
+                                        <p style="<?=$add_style3?>"><?=substr($res['_from'],0,5)?>~<?=substr($res['_to'],0,5)?></p>
                                         <!--<p><span>AM</span> <span>00:00</span></p>-->
                                     </div>
                                 </div>
@@ -189,7 +189,7 @@ include_once ('head.php');
             }else{
                 ?>
 
-                <div style="text-align:center"> 진행 중인 숙제가 없습니다.</div>
+                <div style="text-align:center"> 숙제가 없습니다.</div>
                 <?
             }
             ?>
