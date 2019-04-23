@@ -55,11 +55,19 @@ if(!$_SESSION['s_uid']) {
                 </div>
             </div>
             </a>
+            <div class="alarm" style="display: none;">
+                <div class="alarm_tri">
+                    <img src="img/bubble_tri_right.png" width="100%" height="100%">
+                </div>
+                <div class="alarm_wrap">
+
+                </div>
+            </div>
             <div class="add_btn_wrap">
                 <a href="login.php"><div class="close_btn"><img src="img/nav/logout.png" alt="logout_btn_icon"></div></a>
             </div>
             <div class="add_btn_wrap">
-                <a href="#"><div class="close_btn"><img src="img/nav/alarm.png" alt="alarm_btn_icon"></div></a>
+                <div class="alarm_btn" onclick="show_alarm()"><img src="img/nav/alarm.png" alt="alarm_btn_icon"></div>
             </div>
             <div class="add_btn_wrap">
                 <a href="setting.php"><div class="close_btn"><img src="img/nav/setting.png" alt="setting_btn_icon"></div></a>
@@ -327,3 +335,8 @@ if(!$_SESSION['s_uid']) {
         </div>
     </div>
 </body>
+<script>
+    function show_alarm() {
+        $('.alarm').toggle();
+    }
+</script>

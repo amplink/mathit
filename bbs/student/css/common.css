@@ -627,3 +627,29 @@ section {
     color: rgb(255, 255, 255);
     text-align: center;
 }
+
+/* alarm */
+.alarm_wrap {
+    position: absolute;
+    width: 60%;
+    height: 400px;
+    top: 65px;
+    left: 40%;
+    background-color: rgb(255, 228, 73);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.alarm_btn {
+    width: 30px;
+}
+
+.alarm_tri {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50px;
+    left: 62%;
+    /*background-color: rgb(255, 228, 73);*/
+}
