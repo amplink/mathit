@@ -283,4 +283,3 @@ if(!$_SESSION['s_uid']) {
             </a>
         </div>
     </div>
-</body>
