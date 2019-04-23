@@ -123,9 +123,15 @@ if($result) {
 }
 
 
-
-$sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='학생', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-sql_query($sql);
+$ac = $_SESSION['client_no'];
+$link = "/api/math/class_stu?client_no=".$ac."&d_uid=".$d_id."&c_uid=".$c_id;
+//echo $link;
+$r = api_calls_get($link);
+//var_dump($r);
+for($i=1; $i<count($r); $i++) {
+    $sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='학생', `uid`='".$r[$i][0]."',`chk`='0', `datetime`=CURRENT_TIMESTAMP";
+    sql_query($sql);
+}
 
 $sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
 sql_query($sql);
