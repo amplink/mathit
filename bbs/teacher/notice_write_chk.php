@@ -124,6 +124,17 @@ if($seqq > 0) {
         }
     }
 
+    if($res['type'] == "학생") {
+        $ac = $_SESSION['client_no'];
+        $link = "/api/math/student_list?client_no=".$ac;
+        $r = api_calls_get($link);
+
+        for($i=1; $i<count($r); $i++) {
+            $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][0]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+            sql_query($sql);
+        }
+    }
+
     $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
     sql_query($sql);
 
@@ -141,6 +152,17 @@ if($seqq > 0) {
                 $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
                 sql_query($sql);
             }
+        }
+    }
+
+    if($res['type'] == "학생") {
+        $ac = $_SESSION['client_no'];
+        $link = "/api/math/student_list?client_no=".$ac;
+        $r = api_calls_get($link);
+
+        for($i=1; $i<count($r); $i++) {
+            $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][0]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+            sql_query($sql);
         }
     }
 

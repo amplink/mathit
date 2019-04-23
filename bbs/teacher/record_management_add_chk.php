@@ -32,8 +32,14 @@ VALUES ('$_SESSION[client_no]', '$d_id', '$c_id', '$s_id', '$class', '$grade', '
     sql_query($sql);
 }
 
-$sql = "insert into `alarm` set `seq`='', `content`='새로운 성적표가 등록되었습니다.', `table_name`='score', `target`='학생', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-sql_query($sql);
+$ac = $_SESSION['client_no'];
+$link = "/api/math/class_stu?client_no=".$ac."&d_uid=".$d_id."&c_uid=".$c_id;
+$r = api_calls_get($link);
+
+for($i=1; $i<count($r); $i++) {
+    $sql = "insert into `alarm` set `seq`='', `content`='새로운 성적표가 등록되었습니다.', `table_name`='score', `target`='학생', `uid`='".$r[$i][0]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+    sql_query($sql);
+}
 
 $sql = "insert into `alarm` set `seq`='', `content`='새로운 성적표가 등록되었습니다.', `table_name`='score', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
 sql_query($sql);
