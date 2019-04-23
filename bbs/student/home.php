@@ -9,14 +9,16 @@ if(!$_SESSION['s_uid']) {
 
 $grade = substr($_SESSION[s_level],0,3).$_SESSION[s_grade];
 
-$sql = "SELECT seq, name, d_order, grade, unit, _from, _to, semester 
-        FROM `homework` 
+$sql = "SELECT A.seq, A.name, A.d_order, A.grade, A.unit, A._from, A._to, A.semester 
+        FROM `homework` A, `homework_assign_list` B
         WHERE 
-		    `client_id`='$_SESSION[client_id]'
-		AND student_id LIKE '%$_SESSION[s_id]%'
-		-- AND  match(student_id) against('*$_SESSION[s_id]*' in boolean mode) 
-		AND `d_uid`='$_SESSION[d_uid]'
-		ORDER BY seq DESC 
+            A.seq = B.h_id
+		AND B.`client_id`='$_SESSION[client_id]'
+		AND B.student_id = '$_SESSION[s_id]'
+		AND B.`d_uid`='$_SESSION[d_uid]'
+		AND B.current_status IS NOT NULL
+		AND B.current_status NOT IN ('s2','s3')
+		ORDER BY A.seq DESC LIMIT 3
 		";
 $result = sql_query($sql);
 $num = mysqli_num_rows($result);
@@ -99,7 +101,7 @@ $num = mysqli_num_rows($result);
                         `client_id`='$_SESSION[client_id]'
                     AND `d_uid`='$_SESSION[d_uid]'
                     AND student_id = '$_SESSION[s_id]'
-                    ORDER BY seq DESC ";
+                    ORDER BY seq DESC  LIMIT 3";
             $result2 = sql_query($sql2);
             $num2 = mysqli_num_rows($result2);
 
