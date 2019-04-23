@@ -16,7 +16,6 @@ $sql = "SELECT A.seq, A.name, A.d_order, A.grade, A.unit, A._from, A._to, A.seme
 		AND B.`client_id`='$_SESSION[client_id]'
 		AND B.student_id = '$_SESSION[s_id]'
 		AND B.`d_uid`='$_SESSION[d_uid]'
-		AND B.current_status IS NOT NULL
 		AND B.current_status NOT IN ('s2','s3')
 		ORDER BY A.seq DESC LIMIT 3
 		";
