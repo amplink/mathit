@@ -3655,6 +3655,35 @@ function arr_sort($array, $key) {
 }
 
 
+function set_paging($page, $block, $block_set, $total_page)
+{
+    $first_page = (($block - 1) * $block_set) + 1;
+    $last_page = min($total_page, $block * $block_set);
+
+    $prev_page = $page - 1;
+    $next_page = $page + 1;
+
+    $prev_block = $block - 1;
+    $next_block = $block + 1;
+
+    $prev_block_page = $prev_block * $block_set;
+    $next_block_page = $next_block * $block_set - ($block_set - 1); // 다음블럭 페이지번호
+
+    echo ($prev_page > 0) ? "<div class='left_btn'><a href='$PHP_SELF?page=$prev_page'><img src='img/prev_btn.png' alt='prev_btn_icon'></a></div>" : "";
+
+    echo " <div class='page_btn_wrap'>";
+    echo ($prev_block > 0) ? "<div class='page_btn'><a href='$PHP_SELF?page=$prev_block_page'></a> " : "";
+
+    for ($i = $first_page; $i <= $last_page; $i++) {
+        echo ($i != $page) ? "<div class='page_btn'><a href='$PHP_SELF?page=$i'>$i</a> " : "<b>$i</b> </div>";
+    }
+    echo "</div>";
+    echo ($next_block <= $total_block) ? "<div class='page_btn'><a href='$PHP_SELF?page=$next_block_page'></a> " : "";
+    echo ($next_page <= $total_page) ? "<div class='right_btn'><a href='$PHP_SELF?page=$next_page'><img src='img/next_btn.png' alt='next_btn_icon'></a></div>" : "";
+
+}
+
+
+
 $grade_arr = array("초3"=>"3", "초4"=>"4", "초5"=>"5", "초6"=>"6",  "중1"=>"7", "중2"=>"8", "중3"=>"9");
 $semester_arr = array("1학기"=>"1", "2학기"=>"2");
-?>
