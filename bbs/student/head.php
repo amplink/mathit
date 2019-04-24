@@ -55,21 +55,29 @@ if(!$_SESSION['s_uid']) {
                 </div>
             </div>
         </a>
-        <div class="alarm" style="display: none;">
+        <div class="alarm">
             <div class="alarm_tri">
                 <img src="img/bubble_tri_right.png" width="100%" height="100%">
             </div>
 
             <div class="alarm_wrap">
+                <p class="x_btn">X</p>
                 <ul class="alarm_list">
                     <?php
-                    $s_uid = $_SESSION['s_uid'];
-                    $sql = "select `content` from `alarm` where `uid`='$s_uid';";
+                    $s_id = $_SESSION['s_id'];
+                    $thisTime = date("Y-m-d H:i:s");
+                    $sql = "select `content`, `datetime` from `alarm` where `uid`='$s_id' order by `seq` desc;";
                     $result = sql_query($sql);
                     while($res = mysqli_fetch_array($result)){
+                        $signdate = $res['datetime'];
+                        $someTime=strtotime($thisTime)-strtotime("$signdate GMT");
                         ?>
                         <li>
-                            <p><?=$res['content']?><br><span style="margin-left: 90%;">오늘</span></p>
+                            <p><?=$res['content']?><br><span style="margin-left: 85%;"><?php
+                                    $cha = ceil($someTime/(60*60*24));
+                                    if($cha <= 0) echo "오늘";
+                                    else echo $cha."일 전";
+                                    ?></span></p>
                         </li>
                     <?php
                     }
@@ -307,7 +315,11 @@ if(!$_SESSION['s_uid']) {
 </div>
 </body>
 <script>
+    $('.alarm').toggle();
     function show_alarm() {
         $('.alarm').toggle();
     }
+    $('.x_btn').click(function(){
+       $('.alarm').toggle();
+    });
 </script>

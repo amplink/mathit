@@ -75,7 +75,10 @@ if($uid) :
         set_session('s_grade', $grade);
         set_session('d_uid', $d_uid);
         set_session('d_order', $d_order);
-
+        $sql = "select `client_name` from `academy` where `client_id`='$ac';";
+        $result = sql_query($sql);
+        $res = mysqli_fetch_array($result);
+        set_session('client_name', $res['client_name']);
 
         //자동 로그인 저장
         if($auto_login == true ) :

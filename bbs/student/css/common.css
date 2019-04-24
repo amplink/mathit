@@ -643,16 +643,17 @@ section {
     z-index: 999;
 }
 
-.alarm_list {
-    margin-top: 30px;
-}
-
 .alarm_list li {
     border-bottom : solid 1px rgb(201, 165, 46);
     margin: 5px 0;
     padding: 5px 0;
     list-style: none;
     font-size: 12px;
+}
+
+.x_btn {
+    margin-left: 90%;
+    font-weight: bold;
 }
 
 .alarm_btn {
