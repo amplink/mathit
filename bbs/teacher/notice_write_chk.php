@@ -4,6 +4,7 @@ session_start();
 
 $t = $_GET['t'];
 $seq = $_GET['seq'];
+$ac = $_SESSION['client_no'];
 
 $type = $_POST['notice_type'];
 $title = $_POST['title'];
@@ -105,8 +106,8 @@ if($seqq > 0) { // 수정이면
     }
 }
 
-$sql = "INSERT INTO `teacher_notice` (`seq`, `title`, `writer`, `type`, `n_range`, `target`, `file_url`, `file_name`, `content`, `event_time`)
-VALUES (NULL, '$title', '$writer', '$type', '$r_range', '$target', '$name_url', '$name_name', '$content', CURRENT_TIMESTAMP);";
+$sql = "INSERT INTO `teacher_notice` (`seq`, `client_id`, `title`, `writer`, `type`, `n_range`, `target`, `file_url`, `file_name`, `content`, `event_time`)
+VALUES (NULL, '$ac', '$title', '$writer', '$type', '$r_range', '$target', '$name_url', '$name_name', '$content', CURRENT_TIMESTAMP);";
 sql_query($sql);
 
 if($seqq > 0) {

@@ -37,7 +37,7 @@ for($i=0; $i<count($d_name); $i++) {
                 <thead>
                     <tr>
                         <th>학생명</th>
-                        <th>범위</th>
+                        <th>숙제명</th>
                         <th>제출기한</th>
                         <th>제출상태</th>
                         <th>채점상태</th>
@@ -52,7 +52,7 @@ for($i=0; $i<count($d_name); $i++) {
 
                 $sql = "SELECT 
 	                         A.*,
-			                 B._from, B._to, B.name, B.grade, B.semester, B.unit,
+			                 B._from, B._to, B.name, B.grade, B.semester, B.unit, B.level,
 			                 B._from, B._to
 			            FROM 
 	                      `homework_assign_list` A 
@@ -65,7 +65,10 @@ for($i=0; $i<count($d_name); $i++) {
 	                      AND B.s_uid = $_GET[s_uid]
                           AND   (A.score_status_1='N' OR A.score_status_2='N')
                           AND (A.current_status != 's2' AND A.current_status != 's3')	                      
-			              AND A.client_id='$ac'";
+			              AND A.client_id='$ac'
+			              AND B.level in ('루트', '파이', '시그마')
+			           ORDER BY
+			              A.student_name, B._from";
 
                 $result = mysqli_query($connect_db, $sql);
                 while ($res = mysqli_fetch_array($result)) {
@@ -74,8 +77,7 @@ for($i=0; $i<count($d_name); $i++) {
                     ?>
 					<tr>
 						<td><span><?=$res['student_name']?></span></td>
-
-						<td><span><?=$res['unit']?></span></td>
+                        <td><span><?=$res['name']?></span><br><?=$res['grade']."-".$res['semester']."-".$res['unit']?></td>
 						<td><span><?=substr($res['_from'],-4)?>-<?=substr($res['_from'],0,2)?>-<?=substr($res['_from'],3,2)?></span>
 							<span> ~ </span>
 							<span><?=substr($res['_to'],-4)?>-<?=substr($res['_to'],0,2)?>-<?=substr($res['_to'],3,2)?></span></td>

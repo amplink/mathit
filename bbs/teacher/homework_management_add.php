@@ -111,7 +111,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                         for($i=0; $i<count($d_name); $i++) {
                             ?>
                             <tr>
-                                <td onclick="lecture('<?=$d_name    [$i]?>')"><span><?=$d_name[$i]?></span></td>
+                                <td onclick="lecture('<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
                             </tr>
                             <?
                         }
@@ -370,6 +370,21 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         //$('.allChk').prop('checked', true);
     })
     function submit() {
+        var startDate = $("#from").val(); //2017-12-10
+        var startDateArr = startDate.split('/');
+
+        var endDate = $("#to").val(); //2017-12-09
+        var endDateArr = endDate.split('/');
+
+        var startDateCompare = new Date(startDateArr[2], parseInt(startDateArr[0])-1, startDateArr[1]);
+        var endDateCompare = new Date(endDateArr[2], parseInt(endDateArr[0])-1, endDateArr[1]);
+
+        if(startDateCompare.getTime() > endDateCompare.getTime()) {
+
+            alert("시작날짜와 종료날짜를 확인해 주세요.");
+            return;
+        }
+
         if($("input[name=student_list\\[\\]]").val()) {
             if($("#name").val() && $("#from").val() && $("#to").val()) {
                 $(window).unbind('beforeunload');

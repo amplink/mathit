@@ -9,6 +9,11 @@ if($type == 'undefined') $type = "";
 $search_type = "%".$type."%";
 $search_title = "%".$title."%";
 $search_writer = "%".$writer."%";
+$ac = $_SESSION['client_no'];
+//$sql = "select `type` from `teacher_setting` where `t_id`='$t_uid';";
+//$result = sql_query($sql);
+//$res = mysqli_fetch_array($result);
+//$t_type = "%".$res['type']."%";
 
 
 if($type && $title && $writer) $sql = "select * from `teacher_schedule` where `type` like '$search_type' and `title` like '$search_title' and `writer` like '$search_writer' order by `event_time` desc;";
@@ -27,7 +32,8 @@ if($result) {
     while($res = mysqli_fetch_array($result)) {
         if($res['s_range']=="비공개" && $res['writer'] != $_SESSION['t_name']) {
             continue;
-        }else {
+        }
+        else {
             ?>
             <tr onclick="call_content(<?=$res['seq']?>)">
                 <td><span><?=$i?></span></td>

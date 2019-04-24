@@ -158,11 +158,7 @@ if($result) {
 </body>
 </html>
 <?php
-for($k=0; $k<count($type)-1; $k++) {
-    echo "<script>$('input[type=checkbox][value=".$type[$k]."]').prop('checked', true);</script>";
-}
-
-for($k=0; $k<count($range)-1; $k++) {
+for($k=0; $k<count($range); $k++) {
     echo "<script>$('input[type=checkbox][value=".$range[$k]."]').prop('checked', true);</script>";
 }
 if((count($range)-1)==3) echo "<script>$('.check_all').prop('checked', true);</script>";

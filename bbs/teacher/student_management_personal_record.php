@@ -19,7 +19,9 @@ $sql = "select * from `teacher_score`
 		and `d_uid` = '$_GET[d_uid]' 
 		and `c_uid` = '$_GET[c_uid]'
 		and `s_uid` = '$_GET[s_uid]'
-		and `student_id` = '$_GET[s_id]';";
+		and `student_id` = '$_GET[s_id]'
+		order by `date`;
+		";
 $result = mysqli_query($connect_db, $sql);
 ?>
 

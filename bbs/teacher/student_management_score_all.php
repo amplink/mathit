@@ -39,7 +39,7 @@ include_once ('head.php');
 
             $sql = "SELECT 
 	           A.*,
-			   B._from, B._to, B.name, B.grade, B.semester, B.unit,
+			   B._from, B._to, B.name, B.grade, B.semester, B.unit, B.level, B.class_name,
 			   B.Q_number1, B.Q_number2, B.Q_number3, B.d_order
 			FROM 
 	          `homework_assign_list` A 
@@ -49,7 +49,10 @@ include_once ('head.php');
 	        WHERE 
 			 (A.score_status_1='N')
 			AND (A.current_status != 's2' OR A.current_status != 's3')
-			AND A.client_id='$ac'";
+			AND A.client_id='$ac'
+			AND B.class_name in ('초등 3학년(루트)', '초등 3학년(파이)', '초등 3학년(시그마)', '초등 4학년(루트)', '초등 4학년(파이)', '초등 4학년(시그마)', '초등 5학년(루트)', '초등 5학년(파이)', '초등 5학년(시그마)', '초등 6학년(루트)', '초등 3학년(파이)', '초등 6학년(시그마)', '중등 1학년(루트)', '중등 1학년(파이)', '중등 1학년(시그마)', '중등 2학년(루트)', '중등 2학년(파이)', '중등 2학년(시그마)',  '중등 3학년(루트)',  '중등 3학년(파이)',  '중등 3학년(시그마)')
+			ORDER BY  field(B.class_name, '초등 3학년(루트)', '초등 3학년(파이)', '초등 3학년(시그마)', '초등 4학년(루트)', '초등 4학년(파이)', '초등 4학년(시그마)', '초등 5학년(루트)', '초등 5학년(파이)', '초등 5학년(시그마)', '초등 6학년(루트)', '초등 3학년(파이)', '초등 6학년(시그마)', '중등 1학년(루트)', '중등 1학년(파이)', '중등 1학년(시그마)', '중등 2학년(루트)', '중등 2학년(파이)', '중등 2학년(시그마)',  '중등 3학년(루트)',  '중등 3학년(파이)',  '중등 3학년(시그마)'), A.student_name, B._from
+			";
 
             $result = mysqli_query($connect_db, $sql);
             while($res = mysqli_fetch_array($result)) {

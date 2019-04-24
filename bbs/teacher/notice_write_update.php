@@ -4,6 +4,7 @@ session_start();
 
 $t = $_GET['t'];
 $seq = $_GET['seq'];
+$ac = $_SESSION['client_no'];
 
 $type = $_POST['notice_type'];
 $title = $_POST['title'];
@@ -62,10 +63,10 @@ if($name) {
     $im_name_in = "$base_dir/$dir/$name_name";
     $name_url = $base_dir."/".$dir."/";
 }
-$sql = "delete from `techer_notice` where `title`='$title';";
+$sql = "delete from `techer_notice` where `seq`='$seq';";
 
-$sql = "INSERT INTO `teacher_notice` (`seq`, `title`, `writer`, `type`, `n_range`, `target`, `file_url`, `file_name`, `content`, `event_time`)
-VALUES (NULL, '$title', '$writer', '$r_type', '$r_range', '$target', '$name_url', '$name_name', '$content', CURRENT_TIMESTAMP);";
+$sql = "INSERT INTO `teacher_notice` (`seq`, `client_id`, `title`, `writer`, `type`, `n_range`, `target`, `file_url`, `file_name`, `content`, `event_time`)
+VALUES (NULL, '$ac','$title', '$writer', '$r_type', '$r_range', '$target', '$name_url', '$name_name', '$content', CURRENT_TIMESTAMP);";
 sql_query($sql);
 
 if($seqq > 0) {

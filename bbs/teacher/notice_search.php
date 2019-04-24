@@ -1,10 +1,15 @@
 <?php
 include_once ('_common.php');
-
+$ac = $_SESSION['client_no'];
+$t_uid = $_SESSION['t_uid'];
+$sql = "select `type` from `teacher_setting` where `t_id`='$t_uid';";
+$result = sql_query($sql);
+$res = mysqli_fetch_array($result);
+$type = "%".$res['type']."%";
 $search = "%".$_GET['search']."%";
 $i=1;
 $cnt = 0;
-$sql = "select * from `teacher_notice` where `title` like '$search' order by `type` desc, `event_time` desc";
+$sql = "select * from `teacher_notice` where `title` like '$search' and `n_range` like '$type' and `client_id`='$ac' order by `type` desc, `event_time` desc";
 $result = mysqli_query($connect_db, $sql);
 $thisTime=date("Y-m-d H:i:s");
 while($res = mysqli_fetch_array($result)) {

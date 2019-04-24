@@ -300,7 +300,7 @@ if($_SESSION['admin']) $res['type'] = "관리자";
             <div class="hamnav_menu <?php if(!$res['hm_mg']) echo "dis";?>"><a href="homework_management_add.php"><span>숙제관리</span></a></div>
             <div class="hamnav_menu <?php if(!$res['score_mg']) echo "dis";?>"><a href="record_management_add.php"><span>성적관리</span></a></div>
             <div class="hamnav_menu"><a href="student_management_score_all.php"><span>채점관리</span></a></div>
-            <div class="hamnav_menu"><a href="class_schedule_write.php"><span>수업관리</span></a></div>
+            <div class="hamnav_menu <?php if($res['type']=="채점강사") echo "dis";?>"><a href="class_schedule_write.php"><span>수업관리</span></a></div>
             <div class="hamnav_menu"><a href="notice_list.php"><span>공지사항</span></a></div>
         </div>
         <?php
