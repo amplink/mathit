@@ -210,6 +210,7 @@ if($_SESSION['admin']) $res['type'] = "관리자";
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/jquery-ui.js"></script>
+        <script src="js/common.js?v=20190425"></script>
 
         <? if(strpos(basename($_SERVER["PHP_SELF"]), "record_management_add") !== false){ ?>
             <link rel="stylesheet" type="text/css" href="css/record_manegement_add.css?v=20190418" />
