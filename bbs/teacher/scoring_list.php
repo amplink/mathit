@@ -13,7 +13,6 @@ for($i=0; $i<count($d_name); $i++) {
 }
 ?>
     <link rel="stylesheet" type="text/css" media="screen" href="css/scoring_list.css?v=20180407" />
-    <script src="js/common.js"></script>
 
 <section>
     <div class="head_section">

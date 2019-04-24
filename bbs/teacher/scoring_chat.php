@@ -5,7 +5,6 @@ include_once ('head.php');
 
 <link rel="stylesheet" type="text/css" media="screen" href="css/scoring_chat.css" />
 <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-<script src="js/common.js"></script>
 
 <?php
 $sql = "SELECT 

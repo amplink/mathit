@@ -8,7 +8,6 @@ $res = mysqli_fetch_array($result);
 ?>
 
 <link rel="stylesheet" type="text/css" media="screen" href="css/class_schedule_write.css" />
-<script src="js/common.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
 
 <section>

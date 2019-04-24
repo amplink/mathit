@@ -3,9 +3,6 @@ include_once ('_common.php');
 include_once ('head.php');
 ?>
 
-
-<script src="js/common.js?v=20190418"></script>
-
 <section>
     <form action="record_management_add_chk.php" method="post" id="record_form">
         <input type="hidden" name="d_id" id="d_id">

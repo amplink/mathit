@@ -23,7 +23,6 @@ $res = mysqli_fetch_array($result);
 ?>
 
 <link rel="stylesheet" type="text/css" media="screen" href="css/student_manegement_record.css" />
-<script src="js/common.js"></script>
 
 <section>
     <div class="head_section">

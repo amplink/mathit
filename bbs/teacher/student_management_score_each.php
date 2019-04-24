@@ -15,7 +15,6 @@ for($i=0; $i<count($d_name); $i++) {
 ?>
 
     <link rel="stylesheet" type="text/css" media="screen" href="css/student_manegement_score_each.css" />
-    <script src="js/common.js"></script>
 
     <style>
         .disabledbutton {

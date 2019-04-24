@@ -24,7 +24,7 @@ $result = mysqli_query($connect_db, $sql);
 ?>
 
 <link rel="stylesheet" type="text/css"  href="css/student_manegement_personal_record.css" />
-<script src="js/common.js"></script>
+
 
 <section>
     <div class="head_section">

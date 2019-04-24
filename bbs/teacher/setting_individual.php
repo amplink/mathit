@@ -21,7 +21,6 @@ for($i=0; $i<count($r); $i++) {
 ?>
 
     <link rel="stylesheet" type="text/css" media="screen" href="css/setting_individual.css" />
-    <script src="js/common.js"></script>
 
 <section>
     <div class="head_section">

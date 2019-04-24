@@ -24,7 +24,7 @@ $today_date = date("Y-m-d");
     }
 </style>
 <link rel="stylesheet" type="text/css" href="css/student_manegement_personal_mid_record_detail.css?v=20190421" />
-<script src="js/common.js"></script>
+
 <section>
 
     <?

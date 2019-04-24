@@ -16,7 +16,7 @@ $today_date = date("Y-m-d");
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/student_manegement_personal_mid_record_detail.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/common.js"></script>
+
 </head>
 
 <body>

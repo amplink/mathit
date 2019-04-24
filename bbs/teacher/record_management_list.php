@@ -8,7 +8,6 @@ $title = $_GET['title'];
 ?>
 
     <link rel="stylesheet" type="text/css" href="css/record_manegement_list.css" />
-    <script src="js/common.js"></script>
 
     <section>
         <div class="head_section">

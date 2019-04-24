@@ -8,7 +8,6 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 ?>
 
     <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css?v=20190407" />
-    <script src="js/common.js"></script>
     <script>
         $( function() {
             var dateFormat = "yy-mm-dd",

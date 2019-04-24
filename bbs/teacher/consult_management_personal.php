@@ -15,7 +15,6 @@ if($_GET['month'] == 'all'){
 
     <link rel="stylesheet" type="text/css" media="screen" href="css/consult_manegement_personal.css" />
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
-    <script src="js/common.js"></script>
     <script>
         $( function() {
             var dateFormat = "mm/dd/yy",

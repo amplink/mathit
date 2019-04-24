@@ -62,7 +62,7 @@ if($result) {
 
     <link rel="stylesheet" type="text/css" media="screen" href="css/notice_write.css" />
     <link rel="stylesheet" type="text/css" href="css/multiselect.css" />
-    <script src="js/common.js"></script>
+
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
 <!--    <script src="js/helper.js"></script>-->
 <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->

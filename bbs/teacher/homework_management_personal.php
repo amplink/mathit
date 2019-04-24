@@ -15,7 +15,7 @@ for($i=0; $i<count($d_name); $i++) {
 
 
 <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_personal.css" />
-<script src="js/common.js"></script>
+
 <script src="js/homework_manegement_personal.js?v=20190415"></script>
 <script>
     $( function() {

@@ -6,7 +6,6 @@ include_once ('head.php');
     <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_list.css?v=20190414" />
 
-    <script src="js/common.js"></script>
     <script src="js/homework_manegement_add.js"></script>
     <script>
         $( function() {

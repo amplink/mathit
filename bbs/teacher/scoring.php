@@ -5,7 +5,6 @@ include_once ('head.php');
 
 <link rel="stylesheet" type="text/css" media="screen" href="css/scoring.css?v=20190403" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/swiper.min.css" />
-<script src="js/common.js"></script>
 <script src="js/swiper.min.js"></script>
 <style>
     html, body {

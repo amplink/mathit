@@ -8,7 +8,6 @@ include_once ('head.php');
 ?>
 
     <link rel="stylesheet" type="text/css" media="screen" href="css/setting.css" />
-    <script src="js/common.js"></script>
 
 <section>
     <form action="setting_chk.php" method="post" id="setting_form">

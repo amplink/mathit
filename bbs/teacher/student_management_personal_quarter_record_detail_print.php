@@ -24,7 +24,7 @@ $today_date = date("Y-m-d");
     }
 </style>
 <link rel="stylesheet" type="text/css" href="css/student_manegement_personal_quarter_record_detail.css?v=20190422" />
-<script src="js/common.js"></script>
+
 <?php
 $sql = "select * from `teacher_score` 
              where 

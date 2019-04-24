@@ -4,7 +4,6 @@ include_once ('head.php');
 ?>
 
 <link rel="stylesheet" type="text/css" media="screen" href="css/student_manegement_score_all.css" />
-<script src="js/common.js"></script>
 
 <style>
     .disabledbutton {

@@ -5,7 +5,6 @@ include_once ('head.php');
 
     <link rel="stylesheet" type="text/css" media="screen" href="css/class_schedule_list.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/notice_list.css" />
-    <script src="js/common.js"></script>
     <script>
         $( function() {
             var dateFormat = "mm/dd/yy",

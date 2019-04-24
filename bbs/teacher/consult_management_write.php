@@ -18,7 +18,6 @@ for($i=0; $i<count($d_name); $i++) {
 ?>
 
     <link rel="stylesheet" type="text/css" media="screen" href="css/consult_manegement_write.css" />
-    <script src="js/common.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
 
 <form action="consult_management_write_chk.php?s_id=<?=$_GET['s_id']?>&d_uid=<?=$_GET['d_uid']?>&c_uid=<?=$_GET['c_uid']?>" method="post" id="consult_form">
