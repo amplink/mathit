@@ -8,14 +8,15 @@ include_once ('head.php');
         <input type="hidden" name="d_id" id="d_id">
         <input type="hidden" name="c_id" id="c_id">
         <input type="hidden" name="s_id" id="s_id">
+        <input type="hidden" name="s_type" id="s_type">
         <div class="head_section">
             <div class="head_section_1400">
                 <div class="head_left">
                     <p class="left_text">성적입력</p>
                 </div>
                 <div class="head_right">
-                    <div class="homework_menu"><a href="record_management_list.php">성적조회</a></div>
                     <div class="homework_menu on"><a href="record_management_add.php" class="on">성적입력</a></div>
+                    <div class="homework_menu"><a href="record_management_list.php">성적조회</a></div>
                 </div>
             </div>
         </div>
@@ -208,7 +209,7 @@ include_once ('head.php');
     function chk_test_genre(e) {
         var d = $('#d_id').val();
         var c = $('#c_id').val();
-
+        $('#s_type').val(e);
         if(e==1) {
             $.ajax({
                 type: "GET",
@@ -346,6 +347,21 @@ include_once ('head.php');
         $('#c_id').val(c);
         $('#s_id').val(s);
         $('#d_yoie').val(n);
+        var s_type = $('#s_type').val();
+        var num = "";
+        if(s_type == '3' || s_type == '4') num = "2";
+        $.ajax({
+            type: "GET",
+            url: "call_student_form"+num+".php?d_uid="+d+"&c_uid="+c,
+            success: function (response) {
+                $('#student_list').html(response);
+            }
+        });
+        $('#text_genre').text("중간평가");
+        $('#test_genre').val("중간평가");
+        $('#sub_score3').attr('type', 'hidden');
+        $('#sub_score3').attr('value', '0');
+        $('#score3_text').hide();
     }
 
     $("#year_select").val(<?php echo $s_year;?>);

@@ -151,7 +151,7 @@ while($res = mysqli_fetch_array($result)) {
     </div>
     <div class="add_btn_wrap">
         <div class="l_btn_wrap">
-            <div class="score_delete_btn w_b" onclick="all_del_score()" style="cursor: pointer;"><a>전체삭제</a></div>
+            <div class="score_delete_btn w_b" onclick="all_del_score()" style="cursor: pointer;"><a>성적삭제</a></div>
             <div class="student_delete_btn w_b" onclick="del_score()" style="cursor: pointer;"><a>선택삭제</a></div>
         </div>
         <div class="r_btn_wrap">

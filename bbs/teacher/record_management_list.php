@@ -16,8 +16,8 @@ $title = $_GET['title'];
                     <p class="left_text">성적조회</p>
                 </div>
                 <div class="head_right">
-                    <div class="homework_menu on"><a href="record_management_list.php" class="on">성적조회</a></div>
                     <div class="homework_menu"><a href="record_management_add.php">성적입력</a></div>
+                    <div class="homework_menu on"><a href="record_management_list.php" class="on">성적조회</a></div>
                 </div>
             </div>
         </div>
@@ -225,7 +225,7 @@ $title = $_GET['title'];
 
             $('#plus'+e).text(val+" 점");
         }
-        
+
         function set_avg1(e) {
             var k = e+1;
             var t = parseInt($('#score_add'+e).val(), 10);
@@ -247,6 +247,23 @@ $title = $_GET['title'];
             c_uid = c;
             s_uid = s;
             d_order = n;
+
+            var s_type = $('#s_type').val();
+
+            if(s_type==1) test_genre = "중간평가";
+            if(s_type==2) test_genre = "기말평가";
+            if(s_type==3) test_genre = "분기테스트";
+            if(s_type==4) test_genre = "입반테스트";
+
+            $.ajax({
+                type: "GET",
+                url: "call_test_list.php?d_uid="+d+"&c_uid="+c+"&s_uid="+s+"&test_genre="+test_genre,
+                dataType: "html",
+                success: function(response){
+                    $("#test_list").html(response);
+                }
+            });
+
         }
 
         function save() {

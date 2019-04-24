@@ -15,7 +15,6 @@ for($i=0; $i<count($d_name); $i++) {
 
 
 <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_personal.css" />
-
 <script src="js/homework_manegement_personal.js?v=20190415"></script>
 <script>
     $( function() {
@@ -240,7 +239,7 @@ for($i=0; $i<count($d_name); $i++) {
                                 <span><?=$_GET['student']?></span>
                                 <span> 학생</span>
                             </p>
-                            <div class="r_exit_btn" style="padding-top:20px" id="<?=$y?>"><img src="img/close.png" alt="close_btn"></div>
+                            <div class="r_exit_btn" id="<?=$y?>"><img src="img/close.png" alt="close_btn"></div>
                         </div>
                         <div class="modal_div" style="text-align:left;">
                             <p class="modal_subtitle">제출 일시</p>
