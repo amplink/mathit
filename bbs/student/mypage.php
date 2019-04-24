@@ -33,13 +33,13 @@ for($i=0; $i<count($class_d_uid); $i++) {
                 <div class="my_user_img"><img src="img/user.png" alt="user_default_img"></div>
                 <div class="my_user_info">
                     <p class="my_user_name"><span><?=$_SESSION['s_name']?></span></p>
-                    <p class="my_academy_name"><span style="color: rgb(17, 141, 81);">수학학원</span></p>
+                    <p class="my_academy_name"><span style="color: rgb(17, 141, 81);"><?=$_SESSION['client_name']?></span></p>
                 </div>
             </div>
         </div>
         <div class="content_p">
             <div class="my_content_head">
-                <p><span>수강 중인 수업</span><span>2</span><span>개</span></p>
+                <p><span>수강 중인 수업</span><span><?=count($class_list)?></span><span>개</span></p>
             </div>
             <div class="class_list_wrap">
                     <?php

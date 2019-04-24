@@ -17,8 +17,8 @@ include_once ('head.php');
                 <p class="left_text">설정</p>
             </div>
             <div class="head_right">
-                <div class="setting_menu on"><a href="setting.php" class="on">설정</a></div>
                 <div class="setting_menu"><a href="setting_individual.php">개인정보조회</a></div>
+                <div class="setting_menu on"><a href="setting.php" class="on">설정</a></div>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@ include_once ('head.php');
     <div class="app_box">
         <div class="app_head">
             <p>앱 정보 및 설정</p>
-            <div class="save_setting_btn" onclick="submit_alarm()"><a href="#none">저장</a></div>
+<!--            <div class="save_setting_btn" onclick="submit_alarm()"><a href="#none">저장</a></div>-->
         </div>
         <div class="app_contnet_section">
             <div class="l_side">
@@ -128,30 +128,30 @@ include_once ('head.php');
                     </p>
                 </div>
             </div>
-            <div class="r_side">
-                <div class="line_">
-                    <p class="content_title">푸시알람</p>
-                    <div class="content_side">
-                        <div class="radio_on"><input type="radio" name="push_alarm" value="1" id="alarm_on">
-                            <p>on</p>
-                        </div>
-                        <div class="radio_on"><input type="radio" name="push_alarm" value="0" id="alarm_off">
-                            <p>off</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="line_">
-                    <p class="content_title">효과음</p>
-                    <div class="content_side">
-                        <div class="radio_on"><input type="radio" name="sound" value="1" id="sound_on">
-                            <p>on</p>
-                        </div>
-                        <div class="radio_on"><input type="radio" name="sound" value="0" id="sound_off">
-                            <p>off</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="r_side">-->
+<!--                <div class="line_">-->
+<!--                    <p class="content_title">푸시알람</p>-->
+<!--                    <div class="content_side">-->
+<!--                        <div class="radio_on"><input type="radio" name="push_alarm" value="1" id="alarm_on">-->
+<!--                            <p>on</p>-->
+<!--                        </div>-->
+<!--                        <div class="radio_on"><input type="radio" name="push_alarm" value="0" id="alarm_off">-->
+<!--                            <p>off</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="line_">-->
+<!--                    <p class="content_title">효과음</p>-->
+<!--                    <div class="content_side">-->
+<!--                        <div class="radio_on"><input type="radio" name="sound" value="1" id="sound_on">-->
+<!--                            <p>on</p>-->
+<!--                        </div>-->
+<!--                        <div class="radio_on"><input type="radio" name="sound" value="0" id="sound_off">-->
+<!--                            <p>off</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
     </form>

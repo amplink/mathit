@@ -29,8 +29,8 @@ for($i=0; $i<count($r); $i++) {
                 <p class="left_text">개인정보조회</p>
             </div>
             <div class="head_right">
-                <div class="setting_menu"><a href="setting.php">설정</a></div>
                 <div class="setting_menu"><a href="setting_individual.php" class="on">개인정보조회</a></div>
+                <div class="setting_menu"><a href="setting.php">설정</a></div>
             </div>
         </div>
     </div>

@@ -242,3 +242,9 @@
     font-family: initial;
     font-size: 14px;
 }
+
+/* dis */
+.head_right .dis {
+    background-color: rgb(230, 230, 230) !important;
+    border-color: rgb(200, 200, 200) !important;
+}
