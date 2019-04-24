@@ -4,7 +4,8 @@ $(document).ready(function(){
         $('.hamburger_btn span').toggleClass('on');
         $('.hamburder_nav').toggleClass('on');
         if($('.alarm_box_wrap').hasClass('on') === true) {
-            $('.alarm_box_wrap').removeClass('on')
+            $('.alarm_box_wrap').removeClass('on');
+            $('.alarm_box_wrap').hide();
         } else {
 
         }
@@ -15,6 +16,7 @@ $(document).ready(function(){
         $('.hamburger_btn span').removeClass('on');
         $('.hamburder_nav').removeClass('on');
         $('.alarm_box_wrap').removeClass('on');
+        $('.alarm_box_wrap').hide();
     })
 
 
@@ -34,14 +36,15 @@ $(document).ready(function(){
 
             }else {
                 if($('.alarm_box_wrap').hasClass('on') === true ) {
-                    $('.alarm_box_wrap').removeClass('on')
+                    $('.alarm_box_wrap').removeClass('on');
+                    $('.alarm_box_wrap').hide();
                 }
             }
 
         }
         // if($(this).attr('class') == 'test11'){
         //         alert(1);
-        //         $('.alarm_box_wrap').toggleClass('on');    
+        //         $('.alarm_box_wrap').toggleClass('on');
         // }else{
         //     alert(2);
         // }
@@ -53,7 +56,9 @@ $(document).ready(function(){
         // $('.alarm_box_wrap').removeClass('off');
         if($('.alarm_box_wrap').hasClass('on') === true) {
             $('.alarm_box_wrap').removeClass('on');
+            $('.alarm_box_wrap').hide();
         } else {
+            $('.alarm_box_wrap').show();
             $('.alarm_box_wrap').addClass('on');
         }
     })
