@@ -7,6 +7,7 @@
     box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
     margin: auto;
     margin-top: 60px;
+    text-align: center;
 }
 
 .head_title {
@@ -15,7 +16,7 @@
     font-size: 18px;
     font-weight: 800;
     color: rgb(17, 90, 55);
-    margin-left: 10px;
+    margin-left: 40px;
     padding-top: 15px;
 }
 
@@ -129,10 +130,22 @@
 .check_btn {
     position: relative;
     bottom: 5px;
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 25px;
     float: right;
     margin-right: 10px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    background-color: rgb(10, 185, 10);
+    color: white;
+}
+
+.complete {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 25px;
 }
 
 .decoration {

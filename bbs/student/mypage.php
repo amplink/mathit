@@ -1,6 +1,6 @@
 <?php
 include_once ('head.php');
-$ac = $_SESSION['client_no'];
+$ac = $_SESSION['client_id'];
 $link = "/api/math/student?client_no=".$ac."&id=".$_SESSION['s_id'];
 $r = api_calls_get($link);
 

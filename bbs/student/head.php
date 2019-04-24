@@ -136,6 +136,7 @@ if(!$_SESSION['s_uid']) {
             </a>
         </div>
     </div>
+    <div class="alarm_back"></div>
 </div>
 
 <!-- 스케줄 -->
@@ -316,10 +317,13 @@ if(!$_SESSION['s_uid']) {
 </body>
 <script>
     $('.alarm').toggle();
+    $('.alarm_back').toggle();
     function show_alarm() {
         $('.alarm').toggle();
+        $('.alarm_back').toggle();
     }
-    $('.x_btn').click(function(){
+    $('.x_btn, .alarm_back').click(function(){
        $('.alarm').toggle();
+        $('.alarm_back').toggle();
     });
 </script>

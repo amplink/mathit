@@ -38,7 +38,7 @@ include_once ('head.php');
             </div>
             <div class="detail_footer">
                 <p><span>현재 등록된 이미지 개수 : </span><span>1</span><span>장</span></p>
-                <div class="check_btn"><a href="#none"><img src="img/check_btn.png" alt="check_btn_icon"></a></div>
+                <div class="check_btn"><a href="#none"><img src="img/check_btn.png" alt="check_btn_icon" style="width: 25px; float: left;"><span class="complete">완료</span></a></div>
             </div>
             <div class="decoration">
                 <span class="deco_circle"></span>
