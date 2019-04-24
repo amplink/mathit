@@ -51,7 +51,7 @@ $title = $_GET['title'];
                         <?php
                         for($i=0; $i<count($d_name); $i++) {
                             ?>
-                            <tr>
+                            <tr class="select_box1">
                                 <td onclick="lecture('<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
                             </tr>
                             <?
@@ -82,22 +82,22 @@ $title = $_GET['title'];
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr class="select_box2">
                             <td onclick="chk_test_genre(1)"><span>중간평가</span></td>
                         </tr>
-                        <tr>
+                        <tr class="select_box2">
                             <td onclick="chk_test_genre(2)"><span>기말평가</span></td>
                         </tr>
-                        <tr>
+                        <tr class="select_box2">
                             <td onclick="chk_test_genre(3)"><span>분기테스트</span></td>
                         </tr>
-                        <tr>
+                        <tr class="select_box2">
                             <td onclick="chk_test_genre(4)"><span>입반테스트</span></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="select_table grade_select_box content">
+                <div class="test_select_box select_table grade_select_box content">
                     <table>
                         <thead>
                         <tr>
@@ -118,7 +118,9 @@ $title = $_GET['title'];
     </body>
     <script>
         $(document).ready(function () {
-            $('.grade_select_box table tbody tr').click(function () {
+            //$('.grade_select_box table tbody tr').click(function () {
+            $(document).on("click",".select_box1",function(){
+
                 if ($(this).hasClass('on') === true) {
                     // $(this).removeClass('on')
                 } else {
@@ -127,7 +129,7 @@ $title = $_GET['title'];
                 }
             })
 
-            $('.class_select_box table tbody tr').click(function () {
+            $(document).on("click",".select_box4",function(){
                 if ($(this).hasClass('on') === true) {
                     // $(this).removeClass('on')
                 } else {
@@ -136,12 +138,21 @@ $title = $_GET['title'];
                 }
             })
 
-            $('.student_list_box table tbody tr').click(function () {
+            $(document).on("click",".select_box2",function(){
                 if ($(this).hasClass('on') === true) {
                     $(this).removeClass('on')
                 } else {
                     $(this).addClass('on');
                     $('.student_list_box table tbody tr').not(this).removeClass('on');
+                }
+            })
+
+            $(document).on("click",".select_box3",function(){
+                if ($(this).hasClass('on') === true) {
+                    $(this).removeClass('on')
+                } else {
+                    $(this).addClass('on');
+                    $('.test_select_box table tbody tr').not(this).removeClass('on');
                 }
             })
         });

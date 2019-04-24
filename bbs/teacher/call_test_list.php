@@ -16,7 +16,7 @@ while($res = mysqli_fetch_array($result)) {
     }
     if($chk == 0) {
 
-        echo "<tr><td onclick=\"call_data('".$res['title']."')\">".$res['title']."</td></tr>";
+        echo "<tr class='select_box3'><td onclick=\"call_data('".$res['title']."')\">".$res['title']."</td></tr>";
         $test_list[$i] = $res['title'];
         $i++;
     }
