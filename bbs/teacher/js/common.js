@@ -52,8 +52,9 @@ $(document).ready(function(){
 
     })
 
-    $('.alarm_btn').click(function(){
+    $(document).on("click",".alarm_btn",function(){
         // $('.alarm_box_wrap').removeClass('off');
+        console.log('a');
         if($('.alarm_box_wrap').hasClass('on') === true) {
             $('.alarm_box_wrap').removeClass('on');
             $('.alarm_box_wrap').hide();
