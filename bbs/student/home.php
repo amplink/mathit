@@ -153,28 +153,47 @@ $num = mysqli_num_rows($result);
                 <div class="notice_table">
 <?php
 
-                    $sql3 = "SELECT  seq, title, event_time
+                    $sql3 = "SELECT  seq, title, event_time, writer
                              FROM `teacher_notice`  
                              WHERE 
                                `client_id`='$_SESSION[client_id]'
+                               AND `n_range` like '%학생%'
                              ORDER BY seq DESC LIMIT 5";
                     $result3 = sql_query($sql3);
                     $num3 = @mysqli_num_rows($result3);
 
                     if($num3 > 0) {
                          while ($res3 = mysqli_fetch_array($result3)) {
+                             if($res3['writer']=="관리자") {
+                                 $sql33 = "SELECT * FROM `notify` where `id`='".$res3['title']."';";
+                                 $result33 = sql_query($sql33);
+                                 $res33 = mysqli_fetch_array($result33);
 ?>
-                    <div class="notice_list">
-                        <a href="notice_read.php">
-                            <div class="notice_title">
-                                <p><?=$res3['title']?></p>
-                            </div>
-                            <div class="notice_date">
-                                <p><?=substr($res3['event_time'],0,10)?></p>
-                            </div>
-                        </a>
-                    </div>
+                     <div class="notice_list">
+                         <a href="notice_read.php?seq=<?=$res3['seq']?>">
+                             <div class="notice_title">
+                                 <p><?=$res33['title']?></p>
+                             </div>
+                             <div class="notice_date">
+                                 <p><?=substr($res33['event_time'],0,10)?></p>
+                             </div>
+                         </a>
+                     </div>
 <?php
+                             }else {
+?>
+                     <div class="notice_list">
+                         <a href="notice_read.php?seq=<?=$res3['seq']?>">
+                             <div class="notice_title">
+                                 <p><?=$res3['title']?></p>
+                             </div>
+                             <div class="notice_date">
+                                 <p><?=substr($res3['event_time'],0,10)?></p>
+                             </div>
+                         </a>
+                     </div>
+<?php
+                             }
                          }
                     }else {
 ?>
