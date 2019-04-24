@@ -28,7 +28,7 @@ $today_date = date("Y-m-d");
 <?php
 $sql = "select * from `teacher_score` 
              where 
-            `seq` = '$_GET[no]'";
+            `seq` = '$_GET[no]' and client_id='$ac'";
 $result = mysqli_query($connect_db, $sql);
 $res = mysqli_fetch_array($result);
 $student_id = $res['student_id'];
@@ -147,10 +147,10 @@ $student_id = $res['student_id'];
                                   `teacher_score`
                                 WHERE 
                                     grade = '$res[grade]'
-                                    AND d_uid='$res[d_uid]'
-                                    AND c_uid='$res[c_uid]'
-                                    AND s_uid='$res[s_uid]'
-                                    AND d_order='$res[d_order]'
+                                    -- AND d_uid='$res[d_uid]'
+                                    -- AND c_uid='$res[c_uid]'
+                                    -- AND s_uid='$res[s_uid]'
+                                    -- AND d_order='$res[d_order]'
                                     AND test_genre='$res[test_genre]'
                                     AND client_id='$ac'
 			                     ";

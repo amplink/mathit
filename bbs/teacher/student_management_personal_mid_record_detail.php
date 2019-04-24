@@ -43,7 +43,7 @@ $today_date = date("Y-m-d");
     $sql = "SELECT * FROM 
              `teacher_score` 
             WHERE 
-                `seq` = '$_GET[no]'";
+                `seq` = '$_GET[no]' and client_id='$ac'";
 
     $result = mysqli_query($connect_db, $sql);
     $res = mysqli_fetch_array($result);

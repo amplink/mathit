@@ -2,30 +2,44 @@
 include_once ('head.php');
 
 
+// 페이지
+$page_set = 10; // 한페이지 줄수
+$block_set = 10; // 한페이지 블럭수
+
 $sql = "SELECT 
-				  COUNT(*)
-				FROM 
-				  `teacher_score`
-				WHERE 
-				   d_uid = $_SESSION[d_uid]
-				AND
-				   student_id = '$_SESSION[s_id]'
-				AND 
-				   A.client_id = '$_SESSION[client_id]'";
+					  COUNT(*)
+					FROM 
+					  `teacher_score`
+					WHERE 
+					   d_uid = $_SESSION[d_uid]
+					AND
+					   student_id = '$_SESSION[s_id]'
+					AND 
+					   client_id = '$_SESSION[client_id]'";
 
 $result = sql_query($sql);
 $total = mysqli_fetch_array($result)[0];
 
+
+$total_page = ceil ($total / $page_set);
+$total_block = ceil ($total_page / $block_set);
+
+if (!$page) $page = 1;
+$block = ceil ($page / $block_set);
+$limit_idx = ($page - 1) * $page_set;
+
+
 $sql = "SELECT 
-				  *
-				FROM 
-				  `teacher_score`
-				WHERE 
-				   d_uid = $_SESSION[d_uid]
-				AND
-				   student_id = '$_SESSION[s_id]'
-				AND 
-				   A.client_id = '$_SESSION[client_id]'";
+					  *
+					FROM 
+					  `teacher_score`
+					WHERE 
+					   d_uid = $_SESSION[d_uid]
+					AND
+					   student_id = '$_SESSION[s_id]'
+					AND 
+					   client_id = '$_SESSION[client_id]'";
+
 $result = sql_query($sql);
 ?>
 <link rel="stylesheet" type="text/css" media="screen" href="css/report.css" />
@@ -43,19 +57,25 @@ $result = sql_query($sql);
             <?
             if($total > 0) {
                 while ($res = mysqli_fetch_array($result)) {
-                    if($res['test_genre'] == "분기테스트") $add_style = "";
-                    else if($res['test_genre'] == "중간평가") $add_style = "";
-                    else if($res['test_genre'] == "기말평가") $add_style = "";
+                    if($res['test_genre'] == "분기테스트" or $res['test_genre'] == "입반테스트"){
+                        $color = "#ffff66";
+                        $link = "report_detail";
+                    }
+                    else if($res['test_genre'] == "중간평가" || $res['test_genre'] == "기말평가"){
+                        $color = "#ffffff";
+                        $link = "report_detail2";
+                    }
+
                     ?>
 
-                    <a href="report_detail.php">
-                        <div class="report_list">
+                    <a href="<?=$link?>.php?no=<?=$res['seq']?>">
+                        <div class="report_list" style="background:<?=$color?>">
                             <div class="report_info">
-                                <p class="date"><span>2017.09.30</span></p>
-                                <p class="p report_title"><span>2018</span>
+                                <p class="date"><span><?=substr($res['date'],-4)?>-<?=substr($res['date'],0,2)?>-<?=substr($res['date'],3,2)?></span></p>
+                                <p class="p report_title"><span><?=$res['year']?></span>
                                     <span> - </span>
-                                    <span>1분기</span>
-                                    <span>월말평가</span></p>
+                                    <span><?=$res['quarter']?>분기</span>
+                                    <span><?=$res['test_genre'] ?></span></p>
                             </div>
                             <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
                         </div>
@@ -73,116 +93,12 @@ $result = sql_query($sql);
                 <?
             }
             ?>
-            <a href="report_detail.php">
-                <div class="report_list" style="background-color: rgb(180, 255, 150)">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>기말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
-                </div>
-            </a>
-            <a href="report_detail.php">
-                <div class="report_list">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>월말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
-                </div>
-            </a>
-            <a href="report_detail.php">
-                <div class="report_list" style="background-color: rgb(255, 200, 150)">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>분기테스트</span></p>
-                    </div>
-                    <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
-                </div>
-            </a>
-            <a href="report_detail.php">
-                <div class="report_list" style="background-color: rgb(180, 255, 150)">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>기말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
-                </div>
-            </a>
-            <a href="report_detail.php">
-                <div class="report_list">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>월말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
-                </div>
-            </a>
-            <a href="report_detail.php">
-                <div class="report_list" style="background-color: rgb(255, 200, 150)">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>분기테스트</span></p>
-                    </div>
-                    <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
-                </div>
-            </a>
-            <a href="report_detail.php">
-                <div class="report_list" style="background-color: rgb(180, 255, 150)">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>기말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
-                </div>
-            </a>
-            <a href="report_detail.php">
-                <div class="report_list">
-                    <div class="report_info">
-                        <p class="date"><span>2017.09.30</span></p>
-                        <p class="p report_title"><span>2018</span>
-                            <span> - </span>
-                            <span>1분기</span>
-                            <span>월말평가</span></p>
-                    </div>
-                    <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
-                </div>
-            </a>
         </div>
         <div class="page_wrap">
             <div class="page_wrap_wrap">
-                <div class="left_btn"><a href="#none"><img src="img/prev_btn.png" alt="prev_btn_icon"></a></div>
-                <div class="page_btn_wrap">
-                    <div class="page_btn"><a href="#none" class="on">1</a></div>
-                    <div class="page_btn"><a href="#none">2</a></div>
-                    <div class="page_btn"><a href="#none">3</a></div>
-                    <div class="page_btn"><a href="#none">4</a></div>
-                    <div class="page_btn"><a href="#none">5</a></div>
-                    <div class="page_btn"><a href="#none">6</a></div>
-                    <div class="page_btn"><a href="#none">7</a></div>
-                </div>
-                <div class="right_btn"><a href="#none"><img src="img/next_btn.png" alt="next_btn_icon"></a></div>
+                <?
+                set_paging($page, $block, $block_set, $total_page);
+                ?>
             </div>
         </div>
     </div>
