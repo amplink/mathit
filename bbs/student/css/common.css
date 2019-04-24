@@ -634,11 +634,25 @@ section {
     width: 60%;
     height: 400px;
     top: 65px;
-    left: 40%;
+    left: 33%;
     background-color: rgb(255, 228, 73);
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
+    padding: 10px;
+    z-index: 999;
+}
+
+.alarm_list {
+    margin-top: 30px;
+}
+
+.alarm_list li {
+    border-bottom : solid 1px rgb(201, 165, 46);
+    margin: 5px 0;
+    padding: 5px 0;
+    list-style: none;
+    font-size: 12px;
 }
 
 .alarm_btn {
