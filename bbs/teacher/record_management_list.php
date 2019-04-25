@@ -180,6 +180,10 @@ $title = $_GET['title'];
                     $("#test_list").empty();
                     $(".right_wrap").empty();
                     $('.select_box2').removeClass('on');
+                    d_uid = "";
+                    c_uid = "";
+                    s_uid = "";
+                    d_order = "";
                 }
             });
             class_name = e;
