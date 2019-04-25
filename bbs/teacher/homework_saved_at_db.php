@@ -129,11 +129,11 @@ $link = "/api/math/class_stu?client_no=".$ac."&d_uid=".$d_id."&c_uid=".$c_id;
 $r = api_calls_get($link);
 //var_dump($r);
 for($i=1; $i<count($r); $i++) {
-    $sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='학생', `uid`='".$r[$i][1]."', `datetime`=CURRENT_TIMESTAMP";
+    $sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='학생', `uid`='".$r[$i][1]."',`chk`='0', `datetime`=CURRENT_TIMESTAMP";
     sql_query($sql);
 }
 
-$sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='관리자', `datetime`=CURRENT_TIMESTAMP";
+$sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
 sql_query($sql);
 
 alert_msg("등록이 완료되었습니다.");

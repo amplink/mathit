@@ -85,8 +85,3 @@ for($i=0; $i<count($class_d_uid); $i++) {
     </section>
 </body>
 </html>
-<script>
-    $('.not_use_btn').click(function () {
-        $('.bus_box').addClass("on");
-    });
-</script>

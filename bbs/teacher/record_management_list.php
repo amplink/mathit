@@ -177,9 +177,9 @@ $title = $_GET['title'];
                 dataType: "html",
                 success: function(response){
                     $("#class_name").html(response);
-                    $("#test_list").empty();
-                    $(".right_wrap").empty();
-                    $('.select_box2').removeClass('on');
+					$("#test_list").empty();
+					$(".right_wrap").empty();
+					$('.select_box2').removeClass('on');
                     d_uid = "";
                     c_uid = "";
                     s_uid = "";

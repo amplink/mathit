@@ -14,7 +14,7 @@ if($t_type == "채점강사") {
     if($t_notice) {
         $cnt = 0;
         $r = api_calls_get("/api/math/class?client_no=".$_SESSION['client_no']);
-        $r = arr_sort($r,4);
+		$r = arr_sort($r,4);
         for($i=0; $i<count($r)-1; $i++) {
             $d_name[$cnt] = $r[$i][4];
             $cnt++;
@@ -23,7 +23,7 @@ if($t_type == "채점강사") {
         // 시간표
         $link = "/api/math/teacher_class?client_no=126&t_uid=".$_SESSION['t_uid'];
         $r = api_calls_get($link);
-        $r = arr_sort($r,4);
+		$r = arr_sort($r,4);
         $t = $_GET['t'];
         $d_uid = array();
         $chk = 0;
@@ -44,7 +44,7 @@ if($t_type == "채점강사") {
 }else {
     $cnt = 0;
     $r = api_calls_get("/api/math/class?client_no=".$_SESSION['client_no']);
-    $r = arr_sort($r,4);
+	$r = arr_sort($r,4);
     for($i=0; $i<count($r)-1; $i++) {
         $d_name[$cnt] = $r[$i][4];
         $cnt++;
@@ -63,15 +63,15 @@ if($result) {
 ?>
 
 
-<link rel="stylesheet" type="text/css" media="screen" href="css/notice_write.css" />
-<link rel="stylesheet" type="text/css" href="css/multiselect.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/notice_write.css" />
+    <link rel="stylesheet" type="text/css" href="css/multiselect.css" />
 
-<script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
 <!--    <script src="js/helper.js"></script>-->
 <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
 <!--    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
-<link rel="stylesheet" type="text/css" href="css/bootstrap-multiselect.css">
-<script src="js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-multiselect.css">
+    <script src="js/bootstrap-multiselect.js"></script>
 
 <section>
     <div class="head_section">

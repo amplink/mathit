@@ -20,7 +20,7 @@ $score_list = array();
 while($res = mysqli_fetch_array($result)) {
     $tot += $res['score1']+$res['score2']+$res['score3'];
     $score_list[] = $res['score1'];
-    $score_list[] = $res['score2'];
+	$score_list[] = $res['score2'];
     $cnt++;
     $a_cnt++;
     $grade = $res['grade'];

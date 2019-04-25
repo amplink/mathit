@@ -79,17 +79,6 @@ if($uid) :
         $result = sql_query($sql);
         $res = mysqli_fetch_array($result);
         set_session('client_name', $res['client_name']);
-        $sql = "select `uid` from `student_table`;";
-        $result = sql_query($sql);
-        $chk = 0;
-        while($res = mysqli_fetch_array($result)) {
-            if($uid == $res['uid']) $chk = 1;
-        }
-
-        if(!$chk) {
-            $sql = "insert into `student_table` set `client_id`='$ac', `uid`='$uid', `grade2`='$grade';";
-            sql_query($sql);
-        }
 
         //자동 로그인 저장
         if($auto_login == true ) :
