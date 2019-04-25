@@ -19,7 +19,8 @@ $a_cnt = 0;
 $score_list = array();
 while($res = mysqli_fetch_array($result)) {
     $tot += $res['score1']+$res['score2']+$res['score3'];
-    $score_list[$cnt] = $res['score1']+$res['score2']+$res['score3'];
+    $score_list[] = $res['score1'];
+    $score_list[] = $res['score2'];
     $cnt++;
     $a_cnt++;
     $grade = $res['grade'];
@@ -77,7 +78,7 @@ while($res = mysqli_fetch_array($result)) {
                         </div>
                         <div class="down_average">
                             <p class="lt">최고 점수</p>
-                            <p class="rt"><span style="color: red;"><?=sprintf("%.1f", max($score_list)/2)?></span><span>점</span></p>
+                            <p class="rt"><span style="color: red;"><?=sprintf("%.1f", max($score_list))?></span><span>점</span></p>
                         </div>
                     </div>
                 </div>
