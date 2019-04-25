@@ -361,9 +361,12 @@ if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
             url: 'bus_ntake.php',
             success: function (res) {
                 if(res == "success") {
-                    alert('버스 탑승이 취소되었습니다.');
-                }else {
-                    alert('버스 탑승 취소에 실패하였습니다.');
+                    alert('담당 기사님께 정상적으로 문자가 발송 되었습니다.');
+                } else if(res == "time_err") {
+                    alert('지금은 서비스를 이용할 수 없는 시간입니다.\n학원으로 연락주시기 바랍니다.');
+                }
+                else {
+                    alert(res);
                 }
                 // alert(res);
             }
