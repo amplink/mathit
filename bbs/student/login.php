@@ -42,9 +42,9 @@ $re = $_GET['re'];
 </div>
 
 <!-- 메인 헤더 -->
-<header>
-    <div class="head_logo"><a href="home.php"><img src="img/logo_notext.png" alt="header_logo"></a></div>
-</header>
+<!--<header>-->
+<!--    <div class="head_logo"><a href="home.php"><img src="img/logo_notext.png" alt="header_logo"></a></div>-->
+<!--</header>-->
 
     <div class="back_img"></div>
     <div class="page_wrap">
