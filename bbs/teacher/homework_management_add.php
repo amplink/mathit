@@ -447,6 +447,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
             success: function(response){
                 $("#class_name").html(response);
                 $("#class_name1").val(e);
+                $("#students").empty();
             }
         });
     }

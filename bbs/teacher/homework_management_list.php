@@ -290,6 +290,8 @@ include_once ('head.php');
             success: function(response){
                 $("#class_name").html(response);
                 class_name = e;
+                $("#students").empty();
+                $("#homework_content").empty();
             }
         });
     }
