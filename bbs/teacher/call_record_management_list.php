@@ -158,7 +158,7 @@ while($res = mysqli_fetch_array($result)) {
         <div class="r_btn_wrap">
             <div class="excel_btn f_b" onclick="excel_down()" style="cursor: pointer;"><a>EXCEL</a></div>
             <div class="print_btn f_b" onclick="info_print()" style="cursor: pointer;"><a>출력</a></div>
-            <div class="complete_btn f_b" onclick='save()' onmouseover="cursor()"><a>저장</a></div>
+            <div class="complete_btn f_b" onclick="save('<?=$title?>')" onmouseover="cursor()"><a>저장</a></div>
         </div>
     </div>
 </form>

@@ -279,7 +279,7 @@ $title = $_GET['title'];
 
         }
 
-        function save() {
+        function save(title) {
             $(window).unbind('beforeunload');
             var url = $('#url').val();
             $.ajax({
