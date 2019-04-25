@@ -110,10 +110,10 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                         </thead>
                         <tbody>
                         <?php
-                        for($i=0; $i<count($d_name); $i++) {
+                        for($i=0; $i<count($d_name2); $i++) {
                             ?>
                             <tr>
-                                <td onclick="lecture('<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
+                                <td onclick="lecture('<?=$d_name2[$i]?>')"><span><?=$d_name2[$i]?></span></td>
                             </tr>
                             <?
                         }

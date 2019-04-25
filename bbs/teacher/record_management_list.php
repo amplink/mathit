@@ -51,10 +51,10 @@ $title = $_GET['title'];
                         </thead>
                         <tbody>
                         <?php
-                        for($i=0; $i<count($d_name); $i++) {
+                        for($i=0; $i<count($d_name2); $i++) {
                             ?>
                             <tr class="select_box1">
-                                <td onclick="lecture('<?=$d_name[$i]?>')"><span><?=$d_name[$i]?></span></td>
+                                <td onclick="lecture('<?=$d_name2[$i]?>')"><span><?=$d_name2[$i]?></span></td>
                             </tr>
                             <?
                         }
@@ -177,9 +177,9 @@ $title = $_GET['title'];
                 dataType: "html",
                 success: function(response){
                     $("#class_name").html(response);
-					$("#test_list").empty();
-					$(".right_wrap").empty();
-					$('.select_box2').removeClass('on');
+                    $("#test_list").empty();
+                    $(".right_wrap").empty();
+                    $('.select_box2').removeClass('on');
                     d_uid = "";
                     c_uid = "";
                     s_uid = "";

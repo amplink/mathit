@@ -92,8 +92,8 @@ for($i=0; $i<count($r)-1; $i++) {
     }
 }
 
-$d_name = array_unique($d_name);
-$d_name = array_values(array_filter(array_map('trim',$d_name)));
+$d_name2 = array_unique($d_name);
+$d_name2 = array_values(array_filter(array_map('trim',$d_name2)));
 
 $time = array();
 $cnt = 0;
@@ -282,7 +282,7 @@ if($_SESSION['admin']) $res['type'] = "관리자";
                     <!--                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">루트</span><span-->
                     <!--                            class="class_grade_">초6</span></a></div>-->
                     <?php
-                    for($i=0; $i<count($d_name); $i++) {
+                    for($i=0; $i<count($d_name2); $i++) {
 
                         //해당 수업에 학생 정보
                         $link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$i]."&c_uid=".$c_uid[$i];
@@ -290,7 +290,7 @@ if($_SESSION['admin']) $res['type'] = "관리자";
 
                         ?>
                         <div class="hamnav_class" style="cursor: pointer;"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>&s_uid=<?=$s_uid[$i]?>">
-                                <span class="class_title"><?=$d_name[$i]?> ( <?php echo (count($r_4)-1);?> )( <?=$d_yoie[$i]?> )</span>
+                                <span class="class_title"><?=$d_name2[$i]?> ( <?php echo (count($r_4)-1);?> )( <?=$d_yoie[$i]?> )</span>
                             </a>
                         </div>
                         <?php
