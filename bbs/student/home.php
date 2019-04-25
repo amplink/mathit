@@ -9,7 +9,7 @@ if(!$_SESSION['s_uid']) {
 
 $grade = substr($_SESSION[s_level],0,3).$_SESSION[s_grade];
 
-$sql = "SELECT A.seq, A.name, A.d_order, A.grade, A.unit, A._from, A._to, A.semester 
+$sql = "SELECT A.seq, A.name, A.d_order, A.grade, A.unit, A._from, A._to, A.semester, B.id 
         FROM `homework` A, `homework_assign_list` B
         WHERE 
             A.seq = B.h_id
@@ -25,11 +25,11 @@ $num = mysqli_num_rows($result);
 <link rel="stylesheet" type="text/css" media="screen" href="css/home.css" />
 
 <body>
-    <!--section-->
-    <section>
-        <div class="report_wrap" style="padding-top:20px">
-            <div class="section_title_line">
-                <a href="homework_ing.php">
+<!--section-->
+<section>
+    <div class="report_wrap" style="padding-top:20px">
+        <div class="section_title_line">
+            <a href="homework_ing.php">
                 <div class="section_title_wrap">
                     <p class="section_title">HOMEWORK</p>
                     <span class="deco_line"></span>
@@ -37,77 +37,80 @@ $num = mysqli_num_rows($result);
                 <div class="more_btn_wrap">
                     <a href="homework_ing.php"><img src="img/green_plus.png" alt="more_btn_icon" style="width: 25px; height: 25px;"></a>
                 </div>
-            </div>
-<?php
-            if($num > 0) {
-                while ($res = mysqli_fetch_array($result)) {
-?>
-                    <div class="report_content_wrap">
-                        <div class="report_box">
-                            <a href="homework_submission.php">
-                                <div class="date">
-                                    <div class="homework_content_img"><img src="img/time.png" alt="time_icon"></div>
-                                    <div class="homework_content_text">
-                                        <p>
-                                            <span><?= substr($res['_from'], 0, 5) ?></span><span> ~ <?= substr($res['_to'], 0, 5) ?></span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="range_view">
-                                    <div class="homework_content_img"><img src="img/nav/book_img.png" alt="homework_icon">
-                                    </div>
-                                    <div class="homework_content_text">
-                                        <p><span><?= $res['grade'] ?> - <?= $res['semester'] ?></span>
-                                        &nbsp;&nbsp;<span><?= $res['unit'] ?> </span></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-<?php
-                }
-            }else{
-?>
+        </div>
+        <?php
+        if($num > 0) {
+            while ($res = mysqli_fetch_array($result)) {
+                ?>
                 <div class="report_content_wrap">
                     <div class="report_box">
-                        <div class="report_content" style="text-align:center">
-                            <p class="report_title">
-                                <span> 숙제가 존재하지 않습니다. </span>
-                            </p>
-                        </div>
+                        <a href="homework_submission.php?no=<?=$res['id']?>">
+                            <div class="date">
+                                <div class="homework_content_img"><img src="img/time.png" alt="time_icon"></div>
+                                <div class="homework_content_text">
+                                    <p>
+                                        <span><?= substr($res['_from'], 0, 5) ?></span><span> ~ <?= substr($res['_to'], 0, 5) ?></span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="range_view">
+                                <div class="homework_content_img"><img src="img/nav/book_img.png" alt="homework_icon">
+                                </div>
+                                <div class="homework_content_text">
+                                    <p><span><?= $res['grade'] ?> - <?= $res['semester'] ?></span>
+                                        &nbsp;&nbsp;<span><?= $res['unit'] ?> </span></p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
-<?php
+                <?php
             }
-?>
+        }else{
+            ?>
+            <div class="report_content_wrap">
+                <div class="report_box">
+                    <div class="report_content" style="text-align:center">
+                        <p class="report_title">
+                            <span> 숙제가 존재하지 않습니다. </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
+    </div>
+    </div>
+    <div class="report_wrap">
+        <div class="section_title_line">
+            <div class="section_title_wrap">
+                <p class="section_title">REPORT</p>
+                <span class="deco_line"></span>
+            </div>
+            <div class="more_btn_wrap">
+                <a href="report.php"><img src="img/green_plus.png" alt="more_btn_icon" style="width: 25px; height: 25px;"></a>
             </div>
         </div>
-        <div class="report_wrap">
-            <div class="section_title_line">
-                <div class="section_title_wrap">
-                    <p class="section_title">REPORT</p>
-                    <span class="deco_line"></span>
-                </div>
-                <div class="more_btn_wrap">
-                    <a href="report.php"><img src="img/green_plus.png" alt="more_btn_icon" style="width: 25px; height: 25px;"></a>
-                </div>
-            </div>
- <?php
+        <?php
 
-            $sql2 = "SELECT  quarter, test_genre, date, year
+        $sql2 = "SELECT  seq, quarter, test_genre, date, year
                     FROM `teacher_score`  
                     WHERE 
                         `client_id`='$_SESSION[client_id]'
                     AND `d_uid`='$_SESSION[d_uid]'
                     AND student_id = '$_SESSION[s_id]'
                     ORDER BY seq DESC  LIMIT 3";
-            $result2 = sql_query($sql2);
-            $num2 = mysqli_num_rows($result2);
+        $result2 = sql_query($sql2);
+        $num2 = mysqli_num_rows($result2);
 
-            if($num2 > 0) {
-                while ($res2 = mysqli_fetch_array($result2)) {
-?>
-            <a href="report_detail.php">
+        if($num2 > 0) {
+            while ($res2 = mysqli_fetch_array($result2)) {
+
+                if($res2['test_genre'] == "분기테스트" or $res2['test_genre'] == "입반테스트") $link = "report_detail";
+                else if($res2['test_genre'] == "중간평가" || $res2['test_genre'] == "기말평가") $link = "report_detail2";
+                ?>
+                <a href="<?=$link?>.php?no=<?=$res2['seq']?>">
                     <div class="report_content_wrap">
                         <div class="report_box">
                             <div class="date">
@@ -122,98 +125,98 @@ $num = mysqli_num_rows($result);
                             </div>
                         </div>
                     </div>
-            </a>
-<?php
-                }
-            }else {
-?>
-                <div class="report_content_wrap">
-                    <div class="report_box">
-                        <div class="report_content" style="text-align:center">
-                            <p class="report_title">
-                                <span> 시험이 존재하지 않습니다. </span>
-                            </p>
-                        </div>
+                </a>
+                <?php
+            }
+        }else {
+            ?>
+            <div class="report_content_wrap">
+                <div class="report_box">
+                    <div class="report_content" style="text-align:center">
+                        <p class="report_title">
+                            <span> 시험이 존재하지 않습니다. </span>
+                        </p>
                     </div>
                 </div>
-<?php
-            }
-?>
-        </div>
-        <div class="notice_wrap">
-            <div class="section_title_line">
-                <div class="section_title_wrap">
-                    <p class="section_title">NOTICE</p>
-                    <span class="deco_line"></span>
-                </div>
-                <div class="more_btn_wrap">
-                    <a href="notice.php"><img src="img/green_plus.png" alt="more_btn_icon" style="width: 25px; height: 25px;"></a>
-                </div>
             </div>
-            <div class="notice_content_wrap">
-                <div class="notice_table">
-<?php
+            <?php
+        }
+        ?>
+    </div>
+    <div class="notice_wrap">
+        <div class="section_title_line">
+            <div class="section_title_wrap">
+                <p class="section_title">NOTICE</p>
+                <span class="deco_line"></span>
+            </div>
+            <div class="more_btn_wrap">
+                <a href="notice.php"><img src="img/green_plus.png" alt="more_btn_icon" style="width: 25px; height: 25px;"></a>
+            </div>
+        </div>
+        <div class="notice_content_wrap">
+            <div class="notice_table">
+                <?php
 
-                    $sql3 = "SELECT  seq, title, event_time, writer, `type`
+                $sql3 = "SELECT  seq, title, event_time, writer, `type`
                              FROM `teacher_notice`  
                              WHERE 
                                `client_id`='$_SESSION[client_id]'
                                AND `n_range` like '%학생%'
                              ORDER BY `type` desc, seq DESC LIMIT 5";
-                    $result3 = sql_query($sql3);
-                    $num3 = @mysqli_num_rows($result3);
+                $result3 = sql_query($sql3);
+                $num3 = @mysqli_num_rows($result3);
 
-                    if($num3 > 0) {
-                         while ($res3 = mysqli_fetch_array($result3)) {
-                             if($res3['writer']=="관리자") {
-                                 $sql33 = "SELECT * FROM `notify` where `id`='".$res3['title']."';";
-                                 $result33 = sql_query($sql33);
-                                 $res33 = mysqli_fetch_array($result33);
-?>
-                     <div class="notice_list">
-                         <a href="notice_read.php?seq=<?=$res3['seq']?>">
-                             <div class="notice_title">
-                                 <p><?php if($res3['type'] == "중요공지") echo "[중요]";?> <?=$res33['title']?></p>
-                             </div>
-                             <div class="notice_date">
-                                 <p><?=substr($res33['event_time'],0,10)?></p>
-                             </div>
-                         </a>
-                     </div>
-<?php
-                             }else {
-?>
-                     <div class="notice_list">
-                         <a href="notice_read.php?seq=<?=$res3['seq']?>">
-                             <div class="notice_title">
-                                 <p><?php if($res3['type'] == "중요공지") echo "[중요]";?> <?=$res3['title']?></p>
-                             </div>
-                             <div class="notice_date">
-                                 <p><?=substr($res3['event_time'],0,10)?></p>
-                             </div>
-                         </a>
-                     </div>
-<?php
-                             }
-                         }
-                    }else {
-?>
-
-                     <div class="report_content" style="text-align:center">
-                             <p class="report_title">
-                                <span> 공지사항이 존재하지 않습니다. </span>
-                             </p>
-                     </div>
-
-<?php
+                if($num3 > 0) {
+                    while ($res3 = mysqli_fetch_array($result3)) {
+                        if($res3['writer']=="관리자") {
+                            $sql33 = "SELECT * FROM `notify` where `id`='".$res3['title']."';";
+                            $result33 = sql_query($sql33);
+                            $res33 = mysqli_fetch_array($result33);
+                            ?>
+                            <div class="notice_list">
+                                <a href="notice_read.php?seq=<?=$res3['seq']?>">
+                                    <div class="notice_title">
+                                        <p><?php if($res3['type'] == "중요공지") echo "[중요]";?> <?=$res33['title']?></p>
+                                    </div>
+                                    <div class="notice_date">
+                                        <p><?=substr($res33['event_time'],0,10)?></p>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php
+                        }else {
+                            ?>
+                            <div class="notice_list">
+                                <a href="notice_read.php?seq=<?=$res3['seq']?>">
+                                    <div class="notice_title">
+                                        <p><?php if($res3['type'] == "중요공지") echo "[중요]";?> <?=$res3['title']?></p>
+                                    </div>
+                                    <div class="notice_date">
+                                        <p><?=substr($res3['event_time'],0,10)?></p>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php
+                        }
                     }
-?>
-                </div>
+                }else {
+                    ?>
+
+                    <div class="report_content" style="text-align:center">
+                        <p class="report_title">
+                            <span> 공지사항이 존재하지 않습니다. </span>
+                        </p>
+                    </div>
+
+                    <?php
+                }
+                ?>
             </div>
         </div>
-    </section>
-    <footer>
-        <p class="copyright"><span>copyright ⓒ 2019 PSE corp. All Rights Reserved.</span></p>
-    </footer>
+    </div>
+</section>
+<footer>
+    <p class="copyright"><span>copyright ⓒ 2019 PSE corp. All Rights Reserved.</span></p>
+</footer>
 </body>
 </html>

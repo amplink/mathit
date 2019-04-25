@@ -39,7 +39,7 @@ include_once ('head.php');
 
             $sql = "SELECT
 				         A.seq, A.name, A.d_order, A.grade, A.unit, 
-						 A._from, A._to, A.semester, B.submit_date1, B.submit_date2, 
+						 A._from, A._to, A.semester, B.submit_date1, B.submit_date2, B.id,
 						 (CASE 
 						  WHEN (B.current_status = 'a1' OR  B.current_status= 'a2') THEN '제출'
 						  WHEN (B.current_status = '') THEN '미제출'
