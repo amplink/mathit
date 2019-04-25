@@ -59,11 +59,16 @@ for($i=0; $i<count($class_d_uid); $i++) {
             <div class="my_content_head">
                 <p><span>셔틀버스 이용 정보</span></p>
             </div>
+            <?php
+            $sql = "select * from `student_table` where `uid`='$_SESSION[s_uid]';";
+            $result = sql_query($sql);
+            $res = mysqli_fetch_array($result);
+            ?>
             <div class="bus_box_wrap">
                 <div class="my_bus_box">
                     <div class="up_section">
                         <div class="bus_use">
-                            <p><span style="color: rgb(0, 181, 103);">이용 중</span><span style="color: rgb(181, 0, 0); display: none">이용안함</span></p>
+                            <p><span style="color: rgb(0, 181, 103); <?php if(!$res['station_uid']) echo "display:none;";?>">이용 중</span><span style="color: rgb(181, 0, 0); <?php if($res['station_uid']) echo "display:none;";?>">이용안함</span></p>
                         </div>
                         <div class="bus_btn_section">
                             <div class="not_use_btn">
@@ -75,13 +80,89 @@ for($i=0; $i<count($class_d_uid); $i++) {
                         </div>
                     </div>
                     <div class="down_section">
-                        <p class="route_name"><span>노선명이 들어갈자리</span></p>
-                        <p class="busstop_name"><span>서울고 사거리</span><span>정류장</span></p>
-                        <p class="bus_time"><span>PM</span> <span>05:20</span></p>
+                        <p class="route_name"><span><?=$res['line']?></span></p>
+                        <p class="busstop_name"><span><?=$res['station']?> 정류장</span></p>
+                        <p class="bus_time"><span>PM <?=$res['time']?></span></p>
                     </div>
                 </div>
+            </div>
+        </div>
+        <?php
+        $ac = $_SESSION['client_id'];
+        $link = "/api/math/bus?client_no=".$ac;
+        $r = api_calls_get($link);
+
+        for($i=0; $i<count($r['list']); $i++) {
+            $bus_uid[$i] = $r['list'][$i][0];
+            $bus_name[$i] = $r['list'][$i][1];
+            // ."(".$r['list'][$i][2].")"
+
+            $uid = $r['list'][$i][0];
+            for($j=0; $j<count($r['route'][$uid]); $j++) {
+                $station_uid[$i][$j] = $r['route'][$uid][$j][0];
+                $station_name[$i][$j] = $r['route'][$uid][$j][1];
+                $station_time[$i][$j] = $r['route'][$uid][$j][2];
+                $station_seq[$i][$j] = $r['route'][$uid][$j][3];
+            }
+        }
+        $s_uid = $_SESSION['s_uid'];
+        $sql = "select `bus_seq` from `student_table` where `uid`='$s_uid';";
+        $result = sql_query($sql);
+        $res = mysqli_fetch_array($result);
+        $r_seq = $res['bus_seq'];
+        ?>
+        <div class="bus_change">
+            <div class="bus_top_box">
+                <p>버스 이용 등록</p>
+            </div>
+            <div class="bus_content_box">
+                <?php
+                $cnt = 0;
+                for($i=0; $i<count($bus_uid); $i++) {
+                    for($j=1; $j<count($station_uid[$i]); $j++) {
+                        ?>
+                        <input type="radio" name="bus_uid" value="<?=$cnt?>" <?php if($r_seq == $cnt) echo "checked";?>><?=$bus_name[$i]?>-<?=$station_name[$i][$j]?>(<?=$station_time[$i][$j]?>)<br>
+                        <?php
+                        $cnt++;
+                    }
+                    echo "<br>";
+                }
+                ?>
+            </div>
+            <div class="bus_box_btn_wrap">
+                <div class="bus_yes"><p>변경</p></div>
+                <div class="bus_no"><p>취소</p></div>
             </div>
         </div>
     </section>
 </body>
 </html>
+<script>
+    $('.not_use_btn').click(function (){
+        $('.bus_box').addClass("on");
+    });
+
+    $('.route_change_btn').click(function (){
+        $('.bus_change').toggle();
+    });
+
+    $('.bus_yes').click(function (){
+        var cnt = $('input[name="bus_uid"]:checked').val();
+        // alert(cnt);
+        $.ajax({
+           url: 'bus.php?cnt='+cnt,
+           success: function (res){
+               if(res=="success") {
+                   alert('변경이 완료되었습니다.');
+                   location.replace('mypage.php');
+               }
+               else alert('변경에 실패하였습니다.');
+               // alert(res);
+           }
+        });
+    });
+
+    $('.bus_yes, .bus_no').click(function (){
+       $('.bus_change').toggle();
+    });
+</script>

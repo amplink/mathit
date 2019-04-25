@@ -226,3 +226,32 @@
     box-shadow: inset 0px 2px 5px rgba(0, 0, 0, .2);
     background-color: rgb(251, 253, 255);
 }
+
+.bus_change {
+    position: fixed;
+    top: 20vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    border-radius: 15px;
+    background-color: white;
+    border: solid 5px rgb(17, 90, 55);
+    z-index: 100;
+    display: none;
+}
+
+.bus_top_box {
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0px;
+}
+
+.bus_content_box {
+    padding: 10px;
+    font-size: 13px;
+}
+
+.bus_top_box p {
+    color: rgb(17, 90, 55);
+}

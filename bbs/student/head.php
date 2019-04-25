@@ -237,7 +237,13 @@ while($res = mysqli_fetch_array($result)) {
 
             }
             ?>
-
+            <?php
+            $s_uid = $_SESSION['s_uid'];
+            $sql = "select * from `student_table` where `uid`='$s_uid';";
+            $result = sql_query($sql);
+            $res = mysqli_fetch_array($result);
+            $today = date("m/d");
+            ?>
         </div>
         <div class="mybus_wrap">
             <div class="bus_head">
@@ -251,10 +257,10 @@ while($res = mysqli_fetch_array($result)) {
                     <img src="img/bus.png" alt="bus_icon">
                 </div>
                 <div class="bus_info">
-                    <p class="bus_place"><span>서울고 앞</span><span> 정류장</span></p>
+                    <p class="bus_place"><span><?=$res['station']?></span><span> 정류장</span></p>
                     <p class="bus_time">
                         <span>PM</span>
-                        <span>05:00</span>
+                        <span><?=$res['time']?></span>
                         <span> 탑승 예정입니다.</span>
                     </p>
                 </div>
@@ -267,8 +273,8 @@ while($res = mysqli_fetch_array($result)) {
 <div class="bus_box">
     <p class="bus_box_title">셔틀버스 탑승 취소</p>
     <div class="bus_box_content">
-        <p><span>서울고 정류장<br>(PM 5:00 탑승 예정)</span></p>
-        <p><span>10/18</span><span>(오늘)</span></p>
+        <p><span><?=$res['station']?><br>(PM <?=$res['time']?> 탑승 예정)</span></p>
+        <p><span><?=$today?></span><span>(오늘)</span></p>
         <p><span>금일 셔틀버스를</span><span>이용하지 않으시겠습니까?</span></p>
         <p><span>담당 기사님께</span> <span>문자가 전송됩니다.</span></p>
     </div>
@@ -352,13 +358,14 @@ if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
 
     $('.yes_btn').click(function () {
         $.ajax({
-            url: 'but_ntake.php',
+            url: 'bus_ntake.php',
             success: function (res) {
-                if(res) {
+                if(res == "success") {
                     alert('버스 탑승이 취소되었습니다.');
                 }else {
                     alert('버스 탑승 취소에 실패하였습니다.');
                 }
+                // alert(res);
             }
         });
     });
