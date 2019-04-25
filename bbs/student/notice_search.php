@@ -63,7 +63,7 @@ while($res = mysqli_fetch_array($result)) {
             $cnt = 0;
             $last = 0;
             while($res = mysqli_fetch_array($result)) $cnt++;
-            for($i=1; $i<=$cnt/10 + 1; $i++) {
+            for($i=1; $i<=$cnt/10; $i++) {
                 ?>
                 <div class="page_btn"><a href="notice.php?page=<?=$i?>" id="<?=$i?>"><?=$i?></a></div>
                 <?

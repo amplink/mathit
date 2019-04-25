@@ -641,6 +641,7 @@ section {
     border-radius: 20px;
     padding: 10px;
     z-index: 999;
+    overflow-y: auto;
 }
 
 .alarm_back {
@@ -672,4 +673,8 @@ section {
     top: 50px;
     left: 62%;
     /*background-color: rgb(255, 228, 73);*/
+}
+
+.new_alarm {
+    
 }
