@@ -13,7 +13,7 @@ for($i=0; $i<count($r['list']); $i++) {
     // ."(".$r['list'][$i][2].")"
 
     $uid = $r['list'][$i][0];
-    for($j=1; $j<count($r['route'][$uid]); $j++) {
+    for($j=1; $j<=count($r['route'][$uid]); $j++) {
         if($t==$cnt) {
             $line = $bus_name[$i];
             $station_uid = $uid;

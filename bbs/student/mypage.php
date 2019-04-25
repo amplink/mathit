@@ -98,7 +98,7 @@ for($i=0; $i<count($class_d_uid); $i++) {
             // ."(".$r['list'][$i][2].")"
 
             $uid = $r['list'][$i][0];
-            for($j=0; $j<count($r['route'][$uid]); $j++) {
+            for($j=0; $j<=count($r['route'][$uid]); $j++) {
                 $station_uid[$i][$j] = $r['route'][$uid][$j][0];
                 $station_name[$i][$j] = $r['route'][$uid][$j][1];
                 $station_time[$i][$j] = $r['route'][$uid][$j][2];
