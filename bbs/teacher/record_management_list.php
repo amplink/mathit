@@ -177,6 +177,9 @@ $title = $_GET['title'];
                 dataType: "html",
                 success: function(response){
                     $("#class_name").html(response);
+                    $("#test_list").empty();
+                    $(".right_wrap").empty();
+                    $('.select_box2').removeClass('on');
                 }
             });
             class_name = e;
