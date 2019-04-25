@@ -61,8 +61,10 @@ $res = mysqli_fetch_array($result);
                 <div class="day_select">
                     <select name="year_select" id="year_select">
                         <?php
-                        for($i=2018; $i<= ( date(Y) ); $i++) {
-                            echo "<option value='{$i}'>{$i}"."년"."</option>";
+                        $last_year = date(Y);
+                        for($i=2019; $i<= $last_year; $i++) {
+                            $selected = ($i == $last_year)?"selected":"";
+                            echo "<option value='{$i}' {$selected}>{$i}"."년"."</option>";
                         }
                         ?>
                     </select>

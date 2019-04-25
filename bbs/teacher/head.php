@@ -305,8 +305,8 @@ if($_SESSION['admin']) $res['type'] = "관리자";
         </div>
         <?php
         $t_uid = $_SESSION['t_uid'];
-        $sql = "select * from `alarm` where `uid`='$t_uid' order by `seq` desc;";
-        if($_SESSION['admin']) $sql = "select * from `alarm` where `target`='관리자';";
+        $sql = "select * from `alarm` where `uid`='$t_uid' order by `seq` desc limit 30";
+        if($_SESSION['admin']) $sql = "select * from `alarm` where `target`='관리자'  order by `seq` desc limit 30";
         $a_result = sql_query($sql);
         $a_cnt = 0;
         $thisTime=date("Y-m-d H:i:s");
