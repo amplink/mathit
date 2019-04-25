@@ -2,8 +2,6 @@
 include_once ('_common.php');
 include_once ('api.class.php');
 
-
-
 $s_uid = $_SESSION['s_uid'];
 $api = new gabiaSmsApi('psemathit','e7e280b259a8b08dd95e605e89637bc1');
 $ac = $_SESSION['client_id'];
