@@ -173,7 +173,7 @@ $num = mysqli_num_rows($result);
                      <div class="notice_list">
                          <a href="notice_read.php?seq=<?=$res3['seq']?>">
                              <div class="notice_title">
-                                 <p><?=$res33['title']?></p>
+                                 <p><?php if($res3['type'] == "중요공지") echo "[중요]";?> <?=$res33['title']?></p>
                              </div>
                              <div class="notice_date">
                                  <p><?=substr($res33['event_time'],0,10)?></p>
@@ -186,7 +186,7 @@ $num = mysqli_num_rows($result);
                      <div class="notice_list">
                          <a href="notice_read.php?seq=<?=$res3['seq']?>">
                              <div class="notice_title">
-                                 <p><?=$res3['title']?></p>
+                                 <p><?php if($res3['type'] == "중요공지") echo "[중요]";?> <?=$res3['title']?></p>
                              </div>
                              <div class="notice_date">
                                  <p><?=substr($res3['event_time'],0,10)?></p>

@@ -72,25 +72,25 @@ if($seqq > 0) { // 수정이면
     }
     if($name) {
         //저장될 디렉토리
-        $base_dir = "../img_data";
+        $base_dir = "img_data";
 
         //폴더 이름을 유일한값으로 만듬
         $dir = time().(double)microtime();
         //폴더 생성
-        @mkdir("$base_dir/$dir",0777);
+        @mkdir("../$base_dir/$dir",0777);
 
         //tmp에 저장된 파일 지정한디렉토리로 이동
         move_uploaded_file($name,"$base_dir/$dir/$name_name");
 
         //DB에 입력할 이름
-        $name_url = $base_dir."/".$dir."/";
+        $name_url = "../".$base_dir."/".$dir."/";
     }
     $sql = "delete from `teacher_notice` where  `seq` = '$seqq';";
     sql_query($sql);
 }else {
     if($name) {
         //저장될 디렉토리
-        $base_dir = "../img_data";
+        $base_dir = "img_data";
 
         //폴더 이름을 유일한값으로 만듬
         $dir = time().(double)microtime();

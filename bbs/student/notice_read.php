@@ -1,5 +1,6 @@
 <?php
 include_once ('head.php');
+//header('Content-Disposition: attachment;');
 $seq = $_GET['seq'];
 
 $sql = "select * from `teacher_notice` where `seq`='$seq';";
@@ -37,7 +38,7 @@ $time = $time[0];
                 if($res1['attach_file_url']) {
                     ?>
                     <div class="attach_file">
-                        <a href="../<?=$res['attach_file_url'].$res['attach_file']?>" download>첨부파일 받기</a>
+                        <a href="http://pse2018.cafe24.com/bbs/teacher/<?=$res['attach_file_url'].$res['attach_file']?>" target="_blank" download>첨부파일 받기</a>
                     </div>
                     <?php
                 }
@@ -66,7 +67,7 @@ $time = $time[0];
                 if($res['file_url']) {
                     ?>
                     <div class="attach_file">
-                        <a href="<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기</a>
+                        <a href="http://pse2018.cafe24.com/bbs/teacher/<?=$res['file_url']?><?=$res['file_name']?>" target="_blank" download>첨부파일 받기</a>
                     </div>
                 <?php
                 }
