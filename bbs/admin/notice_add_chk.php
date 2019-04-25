@@ -29,7 +29,7 @@ else {
 
     if($name) {
         //저장될 디렉토리
-        $base_dir = "file_list";
+        $base_dir = "../img_data";
 
         //폴더 이름을 유일한값으로 만듬
         $dir = time().(double)microtime();
@@ -56,7 +56,7 @@ VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$name_nam
         }
         if($name_name) {
             //저장될 디렉토리
-            $base_dir = "file_list";
+            $base_dir = "../img_data";
 
             //폴더 이름을 유일한값으로 만듬
             $dir = time().(double)microtime();

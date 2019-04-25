@@ -37,7 +37,7 @@ $time = $time[0];
                 if($res1['attach_file_url']) {
                     ?>
                     <div class="attach_file">
-                        <a href="../teacher/<?=$res['attach_file_url'].$res['attach_file']?>" download>첨부파일 받기</a>
+                        <a href="../<?=$res['attach_file_url'].$res['attach_file']?>" download>첨부파일 받기</a>
                     </div>
                     <?php
                 }
@@ -66,7 +66,7 @@ $time = $time[0];
                 if($res['file_url']) {
                     ?>
                     <div class="attach_file">
-                        <a href="../teacher/<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기</a>
+                        <a href="<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기</a>
                     </div>
                 <?php
                 }

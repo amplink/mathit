@@ -72,7 +72,7 @@ if($seqq > 0) { // 수정이면
     }
     if($name) {
         //저장될 디렉토리
-        $base_dir = "img_data";
+        $base_dir = "../img_data";
 
         //폴더 이름을 유일한값으로 만듬
         $dir = time().(double)microtime();
@@ -90,7 +90,7 @@ if($seqq > 0) { // 수정이면
 }else {
     if($name) {
         //저장될 디렉토리
-        $base_dir = "img_data";
+        $base_dir = "../img_data";
 
         //폴더 이름을 유일한값으로 만듬
         $dir = time().(double)microtime();

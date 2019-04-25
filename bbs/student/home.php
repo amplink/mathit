@@ -107,7 +107,7 @@ $num = mysqli_num_rows($result);
             if($num2 > 0) {
                 while ($res2 = mysqli_fetch_array($result2)) {
 ?>
-
+            <a href="report_detail.php">
                     <div class="report_content_wrap">
                         <div class="report_box">
                             <div class="date">
@@ -118,10 +118,11 @@ $num = mysqli_num_rows($result);
                                     <span> - </span>
                                     <span><?=$res2['quarter'] ?>분기</span>
                                     <span> <?=$res2['test_genre'] ?></span></p>
-                                <div class="report_icon"><a href="report_detail.php"><img src="img/report.png" alt="report_icon"></a></div>
+                                <div class="report_icon"><img src="img/report.png" alt="report_icon"></div>
                             </div>
                         </div>
                     </div>
+            </a>
 <?php
                 }
             }else {
