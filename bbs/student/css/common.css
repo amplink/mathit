@@ -676,5 +676,23 @@ section {
 }
 
 .new_alarm {
-    
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 20px;
+}
+
+.new_alarm_menu {
+    display: none;
+    position: absolute;
+    top: 8px;
+    left: 25px;
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 20px;
 }

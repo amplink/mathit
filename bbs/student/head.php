@@ -5,6 +5,13 @@ if(!$_SESSION['s_uid']) {
     alert_msg('로그인을 먼저 해주세요.');
     location_href("login.php");
 }
+$alarm = 0;
+//alert_msg($_SESSION['s_id']);
+$sql = "select `chk` from `alarm` where `uid`='".$_SESSION['s_id']."';";
+$result = sql_query($sql);
+while($res = mysqli_fetch_array($result)) {
+    if(!$res['chk']) $alarm++;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,6 +46,7 @@ if(!$_SESSION['s_uid']) {
         <span></span>
         <span></span>
     </div>
+    <div class="new_alarm_menu"></div>
     <div class="head_logo"><a href="home.php"><img src="img/logo_notext.png" alt="header_logo"></a></div>
     <div class="calender_icon"><img src="img/calendar.png" alt="calendar_icon"></div>
 </header>
@@ -318,12 +326,22 @@ if(!$_SESSION['s_uid']) {
     </div>
 </div>
 </body>
+<?php
+if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
+?>
 <script>
     $('.alarm').toggle();
     $('.alarm_back').toggle();
     function show_alarm() {
         $('.alarm').toggle();
         $('.alarm_back').toggle();
+        $.ajax({
+            url: "alarm_chk.php",
+            success: function (res) {
+                $('.new_alarm').hide();
+                $('.new_alarm_menu').hide();
+            }
+        });
     }
     $('.x_btn, .alarm_back').click(function(){
        $('.alarm').toggle();
