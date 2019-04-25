@@ -94,7 +94,7 @@ for($i=0; $i<count($r)-1; $i++) {
 
 $d_name = array_unique($d_name);
 $d_name = array_values(array_filter(array_map('trim',$d_name)));
-print_r($d_name);
+
 $time = array();
 $cnt = 0;
 
