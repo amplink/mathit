@@ -50,7 +50,7 @@ $re = $_GET['re'];
     <div class="page_wrap">
         <div class="login_wrap">
         <div class="logo">
-            <img src="img/logo_notext1.png" alt="login_logo">
+            <img src="img/logo_text.png" alt="login_logo">
         </div>
 
         <form id="login_form">
