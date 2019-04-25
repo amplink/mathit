@@ -74,7 +74,7 @@ while($res = mysqli_fetch_array($result)) {
                     <?php
                     $s_id = $_SESSION['s_id'];
                     $thisTime = date("Y-m-d H:i:s");
-                    $sql = "select `content`, `datetime` from `alarm` where `uid`='$s_id' order by `seq` desc;";
+                    $sql = "select `content`, `datetime` from `alarm` where `uid`='$s_id' order by `seq` desc limit 30;";
                     $result = sql_query($sql);
                     while($res = mysqli_fetch_array($result)){
                         $signdate = $res['datetime'];
@@ -332,6 +332,7 @@ if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
 <script>
     $('.alarm').toggle();
     $('.alarm_back').toggle();
+
     function show_alarm() {
         $('.alarm').toggle();
         $('.alarm_back').toggle();
@@ -343,8 +344,22 @@ if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
             }
         });
     }
+
     $('.x_btn, .alarm_back').click(function(){
        $('.alarm').toggle();
         $('.alarm_back').toggle();
+    });
+
+    $('.yes_btn').click(function () {
+        $.ajax({
+            url: 'but_ntake.php',
+            success: function (res) {
+                if(res) {
+                    alert('버스 탑승이 취소되었습니다.');
+                }else {
+                    alert('버스 탑승 취소에 실패하였습니다.');
+                }
+            }
+        });
     });
 </script>
