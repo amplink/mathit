@@ -3,32 +3,15 @@ include_once ('_common.php');
 include_once ('head.php');
 ?>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_list.css?v=20190414" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_list.css?v=20190425" />
 
-    <script src="js/homework_manegement_add.js"></script>
-    <script>
-        $( function() {
-            var dateFormat = "yy-mm-dd",
-                from = $( "#from" )
-                    .datepicker({
-                        showOn: "button",
-                        buttonImage: "img/calendar.png",
-                        buttonImageOnly: true,
-                        buttonText: "Select date",
-                        nextText: "다음달",
-                        prevText: "이전달",
-                        changeMonth: true,
-                        dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-                        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-                        monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-                        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                        numberOfMonths: 2
-                    })
-                    .on( "change", function() {
-                        to.datepicker( "option", "minDate", getDate( this ) );
-                    }),
-                to = $( "#to" ).datepicker({
+<script src="js/homework_manegement_add.js"></script>
+<script>
+    $( function() {
+        var dateFormat = "yy-mm-dd",
+            from = $( "#from" )
+                .datepicker({
                     showOn: "button",
                     buttonImage: "img/calendar.png",
                     buttonImageOnly: true,
@@ -42,48 +25,65 @@ include_once ('head.php');
                     monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
                     numberOfMonths: 2
                 })
-                    .on( "change", function() {
-                        from.datepicker( "option", "maxDate", getDate( this ) );
-                    });
+                .on( "change", function() {
+                    to.datepicker( "option", "minDate", getDate( this ) );
+                }),
+            to = $( "#to" ).datepicker({
+                showOn: "button",
+                buttonImage: "img/calendar.png",
+                buttonImageOnly: true,
+                buttonText: "Select date",
+                nextText: "다음달",
+                prevText: "이전달",
+                changeMonth: true,
+                dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+                dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+                monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+                monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                numberOfMonths: 2
+            })
+                .on( "change", function() {
+                    from.datepicker( "option", "maxDate", getDate( this ) );
+                });
 
-            function getDate( element ) {
-                var date;
-                try {
-                    date = $.datepicker.parseDate( dateFormat, element.value );
-                } catch( error ) {
-                    date = null;
-                }
-
-                return date;
+        function getDate( element ) {
+            var date;
+            try {
+                date = $.datepicker.parseDate( dateFormat, element.value );
+            } catch( error ) {
+                date = null;
             }
-        } );
-    </script>
-    <style>
-        .students_checks{
-            display: none;
+
+            return date;
         }
-        .checks_names_wrap{
-            overflow: hidden;
-            margin: 4px;
-        }
-        .checks_names_values{
-            float: right;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .checkNames_span{
-            /*padding: 5px;*/
-        }
-        .red_color_on{
-            color:red;
-        }
-        .orange_color_on{
-            color:orange;
-        }
-        .green_color_on{
-            color:green;
-        }
-    </style>
+    } );
+</script>
+<style>
+    .students_checks{
+        display: none;
+    }
+    .checks_names_wrap{
+        overflow: hidden;
+        margin: 4px;
+    }
+    .checks_names_values{
+        float: right;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .checkNames_span{
+        /*padding: 5px;*/
+    }
+    .red_color_on{
+        color:red;
+    }
+    .orange_color_on{
+        color:orange;
+    }
+    .green_color_on{
+        color:green;
+    }
+</style>
 
 <section>
     <div class="head_section">
@@ -320,7 +320,7 @@ include_once ('head.php');
             dataType: "html",
             success: function(response) {
                 $("#homework_content").html("");
-               // console.log(response);
+                // console.log(response);
                 $("#homework_content").html(response);
                 $('.custumdropdown').homework_manegement_add();
             }

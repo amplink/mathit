@@ -217,7 +217,7 @@ table tbody tr:nth-child(2n) {
     max-height: 550px;
     width: 100%;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: auto;
     background-color: rgb(235, 235, 235);
     border: solid 1px rgb(220, 220, 220);
     margin-top: 10px;
