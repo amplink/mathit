@@ -154,12 +154,12 @@ $num = mysqli_num_rows($result);
                 <div class="notice_table">
 <?php
 
-                    $sql3 = "SELECT  seq, title, event_time, writer
+                    $sql3 = "SELECT  seq, title, event_time, writer, `type`
                              FROM `teacher_notice`  
                              WHERE 
                                `client_id`='$_SESSION[client_id]'
                                AND `n_range` like '%학생%'
-                             ORDER BY seq DESC LIMIT 5";
+                             ORDER BY `type` desc, seq DESC LIMIT 5";
                     $result3 = sql_query($sql3);
                     $num3 = @mysqli_num_rows($result3);
 
