@@ -8,7 +8,7 @@ include_once ('head.php');
         <input type="hidden" name="d_id" id="d_id">
         <input type="hidden" name="c_id" id="c_id">
         <input type="hidden" name="s_id" id="s_id">
-        <input type="text" name="s_type" id="s_type">
+        <input type="hidden" name="s_type" id="s_type">
         <div class="head_section">
             <div class="head_section_1400">
                 <div class="head_left">
@@ -210,6 +210,7 @@ include_once ('head.php');
                 $('#student_list').empty();
                 $('#d_id').val('');
                 $('#c_id').val('');
+                $('#s_type').val('')
 
             }
         });
