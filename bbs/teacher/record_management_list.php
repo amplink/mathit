@@ -179,11 +179,12 @@ $title = $_GET['title'];
                     $("#class_name").html(response);
                     $("#test_list").empty();
                     $(".right_wrap").empty();
-                    // $('.select_box2').removeClass('on');
+                    $('.select_box2').removeClass('on');
                     d_uid = "";
                     c_uid = "";
                     s_uid = "";
                     d_order = "";
+                    test_genre = "";
                 }
             });
             class_name = e;
@@ -267,7 +268,9 @@ $title = $_GET['title'];
             c_uid = c;
             s_uid = s;
             d_order = n;
-
+            $("#test_list").empty();
+            $(".right_wrap").empty();
+            $('.select_box2').removeClass('on');
             var s_type = $('#s_type').val();
 
             if(s_type==1) test_genre = "중간평가";
