@@ -373,14 +373,20 @@ include_once ('head.php');
                 $('#student_list').html(response);
             }
         });
-        $('#text_genre').text("중간평가");
-        $('#test_genre').val("중간평가");
+
+        if(s_type==1) test_genre = "중간평가";
+        if(s_type==2) test_genre = "기말평가";
+        if(s_type==3) test_genre = "분기테스트";
+        if(s_type==4) test_genre = "입반테스트";
+        
+        $('#text_genre').text(test_genre);
+        $('#test_genre').val(test_genre);
         $('#sub_score3').attr('type', 'hidden');
         $('#sub_score3').attr('value', '0');
         $('#score3_text').hide();
         $('#grade_box').hide();
-        $('.select_box2').removeClass('on');
-        $('.select_box2').first().addClass('on');
+        // $('.select_box2').removeClass('on');
+        // $('.select_box2').first().addClass('on');
     }
 
     $("#year_select").val(<?php echo $s_year;?>);
