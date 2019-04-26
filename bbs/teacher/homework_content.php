@@ -40,7 +40,7 @@ while($res = mysqli_fetch_array($result)) {
                     <div class="x_btn"><img src="img/close.png" alt="delete_icon" onclick="del_homework('<?=$res['name']?>')"></div>
                 </td>
                 <td>
-                    <input type='text' name='title' value='<?=$res['name']?>'>
+                    <input type='text' name='title' value="<?=htmlspecialchars($res['name'], ENT_QUOTES)?>">
                 </td>
 
                 <td><select name="textbook" id="textbook<?=$i?>" onchange="chk_type(<?=$i?>)">
