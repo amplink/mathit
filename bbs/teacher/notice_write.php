@@ -198,6 +198,7 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
             location.href = 'notice_list.php';
         })
         $('#class_select').multiselect();
+        cancel_chk_all();
     });
     function cancel_chk_all() {
         if($('.check_all').prop('checked', true)) {
