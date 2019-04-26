@@ -10,9 +10,10 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 <link rel="stylesheet" type="text/css" media="screen" href="css/homework_manegement_add.css?v=20190407" />
 <script>
     $( function() {
-        var dateFormat = "yy-mm-dd",
+        var dateFormat = "mm/dd/yy",
             from = $( "#from" )
                 .datepicker({
+                    defaultDate: "<?=date('m/d/Y')?>",
                     showOn: "button",
                     buttonImage: "img/calendar.png",
                     buttonImageOnly: true,
@@ -30,9 +31,11 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                     to.datepicker( "option", "minDate", getDate( this ) );
                 }),
             to = $( "#to" ).datepicker({
+                defaultDate: "<?=date('m/d/Y')?>",
                 showOn: "button",
                 buttonImage: "img/calendar.png",
                 buttonImageOnly: true,
+                minDate: new Date(),
                 buttonText: "Select date",
                 nextText: "다음달",
                 prevText: "이전달",
@@ -41,11 +44,18 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
                 monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                numberOfMonths: 1
+                numberOfMonths: 1,
+                onSelect: function(dateText, inst) {
+                    if($("#to").val() < "<?=date('m/d/Y')?>"){
+                        alert('종료일을 확인해 주세요.');
+                        $("#to").val('');
+                    }
+                }
             })
                 .on( "change", function() {
                     from.datepicker( "option", "maxDate", getDate( this ) );
                 });
+
 
         function getDate( element ) {
             var date;

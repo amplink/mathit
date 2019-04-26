@@ -173,6 +173,7 @@ $today_date = date("Y-m-d");
 				AND A.s_uid='$res[s_uid]'
 				AND B.student_id='$res[student_id]'
 				AND A.client_id='$ac'
+				AND (B.submit_date1 != '' OR B.submit_date2 != '')
 				AND (A._from >= '$start_day' AND A._to < '$res[date]')
 				 ) C
 				";
@@ -269,6 +270,7 @@ $today_date = date("Y-m-d");
 				AND B.student_id='$res[student_id]'
 				AND B.apply_status_1 IS NOT NULL
 				AND (A._from >= '$start_day' AND A._to < '$res[date]')
+				AND (B.submit_date1 != '' OR B.submit_date2 != '')
 				ORDER BY A.seq asc";
 
                 $result4 = mysqli_query($connect_db, $sql4);
@@ -380,6 +382,7 @@ $today_date = date("Y-m-d");
 				AND A.s_uid='$res[s_uid]' 
 				AND A.client_id='$ac' 
 				AND B.apply_status_1 IS NOT NULL
+				AND (B.submit_date1 != '' OR B.submit_date2 != '')
 				AND (A._from >= '$start_day' AND A._to < '$res[date]')
 				ORDER BY A.seq asc" ;
 

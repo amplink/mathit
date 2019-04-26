@@ -39,21 +39,25 @@ $res = mysqli_fetch_array($result);
     </div>
 
     <div class="content_detail_p">
-        <form name="photoForm" id="photoForm" enctype="multipart/form-data">
+        <form action='./upload_photo.php' method="post" name="photoForm" id="photoForm" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<?=$_GET['no']?>">
             <div class="detail_head"><input multiple="multiple" name="files[]" id="files" type="file" style="display:none"/>
                 <div class="check_btn"  onclick='photosel()'><a><img src="img/check_btn.png" alt="check_btn_icon" style="width: 25px; float: left;"  id="imgReg"><span class="complete">등록</span></a></div>
                 <p><span>    카메라 버튼을 눌러 숙제 이미지를 추가한 후</span><span>체크 버튼을 눌러 저장해 주세요</span></p>
             </div>
         </form>
-        <div class="photo_section" style="float:left">
+        <div class="photo_section" style="float:left" id="sortable">
             <!--<div class="photo_box">
                 <div class="camera_icon">
                     <img src="img/camera.png" alt="camera_icon"></div>
             </div>-->
         </div>
+
+
+
         <div class="detail_footer">
             <p><span>현재 등록된 이미지 개수 : </span><span id="num">1</span><span>장</span></p>
-            <div class="check_btn"><a href="#none"><img src="img/check_btn.png" alt="check_btn_icon" style="width: 25px; float: left;"><span class="complete">완료</span></a></div>
+            <div class="check_btn" onClick="save()"><a><img src="img/check_btn.png" alt="check_btn_icon" style="width: 25px; float: left;"><span class="complete">완료</span></a></div>
         </div>
         <div class="decoration">
             <span class="deco_circle"></span>
@@ -68,7 +72,16 @@ $res = mysqli_fetch_array($result);
             <span class="deco_circle"></span>
         </div>
     </div>
+
+
+
+
 </section>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+
+<script type="text/javascript" src="./js/jquery-ui.js" ></script>
+<script type="text/javascript" src="./js/jquery.ui.touch-punch.min.js" ></script>
+
 <script>
     $('#files').change(function(){
         fileBuffer = [];
@@ -76,7 +89,7 @@ $res = mysqli_fetch_array($result);
 
         Array.prototype.push.apply(fileBuffer, target[0].files);
         var html = '';
-        var i = 0;
+        var i = $('.photo_box').length;
         $.each(target[0].files, function(index, file){
             const fileName = file.name;
             html += '<div class="file">';
@@ -87,7 +100,7 @@ $res = mysqli_fetch_array($result);
             html += '<img src="'+URL.createObjectURL(file)+'" height="70" style="margin-top:-25px"></div>';
             html += '</div>';
             //html += '<img src="'+URL.createObjectURL(file)+'" width="30" height="30">'
-            html += '<span style="font-size:13px">'+fileName+'</span>';
+            html += '<span style="font-size:13px">'+i+'</span>';
             //html += '<span> <input type="text" style="width:250px/"></span>';
             html += '<span id="removeImg">X</span>';
             html += '</div>';
@@ -100,8 +113,9 @@ $res = mysqli_fetch_array($result);
 
             i++;
         });
+        var num = $('.photo_box').length + i;
         $('.photo_section').append(html);
-        $("#num").text(i);
+        $("#num").text(num);
     });
 
     $(document).on('click', '#removeImg', function(){
@@ -110,11 +124,23 @@ $res = mysqli_fetch_array($result);
         $('.photo_section>div:eq('+fileIndex+')').remove();
     });
 
+    $(function() {
+
+        $("#sortable").sortable();
+
+        $("#sortable").disableSelection();
+
+    });
+
     function photosel(){
         document.getElementById('files').click();
 
     }
 
+    function save(){
+        $("#photoForm").submit();
+
+    }
 </script>
 </body>
 </html>
