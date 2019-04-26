@@ -379,6 +379,8 @@ include_once ('head.php');
         $('#sub_score3').attr('value', '0');
         $('#score3_text').hide();
         $('#grade_box').hide();
+        $('.select_box2').removeClass('on');
+        $('.select_box2').first().addClass('on');
     }
 
     $("#year_select").val(<?php echo $s_year;?>);
