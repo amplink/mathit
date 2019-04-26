@@ -284,7 +284,11 @@ while($res = mysqli_fetch_array($result)) {
                     $res5 = mysqli_fetch_array($result5);
 
                     $today = date("m/d/Y");
-                    if($res['_from'] <= $today && $res['_to'] >= $today && $res5[tot] > 0) {
+                    $today = strtotime(date($today));
+                    $start = strtotime(date($res['_from']));
+                    $end = strtotime(date($res['_to']));
+
+                    if($start <= $today && $end >= $today && $res5[tot] > 0) {
                         ?>
                         <p class="ing_text" id="status_complete<?=$i?>" style="color: blue;cursor: pointer;" onclick="show_box(<?=$i?>)">진행중</p>
                         <div class="students_checks<?=$i?>" style="background:rgb(255, 228, 73);
@@ -339,7 +343,7 @@ while($res = mysqli_fetch_array($result)) {
                         </div>
                         <?php
 
-                    }else if($res['_from'] > $today) {
+                    }else if($start > $today) {
                         echo '<div class="resend_btn" onclick="resend('.$i.')" style="cursor:pointer"><a>재전송</a></div>';
                         //}else if($sd < 0 && $ed < 0 && $res5[tot] == 0) {
                     }else if($res5[tot] == 0) {
@@ -383,7 +387,7 @@ while($res = mysqli_fetch_array($result)) {
                     dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
                     monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
                     monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                    numberOfMonths: 2
+                    numberOfMonths: 1
                 })
                     .on("change", function () {
                         to.datepicker("option", "minDate", getDate(this));
@@ -392,6 +396,7 @@ while($res = mysqli_fetch_array($result)) {
                     showOn: "button",
                     buttonImage: "img/calendar.png",
                     buttonImageOnly: true,
+                    minDate: new Date(),
                     buttonText: "Select date",
                     nextText: "다음달",
                     prevText: "이전달",
@@ -400,7 +405,13 @@ while($res = mysqli_fetch_array($result)) {
                     dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
                     monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
                     monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                    numberOfMonths: 2
+                    numberOfMonths: 1,
+                    onSelect: function(dateText, inst) {
+                        if($("#to").val() < "<?=date('m/d/Y')?>"){
+                            alert('종료일을 확인해 주세요.');
+                            $("#to").val('');
+                        }
+                    }
                 })
                     .on("change", function () {
                         from.datepicker("option", "maxDate", getDate(this));
