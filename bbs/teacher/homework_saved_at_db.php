@@ -1,7 +1,7 @@
 <?php
 include_once('./_common.php');
 
-$name = addslashes($_POST['name']);
+$name = $_POST['name'];
 $from = $_POST['from'];
 $to = $_POST['to'];
 $textbook = $_POST['textbook'];
