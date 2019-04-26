@@ -263,6 +263,7 @@ include_once ('head.php');
             $('#sub_score3').attr('type', 'text');
             $('#sub_score3').attr('value', '100');
             $('#score3_text').show();
+            $('#grade_box').show();
         }
         if(e==4) {
             $.ajax({
@@ -277,6 +278,7 @@ include_once ('head.php');
             $('#sub_score3').attr('type', 'text');
             $('#sub_score3').attr('value', '100');
             $('#score3_text').show();
+            $('#grade_box').show();
         }
     }
 

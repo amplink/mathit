@@ -19,7 +19,9 @@ $a_cnt = 0;
 $score_list = array();
 while($res = mysqli_fetch_array($result)) {
     $tot += $res['score1']+$res['score2']+$res['score3'];
-    $score_list[] = $res['score1']+$res['score2']+$res['score3'];
+    $score_list[] = $res['score1'];
+    $score_list[] = $res['score2'];
+    $score_list[] = $res['score3'];
     $cnt++;
     $a_cnt++;
     $grade = $res['grade'];
@@ -73,7 +75,7 @@ while($res = mysqli_fetch_array($result)) {
                     <div class="score_average">
                         <div class="up_average">
                             <p class="lt">100점 만점</p>
-                            <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", ($tot/2))?></span><span>점</span></p>
+                            <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", ($tot/$cnt/2))?></span><span>점</span></p>
                         </div>
                         <div class="down_average">
                             <p class="lt">최고 점수</p>
@@ -86,7 +88,7 @@ while($res = mysqli_fetch_array($result)) {
                     <div class="score_average">
                         <div class="up_average">
                             <p class="lt">동일레벨</p>
-                            <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", $a_tot1/$a_cnt1)?></span><span>점</span></p>
+                            <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", $a_tot1/$a_cnt1/2)?></span><span>점</span></p>
                         </div>
 <!--                        <div class="up_average">-->
 <!--                            <p class="lt">동일학년</p>-->
