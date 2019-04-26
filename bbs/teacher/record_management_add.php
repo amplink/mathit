@@ -194,6 +194,7 @@ include_once ('head.php');
             }
         })
         $('#grade_box').hide();
+        $('.right_wrap').hide();
     })
 
     function lecture(e) {
@@ -206,6 +207,7 @@ include_once ('head.php');
             success: function(response){
                 $("#class_name").html(response);
                 $('.select_box2').removeClass('on');
+                $(".right_wrap").hide();
                 $('#text_genre').empty();
                 $('#test_genre').empty();
                 $('#student_list').empty();
@@ -221,7 +223,7 @@ include_once ('head.php');
         var c = $('#c_id').val();
         $('#s_type').val(e);
         $('#grade_box').hide();
-
+        $('.right_wrap').show();
         if(e==1) {
             $.ajax({
                 type: "GET",
