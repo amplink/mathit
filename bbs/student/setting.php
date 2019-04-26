@@ -1,5 +1,9 @@
 <?php
 include_once ('head.php');
+$uid = $_SESSION['s_uid'];
+$sql = "select `sound`, `push_alarm` from `student_table` where `uid`='$uid';";
+$result = sql_query($sql);
+$res = mysqli_fetch_array($result);
 ?>
 <link rel="stylesheet" type="text/css" media="screen" href="css/setting.css" />
 <body>
@@ -19,11 +23,11 @@ include_once ('head.php');
                 <br>
                 <div class="setting_content">
                     <div class="push_radio">
-                        <input type="radio" name="push_alarm">
+                        <input type="radio" name="push_alarm" onchange="submit()" value="1" <?php if($res['push_alarm']) echo "checked";?>>
                         <p>ON</p>
                     </div>
                     <div class="push_radio">
-                        <input type="radio" name="push_alarm">
+                        <input type="radio" name="push_alarm" onchange="submit()" value="0" <?php if(!$res['push_alarm']) echo "checked";?>>
                         <p>OFF</p>
                     </div>
                 </div>
@@ -35,11 +39,11 @@ include_once ('head.php');
                 <br>
                 <div class="setting_content">
                     <div class="sound_radio">
-                        <input type="radio" name="sound">
+                        <input type="radio" name="sound" onchange="submit()" value="1" <?php if($res['sound']) echo "checked";?>>
                         <p>ON</p>
                     </div>
                     <div class="sound_radio">
-                        <input type="radio" name="sound">
+                        <input type="radio" name="sound" onchange="submit()" value="0" <?php if(!$res['sound']) echo "checked";?>>
                         <p>OFF</p>
                     </div>
                 </div>
@@ -48,3 +52,16 @@ include_once ('head.php');
     </section>
 </body>
 </html>
+<script>
+    function submit() {
+        var push = $('input[name="push_alarm"]:checked').val();
+        var sound = $('input[name="sound"]:checked').val();
+        // alert("setting_chk.php?push="+push+"&sound="+sound);
+        $.ajax({
+           url: "setting_chk.php?push="+push+"&sound="+sound,
+           success: function (res) {
+
+           }
+        });
+    }
+</script>
