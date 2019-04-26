@@ -59,7 +59,7 @@ while($res = mysqli_fetch_array($result)) {
                 <div class="user_img"><img src="img/nav/user.png" alt="user_img"></div>
                 <div class="user_info">
                     <p class="user_name"><?=$_SESSION['s_name']?></p>
-                    <p class="academy_name">수학학원</p>
+                    <p class="academy_name"><?=$_SESSION['client_name']?></p>
                 </div>
             </div>
         </a>

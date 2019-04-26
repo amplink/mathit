@@ -118,7 +118,7 @@ include_once ('head.php');
                                 <input type="text" placeholder="기준점수" name="standard_score" value="100" id="standard_score" style="width: 100px;">
                                 <span> 점</span>
                             </div>
-                            <div class="division">
+                            <div class="division" id="grade_box">
                                 <p class="l_div_title">학년</p>
                                 <select name="grade">
                                     <option value="3">초3</option>
@@ -233,6 +233,7 @@ include_once ('head.php');
             $('#sub_score3').attr('type', 'hidden');
             $('#sub_score3').attr('value', '0');
             $('#score3_text').hide();
+            $('#grade_box').hide();
         }
         if(e==2) {
             $.ajax({
@@ -247,6 +248,7 @@ include_once ('head.php');
             $('#sub_score3').attr('type', 'hidden');
             $('#sub_score3').attr('value', '0');
             $('#score3_text').hide();
+            $('#grade_box').hide();
         }
         if(e==3) {
             $.ajax({
