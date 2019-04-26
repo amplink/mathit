@@ -49,7 +49,7 @@ for($i=0; $i<count($type); $i++) $r_type .= $type[$i].",";
 
 if($name) {
     //저장될 디렉토리
-    $base_dir = "../img_data";
+    $base_dir = "img_data";
 
     //폴더 이름을 유일한값으로 만듬
     $dir = time().(double)microtime();
