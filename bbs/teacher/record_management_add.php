@@ -8,7 +8,7 @@ include_once ('head.php');
         <input type="hidden" name="d_id" id="d_id">
         <input type="hidden" name="c_id" id="c_id">
         <input type="hidden" name="s_id" id="s_id">
-        <input type="hidden" name="s_type" id="s_type">
+        <input type="text" name="s_type" id="s_type">
         <div class="head_section">
             <div class="head_section_1400">
                 <div class="head_left">
@@ -84,16 +84,16 @@ include_once ('head.php');
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr class="select_box2">
                             <td onclick="chk_test_genre(1)"><span>중간평가</span></td>
                         </tr>
-                        <tr>
+                        <tr class="select_box2">
                             <td onclick="chk_test_genre(2)"><span>기말평가</span></td>
                         </tr>
-                        <tr>
+                        <tr class="select_box2">
                             <td onclick="chk_test_genre(3)"><span>분기테스트</span></td>
                         </tr>
-                        <tr>
+                        <tr class="select_box2">
                             <td onclick="chk_test_genre(4)"><span>입반테스트</span></td>
                         </tr>
                         </tbody>
@@ -204,6 +204,13 @@ include_once ('head.php');
             dataType: "html",
             success: function(response){
                 $("#class_name").html(response);
+                $('.select_box2').removeClass('on');
+                $('#text_genre').empty();
+                $('#test_genre').empty();
+                $('#student_list').empty();
+                $('#d_id').val('');
+                $('#c_id').val('');
+
             }
         });
     }
