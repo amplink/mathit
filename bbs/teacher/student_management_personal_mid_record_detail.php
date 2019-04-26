@@ -198,18 +198,23 @@ $today_date = date("Y-m-d");
                     </div>
                 </div>
                 <?
-                $avg =round(($res['score1'] + $res['score2']) / 2);
+                $avg =round(($res['score1'] + $res['score2']) / 2,1);
 
                 $sql3 = "SELECT 
 				  SUM(A.score1 + A.score2) / (COUNT(A.seq)*2) avg,
-				  MAX((A.score1 + A.score2) / 2) max,
+				  MAX(if(A.score1 > A.score2, A.score1, A.score2)) max,
 				  (SELECT SUM(score1 + score2) / (COUNT(seq)*2) 
 				   FROM `teacher_score` 
-				   WHERE  seq = '$_GET[no]') tot2
+				   WHERE      d_uid='$res[d_uid]'
+				          AND c_uid='$res[c_uid]'
+				          AND s_uid='$res[s_uid]'
+						  AND test_genre='$res[test_genre]') tot2
 				FROM
 				  `teacher_score` A
 				WHERE 
-					A.seq = '$_GET[no]'
+					    c_uid='$res[c_uid]'
+				    AND s_uid='$res[s_uid]'
+					AND test_genre='$res[test_genre]'
 				
 				";
 
@@ -235,8 +240,8 @@ $today_date = date("Y-m-d");
                             <tr>
                                 <td><span><?=$res['score1']?></span></td>
                                 <td><span><?=$res['score2']?></span></td>
-                                <td><span><?=round($res3['tot2'])?></span></td>
-                                <td><span><?=round($res3['avg'])?></span></td>
+                                <td><span><?=sprintf("%.1f",$res3['tot2'])?></span></td>
+                                <td><span><?=sprintf("%.1f",$res3['avg'])?></span></td>
                                 <td><span><?=round($res3['max'])?></span></td>
                             </tr>
                             </tbody>
@@ -340,9 +345,11 @@ $today_date = date("Y-m-d");
                             </tr>
 
                             <?
-
-                            $wrong_tot = count(explode(",",$res4['wrong_answer']));
-                            $score_arr[$j] = round((($q_tot1-$wrong_tot) / $q_tot1) * 100);
+                            if($res4['wrong_answer']) $m = 0;
+                            else                      $m = 1;
+                            $wrong_tot = count(explode(",",$res4['wrong_answer']))-$m;
+                            $scores = round((($q_tot1-$wrong_tot) / $q_tot1) * 100);
+                            $score_arr[$j] = (!is_infinite($scores) and !is_nan($scores))?$scores:"0";
                             $j++;
                         }
                         ?>
@@ -389,7 +396,9 @@ $today_date = date("Y-m-d");
                     if($res5['Q_number'.$i]) $all += count(explode(",",$res5['Q_number'.$i]));
                 }
 
-                $wrong_tot = count(explode(",",$res5['wrong_answer']));
+                if($res5['wrong_answer']) $m = 0;
+                else                      $m = 1;
+                $wrong_tot = count(explode(",",$res5['wrong_answer'])) - $m;
                 $score_arr2[$res5['seq']][] = round((($all-$wrong_tot) / $all) * 100);
                 // $score_arr2[$j] =
                 $student_arr[$j] = $res5['student_id'];
@@ -405,9 +414,11 @@ $today_date = date("Y-m-d");
                 foreach ($score_arr2[$key] as $v2) {
                     $sum += $v2;
                 }
-                $avg[$i] = round($sum / $n);
+                $avgs = round($sum / $n);
+                $avg[$i] = (!is_infinite($avgs) and !is_nan($avgs))?round($sum / $n):"0";
                 $i++;
             }
+            //print_r($score_arr);
 
             $me_score = implode(",",$score_arr);
             $tot_score = implode(",",$avg);

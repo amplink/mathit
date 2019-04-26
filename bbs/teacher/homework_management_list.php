@@ -86,6 +86,7 @@ include_once ('head.php');
 </style>
 
 <section>
+    <input type="hidden" name="step" id="step" value="1">
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
@@ -315,7 +316,6 @@ include_once ('head.php');
     }
 
     function call_homework_list(d, c, s, n, m) {
-
         $.ajax({
             type: "GET",
             url: "homework_content.php?class_name="+class_name+"&d_uid="+d+"&c_uid="+c+"&s_uid="+s+"&d_order="+n+"&st_id="+m,
@@ -330,13 +330,28 @@ include_once ('head.php');
 
     }
 
-    function del_homework(e) {
+    function del_homework(e, d, c, s, n, m) {
         if(confirm("삭제하시겠습니까?")) {
-            location.href = "del_homework.php?name="+e;
+            $.ajax({
+                type: "GET",
+                url: "del_homework.php?no="+e+"&class_name="+class_name+"&d_uid="+d+"&c_uid="+c+"&s_uid="+s+"&d_order="+n+"&st_id="+m,
+                dataType: "html",
+                success: function(response) {
+                    $("#homework_content").html("");
+                    // console.log(response);
+                    $("#homework_content").html(response);
+                    if($("#step").val() != "3") m = "";
+
+                    call_homework_list(d, c, s, n, m);
+
+                }
+            });
+
         }
     }
 
     function student_select() {
+        $("#step").val("3");
         if ($(this).hasClass('on') === true) {
             $(this).removeClass('on')
         } else {

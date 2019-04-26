@@ -37,7 +37,7 @@ while($res = mysqli_fetch_array($result)) {
         <form action="homework_resend.php?seq=<?=$res['seq']?>" method="POST" id="resend_form<?=$i?>" enctype="multipart/form-data">
             <table class="homework_cont">
                 <td>
-                    <div class="x_btn"><img src="img/close.png" alt="delete_icon" onclick="del_homework('<?=$res['name']?>')"></div>
+                    <div class="x_btn"><img src="img/close.png" alt="delete_icon" onclick="del_homework('<?=$res['seq']?>','<?=$res['d_uid']?>','<?=$res['c_uid']?>','<?=$res['s_uid']?>','<?=$res['d_order']?>','<?=$res['student_id']?>')"></div>
                 </td>
                 <td>
                     <input type='text' name='title' value="<?=htmlspecialchars($res['name'], ENT_QUOTES)?>">

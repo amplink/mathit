@@ -56,6 +56,9 @@ while($res = mysqli_fetch_array($result)) {
 
 ?>
 <form method="post" id="score_form">
+    <input type="hidden" name="d_uid" value="<?=$d_uid?>">
+    <input type="hidden" name="c_uid" value="<?=$c_uid?>">
+    <input type="hidden" name="s_uid" value="<?=$s_uid?>">
     <input type="hidden" value="record_management_del.php?class=<?=$class?>&test_genre=<?=$test_genre?>&title=<?=$title?>" id="url">
     <div class="right_box" id="right_box">
         <div class="right_box_1">
@@ -90,10 +93,10 @@ while($res = mysqli_fetch_array($result)) {
                             <p class="lt">동일레벨</p>
                             <p class="rt"><span style="color: blue;"><?=sprintf("%.1f", $a_tot1/$a_cnt1/2)?></span><span>점</span></p>
                         </div>
-<!--                        <div class="up_average">-->
-<!--                            <p class="lt">동일학년</p>-->
-<!--                            <p class="rt"><span style="color: red;">--><?//=sprintf("%.1f", $a_tot/$a_cnt2)?><!--</span><span>점</span></p>-->
-<!--                        </div>-->
+                        <!--                        <div class="up_average">-->
+                        <!--                            <p class="lt">동일학년</p>-->
+                        <!--                            <p class="rt"><span style="color: red;">--><?//=sprintf("%.1f", $a_tot/$a_cnt2)?><!--</span><span>점</span></p>-->
+                        <!--                        </div>-->
                     </div>
                 </div>
             </div>
@@ -135,7 +138,7 @@ while($res = mysqli_fetch_array($result)) {
                         ?>
                         <tr>
                             <td><input type="checkbox" name="chk_list[]" value="<?=$res['seq']?>"></td>
-                            <td><span><input type="hidden" name="student[]" value="<?=$res['student']?>"><?=$res['student']?></span></td>
+                            <td><span><input type="hidden" name="student[]" value="<?=$res['student_id']?>"><?=$res['student']?></span></td>
                             <td><span><input type="text" name="score1[]" value="<?=$res['score1']?>" onchange="set_avg1(<?=$cnt?>)" id="score_add<?=$cnt?>"> 점</span></td>
                             <?php $cnt++;?>
                             <td><span><input type="text" name="score2[]" value="<?=$res['score2']?>" onchange="set_avg(<?=$cnt?>)" id="score_add<?=$cnt?>"> 점</span></td>
