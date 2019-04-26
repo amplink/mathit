@@ -373,12 +373,12 @@ include_once ('head.php');
                 $('#student_list').html(response);
             }
         });
-
+        test_genre = "";
         if(s_type==1) test_genre = "중간평가";
         if(s_type==2) test_genre = "기말평가";
         if(s_type==3) test_genre = "분기테스트";
         if(s_type==4) test_genre = "입반테스트";
-        
+
         $('#text_genre').text(test_genre);
         $('#test_genre').val(test_genre);
         $('#sub_score3').attr('type', 'hidden');
