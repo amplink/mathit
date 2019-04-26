@@ -193,6 +193,7 @@ include_once ('head.php');
                 $('.student_list_box table tbody tr').not(this).removeClass('on');
             }
         })
+        $('#grade_box').hide();
     })
 
     function lecture(e) {
@@ -210,8 +211,7 @@ include_once ('head.php');
                 $('#student_list').empty();
                 $('#d_id').val('');
                 $('#c_id').val('');
-                $('#s_type').val('')
-
+                $('#s_type').val('');
             }
         });
     }
