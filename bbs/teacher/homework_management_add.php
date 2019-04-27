@@ -46,7 +46,12 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
                 numberOfMonths: 1,
                 onSelect: function(dateText, inst) {
-                    if($("#to").val() < "<?=date('m/d/Y')?>"){
+                    var to = $("#to").val();
+                    var toArray = to.split('/');
+                    var selDate = toArray[2]+toArray[0]+toArray[1];
+                    var today = "<?=date('Ymd')?>";
+
+                    if(selDate < today){
                         alert('종료일을 확인해 주세요.');
                         $("#to").val('');
                     }
