@@ -106,7 +106,7 @@ include_once ('head.php');
                         <div class="r_left_box">
                             <div class="division">
                                 <p class="l_div_title">대상반</p>
-                                <a id="text_class"></a>
+                                <a id="text_class"></a> <span id="d_order"></span>
                                 <input type="hidden" name="class" id="class">
                             </div>
                             <div class="division" style="padding-top:5px">
@@ -221,6 +221,8 @@ include_once ('head.php');
     function chk_test_genre(e) {
         var d = $('#d_id').val();
         var c = $('#c_id').val();
+        var yoile = $('#d_yoie').val();
+        $('#d_order').text(yoile);
         $('#s_type').val(e);
         $('#grade_box').hide();
         $('.right_wrap').show();
@@ -365,6 +367,7 @@ include_once ('head.php');
         $('#c_id').val(c);
         $('#s_id').val(s);
         $('#d_yoie').val(n);
+        $('#d_order').text(n);
         var s_type = $('#s_type').val();
         var num = "";
         if(s_type == '3' || s_type == '4') num = "2";
