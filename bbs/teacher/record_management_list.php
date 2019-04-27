@@ -268,16 +268,16 @@ $title = $_GET['title'];
             c_uid = c;
             s_uid = s;
             d_order = n;
-            $("#test_list").empty();
+            //$("#test_list").empty();
             $(".right_wrap").empty();
-            $('.select_box2').removeClass('on');
+            //$('.select_box2').removeClass('on');
             var s_type = $('#s_type').val();
 
             if(s_type==1) test_genre = "중간평가";
             if(s_type==2) test_genre = "기말평가";
             if(s_type==3) test_genre = "분기테스트";
             if(s_type==4) test_genre = "입반테스트";
-            test_genre = "";
+            //test_genre = "";
             $.ajax({
                 type: "GET",
                 url: "call_test_list.php?d_uid="+d+"&c_uid="+c+"&s_uid="+s+"&test_genre="+test_genre,
