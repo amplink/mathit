@@ -17,6 +17,7 @@ if($t_type == "채점강사") {
         $r = arr_sort($r,4);
         for($i=0; $i<count($r)-1; $i++) {
             $d_name[$cnt] = $r[$i][4];
+            $d_yoie[$cnt] = $r[$i][5];
             $cnt++;
         }
     }else {
@@ -36,6 +37,7 @@ if($t_type == "채점강사") {
             if(!$chk) {
                 $d_uid[$cnt] = $r[$i][0];
                 $d_name[$cnt] = $r[$i][4];
+                $d_yoie[$cnt] = $r[$i][5];
                 $cnt++;
             }
         }
@@ -47,6 +49,7 @@ if($t_type == "채점강사") {
     $r = arr_sort($r,4);
     for($i=0; $i<count($r)-1; $i++) {
         $d_name[$cnt] = $r[$i][4];
+        $d_yoie[$cnt] = $r[$i][5];
         $cnt++;
     }
 }
@@ -126,7 +129,7 @@ if($result) {
                 <div class="option_content">
                     <select name="target[]" id="class_select" style="margin-top: 5px;" multiple="multiple" required>
                         <?php
-                        for($i=0; $i<count($d_name); $i++) echo "<option value='".$d_name[$i]."'>$d_name[$i]</option>";
+                        for($i=0; $i<count($d_name); $i++) echo "<option value='".$d_name[$i]."'>$d_name[$i]($d_yoie[$i])</option>";
                         ?>
                     </select>
                 </div>
@@ -188,8 +191,9 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
             $('.oj').prop('checked', this.checked);
         });
         $('.save_btn').click(function () {
-
-            var fileSize = document.getElementById('bf_file').files[0].size;
+            var fileSize;
+            if($('#bf_file').val()) fileSize = document.getElementById('bf_file').files[0].size;
+            else fileSize = 0;
             var maxSize = 20971520;
             if(fileSize > maxSize){
                 alert("해당파일은 파일용량을 초과 하였습니다.");

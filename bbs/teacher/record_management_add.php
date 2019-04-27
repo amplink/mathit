@@ -386,10 +386,14 @@ include_once ('head.php');
 
         $('#text_genre').text(test_genre);
         $('#test_genre').val(test_genre);
-        $('#sub_score3').attr('type', 'hidden');
-        $('#sub_score3').attr('value', '0');
-        $('#score3_text').hide();
+
+        // $('#score3_text').hide();
         $('#grade_box').hide();
+        if(s_type == 1 || s_type == 2) {
+            $('#sub_score3').attr('type', 'hidden');
+            $('#sub_score3').attr('value', '0');
+            $('#score3_text').hide();
+        }
         // $('.select_box2').removeClass('on');
         // $('.select_box2').first().addClass('on');
     }

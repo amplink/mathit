@@ -103,7 +103,7 @@ include_once ('head.php');
                 </p>
             </div>
             <div class="head_right">
-                <div class="resend_btn"><a href="javascript:alert('서비스 준비중 입니다.')">재전송 요청</a></div>
+                <div class="resend_btn"><a href="#">재전송 요청</a></div>
                 <?
                 if($res['current_status'] == 'a1' or $res['current_status'] == 'a2'){
                     ?>
@@ -370,6 +370,17 @@ include_once ('head.php');
             $(this).css("width", width * ratio);
             width = width * ratio;
         }
+    });
+
+    $('.resend_btn').click(function (){
+        var s_id = $('input[name="s_id"]').val();
+        // alert(s_id);
+        $.ajax({
+            url: 'scoring_resend.php?s_id'+s_id,
+            success: function (res) {
+                alert('재전송 요청 하였습니다.');
+            }
+        });
     });
 
 </script>
