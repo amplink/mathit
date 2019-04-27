@@ -63,7 +63,7 @@ while($res = mysqli_fetch_array($result)) {
                 <div class="division">
                     <p class="l_div_title">대상반</p>
                     <p class="r_div_content">
-                        <span><?=$class?></span>
+                        <span><?=$class?> <?=$d_order?></span>
                     </p>
                 </div>
                 <div class="division">
