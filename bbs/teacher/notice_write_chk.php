@@ -13,8 +13,16 @@ $target = $_POST['target'];
 $content = $_POST['content'];
 $seqq = $_POST['seq'];
 
-$name = $_FILES['bf_file']['tmp_name'][0];
-$name_name = $_FILES['bf_file']['name'][0];
+$name = $_FILES['bf_file']['tmp_name'];
+$name_name = $_FILES['bf_file']['name'];
+
+/*
+if ($_FILES['bf_file']['tmp_name'] && $_FILES['bf_file']["size"] == ""){
+    alert_msg("해당파일은 파일용량을 초과 하였습니다.");
+    echo "<script>history.back();</script>";
+    exit;
+}
+*/
 //echo $name;
 $writer = $_SESSION['t_name'];
 
@@ -50,6 +58,8 @@ if(count($type) == 0) {
     echo "<script>history.back();</script>";
     exit;
 }
+
+
 
 for($i=0; $i<count($range); $i++) {
     if($i==count($range)-1) $r_range .= $range[$i];
