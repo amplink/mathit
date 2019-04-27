@@ -344,7 +344,7 @@ while($res = mysqli_fetch_array($result)) {
                         <?php
 
                     }else if($start > $today) {
-                        echo '<div class="resend_btn" onclick="resend('.$i.')" style="cursor:pointer"><a>재전송</a></div>';
+                        echo '<div class="resend_btn" onclick="resend('.$i.','.$res['seq'].')" style="cursor:pointer"><a>재전송</a></div>';
                         //}else if($sd < 0 && $ed < 0 && $res5[tot] == 0) {
                     }else if($res5[tot] == 0) {
                         echo '<p class="complete_text">완료</p>';
@@ -366,9 +366,26 @@ while($res = mysqli_fetch_array($result)) {
 }
 ?>
 <script>
-    function resend(e) {
+    function resend(e, seq) {
 
-        $('#resend_form'+e).submit();
+        //$('#resend_form'+e).submit();
+
+        var params = $("#resend_form"+e).serialize();
+        $.ajax({
+            type: "POST",
+            url: "homework_resend.php?seq="+seq,
+            data:params,
+            dataType: "json",
+            success: function(response){
+                //call_homework_list(d, c, s, n, m);
+                alert(response.message);
+                //call_homework_list('<?=$_GET[d_uid]?>', '<?=$_GET[c_uid]?>', '<?=$_GET[s_uid]?>', '<?=$_GET[d_order]?>', '<?=$_GET[st_id]?>');
+
+            }
+        });
+
+
+
     }
 </script>
 <script>
@@ -407,9 +424,9 @@ while($res = mysqli_fetch_array($result)) {
                     monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
                     numberOfMonths: 1,
                     onSelect: function(dateText, inst) {
-                        if($("#to").val() < "<?=date('m/d/Y')?>"){
+                        if($("#to" + i).val() < "<?=date('m/d/Y')?>"){
                             alert('종료일을 확인해 주세요.');
-                            $("#to").val('');
+                            $("#to" + i).val('');
                         }
                     }
                 })

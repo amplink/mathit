@@ -55,7 +55,11 @@ $sql = "update `homework` set
                          `Q_number4`='$q_number4',
                          `checked` = '0' where `seq`='$seq';";
 
-sql_query($sql);
-alert_msg("수정되었습니다.");
-location_href("./homework_management_list.php");
+$result = sql_query($sql);
+if($result == 1) {
+    $jsonData['message'] = "수정되었습니다.";
+    echo json_encode($jsonData);
+}
+//alert_msg("수정되었습니다.");
+//location_href("./homework_management_list.php");
 ?>
