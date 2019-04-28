@@ -194,7 +194,7 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
             var fileSize;
             if($('#bf_file').val()) fileSize = document.getElementById('bf_file').files[0].size;
             else fileSize = 0;
-            var maxSize = 20971520;
+            var maxSize = 209715200;
             if(fileSize > maxSize){
                 alert("해당파일은 파일용량을 초과 하였습니다.");
             }
