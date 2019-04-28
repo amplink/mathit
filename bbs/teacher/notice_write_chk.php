@@ -125,12 +125,17 @@ if($seqq > 0) {
     $result = sql_query($sql);
     while($res = mysqli_fetch_array($result)) {
         for($kk=0; $kk<count($range); $kk++) {
+            $t_uid = $res['t_id'];
             if($range[$kk]=="전임강사" && $res['type'] == "전임강사") {
-                $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-                sql_query($sql);
+                if($t_uid != $_SESSION['t_uid']) {
+                    $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                    sql_query($sql);
+                }
             }else if($range[$kk]=="채점강사" && $res['type'] == "채점강사") {
-                $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-                sql_query($sql);
+                if($t_uid != $_SESSION['t_uid']) {
+                    $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                    sql_query($sql);
+                }
             }
         }
     }
@@ -156,12 +161,17 @@ if($seqq > 0) {
     $result = sql_query($sql);
     while($res = mysqli_fetch_array($result)) {
         for($kk=0; $kk<count($range); $kk++) {
+            $t_uid = $res['t_id'];
             if($range[$kk]=="전임강사" && $res['type'] == "전임강사") {
-                $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-                sql_query($sql);
+                if($t_uid != $_SESSION['t_uid']) {
+                    $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                    sql_query($sql);
+                }
             }else if($range[$kk]=="채점강사" && $res['type'] == "채점강사") {
-                $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-                sql_query($sql);
+                if($t_uid != $_SESSION['t_uid']) {
+                    $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                    sql_query($sql);
+                }
             }
         }
     }
