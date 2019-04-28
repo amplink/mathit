@@ -201,6 +201,7 @@ while($res = mysqli_fetch_array($result)) {
 
                         <?php
                         $n = 0;
+                        $bus_on = 0;
                         for($j=0; $j<4; $j++) {
 
                             $count1 = $weekly[$weeks[$i]];
