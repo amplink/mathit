@@ -41,8 +41,8 @@ sql_query($sql);
 $sql = "select * from `teacher_setting`;";
 $result = sql_query($sql);
 if($range == "관리자") {
-    $sql = "insert into `alarm` set `seq`='', `content`='새로운 수업계획표/일지가 등록되었습니다.', `table_name`='schedule', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-    sql_query($sql);
+//    $sql = "insert into `alarm` set `seq`='', `content`='새로운 수업계획표/일지가 등록되었습니다.', `table_name`='schedule', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+//    sql_query($sql);
 }else {
     while($res = mysqli_fetch_array($result)) {
         if(($range == "전임강사" || $range == "전체") && $res['type']=="전임강사") {
