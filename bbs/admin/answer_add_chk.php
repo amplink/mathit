@@ -86,7 +86,7 @@ if($section_1[0][0]) {
         if($section_1[0][$i]) {
             $answer_img = "";
             if($section_1[1]['tmp_name'][$i]) {
-                $path = $section_1[4]['tmp_name'][$i];
+                $path = $section_1[1]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
                 $data = file_get_contents($path);
                 $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -94,7 +94,7 @@ if($section_1[0][0]) {
 
             $explain_img = "";
             if($section_1[2]['tmp_name'][$i]) {
-                $path = $section_1[5]['tmp_name'][$i];
+                $path = $section_1[2]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
                 $data = file_get_contents($path);
                 $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -122,7 +122,7 @@ if($section_2[0][0]) {
         if($section_2[0][$i]) {
             $answer_img = "";
             if($section_2[1]['tmp_name'][$i]) {
-                $path = $section_1[4]['tmp_name'][$i];
+                $path = $section_2[1]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
                 $data = file_get_contents($path);
                 $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -130,7 +130,7 @@ if($section_2[0][0]) {
 
             $explain_img = "";
             if($section_2[2]['tmp_name'][$i]) {
-                $path = $section_1[5]['tmp_name'][$i];
+                $path = $section_2[2]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
                 $data = file_get_contents($path);
                 $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -153,7 +153,7 @@ if($section_3[0][0]) {
         if($section_3[0][$i]) {
             $answer_img = "";
             if($section_3[1]['tmp_name'][$i]) {
-                $path = $section_3[4]['tmp_name'][$i];
+                $path = $section_3[1]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
                 $data = file_get_contents($path);
                 $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -161,7 +161,7 @@ if($section_3[0][0]) {
 
             $explain_img = "";
             if($section_3[2]['tmp_name'][$i]) {
-                $path = $section_1[5]['tmp_name'][$i];
+                $path = $section_3[2]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
                 $data = file_get_contents($path);
                 $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -182,7 +182,7 @@ if($section_4[0][0]) {
         if($section_4[0][$i]) {
             $answer_img = "";
             if($section_4[1]['tmp_name'][$i]) {
-                $path = $section_1[4]['tmp_name'][$i];
+                $path = $section_4[1]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
                 $data = file_get_contents($path);
                 $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -190,7 +190,7 @@ if($section_4[0][0]) {
 
             $explain_img = "";
             if($section_4[2]['tmp_name'][$i]) {
-                $path = $section_1[5]['tmp_name'][$i];
+                $path = $section_4[2]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
                 $data = file_get_contents($path);
                 $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -208,6 +208,6 @@ echo "<script>alert('등록이 완료되었습니다.');</script>";
 
 ?>
 <script>
-    var page = 1;
+    var page = <?php echo $page;?>;
    location.href='./answer_manegement.php?page='+page;
 </script>
