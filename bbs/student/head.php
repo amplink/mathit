@@ -87,14 +87,14 @@ while($res = mysqli_fetch_array($result)) {
                                     else echo $cha."일 전";
                                     ?></span></p>
                         </li>
-                    <?php
+                        <?php
                     }
                     ?>
                 </ul>
             </div>
         </div>
         <div class="add_btn_wrap">
-            <a href="login.php"><div class="close_btn"><img src="img/nav/logout.png" alt="logout_btn_icon"></div></a>
+            <a href="logout.php"><div class="close_btn"><img src="img/nav/logout.png" alt="logout_btn_icon"></div></a>
         </div>
         <div class="add_btn_wrap">
             <div class="alarm_btn" onclick="show_alarm()">
@@ -170,9 +170,11 @@ while($res = mysqli_fetch_array($result)) {
             $link = "/api/math/class?client_no=".$_SESSION['client_id'];
             $r = api_calls_get($link);
 
+            $d_uid_arr = explode(",",$_SESSION['d_uid']);
+
             foreach($r as $k => $v){
-                if(in_array($_SESSION['d_uid'],$v)) {
-                    $class_name = $v[4];
+                if(in_array($d_uid_arr,$v)) {
+                    $class_name[] = $v[4];
                     break;
                 }
             }
@@ -180,12 +182,15 @@ while($res = mysqli_fetch_array($result)) {
             $weekly = array("월"=>"3","화"=>"6","수"=>"9","목"=>"12","금"=>"15","토"=>"18");
             $weeks = array_keys($weekly);
 
-            $link = "/api/math/timetable?client_no=".$_SESSION['client_id']."&d_uid=".$_SESSION['d_uid'];
-            $r = api_calls_get($link);
+            foreach($d_uid_arr as $val){
+                $link = "/api/math/timetable?client_no=".$_SESSION['client_id']."&d_uid=".trim($val);
+                $r2[] = api_calls_get($link);
+            }
 
             $today = date("d");
             $day_of_the_week = date('w') - 1;
             $this_week_ago = date('Y-m-d', strtotime($date." -".$day_of_the_week."days"));
+
 
             for($i=0; $i<6; $i++) {
                 $this_week_end = date("Y-m-d", strtotime($this_week_ago." +".$i." day"));
@@ -202,27 +207,35 @@ while($res = mysqli_fetch_array($result)) {
                         <?php
                         $n = 0;
                         $bus_on = 0;
-                        for($j=0; $j<4; $j++) {
+                        for($j=0; $j<4; $j++) { //4교시까지
 
-                            $count1 = $weekly[$weeks[$i]];
-                            if ($r[$j][$count1] == 1) {
-                                $start = $r[$j][$count1 + 1];
-                                $end = $r[$j][$count1 + 2];
-                                if($week_day == $today) $bus_on = 1;
-                                ?>
-                                <div class="class_time_info">
-                                    <p class="time"><?=$r[$j][0]?>교시 - <span>PM</span>
-                                        <span><?= $start ?></span>
-                                        <span> ~ </span>
-                                        <span><?= $end ?></span></p>
-                                    <p class="class_name">
-                                        <span><?=$class_name?></span>
-                                    </p>
-                                </div>
-                                <?php
-                                $n++;
+                            $x = 0;
+                            foreach($d_uid_arr as $val){
+                                $count1 = $weekly[$weeks[$i]];
+
+                                if ($r2[$x][$j][$count1] == 1) { //수업이 있으면
+                                    $start = $r2[$x][$j][$count1 + 1];
+                                    $end = $r2[$x][$j][$count1 + 2];
+                                    if($week_day == $today) $bus_on = 1;
+                                    ?>
+                                    <div class="class_time_info">
+                                        <p class="time"><?=$r2[$x][$j][0]?>교시 - <span>PM</span>
+                                            <span><?= $start ?></span>
+                                            <span> ~ </span>
+                                            <span><?= $end ?></span></p>
+                                        <p class="class_name">
+                                            <span><?=$class_name?></span>
+                                        </p>
+                                    </div>
+                                    <?php
+                                    $n++;
+                                }
+
+                                $x++;
                             }
+
                         }
+
                         if($n == 0){
                             if($week_day == $today) $bus_on = 0;
                             ?>
@@ -239,8 +252,12 @@ while($res = mysqli_fetch_array($result)) {
                 <?php
 
             }
-            ?>
-            <?php
+
+
+
+
+
+
             $s_uid = $_SESSION['s_uid'];
             $sql = "select * from `student_table` where `uid`='$s_uid';";
             $result = sql_query($sql);
@@ -355,7 +372,7 @@ if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
     }
 
     $('.x_btn, .alarm_back').click(function(){
-       $('.alarm').toggle();
+        $('.alarm').toggle();
         $('.alarm_back').toggle();
     });
 
