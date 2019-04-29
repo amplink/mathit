@@ -164,10 +164,14 @@ $res = mysqli_fetch_array($result);
             <?php
             $ac = $_SESSION['client_no'];
             $task = $_SESSION['t_task'];
-            $sql = "select * from `teacher_notice` order by `event_time` desc;";
+            $sql = "select `type` from `teacher_setting` where `t_id`='$t_uid';";
+            $result = sql_query($sql);
+            $res = mysqli_fetch_array($result);
+            $type = "%".$res['type']."%";
+            $sql = "select * from `teacher_notice` where `n_range` like '$type' or `writer`='$_SESSION[t_name]' and `client_id`='$ac' order by `type` desc, `event_time` desc";
             $result = sql_query($sql);
             while($res = mysqli_fetch_array($result)) {
-                if($res['writer'] == "관리자") {
+                if(strpos($res['title'],":")) {
                     $id = $res['title'];
                     $sql = "select * from `notify` where `id`='$id';";
                     $admin_res = sql_query($sql);
