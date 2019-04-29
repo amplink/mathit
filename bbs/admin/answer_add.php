@@ -111,15 +111,15 @@ $page = $_GET['page'];
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_answer_img_<?=$i;?>">
                             </td>
                             <td style="border-left: none;">
-                                <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')">
-                                <input type="hidden" name="a_answer_image[]" id="a_answer_base_<?=$i;?>" value="">
+                                <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')" name="a_answer_images[]">
+<!--                                <input type="hidden" name="a_answer_image[]" id="a_answer_base_--><?//=$i;?><!--" value="">-->
                             </td>
                             <td>
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_explain_img_<?=$i;?>">
                             </td>
                             <td style="border-left: none;">
-                                <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')">
-                                <input type="hidden" name="a_explain_image[]" id="a_explain_base_<?=$i;?>" value="">
+                                <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')" name="a_explain_images[]">
+<!--                                <input type="hidden" name="a_explain_image[]" id="a_explain_base_--><?//=$i;?><!--" value="">-->
                             </td>
                             <td>
                                 <?
@@ -161,15 +161,15 @@ $page = $_GET['page'];
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="b_answer_img_<?=$i;?>">
                             </td>
                             <td style="border-left: none;">
-                                <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')">
-                                <input type="hidden" name="b_answer_image[]" id="b_answer_base_<?=$i;?>" value="">
+                                <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')" name="b_answer_images[]">
+<!--                                <input type="hidden" name="b_answer_image[]" id="b_answer_base_--><?//=$i;?><!--" value="">-->
                             </td>
                             <td>
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="b_explain_img_<?=$i;?>">
                             </td>
                             <td style="border-left: none;">
-                                <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')">
-                                <input type="hidden" name="b_explain_image[]" id="b_explain_base_<?=$i;?>" value="">
+                                <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')" name="b_explain_images[]">
+<!--                                <input type="hidden" name="b_explain_image[]" id="b_explain_base_--><?//=$i;?><!--" value="">-->
                             </td>
                             <td>
                                 <?
@@ -211,14 +211,14 @@ $page = $_GET['page'];
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="c_answer_img_<?=$i;?>">
                             </td>
                             <td>
-                                <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')">
+                                <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')" name="c_answer_images[]">
                                 <input type="hidden" name="c_answer_image[]" id="c_answer_base_<?=$i;?>" value="">
                             </td>
                             <td>
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="c_explain_img_<?=$i;?>">
                             </td>
                             <td>
-                                <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')">
+                                <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')" name="c_explain_images[]">
                                 <input type="hidden" name="c_explain_image[]" id="c_explain_base_<?=$i;?>" value="">
                             </td>
                             <td>
@@ -261,14 +261,14 @@ $page = $_GET['page'];
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="d_answer_img_<?=$i;?>">
                             </td>
                             <td>
-                                <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')">
+                                <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')" name="d_answer_images[]">
                                 <input type="hidden" name="d_answer_image[]" id="d_answer_base_<?=$i;?>" value="">
                             </td>
                             <td>
                                 <img src="" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="d_explain_img_<?=$i;?>">
                             </td>
                             <td>
-                                <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')">
+                                <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')" name="d_explain_images[]">
                                 <input type="hidden" name="d_explain_image[]" id="d_explain_base_<?=$i;?>" value="">
                             </td>
                             <td>
@@ -352,11 +352,11 @@ $page = $_GET['page'];
         var text = '<tr class="item_section">\n' + '<td>\n' +
             '<div class="plus_icon" onclick="append_div(this, \'' + idx + '\')">' +
             '<img src="img/plus.png" alt="plus"></div></td>\n' +
-            '<td><input type="text" name="'+idx+'_item_number[]" placeholder="문항번호" onkeydown="tab_next('+idx+', '+cnt+')"></td>\n' +
+            '<td><input type="text" name="'+idx+'_item_number[]" placeholder="문항번호" onkeydown="tab_next(\''+idx+'\', '+cnt+')"></td>\n' +
             '<td><img src="" id="'+idx+'_answer_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;"></td>' +
             '<td><input type="file" id="'+idx+'_answer_file_'+cnt+'" onchange="readImage1(this, '+cnt+', \''+idx+'\')"><input type="hidden" name="'+idx+'_answer_image[]" id='+idx+'_answer_base_'+cnt+'></td>\n' +
             '<td><img src="" id="'+idx+'_explain_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;"></td>' +
-            '<td><input type="file" id="'+idx+'_answer_base_'+cnt+'" onchange="readImage2(this, '+cnt+', \''+idx+'\')"><input type="hidden" name="'+idx+'_explain_image[]" id='+idx+'_explain_base_'+cnt+'></td>\n' +
+            '<td><input type="file" id="'+idx+'_explain_file_'+cnt+'" onchange="readImage2(this, '+cnt+', \''+idx+'\')"><input type="hidden" name="'+idx+'_explain_image[]" id='+idx+'_explain_base_'+cnt+'></td>\n' +
             '<td><div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div></td>\n' +
             '</tr>';
         $(previous).parent().parent().after(text);
@@ -392,7 +392,7 @@ $page = $_GET['page'];
         if (input.files && input.files[0]) {
             var FR= new FileReader();
             FR.onload = function(e) {
-                $("#"+idx+"_answer_base_"+count).val(e.target.result);
+                // $("#"+idx+"_answer_base_"+count).val(e.target.result);
                 $("#"+idx+"_answer_img_"+count).attr("src", e.target.result);
             };
             FR.readAsDataURL(input.files[0]);
@@ -403,7 +403,7 @@ $page = $_GET['page'];
         if (input.files && input.files[0]) {
             var FR= new FileReader();
             FR.onload = function(e) {
-                $("#"+idx+"_explain_base_"+count).val(e.target.result);
+                // $("#"+idx+"_explain_base_"+count).val(e.target.result);
                 $("#"+idx+"_explain_img_"+count).attr("src", e.target.result);
             };
             FR.readAsDataURL(input.files[0]);
