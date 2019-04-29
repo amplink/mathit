@@ -157,7 +157,7 @@ $num = mysqli_num_rows($result);
             <div class="notice_table">
                 <?php
 
-                $sql3 = "SELECT  seq, title, event_time, writer, `type`
+                $sql3 = "SELECT  seq, title, event_time, writer, `type`, `file_url`
                              FROM `teacher_notice`  
                              WHERE 
                                `client_id`='$_SESSION[client_id]'
@@ -176,7 +176,15 @@ $num = mysqli_num_rows($result);
                             <div class="notice_list">
                                 <a href="notice_read.php?seq=<?=$res3['seq']?>">
                                     <div class="notice_title">
-                                        <p><?php if($res3['type'] == "중요공지") echo "[중요]";?> <?=$res33['title']?></p>
+                                        <p><?php if($res3['type'] == "중요공지") echo "[중요]";?> <?=$res33['title']?>
+                                            <?php
+                                            if($res33['attach_file_url']) {
+                                                ?>
+                                                <img src="./img/disc.png" style="width: 13px; height: 13px;">
+                                                <?php
+                                            }
+                                            ?>
+                                        </p>
                                     </div>
                                     <div class="notice_date">
                                         <p><?=substr($res33['event_time'],0,10)?></p>
@@ -189,7 +197,14 @@ $num = mysqli_num_rows($result);
                             <div class="notice_list">
                                 <a href="notice_read.php?seq=<?=$res3['seq']?>">
                                     <div class="notice_title">
-                                        <p><?php if($res3['type'] == "중요공지") echo "[중요]";?> <?=$res3['title']?></p>
+                                        <p><?php if($res3['type'] == "중요공지") echo "[중요]";?> <?=$res3['title']?>
+                                            <?php if($res3['file_url']) {
+                                                ?>
+                                                <img src="./img/disc.png" style="width: 13px; height: 13px;">
+                                                <?php
+                                            }
+                                            ?>
+                                        </p>
                                     </div>
                                     <div class="notice_date">
                                         <p><?=substr($res3['event_time'],0,10)?></p>

@@ -25,7 +25,15 @@ while($res = mysqli_fetch_array($result)) {
             <a href="notice_read.php?seq=<?=$res['seq']?>">
                 <div class="up_section">
                     <div class="number" style="<?php if($res['type'] == '중요공지') echo "width: 20%;"; else echo "width: 10%;";?>"><span class="emphasis"><?php if($ad_res['type'] == "중요공지") echo "[중요] ";?>공지</span></div>
-                    <div class="notice_title"><span class="emphasis"><?=$ad_res['title']?></span></div>
+                    <div class="notice_title"><span class="emphasis"><?=$ad_res['title']?>
+                            <?php
+                            if($ad_res['attach_file_url']) {
+                                ?>
+                                <img src="./img/disc.png" style="width: 13px; height: 13px;">
+                                <?php
+                            }
+                            ?>
+                        </span></div>
                     <div class="date"><span><?=$time?></span></div>
                 </div>
                 <div class="down_section">
@@ -40,7 +48,14 @@ while($res = mysqli_fetch_array($result)) {
             <a href="notice_read.php?seq=<?=$res['seq']?>">
                 <div class="up_section">
                     <div class="number" style="<?php if($res['type'] == '중요공지') echo "width: 20%;"; else echo "width: 10%;";?>"><span class="emphasis"><?php if($res['type'] == "중요공지") echo "[중요] ";?>공지</span></div>
-                    <div class="notice_title"><span class="emphasis"><?=$res['title']?></span></div>
+                    <div class="notice_title"><span class="emphasis"><?=$res['title']?>
+                    <?php if($res['file_url']) {
+                        ?>
+                        <img src="./img/disc.png" style="width: 13px; height: 13px;">
+                    <?php
+                    }
+                    ?>
+                        </span></div>
                     <div class="date"><span><?=$time?></span></div>
                 </div>
                 <div class="down_section">
