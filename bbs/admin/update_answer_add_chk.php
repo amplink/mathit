@@ -138,7 +138,7 @@ if($section_1[0][0]) {
             }
             $answer_id = $section_1[3][$i];
 
-            $sql = "UPDATE `answer_master` set `item_number`='".$section_1[0][$i]."', `answer_image` = '".$answer_img."', `explain_image`='".$explain_img."', `event_time`=CURRENT_TIMESTAMP where `answer_id`='$answer_id';";
+            $sql = "UPDATE `answer_master` set `seq` = '$i', `item_number`='".$section_1[0][$i]."', `answer_image` = '".$answer_img."', `explain_image`='".$explain_img."', `event_time`=CURRENT_TIMESTAMP where `answer_id`='$answer_id';";
             sql_query($sql);
         }else { // 새로운 데이터라면
             $answer_id = rand(1, 22222).":".date("mds");
@@ -233,7 +233,7 @@ if($section_2[0][0]) {
             }
             $answer_id = $section_2[3][$i];
 
-            $sql = "UPDATE `answer_master` set `item_number`='".$section_2[0][$i]."', `answer_image` = '".$answer_img."', `explain_image`='".$explain_img."', `event_time`=CURRENT_TIMESTAMP where `answer_id`='$answer_id';";
+            $sql = "UPDATE `answer_master` set `seq` = '$i', `item_number`='".$section_2[0][$i]."', `answer_image` = '".$answer_img."', `explain_image`='".$explain_img."', `event_time`=CURRENT_TIMESTAMP where `answer_id`='$answer_id';";
             sql_query($sql);
         }else { // 새로운 데이터라면
             $answer_id = rand(1, 22222).":".date("mds");
@@ -322,7 +322,7 @@ if($section_3[0][0]) {
             }
             $answer_id = $section_3[3][$i];
 
-            $sql = "UPDATE `answer_master` set `item_number`='".$section_3[0][$i]."', `answer_image` = '".$answer_img."', `explain_image`='".$explain_img."', `event_time`=CURRENT_TIMESTAMP where `answer_id`='$answer_id';";
+            $sql = "UPDATE `answer_master` set `seq` = '$i', `item_number`='".$section_3[0][$i]."', `answer_image` = '".$answer_img."', `explain_image`='".$explain_img."', `event_time`=CURRENT_TIMESTAMP where `answer_id`='$answer_id';";
             sql_query($sql);
         }else { // 새로운 데이터라면
             $answer_id = rand(1, 22222).":".date("mds");
@@ -410,7 +410,7 @@ if($section_4[0][0]) {
             }
             $answer_id = $section_4[3][$i];
 
-            $sql = "UPDATE `answer_master` set `item_number`='".$section_4[0][$i]."', `answer_image` = '".$answer_img."', `explain_image`='".$explain_img."', `event_time`=CURRENT_TIMESTAMP where `answer_id`='$answer_id';";
+            $sql = "UPDATE `answer_master` set `seq` = '$i', `item_number`='".$section_4[0][$i]."', `answer_image` = '".$answer_img."', `explain_image`='".$explain_img."', `event_time`=CURRENT_TIMESTAMP where `answer_id`='$answer_id';";
             sql_query($sql);
         }else { // 새로운 데이터라면
             $answer_id = rand(1, 22222).":".date("mds");

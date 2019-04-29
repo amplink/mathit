@@ -179,6 +179,7 @@ if($book_type == "베타") {
                         <tr id="item_section_1">
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'a')"><img src="img/plus.png" alt="plus"></div>
+                                <input type="hidden" name="a_idx[]" value="">
                             </td>
                             <td class="pt-17"><input type="text" name="a_item_number[]" placeholder="문항번호" value="" onkeydown="tab_next('a', <?=$i?>)"></td>
                             <td>
@@ -267,6 +268,7 @@ if($book_type == "베타") {
                         <tr id="item_section_2">
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'b')"><img src="img/plus.png" alt="plus"></div>
+                                <input type="hidden" name="b_idx[]" value="">
                             </td>
                             <td class="pt-17"><input type="text" name="b_item_number[]" placeholder="문항번호" value="" onkeydown="tab_next('b', <?=$i?>)"></td>
                             <td>
@@ -352,6 +354,7 @@ if($book_type == "베타") {
                         <tr id="item_section_3">
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'c')"><img src="img/plus.png" alt="plus"></div>
+                                <input type="hidden" name="c_idx[]" value="">
                             </td>
                             <td class="pt-17"><input type="text" name="c_item_number[]" placeholder="문항번호" value="" onkeydown="tab_next('c', <?=$i?>)"></td>
                             <td>
@@ -437,6 +440,7 @@ if($book_type == "베타") {
                         <tr id="item_section_4">
                             <td>
                                 <div class="plus_icon" onclick="append_div(this,'d')"><img src="img/plus.png" alt="plus"></div>
+                                <input type="hidden" name="d_idx[]" value="">
                             </td>
                             <td class="pt-17"><input type="text" name="d_item_number[]" placeholder="문항번호" value="" onkeydown="tab_next('d', <?=$i?>)"></td>
                             <td>
@@ -534,7 +538,7 @@ if($book_type == "베타") {
 
         var text = '<tr class="item_section">\n' + '<td>\n' +
             '<div class="plus_icon" onclick="append_div(this, \'' + idx + '\')">' +
-            '<img src="img/plus.png" alt="plus"></div></td>\n' +
+            '<img src="img/plus.png" alt="plus"><input type="hidden" name="'+idx+'_idx[]"></div></td>\n' +
             '<td><input type="text" name="'+idx+'_item_number[]" placeholder="문항번호" onkeydown="tab_next(\''+idx+'\', '+cnt+')"></td>\n' +
             '<td><img src="" id="'+idx+'_answer_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;"></td>' +
             '<td><input type="file" id="'+idx+'_answer_file_'+cnt+'" onchange="readImage1(this, '+cnt+', \''+idx+'\')" name="'+idx+'_answer_images[]"></td>\n' +
