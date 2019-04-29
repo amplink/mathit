@@ -52,6 +52,11 @@ $res = mysqli_fetch_array($result);
                 <div class="modify_btn"><a href="class_schedule_update.php?seq=<?=$res['seq']?>">수정</a></div>
                 <div class="delete_btn"><a href="class_schedule_del.php?&seq=<?=$res['seq']?>">삭제</a></div>
                 <?php
+            }else if($res['writer'] == "관리자" && $_SESSION['admin']) {
+                ?>
+                <div class="modify_btn"><a href="class_schedule_update.php?seq=<?=$res['seq']?>">수정</a></div>
+                <div class="delete_btn"><a href="class_schedule_del.php?&seq=<?=$res['seq']?>">삭제</a></div>
+            <?php
             }
             ?>
         </div>

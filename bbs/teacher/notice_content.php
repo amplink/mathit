@@ -1,9 +1,7 @@
 <?php
 include_once ('_common.php');
-session_start();
 
 $seq = $_GET['seq'];
-
 if(strpos($seq, ":")) {
     $sql = "select * from `notify` where `id`='$seq';";
     $result = mysqli_query($connect_db, $sql);
@@ -105,8 +103,20 @@ if(strpos($seq, ":")) {
     </div>
     <div class="btn_section">
         <div class="l_btn_wrap">
-            <?php if($res['writer'] == $_SESSION['t_name']) ?><div class="modify_btn"><a href="notice_write.php?seq=<?=$res['seq']?>&t=3">수정</a></div>
-            <?php if($res['writer'] == $_SESSION['t_name']) ?><div class="delete_btn" style="cursor: pointer;" onclick="del_content(<?=$res['seq']?>)"><a>삭제</a></div></div>
+            <?php
+            if($res['writer'] == $_SESSION['t_name']) {
+                ?>
+                <div class="modify_btn"><a href="notice_write.php?seq=<?=$res['seq']?>&t=3">수정</a></div>
+                <div class="delete_btn" style="cursor: pointer;" onclick="del_content(<?=$res['seq']?>)"><a>삭제</a></div>
+                <?php
+            }else if($res['writer'] == "관리자" && $_SESSION['admin']) {
+                ?>
+                <div class="modify_btn"><a href="notice_write.php?seq=<?=$res['seq']?>&t=3">수정</a></div>
+                <div class="delete_btn" style="cursor: pointer;" onclick="del_content(<?=$res['seq']?>)"><a>삭제</a></div>
+                <?php
+            }
+            ?>
+
         <div class="r_btn_wrap">
             <?php if($res['file_url']) {
                 ?>

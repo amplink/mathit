@@ -30,6 +30,7 @@ if($name) {
 $sql = "delete from `teacher_schedule` where `seq`='$seq';";
 sql_query($sql);
 
+if($_SESSION['admin']) $writer = '관리자';
 $sql = "INSERT INTO `teacher_schedule` (`seq`, `type`, `s_range`, `title`, `writer`, `file_url`, `file_name`, `content`, `event_time`)
 VALUES (NULL, '$type', '$range', '$title', '$writer', '$name_url', '$name_name', '$content', CURRENT_TIMESTAMP);";
 sql_query($sql);
@@ -40,13 +41,19 @@ $result = sql_query($sql);
 while($res = mysqli_fetch_array($result)) {
     if(($range == "전임강사" || $range == "전체") && $res['type']=="전임강사") {
         $t_uid = $res['t_id'];
-        $sql = "insert into `alarm` set `seq`='', `content`='수업계획표/일지가 수정되었습니다.', `table_name`='schedule', `target`='$range', `uid`='$t_uid',`chk`='0', `datetime`=CURRENT_TIMESTAMP";
-        sql_query($sql);
+        if($res['t_id'] != $_SESSION['t_uid'] && $range != "비공개") {
+            $sql = "insert into `alarm` set `seq`='', `content`='수업계획표/일지가 수정되었습니다.', `table_name`='schedule', `target`='$range', `uid`='$t_uid',`chk`='0', `datetime`=CURRENT_TIMESTAMP";
+            sql_query($sql);
+        }
     }
 }
 
-$sql = "insert into `alarm` set `seq`='', `content`='수업계획표/일지가 수정되었습니다.', `table_name`='schedule', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-sql_query($sql);
+if($range == "전체" || $range == "관리자") {
+    if(!$_SESSION['admin']) {
+        $sql = "insert into `alarm` set `content`='새로운 수업계획표/일지가 등록되었습니다.', `table_name`='schedule', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP;";
+        sql_query($sql);
+    }
+}
 
 
 alert_msg("수정이 완료되었습니다.");

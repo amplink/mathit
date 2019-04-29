@@ -115,6 +115,7 @@ if($seqq > 0) { // 수정이면
 
     }
 }
+if($_SESSION['admin']) $writer = "관리자";
 
 $sql = "INSERT INTO `teacher_notice` (`seq`, `client_id`, `title`, `writer`, `type`, `n_range`, `target`, `file_url`, `file_name`, `content`, `event_time`)
 VALUES (NULL, '$ac', '$title', '$writer', '$type', '$r_range', '$target', '$name_url', '$name_name', '$content', CURRENT_TIMESTAMP);";
@@ -151,9 +152,6 @@ if($seqq > 0) {
         }
     }
 
-    $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-    sql_query($sql);
-
     alert_msg("공지수정이 완료되었습니다.");
     location_href("./notice_list.php");
 }else {
@@ -188,9 +186,10 @@ if($seqq > 0) {
             }
         }
     }
-
-    $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-    sql_query($sql);
+    if(!$_SESSION['admin']) {
+        $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+        sql_query($sql);
+    }
 
     alert_msg("공지등록이 완료되었습니다.");
     location_href("./notice_list.php");

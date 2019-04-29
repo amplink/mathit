@@ -16,7 +16,7 @@ if($_SESSION['admin']) {
 $result = mysqli_query($connect_db, $sql);
 $thisTime=date("Y-m-d H:i:s");
 while($res = mysqli_fetch_array($result)) {
-    if($res['writer'] == "관리자") {
+    if(strpos($res['title'],":")) {
         $id = $res['title'];
         $sql = "select * from `notify` where `id`='$id';";
         $admin_res = sql_query($sql);
