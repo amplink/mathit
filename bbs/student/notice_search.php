@@ -15,7 +15,7 @@ $result = sql_query($sql);
 while($res = mysqli_fetch_array($result)) {
     $time = explode(' ', $res['event_time']);
     $time = $time[0];
-    if($res['writer'] == "관리자") {
+    if(strpos($res['title'], ":")) {
         $id = $res['title'];
         $sql = "select * from `notify` where `id`='$id';";
         $admin_res = sql_query($sql);

@@ -141,15 +141,22 @@ if($seqq > 0) {
         }
     }
 
-    if($range == "학생") {
-        $ac = $_SESSION['client_no'];
-        $link = "/api/math/student_list?client_no=".$ac;
-        $r = api_calls_get($link);
+    for($kk=0; $kk<count($range); $kk++) {
+        if($range[$kk]=="학생") {
+            $ac = $_SESSION['client_no'];
+            $link = "/api/math/student_list?client_no=".$ac;
+            $r = api_calls_get($link);
 
-        for($i=1; $i<count($r); $i++) {
-            $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-            sql_query($sql);
+            for($i=1; $i<count($r); $i++) {
+                $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                sql_query($sql);
+            }
         }
+    }
+
+    if(!$_SESSION['admin']) {
+        $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+        sql_query($sql);
     }
 
     alert_msg("공지수정이 완료되었습니다.");
@@ -186,6 +193,7 @@ if($seqq > 0) {
             }
         }
     }
+
     if(!$_SESSION['admin']) {
         $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
         sql_query($sql);

@@ -179,7 +179,7 @@ $title = $_GET['title'];
                     $("#class_name").html(response);
                     $("#test_list").empty();
                     $(".right_wrap").empty();
-                    // $('.select_box2').removeClass('on');
+                    $('.select_box2').removeClass('on');
                     d_uid = "";
                     c_uid = "";
                     s_uid = "";

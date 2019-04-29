@@ -168,7 +168,7 @@ $num = mysqli_num_rows($result);
 
                 if($num3 > 0) {
                     while ($res3 = mysqli_fetch_array($result3)) {
-                        if($res3['writer']=="관리자") {
+                        if(strpos($res3['title'], ":")) {
                             $sql33 = "SELECT * FROM `notify` where `id`='".$res3['title']."';";
                             $result33 = sql_query($sql33);
                             $res33 = mysqli_fetch_array($result33);
