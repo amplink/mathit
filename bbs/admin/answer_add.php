@@ -353,10 +353,10 @@ $page = $_GET['page'];
             '<div class="plus_icon" onclick="append_div(this, \'' + idx + '\')">' +
             '<img src="img/plus.png" alt="plus"></div></td>\n' +
             '<td><input type="text" name="'+idx+'_item_number[]" placeholder="문항번호" onkeydown="tab_next(\''+idx+'\', '+cnt+')"></td>\n' +
-            '<td><img src="" id="'+idx+'_answer_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;"></td>' +
-            '<td><input type="file" id="'+idx+'_answer_file_'+cnt+'" onchange="readImage1(this, '+cnt+', \''+idx+'\')"><input type="hidden" name="'+idx+'_answer_image[]" id='+idx+'_answer_base_'+cnt+'></td>\n' +
-            '<td><img src="" id="'+idx+'_explain_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;"></td>' +
-            '<td><input type="file" id="'+idx+'_explain_file_'+cnt+'" onchange="readImage2(this, '+cnt+', \''+idx+'\')"><input type="hidden" name="'+idx+'_explain_image[]" id='+idx+'_explain_base_'+cnt+'></td>\n' +
+            '<td><img src="" id="'+idx+'_answer_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" name="'+idx+'_answer_images[]"></td>' +
+            '<td><input type="file" id="'+idx+'_answer_file_'+cnt+'" onchange="readImage1(this, '+cnt+', \''+idx+'\')"></td>\n' +
+            '<td><img src="" id="'+idx+'_explain_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" name="'+idx+'_explain_images[]"></td>' +
+            '<td><input type="file" id="'+idx+'_explain_file_'+cnt+'" onchange="readImage2(this, '+cnt+', \''+idx+'\')"></td>\n' +
             '<td><div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div></td>\n' +
             '</tr>';
         $(previous).parent().parent().after(text);
@@ -588,6 +588,7 @@ $page = $_GET['page'];
 
         $.ajax({
             type : 'post',
+            enctype: "multipart/form-data",
             url : './answer_add_double_chk.php',
             data : str,
             error: function(xhr, status, error){
@@ -597,7 +598,8 @@ $page = $_GET['page'];
                 if(e==0 && isCnt==0) {
                     $.ajax({
                         type : 'post',
-                        url : './answer_add_chk1.php',
+                        enctype: "multipart/form-data",
+                        url : './answer_add_chk.php',
                         data : str,
                         error: function(xhr, status, error){
                             alert(error);
@@ -610,6 +612,7 @@ $page = $_GET['page'];
                 } else if (isCnt != 0) {
                     $.ajax({
                         type : 'post',
+                        enctype: "multipart/form-data",
                         url : './update_answer_add_chk.php',
                         data : str,
                         error: function(xhr, status, error){
@@ -618,6 +621,7 @@ $page = $_GET['page'];
                         success : function(json){
                             $.ajax({
                                 type : 'post',
+                                enctype: "multipart/form-data",
                                 url : './answer_add_chk1.php',
                                 data : str,
                                 error: function(xhr, status, error){

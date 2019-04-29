@@ -1,7 +1,6 @@
 <?php
 
 include_once ('_common.php');
-
 $page = $_GET['page'];
 
 $book_type = $_POST['book_type'];
@@ -9,19 +8,21 @@ $grade = $_POST['grade'];
 $unit = $_POST['unit'];
 $semester = $_POST['semester'];
 $level = $_POST['level'];
-$event_time = $_POST['event'];
 
 $section_1[0] = $_POST['a_item_number'];
-$section_1[1] = $_POST['a_answer_image'];
-$section_1[2] = $_POST['a_explain_image'];
+$section_1[1] = $_FILES['a_answer_images'];
+$section_1[2] = $_FILES['a_explain_images'];
+$section_1[3] = $_POST['a_idx'];
 
 $section_2[0] = $_POST['b_item_number'];
-$section_2[1] = $_POST['b_answer_image'];
-$section_2[2] = $_POST['b_explain_image'];
+$section_2[1] = $_FILES['b_answer_images'];
+$section_2[2] = $_FILES['b_explain_images'];
+$section_2[3] = $_POST['b_idx'];
 
 $section_3[0] = $_POST['c_item_number'];
-$section_3[1] = $_POST['c_answer_image'];
-$section_3[2] = $_POST['c_explain_image'];
+$section_3[1] = $_FILES['c_answer_images'];
+$section_3[2] = $_FILES['c_explain_images'];
+$section_3[3] = $_POST['c_idx'];
 
 $section_size[0] = count($section_1[0]);
 $section_size[1] = count($section_2[0]);
@@ -43,9 +44,6 @@ for($i=0; $i<$section_size[2]; $i++) {
 
 if($cnt == 0) $section_1[0][0] = ".";
 
-$sql = "delete from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level';";
-sql_query($sql);
-
 if($section_1[0][0]) {
     if($level == "시그마") $c_name = "실력확인";
     else if($level == "파이" || $level == "루트") $c_name = "개념다지기";
@@ -54,11 +52,63 @@ if($section_1[0][0]) {
     else if($unit == "기말평가") $c_name = "기말평가 1회";
 
     for($i=0; $i<$section_size[0]; $i++) {
-        $answer_id = rand(1, 22222).":".date("mds");
-        $sql = "INSERT INTO `answer_master`
-                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `event_time`)
-                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_1[0][$i]."', '".$section_1[1][$i]."', '".$section_1[2][$i]."', CURRENT_TIMESTAMP);";
-        if($section_1[0][$i]) mysqli_query($connect_db, $sql);
+        if($section_1[3][$i]) { // 기존 데이터가 있다면
+            $sql = "select * from `answer_master` where `answer_id`='".$section_1[3][$i]."';";
+            $result = mysqli_query($connect_db, $sql);
+            $res = mysqli_fetch_array($result);
+
+            if($section_1[1]['tmp_name'][$i]) { // answer_img가 변경 됐다면
+                $answer_img = "";
+                if($section_1[1]['tmp_name'][$i]) {
+                    $path = $section_1[1]['tmp_name'][$i];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+            }else {
+                $answer_img = $res['answer_image'];
+            }
+            if($section_1[2]['tmp_name'][$i]) {
+                $explain_img = "";
+                if($section_1[2]['tmp_name'][$i]) {
+                    $path = $section_1[2]['tmp_name'][$i];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+            }else {
+                $explain_img = $res['explain_image'];
+            }
+            $answer_id = $section_1[3][$i];
+
+            $sql = "UPDATE `answer_master` set `item_number`='".$section_1[0][$i]."', `answer_image` = '".$answer_img."', `explain_image`='".$explain_img."', `event_time`=CURRENT_TIMESTAMP where `answer_id`='$answer_id';";
+            sql_query($sql);
+        }else { // 새로운 데이터라면
+            $answer_id = rand(1, 22222).":".date("mds");
+
+            if($section_1[0][$i]) {
+                $answer_img = "";
+                if($section_1[1]['tmp_name'][$i]) {
+                    $path = $section_1[1]['tmp_name'][$i];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+
+                $explain_img = "";
+                if($section_1[2]['tmp_name'][$i]) {
+                    $path = $section_1[2]['tmp_name'][$i];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+
+                $sql = "INSERT INTO `answer_master`
+                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
+                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_1[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
+                mysqli_query($connect_db, $sql);
+            }
+        }
     }
 }
 
@@ -68,22 +118,126 @@ if($section_2[0][0]) {
     else $c_name = "단원마무리";
 
     for($i=0; $i<$section_size[1]; $i++) {
-        $answer_id = rand(22222, 44444).":".date("mds");
-        $sql = "INSERT INTO `answer_master`
-                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `event_time`)
-                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_2[0][$i]."', '".$section_2[1][$i]."', '".$section_2[2][$i]."', CURRENT_TIMESTAMP);";
-        if($section_2[0][$i]) mysqli_query($connect_db, $sql);
+        if($section_2[3][$i]) { // 기존 데이터가 있다면
+            $sql = "select * from `answer_master` where `answer_id`='".$section_2[3][$i]."';";
+            $result = mysqli_query($connect_db, $sql);
+            $res = mysqli_fetch_array($result);
+
+            if($section_2[1]['tmp_name'][$i]) { // answer_img가 변경 됐다면
+                $answer_img = "";
+                if($section_2[1]['tmp_name'][$i]) {
+                    $path = $section_2[1]['tmp_name'][$i];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+            }else {
+                $answer_img = $res['answer_image'];
+            }
+            if($section_2[2]['tmp_name'][$i]) {
+                $explain_img = "";
+                if($section_2[2]['tmp_name'][$i]) {
+                    $path = $section_2[2]['tmp_name'][$i];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+            }else {
+                $explain_img = $res['explain_image'];
+            }
+            $answer_id = $section_2[3][$i];
+
+            $sql = "UPDATE `answer_master` set `item_number`='".$section_2[0][$i]."', `answer_image` = '".$answer_img."', `explain_image`='".$explain_img."', `event_time`=CURRENT_TIMESTAMP where `answer_id`='$answer_id';";
+            sql_query($sql);
+        }else { // 새로운 데이터라면
+            $answer_id = rand(1, 22222).":".date("mds");
+
+            if($section_2[0][$i]) {
+                $answer_img = "";
+                if($section_2[1]['tmp_name'][$i]) {
+                    $path = $section_2[1]['tmp_name'][$i];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+
+                $explain_img = "";
+                if($section_2[2]['tmp_name'][$i]) {
+                    $path = $section_2[2]['tmp_name'][$i];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+
+                $sql = "INSERT INTO `answer_master`
+                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
+                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_2[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
+                mysqli_query($connect_db, $sql);
+            }
+        }
     }
 }
 
 if($section_3[0][0]) {
     $c_name = "도전문제";
     for($i=0; $i<$section_size[2]; $i++) {
-        $answer_id = rand(44444, 66666).":".date("mds");
-        $sql = "INSERT INTO `answer_master`
-                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `event_time`)
-                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_3[0][$i]."', '".$section_3[1][$i]."', '".$section_3[2][$i]."', CURRENT_TIMESTAMP);";
-        if($section_3[0][$i]) mysqli_query($connect_db, $sql);
+        if($section_3[3][$i]) { // 기존 데이터가 있다면
+            $sql = "select * from `answer_master` where `answer_id`='".$section_3[3][$i]."';";
+            $result = mysqli_query($connect_db, $sql);
+            $res = mysqli_fetch_array($result);
+
+            if($section_3[1]['tmp_name'][$i]) { // answer_img가 변경 됐다면
+                $answer_img = "";
+                if($section_3[1]['tmp_name'][$i]) {
+                    $path = $section_3[1]['tmp_name'][$i];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+            }else {
+                $answer_img = $res['answer_image'];
+            }
+            if($section_3[2]['tmp_name'][$i]) {
+                $explain_img = "";
+                if($section_3[2]['tmp_name'][$i]) {
+                    $path = $section_3[2]['tmp_name'][$i];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+            }else {
+                $explain_img = $res['explain_image'];
+            }
+            $answer_id = $section_3[3][$i];
+
+            $sql = "UPDATE `answer_master` set `item_number`='".$section_3[0][$i]."', `answer_image` = '".$answer_img."', `explain_image`='".$explain_img."', `event_time`=CURRENT_TIMESTAMP where `answer_id`='$answer_id';";
+            sql_query($sql);
+        }else { // 새로운 데이터라면
+            $answer_id = rand(1, 22222).":".date("mds");
+
+            if($section_3[0][$i]) {
+                $answer_img = "";
+                if($section_3[1]['tmp_name'][$i]) {
+                    $path = $section_3[1]['tmp_name'][$i];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+
+                $explain_img = "";
+                if($section_3[2]['tmp_name'][$i]) {
+                    $path = $section_3[2]['tmp_name'][$i];
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+
+                $sql = "INSERT INTO `answer_master`
+                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
+                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_3[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
+                mysqli_query($connect_db, $sql);
+            }
+        }
     }
 }
 
