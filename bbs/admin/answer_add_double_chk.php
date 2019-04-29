@@ -1,6 +1,5 @@
 <?php
 include_once ('_common.php');
-session_start();
 
 $sql = "select * from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level';";
 $result = mysqli_query($connect_db, $sql);

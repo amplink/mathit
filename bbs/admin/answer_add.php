@@ -353,10 +353,10 @@ $page = $_GET['page'];
             '<div class="plus_icon" onclick="append_div(this, \'' + idx + '\')">' +
             '<img src="img/plus.png" alt="plus"></div></td>\n' +
             '<td><input type="text" name="'+idx+'_item_number[]" placeholder="문항번호" onkeydown="tab_next(\''+idx+'\', '+cnt+')"></td>\n' +
-            '<td><img src="" id="'+idx+'_answer_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" name="'+idx+'_answer_images[]"></td>' +
-            '<td><input type="file" id="'+idx+'_answer_file_'+cnt+'" onchange="readImage1(this, '+cnt+', \''+idx+'\')"></td>\n' +
-            '<td><img src="" id="'+idx+'_explain_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" name="'+idx+'_explain_images[]"></td>' +
-            '<td><input type="file" id="'+idx+'_explain_file_'+cnt+'" onchange="readImage2(this, '+cnt+', \''+idx+'\')"></td>\n' +
+            '<td><img src="" id="'+idx+'_answer_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;"></td>' +
+            '<td><input type="file" id="'+idx+'_answer_file_'+cnt+'" onchange="readImage1(this, '+cnt+', \''+idx+'\')" name="'+idx+'_answer_images[]"></td>\n' +
+            '<td><img src="" id="'+idx+'_explain_img_'+cnt+'" width="40" height="40" class="pt-7" style="height: 45px; width: auto;"></td>' +
+            '<td><input type="file" id="'+idx+'_explain_file_'+cnt+'" onchange="readImage2(this, '+cnt+', \''+idx+'\')" name="'+idx+'_explain_images[]"></td>\n' +
             '<td><div class="minus_icon" onclick="delete_div(this)"><img src="img/minus.png" alt="minus"></div></td>\n' +
             '</tr>';
         $(previous).parent().parent().after(text);
@@ -584,61 +584,106 @@ $page = $_GET['page'];
             alert("입력값이 없어 등록되지 않았습니다.");
             return;
         }
-        var str = $("#answer_add_form").serialize();
+        var form = $('#answer_add_form')[0];
+        var formData = new FormData(form);
+        event.preventDefault();
 
-        $.ajax({
-            type : 'post',
-            enctype: "multipart/form-data",
-            url : './answer_add_double_chk.php',
-            data : str,
-            error: function(xhr, status, error){
-                alert(error);
-            },
-            success : function(e){
-                if(e==0 && isCnt==0) {
-                    $.ajax({
-                        type : 'post',
-                        enctype: "multipart/form-data",
-                        url : './answer_add_chk.php',
-                        data : str,
-                        error: function(xhr, status, error){
-                            alert(error);
-                        },
-                        success : function(json){
-                            alert("중간 등록이 완료되었습니다.");
-                            isCnt++;
-                        },
-                    });
-                } else if (isCnt != 0) {
-                    $.ajax({
-                        type : 'post',
-                        enctype: "multipart/form-data",
-                        url : './update_answer_add_chk.php',
-                        data : str,
-                        error: function(xhr, status, error){
-                            alert(error);
-                        },
-                        success : function(json){
-                            $.ajax({
-                                type : 'post',
-                                enctype: "multipart/form-data",
-                                url : './answer_add_chk1.php',
-                                data : str,
-                                error: function(xhr, status, error){
-                                    alert(error);
-                                },
-                                success : function(json){
-                                    alert("중간 등록이 완료되었습니다.");
-                                    isCnt++;
-                                },
-                            });
-                        }
-                    });
-                } else if(e == 1) {
-                    alert("중복된 교재입니다.");
+        if(isCnt == 0) {
+            $.ajax({
+                url: "./answer_add_double_chk.php",
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function(res) {
+                    if(res==0) {
+                        $.ajax({
+                            url: './answer_add_chk.php',
+                            type: "POST",
+                            processData: false,
+                            contentType: false,
+                            data: formData,
+                            success: function(v) {
+                                alert('중간등록이 완료되었습니다.');
+                                isCnt++;
+                            }
+                        });
+                    }else {
+                        alert('중복된 교재입니다.');
+                    }
                 }
-            },
-        });
+            });
+        }else {
+            $.ajax({
+                url: './answer_add_chk.php',
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function(v) {
+                    alert('중간등록이 완료되었습니다.');
+                    isCnt++;
+                }
+            });
+        }
+
+        // $.ajax({
+        //     type : 'post',
+        //     enctype: "multipart/form-data",
+        //     url : './answer_add_double_chk.php',
+        //     data : formData,
+        //     error: function(xhr, status, error){
+        //         alert(error);
+        //     },
+        //     success : function(e){
+        //         if(e==0 && isCnt==0) {
+        //             $.ajax({
+        //                 type : 'post',
+        //                 enctype: "multipart/form-data",
+        //                 processData: false,
+        //                 contentType: false,
+        //                 url : './answer_add_chk.php',
+        //                 data : formData,
+        //                 error: function(xhr, status, error){
+        //                     alert(error);
+        //                 },
+        //                 success : function(res){
+        //                     alert('중간저장 되었습니다.');
+        //                     isCnt++;
+        //                 },
+        //             });
+        //         } else if (isCnt != 0) {
+        //             $.ajax({
+        //                 type : 'post',
+        //                 enctype: "multipart/form-data",
+        //                 processData: false,
+        //                 contentType: false,
+        //                 url : './update_answer_add_chk.php',
+        //                 data : formData,
+        //                 error: function(xhr, status, error){
+        //                     alert(error);
+        //                 },
+        //                 success : function(json){
+        //                     $.ajax({
+        //                         type : 'post',
+        //                         enctype: "multipart/form-data",
+        //                         url : './answer_add_chk1.php',
+        //                         data : formData,
+        //                         error: function(xhr, status, error){
+        //                             alert(error);
+        //                         },
+        //                         success : function(json){
+        //                             alert("중간 등록이 완료되었습니다.");
+        //                             isCnt++;
+        //                         },
+        //                     });
+        //                 }
+        //             });
+        //         } else if(e == 1) {
+        //             alert("중복된 교재입니다.");
+        //         }
+        //     },
+        // });
     }
 
     function tab_next(t, e) {

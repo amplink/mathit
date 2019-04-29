@@ -84,6 +84,30 @@ if($section_1[0][0]) {
         }
     }
 
+    $save_arr = array();
+    $del_arr = array();
+
+    for($i=0; $i<count($section_1[3]); $i++) {
+        $save_arr[$i] = $section_1[3][$i];
+    }
+
+    $sql = "select `answer_id` from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level' and `c_name`='$c_name';";
+    $result = mysqli_query($connect_db, $sql);
+    $k=0;
+    while($res = mysqli_fetch_array($result)) {
+        $del_arr[$k] = $res['answer_id'];
+        $k++;
+    }
+
+    for($i=0; $i<count($save_arr); $i++) {
+        $del_arr = arr_del($del_arr, $save_arr[$i]);
+    }
+    sort($del_arr);
+    for($i=0; $i<count($del_arr); $i++) {
+        $sql = "delete from `answer_master` where `answer_id`='$del_arr[$i]';";
+        sql_query($sql);
+    }
+
     for($i=0; $i<$section_size[0]; $i++) {
         if($section_1[3][$i]) { // 기존 데이터가 있다면
             $sql = "select * from `answer_master` where `answer_id`='".$section_1[3][$i]."';";
@@ -155,6 +179,30 @@ if($section_2[0][0]) {
         else $c_name = "단원마무리";
     }
 
+    $save_arr = array();
+    $del_arr = array();
+
+    for($i=0; $i<count($section_2[3]); $i++) {
+        $save_arr[$i] = $section_2[3][$i];
+    }
+
+    $sql = "select `answer_id` from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level' and `c_name`='$c_name';";
+    $result = mysqli_query($connect_db, $sql);
+    $k=0;
+    while($res = mysqli_fetch_array($result)) {
+        $del_arr[$k] = $res['answer_id'];
+        $k++;
+    }
+
+    for($i=0; $i<count($save_arr); $i++) {
+        $del_arr = arr_del($del_arr, $save_arr[$i]);
+    }
+    sort($del_arr);
+    for($i=0; $i<count($del_arr); $i++) {
+        $sql = "delete from `answer_master` where `answer_id`='$del_arr[$i]';";
+        sql_query($sql);
+    }
+
     for($i=0; $i<$section_size[1]; $i++) {
         if($section_2[3][$i]) { // 기존 데이터가 있다면
             $sql = "select * from `answer_master` where `answer_id`='".$section_2[3][$i]."';";
@@ -219,6 +267,31 @@ if($section_2[0][0]) {
 if($section_3[0][0]) {
     if($book_type == "베타") $c_name = "도전문제";
     else $c_name = "서술과코칭";
+
+    $save_arr = array();
+    $del_arr = array();
+
+    for($i=0; $i<count($section_3[3]); $i++) {
+        $save_arr[$i] = $section_3[3][$i];
+    }
+
+    $sql = "select `answer_id` from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level' and `c_name`='$c_name';";
+    $result = mysqli_query($connect_db, $sql);
+    $k=0;
+    while($res = mysqli_fetch_array($result)) {
+        $del_arr[$k] = $res['answer_id'];
+        $k++;
+    }
+
+    for($i=0; $i<count($save_arr); $i++) {
+        $del_arr = arr_del($del_arr, $save_arr[$i]);
+    }
+    sort($del_arr);
+    for($i=0; $i<count($del_arr); $i++) {
+        $sql = "delete from `answer_master` where `answer_id`='$del_arr[$i]';";
+        sql_query($sql);
+    }
+
     for($i=0; $i<$section_size[2]; $i++) {
         if($section_3[3][$i]) { // 기존 데이터가 있다면
             $sql = "select * from `answer_master` where `answer_id`='".$section_3[3][$i]."';";
@@ -282,6 +355,31 @@ if($section_3[0][0]) {
 
 if($section_4[0][0]) {
     $c_name = "이야기수학";
+
+    $save_arr = array();
+    $del_arr = array();
+
+    for($i=0; $i<count($section_4[3]); $i++) {
+        $save_arr[$i] = $section_4[3][$i];
+    }
+
+    $sql = "select `answer_id` from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level' and `c_name`='$c_name';";
+    $result = mysqli_query($connect_db, $sql);
+    $k=0;
+    while($res = mysqli_fetch_array($result)) {
+        $del_arr[$k] = $res['answer_id'];
+        $k++;
+    }
+
+    for($i=0; $i<count($save_arr); $i++) {
+        $del_arr = arr_del($del_arr, $save_arr[$i]);
+    }
+    sort($del_arr);
+    for($i=0; $i<count($del_arr); $i++) {
+        $sql = "delete from `answer_master` where `answer_id`='$del_arr[$i]';";
+        sql_query($sql);
+    }
+
     for($i=0; $i<$section_size[3]; $i++) {
         if($section_4[3][$i]) { // 기존 데이터가 있다면
             $sql = "select * from `answer_master` where `answer_id`='".$section_4[3][$i]."';";
