@@ -103,10 +103,10 @@ include_once ('head.php');
                 </p>
             </div>
             <div class="head_right">
-                <div class="resend_btn"><a href="#">재전송 요청</a></div>
                 <?
                 if($res['current_status'] == 'a1' or $res['current_status'] == 'a2'){
                     ?>
+                    <div class="resend_btn"><a href="#">재전송 요청</a></div>
                     <div class="complete_btn"><a href="javascript:complete()">완료</a></div>
                     <?
                 }
@@ -224,18 +224,28 @@ include_once ('head.php');
 
                 </div>
             </div>
-            <div class="r_section">
+            <div class="r_section" style="padding-top:20px">
                 <div class="paper_input swiper-container">
                     <ul class="swiper-wrapper">
-                        <li class="swiper-slide">
-                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/1.jpg" style="height: 100%;"></div>
-                        </li>
-                        <li class="swiper-slide">
-                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/2.jpg" style="height: 100%;"></div>
-                        </li>
-                        <li class="swiper-slide">
-                            <div class="paper_img_input" style="overflow:auto;"><img src="./img/3.jpg" style="height: 100%;"></div>
-                        </li>
+
+                        <?php
+                        $sql = "SELECT * FROM 
+					    `upload_photo` 
+					   WHERE 
+					    id = '$_GET[id]' 
+					   ORDER BY sort asc";
+                        $result4 = mysqli_query($connect_db, $sql);
+                        $i = 0;
+                        while ($res4 = mysqli_fetch_array($result4)) {
+                            ++$i;
+                            ?>
+
+                            <li class="swiper-slide">
+                                <div class="paper_img_input" style="overflow:auto;"><img src="http://student.mathitlms.co.kr/data/photo/<?=$res4['reg_month']?>/<?=$res4['id']?>/<?=$res4['file_name']?>" style="height: 100%;"></div>
+                            </li>
+                            <?
+                        }
+                        ?>
                     </ul>
                     <div class="swiper-pagination"></div>
                     <div class="swiper-button-next"></div>
@@ -374,11 +384,13 @@ include_once ('head.php');
 
     $('.resend_btn').click(function (){
         var s_id = $('input[name="s_id"]').val();
-        // alert(s_id);
+        //alert(s_id);
         $.ajax({
-            url: 'scoring_resend.php?s_id'+s_id,
+            url: 'scoring_resend.php?s_id'+s_id+"&id=<?=$_GET[id]?>",
             success: function (res) {
                 alert('재전송 요청 하였습니다.');
+                location.reload();
+
             }
         });
     });

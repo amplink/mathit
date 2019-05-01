@@ -40,7 +40,7 @@ $r = api_calls_get($link);
 //print_r($r);
 
 $uid	= $r[0];	//UID
-$tid	= $r[1];	//아이디
+$sid	= $r[1];	//아이디
 $hash	= $r[2];	//비밀번호 해쉬
 $name   = $r[3];	//이름
 $sex   = $r[4];	//성별
@@ -66,7 +66,7 @@ if($uid) :
         //세션저장
         set_session('client_id', $ac);
         set_session('s_uid', $uid);
-        set_session('s_id', $tid);
+        set_session('s_id', $sid);
         set_session('s_name', $name);
         set_session('s_grade', $grade);
         set_session('s_hp', $hp);
@@ -119,7 +119,7 @@ if($uid) :
 
     else :
 
-         echo "캠퍼스 또는 아이디 와 비밀번호를 확인해주세요.";
+        echo "캠퍼스 또는 아이디 와 비밀번호를 확인해주세요.";
         //location_href("./login.php?re=1");
         exit;
 

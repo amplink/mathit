@@ -14,14 +14,20 @@ $sql = "SELECT
 				AND
 				   A.id = '$_GET[no]'
 				AND 
+				   A.student_id = '$_SESSION[s_id]'
+				AND 
 				   A.client_id = '$_SESSION[client_id]'
 				  ";
-
 
 //echo $sql;
 $result = mysqli_query($connect_db, $sql);
 $res = mysqli_fetch_array($result);
-
+$tot = count($res);
+if($tot == 0) {
+    alert_msg("존재하지 않는 숙제 입니다.");
+    echo "<script>history.back();</script>";
+    exit;
+}
 ?>
 <!--section-->
 <section>
@@ -58,22 +64,25 @@ $res = mysqli_fetch_array($result);
 
                 <?php
                 $sql2 = "SELECT * FROM 
-					    `upload_photo` 
-					   WHERE 
-					    id = '$_GET[no]' ";
+					       `upload_photo` 
+					     WHERE 
+					       id = '$_GET[no]' 
+						 AND student_id = '$_SESSION[s_id]'
+					     ORDER BY sort asc";
+
                 $result2 = mysqli_query($connect_db, $sql2);
                 $i = 0;
                 while ($res2 = mysqli_fetch_array($result2)) {
                     ++$i;
                     ?>
-                    <div class="file"  id="img_<?=$i?>">
+                    <div class="file" id="img_<?=$res2['seq']?>">
                         <div class="photo_box">
                             <div class="camera_icon" style="width:100%;">
                                 <img src="./data/photo/<?=$res2['reg_month']?>/<?=$res2['id']?>/<?=$res2['file_name']?>" height="70" style="margin-top:-25px">
                             </div>
                         </div>
                         <span style="font-size:13px"><?=$i?></span>
-                        <span id="removeImg">X</span>
+                        <span class="removeImgDb" data-value="<?=$res2['seq']?>">X</span>
                     </div>
                     <?
                 }
@@ -146,8 +155,7 @@ $res = mysqli_fetch_array($result);
                         image.src = this.result;
                         //preview.appendChild( image );
 
-
-                        html += '<div class="file"  id="img_'+i+'">';
+                        html += '<div class="file"  id="img_'+(i-1)+'">';
                         html += '<div class="photo_box">';
                         html += '<div class="camera_icon" style="width:100%;">';
                         //html += '<img src="img/camera.png" alt="camera_icon"></div>';
@@ -212,6 +220,15 @@ $res = mysqli_fetch_array($result);
             $('.photo_section>div:eq('+fileIndex+')').remove();
         });
 
+        $(document).on('mousedown', '.removeImgDb', function(){
+            var fileIndex = $(this).data("value");
+            var n = $(".file").index($(this).parent('div'));
+            $.post('img_del.php', {no:fileIndex}, function(data){
+                $('.photo_section>div:eq('+n+')').remove();
+            },'text');
+            // fileBuffer.splice(fileIndex,1);
+            // $('.photo_section>div:eq('+fileIndex+')').remove();
+        });
 
         $(document).on('touch', '.camera_icon', function(){
             //$('.camera_icon').on("mousedown", function(){
@@ -233,9 +250,9 @@ $res = mysqli_fetch_array($result);
                 var postData = $(this).sortable('serialize');
                 console.log(postData);
                 $("#sort").val(postData);
-                /* $.post('sort_save.php', postData, function(data){
-                   console.log(data);
-                 },'text');*/
+                $.post('sort_save.php?id=<?=$_GET[no]?>', postData, function(data){
+                    console.log(data);
+                },'text');
             }
         }).disableSelection().on("tap", ".camera_icon", function() {
             var img = $(this).children("img");
@@ -246,6 +263,11 @@ $res = mysqli_fetch_array($result);
 
 
         $("#check_btn").click(function(){
+
+            if($('.photo_box').length == 0){
+                alert("첨부할 사진을 먼저 선택해 주세요.");
+                return false;
+            }
 
             $("#photoForm").ajaxForm({
                 type: "post",
@@ -258,7 +280,6 @@ $res = mysqli_fetch_array($result);
                 success : function(result){
                     if(result == "success") alert('사진이 정상 등록 되었습니다.');
                     else if(result == "err") alert('사진이 정상 등록 되지 않았습니다.');
-
                     location.href = "homework_submission.php?no=<?=$_GET['no']?>";
                 }
             }).submit();
