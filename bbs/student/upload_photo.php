@@ -1,10 +1,13 @@
 <?php
 include_once ('_common.php');
 
+$id = $_POST['id'];
 $i = 0;
-
-$sort = str_replace("img[]=","",$_POST['sort']);
-$sort_arr = explode("&", $sort);
+$j = 1;
+if($_POST['sort']){
+    $sort = str_replace("img[]=","",$_POST['sort']);
+    $sort_arr = explode("&", $sort);
+}
 
 $tot = count($_FILES['files']['name']);
 
@@ -14,7 +17,7 @@ foreach ($_FILES['files']['name'] as $f => $name) {
     if(!is_dir($upload_dir)){
         mkdir($upload_dir, 0755);
     }
-    $upload_dir2 = "./data/photo/".date("Ym")."/".$_POST['id'];
+    $upload_dir2 = "./data/photo/".date("Ym")."/".$id;
 
     if(!is_dir($upload_dir2)){
         mkdir($upload_dir2, 0755);
@@ -36,18 +39,30 @@ foreach ($_FILES['files']['name'] as $f => $name) {
     $filename = $unencodedData.".".$ext;
     $uploadFile = $upload_dir2."/".$filename;
 
-    $id = $_POST['id'];
-    $sno = $sort_arr[$f];
-
+    $sno = ($_POST['sort'])?$sort_arr[$f]:$j;
+    $reg_month = date('Ym');
     if(move_uploaded_file($_FILES['files']['tmp_name'][$f], $uploadFile)){
-        $sql = "INSERT INTO `upload_photo` (`id`, `file_name`, `org_file_name`, `sort`, reg_date)
-			VALUES ('$id', '$filename', '$name', '$sno', now());";
+        $sql = "INSERT INTO `upload_photo` (`id`, `file_name`, `org_file_name`, `sort`, `reg_month`, `reg_date`)
+			VALUES ('$id', '$filename', '$name', '$sno', '$reg_month', now());";
         $result = sql_query($sql);
         if($result) $i++;
+
     }
+
+    $j++;
 }
 
-if($tot == $i) echo "success";
+if($tot == $i){
+
+    if($_POST['status'] == "") $step = "1";
+    else if($_POST['status'] == "s1") $step = "2";
+
+    $sql2 = "UPDATE homework_assign_list SET current_status = 'a".$step."', apply_status_".$step." = 'Y' WHERE id = '$id'";
+    echo $sql2;
+    $result2 = sql_query($sql2);
+    if($result2) echo "success";
+
+}
 else if($tot > $i) echo "err";
 
 ?>

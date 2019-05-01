@@ -83,7 +83,7 @@ include_once ('head.php');
                     ?>
                     <div class="content_list">
                         <div class="content_alarm_section" style="width:63px">
-                            <a href="homework_submission.php">
+                            <a href="homework_submission.php?no=<?=$res['id']?>">
                                 <!--숙제 제출화면-->
                                 <div class="submission">
                                     <div class="submission_sign <?=$add_style?>"><span><?=$status1?></span></div>
