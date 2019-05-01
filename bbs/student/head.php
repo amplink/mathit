@@ -166,18 +166,23 @@ while($res = mysqli_fetch_array($result)) {
         <div class="weekly_schedule_wrap">
 
             <?php
+            /*
+                        $link = "/api/math/class?client_no=".$_SESSION['client_id'];
+                        $r = api_calls_get($link);
 
-            $link = "/api/math/class?client_no=".$_SESSION['client_id'];
+                        foreach($r as $k => $v){
+                            if(in_array($d_uid_arr,$v)) {
+                                $class_name[] = $v[4];
+                                break;
+                            }
+                        }
+            */
+
+            $link = "/api/math/student?client_no=".$_SESSION['client_id']."&id=".$_SESSION['s_id'];
             $r = api_calls_get($link);
 
-            $d_uid_arr = explode(",",$_SESSION['d_uid']);
-
-            foreach($r as $k => $v){
-                if(in_array($d_uid_arr,$v)) {
-                    $class_name[] = $v[4];
-                    break;
-                }
-            }
+            //$d_uid_arr = explode(",",$_SESSION['d_uid']);
+            $d_uid_arr = explode(',', $r[17]);
 
             $weekly = array("월"=>"3","화"=>"6","수"=>"9","목"=>"12","금"=>"15","토"=>"18");
             $weeks = array_keys($weekly);
@@ -223,9 +228,9 @@ while($res = mysqli_fetch_array($result)) {
                                             <span><?= $start ?></span>
                                             <span> ~ </span>
                                             <span><?= $end ?></span></p>
-                                        <p class="class_name">
+                                        <!-- <p class="class_name">
                                             <span><?=$class_name?></span>
-                                        </p>
+                                        </p>-->
                                     </div>
                                     <?php
                                     $n++;

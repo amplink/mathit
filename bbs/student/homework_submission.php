@@ -206,24 +206,24 @@ $res = mysqli_fetch_array($result);
 
         });
 
-        $(document).on('touchend', '#removeImg', function(){
+        $(document).on('mousedown', '#removeImg', function(){
             const fileIndex = $(this).parent().index();
             fileBuffer.splice(fileIndex,1);
             $('.photo_section>div:eq('+fileIndex+')').remove();
         });
 
 
-        $(document).on('touchend', '.camera_icon', function(){
-
+        $(document).on('touch', '.camera_icon', function(){
+            //$('.camera_icon').on("mousedown", function(){
             var img = $(this).children("img");
             var img_src = img.attr("src");
             $(".bigimg").show();
             $(".bigimg").html("<img src='"+img_src+"'>");
 
         });
+//});
 
-
-        $(document).on('touchend', '.bigimg', function(){
+        $(document).on('mousedown', '.bigimg', function(){
             $(this).hide();
         });
 
@@ -237,9 +237,13 @@ $res = mysqli_fetch_array($result);
                    console.log(data);
                  },'text');*/
             }
+        }).disableSelection().on("tap", ".camera_icon", function() {
+            var img = $(this).children("img");
+            var img_src = img.attr("src");
+            $(".bigimg").show();
+            $(".bigimg").html("<img src='"+img_src+"'>");
         });
 
-        $("#sortable").disableSelection();
 
         $("#check_btn").click(function(){
 
