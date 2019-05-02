@@ -50,5 +50,11 @@ $sql4 = "SELECT
 $result4 = sql_query($sql4);
 $res4 = mysqli_fetch_array($result4);
 
+$rmdir = '../student/data/photo/'.$res4[reg_month].'/'.$id;
 sql_query("DELETE FROM upload_photo WHERE id = '".$id."'");
-rm_dir('../student/data/photo/'.$res4[reg_month].'/'.$id);
+
+if(is_dir($rmdir)) {
+    rm_dir($rmdir);
+}
+
+?>

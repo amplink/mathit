@@ -84,6 +84,8 @@ include_once ('head.php');
             $page_set = 10; // 한페이지 줄수
             $block_set = 10; // 한페이지 블럭수
 
+            $today = date('m/d/Y');
+
             if($_GET['start'] && $_GET['end'])  $add_sql = " AND (A._from >= '".$_GET['start']."' AND  A._to <='".$_GET['end']."') ";
 
             $sql = "SELECT
@@ -93,7 +95,8 @@ include_once ('head.php');
 							A.seq = B.h_id
 						AND B.`client_id`='$_SESSION[client_id]'
 						AND B.student_id = '$_SESSION[s_id]'
-						AND B.`d_uid`='$_SESSION[d_uid]'";
+						AND B.`d_uid` IN ($_SESSION[d_uid])
+						AND A._from <= '$today'";
             $sql .= $add_sql;
 
             //echo $sql;
@@ -129,7 +132,8 @@ include_once ('head.php');
 							A.seq = B.h_id
 						AND B.`client_id`='$_SESSION[client_id]'
 						AND B.student_id = '$_SESSION[s_id]'
-						AND B.`d_uid`='$_SESSION[d_uid]'";
+						AND B.`d_uid` IN ($_SESSION[d_uid])
+						AND A._from <= '$today'";
             $sql .= $add_sql;
             $sql .= "ORDER BY A.seq DESC LIMIT $limit_idx, $page_set ";
             //echo $sql;

@@ -21,6 +21,8 @@ include_once ('head.php');
             $page_set = 10; // 한페이지 줄수
             $block_set = 10; // 한페이지 블럭수
 
+            $today = date('m/d/Y');
+
             $sql = "SELECT
 				      COUNT(*)
 						FROM `homework` A, `homework_assign_list` B
@@ -28,10 +30,9 @@ include_once ('head.php');
 							A.seq = B.h_id
 						AND B.`client_id`='$_SESSION[client_id]'
 						AND B.student_id = '$_SESSION[s_id]'
-						AND B.`d_uid`='$_SESSION[d_uid]'
+						AND B.`d_uid` IN ($_SESSION[d_uid])
 						AND B.current_status NOT IN ('s2','s3')
-						ORDER BY A.seq DESC
-						";
+						AND A._from <= '$today'";
 
             $result = sql_query($sql);
             $total = mysqli_fetch_array($result)[0];
@@ -57,7 +58,7 @@ include_once ('head.php');
 							A.seq = B.h_id
 						AND B.`client_id`='$_SESSION[client_id]'
 						AND B.student_id = '$_SESSION[s_id]'
-						AND B.`d_uid`='$_SESSION[d_uid]'
+						AND B.`d_uid` IN ($_SESSION[d_uid])
 						AND B.current_status NOT IN ('s2','s3')
 						ORDER BY A.seq DESC
 						";
