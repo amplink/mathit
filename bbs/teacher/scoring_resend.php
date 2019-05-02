@@ -36,7 +36,7 @@ $result3 = sql_query($sql3);
 
 if($result3){
 
-    $sql = "insert into `alarm` set `content`='정답지를 다시촬영하여 전송해 주세요.', `table_name`='score', `target`='학생', `uid`='$s_id';";
+    $sql = "insert into `alarm` set `content`='정답지를 다시 촬영하여 전송해 주세요.', `table_name`='score', `target`='학생', `uid`='$s_id';";
     sql_query($sql);
 }
 ?>
