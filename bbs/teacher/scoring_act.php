@@ -91,8 +91,12 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
         $result2 = sql_query($sql2);
         $res2 = mysqli_fetch_array($result2);
 
+        $rmdir = '../student/data/photo/'.$res2[reg_month].'/'.$_POST['id'];
+
+        if(is_dir($rmdir)) {
+            rm_dir($rmdir);
+        }
         sql_query("DELETE FROM upload_photo WHERE id = '".$_POST['id']."'");
-        rm_dir('../student/data/photo/'.$res2[reg_month].'/'.$_POST['id']);
 
     }
 
@@ -138,3 +142,4 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
 }
 
 location_href("./scoring_list.php?s_id=$_POST[s_id]&d_uid=$_POST[d_uid]&c_uid=$_POST[c_uid]");
+?>
