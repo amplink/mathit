@@ -384,9 +384,8 @@ include_once ('head.php');
 
     $('.resend_btn').click(function (){
         var s_id = $('input[name="s_id"]').val();
-        //alert(s_id);
         $.ajax({
-            url: 'scoring_resend.php?s_id'+s_id+"&id=<?=$_GET[id]?>",
+            url: 'scoring_resend.php?s_id='+s_id+"&id=<?=$_GET['id']?>",
             success: function (res) {
                 alert('재전송 요청 하였습니다.');
                 location.reload();
