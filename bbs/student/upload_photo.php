@@ -30,7 +30,7 @@ foreach ($_FILES['files']['name'] as $key => $name) {
     $uploadName = explode('.', $name);
 
     $fileSize = $_FILES['files']['size'][$key];
-    if($fileSize > 5242880) break;
+    if($fileSize > 10485760) break;
 
     // $fileType = $_FILES['files']['type'][$key];
     $uploadname = time().$key.'.'.$uploadName[1];

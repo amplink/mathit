@@ -146,9 +146,14 @@ if($tot == 0) {
 
                 // Make sure `file.name` matches our extensions criteria
                 if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
-                    var reader = new FileReader();
 
+                    var reader = new FileReader();
                     reader.addEventListener("load", function () {
+                        if(i > 10){
+                            alert('최대 10개까지 첨부 가능합니다.');
+                            return false;
+                        }
+
                         var image = new Image();
                         image.height = 100;
                         image.title = file.name;
