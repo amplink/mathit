@@ -3684,6 +3684,22 @@ function set_paging($page, $block, $block_set, $total_page)
 }
 
 
+function rm_dir($dir) {
+    $dirs = dir($dir);
+    while(false !== ($entry = $dirs->read())) {
+        if(($entry != '.') && ($entry != '..')) {
+            if(is_dir($dir.'/'.$entry)) {
+                rmdir_ok($dir.'/'.$entry);
+            } else {
+                @unlink($dir.'/'.$entry);
+            }
+        }
+    }
+    $dirs->close();
+    @rmdir($dir);
+}
+
 
 $grade_arr = array("초3"=>"3", "초4"=>"4", "초5"=>"5", "초6"=>"6",  "중1"=>"7", "중2"=>"8", "중3"=>"9");
 $semester_arr = array("1학기"=>"1", "2학기"=>"2");
+?>

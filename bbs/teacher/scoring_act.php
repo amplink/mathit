@@ -31,7 +31,7 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
 			   
 			   ";
 
-    $result = mysqli_query($connect_db, $sql);
+    $result = sql_query($sql);
     $res = mysqli_fetch_array($result);
 
     //$cronerData[$_POST['corner_name']] = $marking;
@@ -79,6 +79,23 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
 
     }
 
+    if($j == 0 || $count == 1 || $count == 2){
+
+        $sql2 = "SELECT 
+				    reg_month
+				 FROM 
+				   `upload_photo`
+				 WHERE
+				   id = '".$_POST['id']."'
+				 LIMIT 1";
+        $result2 = sql_query($sql2);
+        $res2 = mysqli_fetch_array($result2);
+
+        sql_query("DELETE FROM upload_photo WHERE id = '".$_POST['id']."'");
+        rm_dir('../student/data/photo/'.$res2[reg_month].'/'.$_POST['id']);
+
+    }
+
     $sql3 = "SELECT 
 			  count(id) tot
 			FROM 
@@ -121,4 +138,3 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
 }
 
 location_href("./scoring_list.php?s_id=$_POST[s_id]&d_uid=$_POST[d_uid]&c_uid=$_POST[c_uid]");
-?>

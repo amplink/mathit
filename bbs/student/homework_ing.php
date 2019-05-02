@@ -49,7 +49,7 @@ include_once ('head.php');
 						 (CASE
 						  WHEN (B.current_status = 'a1' OR  B.current_status= 'a2') THEN '채점중'
 						  WHEN (B.current_status = '') THEN '-'
-						  WHEN (B.apply_status_2 = 'N' AND current_status = 's1') THEN '완료'
+						  WHEN (B.apply_status_2 = 'N' AND current_status = 's1') THEN '채점완료'
 						  END
 						  ) status2
 						FROM `homework` A, `homework_assign_list` B

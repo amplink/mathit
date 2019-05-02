@@ -39,4 +39,16 @@ if($result3){
     $sql = "insert into `alarm` set `content`='정답지를 다시 촬영하여 전송해 주세요.', `table_name`='score', `target`='학생', `uid`='$s_id';";
     sql_query($sql);
 }
-?>
+
+$sql4 = "SELECT 
+			reg_month
+		 FROM 
+		   `upload_photo`
+		 WHERE
+		   id = '".$id."'
+		 LIMIT 1";
+$result4 = sql_query($sql4);
+$res4 = mysqli_fetch_array($result4);
+
+sql_query("DELETE FROM upload_photo WHERE id = '".$id."'");
+rm_dir('../student/data/photo/'.$res4[reg_month].'/'.$id);
