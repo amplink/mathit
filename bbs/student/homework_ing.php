@@ -95,10 +95,10 @@ include_once ('head.php');
                                 </div>
                             </a>
                         </div>
-                        <div class="content_detail_section" style="width: calc(100% - 95px)">
+                        <div class="content_detail_section" style="width: calc(100% - 90px);">
                             <a href="homework_chat.php?id=<?=$res['id']?>">
                                 <!--숙제 확인화면-->
-                                <div class="book" style="width:110px">
+                                <div class="book" style="width:125px">
                                     <div class="section_icon"><img src="img/range.png" alt="range_icon"></div>
                                     <div class="section_text">
                                         <p class="book_name"><?= $res['grade'] ?> - <?= $res['semester'] ?></p>
@@ -107,8 +107,8 @@ include_once ('head.php');
                                 </div>
                                 <div class="limit">
                                     <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
-                                    <div class="section_text" style="vertical-align:top;padding-top:8px">
-                                        <p style="<?=$add_style2?>"><?=substr($res['_from'],0,5)?> ~ <?=substr($res['_to'],0,5)?></p>
+                                    <div class="section_text" style="vertical-align:top;padding-top:8px;margin-left:-10px">
+                                        <p style="<?=$add_style2?>"><?=substr($res['_from'],0,5)?>~<?=substr($res['_to'],0,5)?></p>
                                         <!--<p><span>AM</span> <span>00:00</span></p>-->
                                     </div>
                                 </div>
