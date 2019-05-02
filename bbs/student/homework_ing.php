@@ -60,6 +60,7 @@ include_once ('head.php');
 						AND B.student_id = '$_SESSION[s_id]'
 						AND B.`d_uid` IN ($_SESSION[d_uid])
 						AND B.current_status NOT IN ('s2','s3')
+						AND A._from <= '$today'
 						ORDER BY A.seq DESC
 						";
 

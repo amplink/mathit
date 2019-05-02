@@ -101,13 +101,13 @@ $student_id = $res['student_id'];
         <div class="report_detail_section">
             <p class="detail_title">학생 수준 진단</p>
             <div class="detail_content_box">
-                <p><span><?=$res['evaluation']?></span></p>
+                <p><span><?=nl2br($res['evaluation'])?></span></p>
             </div>
         </div>
         <div class="report_detail_section">
             <p class="detail_title">선생님 코멘트</p>
             <div class="detail_content_box">
-                <p><span><?=$res['comment']?></span></p>
+                <p><span><?=nl2br($res['comment'])?></span></p>
             </div>
         </div>
     </div>

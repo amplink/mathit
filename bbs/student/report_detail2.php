@@ -313,7 +313,7 @@ echo $result;
         <div class="report_detail_section">
             <p class="detail_title">선생님 코멘트</p>
             <div class="detail_content_box" style="margin-top:-7px">
-                <p><span><?=$res['comment']?></span></p>
+                <p><span><?=nl2br($res['comment'])?></span></p>
             </div>
         </div>
     </div>
