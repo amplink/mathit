@@ -20,7 +20,7 @@ $sql = "SELECT
 				  ";
 
 //echo $sql;
-$result = mysqli_query($connect_db, $sql);
+$result = sql_query($sql);
 $res = mysqli_fetch_array($result);
 $tot = count($res);
 if($tot == 0) {
@@ -70,7 +70,7 @@ if($tot == 0) {
 						 AND student_id = '$_SESSION[s_id]'
 					     ORDER BY sort asc";
 
-                $result2 = mysqli_query($connect_db, $sql2);
+                $result2 = sql_query($sql2);
                 $i = 0;
                 while ($res2 = mysqli_fetch_array($result2)) {
                     ++$i;
@@ -221,17 +221,16 @@ if($tot == 0) {
         });
 
         $(document).on('mousedown', '.removeImgDb', function(){
-            var fileIndex = $(this).data("value");
-            var n = $(".file").index($(this).parent('div'));
-            $.post('img_del.php', {no:fileIndex}, function(data){
-                $('.photo_section>div:eq('+n+')').remove();
-            },'text');
-            // fileBuffer.splice(fileIndex,1);
-            // $('.photo_section>div:eq('+fileIndex+')').remove();
+            if(confirm('정말 삭제 하겠습니가?')){
+                var fileIndex = $(this).data("value");
+                var n = $(".file").index($(this).parent('div'));
+                $.post('img_del.php', {no:fileIndex}, function(data){
+                    $('.photo_section>div:eq('+n+')').remove();
+                },'text');
+            }
         });
 
-        $(document).on('touch', '.camera_icon', function(){
-            //$('.camera_icon').on("mousedown", function(){
+        $(document).on('mousedown', '.camera_icon', function(){
             var img = $(this).children("img");
             var img_src = img.attr("src");
             $(".bigimg").show();
@@ -244,22 +243,24 @@ if($tot == 0) {
             $(this).hide();
         });
 
+        /*
+                     $("#sortable").sortable({
+                        update : function(event, ui){
+                            var postData = $(this).sortable('serialize');
+                            console.log(postData);
+                            $("#sort").val(postData);
+                             $.post('sort_save.php?id=<?=$_GET[no]?>', postData, function(data){
+                       console.log(data);
+                     },'text');
+                }
+             }).disableSelection().on("tap", ".camera_icon", function() {
+                var img = $(this).children("img");
+                var img_src = img.attr("src");
+                $(".bigimg").show();
+                $(".bigimg").html("<img src='"+img_src+"'>");
+            });
+*/
 
-        $("#sortable").sortable({
-            update : function(event, ui){
-                var postData = $(this).sortable('serialize');
-                console.log(postData);
-                $("#sort").val(postData);
-                $.post('sort_save.php?id=<?=$_GET[no]?>', postData, function(data){
-                    console.log(data);
-                },'text');
-            }
-        }).disableSelection().on("tap", ".camera_icon", function() {
-            var img = $(this).children("img");
-            var img_src = img.attr("src");
-            $(".bigimg").show();
-            $(".bigimg").html("<img src='"+img_src+"'>");
-        });
 
 
         $("#check_btn").click(function(){

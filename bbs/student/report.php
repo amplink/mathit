@@ -11,7 +11,7 @@ $sql = "SELECT
 					FROM 
 					  `teacher_score`
 					WHERE 
-					   d_uid = $_SESSION[d_uid]
+					   d_uid IN ($_SESSION[d_uid])
 					AND
 					   student_id = '$_SESSION[s_id]'
 					AND 
@@ -34,11 +34,12 @@ $sql = "SELECT
 					FROM 
 					  `teacher_score`
 					WHERE 
-					   d_uid = $_SESSION[d_uid]
+					   d_uid IN ($_SESSION[d_uid])
 					AND
 					   student_id = '$_SESSION[s_id]'
 					AND 
-					   client_id = '$_SESSION[client_id]'";
+					   client_id = '$_SESSION[client_id]'
+					ORDER BY seq desc";
 
 $result = sql_query($sql);
 ?>

@@ -144,10 +144,10 @@ $student_id = $res['student_id'];
                                   `teacher_score`
                                 WHERE 
                                     grade = '$res[grade]'
-                                    AND d_uid='$res[d_uid]'
-                                    AND c_uid='$res[c_uid]'
+                                    -- AND d_uid='$res[d_uid]'
+                                    -- AND c_uid='$res[c_uid]'
                                     AND s_uid='$res[s_uid]'
-                                    AND d_order='$res[d_order]'
+                                    -- AND d_order='$res[d_order]'
                                     AND test_genre='$res[test_genre]'
                                     AND client_id='$ac'
 			                     ";

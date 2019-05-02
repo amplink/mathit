@@ -12,9 +12,9 @@ if($_POST['sort']){
 
 $tot = count($_FILES['files']['name']);
 
-foreach ($sort_arr as $key) {
+//foreach ($sort_arr as $key) {
 
-    //foreach ($_FILES['files']['name'] as $f => $name) {
+foreach ($_FILES['files']['name'] as $key => $name) {
 
     $upload_dir = "./data/photo/".date("Ym");
     if(!is_dir($upload_dir)){
@@ -73,4 +73,3 @@ if($tot == $i){
 
 }
 else if($tot > $i) echo "err";
-

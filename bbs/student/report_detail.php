@@ -5,11 +5,12 @@ include_once ('head.php');
 <body>
 <?php
 $sql = "SELECT * FROM 
-	         `teacher_score` 
-			WHERE 
-				`seq` = '$_GET[no]' 
-			AND client_id = '$_SESSION[client_id]' 
+              `teacher_score` 
+            WHERE 
+              `seq` = '$_GET[no]' 
+			AND client_id = '$_SESSION[client_id]'
 			AND student_id = '$_SESSION[s_id]'";
+
 $result = mysqli_query($connect_db, $sql);
 $res = mysqli_fetch_array($result);
 $student_id = $res['student_id'];
@@ -76,8 +77,12 @@ $student_id = $res['student_id'];
                                   `teacher_score`
                                 WHERE 
                                     grade = '$res[grade]'
+                                    -- AND d_uid='$res[d_uid]'
+                                    -- AND c_uid='$res[c_uid]'
+                                    AND s_uid='$res[s_uid]'
+                                    -- AND d_order='$res[d_order]'
                                     AND test_genre='$res[test_genre]'
-                                    AND client_id='$ac'
+                                    AND client_id='$_SESSION[client_id]'
 			                     ";
                     $result2 = mysqli_query($connect_db, $sql2);
                     $res2 = mysqli_fetch_array($result2);

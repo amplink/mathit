@@ -15,7 +15,7 @@ $sql = "SELECT A.seq, A.name, A.d_order, A.grade, A.unit, A._from, A._to, A.seme
             A.seq = B.h_id
 		AND B.`client_id`='$_SESSION[client_id]'
 		AND B.student_id = '$_SESSION[s_id]'
-		AND B.`d_uid`='$_SESSION[d_uid]'
+		AND B.`d_uid` IN ($_SESSION[d_uid])
 		AND B.current_status NOT IN ('s2','s3')
 		ORDER BY A.seq DESC LIMIT 3
 		";
@@ -98,7 +98,7 @@ $num = mysqli_num_rows($result);
                     FROM `teacher_score`  
                     WHERE 
                         `client_id`='$_SESSION[client_id]'
-                    AND `d_uid`='$_SESSION[d_uid]'
+                    AND `d_uid` IN ($_SESSION[d_uid])
                     AND student_id = '$_SESSION[s_id]'
                     ORDER BY seq DESC  LIMIT 3";
         $result2 = sql_query($sql2);
