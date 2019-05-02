@@ -151,6 +151,15 @@ if($seqq > 0) {
                 $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
                 sql_query($sql);
             }
+            $sql = "select `token` from `fcm`;";
+            $result = sql_query($sql);
+            $tokens = array();
+            while($res = mysqli_fetch_array($result)) {
+                $tokens[] = $res['token'];
+            }
+            $message = "공지가 수정되었습니다.";
+            send_notification($tokens, $message);
+
         }
     }
 
@@ -191,6 +200,14 @@ if($seqq > 0) {
                 $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
                 sql_query($sql);
             }
+            $sql = "select `token` from `fcm`;";
+            $result = sql_query($sql);
+            $tokens = array();
+            while($res = mysqli_fetch_array($result)) {
+                $tokens[] = $res['token'];
+            }
+            $message = "새로운 공지가 등록되었습니다.";
+            send_notification($tokens, $message);
         }
     }
 
