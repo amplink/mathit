@@ -64,7 +64,7 @@ $res = mysqli_fetch_array($result);
 <section>
     <div class="head_p">
         <p class="head_title">제출 결과 확인</p>
-        <div class="back_btn"><a href="homework_ing.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
+        <div class="back_btn"><a href="javascript:history.back()"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
     </div>
     <div class="content_p">
         <div class="homework_name_wrap">

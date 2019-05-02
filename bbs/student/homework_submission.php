@@ -34,7 +34,7 @@ if($tot == 0) {
     <div class="bigimg" style="position:absolute;width:100%;height:100vh;z-index:999;background-color:white;display:none"></div>
     <div class="head_p">
         <p class="head_title">숙제제출</p>
-        <div class="back_btn"><a href="homework_ing.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
+        <div class="back_btn"><a href="javascript:history.back()"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
     </div>
     <div class="content_p">
         <div class="homework_name_wrap" style="padding-left:10px">

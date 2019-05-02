@@ -38,8 +38,7 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
     $jsonData =  json_decode($res['wrong_anwer_'.$count],true);
     //$jsonData[$_POST['corner']] = $cronerData;
     //$jsonData[$_POST['corner']] = $marking;
-    $wrong_anwer =  json_encode($marking);
-
+    $wrong_anwer =  json_encode($marking, JSON_UNESCAPED_UNICODE);
 
     $marking_tot = count($marking);
 
@@ -142,4 +141,3 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
 }
 
 location_href("./scoring_list.php?s_id=$_POST[s_id]&d_uid=$_POST[d_uid]&c_uid=$_POST[c_uid]");
-?>
