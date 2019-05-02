@@ -43,7 +43,7 @@ $today_date = date("Y-m-d");
     $sql = "SELECT * FROM 
              `teacher_score` 
             WHERE 
-                `seq` = '$_GET[no]'";
+                `seq` = '$_GET[no]' and client_id='$ac'";
 
     $result = mysqli_query($connect_db, $sql);
     $res = mysqli_fetch_array($result);
@@ -196,7 +196,7 @@ $today_date = date("Y-m-d");
                     </div>
                 </div>
                 <?
-                $avg =round(($res['score1'] + $res['score2']) / 2);
+                $avg =round(($res['score1'] + $res['score2']) / 2,1);
 
                 $sql3 = "SELECT 
 				  SUM(A.score1 + A.score2) / (COUNT(A.seq)*2) avg,
@@ -212,9 +212,7 @@ $today_date = date("Y-m-d");
 				WHERE 
 					    c_uid='$res[c_uid]'
 				    AND s_uid='$res[s_uid]'
-					AND test_genre='$res[test_genre]'
-				
-				";
+					AND test_genre='$res[test_genre]'";
 
                 //echo $sql3;
                 $result3 = mysqli_query($connect_db, $sql3);

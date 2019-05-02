@@ -161,7 +161,7 @@ $today_date = date("Y-m-d");
                         <?
                         $sql2 = "
 		
-		SELECT  COUNT(C.seq) N1, SUM(C.tot2) N2 FROM (
+		      SELECT  COUNT(C.seq) N1, SUM(C.tot2) N2 FROM (
 				SELECT 
 					A.seq,
 				   (SELECT COUNT(h_id) FROM `homework_assign_list` WHERE h_id = A.seq AND student_id = '$res[student_id]' AND current_status IN ('s2','s3')) tot2
@@ -215,9 +215,7 @@ $today_date = date("Y-m-d");
 				WHERE 
 					    c_uid='$res[c_uid]'
 				    AND s_uid='$res[s_uid]'
-					AND test_genre='$res[test_genre]'
-				
-				";
+					AND test_genre='$res[test_genre]'";
 
                 //echo $sql3;
                 $result3 = mysqli_query($connect_db, $sql3);
