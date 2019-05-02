@@ -196,11 +196,12 @@ while($res = mysqli_fetch_array($result)) {
             $day_of_the_week = date('w') - 1;
             $this_week_ago = date('Y-m-d', strtotime($date." -".$day_of_the_week."days"));
 
-
+            $bus_on = 0;
             for($i=0; $i<6; $i++) {
                 $this_week_end = date("Y-m-d", strtotime($this_week_ago." +".$i." day"));
                 $week_day = substr($this_week_end,-2);
                 $add_css = ($week_day == $today)?"on":"";
+                if($week_day == $today) $bus_on = 1;
                 ?>
                 <div class="weekly_scedule_box <?=$add_css?>">
                     <div class="date_wrap">
@@ -211,7 +212,6 @@ while($res = mysqli_fetch_array($result)) {
 
                         <?php
                         $n = 0;
-                        $bus_on = 0;
                         for($j=0; $j<4; $j++) { //4교시까지
 
                             $x = 0;
@@ -221,7 +221,7 @@ while($res = mysqli_fetch_array($result)) {
                                 if ($r2[$x][$j][$count1] == 1) { //수업이 있으면
                                     $start = $r2[$x][$j][$count1 + 1];
                                     $end = $r2[$x][$j][$count1 + 2];
-                                    if($week_day == $today) $bus_on = 1;
+
                                     ?>
                                     <div class="class_time_info">
                                         <p class="time"><?=$r2[$x][$j][0]?>교시 - <span>PM</span>
@@ -242,7 +242,7 @@ while($res = mysqli_fetch_array($result)) {
                         }
 
                         if($n == 0){
-                            if($week_day == $today) $bus_on = 0;
+//                            if($week_day == $today) $bus_on = 0;
                             ?>
                             <div class="class_time_info" style="text-align:center;padding-top:10px">
                                 수업이 없습니다.
@@ -385,6 +385,7 @@ if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
         var bus_chk = <?php echo $bus_on;?>;
         var now = new Date();
         var hour = now.getHours();
+        // alert(bus_chk);
         if(bus_chk && hour < 15) {
             $.ajax({
                 url: 'bus_ntake.php',
