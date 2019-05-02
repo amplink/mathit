@@ -3689,7 +3689,7 @@ function rm_dir($dir) {
     while(false !== ($entry = $dirs->read())) {
         if(($entry != '.') && ($entry != '..')) {
             if(is_dir($dir.'/'.$entry)) {
-                rmdir_ok($dir.'/'.$entry);
+                rm_dir($dir.'/'.$entry);
             } else {
                 @unlink($dir.'/'.$entry);
             }
@@ -3702,4 +3702,3 @@ function rm_dir($dir) {
 
 $grade_arr = array("초3"=>"3", "초4"=>"4", "초5"=>"5", "초6"=>"6",  "중1"=>"7", "중2"=>"8", "중3"=>"9");
 $semester_arr = array("1학기"=>"1", "2학기"=>"2");
-?>
