@@ -149,7 +149,7 @@ if($tot == 0) {
 
                     var reader = new FileReader();
                     reader.addEventListener("load", function () {
-                        if(i > 30){
+                        if(i > 20){
                             //alert('최대 10개까지 첨부 가능합니다.');
                             return false;
                         }
@@ -275,6 +275,8 @@ if($tot == 0) {
                 return false;
             }
 
+            if(doubleSubmitCheck()) return;
+
             $("#photoForm").ajaxForm({
                 type: "post",
                 url : "./upload_photo.php",
@@ -292,6 +294,16 @@ if($tot == 0) {
 
         });
     });
+
+    var doubleSubmitFlag = false;
+    function doubleSubmitCheck(){
+        if(doubleSubmitFlag){
+            return doubleSubmitFlag;
+        }else{
+            doubleSubmitFlag = true;
+            return false;
+        }
+    }
 
     function photosel(){
 

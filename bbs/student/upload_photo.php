@@ -11,14 +11,15 @@ if($_POST['sort']){
 }
 
 $tot = count($_FILES['files']['name']);
+$tot2 = count($_FILES['files']['name']);
 
-if($tot > 30) $tot = 30;
+if($tot > 20) $tot = 20;
 
 //foreach ($sort_arr as $key) {
 
 foreach ($_FILES['files']['name'] as $key => $name) {
 
-    if($j <= 30){
+    if($j <= 20){
 
         $upload_dir = "./data/photo/".date("Ym");
         if(!is_dir($upload_dir)){
@@ -91,7 +92,7 @@ foreach ($_FILES['files']['name'] as $key => $name) {
 
         //if(move_uploaded_file($tmp_file, $uploadFile)){
         $sql = "INSERT INTO `upload_photo` (`id`, `student_id`, `file_name`, `org_file_name`, `sort`, `reg_month`, `reg_date`)
-				VALUES ('$id', '$_SESSION[s_id]', '$filename', '$name', '$sno', '$reg_month', now());";
+				VALUES ('$id', '$_SESSION[s_id]', '$filename', '$name', '$tot2', '$reg_month', now());";
         $result = sql_query($sql);
         if($result) $i++;
 

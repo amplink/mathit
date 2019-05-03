@@ -87,7 +87,6 @@ echo $result;
                 <table>
                     <thead>
                     <tr>
-                        <th></th>
                         <th>출제일</th>
                         <th>숙제명</th>
                         <th>제출일</th>
@@ -117,9 +116,9 @@ echo $result;
 				AND A.c_uid='$res[c_uid]' 
 				AND A.client_id='$_SESSION[client_id]' 
 				AND B.student_id='$res[student_id]'
-				AND B.apply_status_1 IS NOT NULL
-				AND (A._from >= '$start_day' AND A._to < '$res[date]')
-				ORDER BY A.seq asc";
+				AND B.current_status IN ('s2','s3')
+				AND (A._from >= '$start_day' AND A._from <= '$res[date]')
+				ORDER BY A._from asc";
 
                     $result4 = mysqli_query($connect_db, $sql4);
 
@@ -209,10 +208,9 @@ echo $result;
 				AND A.c_uid='$res[c_uid]' 
 				AND A.s_uid='$res[s_uid]' 
 				AND A.client_id='$_SESSION[client_id]' 
-				AND B.apply_status_1 IS NOT NULL
-				AND (B.submit_date1 != '' OR B.submit_date2 != '')
-				AND (A._from >= '$start_day' AND A._to < '$res[date]')
-				ORDER BY A.seq asc" ;
+				AND B.current_status IN ('s2','s3')
+				AND (A._from >= '$start_day' AND A._from <= '$res[date]')
+				ORDER BY A._from asc" ;
 
         $result5 = mysqli_query($connect_db, $sql5);
         $j = 0;
@@ -242,7 +240,8 @@ echo $result;
             foreach ($score_arr2[$key] as $v2) {
                 $sum += $v2;
             }
-            $avg[$i] = round($sum / $n);
+            $avgs = round($sum / $n);
+            $avg[$i] = (!is_infinite($avgs) and !is_nan($avgs))?round($sum / $n):"0";
             $i++;
         }
 
