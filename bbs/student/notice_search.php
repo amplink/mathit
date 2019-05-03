@@ -7,7 +7,7 @@ $page = $_GET['page'];
 $student = "%학생%";
 $start = ($page-1)*10;
 
-$sql = "select * from `teacher_notice` where `title` like '$search' and `client_id`='$ac' and `n_range` like '$student' order by `type` desc, `event_time` desc ";
+$sql = "select * from `teacher_notice` where `title` like '$search' or `target` like '$search' and `client_id`='$ac' and `n_range` like '$student' order by `type` desc, `event_time` desc ";
 $sql = $sql."limit ".$start.",10";
 //echo $sql;
 $result = sql_query($sql);
@@ -73,14 +73,14 @@ while($res = mysqli_fetch_array($result)) {
         <div class="left_btn" style="<?php if($page==1) echo "visibility: hidden;";?>"><a href="notice.php?page=<?=$page-1?>"><img src="img/prev_btn.png" alt="prev_btn_icon"></a></div>
         <div class="page_btn_wrap">
             <?php
-            $sql = "select `seq` from `teacher_notice` where `client_id`='$ac';";
+            $sql = "select * from `teacher_notice` where `title` like '$search' or `target` like '$search' and `client_id`='$ac' and `n_range` like '$student' order by `type` desc, `event_time` desc ";
             $result = sql_query($sql);
             $cnt = 0;
             $last = 0;
             while($res = mysqli_fetch_array($result)) $cnt++;
-            for($i=1; $i<=$cnt/10; $i++) {
+            for($i=0; $i<$cnt/10; $i++) {
                 ?>
-                <div class="page_btn"><a href="notice.php?page=<?=$i?>" id="<?=$i?>"><?=$i?></a></div>
+                <div class="page_btn"><a href="notice.php?page=<?=$i+1?>" id="<?=$i+1?>"><?=$i+1?></a></div>
                 <?
                 $last++;
             }

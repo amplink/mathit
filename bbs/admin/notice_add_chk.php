@@ -4,6 +4,7 @@ include_once ('_common.php');
 //INSERT INTO `notify` (`id`, `client_id`, `target`, `title`, `author`, `type`, `attach_file`, `contents`, `event_time`) VALUES ('eeeee', '125', '0', 'title', 'author', '1', 'awef', 'waefawef', CURRENT_TIMESTAMP);
 $r_client_id = $_POST['ac_select'];
 $r_target = $_POST['notice_range'];
+$range = $_POST['notice_range'];
 $title = $_POST['title'];
 $author = "관리자";
 $type = $_POST['notice_div'];
@@ -47,8 +48,50 @@ else {
         $sql = "INSERT INTO `notify` (`id`, `client_id`, `target`, `title`, `author`, `type`, `attach_file`, `attach_file_url`, `contents`, `event_time`)
 VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$name_name', '$name_url','$contents', CURRENT_TIMESTAMP);";
         sql_query($sql);
-        $sql = "INSERT INTO `teacher_notice` SET `seq`= '', `title`='$id', `writer`='관리자', `type`='$type', `n_range`='$target',`event_time`= CURRENT_TIMESTAMP";
+        $sql = "INSERT INTO `teacher_notice` SET `client_id` = '$client_id', `seq`= '', `title`='$id', `writer`='관리자', `type`='$type', `n_range`='$target', `target`='$title', `event_time`= CURRENT_TIMESTAMP";
         sql_query($sql);
+
+        // 알림 부분
+        $sql = "select * from `teacher_setting`;";
+        $result = sql_query($sql);
+        while($res = mysqli_fetch_array($result)) {
+            for($kk=0; $kk<count($range); $kk++) {
+                $t_uid = $res['t_id'];
+                if($range[$kk]=="전임강사" && $res['type'] == "전임강사") {
+                    $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                    sql_query($sql);
+                }else if($range[$kk]=="채점강사" && $res['type'] == "채점강사") {
+                    $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                    sql_query($sql);
+                }
+            }
+        }
+
+        for($kk=0; $kk<count($range); $kk++) {
+            if($range[$kk]=="학생") {
+                $ac = $_SESSION['client_no'];
+                $link = "/api/math/student_list?client_no=".$ac;
+                $r = api_calls_get($link);
+
+                for($i=1; $i<count($r); $i++) {
+                    $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                    sql_query($sql);
+                }
+                $sql = "select `token` from `fcm`;";
+                $result = sql_query($sql);
+                $tokens = array();
+                while($res = mysqli_fetch_array($result)) {
+                    $tokens[] = $res['token'];
+                }
+                $message = "새로운 공지가 등록되었습니다.";
+                send_notification($tokens, $message);
+            }
+        }
+
+        if(!$_SESSION['admin']) {
+            $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+            sql_query($sql);
+        }
     }else {
         if($_POST['hidden'] == 1) {
             $sql = "update `notify` set `attach_file`='', `attach_file_url`='';";
@@ -71,13 +114,99 @@ VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$name_nam
 
             $sql = "UPDATE `notify` SET `client_id` = '$client_id', `target` = '$target', `title` = '$title', `author` = '$author', `type` = '$type', `attach_file` = '$name_name', `attach_file_url` = '$name_url', `contents` = '$contents', `event_time` = CURRENT_TIMESTAMP WHERE  `id` = '".$_GET['id']."';";
             sql_query($sql);
-            $sql = "UPDATE `teacher_notice` SET `event_time`=CURRENT_TIMESTAMP, `type`='$type', `n_range`='$target' where `title`='".$_GET['id']."';";
+            $sql = "UPDATE `teacher_notice` SET `client_id` = '$client_id', `event_time`=CURRENT_TIMESTAMP, `type`='$type', `n_range`='$target', `target`='$title' where `title`='".$_GET['id']."';";
             sql_query($sql);
+
+            // 알림 부분
+            $sql = "select * from `teacher_setting`;";
+            $result = sql_query($sql);
+            while($res = mysqli_fetch_array($result)) {
+                for($kk=0; $kk<count($range); $kk++) {
+                    $t_uid = $res['t_id'];
+                    if($range[$kk]=="전임강사" && $res['type'] == "전임강사") {
+                        $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                        sql_query($sql);
+                    }else if($range[$kk]=="채점강사" && $res['type'] == "채점강사") {
+                        $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                        sql_query($sql);
+                    }
+                }
+            }
+
+            for($kk=0; $kk<count($range); $kk++) {
+                if($range[$kk]=="학생") {
+                    $ac = $_SESSION['client_no'];
+                    $link = "/api/math/student_list?client_no=".$ac;
+                    $r = api_calls_get($link);
+
+                    for($i=1; $i<count($r); $i++) {
+                        $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                        sql_query($sql);
+                    }
+                    $sql = "select `token` from `fcm`;";
+                    $result = sql_query($sql);
+                    $tokens = array();
+                    while($res = mysqli_fetch_array($result)) {
+                        $tokens[] = $res['token'];
+                    }
+                    $message = "공지가 수정되었습니다.";
+                    send_notification($tokens, $message);
+
+                }
+            }
+
+            if(!$_SESSION['admin']) {
+                $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                sql_query($sql);
+            }
         }else {
             $sql = "UPDATE `notify` SET `client_id` = '$client_id', `target` = '$target', `title` = '$title', `author` = '$author', `type` = '$type', `contents` = '$contents', `event_time` = CURRENT_TIMESTAMP WHERE  `id` = '".$_GET['id']."';";
             sql_query($sql);
-            $sql = "UPDATE `teacher_notice` SET `event_time`=CURRENT_TIMESTAMP, `type`='$type', `n_range`='$target' where `title`='".$_GET['id']."';";
+            $sql = "UPDATE `teacher_notice` SET `client_id` = '$client_id', `event_time`=CURRENT_TIMESTAMP, `type`='$type', `n_range`='$target', `target`='$title' where `title`='".$_GET['id']."';";
             sql_query($sql);
+
+            // 알림 부분
+            $sql = "select * from `teacher_setting`;";
+            $result = sql_query($sql);
+            while($res = mysqli_fetch_array($result)) {
+                for($kk=0; $kk<count($range); $kk++) {
+                    $t_uid = $res['t_id'];
+                    if($range[$kk]=="전임강사" && $res['type'] == "전임강사") {
+                        $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                        sql_query($sql);
+                    }else if($range[$kk]=="채점강사" && $res['type'] == "채점강사") {
+                        $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='$range[$kk]', `uid`='".$res['t_id']."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                        sql_query($sql);
+                    }
+                }
+            }
+
+            for($kk=0; $kk<count($range); $kk++) {
+                if($range[$kk]=="학생") {
+                    $ac = $_SESSION['client_no'];
+                    $link = "/api/math/student_list?client_no=".$ac;
+                    $r = api_calls_get($link);
+
+                    for($i=1; $i<count($r); $i++) {
+                        $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                        sql_query($sql);
+                    }
+                    $sql = "select `token` from `fcm`;";
+                    $result = sql_query($sql);
+                    $tokens = array();
+                    while($res = mysqli_fetch_array($result)) {
+                        $tokens[] = $res['token'];
+                    }
+                    $message = "공지가 수정되었습니다.";
+                    send_notification($tokens, $message);
+
+                }
+            }
+
+            if(!$_SESSION['admin']) {
+                $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                sql_query($sql);
+            }
         }
     }
 

@@ -9,7 +9,7 @@ $type = "%".$res['type']."%";
 $search = "%".$_GET['search']."%";
 $i=1;
 $cnt = 0;
-$sql = "select * from `teacher_notice` where `title` like '$search' and `n_range` like '$type' or `writer`='$_SESSION[t_name]' and `client_id`='$ac' order by `type` desc, `event_time` desc";
+$sql = "select * from `teacher_notice` where `title` like '$search' or `target` like '$search' and `n_range` like '$type' or `writer`='$_SESSION[t_name]' and `client_id`='$ac' order by `type` desc, `event_time` desc";
 if($_SESSION['admin']) {
     $sql = "select * from `teacher_notice` where `title` like '$search' and `client_id`='$ac' order by `type` desc, `event_time` desc";
 }
@@ -29,7 +29,7 @@ while($res = mysqli_fetch_array($result)) {
                 $signdate = $res['event_time'];
                 $someTime=strtotime($thisTime)-strtotime("$signdate GMT");
                 $cha = ceil($someTime/(60*60*24));
-                echo $cha;
+//                echo $cha;
                 if($cha <= 2) {
                     ?>
                     <div class="new"><p>new</p></div>

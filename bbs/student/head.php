@@ -385,22 +385,17 @@ if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
         var bus_chk = <?php echo $bus_on;?>;
         var now = new Date();
         var hour = now.getHours();
-        // alert(bus_chk);
+        alert(bus_chk);
         if(bus_chk && hour < 15) {
-            $.ajax({
-                url: 'bus_ntake.php',
-                success: function (res) {
-                    if(res == "success") {
-                        alert('담당 기사님께 정상적으로 문자가 발송 되었습니다.');
-                    } else if(res == "time_err") {
-                        alert('지금은 서비스를 이용할 수 없는 시간입니다.\n학원으로 연락주시기 바랍니다.');
-                    }
-                    else {
-                        alert(res);
-                    }
-                    // alert(res);
-                }
-            });
+            // $.ajax({
+            //     url: 'bus_ntake.php',
+            //     success: function (res) {
+            //         if(res == "success") {
+            //             alert('담당 기사님께 정상적으로 문자가 발송 되었습니다.');
+            //         }
+            //         // alert(res);
+            //     }
+            // });
         }else  alert('지금은 서비스를 이용할 수 없는 시간입니다.\n학원으로 연락주시기 바랍니다.');
     });
 </script>
