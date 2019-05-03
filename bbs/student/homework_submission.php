@@ -81,8 +81,8 @@ if($tot == 0) {
                                 <img src="./data/photo/<?=$res2['reg_month']?>/<?=$res2['id']?>/<?=$res2['file_name']?>" height="70" style="margin-top:-25px">
                             </div>
                         </div>
-                        <span style="font-size:13px"><?=$i?></span>
-                        <span class="removeImgDb" data-value="<?=$res2['seq']?>">X</span>
+                        <center><span style="font-size:13px"><?=$i?></span></center>
+                        <!--<span class="removeImgDb" data-value="<?=$res2['seq']?>">X</span>-->
                     </div>
                     <?
                 }
@@ -133,10 +133,10 @@ if($tot == 0) {
         $('#files').change(function(){
             fileBuffer = [];
             //const target = document.getElementsByName('files[]');
-            var files   = document.querySelector('input[type=file]').files;
+            var target   = document.querySelector('input[type=file]').files;
 
             //Array.prototype.push.apply(fileBuffer, target[0].files);
-
+            $('.photo_section').html("");
             var i = $('.photo_box').length + 1;
 
             function readAndPreview(file) {
@@ -149,8 +149,8 @@ if($tot == 0) {
 
                     var reader = new FileReader();
                     reader.addEventListener("load", function () {
-                        if(i > 10){
-                            alert('최대 10개까지 첨부 가능합니다.');
+                        if(i > 30){
+                            //alert('최대 10개까지 첨부 가능합니다.');
                             return false;
                         }
 
@@ -167,9 +167,9 @@ if($tot == 0) {
                         html += '<img src="'+image.src+'" height="70" style="margin-top:-25px"></div>';
                         html += '</div>';
                         //html += '<img src="'+URL.createObjectURL(file)+'" width="30" height="30">'
-                        html += '<span style="font-size:13px">'+i+'</span>';
+                        html += '<center><span style="font-size:13px">'+i+'</span></center>';
                         //html += '<span> <input type="text" style="width:250px/"></span>';
-                        html += '<span id="removeImg">X</span>';
+                        //html += '<span id="removeImg">X</span>';
                         html += '</div>';
 
                         ++i;
@@ -183,8 +183,8 @@ if($tot == 0) {
 
             }
 
-            if (files) {
-                [].forEach.call(files, readAndPreview);
+            if (target) {
+                [].forEach.call(target, readAndPreview);
             }
 
 

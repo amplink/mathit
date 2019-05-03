@@ -358,30 +358,30 @@ include_once ('head.php');
     });
 
 
+    /*
+        $('.paper_img_input img').each(function() {
+            var maxWidth = 700;
+            var maxHeight = 750;
+            var ratio = 0;
+            var width = $(this).width();
+            var height = $(this).height();
+            if(width > maxWidth){
+                ratio = maxWidth / width;
+                $(this).css("width", maxWidth);
+                $(this).css("height", height * ratio);
+                height = height * ratio;
+            }
+            var width = $(this).width();
+            var height = $(this).height();
 
-    $('.paper_img_input img').each(function() {
-        var maxWidth = 700;
-        var maxHeight = 750;
-        var ratio = 0;
-        var width = $(this).width();
-        var height = $(this).height();
-        if(width > maxWidth){
-            ratio = maxWidth / width;
-            $(this).css("width", maxWidth);
-            $(this).css("height", height * ratio);
-            height = height * ratio;
-        }
-        var width = $(this).width();
-        var height = $(this).height();
-
-        if(height > maxHeight){
-            ratio = maxHeight / height;
-            $(this).css("height", maxHeight);
-            $(this).css("width", width * ratio);
-            width = width * ratio;
-        }
-    });
-
+            if(height > maxHeight){
+                ratio = maxHeight / height;
+                $(this).css("height", maxHeight);
+                $(this).css("width", width * ratio);
+                width = width * ratio;
+            }
+        });
+    */
     $('.resend_btn').click(function (){
         var s_id = $('input[name="s_id"]').val();
         $.ajax({

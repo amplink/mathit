@@ -259,12 +259,12 @@ while($res = mysqli_fetch_array($result)) {
                     <?php
                     $_from = $res['_from'];
                     $_to = $res['_to'];
-                    echo '<input type="text" name="from" id="from'.$i.'" style="width: 70px;" value="'.$_from.'" required>';
+                    echo '<input type="text" name="from" id="from'.$i.'" style="width: 70px;" value="'.$_from.'" readOnly required>';
                     ?>
                 </td>
                 <td style="max-width: 200px; width: 200px;">
                     <?php
-                    echo '<input type="text" name="to" id="to'.$i.'" style="width: 70px;" value="'.$_to.'" required>';
+                    echo '<input type="text" name="to" id="to'.$i.'" style="width: 70px;" value="'.$_to.'" readOnly required>';
                     ?>
                 </td>
                 </td>
@@ -379,7 +379,7 @@ while($res = mysqli_fetch_array($result)) {
             success: function(response){
                 //call_homework_list(d, c, s, n, m);
                 alert(response.message);
-                //call_homework_list('<?=$_GET[d_uid]?>', '<?=$_GET[c_uid]?>', '<?=$_GET[s_uid]?>', '<?=$_GET[d_order]?>', '<?=$_GET[st_id]?>');
+                call_homework_list('<?=$_GET[d_uid]?>', '<?=$_GET[c_uid]?>', '<?=$_GET[s_uid]?>', '<?=$_GET[d_order]?>', '<?=$_GET[st_id]?>');
 
             }
         });

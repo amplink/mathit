@@ -233,9 +233,9 @@ $res = mysqli_fetch_array($result);
                                             if(!in_array($group[$res['corner'.$i]][$j]['item_number'], $chk_wrong_answer)) continue;
                                             $wrongArr =  explode(",",$wrongData[$i]);
                                             ?>
-                                            <div>
-                                                <span style="display:inline-block;width:55px;height:30px;vertical-align:top;padding-top:5px;"><?=$group[$res['corner'.$i]][$j]['item_number']?>.</span>
-                                                <span style="display:inline-block;border:1px solid #c3c3c3"><img src="<?=$group[$res['corner'.$i]][$j]['answer_image']?>" onload="resize(this)"></span>
+                                            <div style="padding-top:5px;">
+                                                <span style="display:inline-block;width:60px;height:30px;vertical-align:top;padding-top:5px;"><?=$group[$res['corner'.$i]][$j]['item_number']?>.</span>
+                                                <span style="display:inline-block;border:1px solid #c3c3c3;"><img src="<?=$group[$res['corner'.$i]][$j]['answer_image']?>" onload="resize(this)"></span>
                                             </div>
 
                                             <? if($group[$res['corner'.$i]][$j]['explain_image']){ ?>

@@ -87,6 +87,7 @@ include_once ('head.php');
 
 <section>
     <input type="hidden" name="step" id="step" value="1">
+    <input type="hidden" name="chw" id="chw" value="0">
     <div class="head_section">
         <div class="head_section_1400">
             <div class="head_left">
@@ -309,6 +310,7 @@ include_once ('head.php');
                     success: function(response) {
                         $("#homework_content").html(response);
                         $('.custumdropdown').homework_manegement_add();
+                        if($("#chw").val() == '1') clear_btn();
                     }
                 });
             }
@@ -325,6 +327,7 @@ include_once ('head.php');
                 // console.log(response);
                 $("#homework_content").html(response);
                 $('.custumdropdown').homework_manegement_add();
+                if($("#chw").val() == '1') clear_btn();
             }
         });
 
@@ -378,6 +381,7 @@ include_once ('head.php');
     }
 
     function clear_btn() {
+        $("#chw").val('1');
         if($('#clear').prop('checked')) $('.complete_text').parent().parent().hide();
         else $('.complete_text').parent().parent().show();
     }
