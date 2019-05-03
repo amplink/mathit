@@ -201,7 +201,7 @@ while($res = mysqli_fetch_array($result)) {
                 $this_week_end = date("Y-m-d", strtotime($this_week_ago." +".$i." day"));
                 $week_day = substr($this_week_end,-2);
                 $add_css = ($week_day == $today)?"on":"";
-                if($week_day == $today) $bus_on = 1;
+
                 ?>
                 <div class="weekly_scedule_box <?=$add_css?>">
                     <div class="date_wrap">
@@ -221,7 +221,7 @@ while($res = mysqli_fetch_array($result)) {
                                 if ($r2[$x][$j][$count1] == 1) { //수업이 있으면
                                     $start = $r2[$x][$j][$count1 + 1];
                                     $end = $r2[$x][$j][$count1 + 2];
-
+                                    if($week_day == $today) $bus_on = 1;
                                     ?>
                                     <div class="class_time_info">
                                         <p class="time"><?=$r2[$x][$j][0]?>교시 - <span>PM</span>
@@ -385,17 +385,17 @@ if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
         var bus_chk = <?php echo $bus_on;?>;
         var now = new Date();
         var hour = now.getHours();
-        alert(bus_chk);
+        // alert(bus_chk);
         if(bus_chk && hour < 15) {
-            // $.ajax({
-            //     url: 'bus_ntake.php',
-            //     success: function (res) {
-            //         if(res == "success") {
-            //             alert('담당 기사님께 정상적으로 문자가 발송 되었습니다.');
-            //         }
-            //         // alert(res);
-            //     }
-            // });
+            $.ajax({
+                url: 'bus_ntake.php',
+                success: function (res) {
+                    if(res == "success") {
+                        alert('담당 기사님께 정상적으로 문자가 발송 되었습니다.');
+                    }
+                    // alert(res);
+                }
+            });
         }else  alert('지금은 서비스를 이용할 수 없는 시간입니다.\n학원으로 연락주시기 바랍니다.');
     });
 </script>
