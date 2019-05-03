@@ -177,11 +177,11 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                         </div>
                         <div class="homework_deadline_wrap">
                             <div class="date_range">
-                                <p class="l_text">시작일</p><input type="text" name="from" id="from" required>
+                                <p class="l_text">시작일</p><input type="text" name="from" id="from" readOnly required>
                             </div>
                             <span style="margin-right: 20px;">~</span>
                             <div class="date_range">
-                                <p class="l_text">종료일</p><input type="text" name="to" id="to" required>
+                                <p class="l_text">종료일</p><input type="text" name="to" id="to" readOnly required>
                             </div>
                         </div>
                     </div>
@@ -404,13 +404,22 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
 
         if($("input[name=student_list\\[\\]]").val()) {
             if($("#name").val() && $("#from").val() && $("#to").val()) {
-                $(window).unbind('beforeunload');
-                $('#all').submit();
+                if($("#corner1").val() == "선택"){
+                    alert("코너명을 선택해주세요.");
+                    return false;
+                }else if($(".identifier:eq(0)").text() == "선택"){
+                    alert("문항번호를 선택해주세요.");
+                    return false;
+                }else{
+                    $(window).unbind('beforeunload');
+                    $('#all').submit();
+                }
             }else {
                 alert('입력이 빠진 것이 없는지 확인해주세요.');
             }
         }
         else alert("학생을 선택해주세요.");
+
     }
     var Banlist =  new Array();
     var yq = 0;

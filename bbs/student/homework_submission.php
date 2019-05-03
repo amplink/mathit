@@ -90,17 +90,16 @@ if($tot == 0) {
             </div>
 
         </form>
-
-        <div class="detail_footer">
+        <div class="detail_footer" style="padding-top:40px">
             <p><span>등록된 이미지 개수 : </span><span id="num"><?=$i?></span><span>장</span></p>
             <?
             if($res['current_status'] == '' || $res['current_status'] == 's1') {
                 ?>
-                <div class="check_btn" id="check_btn"><a><img src="img/check_btn.png" alt="check_btn_icon" style="width: 25px; float: left;"><span class="complete">완료</span></a></div>
+                <div class="check_btn" id="check_btn"  style="text-align:center"><a><span class="complete">완료</span></a></div>
                 <?
             }else{
                 ?>
-                <div class="check_btn" style="width:80px"><a><img src="img/check_btn.png" alt="check_btn_icon" style="width: 25px; float: left;"><span class="complete">제출완료</span></a></div>
+                <div class="check_btn" style="width:80px;background-color:gray;text-align:center"><a><span class="complete">제출완료</span></a></div>
                 <?
             }
             ?>
@@ -276,6 +275,7 @@ if($tot == 0) {
             }
 
             if(doubleSubmitCheck()) return;
+            $(this).css("background-color","gray");
 
             $("#photoForm").ajaxForm({
                 type: "post",

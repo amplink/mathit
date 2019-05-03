@@ -106,7 +106,7 @@ include_once ('head.php');
                 <?
                 if($res['current_status'] == 'a1' or $res['current_status'] == 'a2'){
                     ?>
-                    <div class="resend_btn"><a href="#">재전송 요청</a></div>
+                    <div class="resend_btn"><a>재전송 요청</a></div>
                     <div class="complete_btn"><a href="javascript:complete()">완료</a></div>
                     <?
                 }
@@ -388,7 +388,7 @@ include_once ('head.php');
             url: 'scoring_resend.php?s_id='+s_id+"&id=<?=$_GET['id']?>",
             success: function (res) {
                 alert('재전송 요청 하였습니다.');
-                location.reload();
+                location.href="./scoring_list.php?s_id=<?=$res['student_id']?>&d_uid=<?=$res['d_uid']?>&c_uid=<?=$res['c_uid']?>";
 
             }
         });
