@@ -32,13 +32,13 @@ $time = $time[0];
             </div>
             <div class="content_detail_p">
                 <div class="text_input_wrap">
-                    <div class="text_input"><?=$res['content']?></div>
+                    <div class="text_input"><?=$res1['contents']?></div>
                 </div>
                 <?php
                 if($res1['attach_file_url']) {
                     ?>
                     <div class="attach_file">
-                        <a href="http://pse2018.cafe24.com/bbs/admin/<?=$res['attach_file_url'].$res['attach_file']?>" target="_blank" download>첨부파일 받기</a>
+                        <a href="http://pse2018.cafe24.com/bbs/admin/<?=$res1['attach_file_url'].$res1['attach_file']?>" target="_blank" download>첨부파일 받기</a>
                     </div>
                     <?php
                 }
