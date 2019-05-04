@@ -70,7 +70,7 @@ while($res = mysqli_fetch_array($result)) {
 ?>
 <div class="page_wrap">
     <div class="page_wrap_wrap">
-        <div class="left_btn" style="<?php if($page==1) echo "visibility: hidden;";?>"><a href="notice.php?page=<?=$page-1?>"><img src="img/prev_btn.png" alt="prev_btn_icon"></a></div>
+        <div class="left_btn" style="<?php if($page==1) echo "visibility: hidden;";?>"><a href="notice.php?page=<?=$page-1?>&search=<?=$_GET['search']?>"><img src="img/prev_btn.png" alt="prev_btn_icon"></a></div>
         <div class="page_btn_wrap">
             <?php
             $sql = "select * from `teacher_notice` where `title` like '$search' or `target` like '$search' and `client_id`='$ac' and `n_range` like '$student' order by `type` desc, `event_time` desc ";
@@ -86,7 +86,7 @@ while($res = mysqli_fetch_array($result)) {
             }
             ?>
         </div>
-        <div class="right_btn" style="<?php if($page==$last) echo "visibility: hidden;";?>"><a href="notice.php?page=<?=$page+1?>"><img src="img/next_btn.png" alt="next_btn_icon"></a></div>
+        <div class="right_btn" style="<?php if($page==$last) echo "visibility: hidden;";?>"><a href="notice.php?page=<?=$page+1?>&search=<?=$_GET['search']?>"><img src="img/next_btn.png" alt="next_btn_icon"></a></div>
     </div>
 </div>
 <script>
