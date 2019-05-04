@@ -166,7 +166,7 @@ $ac_r_size = count($ac_range);
                     </div>
                     <!--                <div class="contents_box">-->
                     <input style="margin-top: 15px;" type="file" name="bf_file[]" onchange="file_n_change();">
-                    <span id="file_n">현재 파일 : <? echo $no_res['attach_file'];?></span><?php if($no_res['attach_file']) echo "<img src='../teacher/img/close.png' width='20' height='20' style='margin-left: 20px; cursor: pointer;' onclick='minus()' id='close_img'>";?>
+                    <span id="file_n">현재 파일 : <? echo $no_res['attach_file'];?></span><?php if($no_res['attach_file']) echo "<img src='img/close.png' width='20' height='20' style='margin-left: 20px; cursor: pointer;' onclick='minus()' id='close_img'>";?>
                     <!--                </div>-->
                 </div>
                 <div class="board_line">
