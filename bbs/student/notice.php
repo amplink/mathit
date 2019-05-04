@@ -1,6 +1,7 @@
 <?php
 include_once ('head.php');
 $page = $_GET['page'];
+$search = $_GET['search'];
 if(!$page) $page = 1;
 ?>
 <link rel="stylesheet" type="text/css" media="screen" href="css/notice.css" />
@@ -14,7 +15,7 @@ if(!$page) $page = 1;
         <div class="content_p">
             <div class="search_box_wrap">
                 <div class="search_box">
-                    <input type="text" placeholder="제목 검색" id="search_val" onkeydown="chk_enter()">
+                    <input type="text" placeholder="제목 검색" id="search_val" onkeydown="chk_enter()" value="<?=$search?>">
                     <div class="search_btn" onclick="search_notice()"><img src="img/search.png" alt="search_icon"></div>
                 </div>
             </div>

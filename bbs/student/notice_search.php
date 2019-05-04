@@ -80,7 +80,7 @@ while($res = mysqli_fetch_array($result)) {
             while($res = mysqli_fetch_array($result)) $cnt++;
             for($i=0; $i<$cnt/10; $i++) {
                 ?>
-                <div class="page_btn"><a href="notice.php?page=<?=$i+1?>" id="<?=$i+1?>"><?=$i+1?></a></div>
+                <div class="page_btn"><a href="notice.php?page=<?=$i+1?>&search=<?=$_GET['search']?>" id="<?=$i+1?>"><?=$i+1?></a></div>
                 <?
                 $last++;
             }
