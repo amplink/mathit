@@ -51,7 +51,7 @@ if(strpos($seq, ":")) {
             <?php if($res['attach_file_url']) {
                 ?>
                 <div class="modify_btn" style="width:130px">
-                    <a href="../admin/<?=$res['attach_file_url'].$res['attach_file']?>" download>첨부파일 받기</a>
+                    <a href="http://pse2018.cafe24.com/bbs/admin/<?=$res['attach_file_url'].$res['attach_file']?>" download>첨부파일 받기</a>
                 </div>
                 <?php
             }
@@ -116,7 +116,7 @@ if(strpos($seq, ":")) {
                 <?php
             }
             ?>
-
+        </div>
         <div class="r_btn_wrap">
             <?php if($res['file_url']) {
                 ?>

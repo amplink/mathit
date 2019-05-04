@@ -38,7 +38,7 @@ $time = $time[0];
                 if($res1['attach_file_url']) {
                     ?>
                     <div class="attach_file">
-                        <a href="http://pse2018.cafe24.com/bbs/teacher/<?=$res['attach_file_url'].$res['attach_file']?>" target="_blank" download>첨부파일 받기</a>
+                        <a href="http://pse2018.cafe24.com/bbs/admin/<?=$res['attach_file_url'].$res['attach_file']?>" target="_blank" download>첨부파일 받기</a>
                     </div>
                     <?php
                 }
