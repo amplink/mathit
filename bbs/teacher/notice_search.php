@@ -9,7 +9,7 @@ $type = "%".$res['type']."%";
 $search = "%".$_GET['search']."%";
 $i=1;
 $cnt = 0;
-$sql = "select * from `teacher_notice` where `title` like '$search' or `target` like '$search' and `n_range` like '$type' or `writer`='$_SESSION[t_name]' and `client_id`='$ac' order by `type` desc, `event_time` desc";
+$sql = "select * from `teacher_notice` where `title` like '$search' and `target` like '$search' and `n_range` like '$type' or `writer`='".$_SESSION['t_name']."' and `client_id`='$ac' order by `type` desc, `event_time` desc";
 if($_SESSION['admin']) {
     $sql = "select * from `teacher_notice` where `title` like '$search' and `client_id`='$ac' order by `type` desc, `event_time` desc";
 }

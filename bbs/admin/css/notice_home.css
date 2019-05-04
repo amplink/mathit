@@ -179,7 +179,7 @@
 
 .list_btn_wrap {
     position: absolute;
-    bottom: 45px;
+    /*bottom: 45px;*/
     left: 50%;
     transform: translateX(-50%);
 }
