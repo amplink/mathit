@@ -1,7 +1,7 @@
 <?php
 include_once ('head.php');
 ?>
-<link rel="stylesheet" type="text/css" media="screen" href="css/homework_chat.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/homework_chat<?=$is_mobile_chk?>.css?v=20190505" />
 
 <?php
 $sql = "SELECT 
