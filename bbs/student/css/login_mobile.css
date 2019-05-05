@@ -1,0 +1,151 @@
+.back_img {
+    position: fixed;
+    top: 10%;
+    left: 35%;
+    width: 30%;
+    height: 80%;
+    opacity: .9;
+    margin-left:auto;
+    margin-right:auto;
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+    background-image: url(../img/login/back_img3.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.page_wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+}
+
+.login_wrap {
+    position: relative;
+    left:60%;
+    top: 50%;
+    transform: translateY(-70%);
+    width: 100px;
+    height: auto;
+    margin: auto;
+}
+
+.logo {
+    width: 300px;
+    margin: auto;
+    margin-top: 25%;
+    margin-left:30px;
+}
+
+.input_wrap {
+    width: 300px;
+    margin: auto;
+    margin-top: 60px;
+}
+
+.input_box {
+    width: 100%;
+    height: 50px;
+    line-height: 10px;
+    border-radius: 50px;
+    border: solid 2px rgb(170, 170, 170);
+    background-color: rgba(255, 255, 255, .2);
+    padding: 0 20px;
+    margin-bottom: 15px;
+}
+
+.input_box input {
+    width: 100%;
+    height: 25px;
+    padding-top:15px;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    text-align: center;
+}
+
+.input_box input::placeholder {
+    color: black;
+}
+
+.input_box input::placeholder {
+    font-size: 14px;
+}
+
+.input_box:nth-child(2) input {
+    font-family: initial;
+}
+
+.aca_select {
+    width: 350%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.aca_select select {
+    width: 100%;
+    height: 35px;
+    padding: 5px 5px;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    font-weight: bold;
+    border-bottom: solid 2px rgb(50, 50, 50);
+    /*text-align-last: center;*/
+    /*color: #e2e2e2;*/
+    /*border-radius: unset;*/
+}
+
+.aca_select select:focus {
+    outline: none;
+}
+
+.aca_select select option {
+    text-align: center;
+    color: rgb(50, 50, 50);
+}
+
+.aca_select select option:focus {
+    background-color: rgba(50, 50, 50, .2);
+    border: none;
+    outline: none;
+}
+
+.login_btn {
+    width: 300px;
+    height: 50px;
+    line-height: 50px;
+    background-color: rgb(8, 110, 60);
+    margin: auto;
+    margin-top: 60px;
+    margin-left:25px;
+}
+
+.login_btn a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.auto_login {
+    width: 30vw;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.auto_login input {
+    border: solid 1px rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, .3);
+    vertical-align: middle;
+}
+
+.auto_login p {
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
