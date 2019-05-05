@@ -107,8 +107,15 @@ $num = mysqli_num_rows($result);
         if($num2 > 0) {
             while ($res2 = mysqli_fetch_array($result2)) {
 
-                if($res2['test_genre'] == "분기테스트" or $res2['test_genre'] == "입반테스트") $link = "report_detail";
-                else if($res2['test_genre'] == "중간평가" || $res2['test_genre'] == "기말평가") $link = "report_detail2";
+                if($res2['test_genre'] == "분기테스트" or $res2['test_genre'] == "입반테스트"){
+                    $link = "report_detail";
+                    $type= "quarter";
+                }
+                else if($res2['test_genre'] == "중간평가" || $res2['test_genre'] == "기말평가"){
+                    $link = "report_detail2";
+                    $type= "mid";
+                }
+
                 ?>
                 <a href="<?=$link?>.php?no=<?=$res2['seq']?>">
                     <div class="report_content_wrap">
@@ -121,7 +128,13 @@ $num = mysqli_num_rows($result);
                                     <span> - </span>
                                     <span><?=$res2['quarter'] ?>분기</span>
                                     <span> <?=$res2['test_genre'] ?></span></p>
-                                <div class="report_icon"><img src="img/report.png" alt="report_icon"></div>
+
+                                <div class="report_icon" style="width:60px">
+                                    <? if($is_mobile_chk){?>
+                                        <a href="javascript:print_send('<?=$type?>','<?=$res2[seq]?>')"><img src="img/printer.png" alt="report_icon" style="width:20px"></a>
+                                    <? } ?>
+                                    &nbsp;<img src="img/report.png" alt="report_icon" style="width:20px">
+                                </div>
                             </div>
                         </div>
                     </div>

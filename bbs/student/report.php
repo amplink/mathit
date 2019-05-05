@@ -61,10 +61,12 @@ $result = sql_query($sql);
                     if($res['test_genre'] == "분기테스트" or $res['test_genre'] == "입반테스트"){
                         $color = "#ffff66";
                         $link = "report_detail";
+                        $type= "quarter";
                     }
                     else if($res['test_genre'] == "중간평가" || $res['test_genre'] == "기말평가"){
                         $color = "#ffffff";
                         $link = "report_detail2";
+                        $type= "mid";
                     }
 
                     ?>
@@ -78,7 +80,14 @@ $result = sql_query($sql);
                                     <span><?=$res['quarter']?>분기</span>
                                     <span><?=$res['test_genre'] ?></span></p>
                             </div>
-                            <div class="report_view_btn"><img src="img/report.png" alt="report_view_icon"></div>
+                            <div class="report_view_btn" style="width:60px">
+
+                                <? if($is_mobile_chk){?>
+                                    <a href="javascript:print_send('<?=$type?>','<?=$res2[seq]?>')"><img src="img/printer.png" alt="report_icon" style="width:20px"></a>
+                                <? } ?>
+                                &nbsp;<img src="img/report.png" alt="report_icon" style="width:20px">
+
+                            </div>
                         </div>
                     </a>
                     <?

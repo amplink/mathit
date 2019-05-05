@@ -22,4 +22,9 @@ $(document).ready(function(){
     $('.yes_btn, .no_btn').click(function(){
         $('.bus_box').removeClass('on');
     })
-}) 
+})
+
+function print_send(gubun, no) {
+    var url = gubun+"_print.php?no="+no;
+    window.open(url,"PopupWin", "top=-200,width=1300,height=900");
+}

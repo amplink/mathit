@@ -27,7 +27,7 @@ $re = $_GET['re'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css?v=201905051" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/common.css?v=20190507" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/login<?=$is_mobile_chk?>.css?v=201905051" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
@@ -35,7 +35,7 @@ $re = $_GET['re'];
 </head>
 <body>
 <!-- 배경 -->
-<div class="bg">
+<div class="bg_login">
     <div class="bg_div"></div>
     <div class="bg_div"></div>
     <div class="bg_div"></div>
@@ -159,8 +159,8 @@ $re = $_GET['re'];
     });
 
 </script>
-<footer>
+<!--<footer>
     <p class="copyright"><span>copyright ⓒ 2019 PSE corp. All Rights Reserved.</span></p>
-</footer>
+</footer>-->
 </body>
 </html>

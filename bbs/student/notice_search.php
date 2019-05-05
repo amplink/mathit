@@ -7,7 +7,7 @@ $page = $_GET['page'];
 $student = "%학생%";
 $start = ($page-1)*10;
 
-$sql = "select * from `teacher_notice` where `title` like '$search' and `target` like '$search' and `client_id`='$ac' and `n_range` like '$student' order by `type` desc, `event_time` desc ";
+$sql = "select * from `teacher_notice` where `title` like '$search' and `client_id`='$ac' and `n_range` like '$student' order by `type` desc, `event_time` desc ";
 $sql = $sql."limit ".$start.",10";
 //echo $sql;
 $result = sql_query($sql);
@@ -49,12 +49,12 @@ while($res = mysqli_fetch_array($result)) {
                 <div class="up_section">
                     <div class="number" style="<?php if($res['type'] == '중요공지') echo "width: 20%;"; else echo "width: 10%;";?>"><span class="emphasis"><?php if($res['type'] == "중요공지") echo "[중요] ";?>공지</span></div>
                     <div class="notice_title"><span class="emphasis"><?=$res['title']?>
-                    <?php if($res['file_url']) {
-                        ?>
-                        <img src="./img/disc.png" style="width: 13px; height: 13px;">
-                    <?php
-                    }
-                    ?>
+                            <?php if($res['file_url']) {
+                                ?>
+                                <img src="./img/disc.png" style="width: 13px; height: 13px;">
+                                <?php
+                            }
+                            ?>
                         </span></div>
                     <div class="date"><span><?=$time?></span></div>
                 </div>

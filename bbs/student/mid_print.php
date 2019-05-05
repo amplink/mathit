@@ -1,8 +1,24 @@
-<?php
-include_once ('head.php');
-?>
-<body>
-<link rel="stylesheet" type="text/css" media="screen" href="css/report_detail.css" />
+<? include_once('_common.php'); ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MATH IT - student</title>
+    <meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css?v=20190506" />
+    <link rel="stylesheet" type="text/css" href="css/report_detail.css" />
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/common.js?v=20190506"></script>
+    <script src="js/jquery-ui.js"></script>
+</head>
+<body style="width:100%">
+
 <?php
 
 $sql = "SELECT * FROM 
@@ -57,10 +73,9 @@ $r = api_calls_get($link);
 ?>
 <!--section-->
 <section>
-    <div class="head_p">
+    <div class="head_p" style="margin-top: -160px;">
         <p class="head_title">성적표</p>
         <p class="title_detail"><span><?=$res['year']?>년</span><span><?=$res['quarter']?>분기</span></p>
-        <div class="back_btn"><a href="report.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
     </div>
     <div class="content_p">
         <p class="record_class_name">
@@ -329,5 +344,8 @@ echo $result;
         </div>
     </div>
 </section>
+<script>
+    window.print();
+</script>
 </body>
 </html>
