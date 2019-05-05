@@ -202,7 +202,8 @@ include_once ('head.php');
                 <div class="page_wrap_wrap">
 
                     <?
-                    set_paging($page, $block, $block_set, $total_page);
+                    $parms = "start=".$_GET['start']."&end=".$_GET['end'];
+                    set_paging($page, $block, $block_set, $total_page, $parms);
                     ?>
 
                 </div>
