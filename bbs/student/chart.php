@@ -2,7 +2,7 @@
 
 <script src="./js/Chart.min.js"></script>
 <script src="./js/utils.js?v=20190414"></script>
-<link rel="stylesheet" type="text/css" href="./css/chart_style.css?v=201904021">
+<link rel="stylesheet" type="text/css" href="./css/chart_style<?=$is_mobile_chk?>.css?v=20190505">
 <style>
     canvas{
         -moz-user-select: none;

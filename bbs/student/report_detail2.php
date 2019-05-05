@@ -1,8 +1,8 @@
 <?php
 include_once ('head.php');
 ?>
-<link rel="stylesheet" type="text/css" media="screen" href="css/report_detail.css" />
 <body>
+<link rel="stylesheet" type="text/css" media="screen" href="css/report_detail.css" />
 <?php
 
 $sql = "SELECT * FROM 

@@ -562,6 +562,12 @@ define('G5_DEVICE_BUTTON_DISPLAY', $set_device);
 if (G5_IS_MOBILE) {
     $g5['mobile_path'] = G5_PATH.'/'.$g5['mobile_dir'];
 }
+
+if(preg_match('/(iPhone|Android|Opera Mini|SymbianOS|Windows CE|BlackBerry|Nokia|SonyEricsson|webOS|PalmOS)/i', $_SERVER['HTTP_USER_AGENT'])) {
+    $is_mobile_chk = "";
+}else{
+    $is_mobile_chk = "_mobile";
+}
 //==============================================================================
 
 
