@@ -158,8 +158,8 @@ $weeks = array_keys($weekly);
             ?>
         </div>
         <div class="bus_box_btn_wrap">
-            <div class="bus_yes"><p>변경</p></div>
-            <div class="bus_no"><p>취소</p></div>
+            <div class="bus_yes" style="cursor:pointer"><p>변경</p></div>
+            <div class="bus_no" style="cursor:pointer"><p>취소</p></div>
         </div>
     </div>
 </section>

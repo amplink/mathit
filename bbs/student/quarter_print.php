@@ -32,7 +32,7 @@ $student_id = $res['student_id'];
 ?>
 <!--section-->
 <section>
-    <div class="head_p" style="margin-top: -160px;">
+    <div class="head_p" style="margin-top: -30px;">
         <p class="head_title">성적표</p>
         <p class="title_detail"><span><?=$res['year']?>년</span><span><?=$res['quarter']?>분기</span></p>
     </div>

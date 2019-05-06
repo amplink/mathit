@@ -32,7 +32,13 @@ $student_id = $res['student_id'];
     </div>
     <div class="content_detail_p">
         <div class="report_detail_section">
-            <p class="detail_title">영역별 점수</p>
+            <p class="detail_title">영역별 점수
+                <span style="float:right">
+					<? if($is_mobile_chk){?>
+                        <a href="javascript:print_send('quarter','<?=$res[seq]?>')"><img src="img/printer.png" alt="report_icon" style="width:30px"></a>&nbsp;
+                    <? } ?>
+				</span>
+            </p>
             <div class="detail_content_box">
                 <table>
                     <thead>

@@ -106,7 +106,7 @@ while($res = mysqli_fetch_array($result)) {
             <a href="setting.php"><div class="close_btn"><img src="img/nav/setting.png" alt="setting_btn_icon"></div></a>
         </div>
         <div class="close_btn_wrap">
-            <div class="close_btn"><img src="img/close_btn.png" alt="close_btn_icon"></div>
+            <div class="close_btn" style="cursor:pointer"><img src="img/close_btn.png" alt="close_btn_icon"></div>
         </div>
     </div>
     <div class="ham_nav_wrap">
@@ -273,7 +273,7 @@ while($res = mysqli_fetch_array($result)) {
         <div class="mybus_wrap">
             <div class="bus_head">
                 <p class="bus_title">MY BUS</p>
-                <div class="onboard_cancel_btn">
+                <div class="onboard_cancel_btn" style="cursor:pointer">
                     <p>탑승 취소</p>
                 </div>
             </div>
@@ -304,10 +304,10 @@ while($res = mysqli_fetch_array($result)) {
         <p><span>담당 기사님께</span> <span>문자가 전송됩니다.</span></p>
     </div>
     <div class="bus_box_btn_wrap">
-        <div class="yes_btn">
+        <div class="yes_btn" style="cursor:pointer">
             <p>네</p>
         </div>
-        <div class="no_btn">
+        <div class="no_btn" style="cursor:pointer">
             <p>아니오</p>
         </div>
     </div>

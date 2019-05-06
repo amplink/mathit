@@ -81,6 +81,11 @@ echo $result;
                         %
 					 </span>
                 <span>(지각: <? echo ($r[1][2])?$r[1][2]:"0"?>, 결석: <? echo ($r[1][0])?$r[1][0]:"0"?>)</span>
+                <span style="float:right">
+					<? if($is_mobile_chk){?>
+                        <a href="javascript:print_send('mid','<?=$res[seq]?>')"><img src="img/printer.png" alt="report_icon" style="width:30px"></a>&nbsp;
+                    <? } ?>
+				</span>
             </p>
             <p class="detail_title">숙제</p>
             <div class="detail_content_box" style="margin-top:-7px;">
@@ -123,6 +128,7 @@ echo $result;
                     $result4 = mysqli_query($connect_db, $sql4);
 
                     $j = 0;
+                    $x = 0;
                     $score_arr = array();
                     $from_date = array();
                     while($res4 = mysqli_fetch_array($result4)) {
@@ -169,6 +175,7 @@ echo $result;
                             $submit_date2 = strtotime($submit_date);
                             $to_date = strtotime($res4['_to']);
                             $late_chk = ($submit_date2 > $to_date)?"1":"0";
+                            if($late_chk) $x++;
                             ?>
                             <span <?if($late_chk)echo "style='color:red'";?>>
 								<?=$submit_date?>
@@ -193,7 +200,7 @@ echo $result;
                     </tbody>
                 </table>
             </div>
-            <? if($late_chk){ ?>
+            <? if($x > 0){ ?>
                 <span style='font-size:13px;color:red'>* 제출일의 빨간색 표시는 지각 제출을 의미합니다.</span>
             <? } ?>
         </div>
