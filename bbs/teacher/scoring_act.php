@@ -132,6 +132,19 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
             if($v > 0) {
                 $sql = "insert into `alarm` set `content`='" . $res[class_name] . "반 숙제채점이 완료 되었습니다.', `table_name`='homework', `target`='전임강사', `chk`='0', `uid`='$v', `datetime`=CURRENT_TIMESTAMP";
                 sql_query($sql);
+                /***************************/
+                $sql = "select * from `fcm` where `uid`='".$v."';";
+                $result = sql_query($sql);
+                $tokens = array();
+                while($res = mysqli_fetch_array($result)) {
+                    $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
+                    $result1 = sql_query($sql1);
+                    $res1 = mysqli_fetch_array($result1);
+                    if($res1['push_alarm']) $tokens[] = $res['token'];
+                }
+                $message = "채점을 완료 하였습니다.";
+                send_notification($tokens, $message);
+                /***************************/
             }
         }
     }
