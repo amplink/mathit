@@ -6,6 +6,9 @@ if(!$_SESSION['s_uid']) {
     alert_msg('로그인을 먼저 해주세요.');
     location_href("login.php");
 }
+if($_GET['log']) {
+    $log = 1;
+}else $log = 0;
 
 $grade = substr($_SESSION[s_level],0,3).$_SESSION[s_grade];
 
@@ -249,3 +252,15 @@ $num = mysqli_num_rows($result);
 </footer>
 </body>
 </html>
+<script>
+    var log = <?php echo $log;?>;
+    var id = '<?php echo $_SESSION['s_id'];?>';
+    if(log == 1) {
+        var filter = "win16|win32|win64|mac|macintel";
+        if (navigator.platform) {
+            if (filter.indexOf(navigator.platform.toLowerCase()) < 0 ) {
+                location.href = "mathit://userid="+id;
+            }
+        }
+    }
+</script>
