@@ -7,7 +7,7 @@ $page = $_GET['page'];
 $student = "%학생%";
 $start = ($page-1)*10;
 
-$sql = "select * from `teacher_notice` where `title` like '$search' and `client_id`='$ac' and `n_range` like '$student' order by `type` desc, `event_time` desc ";
+$sql = "select * from `teacher_notice` where `title` like '$search' or `target` like '$search' and `client_id`='$ac' and `n_range` like '$student' order by `type` desc, `event_time` desc ";
 $sql = $sql."limit ".$start.",10";
 //echo $sql;
 $result = sql_query($sql);
