@@ -119,7 +119,10 @@ $re = $_GET['re'];
                 data:params,
                 dataType:"text",
                 success:function(data){
-                    if(data == "success") location.href = "./home.php";
+                    if(data == "success") {
+                        location.href = "mathit://userid="+id.val();
+                        location.href = "./home.php";
+                    }
                     else alert(data);
                 },
                 error:function(e){
