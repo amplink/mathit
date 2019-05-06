@@ -72,17 +72,17 @@ $result = sql_query($sql);
                     ?>
 
                     <div class="report_list" style="background:<?=$color?>;cursor:pointer">
-                        <div class="report_info" style="width:85%" onClick="location.href='<?=$link?>.php?no=<?=$res['seq']?>'">
+                        <div class="report_info" style="width:80%" onClick="location.href='<?=$link?>.php?no=<?=$res['seq']?>'">
                             <p class="date"><span><?=substr($res['date'],-4)?>-<?=substr($res['date'],0,2)?>-<?=substr($res['date'],3,2)?></span></p>
                             <p class="p report_title"><span><?=$res['year']?></span>
                                 <span> - </span>
                                 <span><?=$res['quarter']?>분기</span>
                                 <span><?=$res['test_genre'] ?></span></p>
                         </div>
-                        <div class="report_view_btn" style="width:60px">
-                            <a href="<?=$link?>.php?no=<?=$res['seq']?>"><img src="img/report.png" alt="report_icon" style="width:20px"></a>&nbsp;
+                        <div class="report_view_btn"<? if($is_mobile_chk){ ?> style="width:60px" <? } ?>>
+                            <a href="<?=$link?>.php?no=<?=$res['seq']?>"><img src="img/report.png" alt="report_icon" style="width:20px"></a>
                             <? if($is_mobile_chk){?>
-                                <a href="javascript:print_send('<?=$type?>','<?=$res[seq]?>')"><img src="img/printer.png" alt="report_icon" style="width:20px"></a>
+                                &nbsp;<a href="javascript:print_send('<?=$type?>','<?=$res[seq]?>')"><img src="img/printer.png" alt="report_icon" style="width:20px"></a>
                             <? } ?>
                         </div>
                     </div>
