@@ -271,7 +271,7 @@ $today_date = date("Y-m-d");
 				AND B.student_id='$res[student_id]'
 				AND B.current_status IN ('s2','s3')
 				AND (A._from >= '$start_day' AND A._from <= '$res[date]')
-				ORDER BY A.seq asc";
+				ORDER BY A._from asc";
 
                 $result4 = mysqli_query($connect_db, $sql4);
                 ?>
@@ -292,6 +292,7 @@ $today_date = date("Y-m-d");
                         <tbody>
                         <?
                         $j = 0;
+                        $x = 0;
                         $score_arr = array();
                         $from_date = array();
                         while($res4 = mysqli_fetch_array($result4)) {
@@ -333,7 +334,17 @@ $today_date = date("Y-m-d");
                                     <span><?=$res4['name']?></span>
                                 </td>
                                 <td>
-                                    <span><? echo ($res4['submit_date2'])?substr($res4['submit_date2'],0,10):substr($res4['submit_date1'],0,10);?></span>
+                                    <?
+                                    $submit_date = ($res4['submit_date2'])?substr($res4['submit_date2'],0,10):substr($res4['submit_date1'],0,10);
+
+                                    $submit_date2 = strtotime($submit_date);
+                                    $to_date = strtotime($res4['_to']);
+                                    $late_chk = ($submit_date2 > $to_date)?"1":"0";
+                                    if($late_chk) $x++;
+                                    ?>
+                                    <span <?if($late_chk)echo "style='color:red'";?>>
+									<?=$submit_date?>
+									</span>
                                 </td>
                                 <td>
                                     <span><?=$wrong_tot1?> / <?=$q_tot1?></span>
@@ -357,6 +368,9 @@ $today_date = date("Y-m-d");
                         </tbody>
                     </table>
                 </div>
+                <? if($x > 0){ ?>
+                    <span style='font-size:13px;color:red'>* 제출일의 빨간색 표시는 지각 제출을 의미합니다.</span>
+                <? } ?>
             </div>
             <?
 
@@ -383,7 +397,7 @@ $today_date = date("Y-m-d");
 				AND A.client_id='$ac' 
 				AND B.current_status IN ('s2','s3')
 				AND (A._from >= '$start_day' AND A._from <= '$res[date]')
-				ORDER BY A.seq asc" ;
+				ORDER BY A._from asc" ;
 
             $result5 = mysqli_query($connect_db, $sql5);
             $j = 0;
@@ -421,7 +435,7 @@ $today_date = date("Y-m-d");
 
             $me_score = implode(",",$score_arr);
             $tot_score = implode(",",$avg);
-
+            //print_r($tot_score);
             // $from_date = implode(",",$from_date);
             $max = count($from_date);
 
