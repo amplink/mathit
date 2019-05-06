@@ -28,7 +28,7 @@ $re = $_GET['re'];
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/common.css?v=20190507" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/login<?=$is_mobile_chk?>.css?v=201905051" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/login<?=$is_mobile_chk?>.css?v=2019050502" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -70,6 +70,7 @@ $re = $_GET['re'];
                     ?>
                 </select>
             </div>
+            <br>
             <div class="login_btn" id="login_btn" style="cursor: pointer">
                 <a>LOGIN</a>
             </div>

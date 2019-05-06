@@ -154,19 +154,17 @@ include_once ('head.php');
                     ?>
 
 
-                    <div class="content_list">
+                    <div class="content_list" onClick="location.href='homework_submission.php?no=<?=$res['id']?>'"  style="cursor:pointer">
                         <div class="content_alarm_section" style="width:63px">
-                            <a href="homework_submission.php?no=<?=$res['id']?>">
-                                <!--숙제 제출화면-->
-                                <div class="submission">
-                                    <div class="submission_sign <?=$add_style?>" style="<?=$add_style2?>"><?=$status1?></div>
-                                </div>
-                                <div class="scoring">
-                                    <div class="scoring_none"><span style="color: white;"><?=$res['status2']?></span></div>
-                                    <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
-                                    <!--                                <div class="scoring_ed_sign"><img src="img/check.png" alt="scoring_icon"></div>-->
-                                </div>
-                            </a>
+                            <!--숙제 제출화면-->
+                            <div class="submission">
+                                <div class="submission_sign <?=$add_style?>" style="<?=$add_style2?>"><?=$status1?></div>
+                            </div>
+                            <div class="scoring">
+                                <div class="scoring_none"><span style="color: white;"><?=$res['status2']?></span></div>
+                                <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
+                                <!--                                <div class="scoring_ed_sign"><img src="img/check.png" alt="scoring_icon"></div>-->
+                            </div>
                         </div>
                         <div class="content_detail_section <?echo ($res['status1']=='숙제완료')?'final':'';?>" style="width: calc(100% - 95px)">
                             <a href="homework_chat.php?id=<?=$res['id']?>">

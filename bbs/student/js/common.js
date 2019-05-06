@@ -26,5 +26,5 @@ $(document).ready(function(){
 
 function print_send(gubun, no) {
     var url = gubun+"_print.php?no="+no;
-    window.open(url,"PopupWin", "top=-200,width=1300,height=900");
+    window.open(url,"PopupWin", "top=-200,width=800,height=900");
 }

@@ -26,9 +26,9 @@ while($res = mysqli_fetch_array($result)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common<?=$is_mobile_chk?>.css?v=20190506" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/common<?=$is_mobile_chk?>.css?v=2019050602" />
     <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/common.js?v=20190506"></script>
+    <script src="js/common.js?v=2019050601"></script>
     <script src="js/jquery-ui.js"></script>
 </head>
 <body>

@@ -127,7 +127,9 @@ $student_id = $res['student_id'];
     </div>
 </section>
 <script>
-    window.print();
+    setTimeout(function() {
+        window.print();
+    }, 2000);
 </script>
 </body>
 </html>

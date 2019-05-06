@@ -283,7 +283,7 @@ echo $result;
 
         <div class="report_detail_section">
             <p class="detail_title">차트</p>
-            <div class="detail_content_box" style="margin-top:-7px;">
+            <div class="detail_content_box" style="margin-top:-7px;width:600px;text-align:center">
                 <p><span><? include "./chart.php";?></span></p>
             </div>
 
@@ -345,7 +345,9 @@ echo $result;
     </div>
 </section>
 <script>
-    window.print();
+    setTimeout(function() {
+        window.print();
+    }, 2000);
 </script>
 </body>
 </html>
