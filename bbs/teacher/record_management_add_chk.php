@@ -49,11 +49,14 @@ $r = api_calls_get($link);
 for($i=1; $i<count($r); $i++) {
     $sql = "insert into `alarm` set `seq`='', `content`='새로운 성적표가 등록되었습니다.', `table_name`='score', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
     sql_query($sql);
-    $sql = "select `token` from `fcm` where `uid`='".$r[$i][1]."';";
+    $sql = "select * from `fcm` where `uid`='".$r[$i][1]."';";
     $result = sql_query($sql);
     $tokens = array();
     while($res = mysqli_fetch_array($result)) {
-        $tokens[] = $res['token'];
+        $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
+        $result1 = sql_query($sql1);
+        $res1 = mysqli_fetch_array($result1);
+        if($res1['push_alarm']) $tokens[] = $res['token'];
     }
     $message = "새로운 성적표가 등록되었습니다.";
     send_notification($tokens, $message);

@@ -38,13 +38,15 @@ if($result3){
 
     $sql = "insert into `alarm` set `content`='정답지를 다시 촬영하여 전송해 주세요.', `table_name`='score', `target`='학생', `uid`='$s_id';";
     sql_query($sql);
-    $sql = "select `token` from `fcm` where `uid`='".$s_id."';";
+    $sql = "select * from `fcm` where `uid`='".$s_id."';";
     $result = sql_query($sql);
     $tokens = array();
     while($res = mysqli_fetch_array($result)) {
-        $tokens[] = $res['token'];
+        $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
+        $result1 = sql_query($sql1);
+        $res1 = mysqli_fetch_array($result1);
+        if($res1['push_alarm']) $tokens[] = $res['token'];
     }
-    $message = "정답지를 다시 촬영하여 전송해 주세요.";
     send_notification($tokens, $message);
 }
 
