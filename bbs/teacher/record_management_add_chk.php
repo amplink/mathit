@@ -34,6 +34,14 @@ VALUES ('$_SESSION[client_no]', '$d_id', '$c_id', '$s_id', '$class', '$grade', '
     if($result == 1) $j++;
 }
 
+if(count($student) != $j){
+    alert_msg("이미 등록되어진 성적표가 있습니다.");
+    location_href("./record_management_list.php");
+    exit;
+}else{
+    alert_msg("등록이 완료되었습니다.");
+}
+
 $ac = $_SESSION['client_no'];
 $link = "/api/math/class_stu?client_no=".$ac."&d_uid=".$d_id."&c_uid=".$c_id;
 $r = api_calls_get($link);
@@ -53,11 +61,5 @@ for($i=1; $i<count($r); $i++) {
 
 $sql = "insert into `alarm` set `seq`='', `content`='새로운 성적표가 등록되었습니다.', `table_name`='score', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
 sql_query($sql);
-
-if(count($student) != $j){
-    alert_msg("이미 등록되어진 성적표가 있습니다.");
-}else{
-    alert_msg("등록이 완료되었습니다.");
-}
 location_href("./record_management_list.php");
 ?>

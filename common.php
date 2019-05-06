@@ -679,12 +679,17 @@ function alert_msg($msg) {
 }
 
 // fcm
-function send_notification ($tokens, $message) {
+function send_notification ($tokens, $data) {
     $api_key = "AAAAhDK6-ec:APA91bFBnly-IcmYVvJ51n4dNz5E9LUSclSDpjwBxsG7Zl4Reg1neeDGvA-OjQyB3IeIkrFCyy3GPVqccqfM2Amtenfw7RRB4Gum6XeyKehxadoOvXS9jTINNUNRFvBoh_xIxkq4F5aO";
     $url = "https://fcm.googleapis.com/fcm/send";
+    $msg = array(
+        'title' => $data,
+        'body' => $data
+    );
+
     $fields = array(
         'registration_ids' => $tokens,
-        'data' => $message
+        'data' => $msg
     );
     $headers = array(
         'Authorization:key ='.$api_key,
