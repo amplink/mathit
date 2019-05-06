@@ -124,16 +124,16 @@ $num = mysqli_num_rows($result);
                                 <p><span><?=substr($res2['date'],-4) ?>-<?=substr($res2['date'],0,2) ?>-<?=substr($res2['date'],3,2) ?></span></p>
                             </div>
                             <div class="report_content">
-                                <p class="report_title" style="width:85%" onClick="location.href='<?=$link?>.php?no=<?=$res2['seq']?>'"><span><?=$res2['year'] ?></span>
+                                <p class="report_title" style="width:80%" onClick="location.href='<?=$link?>.php?no=<?=$res2['seq']?>'"><span><?=$res2['year'] ?></span>
                                     <span> - </span>
                                     <span><?=$res2['quarter'] ?>분기</span>
                                     <span> <?=$res2['test_genre'] ?></span></p>
 
-                                <div class="report_icon" style="width:60px">
+                                <div class="report_icon"<? if($is_mobile_chk){ ?> style="width:60px" <? } ?>>
                                     <a href="<?=$link?>.php?no=<?=$res2['seq']?>"><img src="img/report.png" alt="report_icon" style="width:20px"></a>
-                                    &nbsp;
+
                                     <? if($is_mobile_chk){?>
-                                        <a href="javascript:print_send('<?=$type?>','<?=$res2[seq]?>')"><img src="img/printer.png" alt="report_icon" style="width:20px"></a>
+                                        &nbsp;<a href="javascript:print_send('<?=$type?>','<?=$res2[seq]?>')"><img src="img/printer.png" alt="report_icon" style="width:20px"></a>
                                     <? } ?>
                                 </div>
                             </div>
