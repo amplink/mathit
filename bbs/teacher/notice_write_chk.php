@@ -207,7 +207,9 @@ if($seqq > 0) {
                 $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
                 $result1 = sql_query($sql1);
                 $res1 = mysqli_fetch_array($result1);
-                if($res1['push_alarm']) $tokens[] = $res['token'];
+                if($res1['push_alarm']) {
+                    $tokens[] = $res['token'];
+                }
             }
             $message = "새로운 공지가 등록되었습니다.";
             send_notification($tokens, $message);

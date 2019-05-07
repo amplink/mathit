@@ -47,6 +47,7 @@ if($result3){
         $res1 = mysqli_fetch_array($result1);
         if($res1['push_alarm']) $tokens[] = $res['token'];
     }
+    $message = "정답지를 다시 촬영하여 전송해 주세요.";
     send_notification($tokens, $message);
 }
 
