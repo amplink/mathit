@@ -56,7 +56,7 @@ if($tot == 0) {
             <input type="hidden" name="sort" id="sort" value="">
             <input type="hidden" name="status" id="status" value="<?=$res['current_status']?>">
             <div class="detail_head"><input multiple name="files[]" id="files" type="file" style="display:none"/>
-                <div class="check_btn"  onclick='photosel()'><a><img src="img/check_btn.png" alt="check_btn_icon" style="width: 25px; float: left;"  id="imgReg"><span class="complete">등록</span></a></div>
+                <div class="check_btn"  onclick='photosel()'><a><img src="img/check_btn.png" alt="check_btn_icon" style="width:25px;float:left;" id="imgReg"><span class="complete" style="cursor:pointer">등록</span></a></div>
                 <p><span>    등록 버튼을 눌러 숙제 이미지를 추가한 후</span><span>완료 버튼을 눌러 저장해 주세요</span></p>
             </div>
 
@@ -95,7 +95,7 @@ if($tot == 0) {
             <?
             if($res['current_status'] == '' || $res['current_status'] == 's1') {
                 ?>
-                <div class="check_btn" id="check_btn"  style="text-align:center"><a><span class="complete">완료</span></a></div>
+                <div class="check_btn" id="check_btn"  style="text-align:center"><a><span class="complete" style="cursor:pointer">완료</span></a></div>
                 <?
             }else{
                 ?>

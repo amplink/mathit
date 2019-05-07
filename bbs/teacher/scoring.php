@@ -123,6 +123,7 @@ include_once ('head.php');
         <input type="hidden" name="c_uid" value="<?=$res['c_uid']?>">
         <input type="hidden" name="d_uid" value="<?=$res['d_uid']?>">
         <input type="hidden" name="s_id" value="<?=$res['student_id']?>">
+        <input type="hidden" name="h_id" value="<?=$res['h_id']?>">
         <input type="hidden" name="tempSave" id="tempSave">
         <input type="hidden" name="cornerType" id="cornerType" value="1">
         <input type="hidden" name="cornerTot" id="cornerTot" value="<?=$tot?>">
@@ -292,7 +293,11 @@ include_once ('head.php');
         });
 
         if(chk == 0){
-            if(!confirm('채점결과 만점 입니다. \n완료 할까요?')) $("#scoreForm").submit();
+            if(confirm('채점결과 만점 입니다. \n완료 할까요?')){
+                $("#scoreForm").submit();
+            }else{
+                return false;
+            }
         }
 
         $("#scoreForm").submit();
