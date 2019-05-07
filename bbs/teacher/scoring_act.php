@@ -139,7 +139,6 @@ if($res3[tot] > 0){
             sql_query($sql);
             /***************************/
             $sql = "select * from `fcm` where `uid`='".$r[$i][1]."'";
-            echo $sql;
 
             $result = sql_query($sql);
             $tokens = array();

@@ -132,6 +132,12 @@ while($res = mysqli_fetch_array($result)) {
                         ORDER BY c_name ASC";
 
                         $result3 = mysqli_query($connect_db, $sql3);
+
+                        $sel = ($res['corner1'] == '선택')?"selected":"";
+
+                        ?>
+                        <option value="선택" <?=$sel?>>선택</option>
+                        <?
                         while($res3 = mysqli_fetch_array($result3)) {
                             $corner_arr[] = $res3['c_name'];
                             $sel = ($res['corner1'] == $res3['c_name'])?"selected":"";
@@ -188,6 +194,10 @@ while($res = mysqli_fetch_array($result)) {
                 <td>
                     <select name="corner2" id="corner2<?=$i?>" data-key="<?=$i?>" data-num="2" class="corner">
                         <?php
+                        $sel = ($res['corner2'] == '선택')?"selected":"";
+                        ?>
+                        <option value="선택" <?=$sel?>>선택</option>
+                        <?
                         foreach($corner_arr as $v){
                             $sel = ($res['corner2'] == $v)?"selected":"";
                             ?>
@@ -212,6 +222,10 @@ while($res = mysqli_fetch_array($result)) {
                 <td>
                     <select name="corner3" id="corner3<?=$i?>" data-key="<?=$i?>" data-num="3" class="corner">
                         <?php
+                        $sel = ($res['corner3'] == '선택')?"selected":"";
+                        ?>
+                        <option value="선택" <?=$sel?>>선택</option>
+                        <?
                         foreach($corner_arr as $v){
                             $sel = ($res['corner3'] == $v)?"selected":"";
                             ?>
@@ -236,6 +250,10 @@ while($res = mysqli_fetch_array($result)) {
                 <td>
                     <select name="corner4" id="corner4<?=$i?>" data-key="<?=$i?>" data-num="4" class="corner">
                         <?php
+                        $sel = ($res['corner4'] == '선택')?"selected":"";
+                        ?>
+                        <option value="선택" <?=$sel?>>선택</option>
+                        <?
                         foreach($corner_arr as $v){
                             $sel = ($res['corner4'] == $v)?"selected":"";
                             ?>
@@ -288,7 +306,8 @@ while($res = mysqli_fetch_array($result)) {
                     $start = strtotime(date($res['_from']));
                     $end = strtotime(date($res['_to']));
 
-                    if($start <= $today && $end >= $today && $res5[tot] > 0) {
+                    //if($start <= $today && $end >= $today && $res5[tot] > 0) {
+                    if($res5[tot] > 0){
                         ?>
                         <p class="ing_text" id="status_complete<?=$i?>" style="color: blue;cursor: pointer;" onclick="show_box(<?=$i?>)">진행중</p>
                         <div class="students_checks<?=$i?>" style="background:rgb(255, 228, 73);
