@@ -136,11 +136,11 @@ if($_POST['current_status'] == 'a1' or $_POST['current_status'] == 'a2'){
                 $sql = "select * from `fcm` where `uid`='".$v."';";
                 $result = sql_query($sql);
                 $tokens = array();
-                while($res = mysqli_fetch_array($result)) {
-                    $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
-                    $result1 = sql_query($sql1);
-                    $res1 = mysqli_fetch_array($result1);
-                    if($res1['push_alarm']) $tokens[] = $res['token'];
+                while($res4 = mysqli_fetch_array($result)) {
+                    $sql5 = "select `push_alarm` from `student_table` where `id`='".$res4['uid']."';";
+                    $result5 = sql_query($sql5);
+                    $res5 = mysqli_fetch_array($result5);
+                    if($res5['push_alarm']) $tokens[] = $res4['token'];
                 }
                 $message = "채점을 완료 하였습니다.";
                 send_notification($tokens, $message);
