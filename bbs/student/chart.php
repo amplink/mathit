@@ -64,7 +64,7 @@
             xAxes: [{
                 ticks: {
                     autoSkip: false,
-                    maxRotation: 0
+                    maxRotation: 60
                 }
             }]
         }

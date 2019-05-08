@@ -111,18 +111,6 @@ while($res = mysqli_fetch_array($result)) {
     </div>
     <div class="ham_nav_wrap">
         <div class="ham_nav_menu">
-            <a href="notice.php">
-                <div class="ham_nav_menu_icon_wrap">
-                    <div class="ham_nav_menu_icon">
-                        <img src="img/nav/notice.png" alt="notice_icon">
-                    </div>
-                </div>
-                <div class="ham_nav_menu_title_wrap">
-                    <p class="ham_nav_menu_title">공지사항</p>
-                </div>
-            </a>
-        </div>
-        <div class="ham_nav_menu">
             <a href="homework_ing.php">
                 <div class="ham_nav_menu_icon_wrap">
                     <div class="ham_nav_menu_icon">
@@ -143,6 +131,18 @@ while($res = mysqli_fetch_array($result)) {
                 </div>
                 <div class="ham_nav_menu_title_wrap">
                     <p class="ham_nav_menu_title">성적관리</p>
+                </div>
+            </a>
+        </div>
+        <div class="ham_nav_menu">
+            <a href="notice.php">
+                <div class="ham_nav_menu_icon_wrap">
+                    <div class="ham_nav_menu_icon">
+                        <img src="img/nav/notice.png" alt="notice_icon">
+                    </div>
+                </div>
+                <div class="ham_nav_menu_title_wrap">
+                    <p class="ham_nav_menu_title">공지사항</p>
                 </div>
             </a>
         </div>
@@ -224,7 +224,7 @@ while($res = mysqli_fetch_array($result)) {
                                     if($week_day == $today) $bus_on = 1;
                                     ?>
                                     <div class="class_time_info">
-                                        <p class="time"><?=$r2[$x][$j][0]?>교시 - <span>PM</span>
+                                        <p class="time" style="margin-left:-85px"><?=$r2[$x][$j][0]?>교시 - <span>PM</span>
                                             <span><?= $start ?></span>
                                             <span> ~ </span>
                                             <span><?= $end ?></span></p>
@@ -244,7 +244,7 @@ while($res = mysqli_fetch_array($result)) {
                         if($n == 0){
 //                            if($week_day == $today) $bus_on = 0;
                             ?>
-                            <div class="class_time_info" style="text-align:center;padding-top:10px">
+                            <div class="class_time_info" style="text-align:center;padding-top:10px;margin-left:-85px">
                                 수업이 없습니다.
                             </div>
 
@@ -270,9 +270,9 @@ while($res = mysqli_fetch_array($result)) {
             $today = date("m/d");
             ?>
         </div>
-        <div class="mybus_wrap">
+        <div class="mybus_wrap" style="margin-left:-55px">
             <div class="bus_head">
-                <p class="bus_title">MY BUS</p>
+                <p class="bus_title" style="margin-left:90px">MY BUS</p>
                 <div class="onboard_cancel_btn" style="cursor:pointer">
                     <p>탑승 취소</p>
                 </div>

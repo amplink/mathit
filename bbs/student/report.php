@@ -39,7 +39,7 @@ $sql = "SELECT
 					   student_id = '$_SESSION[s_id]'
 					AND 
 					   client_id = '$_SESSION[client_id]'
-					ORDER BY seq desc";
+					ORDER BY date ASC";
 
 $result = sql_query($sql);
 ?>

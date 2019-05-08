@@ -90,7 +90,7 @@ $num = mysqli_num_rows($result);
     <div class="report_wrap">
         <div class="section_title_line">
             <div class="section_title_wrap">
-                <p class="section_title">REPORT</p>
+                <a href="./report.php"><p class="section_title">REPORT</p></a>
                 <span class="deco_line"></span>
             </div>
             <div class="more_btn_wrap">
@@ -165,7 +165,7 @@ $num = mysqli_num_rows($result);
     <div class="notice_wrap">
         <div class="section_title_line">
             <div class="section_title_wrap">
-                <p class="section_title">NOTICE</p>
+                <a href="./notice.php"><p class="section_title">NOTICE</p></a>
                 <span class="deco_line"></span>
             </div>
             <div class="more_btn_wrap">

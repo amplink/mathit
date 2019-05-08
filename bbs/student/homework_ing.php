@@ -9,7 +9,7 @@ include_once ('head.php');
         <p class="head_title">숙제관리</p>
         <div class="back_btn"><a href="home.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
     </div>
-    <div class="content_p">
+    <div class="content_p" style="height:600px">
         <div class="content_menu_wrap">
             <div class="content_menu on"><a href="homework_ing.php" class="on">진행 중인 숙제</a></div>
             <div class="content_menu"><a href="homework_all.php">전체 목록</a></div>
@@ -61,7 +61,7 @@ include_once ('head.php');
 						AND B.`d_uid` IN ($_SESSION[d_uid])
 						AND B.current_status NOT IN ('s2','s3')
 						AND A._from <= '$today'
-						ORDER BY A.seq DESC
+						ORDER BY A._from, A._to ASC
 						";
 
             $result = sql_query($sql);

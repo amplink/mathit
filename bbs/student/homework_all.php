@@ -135,7 +135,7 @@ include_once ('head.php');
 						AND B.`d_uid` IN ($_SESSION[d_uid])
 						AND A._from <= '$today'";
             $sql .= $add_sql;
-            $sql .= "ORDER BY A.seq DESC LIMIT $limit_idx, $page_set ";
+            $sql .= "ORDER BY A._from, A._to ASC LIMIT $limit_idx, $page_set ";
             //echo $sql;
             $result = sql_query($sql);
 
