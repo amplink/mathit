@@ -684,12 +684,15 @@ function send_notification ($tokens, $data) {
     $url = "https://fcm.googleapis.com/fcm/send";
     $msg = array(
         'title' => $data,
-        'body' => $data
+        'body' => $data,
+        'sound' => 'default',
+        'badge' => '1'
     );
 
     $fields = array(
         'registration_ids' => $tokens,
-        'data' => $msg
+        'data' => $msg,
+        'priority' => 'high'
     );
     $headers = array(
         'Authorization:key ='.$api_key,
@@ -701,7 +704,6 @@ function send_notification ($tokens, $data) {
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
     $result = curl_exec($ch);
