@@ -482,7 +482,6 @@ while($res = mysqli_fetch_array($result)) {
 
 
 
-
         $('.corner').change(function () {
 
             var idx = $(this).data("num");
@@ -519,20 +518,11 @@ while($res = mysqli_fetch_array($result)) {
             }else{
                 $("#Q_number"+idx+"_"+no).parent().parent().find('.var_option').removeClass('selected');
                 $("#Q_number"+idx+"_"+no).parent().parent().find('.identifier').html('선택');
+                $("#Q_number"+idx+"_"+no).parent().parent().find('.combobox').html('');
             }
 
 
         });
-
-
-
-
-
-
-
-
-
-
 
 
 
