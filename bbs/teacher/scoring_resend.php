@@ -41,14 +41,19 @@ if($result3){
     $sql = "select * from `fcm` where `uid`='".$s_id."';";
     $result = sql_query($sql);
     $tokens = array();
+    $i_tokens = array();
     while($res = mysqli_fetch_array($result)) {
         $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
         $result1 = sql_query($sql1);
         $res1 = mysqli_fetch_array($result1);
-        if($res1['push_alarm']) $tokens[] = $res['token'];
+        if($res1['push_alarm']) {
+            if($res['iphone']) $i_tokens[] = $res['token'];
+            else $tokens[] = $res['token'];
+        }
     }
     $message = "정답지를 다시 촬영하여 전송해 주세요.";
-    send_notification($tokens, $message);
+    if(count($tokens) > 0) send_notification($tokens, $message);
+    if(count($i_tokens) > 0) send_notification_ios($i_tokens, $message);
 }
 
 $sql4 = "SELECT 

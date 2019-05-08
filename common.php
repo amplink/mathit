@@ -682,6 +682,7 @@ function alert_msg($msg) {
 function send_notification ($tokens, $data) {
     $api_key = "AAAAhDK6-ec:APA91bFBnly-IcmYVvJ51n4dNz5E9LUSclSDpjwBxsG7Zl4Reg1neeDGvA-OjQyB3IeIkrFCyy3GPVqccqfM2Amtenfw7RRB4Gum6XeyKehxadoOvXS9jTINNUNRFvBoh_xIxkq4F5aO";
     $url = "https://fcm.googleapis.com/fcm/send";
+
     $msg = array(
         'title' => $data,
         'body' => $data,
@@ -709,6 +710,39 @@ function send_notification ($tokens, $data) {
     $result = curl_exec($ch);
     if($result == FALSE) {
         die('Curl failed: '.curl_error($ch));
+    }
+
+    curl_close($ch);
+    return $result;
+}
+
+// ios
+function send_notification_ios ($tokens, $data) {
+    $api_key = "AAAAhDK6-ec:APA91bFBnly-IcmYVvJ51n4dNz5E9LUSclSDpjwBxsG7Zl4Reg1neeDGvA-OjQyB3IeIkrFCyy3GPVqccqfM2Amtenfw7RRB4Gum6XeyKehxadoOvXS9jTINNUNRFvBoh_xIxkq4F5aO";
+    $url = "https://fcm.googleapis.com/fcm/send";
+    $title = "MATH IT";
+    $body = $data;
+
+    $notification = array('title' =>$title , 'text' => $body, 'sound' => 'default', 'badge' =>'1');
+
+    $arrayToSend = array('registration_ids' => $tokens, 'notification'=>$notification,'priority'=>'high');
+    $json = json_encode($arrayToSend);
+    $headers = array();
+    $headers[] = 'Content-Type: application/json';
+    $headers[] = 'Authorization: key='. $api_key;
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+    curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    //Send the request
+    $result = curl_exec($ch);
+    if ($result === FALSE)
+    {
+        die('FCM Send Error: ' . curl_error($ch));
     }
 
     curl_close($ch);

@@ -1,11 +1,8 @@
 <?php
 include_once ('_common.php');
-$sql = "select `token` from `fcm`;";
-$result = sql_query($sql);
-$tokens = array();
-while($res = mysqli_fetch_array($result)) {
-    $tokens[] = $res['token'];
-}
-$message = "새로운 공지가 등록되었습니다.";
-send_notification($tokens, $message);
+if(strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'],'iPad'))
+    echo "iPhone or iPad";
+else echo "11";
+
+alert_msg("1111");
 ?>

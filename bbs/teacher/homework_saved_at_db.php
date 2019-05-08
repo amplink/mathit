@@ -134,14 +134,19 @@ for($i=1; $i<count($r); $i++) {
     $sql = "select * from `fcm` where `uid`='".$r[$i][1]."';";
     $result = sql_query($sql);
     $tokens = array();
+    $i_tokens = array();
     while($res = mysqli_fetch_array($result)) {
         $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
         $result1 = sql_query($sql1);
         $res1 = mysqli_fetch_array($result1);
-        if($res1['push_alarm']) $tokens[] = $res['token'];
+        if($res1['push_alarm']) {
+            if($res['iphone']) $i_tokens[] = $res['token'];
+            $tokens[] = $res['token'];
+        }
     }
     $message = "새로운 숙제가 등록되었습니다.";
-    send_notification($tokens, $message);
+    if(count($tokens) > 0) send_notification($tokens, $message);
+    if(count($i_tokens) > 0) send_notification_ios($i_tokens, $message);
 }
 
 $sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
