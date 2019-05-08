@@ -11,11 +11,13 @@ if($_GET['log']) {
 }else $log = 0;
 
 $grade = substr($_SESSION[s_level],0,3).$_SESSION[s_grade];
+$today = date("m/d/Y");
 
 $sql = "SELECT A.seq, A.name, A.d_order, A.grade, A.unit, A._from, A._to, A.semester, B.id 
         FROM `homework` A, `homework_assign_list` B
         WHERE 
             A.seq = B.h_id
+        AND A.`_from` <= '$today'
 		AND B.`client_id`='$_SESSION[client_id]'
 		AND B.student_id = '$_SESSION[s_id]'
 		AND B.`d_uid` IN ($_SESSION[d_uid])
