@@ -307,7 +307,7 @@ while($res = mysqli_fetch_array($result)) {
                     $end = strtotime(date($res['_to']));
 
                     //if($start <= $today && $end >= $today && $res5[tot] > 0) {
-                    if($res5[tot] > 0){
+                    if($start <= $today && $res5[tot] > 0){
                         ?>
                         <p class="ing_text" id="status_complete<?=$i?>" style="color: blue;cursor: pointer;" onclick="show_box(<?=$i?>)">진행중</p>
                         <div class="students_checks<?=$i?>" style="background:rgb(255, 228, 73);
@@ -388,6 +388,23 @@ while($res = mysqli_fetch_array($result)) {
     function resend(e, seq) {
 
         //$('#resend_form'+e).submit();
+        var j = 0;
+        for(i=1; i<=4; i++){
+            if($("#corner"+i+e).val() == '선택') j++;
+        }
+        if(j == 4){
+            alert('코너명이 선택되지 않았습니다.');
+            return false;
+        }
+
+        var j = 0;
+        for(i=1; i<=4; i++){
+            if($("#Q_number"+i+"_"+e).val() == '') j++;
+        }
+        if(j == 4){
+            alert('문항번호가 선택되지 않았습니다.');
+            return false;
+        }
 
         var params = $("#resend_form"+e).serialize();
         $.ajax({
@@ -467,11 +484,13 @@ while($res = mysqli_fetch_array($result)) {
 
 
         $('.corner').change(function () {
-            var idx = $(this).data("num");
-            if($(this).val() != '선택'){
-                var no = $(this).data("key");
-                var params = $("#resend_form"+no).serialize();
 
+            var idx = $(this).data("num");
+            var no = $(this).data("key");
+
+            if($(this).val() != '선택'){
+
+                var params = $("#resend_form"+no).serialize();
                 var n = no -1;
                 $("#corner_no").val($(this).val());
 
@@ -497,6 +516,9 @@ while($res = mysqli_fetch_array($result)) {
                         $('.custumdropdown').eq(0).homework_manegement_add();
                     }
                 });
+            }else{
+                $("#Q_number"+idx+"_"+no).parent().parent().find('.var_option').removeClass('selected');
+                $("#Q_number"+idx+"_"+no).parent().parent().find('.identifier').html('선택');
             }
 
 
