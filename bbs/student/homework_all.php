@@ -154,8 +154,8 @@ include_once ('head.php');
                     ?>
 
 
-                    <div class="content_list" onClick="location.href='homework_submission.php?no=<?=$res['id']?>'"  style="cursor:pointer">
-                        <div class="content_alarm_section" style="width:63px">
+                    <div class="content_list" style="cursor:pointer">
+                        <div class="content_alarm_section" style="width:63px" onClick="location.href='homework_submission.php?no=<?=$res['id']?>'">
                             <!--숙제 제출화면-->
                             <div class="submission">
                                 <div class="submission_sign <?=$add_style?>" style="<?=$add_style2?>"><?=$status1?></div>
@@ -166,24 +166,22 @@ include_once ('head.php');
                                 <!--                                <div class="scoring_ed_sign"><img src="img/check.png" alt="scoring_icon"></div>-->
                             </div>
                         </div>
-                        <div class="content_detail_section <?echo ($res['status1']=='숙제완료')?'final':'';?>" style="width: calc(100% - 95px)">
-                            <a href="homework_chat.php?id=<?=$res['id']?>">
-                                <!--숙제 확인화면-->
-                                <div class="book" style="width:110px">
-                                    <div class="section_icon"><img src="img/range.png" alt="range_icon"></div>
-                                    <div class="section_text">
-                                        <p class="book_name"><?= $res['grade'] ?> - <?= $res['semester'] ?></p>
-                                        <p class="book_page"><span><?= $res['unit'] ?></span></p>
-                                    </div>
+                        <div class="content_detail_section <?echo ($res['status1']=='숙제완료')?'final':'';?>" style="width: calc(100% - 95px)" onClick="location.href='homework_chat.php?id=<?=$res['id']?>'">
+                            <!--숙제 확인화면-->
+                            <div class="book" style="width:110px">
+                                <div class="section_icon"><img src="img/range.png" alt="range_icon"></div>
+                                <div class="section_text">
+                                    <p class="book_name"><?= $res['grade'] ?> - <?= $res['semester'] ?></p>
+                                    <p class="book_page"><span><?= $res['unit'] ?></span></p>
                                 </div>
-                                <div class="limit">
-                                    <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
-                                    <div class="section_text" style="vertical-align:top;padding-top:8px;padding-left:-20px">
-                                        <p style="<?=$add_style3?>"><?=substr($res['_from'],0,5)?>~<?=substr($res['_to'],0,5)?></p>
-                                        <!--<p><span>AM</span> <span>00:00</span></p>-->
-                                    </div>
+                            </div>
+                            <div class="limit">
+                                <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
+                                <div class="section_text" style="vertical-align:top;padding-top:8px;padding-left:-20px">
+                                    <p style="<?=$add_style3?>"><?=substr($res['_from'],0,5)?>~<?=substr($res['_to'],0,5)?></p>
+                                    <!--<p><span>AM</span> <span>00:00</span></p>-->
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                     <?
