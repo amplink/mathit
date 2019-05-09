@@ -25,13 +25,10 @@ if($t_type == "채점강사") {
         }
     }else {
         // 시간표
-        $link = "/api/math/teacher_class?client_no=126&t_uid=".$_SESSION['t_uid'];
+        $link = "/api/math/teacher_class?client_no=".$ac."&t_uid=".$_SESSION['t_uid']."&date=".$date;
         $r = api_calls_get($link);
         $r = arr_sort($r,4);
         $t = $_GET['t'];
-        $d_uid = array();
-        $chk = 0;
-        $cnt = 0;
         for($i=0; $i<count($r)-1; $i++) {
             $chk = 0;
             for($j=0; $j<count($d_uid); $j++) {
@@ -56,6 +53,7 @@ if($t_type == "채점강사") {
         $d_uid[$cnt] = $r[$i][0];
         $c_uid[$cnt] = $r[$i][1];
         $s_uid[$cnt] = $r[$i][2];
+        $d_name[$cnt] = $r[$i][4];
         $d_yoie[$cnt] = $r[$i][5];
         $cnt++;
     }
@@ -86,10 +84,7 @@ $count_s = count($sub_s)-1;
 
 $class_value = array();
 for($i=0; $i<$count_c; $i++) {
-//    if($d_uid[$i]==$sub_d[$i]) {
-        $class_value[] = $sub_d[$i]."/".$sub_c[$i]."/".$sub_s[$i];
-//        alert_msg($class_value[$i]);
-//    }
+    $class_value[] = $sub_d[$i]."/".$sub_c[$i]."/".$sub_s[$i];
 }
 $awef = 0;
 ?>
@@ -243,9 +238,8 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
             location.href = 'notice_list.php';
         });
         m = $('#class_select').multiselect();
-        if(<?php echo $mm;?> == 0) {
-            // m.selectAll();
-        }else {
+        m.selectAll();
+        if(<?php echo $mm;?>) {
             var ar = <?php echo json_encode($class_value);?>;
             for(var i=0; i<ar.length; i++) {
                 m.select(ar[i]);

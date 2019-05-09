@@ -99,7 +99,7 @@ $weeks = array_keys($weekly);
                         <p><span style="color: rgb(0, 181, 103); <?php if(!$res['station_uid']) echo "display:none;";?>">이용 중</span><span style="color: rgb(181, 0, 0); <?php if($res['station_uid']) echo "display:none;";?>">이용안함</span></p>
                     </div>
                     <div class="bus_btn_section">
-                        <div class="not_use_btn">
+                        <div class="not_use_btn" style="<?php if(!$res['bus_seq']) echo 'display:none';?>">
                             <p>버스 미 이용 알림</p>
                         </div>
                         <div class="route_change_btn">

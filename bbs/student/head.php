@@ -392,8 +392,9 @@ if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
                 success: function (res) {
                     if(res == "success") {
                         alert('담당 기사님께 정상적으로 문자가 발송 되었습니다.');
+                    }else if(res == "fail") {
+                        alert('버스노선을 먼저 선택해주세요.');
                     }
-                    // alert(res);
                 }
             });
         }else  alert('지금은 서비스를 이용할 수 없는 시간입니다.\n학원으로 연락주시기 바랍니다.');
