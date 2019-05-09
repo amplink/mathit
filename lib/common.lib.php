@@ -3669,16 +3669,18 @@ function set_paging($page, $block, $block_set, $total_page, $parms)
     $prev_block_page = $prev_block * $block_set;
     $next_block_page = $next_block * $block_set - ($block_set - 1); // 다음블럭 페이지번호
 
-    echo ($prev_page > 0) ? "<div class='left_btn'><a href='$PHP_SELF?page=$prev_page&$parms'><img src='img/prev_btn.png' alt='prev_btn_icon'></a></div>" : "";
+    echo  "<div class='left_btn'";
+    if($page==1) echo "style='visibility: hidden;'";
+    echo "><a href='$PHP_SELF?page=$prev_page&$parms'><img src='img/prev_btn.png' alt='prev_btn_icon'></a></div>";
 
     echo " <div class='page_btn_wrap'>";
-    echo ($prev_block > 0) ? "<div class='page_btn'><a href='$PHP_SELF?page=$prev_block_page&$parms'></a> " : "";
+    echo ($prev_block > 0) ? "<div class='page_btn'><a href='$PHP_SELF?page=$prev_block_page&$parms'></a> </div>" : "";
 
     for ($i = $first_page; $i <= $last_page; $i++) {
-        echo ($i != $page) ? "<div class='page_btn'><a href='$PHP_SELF?page=$i&$parms'>$i</a> " : "<b>$i</b> </div>";
+        echo ($i != $page) ? "<div class='page_btn'><a href='$PHP_SELF?page=$i&$parms'>$i</a></div>" : "<div class='page_btn'><a href='$PHP_SELF?page=$i&$parms' class='on'>$i</a></div>";
     }
-    echo "</div>";
-    echo ($next_block <= $total_block) ? "<div class='page_btn'><a href='$PHP_SELF?page=$next_block_page&$parms'></a> " : "";
+    echo " </div>";
+    echo ($next_block <= $total_block) ? "<div class='page_btn'><a href='$PHP_SELF?page=$next_block_page&$parms'></a></div> " : "";
     echo ($next_page <= $total_page) ? "<div class='right_btn'><a href='$PHP_SELF?page=$next_page&$parms'><img src='img/next_btn.png' alt='next_btn_icon'></a></div>" : "";
 
 }
