@@ -69,8 +69,8 @@ include_once ('head.php');
         </div>
         <div class="content_list_wrap" style="height:100%; border:0px #fff solid">
             <form action="<?=$_SERVER['PHP_SELF']?>" method="get" id="form_search">
-                <div class="calendar_wrap">
-                    <div class="calendar_section">
+                <div class="calendar_wrap" style="text-align:right;">
+                    <div class="calendar_section" style="padding-right:10px">
                         <input type="text" id="from" name="start" style="width:80px" value="<?=$_GET['start']?>">
                         <span> ~ </span>
                         <input type="text" id="to" name="end" style="width:80px" value="<?=$_GET['end']?>">
