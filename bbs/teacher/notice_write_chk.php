@@ -21,6 +21,8 @@ for($i=0; $i<count($target); $i++) {
     $d_uid .= $t[0]."/";
     $c_uid .= $t[1]."/";
     $s_uid .= $t[2]."/";
+    $d_uid1[$i] = $t[0];
+    $c_uid1[$i] = $t[1];
 }
 
 //var_dump($target);
@@ -145,24 +147,26 @@ if($seqq > 0) {
     for($kk=0; $kk<count($range); $kk++) {
         if($range[$kk]=="학생") {
             $ac = $_SESSION['client_no'];
-            $link = "/api/math/student_list?client_no=".$ac;
-            $r = api_calls_get($link);
+            for($t=0; $t<count($d_uid1); $t++) {
+                $link = "/api/math/class_stu?client_no=".$ac."&d_uid=".$d_uid1[$t]."&c_uid=".$c_uid1[$t];
+                $r = api_calls_get($link);
 
-            for($i=1; $i<count($r); $i++) {
-                $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-                sql_query($sql);
-            }
-            $sql = "select * from `fcm`;";
-            $result = sql_query($sql);
-            $tokens = array();
-            $i_tokens = array();
-            while($res = mysqli_fetch_array($result)) {
-                $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
-                $result1 = sql_query($sql1);
-                $res1 = mysqli_fetch_array($result1);
-                if($res1['push_alarm']) {
-                    if($res['iphone']) $i_tokens[] = $res['token'];
-                    else $tokens[] = $res['token'];
+                for($i=1; $i<count($r); $i++) {
+                    $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                    sql_query($sql);
+                    $sql = "select * from `fcm` where `uid`='".$r[$i][1]."';";
+                    $result = sql_query($sql);
+                    $tokens = array();
+                    $i_tokens = array();
+                    while($res = mysqli_fetch_array($result)) {
+                        $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
+                        $result1 = sql_query($sql1);
+                        $res1 = mysqli_fetch_array($result1);
+                        if($res1['push_alarm']) {
+                            if($res['iphone']) $i_tokens[] = $res['token'];
+                            else $tokens[] = $res['token'];
+                        }
+                    }
                 }
             }
             $message = "공지가 수정되었습니다.";
@@ -175,9 +179,10 @@ if($seqq > 0) {
         $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
         sql_query($sql);
     }
+    var_dump($d_uid1);
 
-    alert_msg("공지수정이 완료되었습니다.");
-    location_href("./notice_list.php");
+//    alert_msg("공지수정이 완료되었습니다.");
+//    location_href("./notice_list.php");
 }else {
     $sql = "select * from `teacher_setting`;";
     $result = sql_query($sql);
@@ -201,24 +206,26 @@ if($seqq > 0) {
     for($kk=0; $kk<count($range); $kk++) {
         if($range[$kk]=="학생") {
             $ac = $_SESSION['client_no'];
-            $link = "/api/math/student_list?client_no=".$ac;
-            $r = api_calls_get($link);
+            for($t=0; $t<count($d_uid1); $t++) {
+                $link = "/api/math/class_stu?client_no=".$ac."&d_uid=".$d_uid1[$t]."&c_uid=".$c_uid1[$t];
+                $r = api_calls_get($link);
 
-            for($i=1; $i<count($r); $i++) {
-                $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
-                sql_query($sql);
-            }
-            $sql = "select * from `fcm`;";
-            $result = sql_query($sql);
-            $tokens = array();
-            $i_tokens = array();
-            while($res = mysqli_fetch_array($result)) {
-                $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
-                $result1 = sql_query($sql1);
-                $res1 = mysqli_fetch_array($result1);
-                if($res1['push_alarm']) {
-                    if($res['iphone']) $i_tokens[] = $res['token'];
-                    else $tokens[] = $res['token'];
+                for($i=1; $i<count($r); $i++) {
+                    $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                    sql_query($sql);
+                    $sql = "select * from `fcm` where `uid`='".$r[$i][1]."';";
+                    $result = sql_query($sql);
+                    $tokens = array();
+                    $i_tokens = array();
+                    while($res = mysqli_fetch_array($result)) {
+                        $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
+                        $result1 = sql_query($sql1);
+                        $res1 = mysqli_fetch_array($result1);
+                        if($res1['push_alarm']) {
+                            if($res['iphone']) $i_tokens[] = $res['token'];
+                            else $tokens[] = $res['token'];
+                        }
+                    }
                 }
             }
             $message = "새로운 공지가 등록되었습니다.";

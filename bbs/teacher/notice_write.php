@@ -224,7 +224,6 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
             location.href = 'notice_list.php';
         });
         m = $('#class_select').multiselect();
-        m.selectAll();
         if(<?php echo $mm;?>) {
             var ar = <?php echo json_encode($class_value);?>;
             for(var i=0; i<ar.length; i++) {
