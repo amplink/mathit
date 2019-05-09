@@ -26,7 +26,7 @@ while($res = mysqli_fetch_array($result)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/common<?=$is_mobile_chk?>.css?v=2019050602" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/common<?=$is_mobile_chk?>.css?v=20190509" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js?v=2019050601"></script>
     <script src="js/jquery-ui.js"></script>
@@ -224,7 +224,7 @@ while($res = mysqli_fetch_array($result)) {
                                     if($week_day == $today) $bus_on = 1;
                                     ?>
                                     <div class="class_time_info">
-                                        <p class="time" style="margin-left:-85px"><?=$r2[$x][$j][0]?>교시 - <span>PM</span>
+                                        <p class="time" style="text-align:center;<?if($is_mobile_chk) echo 'margin-left:-85px"';?>"><?=$r2[$x][$j][0]?>교시 - <span>PM</span>
                                             <span><?= $start ?></span>
                                             <span> ~ </span>
                                             <span><?= $end ?></span></p>
@@ -244,7 +244,7 @@ while($res = mysqli_fetch_array($result)) {
                         if($n == 0){
 //                            if($week_day == $today) $bus_on = 0;
                             ?>
-                            <div class="class_time_info" style="text-align:center;padding-top:10px;margin-left:-85px">
+                            <div class="class_time_info" style="text-align:center;padding-top:10px;<?if($is_mobile_chk) echo 'margin-left:-85px';?>">
                                 수업이 없습니다.
                             </div>
 
@@ -270,9 +270,9 @@ while($res = mysqli_fetch_array($result)) {
             $today = date("m/d");
             ?>
         </div>
-        <div class="mybus_wrap" style="margin-left:-55px">
+        <div class="mybus_wrap" <?if($is_mobile_chk) echo 'style="margin-left:-55px"';?>>
             <div class="bus_head">
-                <p class="bus_title" style="margin-left:90px">MY BUS</p>
+                <p class="bus_title" <?if($is_mobile_chk) echo 'style="margin-left:90px"';?>>MY BUS</p>
                 <div class="onboard_cancel_btn" style="cursor:pointer">
                     <p>탑승 취소</p>
                 </div>

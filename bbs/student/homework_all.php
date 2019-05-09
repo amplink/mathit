@@ -57,17 +57,17 @@ include_once ('head.php');
 </script>
 <body>
 <!--section-->
-<section>
+<section style="height:100%; overflow:hidden;margin-top:0px">
     <div class="head_p">
         <p class="head_title">숙제관리</p>
         <div class="back_btn"><a href="home.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
     </div>
-    <div class="content_p">
+    <div class="content_p" style="height:87%; border:0px #fff solid">
         <div class="content_menu_wrap">
             <div class="content_menu"><a href="homework_ing.php">진행 중인 숙제</a></div>
             <div class="content_menu on"><a href="homework_all.php" class="on">전체 목록</a></div>
         </div>
-        <div class="content_list_wrap">
+        <div class="content_list_wrap" style="height:100%; border:0px #fff solid">
             <form action="<?=$_SERVER['PHP_SELF']?>" method="get" id="form_search">
                 <div class="calendar_wrap">
                     <div class="calendar_section">
@@ -191,7 +191,7 @@ include_once ('head.php');
             }else{
                 ?>
 
-                <div style="text-align:center"> 숙제가 없습니다.</div>
+                <div style="text-align:center;padding-top:40%"> 숙제가 없습니다.</div>
                 <?
             }
             ?>
@@ -200,8 +200,10 @@ include_once ('head.php');
                 <div class="page_wrap_wrap">
 
                     <?
-                    $parms = "start=".$_GET['start']."&end=".$_GET['end'];
-                    set_paging($page, $block, $block_set, $total_page, $parms);
+                    if($total > 0) {
+                        $parms = "start=".$_GET['start']."&end=".$_GET['end'];
+                        set_paging($page, $block, $block_set, $total_page, $parms);
+                    }
                     ?>
 
                 </div>
