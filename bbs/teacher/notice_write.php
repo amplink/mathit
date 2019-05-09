@@ -10,43 +10,9 @@ $res = mysqli_fetch_array($result);
 $t_type = $res['type'];
 $t_notice = $res['notice'];
 
-if($t_type == "채점강사") {
-    if($t_notice) {
-        $cnt = 0;
-        $r = api_calls_get("/api/math/class?client_no=".$_SESSION['client_no']);
-        $r = arr_sort($r,4);
-        for($i=0; $i<count($r)-1; $i++) {
-            $d_uid[$cnt] = $r[$i][0];
-            $c_uid[$cnt] = $r[$i][1];
-            $s_uid[$cnt] = $r[$i][2];
-            $d_name[$cnt] = $r[$i][4];
-            $d_yoie[$cnt] = $r[$i][5];
-            $cnt++;
-        }
-    }else {
-        // 시간표
-        $link = "/api/math/teacher_class?client_no=".$ac."&t_uid=".$_SESSION['t_uid']."&date=".$date;
-        $r = api_calls_get($link);
-        $r = arr_sort($r,4);
-        $t = $_GET['t'];
-        for($i=0; $i<count($r)-1; $i++) {
-            $chk = 0;
-            for($j=0; $j<count($d_uid); $j++) {
-                if($d_uid[$j] == $r[$i][0]) $chk = 1;
-            }
-            if(!$chk) {
-                $d_uid[$cnt] = $r[$i][0];
-                $c_uid[$cnt] = $r[$i][1];
-                $s_uid[$cnt] = $r[$i][2];
-                $d_name[$cnt] = $r[$i][4];
-                $d_yoie[$cnt] = $r[$i][5];
-                $cnt++;
-            }
-        }
-    }
+$cnt = 0;
 
-}else {
-    $cnt = 0;
+if($t_notice) {
     $r = api_calls_get("/api/math/class?client_no=".$_SESSION['client_no']);
     $r = arr_sort($r,4);
     for($i=0; $i<count($r)-1; $i++) {
@@ -56,6 +22,26 @@ if($t_type == "채점강사") {
         $d_name[$cnt] = $r[$i][4];
         $d_yoie[$cnt] = $r[$i][5];
         $cnt++;
+    }
+
+}else {
+    $link = "/api/math/teacher_class?client_no=".$ac."&t_uid=".$_SESSION['t_uid']."&date=".$date;
+    $r = api_calls_get($link);
+    $r = arr_sort($r,4);
+    $t = $_GET['t'];
+    for($i=0; $i<count($r)-1; $i++) {
+        $chk = 0;
+        for($j=0; $j<count($d_uid); $j++) {
+            if($d_uid[$j] == $r[$i][0]) $chk = 1;
+        }
+        if(!$chk) {
+            $d_uid[$cnt] = $r[$i][0];
+            $c_uid[$cnt] = $r[$i][1];
+            $s_uid[$cnt] = $r[$i][2];
+            $d_name[$cnt] = $r[$i][4];
+            $d_yoie[$cnt] = $r[$i][5];
+            $cnt++;
+        }
     }
 }
 
