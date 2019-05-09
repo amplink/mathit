@@ -282,7 +282,7 @@
 }
 
 .ui-widget-header {
-    background: #16d46e;
+    /*background: #16d46e;*/
 }
 
 /**/
@@ -314,8 +314,3 @@
 }
 
 /**/
-
-#ui-datepicker-div {
-    left: 50% !important;
-    transform: translateX(-50%);
-}

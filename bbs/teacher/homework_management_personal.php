@@ -257,7 +257,7 @@ for($i=0; $i<count($d_name); $i++) {
                                             <?
                                         }else{
                                             ?>
-                                            <span style="display: none">기한초과제출</span>
+                                            <span style="display: none">기간초과제출</span>
                                             <?
                                         }
                                         ?>
@@ -288,7 +288,7 @@ for($i=0; $i<count($d_name); $i++) {
                                             <?
                                         }else{
                                             ?>
-                                            <span style="display: none">기한초과제출</span>
+                                            <span style="display: none">기간초과제출</span>
                                             <?
                                         }
                                         ?>

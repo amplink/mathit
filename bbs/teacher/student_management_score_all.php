@@ -29,7 +29,7 @@ include_once ('head.php');
                 <th>학년 / 학급명</th>
                 <th>학생명</th>
                 <th>숙제명</th>
-                <th>제출기한</th>
+                <th>제출기간</th>
                 <th>제출상태</th>
                 <th>채점상태</th>
             </tr>

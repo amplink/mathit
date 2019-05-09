@@ -1,7 +1,19 @@
 <?php
 include_once ('head.php');
 ?>
-<link rel="stylesheet" type="text/css" media="screen" href="css/homework_all.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/homework_all.css?v=20190509" />
+<?
+if(!$is_mobile_chk){
+    ?>
+    <style>
+        #ui-datepicker-div {
+            left: 50% !important;
+            transform: translateX(-50%);
+        }
+    </style>
+    <?
+}
+?>
 <script>
     $( function() {
         var dateFormat = "mm/dd/yy",
@@ -19,7 +31,13 @@ include_once ('head.php');
                     dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
                     monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
                     monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                    numberOfMonths: 1
+                    numberOfMonths: 1,
+                    beforeShow: function(input) {
+                        var i_offset = $(input).offset();
+                        setTimeout(function(){
+                            $('#ui-datepicker-div').css({'left':'30%'});
+                        })
+                    }
                 })
                 .on( "change", function() {
                     to.datepicker( "option", "minDate", getDate( this ) );
@@ -37,7 +55,12 @@ include_once ('head.php');
                 dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
                 monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                numberOfMonths: 1
+                numberOfMonths: 1,
+                beforeShow: function(input) {
+                    setTimeout(function(){
+                        $('#ui-datepicker-div').css({'left':'50%'});
+                    })
+                }
             })
                 .on( "change", function() {
                     from.datepicker( "option", "maxDate", getDate( this ) );
