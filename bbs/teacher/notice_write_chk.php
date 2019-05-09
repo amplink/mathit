@@ -179,10 +179,9 @@ if($seqq > 0) {
         $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
         sql_query($sql);
     }
-    var_dump($d_uid1);
 
-//    alert_msg("공지수정이 완료되었습니다.");
-//    location_href("./notice_list.php");
+    alert_msg("공지수정이 완료되었습니다.");
+    location_href("./notice_list.php");
 }else {
     $sql = "select * from `teacher_setting`;";
     $result = sql_query($sql);
