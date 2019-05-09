@@ -11,7 +11,7 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="css/common2.css?v=20190506" />
+    <link rel="stylesheet" type="text/css" href="css/common2.css?v=20190509" />
     <link rel="stylesheet" type="text/css" href="css/report_detail.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js?v=20190506"></script>
@@ -340,7 +340,7 @@ echo $result;
 
         <div class="report_detail_section">
             <p class="detail_title">선생님 코멘트</p>
-            <div class="detail_content_box" style="margin-top:-7px">
+            <div class="detail_content_box" style="margin-top:-7px;min-height:10px">
                 <p><span><?=nl2br($res['comment'])?></span></p>
             </div>
         </div>

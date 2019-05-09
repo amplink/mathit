@@ -286,8 +286,8 @@ if($tot == 0) {
                     alert("잠시 후 다시 시도해 주십시오.") ;
                 },
                 success : function(result){
-                    if(result == "success") alert('사진이 정상 등록 되었습니다.');
-                    else if(result == "err") alert('사진이 정상 등록 되지 않았습니다.');
+                    if(result == "success") alert('정상 제출 되었습니다.');
+                    else                    alert(result);
                     location.href = "homework_submission.php?no=<?=$_GET['no']?>";
                 }
             }).submit();
