@@ -20,7 +20,7 @@ $res = mysqli_fetch_array($result);
             </div>
             <div class="head_right">
                 <?php
-                if($res['notice']) {
+                if($res['type']=="전임강사" || $res['notice']) {
                     ?>
                     <div class="write_btn"><a href="notice_write.php">공지사항 등록</a></div>
                 <?php

@@ -51,6 +51,9 @@ $res = mysqli_fetch_array($result);
         </div>
     </section>
 </body>
+<footer>
+    <p class="copyright"><span>copyright ⓒ 2019 PSE corp. All Rights Reserved.</span></p>
+</footer>
 </html>
 <script>
     function submit() {

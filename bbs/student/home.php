@@ -254,9 +254,6 @@ $num = mysqli_num_rows($result);
         </div>
     </div>
 </section>
-<footer>
-    <p class="copyright"><span>copyright ⓒ 2019 PSE corp. All Rights Reserved.</span></p>
-</footer>
 </body>
 </html>
 <script>
