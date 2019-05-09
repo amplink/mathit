@@ -108,9 +108,15 @@ $weeks = array_keys($weekly);
                     </div>
                 </div>
                 <div class="down_section">
-                    <p class="route_name"><span><?=$res['line']?></span></p>
-                    <p class="busstop_name"><span><?=$res['station']?> 정류장</span></p>
-                    <p class="bus_time"><span>PM <?=$res['time']?></span></p>
+                    <?php
+                    if($res['bus_seq']) {
+                        ?>
+                        <p class="route_name"><span><?=$res['line']?></span></p>
+                        <p class="busstop_name"><span><?=$res['station']?> 정류장</span></p>
+                        <p class="bus_time"><span>PM <?=$res['time']?></span></p>
+                        <?
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -156,6 +162,7 @@ $weeks = array_keys($weekly);
                 echo "<br>";
             }
             ?>
+            <input type="radio" name="bus_uid" value="">버스 미이용
         </div>
         <div class="bus_box_btn_wrap">
             <div class="bus_yes" style="cursor:pointer"><p>변경</p></div>

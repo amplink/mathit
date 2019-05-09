@@ -37,9 +37,10 @@ $time = $time[0];
                 <?php
                 if($res1['attach_file_url']) {
                     ?>
-                    <div class="attach_file">
+                    <div class="attach_file" style="float:left;">
                         <a href="http://pse2018.cafe24.com/bbs/admin/<?=$res1['attach_file_url'].$res1['attach_file']?>" target="_blank" download>첨부파일 받기</a>
                     </div>
+                    <span style="font-size: 14px; line-height: 25px;">&nbsp;&nbsp;<?=$res1['attach_file']?></span>
                     <?php
                 }
                 ?>
@@ -66,9 +67,10 @@ $time = $time[0];
                 <?php
                 if($res['file_url']) {
                     ?>
-                    <div class="attach_file">
+                    <div class="attach_file" style="float:left">
                         <a href="http://pse2018.cafe24.com/bbs/teacher/<?=$res['file_url']?><?=$res['file_name']?>" target="_blank" download>첨부파일 받기</a>
                     </div>
+                    <span style="font-size: 14px; line-height: 25px;">&nbsp;&nbsp;<?=$res['file_name']?></span>
                 <?php
                 }
                 ?>

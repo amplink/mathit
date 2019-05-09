@@ -16,14 +16,15 @@ $seqq = $_POST['seq'];
 $name = $_FILES['bf_file']['tmp_name'];
 $name_name = $_FILES['bf_file']['name'];
 
-/*
-if ($_FILES['bf_file']['tmp_name'] && $_FILES['bf_file']["size"] == ""){
-    alert_msg("해당파일은 파일용량을 초과 하였습니다.");
-    echo "<script>history.back();</script>";
-    exit;
+for($i=0; $i<count($target); $i++) {
+    $t = explode('/', $target[$i]);
+    $d_uid .= $t[0]."/";
+    $c_uid .= $t[1]."/";
+    $s_uid .= $t[2]."/";
 }
-*/
-//echo $name;
+
+//var_dump($target);
+
 $writer = $_SESSION['t_name'];
 
 $sql = "select * from `teacher_notice`;";
@@ -117,8 +118,8 @@ if($seqq > 0) { // 수정이면
 }
 if($_SESSION['admin']) $writer = "관리자";
 
-$sql = "INSERT INTO `teacher_notice` (`seq`, `client_id`, `title`, `writer`, `type`, `n_range`, `target`, `file_url`, `file_name`, `content`, `event_time`)
-VALUES (NULL, '$ac', '$title', '$writer', '$type', '$r_range', '$target', '$name_url', '$name_name', '$content', CURRENT_TIMESTAMP);";
+$sql = "INSERT INTO `teacher_notice` (`seq`, `client_id`, `d_uid`, `c_uid`, `s_uid`, `title`, `writer`, `type`, `n_range`, `target`, `file_url`, `file_name`, `content`, `event_time`)
+VALUES (NULL, '$ac', '$d_uid', '$c_uid', '$s_uid','$title', '$writer', '$type', '$r_range', '$target', '$name_url', '$name_name', '$content', CURRENT_TIMESTAMP);";
 sql_query($sql);
 
 if($seqq > 0) {

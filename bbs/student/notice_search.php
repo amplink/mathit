@@ -7,7 +7,13 @@ $page = $_GET['page'];
 $student = "%학생%";
 $start = ($page-1)*10;
 
-$sql = "select * from `teacher_notice` where `title` like '$search' or `target` like '$search' and `client_id`='$ac' and `n_range` like '$student' order by `type` desc, `event_time` desc ";
+$sub_uid = explode(', ', $_SESSION['d_uid']);
+for($i=0; $i<count($sub_uid); $i++) {
+    if(count($sub_uid)-1 == $i) $d_uid .= $sub_uid[$i];
+    else $d_uid .= $sub_uid[$i]."|";
+}
+//alert_msg($d_uid);
+$sql = "select * from `teacher_notice` where (`title` like '$search' or `target` like '$search') and `client_id`='$ac' and `n_range` like '$student' and `d_uid` RLIKE '$d_uid' order by `type` desc, `event_time` desc ";
 $sql = $sql."limit ".$start.",10";
 //echo $sql;
 $result = sql_query($sql);

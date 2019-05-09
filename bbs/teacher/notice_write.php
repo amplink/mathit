@@ -16,6 +16,9 @@ if($t_type == "채점강사") {
         $r = api_calls_get("/api/math/class?client_no=".$_SESSION['client_no']);
         $r = arr_sort($r,4);
         for($i=0; $i<count($r)-1; $i++) {
+            $d_uid[$cnt] = $r[$i][0];
+            $c_uid[$cnt] = $r[$i][1];
+            $s_uid[$cnt] = $r[$i][2];
             $d_name[$cnt] = $r[$i][4];
             $d_yoie[$cnt] = $r[$i][5];
             $cnt++;
@@ -36,6 +39,8 @@ if($t_type == "채점강사") {
             }
             if(!$chk) {
                 $d_uid[$cnt] = $r[$i][0];
+                $c_uid[$cnt] = $r[$i][1];
+                $s_uid[$cnt] = $r[$i][2];
                 $d_name[$cnt] = $r[$i][4];
                 $d_yoie[$cnt] = $r[$i][5];
                 $cnt++;
@@ -48,7 +53,9 @@ if($t_type == "채점강사") {
     $r = api_calls_get("/api/math/class?client_no=".$_SESSION['client_no']);
     $r = arr_sort($r,4);
     for($i=0; $i<count($r)-1; $i++) {
-        $d_name[$cnt] = $r[$i][4];
+        $d_uid[$cnt] = $r[$i][0];
+        $c_uid[$cnt] = $r[$i][1];
+        $s_uid[$cnt] = $r[$i][2];
         $d_yoie[$cnt] = $r[$i][5];
         $cnt++;
     }
@@ -63,6 +70,28 @@ if($result) {
 //    $type = explode(',', $res['type']);
     $range = explode(',', $res['n_range']);
 }
+if($seq) {
+    $mm = $seq;
+}else {
+    $mm = 0;
+}
+
+$sub_d = explode('/', $res['d_uid']);
+$sub_c = explode('/', $res['c_uid']);
+$sub_s = explode('/', $res['s_uid']);
+
+$count_d = count($sub_d)-1;
+$count_c = count($sub_c)-1;
+$count_s = count($sub_s)-1;
+
+$class_value = array();
+for($i=0; $i<$count_c; $i++) {
+//    if($d_uid[$i]==$sub_d[$i]) {
+        $class_value[] = $sub_d[$i]."/".$sub_c[$i]."/".$sub_s[$i];
+//        alert_msg($class_value[$i]);
+//    }
+}
+$awef = 0;
 ?>
 
 
@@ -129,7 +158,13 @@ if($result) {
                 <div class="option_content">
                     <select name="target[]" id="class_select" style="margin-top: 5px;" multiple="multiple" required>
                         <?php
-                        for($i=0; $i<count($d_name); $i++) echo "<option value='".$d_name[$i]."'>$d_name[$i]($d_yoie[$i])</option>";
+                        for($i=0; $i<count($d_name); $i++) {
+//                            $value = $d_uid[$i]."/".$c_uid[$i]."/".$s_uid[$i];
+//                            if($class_value[$i] == $value) $chk = "selected";
+//                            else $chk = "";
+
+                            echo "<option value='".$d_uid[$i]."/".$c_uid[$i]."/".$s_uid[$i]."'>$d_name[$i]($d_yoie[$i])</option>";
+                        }
                         ?>
                     </select>
                 </div>
@@ -185,7 +220,7 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
         .catch( error => {
             console.error( error );
         });
-
+    var m;
     $(document).ready(function(){
         $('.check_all').click(function(){
             $('.oj').prop('checked', this.checked);
@@ -206,8 +241,17 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
         });
         $('.cancel_btn').click(function () {
             location.href = 'notice_list.php';
-        })
-        $('#class_select').multiselect();
+        });
+        m = $('#class_select').multiselect();
+        if(<?php echo $mm;?> == 0) {
+            // m.selectAll();
+        }else {
+            var ar = <?php echo json_encode($class_value);?>;
+            for(var i=0; i<ar.length; i++) {
+                m.select(ar[i]);
+            }
+        }
+
         cancel_chk_all();
     });
     function cancel_chk_all() {

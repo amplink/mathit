@@ -175,12 +175,17 @@ $num = mysqli_num_rows($result);
         <div class="notice_content_wrap">
             <div class="notice_table">
                 <?php
-
+                $sub_uid = explode(', ', $_SESSION['d_uid']);
+                for($i=0; $i<count($sub_uid); $i++) {
+                    if(count($sub_uid)-1 == $i) $d_uid .= $sub_uid[$i];
+                    else $d_uid .= $sub_uid[$i]."/|";
+                }
                 $sql3 = "SELECT  seq, title, event_time, writer, `type`, `file_url`
                              FROM `teacher_notice`  
                              WHERE 
                                `client_id`='$_SESSION[client_id]'
                                AND `n_range` like '%학생%'
+                               AND `d_uid` RLIKE '$d_uid'
                              ORDER BY `type` desc, seq DESC LIMIT 5";
                 $result3 = sql_query($sql3);
                 $num3 = @mysqli_num_rows($result3);

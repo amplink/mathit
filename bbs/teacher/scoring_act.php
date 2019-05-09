@@ -135,7 +135,7 @@ if($res3[tot] > 0){
 
         for($i=1; $i<count($r); $i++) {
 
-            $sql = "insert into `alarm` set `content`='" . $res[class_name] . "반 숙제채점이 완료 되었습니다.', `table_name`='homework', `target`='전임강사', `chk`='0', `uid`='".$r[$i][1]."', `datetime`=CURRENT_TIMESTAMP";
+            $sql = "insert into `alarm` set `content`='채점이 완료 되었습니다.', `table_name`='homework', `target`='전임강사', `chk`='0', `uid`='".$r[$i][1]."', `datetime`=CURRENT_TIMESTAMP";
             sql_query($sql);
             /***************************/
             $sql = "select * from `fcm` where `uid`='".$r[$i][1]."'";
