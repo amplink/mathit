@@ -149,7 +149,8 @@ if(!$is_mobile_chk){
 						  WHEN (B.apply_status_2 = 'N' AND current_status = 's1') THEN '채점완료'
 						  WHEN (B.current_status = 's2' OR  B.current_status= 's3') THEN '채점완료'
 						  END
-						  ) status2
+						  ) status2,
+						  B.current_status
 						FROM `homework` A, `homework_assign_list` B
 						WHERE 
 							A.seq = B.h_id
@@ -177,19 +178,25 @@ if(!$is_mobile_chk){
                     ?>
 
 
-                    <div class="content_list" style="cursor:pointer">
-                        <div class="content_alarm_section" style="width:63px" onClick="location.href='homework_submission.php?no=<?=$res['id']?>'">
-                            <!--숙제 제출화면-->
-                            <div class="submission">
-                                <div class="submission_sign <?=$add_style?>" style="<?=$add_style2?>"><?=$status1?></div>
+                    <div class="content_list">
+                        <?if($res['current_status'] == "" || $res['current_status'] == "s1"){?>
+                        <a href="homework_submission.php?no=<?=$res['id']?>">
+                            <? } ?>
+                            <div class="content_alarm_section" style="width:63px">
+                                <!--숙제 제출화면-->
+                                <div class="submission">
+                                    <div class="submission_sign <?=$add_style?>" style="<?=$add_style2?>"><?=$status1?></div>
+                                </div>
+                                <div class="scoring">
+                                    <div class="scoring_none"><span style="color: white;"><?=$res['status2']?></span></div>
+                                    <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
+                                    <!--                                <div class="scoring_ed_sign"><img src="img/check.png" alt="scoring_icon"></div>-->
+                                </div>
                             </div>
-                            <div class="scoring">
-                                <div class="scoring_none"><span style="color: white;"><?=$res['status2']?></span></div>
-                                <!--                                <div class="scoring_ing_sign" style="display: none;"><img src="img/doing.png" alt="scoring_icon"></div>-->
-                                <!--                                <div class="scoring_ed_sign"><img src="img/check.png" alt="scoring_icon"></div>-->
-                            </div>
-                        </div>
-                        <div class="content_detail_section <?echo ($res['status1']=='숙제완료')?'final':'';?>" style="width: calc(100% - 95px)" onClick="location.href='homework_chat.php?id=<?=$res['id']?>'">
+                            <?if($res['current_status'] == "" || $res['current_status'] == "s1"){?>
+                        </a>
+                    <? } ?>
+                        <div class="content_detail_section <?echo ($res['status1']=='숙제완료')?'final':'';?>" style="width: calc(100% - 95px);cursor:pointer" onClick="location.href='homework_chat.php?id=<?=$res['id']?>'">
                             <!--숙제 확인화면-->
                             <div class="book" style="width:110px">
                                 <div class="section_icon"><img src="img/range.png" alt="range_icon"></div>
