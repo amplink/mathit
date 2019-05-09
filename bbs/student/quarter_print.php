@@ -11,7 +11,7 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <link rel="icon" type="image/png" sizes="96x96" href="img/f.png">
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="css/common2.css?v=20190506" />
+    <link rel="stylesheet" type="text/css" href="css/common2.css?v=20190509" />
     <link rel="stylesheet" type="text/css" href="css/report_detail.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/common.js?v=20190506"></script>
@@ -31,8 +31,8 @@ $res = mysqli_fetch_array($result);
 $student_id = $res['student_id'];
 ?>
 <!--section-->
-<section>
-    <div class="head_p" style="margin-top: -30px;">
+<section id="section">
+    <div class="head_p">
         <p class="head_title">성적표</p>
         <p class="title_detail"><span><?=$res['year']?>년</span><span><?=$res['quarter']?>분기</span></p>
     </div>
@@ -112,24 +112,22 @@ $student_id = $res['student_id'];
                 </table>
             </div>
         </div>
-        <div class="report_detail_section">
+        <div class="report_detail_section"z>
             <p class="detail_title">학생 수준 진단</p>
-            <div class="detail_content_box">
+            <div class="detail_content_box" style="min-height:50px">
                 <p><span><?=nl2br($res['evaluation'])?></span></p>
             </div>
         </div>
         <div class="report_detail_section">
             <p class="detail_title">선생님 코멘트</p>
-            <div class="detail_content_box">
+            <div class="detail_content_box" style="min-height:50px">
                 <p><span><?=nl2br($res['comment'])?></span></p>
             </div>
         </div>
     </div>
 </section>
 <script>
-    setTimeout(function() {
-        window.print();
-    }, 2000);
+    window.print();
 </script>
 </body>
 </html>
