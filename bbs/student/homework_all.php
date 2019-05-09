@@ -57,7 +57,7 @@ include_once ('head.php');
 </script>
 <body>
 <!--section-->
-<section style="height:100%; overflow:hidden;margin-top:0px">
+<section style="height:100%;overflow:auto;margin-top:0px">
     <div class="head_p">
         <p class="head_title">숙제관리</p>
         <div class="back_btn"><a href="home.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
