@@ -2,7 +2,7 @@
 
 <script src="./js/Chart.min.js"></script>
 <script src="./js/utils.js?v=20190414"></script>
-<link rel="stylesheet" type="text/css" href="./css/chart_style.css?v=201904021">
+<link rel="stylesheet" type="text/css" href="./css/chart_style.css?v=20190509">
 <style>
     canvas{
         -moz-user-select: none;
@@ -64,7 +64,8 @@
             xAxes: [{
                 ticks: {
                     autoSkip: false,
-                    maxRotation: 0
+                    maxRotation: 70,
+                    minRotation: 70
                 }
             }]
         }
