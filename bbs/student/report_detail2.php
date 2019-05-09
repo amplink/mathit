@@ -167,6 +167,7 @@ echo $result;
                         </td>
                         <td>
                             <span><?=$res4['name']?></span>
+                            <br><span><?=$res4['grade']?>-</span><span><?=$res4['semester']?></span><span>(<?=$res4['unit']?>)</span>
                         </td>
                         <td>
                             <?
