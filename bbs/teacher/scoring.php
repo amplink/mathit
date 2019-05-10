@@ -242,7 +242,7 @@ include_once ('head.php');
                             ?>
 
                             <li class="swiper-slide">
-                                <div class="paper_img_input" style="overflow:auto;"><img src="http://student.mathitlms.co.kr/data/photo/<?=$res4['reg_month']?>/<?=$res4['id']?>/<?=$res4['file_name']?>" style="height: 100%;"></div>
+                                <div class="paper_img_input" style="overflow:auto;"><img src="http://student.mathitlms.co.kr/data/photo/<?=$res4['reg_month']?>/<?=$res4['id']?>/<?=$res4['file_name']?>" style="height:750px"></div>
                             </li>
                             <?
                         }

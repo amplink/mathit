@@ -113,12 +113,13 @@ try{
 
 function imageResize($name,$imageResourceId,$width,$height) {
 
-    $re_wid = 500;
+    $re_wid = 700;
     if($width <= $re_wid){
         $re_wid = $width;
         $re_hei = $height;
     }
     $re_hei = (int)(($height*$re_wid)/$width);
+    if($re_hei > 750) $re_hei = 750;
     $targetLayer=imagecreatetruecolor($re_wid,$re_hei);
     imagecopyresampled($targetLayer,$imageResourceId,0,0,0,0,$re_wid,$re_hei, $width,$height);
 
