@@ -137,7 +137,7 @@ $awef = 0;
                     <p>공지 대상</p>
                 </div>
                 <div class="option_content">
-                    <select name="target[]" id="class_select" style="margin-top: 5px;" multiple="multiple" required>
+                    <select name="target[]" id="class_select" style="margin-top: 5px;" multiple="multiple">
                         <?php
                         for($i=0; $i<count($d_name); $i++) {
 //                            $value = $d_uid[$i]."/".$c_uid[$i]."/".$s_uid[$i];
@@ -185,7 +185,7 @@ for($k=0; $k<count($range); $k++) {
 }
 if((count($range)-1)==3) echo "<script>$('.check_all').prop('checked', true);</script>";
 
-echo "<script>$('#class_select').val('".$res['target']."');</script>";
+echo "<script>$('#class_select').val('" . $res['target'] . "')</script>";
 ?>
 <script>
     ClassicEditor
@@ -230,6 +230,7 @@ echo "<script>$('#class_select').val('".$res['target']."');</script>";
                 m.select(ar[i]);
             }
         }
+        $('#class_select_input').attr('autocomplete','off');
 
         cancel_chk_all();
     });
