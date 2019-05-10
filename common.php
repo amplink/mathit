@@ -46,6 +46,20 @@ function g5_path()
     return $result;
 }
 
+
+
+if($_SERVER['HTTP_HOST'] == 'admin.mathitlms.co.kr') {
+    echo("<script>location.replace('https://mathitlms.co.kr/bbs/admin".$_SERVER['REQUEST_URI']."');</script>");
+} else 	if($_SERVER['HTTP_HOST'] == 'teacher.mathitlms.co.kr') {
+    echo("<script>location.replace('https://mathitlms.co.kr/bbs/teacher".$_SERVER['REQUEST_URI']."');</script>");
+} else 	if($_SERVER['HTTP_HOST'] == 'student.mathitlms.co.kr') {
+    echo("<script>location.replace('https://mathitlms.co.kr/bbs/student".$_SERVER['REQUEST_URI']."');</script>");
+}
+
+if(empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'on'){
+    echo("<script>location.replace('https://$_SERVER[HTTP_HOST]".$_SERVER['REQUEST_URI']."');</script>");
+}
+
 $g5_path = g5_path();
 
 include_once($g5_path['path'].'/config.php');   // 설정 파일
