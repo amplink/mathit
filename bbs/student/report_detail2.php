@@ -163,7 +163,7 @@ echo $result;
                     ?>
                     <tr>
                         <td>
-                            <span><?=substr($res4['_from'],6,10)?>-<?=substr($res4['_from'],0,2)?>-<?=substr($res4['_from'],3,2)?></span>
+                            <span><?=substr($res4['_from'],6,10)?>-<br><?=substr($res4['_from'],0,2)?>-<?=substr($res4['_from'],3,2)?></span>
                         </td>
                         <td>
                             <span><?=$res4['name']?></span>
@@ -179,7 +179,8 @@ echo $result;
                             if($late_chk) $x++;
                             ?>
                             <span <?if($late_chk)echo "style='color:red'";?>>
-								<?=$submit_date?>
+								<?=substr($submit_date,0,5)?><br>
+                                <?=substr($submit_date,5,2)?>-<?=substr($submit_date,8,2)?>
 								</span>
                         </td>
                         <td>
