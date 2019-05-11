@@ -20,7 +20,7 @@ $time = $time[0];
             ?>
             <div class="head_p">
                 <p class="head_title">공지사항</p>
-                <div class="back_btn" onclick="history.back();"><a href="#"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
+                <div class="back_btn"><a href="notice.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
             </div>
             <div class="content_p">
                 <p class="notice_title"><span><?=$res1['title']?></span></p>
@@ -38,7 +38,7 @@ $time = $time[0];
                 if($res1['attach_file_url']) {
                     ?>
                     <div class="attach_file" style="float:left;">
-                        <a href="http://pse2018.cafe24.com/bbs/admin/<?=$res1['attach_file_url'].$res1['attach_file']?>" target="_blank" download>첨부파일 받기</a>
+                        <a href="https://pse2018.cafe24.com/bbs/admin/<?=$res1['attach_file_url'].$res1['attach_file']?>" target="_blank" download>첨부파일 받기</a>
                     </div>
                     <span style="font-size: 14px; line-height: 25px;">&nbsp;&nbsp;<?=$res1['attach_file']?></span>
                     <?php
@@ -68,7 +68,7 @@ $time = $time[0];
                 if($res['file_url']) {
                     ?>
                     <div class="attach_file" style="float:left">
-                        <a href="http://pse2018.cafe24.com/bbs/teacher/<?=$res['file_url']?><?=$res['file_name']?>" target="_blank" download>첨부파일 받기</a>
+                        <a href="https://pse2018.cafe24.com/bbs/teacher/<?=$res['file_url']?><?=$res['file_name']?>" target="_blank" download>첨부파일 받기</a>
                     </div>
                     <span style="font-size: 14px; line-height: 25px;">&nbsp;&nbsp;<?=$res['file_name']?></span>
                 <?php
