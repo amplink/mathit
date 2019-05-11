@@ -1,6 +1,6 @@
 <?php
 include_once ('_common.php');
-
+ini_set('memory_limit','512M');
 $id = $_POST['id'];
 $i = 0;
 $j = 1;
