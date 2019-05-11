@@ -13,7 +13,7 @@ if($_GET['log']) {
 $grade = substr($_SESSION[s_level],0,3).$_SESSION[s_grade];
 $today = date("m/d/Y");
 
-$sql = "SELECT A.seq, A.name, A.d_order, A.grade, A.unit, A._from, A._to, A.semester, B.id 
+$sql = "SELECT A.seq, A.name, A.d_order, A.grade, A.unit, A._from, A._to, A.semester, B.id, B.current_status  
         FROM `homework` A, `homework_assign_list` B
         WHERE 
             A.seq = B.h_id
@@ -49,7 +49,9 @@ $num = mysqli_num_rows($result);
                 ?>
                 <div class="report_content_wrap">
                     <div class="report_box">
+                        <?if($res['current_status'] == "" || $res['current_status'] == "s1"){?>
                         <a href="homework_submission.php?no=<?=$res['id']?>">
+                            <? } ?>
                             <div class="date">
                                 <div class="homework_content_img"><img src="img/time.png" alt="time_icon"></div>
                                 <div class="homework_content_text">
@@ -66,7 +68,9 @@ $num = mysqli_num_rows($result);
                                         &nbsp;&nbsp;<span><?= $res['unit'] ?> </span></p>
                                 </div>
                             </div>
+                            <?if($res['current_status'] == "" || $res['current_status'] == "s1"){?>
                         </a>
+                    <? } ?>
                     </div>
                 </div>
                 <?php
@@ -162,7 +166,7 @@ $num = mysqli_num_rows($result);
         }
         ?>
     </div>
-    <div class="notice_wrap" style="margin-bottom: 150px;">
+    <div class="notice_wrap" style="margin-bottom: 100px;">
         <div class="section_title_line">
             <div class="section_title_wrap">
                 <a href="./notice.php"><p class="section_title">NOTICE</p></a>

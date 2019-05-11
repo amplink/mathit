@@ -1,6 +1,6 @@
 <?php
 include_once ('_common.php');
-
+ini_set('memory_limit','512M');
 $id = $_POST['id'];
 $i = 0;
 $j = 1;
@@ -60,31 +60,30 @@ try{
             $sourceProperties = getimagesize($tmp_file);
             $imageType = $sourceProperties[2];
 
-            switch ($imageType) {
 
+            switch ($imageType) {
 
                 case "3":
                     $imageResourceId = imagecreatefrompng($tmp_file);
-                    $targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+                    $targetLayer = imageResize($tmp_file,$imageResourceId,$sourceProperties[0],$sourceProperties[1]);
                     imagepng($targetLayer,$uploadFile);
+                    imagedestroy($targetLayer);
                     break;
-
 
                 case "1":
                     $imageResourceId = imagecreatefromgif($tmp_file);
-                    $targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+                    $targetLayer = imageResize($tmp_file,$imageResourceId,$sourceProperties[0],$sourceProperties[1]);
                     imagegif($targetLayer,$uploadFile);
+                    imagedestroy($targetLayer);
                     break;
-
 
                 case "2":
                     $imageResourceId = imagecreatefromjpeg($tmp_file);
-                    $targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+                    $targetLayer = imageResize($tmp_file,$imageResourceId,$sourceProperties[0],$sourceProperties[1]);
                     imagejpeg($targetLayer,$uploadFile);
                     imagedestroy($targetLayer);
 
                     break;
-
 
                 default:
                     echo "png, jpg, gif 형식만 첨부 가능합니다.";
@@ -112,16 +111,32 @@ try{
 }
 
 
-function imageResize($imageResourceId,$width,$height) {
+function imageResize($name,$imageResourceId,$width,$height) {
 
-    $re_wid = 500;
+    $re_wid = 700;
     if($width <= $re_wid){
         $re_wid = $width;
         $re_hei = $height;
     }
     $re_hei = (int)(($height*$re_wid)/$width);
+    if($re_hei > 750) $re_hei = 750;
     $targetLayer=imagecreatetruecolor($re_wid,$re_hei);
     imagecopyresampled($targetLayer,$imageResourceId,0,0,0,0,$re_wid,$re_hei, $width,$height);
+
+    $exif = exif_read_data($name);
+    if(!empty($exif['Orientation'])) {
+        switch($exif['Orientation']) {
+            case 8:
+                $targetLayer = imagerotate($targetLayer,90,0);
+                break;
+            case 3:
+                $targetLayer = imagerotate($targetLayer,180,0);
+                break;
+            case 6:
+                $targetLayer = imagerotate($targetLayer,-90,0);
+                break;
+        }
+    }
 
     return $targetLayer;
 }

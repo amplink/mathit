@@ -196,9 +196,9 @@
 
 .page_wrap {
     width: 100%;
-    height: 30px;
+    height: 55px;
     background-color: rgb(224, 238, 242);
-    padding: 20px 0 100px 0;
+    padding: 10px 0 0 0;
     text-align: center;
 }
 

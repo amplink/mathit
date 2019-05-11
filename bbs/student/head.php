@@ -94,9 +94,6 @@ while($res = mysqli_fetch_array($result)) {
             </div>
         </div>
         <div class="add_btn_wrap">
-            <a href="logout.php"><div class="close_btn"><img src="img/nav/logout.png" alt="logout_btn_icon"></div></a>
-        </div>
-        <div class="add_btn_wrap">
             <div class="alarm_btn" onclick="show_alarm()">
                 <div class="new_alarm"></div>
                 <img src="img/nav/alarm.png" alt="alarm_btn_icon">
@@ -104,6 +101,9 @@ while($res = mysqli_fetch_array($result)) {
         </div>
         <div class="add_btn_wrap">
             <a href="setting.php"><div class="close_btn"><img src="img/nav/setting.png" alt="setting_btn_icon"></div></a>
+        </div>
+        <div class="add_btn_wrap">
+            <a href="logout.php"><div class="close_btn"><img src="img/nav/logout.png" alt="logout_btn_icon"></div></a>
         </div>
         <div class="close_btn_wrap">
             <div class="close_btn" style="cursor:pointer"><img src="img/close_btn.png" alt="close_btn_icon"></div>
@@ -282,12 +282,17 @@ while($res = mysqli_fetch_array($result)) {
                     <img src="img/bus.png" alt="bus_icon">
                 </div>
                 <div class="bus_info">
-                    <p class="bus_place"><span><?=$res['station']?></span><span> 정류장</span></p>
-                    <p class="bus_time">
-                        <span>PM</span>
-                        <span><?=$res['time']?></span>
-                        <span> 탑승 예정입니다.</span>
-                    </p>
+                    <? if($res['time']){ ?>
+                        <p class="bus_place"><span><?=$res['station']?></span><span> 정류장</span></p>
+                        <p class="bus_time">
+                            <span>PM</span>
+                            <span><?=$res['time']?></span>
+                            <span> 탑승 예정입니다.</span>
+                        </p>
+                    <? }else{ ?>
+
+                        <p class="bus_place"><span>이용하지 않음<br><br></span></p>
+                    <? } ?>
                 </div>
             </div>
         </div>
@@ -356,7 +361,7 @@ while($res = mysqli_fetch_array($result)) {
         </a>
     </div>
 </div>
-</body>
+
 <?php
 if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
 ?>

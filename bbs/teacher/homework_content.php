@@ -309,7 +309,7 @@ while($res = mysqli_fetch_array($result)) {
                     //if($start <= $today && $end >= $today && $res5[tot] > 0) {
                     if($start <= $today && $res5[tot] > 0){
                         ?>
-                        <p class="ing_text" id="status_complete<?=$i?>" style="color: blue;cursor: pointer;" onclick="show_box(<?=$i?>)">진행중</p>
+                        <p class="ing_text" id="status_complete<?=$i?>" data-key="<?=$i?>" style="color: blue;cursor: pointer;">진행중</p>
                         <div class="students_checks<?=$i?>" style="background:rgb(255, 228, 73);
                                                                                 position: absolute;
                                                                                 padding: 10px;width: 97px;right: 80px; visibility: hidden;">
@@ -529,10 +529,25 @@ while($res = mysqli_fetch_array($result)) {
 
 
 
-    } );
+        $(".ing_text").click(function(){
+            var divY = $(this).offset().top;
+            var e = $(this).data("key");
+            var size = <?php echo $i;?>;
+            divY = divY - 100;
+            if($('.students_checks'+e).css('visibility', 'hidden')) {
+                for(var i=0; i<size; i++) {
+                    $('.students_checks'+i).css('visibility', 'hidden');
+                }
+                $('.students_checks'+e).css('visibility', '').css("top",divY+"px");;
+            }
+        });
 
-    function show_box(e) {
-        var size = <?php echo $i;?>;
+
+
+    } );
+    /*
+        function show_box(e) {
+            var size = <?php echo $i;?>;
         if($('.students_checks'+e).css('visibility', 'hidden')) {
             for(var i=0; i<size; i++) {
                 $('.students_checks'+i).css('visibility', 'hidden');
@@ -540,7 +555,7 @@ while($res = mysqli_fetch_array($result)) {
             $('.students_checks'+e).css('visibility', '');
         }
     }
-
+*/
     function blind_box(e) {
         $('.students_checks'+e).css('visibility', 'hidden');
     }
