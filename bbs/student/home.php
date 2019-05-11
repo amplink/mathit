@@ -166,7 +166,7 @@ $num = mysqli_num_rows($result);
         }
         ?>
     </div>
-    <div class="notice_wrap" style="margin-bottom: 150px;">
+    <div class="notice_wrap" style="margin-bottom: 100px;">
         <div class="section_title_line">
             <div class="section_title_wrap">
                 <a href="./notice.php"><p class="section_title">NOTICE</p></a>

@@ -1,6 +1,11 @@
 <?php
 include_once ('head.php');
 ?>
+<style>
+    html, body{
+        height:100%;
+    }
+</style>
 <link rel="stylesheet" type="text/css" media="screen" href="css/homework_chat<?=$is_mobile_chk?>.css?v=20190505" />
 
 <?php
@@ -80,7 +85,7 @@ $res = mysqli_fetch_array($result);
         </div>
     </div>
     <div class="content_detail_p">
-        <div class="chat_wrap">
+        <div class="chat_wrap" style="min-height:650px;">
             <ul>
                 <?php
                 if($res['apply_status_1'] == 'Y') {
