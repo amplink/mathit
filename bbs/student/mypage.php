@@ -96,7 +96,7 @@ $weeks = array_keys($weekly);
             <div class="my_bus_box">
                 <div class="up_section">
                     <div class="bus_use">
-                        <p><span style="color: rgb(0, 181, 103); <?php if(!$res['station_uid']) echo "display:none;";?>">이용 중</span><span style="color: rgb(181, 0, 0); <?php if($res['station_uid']) echo "display:none;";?>">이용안함</span></p>
+                        <p><span style="color: rgb(0, 181, 103); <?php if(!$res['station_uid']) echo "display:none;";?>">이용 중</span><span style="color: rgb(181, 0, 0); <?php if($res['station_uid']) echo "display:none;";?>">이용하지 않음</span></p>
                     </div>
                     <div class="bus_btn_section">
                         <div class="not_use_btn" style="<?php if(!$res['bus_seq']) echo 'display:none';?>">
@@ -144,25 +144,26 @@ $weeks = array_keys($weekly);
     $result = sql_query($sql);
     $res = mysqli_fetch_array($result);
     $r_seq = $res['bus_seq'];
+    $cnt = 0;
     ?>
     <div class="bus_change">
         <div class="bus_top_box">
             <p>버스 이용 등록</p>
         </div>
         <div class="bus_content_box">
+            <input type="radio" name="bus_uid" value="<?=$cnt?>" <?php if($r_seq == $cnt) echo "checked";?>>&nbsp;&nbsp;&nbsp;이용하지 않음<br><br>
             <?php
-            $cnt = 0;
+            $cnt++;
             for($i=0; $i<count($bus_uid); $i++) {
                 for($j=1; $j<count($station_uid[$i]); $j++) {
                     ?>
-                    <input type="radio" name="bus_uid" value="<?=$cnt?>" <?php if($r_seq == $cnt) echo "checked";?>><?=$bus_name[$i]?>-<?=$station_name[$i][$j]?>(<?=$station_time[$i][$j]?>)<br>
+                    <input type="radio" name="bus_uid" value="<?=$cnt?>" <?php if($r_seq == $cnt) echo "checked";?>>&nbsp;&nbsp;&nbsp;<?=$bus_name[$i]?>-<?=$station_name[$i][$j]?>(<?=$station_time[$i][$j]?>)<br>
                     <?php
                     $cnt++;
                 }
                 echo "<br>";
             }
             ?>
-            <input type="radio" name="bus_uid" value="">버스 미이용
         </div>
         <div class="bus_box_btn_wrap">
             <div class="bus_yes" style="cursor:pointer"><p>변경</p></div>

@@ -687,7 +687,7 @@ function send_notification ($tokens, $data) {
         'title' => $data,
         'body' => $data,
         'sound' => 'default',
-        'badge' => '1'
+        'badge' => '0'
     );
 
     $fields = array(
@@ -723,7 +723,7 @@ function send_notification_ios ($tokens, $data) {
     $title = "MATH IT";
     $body = $data;
 
-    $notification = array('title' =>$title , 'text' => $body, 'sound' => 'default', 'badge' =>'1');
+    $notification = array('title' =>$title , 'text' => $body, 'sound' => 'default', 'badge' =>'0');
 
     $arrayToSend = array('registration_ids' => $tokens, 'notification'=>$notification,'priority'=>'high');
     $json = json_encode($arrayToSend);

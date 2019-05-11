@@ -25,7 +25,7 @@ for($i=0; $i<count($r['list']); $i++) {
     }
 }
 $s_uid = $_SESSION['s_uid'];
-if($cnt) {
+if($cnt==1) {
     $sql = "update `student_table` set `station_uid`='$station_uid', `line`='$line', `station`='$station_name', `time`='$station_time', `bus_seq`='$cnt' where `uid`='$s_uid';";
     sql_query($sql);
 }else {

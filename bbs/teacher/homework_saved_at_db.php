@@ -45,7 +45,7 @@ for($i=0; $i<count($Q_number4); $i++) {
 
 for($i=0; $i<count($student_list); $i++) {
 	$student_info = explode("@",$student_list[$i]);
-    if($i==count($student_list)-1){ 
+    if($i==count($student_list)-1){
 	   $st .= $student_info[0];
        $st2 .= $student_info[1];
 	}else{
@@ -122,16 +122,15 @@ if($result) {
     }
 }
 
-
-$ac = $_SESSION['client_no'];
-$link = "/api/math/class_stu?client_no=".$ac."&d_uid=".$d_id."&c_uid=".$c_id;
-//echo $link;
-$r = api_calls_get($link);
-//var_dump($r);
-for($i=1; $i<count($r); $i++) {
-    $sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='학생', `uid`='".$r[$i][1]."',`chk`='0', `datetime`=CURRENT_TIMESTAMP";
+$stu_id = array();
+for($i=0; $i<count($student_list); $i++) {
+    $aaa = explode("@", $student_list[$i]);
+    $stu_id[] = $aaa[1];
+}
+for($i=0; $i<count($stu_id); $i++) {
+    $sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='학생', `uid`='".$stu_id[$i]."',`chk`='0', `datetime`=CURRENT_TIMESTAMP";
     sql_query($sql);
-    $sql = "select * from `fcm` where `uid`='".$r[$i][1]."';";
+    $sql = "select * from `fcm` where `uid`='".$stu_id[$i]."';";
     $result = sql_query($sql);
     $tokens = array();
     $i_tokens = array();

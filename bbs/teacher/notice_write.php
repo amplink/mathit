@@ -47,32 +47,34 @@ if($t_notice) {
 
 $seq = $_GET['seq'];
 
-$sql = "select * from `teacher_notice` where `seq` = '$seq';";
-$result = mysqli_query($connect_db, $sql);
-if($result) {
-    $res = mysqli_fetch_array($result);
-//    $type = explode(',', $res['type']);
-    $range = explode(',', $res['n_range']);
-}
 if($seq) {
     $mm = $seq;
+    $sql = "select * from `teacher_notice` where `seq` = '$seq';";
+    $result = mysqli_query($connect_db, $sql);
+    if($result) {
+        $res = mysqli_fetch_array($result);
+        $range = explode(',', $res['n_range']);
+    }
+
+    $sub_d = explode('/', $res['d_uid']);
+    $sub_c = explode('/', $res['c_uid']);
+    $sub_s = explode('/', $res['s_uid']);
+
+    $count_d = count($sub_d)-1;
+    $count_c = count($sub_c)-1;
+    $count_s = count($sub_s)-1;
+
+    $class_value = array();
+    for($i=0; $i<$count_c; $i++) {
+        $class_value[] = $sub_d[$i]."/".$sub_c[$i]."/".$sub_s[$i];
+    }
 }else {
     $mm = 0;
+    $class_value = array();
+    for($i=0; $i<count($d_uid); $i++) {
+        $class_value[$i] = $d_uid[$i]."/".$c_uid[$i]."/".$s_uid[$i];
+    }
 }
-
-$sub_d = explode('/', $res['d_uid']);
-$sub_c = explode('/', $res['c_uid']);
-$sub_s = explode('/', $res['s_uid']);
-
-$count_d = count($sub_d)-1;
-$count_c = count($sub_c)-1;
-$count_s = count($sub_s)-1;
-
-$class_value = array();
-for($i=0; $i<$count_c; $i++) {
-    $class_value[] = $sub_d[$i]."/".$sub_c[$i]."/".$sub_s[$i];
-}
-$awef = 0;
 ?>
 
 
@@ -225,6 +227,11 @@ echo "<script>$('#class_select').val('" . $res['target'] . "')</script>";
         });
         m = $('#class_select').multiselect();
         if(<?php echo $mm;?>) {
+            var ar = <?php echo json_encode($class_value);?>;
+            for(var i=0; i<ar.length; i++) {
+                m.select(ar[i]);
+            }
+        }else {
             var ar = <?php echo json_encode($class_value);?>;
             for(var i=0; i<ar.length; i++) {
                 m.select(ar[i]);
