@@ -1,6 +1,7 @@
 <?php
 include_once ('_common.php');
 ?>
+
 <?php
 $class_name = $_GET['class_name'];
 $sql = "select * from `homework` 
@@ -35,6 +36,7 @@ while($res = mysqli_fetch_array($result)) {
     ?>
     <div>
         <form action="homework_resend.php?seq=<?=$res['seq']?>" method="POST" id="resend_form<?=$i?>" enctype="multipart/form-data">
+
             <table class="homework_cont">
                 <td>
                     <div class="x_btn"><img src="img/close.png" alt="delete_icon" onclick="del_homework('<?=$res['seq']?>','<?=$res['d_uid']?>','<?=$res['c_uid']?>','<?=$res['s_uid']?>','<?=$res['d_order']?>','<?=$res['student_id']?>')"></div>
@@ -67,7 +69,7 @@ while($res = mysqli_fetch_array($result)) {
                         <option value="중2">중2</option>
                         <option value="중3">중3</option>
                         <?php
-                        echo "<script>$('#grade$i').val('" . $res['grade'] . "')</script>";
+                        echo "<script>$('#grade$i').val('".$res['grade']."');</script>";
                         ?>
                     </select></td>
                 <td><select name="semester" id="semester<?=$i?>" onclick="book_info1(<?=$i?>)">
@@ -90,7 +92,7 @@ while($res = mysqli_fetch_array($result)) {
                         <option value="파이">파이</option>
                         <option value="시그마">시그마</option>
                         <?php
-                        echo "<script>$('#level$i').val('" . $res['level'] . "')</script>";
+                        echo "<script>$('#level$i').val('".$res['level']."');</script>";
                         ?>
                     </select></td>
                 <td>
@@ -405,25 +407,22 @@ while($res = mysqli_fetch_array($result)) {
             alert('문항번호가 선택되지 않았습니다.');
             return false;
         }
-        var chk_list = $('#student_list:checked').length;
-        if(chk_list > 0) {
-            var params = $("#resend_form"+e).serialize();
-            $.ajax({
-                type: "POST",
-                url: "homework_resend.php?seq="+seq,
-                data:params,
-                dataType: "json",
-                success: function(response){
-                    //call_homework_list(d, c, s, n, m);
-                    alert(response.message);
-                    call_homework_list('<?=$_GET[d_uid]?>', '<?=$_GET[c_uid]?>', '<?=$_GET[s_uid]?>', '<?=$_GET[d_order]?>', '<?=$_GET[st_id]?>');
 
-                }
-            });
-        }else {
-            alert('학생을 선택해주세요.');
-            return false;
-        }
+        var params = $("#resend_form"+e).serialize();
+        $.ajax({
+            type: "POST",
+            url: "homework_resend.php?seq="+seq,
+            data:params,
+            dataType: "json",
+            success: function(response){
+                //call_homework_list(d, c, s, n, m);
+                alert(response.message);
+                call_homework_list('<?=$_GET[d_uid]?>', '<?=$_GET[c_uid]?>', '<?=$_GET[s_uid]?>', '<?=$_GET[d_order]?>', '<?=$_GET[st_id]?>');
+
+            }
+        });
+
+
 
     }
 </script>
@@ -528,6 +527,16 @@ while($res = mysqli_fetch_array($result)) {
         });
 
 
+        $("body").click(function(e){
+            if ( !$(e.target).is('.ing_text') ) {
+                $('[class^=students_checks]').css('visibility', 'hidden');
+            }
+        });
+
+
+        $( ".homework_list_table" ).scroll(function() {
+            $('[class^=students_checks]').css('visibility', 'hidden');
+        });
 
         $(".ing_text").click(function(){
             var divY = $(this).offset().top;
@@ -541,8 +550,6 @@ while($res = mysqli_fetch_array($result)) {
                 $('.students_checks'+e).css('visibility', '').css("top",divY+"px");;
             }
         });
-
-
 
     } );
     /*
