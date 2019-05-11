@@ -46,15 +46,15 @@ $result = sql_query($sql);
 <link rel="stylesheet" type="text/css" media="screen" href="css/report.css" />
 <body>
 <!--section-->
-<section>
+<section style="height:100%; overflow:auto;margin-top:0px">
     <div class="head_p">
         <p class="head_title">성적관리</p>
         <div class="back_btn"><a href="home.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
     </div>
     <div class="content_p">
     </div>
-    <div class="content_detail_p">
-        <div class="report_list_wrap">
+    <div class="content_detail_p" class="content_p" style="height:80%; border:0px #fff solid">
+        <div class="report_list_wrap" style="height:80%">
             <?
             if($total > 0) {
                 while ($res = mysqli_fetch_array($result)) {
@@ -102,7 +102,7 @@ $result = sql_query($sql);
             ?>
         </div>
         <div class="page_wrap">
-            <div class="page_wrap_wrap">
+            <div class="page_wrap_wrap" style="margin-top:75px">
                 <?
                 set_paging($page, $block, $block_set, $total_page);
                 ?>

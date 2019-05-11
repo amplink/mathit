@@ -1,7 +1,7 @@
 <?php
 include_once ('head.php');
 ?>
-<link rel="stylesheet" type="text/css" media="screen" href="css/homework_ing.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/homework_ing.css?v=20190512" />
 <body>
 <!--section-->
 <section style="height:100%; overflow:auto;margin-top:0px">
@@ -9,12 +9,12 @@ include_once ('head.php');
         <p class="head_title">숙제관리</p>
         <div class="back_btn"><a href="home.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
     </div>
-    <div class="content_p" style="height:87%; border:0px #fff solid">
+    <div class="content_p" style="height:82%; border:0px #fff solid">
         <div class="content_menu_wrap">
             <div class="content_menu on"><a href="homework_ing.php" class="on">진행 중인 숙제</a></div>
             <div class="content_menu"><a href="homework_all.php">전체 목록</a></div>
         </div>
-        <div class="content_list_wrap" style="height:100%; border:0px #fff solid">
+        <div class="content_list_wrap" style="height:82%; border:0px #fff solid">
 
             <?
             // 페이지
@@ -128,18 +128,17 @@ include_once ('head.php');
                 <?
             }
             ?>
-            <div class="page_wrap">
-                <div class="page_wrap_wrap">
-                    <?
-                    if($total > 0) {
-                        set_paging($page, $block, $block_set, $total_page);
-                    }
-                    ?>
-                </div>
+
+        </div>
+        <div class="page_wrap">
+            <div class="page_wrap_wrap">
+                <?
+                if($total > 0) {
+                    set_paging($page, $block, $block_set, $total_page);
+                }
+                ?>
             </div>
         </div>
-    </div>
-
     </div>
 </section>
 </body>
