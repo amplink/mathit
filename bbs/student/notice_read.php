@@ -50,7 +50,7 @@ $time = $time[0];
             ?>
             <div class="head_p">
                 <p class="head_title">공지사항</p>
-                <div class="back_btn" onclick="history.back();"><a href="#"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
+                <div class="back_btn"><a href="notice.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
             </div>
             <div class="content_p">
                 <p class="notice_title"><span><?=$res['title']?></span></p>
