@@ -127,25 +127,31 @@ for($i=0; $i<count($student_list); $i++) {
     $aaa = explode("@", $student_list[$i]);
     $stu_id[] = $aaa[1];
 }
-for($i=0; $i<count($stu_id); $i++) {
-    $sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='학생', `uid`='".$stu_id[$i]."',`chk`='0', `datetime`=CURRENT_TIMESTAMP";
-    sql_query($sql);
-    $sql = "select * from `fcm` where `uid`='".$stu_id[$i]."';";
-    $result = sql_query($sql);
-    $tokens = array();
-    $i_tokens = array();
-    while($res = mysqli_fetch_array($result)) {
-        $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
-        $result1 = sql_query($sql1);
-        $res1 = mysqli_fetch_array($result1);
-        if($res1['push_alarm']) {
-            if($res['iphone']) $i_tokens[] = $res['token'];
-            $tokens[] = $res['token'];
+$thisTime=date("m/d/Y");
+$time = $from;
+$someTime=strtotime($thisTime)-strtotime("$time GMT");
+$cha = ceil($someTime/(60*60*24));
+if($cha >= 0) {
+    for($i=0; $i<count($stu_id); $i++) {
+        $sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='학생', `uid`='".$stu_id[$i]."',`chk`='0', `datetime`=CURRENT_TIMESTAMP";
+        sql_query($sql);
+        $sql = "select * from `fcm` where `uid`='".$stu_id[$i]."';";
+        $result = sql_query($sql);
+        $tokens = array();
+        $i_tokens = array();
+        while($res = mysqli_fetch_array($result)) {
+            $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
+            $result1 = sql_query($sql1);
+            $res1 = mysqli_fetch_array($result1);
+            if($res1['push_alarm']) {
+                if($res['iphone']) $i_tokens[] = $res['token'];
+                $tokens[] = $res['token'];
+            }
         }
+        $message = "새로운 숙제가 등록되었습니다.";
+        if(count($tokens) > 0) send_notification($tokens, $message);
+        if(count($i_tokens) > 0) send_notification_ios($i_tokens, $message);
     }
-    $message = "새로운 숙제가 등록되었습니다.";
-    if(count($tokens) > 0) send_notification($tokens, $message);
-    if(count($i_tokens) > 0) send_notification_ios($i_tokens, $message);
 }
 
 $sql = "insert into `alarm` set `seq`='', `content`='새로운 숙제가 출제되었습니다.', `table_name`='homework', `target`='관리자', `chk`='0', `datetime`=CURRENT_TIMESTAMP";

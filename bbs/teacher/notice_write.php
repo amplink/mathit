@@ -238,6 +238,14 @@ echo "<script>$('#class_select').val('" . $res['target'] . "')</script>";
             }
         }
         $('#class_select_input').attr('autocomplete','off');
+        $('#class_select_input').focus(function () {
+            $('.multiselect-list').toggle();
+        });
+        $('body').click(function (){
+            if($('.multiselect-list').hasClass('active')) {
+                $('.multiselect-list').hide();
+            }
+        });
         cancel_chk_all();
     });
     function cancel_chk_all() {

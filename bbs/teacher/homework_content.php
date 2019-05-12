@@ -380,6 +380,8 @@ while($res = mysqli_fetch_array($result)) {
                     ?>
                 </td>
             </table>
+            <input type="hidden" id="s_list<?=$i?>" name="s_list">
+            <input type="hidden" id="s_id_list<?=$i?>" name="s_id_list">
         </form>
     </div>
     <?php
@@ -407,7 +409,26 @@ while($res = mysqli_fetch_array($result)) {
             alert('문항번호가 선택되지 않았습니다.');
             return false;
         }
-
+        var s = $('#student_list:checked');
+        var s_arr = s.map(function() {
+            return $(this).val();
+        }).get();
+        var s_name = "";
+        var s_ids = "";
+        for(var i=0; i<s_arr.length; i++) {
+            var t = s_arr[i].split("@");
+            // alert(t);
+            if(i==s_arr.length-1) {
+                s_name += t[0];
+                s_ids += t[1];
+            }
+            else {
+                s_name += t[0]+",";
+                s_ids += t[1]+",";
+            }
+        }
+        $('#s_list'+e).val(s_name);
+        $('#s_id_list'+e).val(s_ids);
         var params = $("#resend_form"+e).serialize();
         $.ajax({
             type: "POST",

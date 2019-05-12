@@ -1,8 +1,8 @@
 <?php
 include_once ('_common.php');
-if(strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'],'iPad'))
-    echo "iPhone or iPad";
-else echo "11";
-
-alert_msg("1111");
+$thisTime=date("m/d/Y");
+$time = "05/14/2019";
+$someTime=strtotime($thisTime)-strtotime("$time GMT");
+$cha = ceil($someTime/(60*60*24));
+echo $cha;
 ?>
