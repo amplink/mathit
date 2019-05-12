@@ -53,8 +53,8 @@ $result = sql_query($sql);
     </div>
     <div class="content_p">
     </div>
-    <div class="content_detail_p" class="content_p" style="height:80%; border:0px #fff solid">
-        <div class="report_list_wrap" style="height:80%">
+    <div class="content_detail_p" class="content_p" style="height:86%; border:0px #fff solid">
+        <div class="report_list_wrap" style="height:93%; border:0px #fff solid">
             <?
             if($total > 0) {
                 while ($res = mysqli_fetch_array($result)) {
@@ -101,8 +101,8 @@ $result = sql_query($sql);
             }
             ?>
         </div>
-        <div class="page_wrap">
-            <div class="page_wrap_wrap" style="margin-top:75px">
+        <div class="page_wrap" style="position:absolute;bottom:-30px">
+            <div class="page_wrap_wrap">
                 <?
                 set_paging($page, $block, $block_set, $total_page);
                 ?>

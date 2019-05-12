@@ -14,7 +14,7 @@ include_once ('head.php');
             <div class="content_menu on"><a href="homework_ing.php" class="on">진행 중인 숙제</a></div>
             <div class="content_menu"><a href="homework_all.php">전체 목록</a></div>
         </div>
-        <div class="content_list_wrap" style="height:82%; border:0px #fff solid">
+        <div class="content_list_wrap" style="height:95%; border:0px #fff solid">
 
             <?
             // 페이지
@@ -130,7 +130,7 @@ include_once ('head.php');
             ?>
 
         </div>
-        <div class="page_wrap">
+        <div class="page_wrap" style="position:absolute;bottom:6px">
             <div class="page_wrap_wrap">
                 <?
                 if($total > 0) {

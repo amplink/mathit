@@ -224,7 +224,7 @@ if(!$is_mobile_chk){
             }
             ?>
 
-            <div class="page_wrap">
+            <div class="page_wrap" style="position:absolute;bottom:10px">
                 <div class="page_wrap_wrap">
 
                     <?
