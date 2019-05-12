@@ -69,7 +69,7 @@ while($res = mysqli_fetch_array($result)) {
                         <option value="중2">중2</option>
                         <option value="중3">중3</option>
                         <?php
-                        echo "<script>$('#grade$i').val('".$res['grade']."');</script>";
+                        echo "<script>$('#grade$i').val('" . $res['grade'] . "')</script>";
                         ?>
                     </select></td>
                 <td><select name="semester" id="semester<?=$i?>" onclick="book_info1(<?=$i?>)">
@@ -92,7 +92,7 @@ while($res = mysqli_fetch_array($result)) {
                         <option value="파이">파이</option>
                         <option value="시그마">시그마</option>
                         <?php
-                        echo "<script>$('#level$i').val('".$res['level']."');</script>";
+                        echo "<script>$('#level$i').val('" . $res['level'] . "')</script>";
                         ?>
                     </select></td>
                 <td>
@@ -547,22 +547,11 @@ while($res = mysqli_fetch_array($result)) {
                 for(var i=0; i<size; i++) {
                     $('.students_checks'+i).css('visibility', 'hidden');
                 }
-                $('.students_checks'+e).css('visibility', '').css("top",divY+"px");;
+                $('.students_checks' + e).css('visibility', '').css("top", divY + "px");
             }
         });
 
     } );
-    /*
-        function show_box(e) {
-            var size = <?php echo $i;?>;
-        if($('.students_checks'+e).css('visibility', 'hidden')) {
-            for(var i=0; i<size; i++) {
-                $('.students_checks'+i).css('visibility', 'hidden');
-            }
-            $('.students_checks'+e).css('visibility', '');
-        }
-    }
-*/
     function blind_box(e) {
         $('.students_checks'+e).css('visibility', 'hidden');
     }

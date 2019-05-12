@@ -134,7 +134,7 @@ if($seq) {
                 </div>
             </div>
             <input type="hidden" name="wr_name" value="<?=$_SESSION['t_name']?>">
-            <div class="board_option_line">
+            <div class="board_option_line" style="height:50px;">
                 <div class="option_title">
                     <p>공지 대상</p>
                 </div>
@@ -152,7 +152,7 @@ if($seq) {
                     </select>
                 </div>
             </div>
-            <div class="board_option_line">
+            <div class="board_option_line" style="height:50px;">
                 <div class="option_title">
                     <p>제목</p>
                 </div>
@@ -238,7 +238,6 @@ echo "<script>$('#class_select').val('" . $res['target'] . "')</script>";
             }
         }
         $('#class_select_input').attr('autocomplete','off');
-
         cancel_chk_all();
     });
     function cancel_chk_all() {
@@ -255,6 +254,5 @@ echo "<script>$('#class_select').val('" . $res['target'] . "')</script>";
             $('.check_all').prop('checked', true)
         }
     }
-
 </script>
 <script src="js/multiselect.min.js"></script>
