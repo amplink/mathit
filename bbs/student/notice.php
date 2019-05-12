@@ -7,7 +7,7 @@ if(!$page) $page = 1;
 <link rel="stylesheet" type="text/css" media="screen" href="css/notice.css?v=20190511" />
 <body>
 <!--section-->
-<section>
+<section style="height:100%;overflow:auto;margin-top:0px">
     <div class="head_p">
         <p class="head_title">공지사항</p>
         <div class="back_btn"><a href="home.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
@@ -20,7 +20,7 @@ if(!$page) $page = 1;
             </div>
         </div>
     </div>
-    <div class="content_detail_p">
+    <div class="content_detail_p" style="height:87%; border:0px #fff solid">
         <div class="notice_list_wrap">
             <!-- 공지사항 리스트 -->
         </div>

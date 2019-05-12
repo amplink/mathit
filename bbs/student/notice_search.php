@@ -74,7 +74,7 @@ while($res = mysqli_fetch_array($result)) {
     $i++;
 }
 ?>
-<div class="page_wrap">
+<div class="page_wrap" style="position:absolute;bottom:10px;width:98%">
     <div class="page_wrap_wrap">
         <div class="left_btn" style="<?php if($page==1) echo "visibility: hidden;";?>"><a href="notice.php?page=<?=$page-1?>&search=<?=$_GET['search']?>"><img src="img/prev_btn.png" alt="prev_btn_icon"></a></div>
         <div class="page_btn_wrap">
