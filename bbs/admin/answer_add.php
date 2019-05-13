@@ -626,64 +626,6 @@ $page = $_GET['page'];
                 }
             });
         }
-
-        // $.ajax({
-        //     type : 'post',
-        //     enctype: "multipart/form-data",
-        //     url : './answer_add_double_chk.php',
-        //     data : formData,
-        //     error: function(xhr, status, error){
-        //         alert(error);
-        //     },
-        //     success : function(e){
-        //         if(e==0 && isCnt==0) {
-        //             $.ajax({
-        //                 type : 'post',
-        //                 enctype: "multipart/form-data",
-        //                 processData: false,
-        //                 contentType: false,
-        //                 url : './answer_add_chk.php',
-        //                 data : formData,
-        //                 error: function(xhr, status, error){
-        //                     alert(error);
-        //                 },
-        //                 success : function(res){
-        //                     alert('중간저장 되었습니다.');
-        //                     isCnt++;
-        //                 },
-        //             });
-        //         } else if (isCnt != 0) {
-        //             $.ajax({
-        //                 type : 'post',
-        //                 enctype: "multipart/form-data",
-        //                 processData: false,
-        //                 contentType: false,
-        //                 url : './update_answer_add_chk.php',
-        //                 data : formData,
-        //                 error: function(xhr, status, error){
-        //                     alert(error);
-        //                 },
-        //                 success : function(json){
-        //                     $.ajax({
-        //                         type : 'post',
-        //                         enctype: "multipart/form-data",
-        //                         url : './answer_add_chk1.php',
-        //                         data : formData,
-        //                         error: function(xhr, status, error){
-        //                             alert(error);
-        //                         },
-        //                         success : function(json){
-        //                             alert("중간 등록이 완료되었습니다.");
-        //                             isCnt++;
-        //                         },
-        //                     });
-        //                 }
-        //             });
-        //         } else if(e == 1) {
-        //             alert("중복된 교재입니다.");
-        //         }
-        //     },
-        // });
     }
 
     function tab_next(t, e) {

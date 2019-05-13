@@ -54,8 +54,8 @@ if($cnt == 0) {
     $section_size[0] += 1;
 }
 
-$sql = "delete from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level';";
-sql_query($sql);
+//$sql = "delete from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level';";
+//sql_query($sql);
 
 if($section_1[0][0]) {
     if($book_type == "알파") {
@@ -78,22 +78,22 @@ if($section_1[0][0]) {
             if($section_1[1]['tmp_name'][$i]) {
                 $path = $section_1[1]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
-                $data = file_get_contents($path);
-                $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                $data = addslashes(file_get_contents($path));
+                $answer_img = $data;
             }
 
             $explain_img = "";
             if($section_1[2]['tmp_name'][$i]) {
                 $path = $section_1[2]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
-                $data = file_get_contents($path);
-                $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                $data = addslashes(file_get_contents($path));
+                $explain_img = $data;
             }
 
             $sql = "INSERT INTO `answer_master`
                 (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
                 VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_1[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
-            mysqli_query($connect_db, $sql);
+            sql_query($sql);
         }
     }
 }
@@ -114,22 +114,22 @@ if($section_2[0][0]) {
             if($section_2[1]['tmp_name'][$i]) {
                 $path = $section_2[1]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
-                $data = file_get_contents($path);
-                $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                $data = addslashes(file_get_contents($path));
+                $answer_img = $data;
             }
 
             $explain_img = "";
             if($section_2[2]['tmp_name'][$i]) {
                 $path = $section_2[2]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
-                $data = file_get_contents($path);
-                $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                $data = addslashes(file_get_contents($path));
+                $explain_img = $data;
             }
 
             $sql = "INSERT INTO `answer_master`
                 (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
                 VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_2[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
-            mysqli_query($connect_db, $sql);
+            sql_query($sql);
         }
     }
 }
@@ -145,22 +145,22 @@ if($section_3[0][0]) {
             if($section_3[1]['tmp_name'][$i]) {
                 $path = $section_3[1]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
-                $data = file_get_contents($path);
-                $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                $data = addslashes(file_get_contents($path));
+                $answer_img = $data;
             }
 
             $explain_img = "";
             if($section_3[2]['tmp_name'][$i]) {
                 $path = $section_3[2]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
-                $data = file_get_contents($path);
-                $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                $data = addslashes(file_get_contents($path));
+                $explain_img = $data;
             }
 
             $sql = "INSERT INTO `answer_master`
                 (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
                 VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_3[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
-            mysqli_query($connect_db, $sql);
+            sql_query($sql);
         }
     }
 }
@@ -174,29 +174,26 @@ if($section_4[0][0]) {
             if($section_4[1]['tmp_name'][$i]) {
                 $path = $section_4[1]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
-                $data = file_get_contents($path);
-                $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                $data = addslashes(file_get_contents($path));
+                $answer_img = $data;
             }
 
             $explain_img = "";
             if($section_4[2]['tmp_name'][$i]) {
                 $path = $section_4[2]['tmp_name'][$i];
                 $type = pathinfo($path, PATHINFO_EXTENSION);
-                $data = file_get_contents($path);
-                $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                $data = addslashes(file_get_contents($path));
+                $explain_img = $data;
             }
 
             $sql = "INSERT INTO `answer_master`
                 (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
                 VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_4[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
-            mysqli_query($connect_db, $sql);
+            sql_query($sql);
         }
     }
 }
 
 echo "<script>alert('등록이 완료되었습니다.');</script>";
+echo "<script>location.href='./answer_manegement.php?page=".$page."';</script>";
 ?>
-<script>
-    var page = <?php echo $page;?>;
-   location.href='./answer_manegement.php?page='+page;
-</script>

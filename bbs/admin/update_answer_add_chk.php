@@ -58,18 +58,11 @@ if($cnt == 0) {
     $section_size[0] += 1;
 }
 
-//$sql = "select * from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level';";
-//$result = mysqli_query($connect_db, $sql);
-//$res = mysqli_fetch_array($result);
-
-//if($res['chk']) {
-//    echo "<script>alert('중복된 교재정보입니다.');</script>";
-//    echo "<script>history.back(-1);</script>";
-//    exit;
-//}
-
-//$sql = "delete from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level';";
-//sql_query($sql);
+function arr_del($list_arr, $del_value) {
+    $b = array_search($del_value, $list_arr);
+    if($b!==FALSE) unset($list_arr[$b]);
+    return $list_arr;
+}
 
 if($section_1[0][0]) {
     if($book_type == "알파") {
@@ -119,8 +112,8 @@ if($section_1[0][0]) {
                 if($section_1[1]['tmp_name'][$i]) {
                     $path = $section_1[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
             }else {
                 $answer_img = $res['answer_image'];
@@ -130,8 +123,8 @@ if($section_1[0][0]) {
                 if($section_1[2]['tmp_name'][$i]) {
                     $path = $section_1[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
             }else {
                 $explain_img = $res['explain_image'];
@@ -148,16 +141,16 @@ if($section_1[0][0]) {
                 if($section_1[1]['tmp_name'][$i]) {
                     $path = $section_1[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
 
                 $explain_img = "";
                 if($section_1[2]['tmp_name'][$i]) {
                     $path = $section_1[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
 
                 $sql = "INSERT INTO `answer_master`
@@ -214,8 +207,8 @@ if($section_2[0][0]) {
                 if($section_2[1]['tmp_name'][$i]) {
                     $path = $section_2[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
             }else {
                 $answer_img = $res['answer_image'];
@@ -225,8 +218,8 @@ if($section_2[0][0]) {
                 if($section_2[2]['tmp_name'][$i]) {
                     $path = $section_2[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
             }else {
                 $explain_img = $res['explain_image'];
@@ -243,16 +236,16 @@ if($section_2[0][0]) {
                 if($section_2[1]['tmp_name'][$i]) {
                     $path = $section_2[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
 
                 $explain_img = "";
                 if($section_2[2]['tmp_name'][$i]) {
                     $path = $section_2[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
 
                 $sql = "INSERT INTO `answer_master`
@@ -303,8 +296,8 @@ if($section_3[0][0]) {
                 if($section_3[1]['tmp_name'][$i]) {
                     $path = $section_3[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
             }else {
                 $answer_img = $res['answer_image'];
@@ -314,8 +307,8 @@ if($section_3[0][0]) {
                 if($section_3[2]['tmp_name'][$i]) {
                     $path = $section_3[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
             }else {
                 $explain_img = $res['explain_image'];
@@ -332,16 +325,16 @@ if($section_3[0][0]) {
                 if($section_3[1]['tmp_name'][$i]) {
                     $path = $section_3[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
 
                 $explain_img = "";
                 if($section_3[2]['tmp_name'][$i]) {
                     $path = $section_3[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
 
                 $sql = "INSERT INTO `answer_master`
@@ -391,8 +384,8 @@ if($section_4[0][0]) {
                 if($section_4[1]['tmp_name'][$i]) {
                     $path = $section_4[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
             }else {
                 $answer_img = $res['answer_image'];
@@ -402,8 +395,8 @@ if($section_4[0][0]) {
                 if($section_4[2]['tmp_name'][$i]) {
                     $path = $section_4[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
             }else {
                 $explain_img = $res['explain_image'];
@@ -420,16 +413,16 @@ if($section_4[0][0]) {
                 if($section_4[1]['tmp_name'][$i]) {
                     $path = $section_4[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
 
                 $explain_img = "";
                 if($section_4[2]['tmp_name'][$i]) {
                     $path = $section_4[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
 
                 $sql = "INSERT INTO `answer_master`

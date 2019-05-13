@@ -93,8 +93,8 @@ if($section_1[0][0]) {
                 if($section_1[1]['tmp_name'][$i]) {
                     $path = $section_1[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
             }else {
                 $answer_img = $res['answer_image'];
@@ -104,8 +104,8 @@ if($section_1[0][0]) {
                 if($section_1[2]['tmp_name'][$i]) {
                     $path = $section_1[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
             }else {
                 $explain_img = $res['explain_image'];
@@ -122,16 +122,16 @@ if($section_1[0][0]) {
                 if($section_1[1]['tmp_name'][$i]) {
                     $path = $section_1[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
 
                 $explain_img = "";
                 if($section_1[2]['tmp_name'][$i]) {
                     $path = $section_1[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
 
                 $sql = "INSERT INTO `answer_master`
@@ -183,8 +183,8 @@ if($section_2[0][0]) {
                 if($section_2[1]['tmp_name'][$i]) {
                     $path = $section_2[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
             }else {
                 $answer_img = $res['answer_image'];
@@ -194,8 +194,8 @@ if($section_2[0][0]) {
                 if($section_2[2]['tmp_name'][$i]) {
                     $path = $section_2[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
             }else {
                 $explain_img = $res['explain_image'];
@@ -212,16 +212,16 @@ if($section_2[0][0]) {
                 if($section_2[1]['tmp_name'][$i]) {
                     $path = $section_2[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
 
                 $explain_img = "";
                 if($section_2[2]['tmp_name'][$i]) {
                     $path = $section_2[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
 
                 $sql = "INSERT INTO `answer_master`
@@ -271,8 +271,8 @@ if($section_3[0][0]) {
                 if($section_3[1]['tmp_name'][$i]) {
                     $path = $section_3[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
             }else {
                 $answer_img = $res['answer_image'];
@@ -282,8 +282,8 @@ if($section_3[0][0]) {
                 if($section_3[2]['tmp_name'][$i]) {
                     $path = $section_3[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
             }else {
                 $explain_img = $res['explain_image'];
@@ -300,16 +300,16 @@ if($section_3[0][0]) {
                 if($section_3[1]['tmp_name'][$i]) {
                     $path = $section_3[1]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $answer_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $answer_img = $data;
                 }
 
                 $explain_img = "";
                 if($section_3[2]['tmp_name'][$i]) {
                     $path = $section_3[2]['tmp_name'][$i];
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $explain_img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $data = addslashes(file_get_contents($path));
+                    $explain_img = $data;
                 }
 
                 $sql = "INSERT INTO `answer_master`
