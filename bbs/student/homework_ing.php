@@ -9,18 +9,18 @@ include_once ('head.php');
         <p class="head_title">숙제관리</p>
         <div class="back_btn"><a href="home.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
     </div>
-    <div class="content_p" style="height:82%; border:0px #fff solid">
+    <div class="content_p" style="border:0px #fff solid">
         <div class="content_menu_wrap">
             <div class="content_menu on"><a href="homework_ing.php" class="on">진행 중인 숙제</a></div>
             <div class="content_menu"><a href="homework_all.php">전체 목록</a></div>
         </div>
-        <div class="content_list_wrap" style="height:95%; border:0px #fff solid">
+        <div class="content_list_wrap" style="border:0px #fff solid">
 
             <?
             // 페이지
             $page_set = 10; // 한페이지 줄수
             $block_set = 10; // 한페이지 블럭수
-
+            $k=0;
             $today = date('m/d/Y');
 
             $sql = "SELECT
@@ -127,10 +127,11 @@ include_once ('head.php');
                 <div style="text-align:center;padding-top:40%"> 진행 중인 숙제가 없습니다.</div>
                 <?
             }
+            $hh = 100*(11-$total);
             ?>
 
         </div>
-        <div class="page_wrap" style="position:absolute;bottom:6px">
+        <div class="page_wrap" style="margin-top: <?=$hh?>px; height: 100px;">
             <div class="page_wrap_wrap">
                 <?
                 if($total > 0) {

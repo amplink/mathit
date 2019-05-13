@@ -17,7 +17,7 @@ $sql = "select * from `teacher_notice` where (`title` like '$search' or `target`
 $sql = $sql."limit ".$start.",10";
 //echo $sql;
 $result = sql_query($sql);
-
+$i=0;
 while($res = mysqli_fetch_array($result)) {
     $time = explode(' ', $res['event_time']);
     $time = $time[0];
@@ -73,8 +73,9 @@ while($res = mysqli_fetch_array($result)) {
     }
     $i++;
 }
+$hh = 100*(10-$i);
 ?>
-<div class="page_wrap" style="bottom:10px;width:98%">
+<div class="page_wrap" style="margin-top: <?=$hh?>px;bottom:10px;width:98%">
     <div class="page_wrap_wrap">
         <div class="left_btn" style="<?php if($page==1) echo "visibility: hidden;";?>"><a href="notice.php?page=<?=$page-1?>&search=<?=$_GET['search']?>"><img src="img/prev_btn.png" alt="prev_btn_icon"></a></div>
         <div class="page_btn_wrap">
