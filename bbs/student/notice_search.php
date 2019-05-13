@@ -73,7 +73,7 @@ while($res = mysqli_fetch_array($result)) {
     }
     $i++;
 }
-$hh = 100*(10-$i);
+$hh = 72*(10-$i);
 ?>
 <div class="page_wrap" style="margin-top: <?=$hh?>px;bottom:10px;width:98%">
     <div class="page_wrap_wrap">

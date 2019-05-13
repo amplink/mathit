@@ -9,12 +9,12 @@ include_once ('head.php');
         <p class="head_title">숙제관리</p>
         <div class="back_btn"><a href="home.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
     </div>
-    <div class="content_p" style="height:<?echo($is_mobile_chk)?"82%":"100%";?>; border:0px #fff solid">
+    <div class="content_p" style="border:0px #fff solid">
         <div class="content_menu_wrap">
             <div class="content_menu on"><a href="homework_ing.php" class="on">진행 중인 숙제</a></div>
             <div class="content_menu"><a href="homework_all.php">전체 목록</a></div>
         </div>
-        <div class="content_list_wrap" style="height:<?echo($is_mobile_chk)?"82%":"100%";?>;border:0px #fff solid">
+        <div class="content_list_wrap" style="border:0px #fff solid;">
 
             <?
             // 페이지
@@ -84,6 +84,7 @@ include_once ('head.php');
                     $status1 = ($submit_date > $to_date)?"지각제출":$res['status1'];
                     ?>
                     <div class="content_list">
+                        <?php $k++;?>
                         <?if($res['current_status'] == "" || $res['current_status'] == "s1"){?>
                         <a href="homework_submission.php?no=<?=$res['id']?>">
                             <? } ?>
@@ -126,17 +127,17 @@ include_once ('head.php');
                 <div style="text-align:center;padding-top:40%"> 진행 중인 숙제가 없습니다.</div>
                 <?
             }
-            $hh = 100*(11-$total);
+            $hh = 60*(10-$k)."px";
             ?>
 
-        </div>
-        <div class="page_wrap" style="margin-top: <?=$hh?>px; height: 100px;">
-            <div class="page_wrap_wrap">
-                <?
-                if($total > 0) {
-                    set_paging($page, $block, $block_set, $total_page);
-                }
-                ?>
+            <div class="page_wrap" style="margin-top: <?=$hh?>; height: 100px;">
+                <div class="page_wrap_wrap">
+                    <?
+                    if($total > 0) {
+                        set_paging($page, $block, $block_set, $total_page);
+                    }
+                    ?>
+                </div>
             </div>
         </div>
     </div>
