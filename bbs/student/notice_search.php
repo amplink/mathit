@@ -74,12 +74,12 @@ while($res = mysqli_fetch_array($result)) {
     $i++;
 }
 ?>
-<div class="page_wrap" style="position:absolute;bottom:10px;width:98%">
+<div class="page_wrap" style="bottom:10px;width:98%">
     <div class="page_wrap_wrap">
         <div class="left_btn" style="<?php if($page==1) echo "visibility: hidden;";?>"><a href="notice.php?page=<?=$page-1?>&search=<?=$_GET['search']?>"><img src="img/prev_btn.png" alt="prev_btn_icon"></a></div>
         <div class="page_btn_wrap">
             <?php
-            $sql = "select * from `teacher_notice` where `title` like '$search' or `target` like '$search' and `client_id`='$ac' and `n_range` like '$student' order by `type` desc, `event_time` desc ";
+            $sql = "select * from `teacher_notice` where (`title` like '$search' or `target` like '$search') and `client_id`='$ac' and `n_range` like '$student' and `d_uid` RLIKE '$d_uid' order by `type` desc, `event_time` desc ";
             $result = sql_query($sql);
             $cnt = 0;
             $last = 0;

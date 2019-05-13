@@ -20,7 +20,7 @@ if(!$page) $page = 1;
             </div>
         </div>
     </div>
-    <div class="content_detail_p" style="height:87%; border:0px #fff solid">
+    <div class="content_detail_p" style="border:0px #fff solid">
         <div class="notice_list_wrap">
             <!-- 공지사항 리스트 -->
         </div>

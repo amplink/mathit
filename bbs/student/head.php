@@ -55,7 +55,7 @@ while($res = mysqli_fetch_array($result)) {
 <div class="hamburger_wrap">
     <div class="user_wrap">
         <a href="mypage.php">
-            <div class="user_side">
+            <div class="user_side" style="width: 40%;">
                 <div class="user_img"><img src="img/nav/user.png" alt="user_img"></div>
                 <div class="user_info">
                     <p class="user_name"><?=$_SESSION['s_name']?></p>
@@ -93,17 +93,16 @@ while($res = mysqli_fetch_array($result)) {
                 </ul>
             </div>
         </div>
-        <div class="add_btn_wrap">
-            <div class="alarm_btn" onclick="show_alarm()">
-                <div class="new_alarm"></div>
-                <img src="img/nav/alarm.png" alt="alarm_btn_icon">
+        <div>
+            <div class="add_btn_wrap" style="top: 30px;">
+                <div class="alarm_btn" onclick="show_alarm()"><div class="new_alarm"></div><img src="img/nav/alarm.png" alt="alarm_btn_icon"></div>
             </div>
-        </div>
-        <div class="add_btn_wrap">
-            <a href="setting.php"><div class="close_btn"><img src="img/nav/setting.png" alt="setting_btn_icon"></div></a>
-        </div>
-        <div class="add_btn_wrap">
-            <a href="logout.php"><div class="close_btn"><img src="img/nav/logout.png" alt="logout_btn_icon"></div></a>
+            <div class="add_btn_wrap" style="top: 30px;">
+                <a href="setting.php"><div class="close_btn"><img src="img/nav/setting.png" alt="setting_btn_icon"></div></a>
+            </div>
+            <div class="add_btn_wrap" style="top: 30px;">
+                <a href="logout.php"><div class="close_btn"><img src="img/nav/logout.png" alt="logout_btn_icon"></div></a>
+            </div>
         </div>
         <div class="close_btn_wrap">
             <div class="close_btn" style="cursor:pointer"><img src="img/close_btn.png" alt="close_btn_icon"></div>
