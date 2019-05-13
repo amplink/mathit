@@ -142,10 +142,6 @@ if($seq) {
                     <select name="target[]" id="class_select" style="margin-top: 5px;" multiple="multiple">
                         <?php
                         for($i=0; $i<count($d_name); $i++) {
-//                            $value = $d_uid[$i]."/".$c_uid[$i]."/".$s_uid[$i];
-//                            if($class_value[$i] == $value) $chk = "selected";
-//                            else $chk = "";
-
                             echo "<option value='".$d_uid[$i]."/".$c_uid[$i]."/".$s_uid[$i]."'>$d_name[$i]($d_yoie[$i])</option>";
                         }
                         ?>
@@ -208,20 +204,6 @@ echo "<script>$('#class_select').val('" . $res['target'] . "')</script>";
         $('.check_all').click(function(){
             $('.oj').prop('checked', this.checked);
         });
-        $('.save_btn').click(function () {
-            var fileSize;
-            if($('#bf_file').val()) fileSize = document.getElementById('bf_file').files[0].size;
-            else fileSize = 0;
-            var maxSize = 209715200;
-            if(fileSize > maxSize){
-                alert("해당파일은 파일용량을 초과 하였습니다.");
-            }
-            else if(!$('#title').val()) {
-                alert('제목을 입력하세요.');
-            }else {
-                $('#write_form').submit();
-            }
-        });
         $('.cancel_btn').click(function () {
             location.href = 'notice_list.php';
         });
@@ -240,14 +222,41 @@ echo "<script>$('#class_select').val('" . $res['target'] . "')</script>";
         $('#class_select_input').attr('autocomplete','off');
         $('#class_select_input').focus(function () {
             $('.multiselect-list').toggle();
+            m._updateText(m);
         });
         $('body').click(function (){
             if($('.multiselect-list').hasClass('active')) {
                 $('.multiselect-list').hide();
+                m._updateText(m);
             }
         });
         cancel_chk_all();
+        $('.save_btn').click(function () {
+            var arr = [];
+            var cnt = 0;
+            for(var i=0; i<$('#class_select option').length; i++) {
+                if($("#class_select option:nth("+i+")").attr('selected')) {
+                    arr[cnt] = $('#class_select option:nth('+i+')').val();
+                    cnt++;
+                }
+            }
+            $('#class_select').val(arr);
+            var fileSize;
+            if($('#bf_file').val()) fileSize = document.getElementById('bf_file').files[0].size;
+            else fileSize = 0;
+            var maxSize = 209715200;
+            if(fileSize > maxSize){
+                alert("해당파일은 파일용량을 초과 하였습니다.");
+            }
+            else if(!$('#title').val()) {
+                alert('제목을 입력하세요.');
+            }else {
+                $('#write_form').submit();
+            }
+        });
     });
+
+
     function cancel_chk_all() {
         if($('.check_all').prop('checked', true)) {
             var boxlengh = $('.oj').length;

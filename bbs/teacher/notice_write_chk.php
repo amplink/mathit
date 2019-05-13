@@ -25,7 +25,7 @@ for($i=0; $i<count($target); $i++) {
     $c_uid1[$i] = $t[1];
 }
 
-//var_dump($target);
+//var_dump($d_uid1);
 
 $writer = $_SESSION['t_name'];
 
@@ -143,7 +143,8 @@ if($seqq > 0) {
             }
         }
     }
-
+    $tokens = array();
+    $i_tokens = array();
     for($kk=0; $kk<count($range); $kk++) {
         if($range[$kk]=="학생") {
             $ac = $_SESSION['client_no'];
@@ -156,8 +157,6 @@ if($seqq > 0) {
                     sql_query($sql);
                     $sql = "select * from `fcm` where `uid`='".$r[$i][1]."';";
                     $result = sql_query($sql);
-                    $tokens = array();
-                    $i_tokens = array();
                     while($res = mysqli_fetch_array($result)) {
                         $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
                         $result1 = sql_query($sql1);
@@ -201,7 +200,8 @@ if($seqq > 0) {
             }
         }
     }
-
+    $tokens = array();
+    $i_tokens = array();
     for($kk=0; $kk<count($range); $kk++) {
         if($range[$kk]=="학생") {
             $ac = $_SESSION['client_no'];
@@ -210,12 +210,10 @@ if($seqq > 0) {
                 $r = api_calls_get($link);
 
                 for($i=1; $i<count($r); $i++) {
-                    $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
+                    $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
                     sql_query($sql);
                     $sql = "select * from `fcm` where `uid`='".$r[$i][1]."';";
                     $result = sql_query($sql);
-                    $tokens = array();
-                    $i_tokens = array();
                     while($res = mysqli_fetch_array($result)) {
                         $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
                         $result1 = sql_query($sql1);
