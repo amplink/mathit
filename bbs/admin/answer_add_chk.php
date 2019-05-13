@@ -54,16 +54,6 @@ if($cnt == 0) {
     $section_size[0] += 1;
 }
 
-$sql = "select * from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level';";
-$result = mysqli_query($connect_db, $sql);
-$res = mysqli_fetch_array($result);
-
-//if($res['chk']) {
-//    echo "<script>alert('중복된 교재정보입니다.');</script>";
-//    echo "<script>history.back(-1);</script>";
-//    exit;
-//}
-
 $sql = "delete from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level';";
 sql_query($sql);
 
