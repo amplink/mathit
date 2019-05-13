@@ -227,7 +227,7 @@ if($section_2[0][0]) {
                 $sql = "INSERT INTO `answer_master`
                 (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
                 VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_2[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
-                mysqli_query($connect_db, $sql);
+                sql_query($sql);
             }
         }
     }
@@ -244,7 +244,7 @@ if($section_3[0][0]) {
     }
 
     $sql = "select `answer_id` from `answer_master` where `book_type`='$book_type' and `grade` = '$grade' and `unit` = '$unit' and `semester` = '$semester' and `level` = '$level' and `c_name`='$c_name';";
-    $result = mysqli_query($connect_db, $sql);
+    $result = sql_query($sql);
     $k=0;
     while($res = mysqli_fetch_array($result)) {
         $del_arr[$k] = $res['answer_id'];
@@ -263,7 +263,7 @@ if($section_3[0][0]) {
     for($i=0; $i<$section_size[2]; $i++) {
         if($section_3[3][$i]) { // 기존 데이터가 있다면
             $sql = "select * from `answer_master` where `answer_id`='".$section_3[3][$i]."';";
-            $result = mysqli_query($connect_db, $sql);
+            $result = sql_query($sql);
             $res = mysqli_fetch_array($result);
 
             if($section_3[1]['tmp_name'][$i]) { // answer_img가 변경 됐다면
@@ -315,7 +315,7 @@ if($section_3[0][0]) {
                 $sql = "INSERT INTO `answer_master`
                 (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
                 VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_3[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
-                mysqli_query($connect_db, $sql);
+                sql_query($sql);
             }
         }
     }
