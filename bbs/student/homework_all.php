@@ -85,12 +85,12 @@ if(!$is_mobile_chk){
         <p class="head_title">숙제관리</p>
         <div class="back_btn"><a href="home.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
     </div>
-    <div class="content_p" style="border:0px #fff solid">
+    <div class="content_p" style="<?echo($is_mobile_chk)?"height:82%":"";?>;border:0px #fff solid">
         <div class="content_menu_wrap">
             <div class="content_menu"><a href="homework_ing.php">진행 중인 숙제</a></div>
             <div class="content_menu on"><a href="homework_all.php" class="on">전체 목록</a></div>
         </div>
-        <div class="content_list_wrap" style="border:0px #fff solid">
+        <div class="content_list_wrap" style="<?echo($is_mobile_chk)?"height:93%":"";?>;border:0px #fff solid">
             <form action="<?=$_SERVER['PHP_SELF']?>" method="get" id="form_search">
                 <div class="calendar_wrap" style="text-align:right;">
                     <div class="calendar_section" style="padding-right:10px">
@@ -226,7 +226,7 @@ if(!$is_mobile_chk){
             $hh = 50*(10-$k);
             ?>
 
-            <div class="page_wrap" style="margin-top: <?=$hh?>px; height: 100px;">
+            <div class="page_wrap" style="<?echo($is_mobile_chk)?"position:absolute;bottom:4px":"margin-top: <?=$hh?>px;height:100px";?>">
                 <div class="page_wrap_wrap">
 
                     <?

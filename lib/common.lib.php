@@ -3681,7 +3681,10 @@ function set_paging($page, $block, $block_set, $total_page, $parms)
     }
     echo " </div>";
     echo ($next_block <= $total_block) ? "<div class='page_btn'><a href='$PHP_SELF?page=$next_block_page&$parms'></a></div> " : "";
-    echo ($next_page <= $total_page) ? "<div class='right_btn'><a href='$PHP_SELF?page=$next_page&$parms'><img src='img/next_btn.png' alt='next_btn_icon'></a></div>" : "";
+
+    echo  "<div class='right_btn'";
+    if($next_page > $total_page) echo "style='visibility: hidden;'";
+    echo "><a href='$PHP_SELF?page=$next_page&$parms'><img src='img/next_btn.png' alt='next_btn_icon'></a></div>";
 
 }
 

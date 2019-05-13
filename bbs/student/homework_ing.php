@@ -9,12 +9,12 @@ include_once ('head.php');
         <p class="head_title">숙제관리</p>
         <div class="back_btn"><a href="home.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
     </div>
-    <div class="content_p" style="border:0px #fff solid">
+    <div class="content_p" style="height:<?echo($is_mobile_chk)?"82%":"100%";?>; border:0px #fff solid">
         <div class="content_menu_wrap">
             <div class="content_menu on"><a href="homework_ing.php" class="on">진행 중인 숙제</a></div>
             <div class="content_menu"><a href="homework_all.php">전체 목록</a></div>
         </div>
-        <div class="content_list_wrap" style="border:0px #fff solid">
+        <div class="content_list_wrap" style="height:<?echo($is_mobile_chk)?"82%":"100%";?>;border:0px #fff solid">
 
             <?
             // 페이지
@@ -37,6 +37,12 @@ include_once ('head.php');
             $result = sql_query($sql);
             $total = mysqli_fetch_array($result)[0];
 
+            $total_page = ceil ($total / $page_set);
+            $total_block = ceil ($total_page / $block_set);
+
+            if (!$page) $page = 1;
+            $block = ceil ($page / $block_set);
+            $limit_idx = ($page - 1) * $page_set;
 
             $sql = "SELECT
 				         A.seq, A.name, A.d_order, A.grade, A.unit, 
@@ -63,16 +69,9 @@ include_once ('head.php');
 						AND B.current_status NOT IN ('s2','s3')
 						AND A._from <= '$today'
 						ORDER BY A._from, A._to ASC
-						";
+					    LIMIT $limit_idx, $page_set ";
 
             $result = sql_query($sql);
-
-            $total_page = ceil ($total / $page_set);
-            $total_block = ceil ($total_page / $block_set);
-
-            if (!$page) $page = 1;
-            $block = ceil ($page / $block_set);
-            $limit_idx = ($page - 1) * $page_set;
 
             if($total > 0) {
                 while ($res = mysqli_fetch_array($result)) {
