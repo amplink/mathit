@@ -91,8 +91,8 @@ if($section_1[0][0]) {
             }
 
             $sql = "INSERT INTO `answer_master`
-                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
-                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_1[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
+                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `new`, `event_time`)
+                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_1[0][$i]."', '".$answer_img."', '".$explain_img."', 1, 1, CURRENT_TIMESTAMP);";
             sql_query($sql);
         }
     }
@@ -127,8 +127,8 @@ if($section_2[0][0]) {
             }
 
             $sql = "INSERT INTO `answer_master`
-                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
-                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_2[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
+                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `new`, `event_time`)
+                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_2[0][$i]."', '".$answer_img."', '".$explain_img."', 1, 1, CURRENT_TIMESTAMP);";
             sql_query($sql);
         }
     }
@@ -158,8 +158,8 @@ if($section_3[0][0]) {
             }
 
             $sql = "INSERT INTO `answer_master`
-                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
-                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_3[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
+                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `new`, `event_time`)
+                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_3[0][$i]."', '".$answer_img."', '".$explain_img."', 1, 1, CURRENT_TIMESTAMP);";
             sql_query($sql);
         }
     }
@@ -187,8 +187,8 @@ if($section_4[0][0]) {
             }
 
             $sql = "INSERT INTO `answer_master`
-                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `event_time`)
-                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_4[0][$i]."', '".$answer_img."', '".$explain_img."', 1, CURRENT_TIMESTAMP);";
+                (`seq`, `answer_id`, `book_type`, `grade`, `semester`, `unit`, `level`, `c_name`, `item_number`, `answer_image`, `explain_image`, `chk`, `new`, `event_time`)
+                VALUES ('$i', '$answer_id', '$book_type', '$grade', '$semester', '$unit', '$level', '$c_name', '".$section_4[0][$i]."', '".$answer_img."', '".$explain_img."', 1, 1, CURRENT_TIMESTAMP);";
             sql_query($sql);
         }
     }

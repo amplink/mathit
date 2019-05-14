@@ -142,6 +142,10 @@ if($book_type == "베타") {
                     $i=0;
                     while($r = mysqli_fetch_array($res)) {
                         $event_time = $r['event_time'];
+                        if($r['new']) {
+                            $r['answer_image'] = "data:image/jpeg;base64,".base64_encode($r['answer_image']);
+                            $r['explain_image'] = "data:image/jpeg;base64,".base64_encode($r['explain_image']);
+                        }
                         ?>
                         <tr id="item_section_1">
                             <td>
@@ -150,14 +154,14 @@ if($book_type == "베타") {
                             </td>
                             <td class="pt-17"><input type="text" name="a_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>" onkeydown="tab_next('a', <?=$i?>)"></td>
                             <td>
-                                <img src="data:image/jpeg;base64,<?=base64_encode($r['answer_image'])?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_answer_img_<?=$i;?>">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_answer_img_<?=$i;?>">
                             </td>
                             <td style="border-left: none;">
                                 <input type="file" id="a_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'a')" name="a_answer_images[]">
 <!--                                <input type="hidden" name="a_answer_image[]" id="a_answer_base_--><?//=$i;?><!--" value="--><?//=$r['answer_image']?><!--">-->
                             </td>
                             <td>
-                                <img src="data:image/jpeg;base64,<?=base64_encode($r['explain_image'])?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_explain_img_<?=$i;?>">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="a_explain_img_<?=$i;?>">
                             </td>
                             <td style="border-left: none;">
                                 <input type="file" id="a_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'a')" name="a_explain_images[]">
@@ -231,6 +235,10 @@ if($book_type == "베타") {
                     $res = mysqli_query($connect_db, $sql);
                     $i=0;
                     while($r = mysqli_fetch_array($res)) {
+                        if($r['new']) {
+                            $r['answer_image'] = "data:image/jpeg;base64,".base64_encode($r['answer_image']);
+                            $r['explain_image'] = "data:image/jpeg;base64,".base64_encode($r['explain_image']);
+                        }
                         ?>
                         <tr id="item_section_2">
                             <td>
@@ -239,14 +247,14 @@ if($book_type == "베타") {
                             </td>
                             <td class="pt-17"><input type="text" name="b_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>" onkeydown="tab_next('b', <?=$i?>)"></td>
                             <td>
-                                <img src="data:image/jpeg;base64,<?=base64_encode($r['answer_image'])?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="b_answer_img_<?=$i;?>">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="b_answer_img_<?=$i;?>">
                             </td>
                             <td style="border-left: none;">
                                 <input type="file" id="b_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'b')" name="b_answer_images[]">
 <!--                                <input type="hidden" name="b_answer_image[]" id="b_answer_base_--><?//=$i;?><!--" value="--><?//=$r['answer_image']?><!--">-->
                             </td>
                             <td>
-                                <img src="data:image/jpeg;base64,<?=base64_encode($r['explain_image'])?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="b_explain_img_<?=$i;?>">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="b_explain_img_<?=$i;?>">
                             </td>
                             <td style="border-left: none;">
                                 <input type="file" id="b_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'b')" name="b_explain_images[]">
@@ -317,6 +325,10 @@ if($book_type == "베타") {
                     $res = mysqli_query($connect_db, $sql);
                     $i=0;
                     while($r = mysqli_fetch_array($res)) {
+                        if($r['new']) {
+                            $r['answer_image'] = "data:image/jpeg;base64,".base64_encode($r['answer_image']);
+                            $r['explain_image'] = "data:image/jpeg;base64,".base64_encode($r['explain_image']);
+                        }
                         ?>
                         <tr id="item_section_3">
                             <td>
@@ -325,14 +337,14 @@ if($book_type == "베타") {
                             </td>
                             <td class="pt-17"><input type="text" name="c_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>" onkeydown="tab_next('c', <?=$i?>)"></td>
                             <td>
-                                <img src="data:image/jpeg;base64,<?=base64_encode($r['answer_image'])?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="c_answer_img_<?=$i;?>">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="c_answer_img_<?=$i;?>">
                             </td>
                             <td>
                                 <input type="file" id="c_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'c')" name="c_answer_images[]">
 <!--                                <input type="hidden" name="c_answer_image[]" id="c_answer_base_--><?//=$i;?><!--" value="--><?//=$r['answer_image']?><!--">-->
                             </td>
                             <td>
-                                <img src="data:image/jpeg;base64,<?=base64_encode($r['explain_image'])?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="c_explain_img_<?=$i;?>">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="c_explain_img_<?=$i;?>">
                             </td>
                             <td>
                                 <input type="file" id="c_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'c')" name="c_explain_images[]">
@@ -403,6 +415,10 @@ if($book_type == "베타") {
                     $res = mysqli_query($connect_db, $sql);
                     $i=0;
                     while($r = mysqli_fetch_array($res)) {
+                        if($r['new']) {
+                            $r['answer_image'] = "data:image/jpeg;base64,".base64_encode($r['answer_image']);
+                            $r['explain_image'] = "data:image/jpeg;base64,".base64_encode($r['explain_image']);
+                        }
                         ?>
                         <tr id="item_section_4">
                             <td>
@@ -411,14 +427,14 @@ if($book_type == "베타") {
                             </td>
                             <td class="pt-17"><input type="text" name="d_item_number[]" placeholder="문항번호" value="<?=$r['item_number'];?>" onkeydown="tab_next('d', <?=$i?>)"></td>
                             <td>
-                                <img src="data:image/jpeg;base64,<?=base64_encode($r['answer_image'])?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="d_answer_img_<?=$i;?>">
+                                <img src="<?=$r['answer_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="d_answer_img_<?=$i;?>">
                             </td>
                             <td>
                                 <input type="file" id="d_answer_file_<?=$i;?>" onchange="readImage1(this, <?=$i;?>, 'd')" name="d_answer_images[]">
 <!--                                <input type="hidden" name="d_answer_image[]" id="d_answer_base_--><?//=$i;?><!--" value="--><?//=$r['answer_image']?><!--">-->
                             </td>
                             <td>
-                                <img src="data:image/jpeg;base64,<?=base64_encode($r['explain_image'])?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="d_explain_img_<?=$i;?>">
+                                <img src="<?=$r['explain_image']?>" width="40" height="40" class="pt-7" style="height: 45px; width: auto;" id="d_explain_img_<?=$i;?>">
                             </td>
                             <td>
                                 <input type="file" id="d_explain_file_<?=$i;?>" onchange="readImage2(this, <?=$i;?>, 'd')" name="d_explain_images[]">
