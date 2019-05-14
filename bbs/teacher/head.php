@@ -98,39 +98,37 @@ $d_name2 = array_values(array_filter(array_map('trim',$d_name2)));
 $time = array();
 $cnt = 0;
 
-for($i=0; $i<count($d_uid); $i++) {
 
-    $link = "/api/math/timetable?client_no=".$ac."&d_uid=".$d_uid[$i];
-    $r = api_calls_get($link);
+
+$link = "/api/math/timetable_teacher?client_no=".$ac."&t_uid=".$_SESSION['t_uid'];
+$r = api_calls_get($link);
+
+
+//print_r($d_uid);
+//echo count($r);
+$d_count = count($d_uid);
+$r_count = count($r);
+
+
+for($i=0; $i<$d_count; $i++) {
     $kk = 0;
+    for($j=0; $j<$r_count; $j++) {
+        $cnt = 0;
+        if($r[$j][2] == $d_uid[$i]) { //해당회차 d_uid
+            for($k=1; $k<count($r[$j]); $k++) {
 
-    if(count($r)) {
-        for($j=0; $j<count($r); $j++) {
+                if($k%3 == 0) {
 
-            $cnt = 0;
+                    if($r[$j][$k]) :
+                        $day[$i][$cnt] = $r[$j][$k];
+                        $time1[$i][$cnt][$kk] = $r[$j][0];
+                        $kk++;
+                    endif;
 
-            if($r[$j][2] == $_SESSION['t_uid']) { //해당 선생(강사)님
-
-//                    $time[$i] = $r[$j][0];
-//                    $time1[$i][$kk] = $r[$j][0];
-//                    $kk++;
-                for($k=1; $k<count($r[$j]); $k++) {
-
-                    if($k%3 == 0) {
-
-                        if($r[$j][$k]) :
-                            $day[$i][$cnt] = $r[$j][$k];
-                            $time1[$i][$cnt][$kk] = $r[$j][0];
-                            $kk++;
-                        endif;
-
-                        $cnt++;
-                    }
+                    $cnt++;
                 }
             }
-
         }
-
     }
 }
 
@@ -282,15 +280,26 @@ if($_SESSION['admin']) $res['type'] = "관리자";
                     <!--                <div class="hamnav_class"><a href="student_manegement_record.html"><span class="class_title">루트</span><span-->
                     <!--                            class="class_grade_">초6</span></a></div>-->
                     <?php
+
+
+                    for($i=0; $i<count($d_name); $i++) {
+                        $param .= "&d_uid[]=".$d_uid[$i]."&c_uid[]=".$c_uid[$i];
+
+                    }
+
+                    //해당 수업에 학생 정보
+                    $link_4 = "/api/math/class_stu_array?client_no=".$_SESSION['client_no'].$param;
+                    $r_4 = api_calls_get($link_4);
+                    $r_count = count($r_4);
                     for($i=0; $i<count($d_name); $i++) {
 
-                        //해당 수업에 학생 정보
-                        $link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$i]."&c_uid=".$c_uid[$i];
-                        $r_4 = api_calls_get($link_4);
-
+                        $sum = 0;
+                        for($j=0; $j<$r_count; $j++) {
+                            if($r_4[$j][1] == $d_uid[$i] and $r_4[$j][2] == $c_uid[$i]) $sum++;
+                        }
                         ?>
                         <div class="hamnav_class" style="cursor: pointer;"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>&s_uid=<?=$s_uid[$i]?>">
-                                <span class="class_title"><?=$d_name[$i]?> ( <?php echo (count($r_4)-1);?> )( <?=$d_yoie[$i]?> )</span>
+                                <span class="class_title"><?=$d_name[$i]?> ( <?php echo $sum;?> )( <?=$d_yoie[$i]?> )</span>
                             </a>
                         </div>
                         <?php
