@@ -272,9 +272,21 @@ while($res = mysqli_fetch_array($result)) {
         <div class="mybus_wrap" <?if($is_mobile_chk) echo 'style="margin-left:-55px"';?>>
             <div class="bus_head">
                 <p class="bus_title" <?if($is_mobile_chk) echo 'style="margin-left:90px"';?>>MY BUS</p>
-                <div class="onboard_cancel_btn" style="cursor:pointer">
-                    <p>탑승 취소</p>
-                </div>
+                <?php
+                if($res['time']) {
+                    ?>
+                    <div class="onboard_cancel_btn" style="cursor:pointer">
+                        <p>탑승 취소</p>
+                    </div>
+                    <?php
+                }else {
+                    ?>
+                    <div style="width: 70px; height: 20px; float: right;">
+
+                    </div>
+                    <?php
+                }
+                ?>
             </div>
             <div class="bus_content">
                 <div class="bus_icon">

@@ -2,7 +2,7 @@
 include_once ('head.php');
 //header('Content-Disposition: attachment;');
 $seq = $_GET['seq'];
-
+$page = $_GET['page'];
 $sql = "select * from `teacher_notice` where `seq`='$seq';";
 $result = sql_query($sql);
 $res = mysqli_fetch_array($result);
@@ -20,7 +20,7 @@ $time = $time[0];
         ?>
         <div class="head_p">
             <p class="head_title">공지사항</p>
-            <div class="back_btn"><a href="notice.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
+            <div class="back_btn"><a href="notice.php?page=<?=$page?>"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
         </div>
         <div class="content_p">
             <p class="notice_title"><span><?=$res1['title']?></span></p>
@@ -50,7 +50,7 @@ $time = $time[0];
         ?>
         <div class="head_p">
             <p class="head_title">공지사항</p>
-            <div class="back_btn"><a href="notice.php"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
+            <div class="back_btn"><a href="notice.php?page=<?=$page?>"><img src="img/back_btn.png" alt="back_btn_icon"></a></div>
         </div>
         <div class="content_p">
             <p class="notice_title"><span><?=$res['title']?></span></p>

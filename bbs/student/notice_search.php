@@ -28,7 +28,7 @@ while($res = mysqli_fetch_array($result)) {
         $ad_res = mysqli_fetch_array($admin_res);
         ?>
         <div class="notice_list">
-            <a href="notice_read.php?seq=<?=$res['seq']?>">
+            <a href="notice_read.php?seq=<?=$res['seq']?>&page=<?=$page?>">
                 <div class="up_section">
                     <div class="number" style="<?php if($res['type'] == '중요공지') echo "width: 20%;"; else echo "width: 10%;";?>"><span class="emphasis"><?php if($ad_res['type'] == "중요공지") echo "[중요] ";?>공지</span></div>
                     <div class="notice_title"><span class="emphasis"><?=$ad_res['title']?>
@@ -51,7 +51,7 @@ while($res = mysqli_fetch_array($result)) {
     }else {
         ?>
         <div class="notice_list">
-            <a href="notice_read.php?seq=<?=$res['seq']?>">
+            <a href="notice_read.php?seq=<?=$res['seq']?>&page=<?=$page?>">
                 <div class="up_section">
                     <div class="number" style="<?php if($res['type'] == '중요공지') echo "width: 20%;"; else echo "width: 10%;";?>"><span class="emphasis"><?php if($res['type'] == "중요공지") echo "[중요] ";?>공지</span></div>
                     <div class="notice_title"><span class="emphasis"><?=$res['title']?>
