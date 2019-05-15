@@ -108,7 +108,7 @@ $res = mysqli_fetch_array($result);
                     <td><?php echo $s ?>교시</td>
                     <td><?php echo str_replace('~',"<br>~<br>",$week1_time[$s]);?></td>
                     <?php
-                    $r_count = count($r_4);
+					$r_count = count($r_4);
                     for($i=0; $i<5; $i++) {
                         $kk = $i+1;
                         if($kk == 7) $kk = 0;
@@ -119,11 +119,11 @@ $res = mysqli_fetch_array($result);
                                 if($day[$j][$i] && ($time1[$j][$i][$k] == $s)) {
                                     /*$link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."&s_uid=".$s_uid[$j];
                                     $r_4 = api_calls_get($link_4);*/
-                                    $sum = 0;
-                                    for($x=0; $x<$r_count; $x++) {
-                                        if($r_4[$x][1] == $d_uid[$j] and $r_4[$x][2] == $c_uid[$j]) $sum++;
-                                    }
-                                    echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."&s_uid=".$s_uid[$j]."'>".$d_name[$j]."<br>(".($sum).")</a><br>";
+									$sum = 0;
+									for($x=0; $x<$r_count; $x++) {
+										if($r_4[$x][1] == $d_uid[$j] and $r_4[$x][2] == $c_uid[$j]) $sum++;
+									}
+                                    echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."&s_uid=".$s_uid[$j]."'>".$d_name[$j]."<br>(".$sum.")</a><br>";
                                     $class_array[count($class_array)] = $time1[$j][$k];
                                 }
                             }
@@ -142,9 +142,13 @@ $res = mysqli_fetch_array($result);
                         for($j=0; $j<count($day); $j++) {
                             for($k = 0; $k<7; $k++) {
                                 if($day[$j][$i] && ($time1[$j][$i][$k] == $s)) {
-                                    $link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j];
-                                    $r_4 = api_calls_get($link_4);
-                                    echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."<br>(".(count($r_4)-1).")</a><br>";
+                                    /*$link_4 = "/api/math/class_stu?client_no=".$_SESSION['client_no']."&d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j];
+                                    $r_4 = api_calls_get($link_4);*/
+									$sum = 0;
+									for($x=0; $x<$r_count; $x++) {
+										if($r_4[$x][1] == $d_uid[$j] and $r_4[$x][2] == $c_uid[$j]) $sum++;
+									}
+                                    echo "<a href='student_management_record.php?d_uid=".$d_uid[$j]."&c_uid=".$c_uid[$j]."'>".$d_name[$j]."<br>(".$sum.")</a><br>";
                                     $class_array[count($class_array)] = $time1[$j][$k];
                                 }
                             }

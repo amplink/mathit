@@ -111,25 +111,25 @@ $r_count = count($r);
 
 
 for($i=0; $i<$d_count; $i++) {
-    $kk = 0;
-    for($j=0; $j<$r_count; $j++) {
-        $cnt = 0;
-        if($r[$j][2] == $d_uid[$i]) { //해당회차 d_uid
-            for($k=1; $k<count($r[$j]); $k++) {
+	$kk = 0;
+	for($j=0; $j<$r_count; $j++) {
+		$cnt = 0;
+		if($r[$j][2] == $d_uid[$i]) { //해당회차 d_uid
+			for($k=1; $k<count($r[$j]); $k++) {
 
-                if($k%3 == 0) {
+				if($k%3 == 0) {
 
-                    if($r[$j][$k]) :
-                        $day[$i][$cnt] = $r[$j][$k];
-                        $time1[$i][$cnt][$kk] = $r[$j][0];
-                        $kk++;
-                    endif;
+					if($r[$j][$k]) :
+						$day[$i][$cnt] = $r[$j][$k];
+						$time1[$i][$cnt][$kk] = $r[$j][0];
+						$kk++;
+					endif;
 
-                    $cnt++;
-                }
-            }
-        }
-    }
+					$cnt++;
+				}
+			}
+		}
+	}
 }
 
 //네비게이터
@@ -283,27 +283,27 @@ if($_SESSION['admin']) $res['type'] = "관리자";
 
 
                     for($i=0; $i<count($d_name); $i++) {
-                        $param .= "&d_uid[]=".$d_uid[$i]."&c_uid[]=".$c_uid[$i];
+                       $param .= "&d_uid[]=".$d_uid[$i]."&c_uid[]=".$c_uid[$i];
 
-                    }
+					}
 
-                    //해당 수업에 학생 정보
-                    $link_4 = "/api/math/class_stu_array?client_no=".$_SESSION['client_no'].$param;
-                    $r_4 = api_calls_get($link_4);
-                    $r_count = count($r_4);
-                    for($i=0; $i<count($d_name); $i++) {
+                        //해당 수업에 학생 정보
+                        $link_4 = "/api/math/class_stu_array?client_no=".$_SESSION['client_no'].$param;
+                        $r_4 = api_calls_get($link_4);
+						$r_count = count($r_4);
+                        for($i=0; $i<count($d_name); $i++) {
 
-                        $sum = 0;
-                        for($j=0; $j<$r_count; $j++) {
-                            if($r_4[$j][1] == $d_uid[$i] and $r_4[$j][2] == $c_uid[$i]) $sum++;
-                        }
+							$sum = 0;
+							for($j=0; $j<$r_count; $j++) {
+								if($r_4[$j][1] == $d_uid[$i] and $r_4[$j][2] == $c_uid[$i]) $sum++;
+							}
                         ?>
                         <div class="hamnav_class" style="cursor: pointer;"><a href="student_management_record.php?d_uid=<?=$d_uid[$i]?>&c_uid=<?=$c_uid[$i]?>&s_uid=<?=$s_uid[$i]?>">
                                 <span class="class_title"><?=$d_name[$i]?> ( <?php echo $sum;?> )( <?=$d_yoie[$i]?> )</span>
                             </a>
                         </div>
                         <?php
-                    }
+                        }
                     ?>
 
                 </div>
@@ -374,7 +374,7 @@ if($_SESSION['admin']) $res['type'] = "관리자";
             $('.hamnav_class_list').show();
             chk_class = 1;
         }else {
-            $('.hamnav_class_list').hide()
+            $('.hamnav_class_list').hide();
             chk_class = 0;
         }
     }

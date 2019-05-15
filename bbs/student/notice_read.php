@@ -8,6 +8,20 @@ $result = sql_query($sql);
 $res = mysqli_fetch_array($result);
 $time = explode(' ', $res['event_time']);
 $time = $time[0];
+
+function getBrowser() { 
+	$broswerList = array('Android', 'MSIE', 'Chrome', 'Firefox', 'iPhone', 'iPad', 'PPC', 'Safari', 'none'); 
+	$browserName = 'none'; 
+	foreach ($broswerList as $userBrowser){ 
+		if($userBrowser === 'none') break; 
+		if(strpos($_SERVER['HTTP_USER_AGENT'], $userBrowser)) { 
+			$browserName = $userBrowser; 
+			break; 
+		} 
+	} 
+	return $browserName; 
+}
+
 ?>
 <link rel="stylesheet" type="text/css" media="screen" href="css/notice_read.css" />
 <body>
@@ -66,10 +80,21 @@ $time = $time[0];
             </div>
             <?php
             if($res['file_url']) {
-                ?>
+			   if(getBrowser() == 'Safari' or getBrowser() == 'iPhone' or getBrowser() == 'iPad' or getBrowser() == 'Android'){
+            ?>
+                <div class="attach_file" style="width:130px;">
+                    <a class="download" href="https://mathitlms.co.kr/bbs/teacher/<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기.</a>
+                </div>
+            <?php
+			   }else{
+            ?>
                 <div class="attach_file" style="float:left">
                     <a href="download.php?path=<?=$res['file_url']?>&file=<?=urlencode($res['file_name'])?>" target="_blank" download>첨부파일 받기</a>
                 </div>
+
+            <?php
+               }
+            ?>
                 <span style="font-size: 14px; line-height: 25px;">&nbsp;&nbsp;<?=$res['file_name']?></span>
                 <?php
             }
