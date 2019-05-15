@@ -171,7 +171,7 @@ include_once ('head.php');
 
                     <?
                     $sql = "SELECT 
-				   item_number, answer_image, c_name
+				   item_number, answer_image, c_name, new
 				FROM 
 				  `answer_master`  
 				WHERE 
@@ -202,6 +202,12 @@ include_once ('head.php');
 			       <table>
 					<tbody>";
                         for($j=0; $j<=count($group[$res2['corner'.$i]]); $j++){
+                            
+							if($group[$res2['corner'.$i]][$j]['new'] == 1){
+							   $img_url = "data:image/jpeg;base64,".base64_encode($group[$res2['corner'.$i]][$j]['answer_image']);
+							}else{
+                               $img_url = $group[$res2['corner'.$i]][$j]['answer_image'];
+							}
 
                             if(!$group[$res2['corner'.$i]][$j]['item_number']) continue;
                             if(!in_array($group[$res2['corner'.$i]][$j]['item_number'], $chkAnswers)) continue;
@@ -212,9 +218,9 @@ include_once ('head.php');
                             <tr class="group_<?=$i?>">
                                 <td width="70"><span><?=$group[$res2['corner'.$i]][$j]['item_number']?></span></td>
                                 <td width="390">
-                                    <div class="img_input_place"><img src="<?=$group[$res2['corner'.$i]][$j]['answer_image']?>"></div>
+                                    <div class="img_input_place"><img src="<?=$img_url?>"></div>
                                 </td>
-                                <td><input type="checkbox" name="marking<?=$i?>[]" value="<?=$group[$res2['corner'.$i]][$j]['item_number']?>" id="marking" class="marking<?=$i?>" <? if(in_array($group[$res2['corner'.$i]][$j]['item_number'], $wrongArr)) echo "checked"; ?>></td>
+                                <td><input type="checkbox" name="marking<?=$i?>[]" value="<?=$add?><?=$group[$res2['corner'.$i]][$j]['item_number']?>" id="marking" class="marking<?=$i?>" <? if(in_array($group[$res2['corner'.$i]][$j]['item_number'], $wrongArr)) echo "checked"; ?>></td>
                             </tr>
                             <?
 

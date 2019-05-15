@@ -155,7 +155,7 @@ $res = mysqli_fetch_array($result);
                             }
 
                             $sql2 = "SELECT 
-                                           item_number, answer_image, explain_image, c_name
+                                           item_number, answer_image, explain_image, c_name, new
                                         FROM 
                                           `answer_master`  
                                         WHERE 
@@ -233,22 +233,32 @@ $res = mysqli_fetch_array($result);
 
                                         <?php
                                         for($i=1; $i<=$tot; $i++) {
+
                                             if($res['corner'.$i] == '선택' or $res['wrong_anwer_2'] =="") continue;
 
                                             $chk_wrong_answer = explode(",", $wrong2[$i]);
                                             echo " <br><br><b>".$i.". ".$res['corner'.$i]."</b>";
                                             for($j=0; $j<=count($group[$res['corner'.$i]]); $j++){
+
+												if($group[$res['corner'.$i]][$j]['new'] == 1){
+												   $img_url="data:image/jpeg;base64,".base64_encode($group[$res['corner'.$i]][$j]['answer_image']);
+												   $img_url2="data:image/jpeg;base64,".base64_encode($group[$res['corner'.$i]][$j]['explain_image']);
+												}else{
+												   $img_url = $group[$res['corner'.$i]][$j]['answer_image'];
+												   $img_url2 = $group[$res['corner'.$i]][$j]['explain_image'];
+												}
+
                                                 if(!in_array($group[$res['corner'.$i]][$j]['item_number'], $chk_wrong_answer)) continue;
                                                 $wrongArr =  explode(",",$wrongData[$i]);
                                                 ?>
                                                 <div>
                                                     <span style="display:inline-block;width:70px;height:30px;vertical-align:top;padding-top:5px;"><?=$group[$res['corner'.$i]][$j]['item_number']?>.</span>
-                                                    <span style="display:inline-block;border:1px solid #c3c3c3"><img src="<?=$group[$res['corner'.$i]][$j]['answer_image']?>" onload="resize(this)"></span>
+                                                    <span style="display:inline-block;border:1px solid #c3c3c3"><img src="<?=$img_url?>" onload="resize(this)"></span>
                                                 </div>
 
                                                 <? if($group[$res['corner'.$i]][$j]['explain_image']){ ?>
                                                     <div style="width:90%;border:1px solid #c3c3c3">
-                                                        <span style="display:inline-block;width:70%;"><img src="<?=$group[$res['corner'.$i]][$j]['explain_image']?>" onload="resize(this)"></span>
+                                                        <span style="display:inline-block;width:70%;"><img src="<?=$img_url2?>" onload="resize(this)"></span>
                                                     </div>
                                                     <br>
                                                 <? } ?>
