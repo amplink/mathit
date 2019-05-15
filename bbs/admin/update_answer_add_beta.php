@@ -161,10 +161,8 @@ $page = $_GET['page'];
                     $i=0;
                     while($r = mysqli_fetch_array($res)) {
                         $event_time = $r['event_time'];
-                        if($r['new']) {
-                            $r['answer_image'] = "data:image/jpeg;base64,".base64_encode($r['answer_image']);
-                            $r['explain_image'] = "data:image/jpeg;base64,".base64_encode($r['explain_image']);
-                        }
+                        if($r['new'] && $r['answer_image']) $r['answer_image'] = "data:image/jpeg;base64,".base64_encode($r['answer_image']);
+                        if($r['new'] && $r['explain_image']) $r['explain_image'] = "data:image/jpeg;base64,".base64_encode($r['explain_image']);
                         ?>
                         <tr id="item_section_1">
                             <td>
@@ -257,10 +255,8 @@ $page = $_GET['page'];
                     $res = mysqli_query($connect_db, $sql);
                     $i=0;
                     while($r = mysqli_fetch_array($res)) {
-                        if($r['new']) {
-                            $r['answer_image'] = "data:image/jpeg;base64,".base64_encode($r['answer_image']);
-                            $r['explain_image'] = "data:image/jpeg;base64,".base64_encode($r['explain_image']);
-                        }
+                        if($r['new'] && $r['answer_image']) $r['answer_image'] = "data:image/jpeg;base64,".base64_encode($r['answer_image']);
+                        if($r['new'] && $r['explain_image']) $r['explain_image'] = "data:image/jpeg;base64,".base64_encode($r['explain_image']);
                         ?>
                         <tr id="item_section_2">
                             <td>
@@ -347,10 +343,8 @@ $page = $_GET['page'];
                     $res = mysqli_query($connect_db, $sql);
                     $i=0;
                     while($r = mysqli_fetch_array($res)) {
-                        if($r['new']) {
-                            $r['answer_image'] = "data:image/jpeg;base64,".base64_encode($r['answer_image']);
-                            $r['explain_image'] = "data:image/jpeg;base64,".base64_encode($r['explain_image']);
-                        }
+                        if($r['new'] && $r['answer_image']) $r['answer_image'] = "data:image/jpeg;base64,".base64_encode($r['answer_image']);
+                        if($r['new'] && $r['explain_image']) $r['explain_image'] = "data:image/jpeg;base64,".base64_encode($r['explain_image']);
                         ?>
                         <tr id="item_section_3">
                             <td>

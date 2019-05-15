@@ -20,7 +20,7 @@ if(!$res['bus_seq']) {
         $bus_uid[$i] = $r['list'][$i][0];
         if($bus_uid[$i]==$res['station_uid']) $driver = $r['list'][$i][3];
     }
-    $driver = "01053967566";
+//    $driver = "01053967566";
     if ($api->sms_send($driver, "02-2282-0331", $_SESSION['s_name']."학생(PM ".$res['time']." ".$res['station']."정류장 탑승 예정)\n\n금일 셔틀버스 이용하지 않습니다.", "MATH IT" ,0) == gabiaSmsApi::$RESULT_OK) {
         echo "success";
     }
