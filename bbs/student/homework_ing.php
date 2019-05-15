@@ -104,11 +104,11 @@ include_once ('head.php');
                     <? } ?>
                         <div class="content_detail_section" style="width: calc(100% - 90px);cursor:pointer" onClick="location.href='homework_chat.php?id=<?=$res['id']?>'">
                             <!--숙제 확인화면-->
-                            <div class="book" style="width:135px">
-                                <div class="section_icon"><img src="img/range.png" alt="range_icon"></div>
-                                <div class="section_text">
+                            <div class="book" style="width:130px; float:left;">
+                                <div class="section_icon" style="float:left;"><img src="img/range.png" alt="range_icon"></div>
+                                <div class="section_text" style="width: 95px;">
                                     <p class="book_name"><?= $res['grade'] ?> - <?= $res['semester'] ?></p>
-                                    <p class="book_page"><span><?= $res['unit'] ?></span></p>
+                                    <p class="book_page" style="word-break: break-all;"><span><?= $res['unit'] ?></span></p>
                                 </div>
                             </div>
                             <div class="limit">

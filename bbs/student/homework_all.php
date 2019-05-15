@@ -199,16 +199,16 @@ if(!$is_mobile_chk){
                     <? } ?>
                         <div class="content_detail_section <?echo ($res['status1']=='숙제완료')?'final':'';?>" style="width: calc(100% - 95px);cursor:pointer" onClick="location.href='homework_chat.php?id=<?=$res['id']?>'">
                             <!--숙제 확인화면-->
-                            <div class="book" style="width:135px">
-                                <div class="section_icon"><img src="img/range.png" alt="range_icon"></div>
-                                <div class="section_text">
+                            <div class="book" style="width:130px; float:left;">
+                                <div class="section_icon" style="float:left;"><img src="img/range.png" alt="range_icon"></div>
+                                <div class="section_text" style="width: 95px;">
                                     <p class="book_name"><?= $res['grade'] ?> - <?= $res['semester'] ?></p>
-                                    <p class="book_page"><span><?= $res['unit'] ?></span></p>
+                                    <p class="book_page" style="word-break: break-all;"><span><?= $res['unit'] ?></span></p>
                                 </div>
                             </div>
                             <div class="limit">
                                 <div class="section_icon"><img src="img/time.png" alt="time_icon"></div>
-                                <div class="section_text" style="vertical-align:top;padding-top:8px;padding-left:-20px">
+                                <div class="section_text" style="vertical-align:top;padding-top:8px;margin-left:-10px">
                                     <p style="<?=$add_style3?>"><?=substr($res['_from'],0,5)?>~<?=substr($res['_to'],0,5)?></p>
                                     <!--<p><span>AM</span> <span>00:00</span></p>-->
                                 </div>
