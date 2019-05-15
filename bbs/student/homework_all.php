@@ -199,7 +199,7 @@ if(!$is_mobile_chk){
                     <? } ?>
                         <div class="content_detail_section <?echo ($res['status1']=='숙제완료')?'final':'';?>" style="width: calc(100% - 95px);cursor:pointer" onClick="location.href='homework_chat.php?id=<?=$res['id']?>'">
                             <!--숙제 확인화면-->
-                            <div class="book" style="width:110px">
+                            <div class="book" style="width:135px">
                                 <div class="section_icon"><img src="img/range.png" alt="range_icon"></div>
                                 <div class="section_text">
                                     <p class="book_name"><?= $res['grade'] ?> - <?= $res['semester'] ?></p>
