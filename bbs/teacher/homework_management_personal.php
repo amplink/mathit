@@ -87,8 +87,8 @@ for($i=0; $i<count($d_name); $i++) {
                 <div class="head_right" style="margin-top:-5px">
                     <p>시작일 조회</p>
                     <?
-                    if($_GET['beginDate']) $beginDate = $_GET['beginDate'];
-                    else					$beginDate = date('m')."/01/".date('Y');
+                    if(isset($_GET['beginDate'])) $beginDate = $_GET['beginDate'];
+                    else					      $beginDate = date('m')."/01/".date('Y');
                     ?>
                     <input type="text" name="beginDate" id="datepicker" class="datepicker2" value="<?=$beginDate?>">
                     <p><div class="search_btn" onclick="search();"><a>검색</a></div></p>
@@ -384,7 +384,7 @@ foreach ($wrong2 as $key => $v) {
 <script>
     $('.modal_wrap').draggable({
         handle: '.modal_head'
-    })
+    });
 
     function search() {
         //var date = $("#datepicker").val();
