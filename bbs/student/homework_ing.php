@@ -27,7 +27,8 @@ include_once ('head.php');
 				      COUNT(*)
 						FROM `homework` A, `homework_assign_list` B
 						WHERE 
-							A.seq = B.h_id
+						    match(A.student_id) against('*$_SESSION[s_id]*' in boolean mode) 
+						AND A.seq = B.h_id
 						AND B.`client_id`='$_SESSION[client_id]'
 						AND B.student_id = '$_SESSION[s_id]'
 						AND B.`d_uid` IN ($_SESSION[d_uid])
@@ -62,7 +63,8 @@ include_once ('head.php');
 						  B.current_status
 						FROM `homework` A, `homework_assign_list` B
 						WHERE 
-							A.seq = B.h_id
+						     match(A.student_id) against('*$_SESSION[s_id]*' in boolean mode) 
+						AND	A.seq = B.h_id
 						AND B.`client_id`='$_SESSION[client_id]'
 						AND B.student_id = '$_SESSION[s_id]'
 						AND B.`d_uid` IN ($_SESSION[d_uid])

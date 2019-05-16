@@ -80,10 +80,16 @@ function getBrowser() {
             </div>
             <?php
             if($res['file_url']) {
-			   if(getBrowser() == 'Safari' or getBrowser() == 'iPhone' or getBrowser() == 'iPad' or getBrowser() == 'Android'){
+			   if(getBrowser() == 'Safari' or getBrowser() == 'Android'){
             ?>
                 <div class="attach_file" style="width:130px;">
                     <a class="download" href="https://mathitlms.co.kr/bbs/teacher/<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기.</a>
+                </div>
+            <?php
+			   }else if(getBrowser() == 'iPhone' or getBrowser() == 'iPad'){
+            ?>
+                <div class="attach_file" style="width:130px;">
+                    <a class="download" href="download://url=https://mathitlms.co.kr/bbs/teacher/<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기.</a>
                 </div>
             <?php
 			   }else{

@@ -53,7 +53,10 @@ for($i=0; $i<count($d_name); $i++) {
 			  `homework` B
 			ON B.seq = A.h_id
 	        WHERE 
-			  A.student_id='$_GET[s_id]' AND A.c_uid='$_GET[c_uid]' AND A.client_id='$ac'";
+			    match(B.student_id) against('*$_GET[s_id]*' in boolean mode) 
+			  AND A.student_id='$_GET[s_id]' 
+			  AND A.c_uid='$_GET[c_uid]' 
+			  AND A.client_id='$ac'";
 
     $result2 = mysqli_query($connect_db, $sql);
     //$res2 = mysqli_fetch_array($result2);
