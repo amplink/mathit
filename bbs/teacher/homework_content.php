@@ -36,6 +36,9 @@ while($res = mysqli_fetch_array($result)) {
     ?>
     <div>
         <form action="homework_resend.php?seq=<?=$res['seq']?>" method="POST" id="resend_form<?=$i?>" enctype="multipart/form-data">
+            <input type='hidden' name="d_uid" value="<?=$res['d_uid']?>">
+			<input type='hidden' name="c_uid" value="<?=$res['c_uid']?>">
+			<input type='hidden' name="class_name" value="<?=$class_name?>">
 
             <table class="homework_cont">
                 <td>

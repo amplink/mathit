@@ -61,7 +61,38 @@ $sql = "update `homework` set
 
 $result = sql_query($sql);
 $s_ids = explode(',', $s_ids);
+$s_name = explode(',', $s_name);
 if($result == 1) {
+
+    sql_query("delete from homework_assign_list where h_id = '$seq'");
+
+    for($i=0; $i<count($s_ids); $i++) {
+
+		$id1 = ($textbook == "알파") ? "A" : "B";
+		$id2 = str_replace("초", "", $grade);
+		$id2 = str_replace("중", "", $id2);
+		$id3 = "S" . substr($semester, 0, 1);
+		$id4 = date('Ymd') . $i;
+		$now = date('Y-m-d');
+		$no = sprintf("%04d",rand (1,10000));
+
+		$id = $_SESSION[client_no] . $id1 . $id2 . $id3 . $id4 . $no;
+
+		$query2 = "INSERT INTO homework_assign_list SET
+					 `id`='$id',
+					 `client_id`='$_SESSION[client_no]',
+					 `d_uid`='$_POST[d_uid]',
+					 `c_uid`='$_POST[c_uid]',
+					 `h_id`='$seq',
+					 `student_id`='$s_ids[$i]',
+					 `grade` = '$grade',
+					 `class_name` = '$class_name',
+					 `student_name` = '$s_name[$i]',
+					 `event_time` = '$now' ";
+		sql_query($query2);
+
+	}
+
     $thisTime=date("m/d/Y");
     $time = $from;
     $someTime=strtotime($thisTime)-strtotime("$time GMT");
