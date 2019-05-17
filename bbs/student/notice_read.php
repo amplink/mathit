@@ -86,10 +86,14 @@ function getBrowser() {
                     <a class="download" href="https://mathitlms.co.kr/bbs/teacher/<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기.</a>
                 </div>
             <?php
-			   }else if(getBrowser() == 'iPhone' or getBrowser() == 'iPad'){
+			   }else if(getBrowser() == 'iPhone' or getBrowser() == 'iPad' or getBrowser() =='Chrome'){
+				    //$url = urlencode("download://url=https://mathitlms.co.kr/bbs/teacher/");
+                    //$url = json_encode("download://url=https://");
+                $url = "download://url=https://";
+				$url = preg_replace("/[:\/]/", "\uU+003A", $aa); 
             ?>
                 <div class="attach_file" style="width:130px;">
-                    <a class="download" href="download://url=https://mathitlms.co.kr/bbs/teacher/<?=$res['file_url'].$res['file_name']?>" download>첨부파일 받기.</a>
+                    <a class="download" href="download://url=/bbs/teacher/<?=$res['file_url'].$res['file_name']?>&download_domain=mathitlms.co.kr&download_protocol=https" download>첨부파일 받기.</a>
                 </div>
             <?php
 			   }else{
