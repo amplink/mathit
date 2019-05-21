@@ -15,6 +15,15 @@ for($i=0; $i<count($d_name); $i++) {
         $class_type = $d_yoie[$i];
     }
 }
+
+$sql = "select * from `teacher_setting` where `t_id`='$_SESSION[t_uid]';";
+$result = sql_query($sql);
+$res = mysqli_fetch_array($result);
+
+if(!$res['consult_mg']) {
+    alert_msg("작성 권한이 없습니다.");
+    location_href("./consult_management_personal.php");
+}
 ?>
 
     <link rel="stylesheet" type="text/css" media="screen" href="css/consult_manegement_write.css" />

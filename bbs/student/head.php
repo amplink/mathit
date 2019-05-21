@@ -64,9 +64,7 @@ while($res = mysqli_fetch_array($result)) {
             </div>
         </a>
         <div class="alarm">
-            <div class="alarm_tri">
-                <img src="img/bubble_tri_right.png" width="100%" height="100%">
-            </div>
+
 
             <div class="alarm_wrap">
                 <p class="x_btn">X</p>
@@ -94,10 +92,13 @@ while($res = mysqli_fetch_array($result)) {
             </div>
         </div>
         <div>
-            <div class="add_btn_wrap" style="top: 30px;">
+            <div class="add_btn_wrap" style="top: 30px; margin-left: 25px; margin-right: 20px;">
                 <div class="alarm_btn" onclick="show_alarm()"><div class="new_alarm"></div><img src="img/nav/alarm.png" alt="alarm_btn_icon"></div>
+                <div class="alarm_tri">
+                    <img src="img/bubble_tri_right.png" width="100%" height="100%">
+                </div>
             </div>
-            <div class="add_btn_wrap" style="top: 30px;">
+            <div class="add_btn_wrap" style="top: 30px; margin-right: 20px;">
                 <a href="setting.php"><div class="close_btn"><img src="img/nav/setting.png" alt="setting_btn_icon"></div></a>
             </div>
             <div class="add_btn_wrap" style="top: 30px;">
@@ -341,10 +342,11 @@ if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
 <script>
     $('.alarm').toggle();
     $('.alarm_back').toggle();
-
+    $('.alarm_tri').toggle();
     function show_alarm() {
         $('.alarm').toggle();
         $('.alarm_back').toggle();
+        $('.alarm_tri').toggle();
         $.ajax({
             url: "alarm_chk.php",
             success: function (res) {
@@ -356,6 +358,7 @@ if($alarm > 0) echo "<script>$('.new_alarm, .new_alarm_menu').show();</script>";
 
     $('.x_btn, .alarm_back').click(function(){
         $('.alarm').toggle();
+        $('.alarm_tri').toggle();
         $('.alarm_back').toggle();
     });
 

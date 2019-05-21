@@ -22,7 +22,7 @@ $sql = "SELECT A.seq, A.name, A.d_order, A.grade, A.unit, A._from, A._to, A.seme
 		AND B.student_id = '$_SESSION[s_id]'
 		AND B.`d_uid` IN ($_SESSION[d_uid])
 		AND B.current_status NOT IN ('s2','s3')
-		ORDER BY A.seq DESC LIMIT 3
+		ORDER BY A._from DESC, A._to ASC LIMIT 3
 		";
 $result = sql_query($sql);
 $num = mysqli_num_rows($result);
@@ -40,7 +40,8 @@ $num = mysqli_num_rows($result);
                     <span class="deco_line"></span>
                 </div>
                 <div class="more_btn_wrap">
-                    <a href="homework_ing.php"><img src="img/green_plus.png" alt="more_btn_icon" style="width: 25px; height: 25px;"></a>
+<!--                    <span>+</span>-->
+                    <a href="homework_ing.php"><img src="img/plus_icon.jpg" alt="more_btn_icon" style="width: 30px; height: 30px; filter: invert(1);"></a>
                 </div>
         </div>
         <?php
@@ -98,7 +99,7 @@ $num = mysqli_num_rows($result);
                 <span class="deco_line"></span>
             </div>
             <div class="more_btn_wrap">
-                <a href="report.php"><img src="img/green_plus.png" alt="more_btn_icon" style="width: 25px; height: 25px;"></a>
+                <a href="report.php"><img src="img/plus_icon.jpg" alt="more_btn_icon" style="width: 30px; height: 30px; filter: invert(1);"></a>
             </div>
         </div>
         <?php
@@ -109,7 +110,7 @@ $num = mysqli_num_rows($result);
                         `client_id`='$_SESSION[client_id]'
                     AND `d_uid` IN ($_SESSION[d_uid])
                     AND student_id = '$_SESSION[s_id]'
-                    ORDER BY seq DESC  LIMIT 3";
+                    ORDER BY date DESC  LIMIT 3";
         $result2 = sql_query($sql2);
         $num2 = mysqli_num_rows($result2);
 
@@ -173,7 +174,7 @@ $num = mysqli_num_rows($result);
                 <span class="deco_line"></span>
             </div>
             <div class="more_btn_wrap">
-                <a href="notice.php"><img src="img/green_plus.png" alt="more_btn_icon" style="width: 25px; height: 25px;"></a>
+                <a href="notice.php"><img src="img/plus_icon.jpg" alt="more_btn_icon" style="width: 30px; height: 30px; filter: invert(1);"></a>
             </div>
         </div>
         <div class="notice_content_wrap">
@@ -187,9 +188,10 @@ $num = mysqli_num_rows($result);
                 $sql3 = "SELECT  seq, title, event_time, writer, `type`, `file_url`
                              FROM `teacher_notice`  
                              WHERE 
-                               `client_id`='$_SESSION[client_id]'
-                               AND `n_range` like '%학생%'
-                               AND `d_uid` RLIKE '$d_uid'
+                               (`client_id`='$_SESSION[client_id]' AND `n_range` like '%학생%' AND `d_uid` RLIKE '$d_uid') 
+                               or 
+                               (`client_id`='$_SESSION[client_id]' AND `n_range` like '%학생%')
+                               
                              ORDER BY `type` desc, seq DESC LIMIT 5";
                 $result3 = sql_query($sql3);
                 $num3 = @mysqli_num_rows($result3);

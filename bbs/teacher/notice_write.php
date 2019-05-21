@@ -251,6 +251,7 @@ echo "<script>$('#class_select').val('" . $res['target'] . "')</script>";
             else if(!$('#title').val()) {
                 alert('제목을 입력하세요.');
             }else {
+                if(doubleSubmitCheck()) return;
                 $('#write_form').submit();
             }
         });
@@ -269,6 +270,16 @@ echo "<script>$('#class_select').val('" . $res['target'] . "')</script>";
         }
         else {
             $('.check_all').prop('checked', true)
+        }
+    }
+
+    var doubleSubmitFlag = false;
+    function doubleSubmitCheck(){
+        if(doubleSubmitFlag){
+            return doubleSubmitFlag;
+        }else{
+            doubleSubmitFlag = true;
+            return false;
         }
     }
 </script>

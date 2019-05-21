@@ -13,6 +13,9 @@ $name = $_FILES['bf_file']['tmp_name'][0];
 $name_name = $_FILES['bf_file']['name'][0];
 $contents = $_POST['content'];
 $id = date("mds").":".rand(1, 200);
+$gid = $_GET['id'];
+$tokens = array();
+$i_tokens = array();
 
 if(count($r_target)==0) {
     echo "<script>alert('공지 범위를 선택해 주세요.');history.back();</script>";
@@ -28,23 +31,23 @@ else {
         else $client_id .= $r_client_id[$i].",";
     }
 
-    if($name) {
-        //저장될 디렉토리
-        $base_dir = "file_list";
-
-        //폴더 이름을 유일한값으로 만듬
-        $dir = time().(double)microtime();
-        //폴더 생성
-        @mkdir("$base_dir/$dir",0777);
-
-        //tmp에 저장된 파일 지정한디렉토리로 이동
-        move_uploaded_file($name,"$base_dir/$dir/$name_name");
-
-        //DB에 입력할 이름
-        $name_url = $base_dir."/".$dir."/";
-    }
-
     if(!$_GET['id']) {
+        if($name) {
+            //저장될 디렉토리
+            $base_dir = "file_list";
+
+            //폴더 이름을 유일한값으로 만듬
+            $dir = time().(double)microtime();
+            //폴더 생성
+            @mkdir("$base_dir/$dir",0777);
+
+            //tmp에 저장된 파일 지정한디렉토리로 이동
+            move_uploaded_file($name,"$base_dir/$dir/$name_name");
+
+            //DB에 입력할 이름
+            $name_url = $base_dir."/".$dir."/";
+        }
+
         $sql = "INSERT INTO `notify` (`id`, `client_id`, `target`, `title`, `author`, `type`, `attach_file`, `attach_file_url`, `contents`, `event_time`)
 VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$name_name', '$name_url','$contents', CURRENT_TIMESTAMP);";
         sql_query($sql);
@@ -76,15 +79,21 @@ VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$name_nam
                     for($i=1; $i<count($r); $i++) {
                         $sql = "insert into `alarm` set `seq`='', `content`='새로운 공지가 등록되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
                         sql_query($sql);
-                    }
-                    $sql = "select `token` from `fcm`;";
-                    $result = sql_query($sql);
-                    $tokens = array();
-                    while($res = mysqli_fetch_array($result)) {
-                        $tokens[] = $res['token'];
+                        $sql = "select * from `fcm` where `uid`='".$r[$i][1]."';";
+                        $result = sql_query($sql);
+                        while($res = mysqli_fetch_array($result)) {
+                            $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
+                            $result1 = sql_query($sql1);
+                            $res1 = mysqli_fetch_array($result1);
+                            if($res1['push_alarm']) {
+                                if($res['iphone']) $i_tokens[] = $res['token'];
+                                else $tokens[] = $res['token'];
+                            }
+                        }
                     }
                     $message = "새로운 공지가 등록되었습니다.";
-                    send_notification($tokens, $message);
+                    if(count($tokens) > 0) send_notification($tokens, $message);
+                    if(count($i_tokens) > 0) send_notification_ios($i_tokens, $message);
                 }
             }
         }
@@ -95,10 +104,27 @@ VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$name_nam
         }
     }else {
         if($_POST['hidden'] == 1) {
-            $sql = "update `notify` set `attach_file`='', `attach_file_url`='';";
+            $sql = "select * from `notify` where `id`='$gid';";
+            $result = sql_query($sql);
+            $res = mysqli_fetch_array($result);
+
+            if($res['attach_file_url']) {
+                unlink($res['attach_file_url'].$res['attach_file']);
+                rmdir(substr($res['attach_file_url'],0, -1));
+            }
+
+            $sql = "update `notify` set `attach_file`='', `attach_file_url`='' where `id`='$gid';";
             sql_query($sql);
         }
         if($name_name) {
+            $sql = "select * from `notify` where `id`='$gid';";
+            $result = sql_query($sql);
+            $res = mysqli_fetch_array($result);
+
+            if($res['attach_file_url']) {
+                unlink($res['attach_file_url'].$res['attach_file']);
+                rmdir(substr($res['attach_file_url'],0, -1));
+            }
             //저장될 디렉토리
             $base_dir = "file_list";
 
@@ -144,15 +170,21 @@ VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$name_nam
                         for($i=1; $i<count($r); $i++) {
                             $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
                             sql_query($sql);
+                            $sql = "select * from `fcm` where `uid`='".$r[$i][1]."';";
+                            $result = sql_query($sql);
+                            while($res = mysqli_fetch_array($result)) {
+                                $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
+                                $result1 = sql_query($sql1);
+                                $res1 = mysqli_fetch_array($result1);
+                                if($res1['push_alarm']) {
+                                    if($res['iphone']) $i_tokens[] = $res['token'];
+                                    else $tokens[] = $res['token'];
+                                }
+                            }
                         }
-                        $sql = "select `token` from `fcm`;";
-                        $result = sql_query($sql);
-                        $tokens = array();
-                        while($res = mysqli_fetch_array($result)) {
-                            $tokens[] = $res['token'];
-                        }
-                        $message = "새로운 공지가 등록되었습니다.";
-                        send_notification($tokens, $message);
+                        $message = "공지가 수정되었습니다.";
+                        if(count($tokens) > 0) send_notification($tokens, $message);
+                        if(count($i_tokens) > 0) send_notification_ios($i_tokens, $message);
                     }
                 }
             }
@@ -193,17 +225,21 @@ VALUES ('$id', '$client_id', '$target', '$title', '$author', '$type', '$name_nam
                         for($i=1; $i<count($r); $i++) {
                             $sql = "insert into `alarm` set `seq`='', `content`='공지가 수정되었습니다.', `table_name`='notice', `target`='학생', `uid`='".$r[$i][1]."', `chk`='0', `datetime`=CURRENT_TIMESTAMP";
                             sql_query($sql);
+                            $sql = "select * from `fcm` where `uid`='".$r[$i][1]."';";
+                            $result = sql_query($sql);
+                            while($res = mysqli_fetch_array($result)) {
+                                $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
+                                $result1 = sql_query($sql1);
+                                $res1 = mysqli_fetch_array($result1);
+                                if($res1['push_alarm']) {
+                                    if($res['iphone']) $i_tokens[] = $res['token'];
+                                    else $tokens[] = $res['token'];
+                                }
+                            }
                         }
-                        $sql = "select * from `fcm`;";
-                        $result = sql_query($sql);
-                        $tokens = array();
-                        while($res = mysqli_fetch_array($result)) {
-                            $sql1 = "select `push_alarm` from `student_table` where `id`='".$res['uid']."';";
-                            $result1 = sql_query($sql1);
-                            $res1 = mysqli_fetch_array($result1);
-                            if($res1['push_alarm']) $tokens[] = $res['token'];
-                        }
-                        send_notification($tokens, $message);
+                        $message = "공지가 수정되었습니다.";
+                        if(count($tokens) > 0) send_notification($tokens, $message);
+                        if(count($i_tokens) > 0) send_notification_ios($i_tokens, $message);
                     }
                 }
             }

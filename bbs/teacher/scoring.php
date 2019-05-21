@@ -291,6 +291,7 @@ include_once ('head.php');
 
     function complete(){
         var chk = 0;
+		if(doubleSubmitCheck()) return;
         $('[class ^= marking]').each(function() {
             if($(this).is(':checked')){
                 //DATA += ","+($(this).val());
@@ -395,6 +396,7 @@ include_once ('head.php');
     */
     $('.resend_btn').click(function (){
         var s_id = $('input[name="s_id"]').val();
+		if(doubleSubmitCheck()) return;
         $.ajax({
             url: 'scoring_resend.php?s_id='+s_id+"&id=<?=$_GET['id']?>",
             success: function (res) {
@@ -405,6 +407,16 @@ include_once ('head.php');
         });
     });
 
+
+    var doubleSubmitFlag = false;
+    function doubleSubmitCheck(){
+        if(doubleSubmitFlag){
+            return doubleSubmitFlag;
+        }else{
+            doubleSubmitFlag = true;
+            return false;
+        }
+    }
 </script>
 
 

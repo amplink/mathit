@@ -43,6 +43,15 @@ if(!$seqq) {
 }
 
 if($t == 2) {
+    $sql = "select * from `teacher_notice` where  `seq` = '$seq';";
+    $result = sql_query($sql);
+    $res = mysqli_fetch_array($result);
+
+    if($res['file_url']) {
+        unlink($res['file_url'].$res['file_name']);
+        rmdir(substr($res['file_url'],0, -1));
+    }
+
     $sql = "delete from `teacher_notice` where `seq` = '$seq';";
     sql_query($sql);
     alert_msg("삭제가 완료되었습니다.");
@@ -84,6 +93,15 @@ if($seqq > 0) { // 수정이면
         $name_url = $res['file_url'];
     }
     if($name) {
+        $sql = "select * from `teacher_notice` where  `seq` = '$seqq';";
+        $result = sql_query($sql);
+        $res = mysqli_fetch_array($result);
+
+        if($res['file_url']) {
+            unlink($res['file_url'].$res['file_name']);
+            rmdir(substr($res['file_url'],0, -1));
+        }
+
         //저장될 디렉토리
         $base_dir = "img_data";
 

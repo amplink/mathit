@@ -37,6 +37,7 @@ for($i=0;$i<count($tid);$i++){
    $gc = (in_array($tid[$i], $grade_card))?"1":"0";
    $nt = (in_array($tid[$i], $notice))?"1":"0";
    $am = (in_array($tid[$i], $admin_menu))?"1":"0";
+   if($type[$i]=="채점강사") $cm = "0";
 
    $sql = "INSERT INTO `teacher_setting` (`seq`, `t_id`, `t_name`, `type`, `hm_create`, `hm_mg`, `score_mg`, `consult_mg`, `grade_card`, `notice`, `admin_menu`, `event_time`) 
 VALUES (NULL, '$tid[$i]', '".$tname[$i]."', '$type[$i]', '$hc', '$hm', '$sm', '$cm', '$gc', '$nt', '$am', CURRENT_TIMESTAMP);";

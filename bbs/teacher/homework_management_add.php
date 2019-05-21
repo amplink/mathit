@@ -319,7 +319,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 $(this).addClass('on');
                 $('.grade_select_box table tbody tr').not(this).removeClass('on');
             }
-        })
+        });
 
         $('.class_select_box table tbody tr').click(function () {
             if ($(this).hasClass('on') === true) {
@@ -328,7 +328,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 $(this).addClass('on');
                 $('.class_select_box table tbody tr').not(this).removeClass('on');
             }
-        })
+        });
 
         $('.student_list_box table tbody tr').click(function () {
             if ($(this).hasClass('on') === true) {
@@ -337,7 +337,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                 $(this).addClass('on');
                 $('.student_list_box table tbody tr').not(this).removeClass('on');
             }
-        })
+        });
 
 
         $('.corner').change(function () {
@@ -385,7 +385,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         chk_type();
         // $('.allChk').click();
         //$('.allChk').prop('checked', true);
-    })
+    });
     function submit() {
         var startDate = $("#from").val(); //2017-12-10
         var startDateArr = startDate.split('/');
@@ -411,6 +411,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
                     alert("문항번호를 선택해주세요.");
                     return false;
                 }else{
+					if(doubleSubmitCheck()) return;
                     $(window).unbind('beforeunload');
                     $('#all').submit();
                 }
@@ -421,7 +422,7 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
         else alert("학생을 선택해주세요.");
 
     }
-    var Banlist =  new Array();
+    var Banlist =  [];
     var yq = 0;
     function select_year() {
         $("#classlist").empty();
@@ -626,6 +627,15 @@ $teacherlist = api_calls_get("/api/math/teacher_list?client_no=".$ac);
          }*/
     }
 
+    var doubleSubmitFlag = false;
+    function doubleSubmitCheck(){
+        if(doubleSubmitFlag){
+            return doubleSubmitFlag;
+        }else{
+            doubleSubmitFlag = true;
+            return false;
+        }
+    }
 
     $(window).bind('beforeunload', function () {
         return "저장하지 않고 페이지를 벗어나시겠습니까?";

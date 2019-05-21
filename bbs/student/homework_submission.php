@@ -148,7 +148,7 @@ if($tot == 0) {
 
                     var reader = new FileReader();
                     reader.addEventListener("load", function () {
-                        if(i > 20){
+                        if(i > 30){
                             //alert('최대 10개까지 첨부 가능합니다.');
                             return false;
                         }

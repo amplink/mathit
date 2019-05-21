@@ -202,8 +202,17 @@ include_once('head.php');
 
     function submit_chk() {
         if($('.notice_range').val() && $('#title').val()) {
-            $(window).unbind('beforeunload');
-            $('#notice_bbs').submit();
+            $.ajax({
+                url: "notice_double_chk.php?title="+$("#title").val(),
+                success: function(res) {
+                    if(res==1) {
+                        alert('중복된 제목입니다.');
+                    }else {
+                        $(window).unbind('beforeunload');
+                        $('#notice_bbs').submit();
+                    }
+                }
+            });
         }else {
             alert('제목 또는 범위를 입력해주세요.');
         }

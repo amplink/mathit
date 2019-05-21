@@ -121,7 +121,7 @@ if($_GET['month'] == 'all'){
                 </thead>
                 <tbody>
                 <?php
-                $sql = "select * from `teacher_consult` where `t_name` = '".$_SESSION['t_name']."'";
+                $sql = "select * from `teacher_consult` where `t_name` = '".$_SESSION['t_name']."' or `web_open`='공개'";
 
 				if(is_numeric($_GET['month'])){
                     $sql .= " and (date >= date_format(date_add(now(), interval -".$_GET['month']." month), '%m/%d/%Y')

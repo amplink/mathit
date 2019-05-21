@@ -68,7 +68,7 @@ for($i=0; $i<count($d_name); $i++) {
 			              AND A.client_id='$ac'
 			              AND B.level in ('루트', '파이', '시그마')
 			           ORDER BY
-			              A.student_name, B._from";
+			              A.student_name, B._from, B._to";
 
             $result = mysqli_query($connect_db, $sql);
             while ($res = mysqli_fetch_array($result)) {

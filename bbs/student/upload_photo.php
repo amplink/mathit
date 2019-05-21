@@ -13,7 +13,7 @@ if($_POST['sort']){
 $tot = count($_FILES['files']['name']);
 $tot2 = count($_FILES['files']['name']);
 
-if($tot > 20) $tot = 20;
+if($tot > 30) $tot = 30;
 
 //foreach ($sort_arr as $key) {
 sql_query("START TRANSACTION");
@@ -21,7 +21,7 @@ sql_query("START TRANSACTION");
 try{
     foreach ($_FILES['files']['name'] as $key => $name) {
 
-        if($j <= 20){
+        if($j <= 30){
 
             $upload_dir = "./data/photo/".date("Ym");
             if(!is_dir($upload_dir)){
@@ -51,35 +51,43 @@ try{
 
             $filename = $unencodedData.".".$ext;
             $uploadFile = $upload_dir2."/".$filename;
-
-            //$sno = ($_POST['sort'])?$key:$j;
-            $sno = $j;
+            
             $reg_month = date('Ym');
             //////////////////////////////////////////////////////////////
             $tmp_file = $_FILES['files']['tmp_name'][$key];
             $sourceProperties = getimagesize($tmp_file);
             $imageType = $sourceProperties[2];
 
+			$exif = exif_read_data($tmp_file);
+            $rotation = $exif['Orientation'];
 
+			if(!empty($exif['DateTimeOriginal'])) {
+			   $img_date = strtotime($exif['DateTimeOriginal']);
+			}else{
+               $img_date = strtotime($exif['DateTimeDigitized']);
+			}
+
+			//$sno = ($_POST['sort'])?$key:$j;
+            $sno = $img_date;
             switch ($imageType) {
 
                 case "3":
                     $imageResourceId = imagecreatefrompng($tmp_file);
-                    $targetLayer = imageResize($tmp_file,$imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+                    $targetLayer = imageResize($rotation,$imageResourceId,$sourceProperties[0],$sourceProperties[1]);
                     imagepng($targetLayer,$uploadFile);
                     imagedestroy($targetLayer);
                     break;
 
                 case "1":
                     $imageResourceId = imagecreatefromgif($tmp_file);
-                    $targetLayer = imageResize($tmp_file,$imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+                    $targetLayer = imageResize($rotation,$imageResourceId,$sourceProperties[0],$sourceProperties[1]);
                     imagegif($targetLayer,$uploadFile);
                     imagedestroy($targetLayer);
                     break;
 
                 case "2":
                     $imageResourceId = imagecreatefromjpeg($tmp_file);
-                    $targetLayer = imageResize($tmp_file,$imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+                    $targetLayer = imageResize($rotation,$imageResourceId,$sourceProperties[0],$sourceProperties[1]);
                     imagejpeg($targetLayer,$uploadFile);
                     imagedestroy($targetLayer);
 
@@ -111,7 +119,7 @@ try{
 }
 
 
-function imageResize($name,$imageResourceId,$width,$height) {
+function imageResize($rotation,$imageResourceId,$width,$height) {
 
     $re_wid = 700;
     if($width <= $re_wid){
@@ -123,9 +131,9 @@ function imageResize($name,$imageResourceId,$width,$height) {
     $targetLayer=imagecreatetruecolor($re_wid,$re_hei);
     imagecopyresampled($targetLayer,$imageResourceId,0,0,0,0,$re_wid,$re_hei, $width,$height);
 
-    $exif = exif_read_data($name);
-    if(!empty($exif['Orientation'])) {
-        switch($exif['Orientation']) {
+    //$exif = exif_read_data($name);
+    if(!empty($rotation)) {
+        switch($rotation) {
             case 8:
                 $targetLayer = imagerotate($targetLayer,90,0);
                 break;

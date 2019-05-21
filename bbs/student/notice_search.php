@@ -13,7 +13,7 @@ for($i=0; $i<count($sub_uid); $i++) {
     else $d_uid .= $sub_uid[$i]."|";
 }
 //alert_msg($d_uid);
-$sql = "select * from `teacher_notice` where (`title` like '$search' or `target` like '$search') and `client_id`='$ac' and `n_range` like '$student' and `d_uid` RLIKE '$d_uid' order by `type` desc, `event_time` desc ";
+$sql = "select * from `teacher_notice` where (`title` like '$search' and `client_id`='$ac' and `n_range` like '$student' and `d_uid` RLIKE '$d_uid') or (`target` like '$search' and `client_id`='$ac' and `n_range` like '$student') order by `type` desc, `event_time` desc ";
 $sql = $sql."limit ".$start.",10";
 //echo $sql;
 $result = sql_query($sql);

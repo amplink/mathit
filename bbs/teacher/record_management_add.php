@@ -174,7 +174,7 @@ include_once ('head.php');
                 $(this).addClass('on');
                 $('.grade_select_box table tbody tr').not(this).removeClass('on');
             }
-        })
+        });
 
         $('.class_select_box table tbody tr').click(function () {
             if ($(this).hasClass('on') === true) {
@@ -183,7 +183,7 @@ include_once ('head.php');
                 $(this).addClass('on');
                 $('.class_select_box table tbody tr').not(this).removeClass('on');
             }
-        })
+        });
 
         $('.student_list_box table tbody tr').click(function () {
             if ($(this).hasClass('on') === true) {
@@ -192,10 +192,10 @@ include_once ('head.php');
                 $(this).addClass('on');
                 $('.student_list_box table tbody tr').not(this).removeClass('on');
             }
-        })
+        });
         $('#grade_box').hide();
         $('.right_wrap').hide();
-    })
+    });
 
     function lecture(e) {
         $('#text_class').text(e);
@@ -406,6 +406,7 @@ include_once ('head.php');
     });
 
     function submit() {
+		if(doubleSubmitCheck()) return;
         if($('#title').val() && $('#datepicker').val() && $('#standard_score').val() && $('#sub_score1').val() && $('#sub_score2').val() && $('#test_genre').val() && $('#d_id').val()) {
             $(window).unbind('beforeunload');
             $('#record_form').submit();
@@ -418,13 +419,22 @@ include_once ('head.php');
         var initBody = document.body.innerHTML;
         window.onbeforeprint = function () {
             document.body.innerHTML = document.getElementById("right_box").innerHTML;
-        }
+        };
         window.onafterprint = function () {
             document.body.innerHTML = initBody;
-        }
+        };
         window.print();
     }
 
+    var doubleSubmitFlag = false;
+    function doubleSubmitCheck(){
+        if(doubleSubmitFlag){
+            return doubleSubmitFlag;
+        }else{
+            doubleSubmitFlag = true;
+            return false;
+        }
+    }
 </script>
 </body>
 
